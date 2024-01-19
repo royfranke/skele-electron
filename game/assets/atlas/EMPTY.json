@@ -1,0 +1,27 @@
+{"frames": [
+	{
+		"filename": "leftHand",
+		"frame": {"x":0,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "rightHand",
+		"frame": {"x":16,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+    {
+		"filename": "shoulders",
+		"frame": {"x":32,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+    {
+		"filename": "empty",
+		"frame": {"x":48,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+]
+}

@@ -1,0 +1,156 @@
+import GameState from "./game-state.js";
+import GameFocus from "./game-focus.js";
+import GameFX from "./game-fx.js";
+import GameInput from "./game-input.js";
+import GameUtilities from "./game-utilities.js";
+import GameCamera from "./game-camera.js";
+import GameClock from "./game-clock.js";
+import HudManager from "../hud/hud-manager.js";
+import ItemManager from "../items/item-manager.js";
+import TimeManager from "../time/time-manager.js";
+/* global Phaser */
+/*
+ * Gets injected into the game scene
+ */
+
+export default class GameManager {
+
+    state=null;
+    last_state=null;
+    focus=null;
+    last_focus=null;
+    input=null;
+
+    constructor(scene) {
+       this.scene = scene;
+       this.app = this.scene.app;
+       this.hud = null;
+       this.utilities = new GameUtilities();
+       this.gameFocus = new GameFocus();
+       this.focus = this.getFocus();
+       this.gameState = new GameState();
+       this.state = this.getState();
+       this.time = new TimeManager();
+       this.fx = new GameFX(this.scene);
+
+           
+
+       for (var i=0;i<80;i++) {
+            
+            var tests = {
+                second: 0,
+                minute: 15,
+                hour: 4,
+                day: i
+            };
+            var checking = this.time.getDate(tests);
+            console.log(checking.weekday+" "+checking.day+" "+checking.month);
+       }
+       
+    }
+
+    getFocus () {
+        return this.gameFocus.getFocus();
+    }
+
+    setFocus (focus_string) {
+        if (focus_string == 'PLAYER' || focus_string == 'MAP' || focus_string == 'PAUSE') {
+            this.hud.setState('VISIBLE_UNFOCUSED');
+        }
+        if (focus_string == 'POCKETS') {
+            this.hud.setState('VISIBLE_FOCUSED');
+        }
+
+        return this.gameFocus.setFocus(focus_string);
+    }
+
+    getLastFocus () {
+        return this.gameFocus.getLastFocus();
+    }
+
+    getFocusChange () {
+        return this.gameFocus.changed();
+    }
+
+    getState () {
+        return this.gameState.getState();
+    }
+
+    setState (state_string) {
+        return this.gameState.setState(state_string);
+    }
+
+    getLastState () {
+        return this.gameState.getLastState();
+    }
+
+    getView () {
+        return this.app.camera.view;
+    }
+
+    update () {
+        this.last_state = this.getLastState();
+        this.state = this.getState();
+
+        if (this.last_state.name != this.state.name) {
+            this.stateChanged();
+        }
+        if (this.state.name == 'NOT_LOADED') { this.loadGame(); }
+
+        if (this.state.input) {
+            if (this.scene.app.input.INPUT.INVENTORY.TAP) {
+                var focus = this.getFocus();
+                if (focus.name == 'PLAYER' || focus.name == 'MAP') {
+                    this.setFocus('POCKETS');
+                }
+                else if (focus.name == 'POCKETS') {
+                    
+                    this.setFocus('PLAYER');  
+                }
+            }
+        }
+        if (this.state.time) {
+            this.time.update();
+        }
+        if (this.hud != null) {
+            this.hud.update();
+            var time = this.time.getTime();
+            this.watch.setText(time.hour+':'+time.minute+time.period);
+        }
+    }
+
+    stateChanged () {
+
+    }
+
+    loadGame () {
+        if (this.state.name == 'NOT_LOADED') {
+            this.app.camera.camera.setBackgroundColor('#4b424a');
+            this.setState('LOADING');
+            
+            this.hud = new HudManager(this.scene);
+            this.watch = this.hud.hudDisplay.tellWatch('00:00AM','positive');
+            this.itemManager = new ItemManager(this.scene);
+
+            this.setFocus('PLAYER');
+            /// After loading functions...
+            this.setState('LOADED');
+
+
+            //var plastic = this.itemManager.newItemToPockets('PLASTIC_BAG_1');
+            var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN');
+
+
+            var apple = this.itemManager.newItem('APPLE');
+            backpack.addItem(apple);
+            var cupcake = this.itemManager.newItem('CUPCAKE_YELLOW');
+            //backpack.addItem(cupcake);
+            var bag = this.itemManager.newItem('LUNCH_BAG_USED',[cupcake]);
+            backpack.addItem(bag);
+
+            this.setState('LOADED');
+            this.setState('OVERWORLD');
+        }
+    }
+
+}

@@ -1,0 +1,36 @@
+{
+  "name": "skele-electron",
+  "version": "1.0.0",
+  "description": "Skele Summer development build on Electron.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "serve": "browser-sync start --watch --server game --directory",
+    "dev": "npm run serve",
+    "prettier": "prettier game/**/*.{js,css,html} --write",
+    "deploy": "gh-pages --branch gh-pages --dist game"
+  },
+  "prettier": {
+    "printWidth": 100
+  },
+  "author": "Roy Franke",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-deb": "^7.2.0",
+    "@electron-forge/maker-rpm": "^7.2.0",
+    "@electron-forge/maker-squirrel": "^7.2.0",
+    "@electron-forge/maker-zip": "^7.2.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
+    "browser-sync": "^2.27.5",
+    "electron": "^28.0.0",
+    "gh-pages": "^3.2.3",
+    "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  }
+}

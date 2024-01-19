@@ -1,0 +1,87 @@
+{"frames": [
+	{
+		"filename": "shoulders",
+		"frame": {"x":0,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "BACKPACK_GREEN",
+		"frame": {"x":16,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "BACKPACK_BROWN",
+		"frame": {"x":32,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "BACKPACK_YELLOW",
+		"frame": {"x":16,"y":48,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "BACKPACK_PURPLE",
+		"frame": {"x":64,"y":0,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+    {
+		"filename": "PLASTIC_BAG_1",
+		"frame": {"x":0,"y":16,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "PLASTIC_BAG_2",
+		"frame": {"x":16,"y":16,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "LUNCH_BAG_CLEAN",
+		"frame": {"x":32,"y":16,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "PAPER_BAG_CLEAN",
+		"frame": {"x":32,"y":32,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "LUNCH_BAG_USED_1",
+		"frame": {"x":32,"y":48,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "PAPER_BAG_USED_1",
+		"frame": {"x":32,"y":64,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "LUNCH_BAG_USED_2",
+		"frame": {"x":32,"y":80,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	{
+		"filename": "PAPER_BAG_USED_2",
+		"frame": {"x":32,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+    {
+		"filename": "BINDLE",
+		"frame": {"x":0,"y":32,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+]
+}
