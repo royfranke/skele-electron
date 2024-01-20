@@ -25,7 +25,7 @@ export default class Preloader{
     this.scene.load.atlas('BLOCK_ARROW', '../game/assets/spritesheets/a_ARROW.png', '../game/assets/atlas/BLOCK_ARROW.json');
     this.scene.load.atlas('EQUIPT', '../game/assets/spritesheets/a_TOOL.png', '../game/assets/atlas/TOOL.json');
     this.scene.load.atlas('WEARS', '../game/assets/spritesheets/a_BAG.png', '../game/assets/atlas/BAG.json');
-    this.scene.load.atlas('ITEMS', '../game/assets/spritesheets/a_ITEM.png', '../game/assets/atlas/ITEM.json');
+    this.scene.load.atlas('ITEMS', '../game/assets/spritesheets/a_ITEM.png', '../game/js/config/atlas/item-atlas.json');
     this.scene.load.atlas('EMPTY', '../game/assets/spritesheets/a_EMPTY.png', '../game/assets/atlas/EMPTY.json');
     this.scene.load.atlas('COINPURSE', '../game/assets/spritesheets/a_COINPURSE.png', '../game/assets/atlas/COINPURSE.json');
     

@@ -19,6 +19,11 @@ const PLAYER_STATES = {
         input: false,
         speed: 0
     },
+    EAT: {
+        name: 'EAT',
+        input: false,
+        speed: 0
+    },
     HOP: {
         name: 'HOP',
         input: true,

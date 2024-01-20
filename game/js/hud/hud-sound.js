@@ -17,7 +17,6 @@ export default class HudSound {
     }
 
     play (sound_key) {
-        console.log("Play sound: "+sound_key)
         var sound = this.scene.sound.add(sound_key);
        sound.play();
     }

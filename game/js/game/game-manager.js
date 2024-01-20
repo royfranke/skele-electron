@@ -43,8 +43,10 @@ export default class GameManager {
                 hour: 4,
                 day: i
             };
+            /*
             var checking = this.time.getDate(tests);
             console.log(checking.weekday+" "+checking.day+" "+checking.month);
+            */
        }
        
     }
@@ -143,7 +145,7 @@ export default class GameManager {
 
             var apple = this.itemManager.newItem('APPLE');
             backpack.addItem(apple);
-            var cupcake = this.itemManager.newItem('CUPCAKE_YELLOW');
+            var cupcake = this.itemManager.newItem('BANANA');
             //backpack.addItem(cupcake);
             var bag = this.itemManager.newItem('LUNCH_BAG_USED',[cupcake]);
             backpack.addItem(bag);

@@ -121,8 +121,9 @@ export default class PlayerManager {
             var last = this.getLastFocus();
             if (last.name == 'PLAYER') { //If focus was just changed off the player
                 this.speed = 0;
-                this.setState('IDLE');
-                this.resetInputs();
+                //this.setState('IDLE');
+                //this.resetInputs();
+                // TODO: Do an initial state set on switch from player
             }
 
         }
@@ -141,6 +142,9 @@ export default class PlayerManager {
         }
         if (this.state.name == 'DIG') {
             return 0;
+        }
+        if (this.state.name == 'EAT') {
+          return 0;
         }
         if (this.state.name == 'PUSH') {
             return 20;

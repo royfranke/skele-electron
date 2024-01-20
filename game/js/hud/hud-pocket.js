@@ -92,35 +92,54 @@ import POCKET_CONFIG from "../config/pocket-states.js";
     }
 
 
-    doAction (pocketIndex, action_string) { // this should probably live somewhere else. TODO
-        //temp
+    doAction (pocketIndex, action_string) {
+
         var _x = this.scene.player.action.actionTile.x;
         var _y = this.scene.player.action.actionTile.y;
-        //temp
-        console.log('Do: '+action_string+' at '+_x+', '+_y);
+
         var action_result = false;
         var pocket = this.getPocket(pocketIndex);
         if (action_string == 'DROP' && pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];
-           /// use item manager to drop item
-           /// for now 
-           var placed = this.scene.manager.itemManager.putItemInWorld(item,_x,_y);
-           if (placed) {
-            this.setPocket(pocketIndex,'EMPTY');
-           }
-           
+
+            var placed = this.scene.manager.itemManager.putItemInWorld(item,_x,_y);
+            if (placed) {
+                this.setPocket(pocketIndex,'EMPTY');
+            }
+
         }
-        if (action_string == 'PUT AWAY' && pocket.STATE != 'EMPTY') {
+        else if (action_string == 'PUT AWAY' && pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];
             /// Check for bags
             /// Check bags for space
             /// If there's space, move the item into the bag
             var inBag = this.availableBag(item,pocketIndex);
-            if (inBag) {
+            if (inBag) {    
                 /// Remove from this pocket
                 this.setPocket(pocketIndex, 'EMPTY');
                 action_result = true;
             }
+        }
+        else if (pocket.STATE != 'EMPTY') {
+            var item = pocket[pocket.STATE];
+            var self = this;
+            if (action_string == 'EAT' && this.scene.player.state.name != 'EAT') {
+                self.scene.player.setState('EAT');
+                setTimeout(() => {
+                    self.scene.player.setState('IDLE');
+                }, 2000);
+            }
+            item.info.actions.forEach(function (item_action) {
+                if (action_string == item_action.name) {
+                    if (item_action.consume) {
+                        self.setPocket(pocketIndex, 'EMPTY');
+                    }
+                    if (item_action.transition != false) {
+                        self.setPocket(pocketIndex, 'EMPTY');
+                        self.scene.manager.itemManager.newItemToPockets(item_action.transition);
+                    }
+                }
+            });
         }
         return action_result;
     }

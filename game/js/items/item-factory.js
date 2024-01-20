@@ -11,6 +11,13 @@ export default class ItemFactory {
         this.valid_items = ITEMS;
     }
 
+    itemInfo (slug) {
+        if (this.validItem(slug)) {
+            return this.valid_items[slug]; /// Returns a non-sprite info set
+        }
+        return false;
+    }
+
     newItem (slug,items=[]) {
         if (this.validItem(slug)) {
             if (this.valid_items[slug].type == 'BAG') {

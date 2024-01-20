@@ -32,6 +32,8 @@ export default class PlayerState {
         if (this.validState(state)) {
             this.last_state = this.state;
             this.state = this.valid_states[state];
+            console.log('setting...'+state);
+            console.log(this.state);
         }
     }
 

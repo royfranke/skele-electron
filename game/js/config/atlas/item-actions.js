@@ -37,7 +37,11 @@ const ITEM_ACTIONS = {
     },
         MEDIA: {
         type: 'MEDIA',
-        actions: ['PLAY',]   
+        actions: ['READ','PLAY',]   
+    },
+        NOTEBOOK: {
+        type: 'NOTEBOOK',
+        actions: ['OPEN','READ',]   
     },
         PRODUCT: {
         type: 'PRODUCT',

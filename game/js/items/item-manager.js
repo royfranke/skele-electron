@@ -15,6 +15,10 @@ export default class ItemManager {
         return this.factory.newItem(slug,items);
     }
 
+    itemInfo (slug) {
+        return this.factory.itemInfo(slug);
+    }
+
     discardItem (item) {
         item.destroy();
     }

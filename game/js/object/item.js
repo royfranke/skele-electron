@@ -30,13 +30,24 @@ export default class Item {
     }
 
     doAction(action) {
+        this.scene.player.action.clearActions();
+
         if (action == 'PICK UP') {
             var valid = this.scene.manager.hud.availablePocket(this);
             if (valid) {
                 this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
             }
         }
-        this.scene.player.action.clearActions();
+        
+    }
+
+    nextItem (new_item) {
+        this.scene.manager.itemManager.itemSwap(new_item);
+    }
+
+    transitionTo (new_item) {
+        console.log('Transitioning to...'+new_item);
+        this.info = this.scene.manager.itemManager.itemInfo(new_item);
     }
 
     setTileLocation(_x, _y) {

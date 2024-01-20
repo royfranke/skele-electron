@@ -85,19 +85,15 @@ export default class HudManager {
 
     stateChanged () {
         if (this.state.name == 'INVISIBLE') {
-            console.log('HUD hidden.');
             this.hudDisplay.pocketsVisible(false);
         }
         if (!this.last_state || this.last_state.name == 'INVISIBLE') {
-            console.log('HUD revealed.');
             this.hudDisplay.pocketsVisible(true);
         }
         if (this.state.name == 'VISIBLE_FOCUSED') {
-            console.log('HUD focused.'); // open pocket
             this.hudDisplay.openPockets();
         }
         if (this.state.name == 'VISIBLE_UNFOCUSED') {
-            console.log('HUD unfocused.'); // close pocket
             this.hudDisplay.closePockets();
         }
     }

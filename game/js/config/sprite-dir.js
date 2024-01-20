@@ -4,6 +4,7 @@ const SPRITE_DIR = {
         'WALK',
         'RUN',
         'DIG',
+        'EAT',
         'HOP',
         'PUSH',
         'PULL'
@@ -178,6 +179,30 @@ const SPRITE_DIR = {
             S: {
                 START: 0,
                 END: 9,
+            }
+        },
+    },
+    EAT: {
+        ANIM: {
+            N: {
+                START: 0,
+                END: 10,
+            },
+            N_SIDE: {
+                START: 0,
+                END: 10,
+            },
+            SIDE: {
+                START: 0,
+                END: 10,
+            },
+            S_SIDE: {
+                START: 0,
+                END: 10,
+            },
+            S: {
+                START: 0,
+                END: 10,
             }
         },
     },

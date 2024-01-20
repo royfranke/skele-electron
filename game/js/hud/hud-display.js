@@ -242,7 +242,6 @@ export default class HudDisplay {
             this.drop.destroy();
             this.drop = null;
         }
-        console.log("Drawing drop");
         const slotMargin = {
             x: 48 + (slot_x*40),
             y: 0,
