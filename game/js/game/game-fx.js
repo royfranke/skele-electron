@@ -21,6 +21,18 @@ import MONEY from "../reference/money.js";
         }, delay);
     }
 
+    itemWoosh(_x,_y,delay=0) {
+        console.log('test');
+        setTimeout(() => {
+            const woosh = this.scene.add.sprite(_x, _y, "fx_item", 0).setScrollFactor(0).setOrigin(0);
+            woosh.setDepth(200000);
+            woosh.anims.play("fx_woosh", false);
+            woosh.once('animationcomplete', () => {
+                woosh.destroy()
+            })
+        }, delay);
+    }
+
 
     coinUp(_x,_y,value,source) {
         //const anims = this.scene.anims;

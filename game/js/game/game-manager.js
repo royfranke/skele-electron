@@ -56,7 +56,7 @@ export default class GameManager {
     }
 
     setFocus (focus_string) {
-        if (focus_string == 'PLAYER' || focus_string == 'MAP' || focus_string == 'PAUSE') {
+        if (focus_string == 'PLAYER' || focus_string == 'MAP' || focus_string == 'PAUSE' || focus_string == 'DIALOG') {
             this.hud.setState('VISIBLE_UNFOCUSED');
         }
         if (focus_string == 'POCKETS') {
@@ -106,7 +106,6 @@ export default class GameManager {
                     this.setFocus('POCKETS');
                 }
                 else if (focus.name == 'POCKETS') {
-                    
                     this.setFocus('PLAYER');  
                 }
             }
@@ -116,7 +115,7 @@ export default class GameManager {
         }
         if (this.hud != null) {
             this.hud.update();
-            var time = this.time.getTime();
+            var time = this.time.getDigitalTime();
             this.watch.setText(time.hour+':'+time.minute+time.period);
         }
     }
@@ -143,7 +142,7 @@ export default class GameManager {
             var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN');
 
 
-            var apple = this.itemManager.newItem('APPLE');
+            var apple = this.itemManager.newItem('POSTCARD_BACK_1');
             backpack.addItem(apple);
             var cupcake = this.itemManager.newItem('BANANA');
             //backpack.addItem(cupcake);

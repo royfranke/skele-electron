@@ -27,8 +27,10 @@ export default class PlayerManager {
        this.action = new PlayerAction(this.scene);
        
        this.app.camera.follow(this.playerSprite.sprite);
-
-       this.playerSprite.setExteriorCollider();
+       this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
+        
+       this.playerSprite.setCollider();
+       
        this.underfoot = null;
     }
 
@@ -221,8 +223,8 @@ export default class PlayerManager {
   }
 
     updateActiveTile() {
-        const groundLayer = this.scene.exterior.groundLayer;
-        const exterior = this.scene.exterior;
+        const groundLayer = this.locale.groundLayer;
+        const exterior = this.locale;
         
         this.standingTile = groundLayer.worldToTileXY(this.playerSprite.sprite.x, this.playerSprite.sprite.y+8); 
         this.snappedStanding = groundLayer.tileToWorldXY(this.standingTile.x, this.standingTile.y);

@@ -22,6 +22,8 @@ export default class Preloader{
     
    
     this.scene.load.atlas('BLOCK', '../game/assets/spritesheets/a_BLOCK.png', '../game/assets/atlas/BLOCK.json');
+    this.scene.load.atlas('POCKET_BLOCK', '../game/assets/spritesheets/pocket_block.png', '../game/assets/atlas/POCKET_BLOCK.json');
+    this.scene.load.atlas('POCKET_ARROW', '../game/assets/spritesheets/pocket_arrow.png', '../game/assets/atlas/POCKET_ARROW.json');
     this.scene.load.atlas('BLOCK_ARROW', '../game/assets/spritesheets/a_ARROW.png', '../game/assets/atlas/BLOCK_ARROW.json');
     this.scene.load.atlas('EQUIPT', '../game/assets/spritesheets/a_TOOL.png', '../game/assets/atlas/TOOL.json');
     this.scene.load.atlas('WEARS', '../game/assets/spritesheets/a_BAG.png', '../game/assets/atlas/BAG.json');
@@ -35,6 +37,15 @@ export default class Preloader{
       {
         frameWidth: 32,
         frameHeight: 12
+      }
+    );
+
+    this.scene.load.spritesheet(
+      "fx_item",
+      "../game/assets/spritesheets/fx_item_1.png",
+      {
+        frameWidth: 16,
+        frameHeight: 16
       }
     );
 

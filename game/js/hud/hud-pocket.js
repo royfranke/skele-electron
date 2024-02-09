@@ -118,6 +118,7 @@ import POCKET_CONFIG from "../config/pocket-states.js";
                 /// Remove from this pocket
                 this.setPocket(pocketIndex, 'EMPTY');
                 action_result = true;
+                //this.scene.manager.hud.hudDisplay.addFX(pocketIndex,0);
             }
         }
         else if (pocket.STATE != 'EMPTY') {

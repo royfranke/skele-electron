@@ -9,7 +9,7 @@ const ITEM_ACTIONS = {
     },
         DELIVERY: {
         type: 'DELIVERY',
-        actions: ['OPEN',]   
+        actions: ['OPEN','READ',]   
     },
         DRINK: {
         type: 'DRINK',
@@ -25,7 +25,7 @@ const ITEM_ACTIONS = {
     },
         JOURNALISM: {
         type: 'JOURNALISM',
-        actions: ['READ','LITTER','CRUMPLE',]   
+        actions: ['READ',]   
     },
         KEY: {
         type: 'KEY',
@@ -33,7 +33,11 @@ const ITEM_ACTIONS = {
     },
         MAIL: {
         type: 'MAIL',
-        actions: ['OPEN',]   
+        actions: ['READ','FLIP',]   
+    },
+        MATERIAL: {
+        type: 'MATERIAL',
+        actions: ['FOLD','UNFOLD',]   
     },
         MEDIA: {
         type: 'MEDIA',
@@ -55,13 +59,21 @@ const ITEM_ACTIONS = {
         type: 'SMOKES',
         actions: ['SMOKE',]   
     },
+        TICKET: {
+        type: 'TICKET',
+        actions: ['READ',]   
+    },
         TOOL: {
         type: 'TOOL',
         actions: ['OPEN',]   
     },
         TRASH: {
         type: 'TRASH',
-        actions: ['CRUMPLE',]   
+        actions: ['CHUCK',]   
+    },
+        WATCH: {
+        type: 'WATCH',
+        actions: ['READ',]   
     },
     };
 

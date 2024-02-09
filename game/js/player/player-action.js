@@ -25,19 +25,12 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
     constructor(scene) {
         this.scene = scene;
+        this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
         this.actionTile = {x: 0, y: 0};
         this.actionTileLast = {x: 0, y: 0};
         this.actionTileFresh = true;
         this.actionTileLookUp = SPRITE_DIR.DIR_TILE;
         this.actionsGroup = this.scene.add.group();
-        this.actionStyle = {
-            'background-color': '#ccc890',
-            'border': '1px solid',
-            'color': '#465e62',
-            'padding': '2px 4px',
-            'border-radius': '4px',
-            font: '12px defaultFont',
-        };
 
         this.clearActions();
 
@@ -67,7 +60,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     updateMarker() {
-        this.snappedWorldPoint = this.scene.exterior.groundLayer.tileToWorldXY(this.actionTile.x, this.actionTile.y);
+        this.snappedWorldPoint = this.locale.groundLayer.tileToWorldXY(this.actionTile.x, this.actionTile.y);
 
         this.actionMarker.setPosition(this.snappedWorldPoint.x - 8, this.snappedWorldPoint.y - 8);
 
@@ -145,6 +138,11 @@ import SPRITE_DIR from "../config/sprite-dir.js";
               return this.availableActions[0].action;
             }
           }
+
+        if (this.scene.player.playerInput.more && this.availableActions.length > 1 ) {
+            var firstItem = this.availableActions.shift(); // Remove the first item
+            this.availableActions.push(firstItem); // Add the first item to the end
+        }
     }
 
     doAction (action_string) {
@@ -154,7 +152,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             
             this.digUp(this.scene.player.snappedStanding.x, this.scene.player.snappedStanding.y);
             setTimeout(() => {
-                this.scene.exterior.ground.placeTileType(this.actionTile.x, this.actionTile.y,  this.scene.exterior.groundLayer, 'DIRT', true);
+                this.locale.ground.placeTileType(this.actionTile.x, this.actionTile.y,  this.locale.groundLayer, 'DIRT', true);
             }, 500);
             this.digUp(this.scene.player.snappedStanding.x, this.scene.player.snappedStanding.y);
             setTimeout(() => {
@@ -221,8 +219,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
         this.actionsGroup.clear(false, true);
 
-        const style = this.actionStyle;
-
         var x = this.menu.x;
         var y = this.menu.y;
 
@@ -230,7 +226,14 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
         const scene = this.scene;
         this.displayActions.forEach(function (action, index) {
-            const newAction = scene.add.dom(x, y + (index * 24), 'div', style, action.action).setOrigin(0);
+            var slip_class = 'select-slip-not-selected';
+            if (index == 0) {
+                var slip_class = 'select-slip';
+            }
+            if (index == 1) {
+                var slip_class = 'more-slip';
+            }
+            const newAction = scene.add.dom(x, y + (index * 16), 'div', '', action.action).setClassName(slip_class).setOrigin(0);
             //const newAction = scene.add.text(x, y + (index * 24), action.action, style).setDepth(101100);
             actionsGroup.add(newAction);
         });

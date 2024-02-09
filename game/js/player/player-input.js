@@ -25,6 +25,7 @@ export default class PlayerInput {
         this.left = input.LEFT.HOLD;
 
         this.select = input.SELECT.TAP;
+        this.more = input.MORE.TAP;
 
         if (this.up || this.down || this.right || this.left) {
             this.held = true;

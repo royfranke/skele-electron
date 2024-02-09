@@ -11,25 +11,26 @@ export default class HudDisplay {
        this.scene = scene;
        
        this.scene.textures.get('BLOCK');
+       this.scene.textures.get('POCKET_BLOCK');
+       this.scene.textures.get('POCKET_ARROW');
        this.scene.textures.get('BLOCK_ARROW');
        this.scene.textures.get('EMPTY');
-       this.scene.textures.get('EQUIPT');
-       //this.scene.textures.get('WEARS');
        this.scene.textures.get('ITEMS');
        this.pocket_actions = null;
        this.view = view;
        this.valid_states = STATES;
+       this.pocket_textblock = this.addPocketTextBlock();
        this.slots = this.initializeSlots();
        this.drop = null;
-       
+       this.currentDialog = false;
        this.item_actions = this.scene.add.group();
 
        this.margin = {
-        top: 16,
-        right: 16,
-        bottom: 16,
-        left:16,
-        }
+            top: 16,
+            right: 16,
+            bottom: 16,
+            left:16,
+       };
 
        this.focusHints = [
             {
@@ -80,9 +81,18 @@ export default class HudDisplay {
             icon: null,
             display: null
         };
+
+        this.watch = {
+            block: null,
+            icon: null,
+            display: null
+        };
         this.coinPurseUI = null;
         this.addCoinPurse(); 
+        this.addWatch(); 
         this.makeFocusHints();
+        this.addMapBox();
+        this.tellDialogBox('Telling.');
     }
 
     newPocketTip (message,duration=0) {
@@ -115,7 +125,7 @@ export default class HudDisplay {
                 
                 y = 2;
                 slots[y][x] = {
-                    slot: this.addArrow(x,y,'blue'),
+                    slot: this.addArrow(x,y,'FOCUSED'),
                     icon: null
                 };
 
@@ -126,6 +136,7 @@ export default class HudDisplay {
 
     refreshDisplay () {
         this.clearActions();
+        this.pocket_textblock.setVisible(false);
         const selected = this.scene.manager.hud.hudInput.selected;
         for (var i=0;i<3;i++) {
             var slot_y = i;
@@ -134,11 +145,12 @@ export default class HudDisplay {
 
                 var slot_x = r;
                 var state = pocket.STATE;
-                var color = pocket.COLOR[state];
+                var color = 'FOCUSED';
+                
                 this.setSlotColor(r, i, color);
                 if (state != 'EMPTY' && selected.pocket == r && pocket[state].info.type == 'BAG') {
                     this.setSlotVisible(r, i, true);
-                    this.setSlotColor(r, i, color);
+                    //this.setSlotColor(r, i, color);
                     if (selected.contents == 1) {
                         this.setSlipVisible(slot_x,true);
                     }
@@ -166,8 +178,11 @@ export default class HudDisplay {
                 this.item_actions.clear();
                 if (state != 'EMPTY' && selected.pocket == r && pocket[state].info.type != 'BAG' && i == 0) {
                     /// It's an item that has actions
-                    
                     this.pocket_actions = this.drawActions(r,selected.actions,pocket[state].actions);
+                    if (pocket[state].info.description != '') {
+                        this.pocket_textblock.setText(pocket[state].info.description);
+                        this.pocket_textblock.setVisible(true);
+                    }
                 }
 
                 
@@ -183,7 +198,7 @@ export default class HudDisplay {
                 
 
                 if (selected.pocket == r && selected.contents == i) {
-                    this.setSlotColor(r, i, pocket.COLOR.SELECTED);
+                    this.setSlotColor(r, i, 'SELECTED');
                     if (state == 'EMPTY') {
                         //this.setPocketTip(pocket[state].NAME);
                     }
@@ -247,7 +262,7 @@ export default class HudDisplay {
             y: 0,
         };
         var right = this.view.right;
-        this.drop = this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', 'DROP').setClassName(selected == true ? 'x-slip' : 'x-slip-not-selected' ).setOrigin(0).setScrollFactor(0);
+        this.drop = this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', 'DROP').setClassName(selected == true ? 'select-slip' : 'select-slip-not-selected' ).setOrigin(0).setScrollFactor(0);
 
     }
 
@@ -257,7 +272,7 @@ export default class HudDisplay {
                 y: 56 + (action_y*16),
             };
             var right = this.view.right;
-            return this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', action).setClassName(selected == true ? 'x-slip' : 'x-slip-not-selected' ).setOrigin(0).setScrollFactor(0);
+            return this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', action).setClassName(selected == true ? 'select-slip' : 'select-slip-not-selected' ).setOrigin(0).setScrollFactor(0);
     }
 
     setContentsIcon (slot_x, new_icon) {
@@ -270,16 +285,14 @@ export default class HudDisplay {
             else {
                 this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'EMPTY','empty');
             }
-            
-            
         }
     }
 
     tapSlip (slot_x) {
         if (this.slots[1][slot_x].slip != null) {
-            this.slots[1][slot_x].slip.setClassName('x-slip button-tap');
+            this.slots[1][slot_x].slip.setClassName('select-slip button-tap');
             setTimeout(() => {
-                this.slots[1][slot_x].slip.setClassName('x-slip');
+                this.slots[1][slot_x].slip.setClassName('select-slip');
             }, 100);
         }
     }
@@ -290,7 +303,7 @@ export default class HudDisplay {
             y: 64,
         };
         var right = this.view.right;
-        const slip =  this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', text).setClassName('x-slip').setOrigin(1,0).setScrollFactor(0).setVisible(false);
+        const slip =  this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', text).setClassName('select-slip').setOrigin(1,0).setScrollFactor(0).setVisible(false);
         return slip;
     }
 
@@ -328,12 +341,19 @@ export default class HudDisplay {
     }
 
 
-    setSlotColor (slot_x, slot_y, color) {
+    setSlotColor (slot_x, slot_y, status='UNFOCUSED') {
+        var pocket = this.scene.manager.hud.pocket.getPocket(slot_x);
+
+        var type = pocket.TYPE;
+        var state = pocket.STATE;
+        if (state != 'EMPTY') {
+            type = (pocket[state].info.type == 'BAG') ? 'BAG' : 'ITEM';
+        }
         if (slot_y < 2) {
-            this.slots[slot_y][slot_x].slot.setFrame('BLOCK_'+color);
+            this.slots[slot_y][slot_x].slot.setFrame(type+'_'+status);
         }
         else {
-            this.setArrowColor(slot_x,color);
+            this.setArrowColor(slot_x,status);
         }
     }
 
@@ -363,9 +383,9 @@ export default class HudDisplay {
         });
     }
 
-    setArrowColor (slot_x, color) {
+    setArrowColor (slot_x, status) {
         var arrow = this.getArrow(slot_x);
-        arrow.setFrame('BLOCK_ARROW_'+color);
+        arrow.setFrame('BAG_ARROW_'+status);
     }
 
     setSlotVisible (slot_x, slot_y, visible) {
@@ -376,20 +396,31 @@ export default class HudDisplay {
         }
     }
 
-    addSlot (slot_x, slot_y, color) {
-        let slot = this.scene.add.image(0,0, 'BLOCK', 'BLOCK_'+color).setOrigin(0);
+    addPocketTextBlock () {
+        const margin = {
+            x: 24,
+            y: 16 + (2*40),
+        };
+        var display_width = 104;
+
+        return this.scene.add.dom((this.view.right - display_width) - (margin.x), this.view.top + (margin.y), 'div', {'max-width':display_width+'px'}, '').setClassName('pocket-textblock').setOrigin(0).setScrollFactor(0).setVisible(false);
+
+    }
+
+    addSlot (slot_x, slot_y) {
+        let slot = this.scene.add.image(0,0, 'POCKET_BLOCK', 'HAND_UNFOCUSED').setOrigin(0);
         slot.setScrollFactor(0);
         slot.setDepth(100000);
         const slotMargin = {
             x: 16 + (slot_x*40),
-            y: 16 + (slot_y*40),
+            y: 16 + (slot_y*36),
         };
         slot.setPosition((this.view.right - slot.displayWidth) - (slotMargin.x), this.view.top + (slotMargin.y));
         return slot;
     }
 
-    addArrow (slot_x, slot_y, color) {
-        let slot = this.scene.add.image(0,0, 'BLOCK_ARROW', 'BLOCK_ARROW_'+color).setOrigin(0);
+    addArrow (slot_x, slot_y, status) {
+        let slot = this.scene.add.image(0,0, 'POCKET_ARROW', 'BAG_ARROW_'+status).setOrigin(0);
         slot.setScrollFactor(0);
         slot.setDepth(100000);
         const slotMargin = {
@@ -420,9 +451,15 @@ export default class HudDisplay {
     addCoinPurse () {
         let _x = this.view.left + 16;
         let _y = this.view.top + 16;
-        let color = 'gold';
-        this.coinPurse.block = this.scene.add.image(_x,_y, 'BLOCK', 'BLOCK_'+color).setOrigin(0).setScrollFactor(0).setDepth(100000);
+        this.coinPurse.block = this.scene.add.image(_x,_y, 'POCKET_BLOCK', 'BAG_FOCUSED').setOrigin(0).setScrollFactor(0).setDepth(100000);
         this.coinPurse.icon = this.scene.add.image(_x + 8,_y + 8, 'COINPURSE', 'COINPURSE_closed').setOrigin(0).setScrollFactor(0).setDepth(100001);
+    }
+
+    addWatch () {
+        let _x = this.view.left + 56;
+        let _y = this.view.top + 16;
+        this.watch.block = this.scene.add.image(_x,_y,  'POCKET_BLOCK', 'ITEM_FOCUSED').setOrigin(0).setScrollFactor(0).setDepth(100000);
+        this.watch.icon = this.scene.add.image(_x + 8,_y + 8, 'ITEMS', 'DIGITAL_WATCH').setOrigin(0).setScrollFactor(0).setDepth(100001);
     }
 
 
@@ -435,25 +472,39 @@ export default class HudDisplay {
         icon.setDepth(100100);
         var margin = {
             x: 24 + (slot_x*40),
-            y: 24 + (slot_y*40),
+            y: 24 + (slot_y*36),
         };
         var right = this.view.right;
         icon.setPosition(right - (icon.displayWidth) - (margin.x), this.view.top + (margin.y));
         return icon;
     }
 
+    addFX (slot_x, slot_y, delay=0) {
+        var margin = {
+            x: 40 + (slot_x*40),
+            y: 24 + (slot_y*36),
+        };
+        var _x = this.view.right - (margin.x);
+        var _y = this.view.top + margin.y;
+
+        this.scene.manager.fx.itemWoosh(_x,_y,delay);
+    }
+
     openPockets () {
         this.setKeyTip(this.hints.POCKETS, true);
+        
+        
         this.openCoinpurse();
     }
     
     closePockets () {
         this.closeCoinpurse();
+        this.pocket_textblock.setVisible(false);
         for (var r=0;r<3;r++) {
             var pocket = this.scene.manager.hud.pocket.getPocket(r); // new HudPocket Obj?
 
             var color = pocket.COLOR.EMPTY;
-            this.setSlotColor(r,0,color);
+            this.setSlotColor(r,0,'UNFOCUSED');
         }
         for (var i=1;i<3;i++) {
             for (var r=0;r<3;r++) {
@@ -536,25 +587,11 @@ export default class HudDisplay {
 
 
     tellWatch (content,timing=0,status='default') {
-        let _x = this.view.left + (this.margin.left*4);
-        let _y = this.view.top + (this.margin.top*2.5);
+        let _x = this.view.left + 96;
+        let _y = this.view.top + this.margin.top;
         
-        let flag = this.scene.add.dom(_x,_y, 'div',this.coinpurseStyle[status], content).setOrigin(0).setScrollFactor(0);
+        let flag = this.scene.add.dom(_x,_y, 'div','', content).setScrollFactor(0).setOrigin(0).setClassName('watch-time');
         if (timing > 0) {
-            if (status != 'default') {
-                let tween_to_y = status == 'positive' ? _y - this.margin.top : _y + this.margin.top;
-                let tween_to_x = status == 'missing' ? _x - this.margin.left : _x;
-                let tween_loop = status == 'missing' ? 2 : -1;
-                this.scene.tweens.add({
-                    targets: [ flag ],
-                    y: tween_to_y,
-                    x: tween_to_x,
-                    duration: timing*.75,
-                    ease: 'Sine.easeInOut',
-                    loop: tween_loop,
-                    yoyo: true
-                });
-            }
             setTimeout(() => {
                 flag.destroy();
             }, timing);
@@ -565,8 +602,8 @@ export default class HudDisplay {
     }
 
     tellCoinpurse (content,timing=0,status='default') {
-        let _x = this.view.left + (this.margin.left*2);
-        let _y = this.view.top + (this.margin.top*2.5);
+        let _x = this.view.left + (this.margin.left/2);
+        let _y = this.view.top + (this.margin.top + 28);
         
         let flag = this.scene.add.dom(_x,_y, 'div',this.coinpurseStyle[status], content).setOrigin(0).setScrollFactor(0);
         if (timing > 0) {
@@ -619,5 +656,56 @@ export default class HudDisplay {
         else {
             return thought;
         }
+    }
+
+    addMapBox () {
+        this.mapBox = {box: null, flag: null};
+        let _x = this.view.left + this.margin.left;
+        let _y = this.view.bottom - (96 + this.margin.bottom)
+        this.mapBox.box = this.scene.add.image(_x,_y, 'mapBox').setOrigin(0).setScrollFactor(0).setDepth(100100);
+        this.mapBox.flag = this.scene.add.dom(_x,_y + 96, 'div','', 'Mini Map').setClassName('mini-map-flag').setOrigin(0).setScrollFactor(0);
+    }
+
+    tellMapBoxFlag (content) {
+        this.mapBox.flag.setText(content);
+    }
+
+    tellDialogBox (content) {
+        if (!this.currentDialog) {
+            let box = this.addDialogBox();
+            box.setText(content);
+            this.currentDialog = true;
+        }
+        else {
+
+        }
+    }
+
+    addDialogBox () {
+        let _x = this.view.left + 112;
+        let _y = this.view.bottom - (96 + this.margin.bottom);
+
+        let dialogBox = this.scene.add.dom(_x,_y, 'div','', 'Dialog').setOrigin(0).setScrollFactor(0).setClassName('dialog-box');
+
+        
+/*
+        let dialogContent = this.scene.add.text(_x,_y, '', {
+            font: "16px defaultFont",
+            fill: "#3a3a50",
+            padding: { x: 16, y: 16 },
+          })
+          .setScrollFactor(0)
+          .setWordWrapWidth(320)
+          .setMaxLines(3).setDepth(101100);
+          */
+          
+          this.scene.time.addEvent({
+            delay: 3000,
+            callback: ()=>{
+                dialogBox.destroy();
+                this.currentDialog = false;
+            }
+        });
+        return dialogBox;
     }
 }

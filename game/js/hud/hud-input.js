@@ -60,6 +60,7 @@ export default class HudInput {
                 }
                 if (selected == content_length - 1) {
                     this.scene.manager.hud.arrowDown(this.selected.pocket);
+                    //selected = content_length - 2; TODO: TEST
                 }
                 
                 this.selected.contents = selected;

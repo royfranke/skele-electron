@@ -1,0 +1,41 @@
+{"frames": [
+	{
+		"filename": "ITEM_ARROW_UNFOCUSED",
+		"frame": {"x":0,"y":0,"w":32,"h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
+	},
+	{
+		"filename": "ITEM_ARROW_FOCUSED",
+		"frame": {"x":32,"y":0,"w":32,"h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
+	},
+	{
+		"filename": "ITEM_ARROW_SELECTED",
+		"frame": {"x":64,"y":0,"w":32,"h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
+	},
+
+
+	{
+		"filename": "BAG_ARROW_UNFOCUSED",
+		"frame": {"x":0,"y":32,"w":32,"h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
+	},
+	{
+		"filename": "BAG_ARROW_FOCUSED",
+		"frame": {"x":32,"y":32,"w":32,"h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
+	},
+	{
+		"filename": "BAG_ARROW_SELECTED",
+		"frame": {"x":64,"y":32,"w":32,"h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
+	}
+]
+}

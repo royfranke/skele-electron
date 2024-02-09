@@ -1,20 +1,19 @@
-
 const MAP_CONFIG = {
     tileSize: 16,
-    width:200,
-    height:150,
+    width: 200,
+    height: 150,
     sectionsWidth: 5,
     sectionsHeight: 5,
     blockWidth: 40,
     blockHeight: 30,
-    blocks: [ 
-            {
+    blocks: [
+        {
             x: 0,
             y: 0,
-            block_tile_x:0,
-            block_tile_y:0,
-            tile_x:0,
-            tile_y:0,
+            block_tile_x: 0,
+            block_tile_y: 0,
+            tile_x: 0,
+            tile_y: 0,
             width: 40,
             height: 30,
             top: 0,
@@ -39,13 +38,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 1,
             y: 0,
-            block_tile_x:40,
-            block_tile_y:0,
-            tile_x:40,
-            tile_y:0,
+            block_tile_x: 40,
+            block_tile_y: 0,
+            tile_x: 40,
+            tile_y: 0,
             width: 40,
             height: 28,
             top: 0,
@@ -70,13 +69,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 1,
             y: 1,
-            block_tile_x:40,
-            block_tile_y:30,
-            tile_x:43,
-            tile_y:33,
+            block_tile_x: 40,
+            block_tile_y: 30,
+            tile_x: 43,
+            tile_y: 33,
             width: 35,
             height: 25,
             top: 33,
@@ -101,13 +100,13 @@ const MAP_CONFIG = {
                 w: "Farmer Street",
             }
         },
-            {
+        {
             x: 0,
             y: 1,
-            block_tile_x:0,
-            block_tile_y:30,
-            tile_x:0,
-            tile_y:30,
+            block_tile_x: 0,
+            block_tile_y: 30,
+            tile_x: 0,
+            tile_y: 30,
             width: 38,
             height: 30,
             top: 30,
@@ -132,13 +131,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 4,
             y: 0,
-            block_tile_x:160,
-            block_tile_y:0,
-            tile_x:160,
-            tile_y:0,
+            block_tile_x: 160,
+            block_tile_y: 0,
+            tile_x: 160,
+            tile_y: 0,
             width: 40,
             height: 30,
             top: 0,
@@ -163,13 +162,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 4,
             y: 4,
-            block_tile_x:160,
-            block_tile_y:120,
-            tile_x:164,
-            tile_y:120,
+            block_tile_x: 160,
+            block_tile_y: 120,
+            tile_x: 164,
+            tile_y: 120,
             width: 36,
             height: 30,
             top: 120,
@@ -194,13 +193,13 @@ const MAP_CONFIG = {
                 w: "Wood Street",
             }
         },
-            {
+        {
             x: 0,
             y: 4,
-            block_tile_x:0,
-            block_tile_y:120,
-            tile_x:0,
-            tile_y:120,
+            block_tile_x: 0,
+            block_tile_y: 120,
+            tile_x: 0,
+            tile_y: 120,
             width: 37,
             height: 30,
             top: 120,
@@ -225,13 +224,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 1,
             y: 4,
-            block_tile_x:40,
-            block_tile_y:120,
-            tile_x:44,
-            tile_y:124,
+            block_tile_x: 40,
+            block_tile_y: 120,
+            tile_x: 44,
+            tile_y: 124,
             width: 36,
             height: 26,
             top: 124,
@@ -256,13 +255,13 @@ const MAP_CONFIG = {
                 w: "Farmer Street",
             }
         },
-            {
+        {
             x: 0,
             y: 3,
-            block_tile_x:0,
-            block_tile_y:90,
-            tile_x:0,
-            tile_y:97,
+            block_tile_x: 0,
+            block_tile_y: 90,
+            tile_x: 0,
+            tile_y: 97,
             width: 40,
             height: 23,
             top: 97,
@@ -287,13 +286,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 4,
             y: 3,
-            block_tile_x:160,
-            block_tile_y:90,
-            tile_x:164,
-            tile_y:90,
+            block_tile_x: 160,
+            block_tile_y: 90,
+            tile_x: 164,
+            tile_y: 90,
             width: 36,
             height: 30,
             top: 90,
@@ -318,13 +317,13 @@ const MAP_CONFIG = {
                 w: "Wood Street",
             }
         },
-            {
+        {
             x: 3,
             y: 4,
-            block_tile_x:120,
-            block_tile_y:120,
-            tile_x:120,
-            tile_y:123,
+            block_tile_x: 120,
+            block_tile_y: 120,
+            tile_x: 120,
+            tile_y: 123,
             width: 37,
             height: 27,
             top: 123,
@@ -349,13 +348,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 2,
             y: 2,
-            block_tile_x:80,
-            block_tile_y:60,
-            tile_x:84,
-            tile_y:64,
+            block_tile_x: 80,
+            block_tile_y: 60,
+            tile_x: 84,
+            tile_y: 64,
             width: 30,
             height: 23,
             top: 64,
@@ -380,13 +379,13 @@ const MAP_CONFIG = {
                 w: "Yew Street",
             }
         },
-            {
+        {
             x: 4,
             y: 1,
-            block_tile_x:160,
-            block_tile_y:30,
-            tile_x:160,
-            tile_y:30,
+            block_tile_x: 160,
+            block_tile_y: 30,
+            tile_x: 160,
+            tile_y: 30,
             width: 40,
             height: 24,
             top: 30,
@@ -411,13 +410,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 4,
             y: 2,
-            block_tile_x:160,
-            block_tile_y:60,
-            tile_x:160,
-            tile_y:67,
+            block_tile_x: 160,
+            block_tile_y: 60,
+            tile_x: 160,
+            tile_y: 67,
             width: 40,
             height: 23,
             top: 67,
@@ -442,13 +441,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 3,
             y: 2,
-            block_tile_x:120,
-            block_tile_y:60,
-            tile_x:127,
-            tile_y:67,
+            block_tile_x: 120,
+            block_tile_y: 60,
+            tile_x: 127,
+            tile_y: 67,
             width: 33,
             height: 20,
             top: 67,
@@ -473,13 +472,13 @@ const MAP_CONFIG = {
                 w: "Index Street",
             }
         },
-            {
+        {
             x: 3,
             y: 1,
-            block_tile_x:120,
-            block_tile_y:30,
-            tile_x:127,
-            tile_y:34,
+            block_tile_x: 120,
+            block_tile_y: 30,
+            tile_x: 127,
+            tile_y: 34,
             width: 33,
             height: 20,
             top: 34,
@@ -504,13 +503,13 @@ const MAP_CONFIG = {
                 w: "Index Street",
             }
         },
-            {
+        {
             x: 3,
             y: 0,
-            block_tile_x:120,
-            block_tile_y:0,
-            tile_x:127,
-            tile_y:0,
+            block_tile_x: 120,
+            block_tile_y: 0,
+            tile_x: 127,
+            tile_y: 0,
             width: 33,
             height: 27,
             top: 0,
@@ -535,13 +534,13 @@ const MAP_CONFIG = {
                 w: "Index Street",
             }
         },
-            {
+        {
             x: 2,
             y: 4,
-            block_tile_x:80,
-            block_tile_y:120,
-            tile_x:80,
-            tile_y:120,
+            block_tile_x: 80,
+            block_tile_y: 120,
+            tile_x: 80,
+            tile_y: 120,
             width: 40,
             height: 30,
             top: 120,
@@ -566,13 +565,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 3,
             y: 3,
-            block_tile_x:120,
-            block_tile_y:90,
-            tile_x:123,
-            tile_y:94,
+            block_tile_x: 120,
+            block_tile_y: 90,
+            tile_x: 123,
+            tile_y: 94,
             width: 34,
             height: 24,
             top: 94,
@@ -597,13 +596,13 @@ const MAP_CONFIG = {
                 w: "Index Street",
             }
         },
-            {
+        {
             x: 0,
             y: 2,
-            block_tile_x:0,
-            block_tile_y:60,
-            tile_x:0,
-            tile_y:60,
+            block_tile_x: 0,
+            block_tile_y: 60,
+            tile_x: 0,
+            tile_y: 60,
             width: 40,
             height: 24,
             top: 60,
@@ -628,13 +627,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 1,
             y: 2,
-            block_tile_x:40,
-            block_tile_y:60,
-            tile_x:40,
-            tile_y:63,
+            block_tile_x: 40,
+            block_tile_y: 60,
+            tile_x: 40,
+            tile_y: 63,
             width: 37,
             height: 21,
             top: 63,
@@ -659,13 +658,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 2,
             y: 0,
-            block_tile_x:80,
-            block_tile_y:0,
-            tile_x:80,
-            tile_y:0,
+            block_tile_x: 80,
+            block_tile_y: 0,
+            tile_x: 80,
+            tile_y: 0,
             width: 34,
             height: 30,
             top: 0,
@@ -690,13 +689,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-            {
+        {
             x: 2,
             y: 1,
-            block_tile_x:80,
-            block_tile_y:30,
-            tile_x:83,
-            tile_y:30,
+            block_tile_x: 80,
+            block_tile_y: 30,
+            tile_x: 83,
+            tile_y: 30,
             width: 31,
             height: 27,
             top: 30,
@@ -721,13 +720,13 @@ const MAP_CONFIG = {
                 w: "Yew Street",
             }
         },
-            {
+        {
             x: 2,
             y: 3,
-            block_tile_x:80,
-            block_tile_y:90,
-            tile_x:84,
-            tile_y:94,
+            block_tile_x: 80,
+            block_tile_y: 90,
+            tile_x: 84,
+            tile_y: 94,
             width: 34,
             height: 26,
             top: 94,
@@ -752,13 +751,13 @@ const MAP_CONFIG = {
                 w: "Yew Street",
             }
         },
-            {
+        {
             x: 1,
             y: 3,
-            block_tile_x:40,
-            block_tile_y:90,
-            tile_x:40,
-            tile_y:97,
+            block_tile_x: 40,
+            block_tile_y: 90,
+            tile_x: 40,
+            tile_y: 97,
             width: 37,
             height: 20,
             top: 97,
@@ -783,9 +782,9 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        ],
-    nodes: [   
-            {
+    ],
+    nodes: [
+        {
             x: 3,
             y: 0,
             center_x: 120,
@@ -799,32 +798,32 @@ const MAP_CONFIG = {
             width: 13,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Northern Boundary",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Index Street",
                     dir: "ns",
                     connect: 1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 5,
             y: 2,
             center_x: 200,
@@ -838,37 +837,37 @@ const MAP_CONFIG = {
             width: 7,
             height: 13,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Pilgrim Street",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Eastern Boundary",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                    lanes: 2,
+                    lanes: 2,
                     name: "Pilgrim Street",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 2,
-                    parking: 0,                                                                                                                                                                                                                                                                                        found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 4,
             y: 5,
             center_x: 160,
@@ -882,38 +881,38 @@ const MAP_CONFIG = {
             width: 7,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Wood Street",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Southern Boundary",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Wood Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 0,
             y: 3,
             center_x: 0,
@@ -927,32 +926,32 @@ const MAP_CONFIG = {
             width: 7,
             height: 13,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Lowland Street",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Western Boundary",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 1,
             y: 5,
             center_x: 40,
@@ -966,38 +965,38 @@ const MAP_CONFIG = {
             width: 7,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Farmer Street",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Southern Boundary",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Farmer Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 3,
             y: 2,
             center_x: 120,
@@ -1011,43 +1010,43 @@ const MAP_CONFIG = {
             width: 13,
             height: 13,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Index Street",
                     dir: "ns",
                     connect: 1,
                     sidewalk: 2,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Pilgrim Street",
                     dir: "ew",
                     connect: 5,
                     sidewalk: 2,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Index Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 2,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                            lanes: 1,
+                    lanes: 1,
                     name: "Pilgrim Street",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 2,
-                    parking: 0,                                                                                                                                                                found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 3,
             y: 3,
             center_x: 120,
@@ -1061,43 +1060,43 @@ const MAP_CONFIG = {
             width: 13,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Index Street",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 2,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Lowland Street",
                     dir: "ew",
                     connect: 4,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Index Street",
                     dir: "n",
                     connect: 4,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                lanes: 1,
+                    lanes: 1,
                     name: "Lowland Street",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0,                                                                                                                                                                                                                            found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 4,
             y: 3,
             center_x: 160,
@@ -1111,37 +1110,37 @@ const MAP_CONFIG = {
             width: 7,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Lowland Street",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Wood Street",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                        lanes: 1,
+                    lanes: 1,
                     name: "Lowland Street",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0,                                                                                                                                                                                                                                                                    found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 2,
             y: 3,
             center_x: 80,
@@ -1155,43 +1154,43 @@ const MAP_CONFIG = {
             width: 7,
             height: 13,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Yew Street",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Lowland Street",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Yew Street",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                            lanes: 2,
+                    lanes: 2,
                     name: "Lowland Street",
                     dir: "ew",
                     connect: 0,
                     sidewalk: 1,
-                    parking: 0,                                                                                                                                                                                                                                                                                                                                found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 2,
             y: 4,
             center_x: 80,
@@ -1205,43 +1204,43 @@ const MAP_CONFIG = {
             width: 7,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Yew Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Shadow Drive",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Yew Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                        lanes: 1,
+                    lanes: 1,
                     name: "Shadow Drive",
                     dir: "ew",
                     connect: 1,
                     sidewalk: 1,
-                    parking: 0,                                                                                                                                                                                    found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 1,
             y: 4,
             center_x: 40,
@@ -1255,32 +1254,32 @@ const MAP_CONFIG = {
             width: 7,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Shadow Drive",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Farmer Street",
                     dir: "ns",
                     connect: 5,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 2,
             y: 2,
             center_x: 80,
@@ -1294,43 +1293,43 @@ const MAP_CONFIG = {
             width: 7,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Yew Street",
                     dir: "n",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Pilgrim Street",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 2,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Yew Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                lanes: 1,
+                    lanes: 1,
                     name: "Pilgrim Street",
                     dir: "e",
                     connect: 1,
                     sidewalk: 1,
-                    parking: 0,                                                                                                                                            found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 1,
             y: 2,
             center_x: 40,
@@ -1344,38 +1343,38 @@ const MAP_CONFIG = {
             width: 5,
             height: 5,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Farmer Street",
                     dir: "s",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Pilgrim Street",
                     dir: "e",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Farmer Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 1,
             y: 1,
             center_x: 40,
@@ -1389,32 +1388,32 @@ const MAP_CONFIG = {
             width: 5,
             height: 5,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Lore Drive",
                     dir: "w",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Farmer Street",
                     dir: "s",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 2,
             y: 1,
             center_x: 80,
@@ -1428,37 +1427,37 @@ const MAP_CONFIG = {
             width: 5,
             height: 5,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Lore Drive",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Yew Street",
                     dir: "n",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                    lanes: 1,
+                    lanes: 1,
                     name: "Lore Drive",
                     dir: "w",
                     connect: 1,
                     sidewalk: 1,
-                    parking: 0,                                                                                                                        found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 3,
             y: 4,
             center_x: 120,
@@ -1472,38 +1471,38 @@ const MAP_CONFIG = {
             width: 5,
             height: 5,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Index Street",
                     dir: "n",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Shadow Drive",
                     dir: "w",
                     connect: 4,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Index Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-            {
+        {
             x: 4,
             y: 4,
             center_x: 160,
@@ -1517,43 +1516,43 @@ const MAP_CONFIG = {
             width: 7,
             height: 5,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Wood Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Shadow Drive",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Wood Street",
                     dir: "ns",
                     connect: 5,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                            lanes: 1,
+                    lanes: 1,
                     name: "Shadow Drive",
                     dir: "w",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0,                                                                                found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 4,
             y: 1,
             center_x: 160,
@@ -1567,37 +1566,37 @@ const MAP_CONFIG = {
             width: 7,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        found: 0
+                    found: 0
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Lore Drive",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Wood Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        lanes: 1,
+                    lanes: 1,
                     name: "Lore Drive",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
             },
         },
-            {
+        {
             x: 3,
             y: 1,
             center_x: 120,
@@ -1611,64 +1610,83 @@ const MAP_CONFIG = {
             width: 13,
             height: 7,
 
-            streets: {  
+            streets: {
                 n: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Index Street",
                     dir: "ns",
                     connect: 0,
                     sidewalk: 1,
                     parking: 0,
-                                        found: 1
+                    found: 1
                 },
                 e: {
-                                        lanes: 1,
+                    lanes: 1,
                     name: "Lore Drive",
                     dir: "ew",
                     connect: 4,
                     sidewalk: 1,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 s: {
-                                        lanes: 2,
+                    lanes: 2,
                     name: "Index Street",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 2,
-                    parking: 0,                    found: 1
+                    parking: 0, found: 1
                 },
                 w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
+                    found: 0
                 },
             },
         },
-        ],
+    ],
     propertyLines: [
-                {
+        {
             lines: {
-                x: 0,
-                y: 0,
-                width: 11,
-                height: 25
+                x: 15,
+                y: 2,
+                width: 13,
+                height: 21
             },
             block: {
-                x: 1,
+                x: 2,
                 y: 1
             },
             address: {
                 name: "",
-                facing: "",
-                number: "",
-                street: "",
+                facing: "S",
+                number: "101",
+                street: "Pilgrim Street",
             }
         },
-        
-                {
+
+        {
+            lines: {
+                x: 2,
+                y: 0,
+                width: 13,
+                height: 23
+            },
+            block: {
+                x: 2,
+                y: 1
+            },
+            address: {
+                name: "",
+                facing: "S",
+                number: "103",
+                street: "Pilgrim Street",
+            }
+        },
+
+        {
             lines: {
                 x: 12,
-                y: 0,
+                y: 2,
                 width: 11,
-                height: 25
+                height: 20
             },
             block: {
                 x: 1,
@@ -1676,18 +1694,18 @@ const MAP_CONFIG = {
             },
             address: {
                 name: "",
-                facing: "",
-                number: "",
-                street: "",
+                facing: "S",
+                number: "201",
+                street: "Pilgrim Street",
             }
         },
-        
-                {
+
+        {
             lines: {
-                x: 24,
-                y: 0,
-                width: 11,
-                height: 25
+                x: 2,
+                y: 2,
+                width: 10,
+                height: 20
             },
             block: {
                 x: 1,
@@ -1695,13 +1713,32 @@ const MAP_CONFIG = {
             },
             address: {
                 name: "",
-                facing: "",
-                number: "",
-                street: "",
+                facing: "S",
+                number: "203",
+                street: "Pilgrim Street",
             }
         },
-        
-            ]
-    
+
+        {
+            lines: {
+                x: 23,
+                y: 2,
+                width: 10,
+                height: 20
+            },
+            block: {
+                x: 1,
+                y: 1
+            },
+            address: {
+                name: "",
+                facing: "E",
+                number: "101",
+                street: "Yew Street",
+            }
+        }
+
+    ]
+
 };
 export default MAP_CONFIG;

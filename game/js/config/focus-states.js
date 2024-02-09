@@ -8,6 +8,9 @@ const FOCUS_STATES = {
     PAUSE: {
         name: 'PAUSE'
     },
+    DIALOG: {
+        name: 'DIALOG'
+    },
     POCKETS: {
         name: 'POCKETS'
     },

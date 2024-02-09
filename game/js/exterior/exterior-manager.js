@@ -205,6 +205,7 @@ import BlockNode from "./exterior-block-node.js";
 
         overMap.blocks.forEach(function (block, index) {
             self.setCorners(block);
+            blocks[block.y][block.x].buildProperties(); 
         });
 
         this.blocks = blocks;
@@ -218,7 +219,31 @@ import BlockNode from "./exterior-block-node.js";
     }
 
     update () {
+        const x = this.scene.player.action.actionTile.x;
+        const y = this.scene.player.action.actionTile.y;
+        var thisBlock = this.xyToBlock(x,y);
+        if (this.lastBlock.x != thisBlock.x || this.lastBlock.y != thisBlock.y) {
+            this.lastBlock = thisBlock;
+            this.block = this.getBlock(thisBlock.x, thisBlock.y);
+        }
 
+        if (this.lastTile.x != x || this.lastTile.y != y) {
+            this.lastTile = {x: x, y: y};
+            if (this.block) {
+                var quad = this.blockQuadrant(x,y);
+                var map_message = this.getPositionString(quad.v, quad.h, this.block.block);
+                var prop = this.block.onProperty(x,y);
+                if (prop) {
+                    map_message = 'at '+prop.address.number+' '+prop.address.street;
+                }
+                if (map_message != '') {
+                    map_message = 'I am ' + map_message;
+                }
+                this.scene.manager.hud.hudDisplay.tellMapBoxFlag(map_message);
+            }
+        }
+
+        
     }
 
     buildCity () {

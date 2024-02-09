@@ -57,8 +57,20 @@ export default class Item {
         var x_pixels = _x * 16;
         var y_pixels = _y * 16;
 
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.info.icon, 0).setOrigin(0, 0).setDepth(y_pixels);
+        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.info.icon, 0).setOrigin(0, 0).setDepth(y_pixels + 8);
+        /// tween
+        const tween = this.scene.add.tween({
+            targets: this.sprite,
+            y: y_pixels - 8,
+            duration: 450,
+            yoyo: true,
+            ease: 'Cubic.easeOut',
+            repeat: 0
+        });
 
+        tween.on('complete', () => {
+        /// put footmask here - item has landed
+        });
         this.sprite_shadow = this.scene.add.ellipse(x_pixels, y_pixels + 10, 12, 6, 0x000000).setOrigin(0, 0);
         this.sprite_shadow.setAlpha(.25);
     }

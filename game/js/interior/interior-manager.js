@@ -33,7 +33,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
         this.tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0); // 1px margin, 2px spacing
         this.wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0); // 1px margin, 2px spacing
         
-        this.floorLayer = this.map.createBlankLayer("Floor", this.tileset);
+        this.groundLayer = this.map.createBlankLayer("Floor", this.tileset);
         this.wallLayer = this.map.createBlankLayer("Wall", this.wall_tileset);
 
         this.interior.rooms = this.makeRooms();
@@ -55,7 +55,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
             var x = 1;
             
             var tile_group = room.floor.group != null ? room.floor.group : 'FILL_';
-            this.floorLayer.weightedRandomize(TILES[room.floor.tile][tile_group], x+1, y + room.wall.height + 1, room.floor.width, room.floor.height);
+            this.groundLayer.weightedRandomize(TILES[room.floor.tile][tile_group], x+1, y + room.wall.height + 1, room.floor.width, room.floor.height);
 
             // Doorway South
             var doorway_x = room.doors[0].x;
@@ -67,8 +67,8 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
             this.player_start_y = room.doors[0].y - 1;
 
             room.doors.forEach(door => {
-                this.floorLayer.setTileLocationCallback(door.x,door.y, door.width, door.height, this.enterPortal, this);
-                this.floorLayer.weightedRandomize(TILES[room.floor.tile][tile_group], door.x,door.y, door.width, door.height);
+                this.groundLayer.setTileLocationCallback(door.x,door.y, door.width, door.height, this.enterPortal, this);
+                this.groundLayer.weightedRandomize(TILES[room.floor.tile][tile_group], door.x,door.y, door.width, door.height);
             });
 
             room.windows.forEach(window => {
@@ -270,17 +270,17 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
     }
 
     cookStairs (_x, _y, width, height) {
-        this.floorLayer.weightedRandomize(TILES.STAIRS.WOOD_LEFT_TOP_, _x, _y, 1,1);
+        this.groundLayer.weightedRandomize(TILES.STAIRS.WOOD_LEFT_TOP_, _x, _y, 1,1);
 
-        this.floorLayer.weightedRandomize(TILES.STAIRS.WOOD_RIGHT_TOP_, _x + 1, _y, 1,1);
+        this.groundLayer.weightedRandomize(TILES.STAIRS.WOOD_RIGHT_TOP_, _x + 1, _y, 1,1);
 
-        this.floorLayer.weightedRandomize(TILES.STAIRS.WOOD_LEFT_, _x, _y+1, 1,height - 2);
+        this.groundLayer.weightedRandomize(TILES.STAIRS.WOOD_LEFT_, _x, _y+1, 1,height - 2);
 
-        this.floorLayer.weightedRandomize(TILES.STAIRS.WOOD_RIGHT_, _x + 1, _y+1, 1,height - 2);
+        this.groundLayer.weightedRandomize(TILES.STAIRS.WOOD_RIGHT_, _x + 1, _y+1, 1,height - 2);
 
-        this.floorLayer.weightedRandomize(TILES.STAIRS.WOOD_LEFT_BOTTOM_, _x, _y+height-1, 1,1);
+        this.groundLayer.weightedRandomize(TILES.STAIRS.WOOD_LEFT_BOTTOM_, _x, _y+height-1, 1,1);
 
-        this.floorLayer.weightedRandomize(TILES.STAIRS.WOOD_RIGHT_BOTTOM_, _x + 1, _y+height-1, 1,1);
+        this.groundLayer.weightedRandomize(TILES.STAIRS.WOOD_RIGHT_BOTTOM_, _x + 1, _y+height-1, 1,1);
     }
 
     cookWindow (_x,_y) {
@@ -321,7 +321,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
         for (var h=0;h<height;h++) {
             for (var w=0;w<width;w++) {
                 //console.log( parseInt(_x + w)+" - "+parseInt(_y + h));
-                this.floorLayer.weightedRandomize(tile[recipe_index],parseInt( _x + w),parseInt(_y + h), 1, 1);
+                this.groundLayer.weightedRandomize(tile[recipe_index],parseInt( _x + w),parseInt(_y + h), 1, 1);
                 recipe_index++;
 
                 //this.groundLayer.putTileAt(0, parseInt( _x + w),parseInt(_y + h))
@@ -339,7 +339,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
 
         /// This should bcome something where we have a registry of tile callback locations in a room and they get destroyed upon exiting
         room.doors.forEach(door => {
-            this.floorLayer.setTileLocationCallback(door.x,door.y, door.width, door.height, null, null);
+            this.groundLayer.setTileLocationCallback(door.x,door.y, door.width, door.height, null, null);
         });
 
         this.buildRoom(this.interior.rooms[next_room]);
@@ -348,7 +348,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
     }
 
     clearTileMaps () {
-        this.floorLayer.fill(TILES.BLANK);
+        this.groundLayer.fill(TILES.BLANK);
         this.wallLayer.fill(WALLTILES.BLANK);
     }
 

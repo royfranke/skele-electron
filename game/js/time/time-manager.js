@@ -30,6 +30,17 @@ export default class TimeManager {
         return time;
     }
 
+    getDigitalTime (current=this.now) {
+        var time = this.getTime(current);
+        if (time.hour < 10) {
+            time.hour = '0'+time.hour;
+        }
+        if (time.minute < 10) {
+            time.minute = '0'+time.minute;
+        }
+        return time;
+    }
+
     getDate (elapsed=this.now) {
         var date = {
             day: elapsed.day + this.start_date,

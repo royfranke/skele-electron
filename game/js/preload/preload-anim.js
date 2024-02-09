@@ -82,6 +82,15 @@ export default class PreloadAnim {
       repeat: 0,
     });
 
+    anims.create({
+      key: "fx_woosh",
+      frames: anims.generateFrameNumbers("fx_item", 
+       { start: 0, end: 8 }
+      ),
+      frameRate: 8,
+      repeat: 0,
+    });
+
   }
 
 

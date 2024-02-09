@@ -1,15 +1,14 @@
 import AppManager from "../app/app-manager.js";
 import GameManager from "../game/game-manager.js";
 import ExteriorManager from "../exterior/exterior-manager.js";
-import InteriorManager from "../interior/interior-manager.js";
 import PreloadManager from "../preload/preload-manager.js";
 import PlayerManager from "../player/player-manager.js";
 /**
- * Game
+ * Game Overworld
  */
-export default class GameScene extends Phaser.Scene {
+export default class OverworldScene extends Phaser.Scene {
     constructor() {
-        super("Game Scene");
+        super("Overworld Scene");
         
     }
 
