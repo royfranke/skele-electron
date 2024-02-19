@@ -11,6 +11,9 @@ const FOCUS_STATES = {
     DIALOG: {
         name: 'DIALOG'
     },
+    CHEST: {
+        name: 'CHEST'
+    },
     POCKETS: {
         name: 'POCKETS'
     },

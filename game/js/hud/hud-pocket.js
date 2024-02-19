@@ -116,9 +116,12 @@ import POCKET_CONFIG from "../config/pocket-states.js";
             var inBag = this.availableBag(item,pocketIndex);
             if (inBag) {    
                 /// Remove from this pocket
+                /// Tween; when tween done empty pocket
                 this.setPocket(pocketIndex, 'EMPTY');
+                var sound_var = Phaser.Math.RND.between(1,3);
+                this.scene.manager.hud.hudSound.play('ITEM_PUT_AWAY_'+sound_var);
                 action_result = true;
-                //this.scene.manager.hud.hudDisplay.addFX(pocketIndex,0);
+                this.scene.manager.hud.hudDisplay.addFX(pocketIndex,0);
             }
         }
         else if (pocket.STATE != 'EMPTY') {

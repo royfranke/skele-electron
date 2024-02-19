@@ -27,10 +27,8 @@ export default class PlayerManager {
        this.action = new PlayerAction(this.scene);
        
        this.app.camera.follow(this.playerSprite.sprite);
-       this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
-        
-       this.playerSprite.setCollider();
-       
+       this.locale = this.scene[this.scene.place];
+
        this.underfoot = null;
     }
 
@@ -85,6 +83,10 @@ export default class PlayerManager {
         this.playerSprite.sprite.setPosition(x_*16, y_*16);
     }
 
+    create () {
+      this.playerSprite.setCollider();
+      this.playerSprite.createShadow();
+    }
 
     update () {
         var focus = this.getFocus();
@@ -157,12 +159,15 @@ export default class PlayerManager {
         if (this.state.name == 'HOP') {
             return 60;
         }
-        if (this.underfoot.TYPE == 'CURB' && this.state.name != 'HOP') {
+        if (this.underfoot != undefined && this.underfoot.TYPE == 'CURB' && this.state.name != 'HOP') {
             this.setState('HOP');
             setTimeout(() => {
                this.setState('IDLE');
             }, 500);
             return 80; 
+        }
+        if (this.underfoot == undefined) {
+          return 60;
         }
         return this.interpretSpeed(this.underfoot.SPEED);
     }
@@ -224,15 +229,15 @@ export default class PlayerManager {
 
     updateActiveTile() {
         const groundLayer = this.locale.groundLayer;
-        const exterior = this.locale;
+        const locale = this.locale;
         
         this.standingTile = groundLayer.worldToTileXY(this.playerSprite.sprite.x, this.playerSprite.sprite.y+8); 
         this.snappedStanding = groundLayer.tileToWorldXY(this.standingTile.x, this.standingTile.y);
         
         //this.debugUnderfootTile.setPosition(this.snappedStanding.x, this.snappedStanding.y);
         this.underfootLast = this.underfoot;
-        this.underfoot = exterior.ground.getGround(this.standingTile.x, this.standingTile.y, groundLayer);
-        this.underAction = exterior.ground.getGround(this.action.actionTile.x, this.action.actionTile.y, groundLayer);
+        this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y, groundLayer);
+        this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y, groundLayer);
     
       }
 

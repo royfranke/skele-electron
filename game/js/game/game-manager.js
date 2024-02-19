@@ -7,6 +7,7 @@ import GameCamera from "./game-camera.js";
 import GameClock from "./game-clock.js";
 import HudManager from "../hud/hud-manager.js";
 import ItemManager from "../items/item-manager.js";
+import ObjectManager from "../objects/object-manager.js";
 import TimeManager from "../time/time-manager.js";
 /* global Phaser */
 /*
@@ -50,13 +51,17 @@ export default class GameManager {
        }
        
     }
+    
+    openChest (chest) {
+        this.itemManager.openChest(chest);
+    }
 
     getFocus () {
         return this.gameFocus.getFocus();
     }
 
     setFocus (focus_string) {
-        if (focus_string == 'PLAYER' || focus_string == 'MAP' || focus_string == 'PAUSE' || focus_string == 'DIALOG') {
+        if (focus_string == 'PLAYER' || focus_string == 'MAP' || focus_string == 'PAUSE' || focus_string == 'DIALOG' || focus_string == 'CHEST') {
             this.hud.setState('VISIBLE_UNFOCUSED');
         }
         if (focus_string == 'POCKETS') {
@@ -105,7 +110,7 @@ export default class GameManager {
                 if (focus.name == 'PLAYER' || focus.name == 'MAP') {
                     this.setFocus('POCKETS');
                 }
-                else if (focus.name == 'POCKETS') {
+                else if (focus.name == 'POCKETS' || focus.name == 'CHEST') {
                     this.setFocus('PLAYER');  
                 }
             }
@@ -133,6 +138,9 @@ export default class GameManager {
             this.watch = this.hud.hudDisplay.tellWatch('00:00AM','positive');
             this.itemManager = new ItemManager(this.scene);
 
+            this.scene[this.scene.place].createItems();
+            
+            //this.objectManager = new ObjectManager(this.scene);
             this.setFocus('PLAYER');
             /// After loading functions...
             this.setState('LOADED');
@@ -151,6 +159,7 @@ export default class GameManager {
 
             this.setState('LOADED');
             this.setState('OVERWORLD');
+            
         }
     }
 

@@ -33,6 +33,18 @@ import MONEY from "../reference/money.js";
         }, delay);
     }
 
+    itemSparkle(_x,_y,delay=0) {
+        console.log('test');
+        setTimeout(() => {
+            const sparkle = this.scene.add.sprite(_x - 8, _y - 16, "fx_sparkle", 0).setScrollFactor(0).setOrigin(0);
+            sparkle.setDepth(200000);
+            sparkle.anims.play("sparkle", false);
+            sparkle.once('animationcomplete', () => {
+                sparkle.destroy()
+            })
+        }, delay);
+    }
+
 
     coinUp(_x,_y,value,source) {
         //const anims = this.scene.anims;

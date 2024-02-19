@@ -178,6 +178,15 @@ const GROUND_TYPE = {
     CANDIG: false,
     CANPLANT: false,
     CANSTAKE: false
+  },
+  STAIRS: {
+    TYPE: "STAIRS",
+    SPEED: "BASE_SPEED",
+    BITMAP: false,
+    FILLTILE: true,
+    CANDIG: false,
+    CANPLANT: false,
+    CANSTAKE: false
   }
 };
 

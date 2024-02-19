@@ -1,7 +1,9 @@
 import TILES from "../config/atlas/tile-weights.js";
+import COOK from "../config/atlas/tile-recipes.js";
 import WALLTILES from "../config/atlas/wall-tile-weights.js";
+import InteriorGround from "./interior-ground.js";
+import ObjectManager from "../objects/object-manager.js";
 
-//import COOK from "../config/tiles/interior/tile-recipes.js";
 
 /**
  * 	Manage Interiors (Non-overworld tile scenes)
@@ -12,10 +14,10 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
     constructor(scene) {
         this.scene = scene;
 
-        this.player_in_room = 0;
+        this.lastRoom = {x: 0, y: 0};
+        this.lastTile = {x: 0, y: 0};
 
         const tileSize = 16;
-
 
         this.interior = {
             width: 24,
@@ -30,14 +32,21 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
             height: this.interior.height,
         });
 
-        this.tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0); // 1px margin, 2px spacing
-        this.wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0); // 1px margin, 2px spacing
+        const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
+        const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
+
         
-        this.groundLayer = this.map.createBlankLayer("Floor", this.tileset);
-        this.wallLayer = this.map.createBlankLayer("Wall", this.wall_tileset);
+        
+        this.groundLayer = this.map.createBlankLayer("Ground", tileset);
+
+        this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
+
 
         this.interior.rooms = this.makeRooms();
         this.buildRoom(this.interior.rooms[0]);
+
+        this.ground = new InteriorGround(this.scene);
+        this.scene.manager.objectManager = new ObjectManager(this.scene);
     }
 
     create () {
@@ -48,26 +57,37 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
 
     }
 
+    createItems () {
+        ///
+    }
+
+    getEntry () {
+        return {
+            x: this.player_start_x,
+            y: this.player_start_y
+        };
+    }
+    
+
     buildRoom (room) {
         this.clearTileMaps();
-        //this.clearTileMaps();
-            var y = 0;
-            var x = 1;
+        var y = 0;
+        var x = 1;
             
-            var tile_group = room.floor.group != null ? room.floor.group : 'FILL_';
-            this.groundLayer.weightedRandomize(TILES[room.floor.tile][tile_group], x+1, y + room.wall.height + 1, room.floor.width, room.floor.height);
+        var tile_group = room.floor.group != null ? room.floor.group : 'FILL_';
+        this.groundLayer.weightedRandomize(TILES[room.floor.tile][tile_group], x+1, y + room.wall.height + 1, room.floor.width, room.floor.height);
 
-            // Doorway South
-            var doorway_x = room.doors[0].x;
-            var doorway_y = room.doors[0].y;
-
+        // Doorway South
+        var doorway_x = room.doors[0].x;
+        var doorway_y = room.doors[0].y;
+       
+        /// TODO - Doesnt work.
+        this.scene.manager.objectManager.newObjectToWorld(doorway_x,doorway_y,'DOOR_WINDOWS_SMALL_');
             
-
-            this.player_start_x = room.doors[0].x + 1;
-            this.player_start_y = room.doors[0].y - 1;
+        this.player_start_x = room.doors[0].x + 1;
+        this.player_start_y = room.doors[0].y - 1;
 
             room.doors.forEach(door => {
-                this.groundLayer.setTileLocationCallback(door.x,door.y, door.width, door.height, this.enterPortal, this);
                 this.groundLayer.weightedRandomize(TILES[room.floor.tile][tile_group], door.x,door.y, door.width, door.height);
             });
 
@@ -93,7 +113,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
             this.wallLayer.weightedRandomize(WALLTILES.BORDER.TOPVIEW_.MID_RIGHT_, x_right, y + 1, 1, room.floor.height - 1);
             this.wallLayer.weightedRandomize(WALLTILES.BORDER.TOPVIEW_.LOWER_RIGHT_, x_right, y + room.floor.height, 1, 1);
             
- /*
+ 
             this.wallLayer.weightedRandomize(WALLTILES.BORDER['SECTIONED_'+room.floor.tile+'_'].LOWER_, x+1, y + room.floor.height + room.wall.height + 1, room.floor.width, 1);
 
             //Portal South
@@ -101,7 +121,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
             this.wallLayer.weightedRandomize(WALLTILES.BORDER['SECTIONED_'+room.floor.tile+'_'].LOWER_, x+1, y + room.floor.height + room.wall.height + 2, 2, 1);
 
             this.wallLayer.putTilesAt([-1, -1], x+1, y + room.floor.height + room.wall.height + 1);
-            */
+            
 
             this.wallLayer.weightedRandomize(WALLTILES.BORDER.SECTIONED_.TOP_RIGHT_, x_right, y + 1 + room.floor.height, 1, room.wall.height-1);
             this.wallLayer.weightedRandomize(WALLTILES.BORDER.SECTIONED_.MID_RIGHT_, x_right, y + room.floor.height + room.wall.height, 1, 1);
@@ -177,7 +197,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
             }
         };
 
-        var room_count = Phaser.Math.Between(2, 4);
+        var room_count = Phaser.Math.Between(1, 1);
         var rooms = [];
         for (var i=0; i<room_count; i++) {
             
@@ -216,7 +236,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
 
     planDoors (floor_width, floor_height, wall_height) {
         var door_south = {
-            x: 1,
+            x: 2,
             y: floor_height + wall_height + 1,
             width: 2,
             height: 1
@@ -338,9 +358,10 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
         var room = this.interior.rooms[this.player_in_room];
 
         /// This should bcome something where we have a registry of tile callback locations in a room and they get destroyed upon exiting
+        /*
         room.doors.forEach(door => {
             this.groundLayer.setTileLocationCallback(door.x,door.y, door.width, door.height, null, null);
-        });
+        }); */
 
         this.buildRoom(this.interior.rooms[next_room]);
         this.scene.player.setPosition(this.player_start_x, this.player_start_y);

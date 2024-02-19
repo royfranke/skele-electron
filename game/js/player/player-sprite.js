@@ -12,20 +12,21 @@ export default class PlayerSprite {
     this.dir_faces = SPRITE_DIR.DIR_FACES;
     this.sprite = this.scene.physics.add.sprite(_x, _y, "player-IDLE", 0).setSize(16, 12).setOffset(8, 16);
 
-    this.createShadow();
   }
 
   setCollider () {
-    if (this.scene.exterior != null) {
+    if (this.scene.place == 'exterior') {
       this.setExteriorCollider();
     }
-    if (this.scene.interior != null) {
+    if (this.scene.place == 'interior') {
       this.setInteriorCollider();
     }
   }
 
   setInteriorCollider() {
     this.scene.physics.add.collider(this.sprite, this.scene.interior.groundLayer);
+    this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
+
   }
 
   setExteriorCollider() {

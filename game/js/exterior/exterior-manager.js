@@ -1,9 +1,11 @@
 import TILES from "../config/atlas/tile-weights.js";
 import COOK from "../config/atlas/tile-recipes.js";
+import WALLTILES from "../config/atlas/wall-tile-weights.js";
 import MAP_CONFIG from "../config/map.js";
 import ExteriorGround from "./exterior-ground.js";
 import Block from "./exterior-block.js";
 import BlockNode from "./exterior-block-node.js";
+import ObjectManager from "../objects/object-manager.js";
 
 /**
  * 	Manage Exteriors (Overworld tile scenes)
@@ -26,15 +28,24 @@ import BlockNode from "./exterior-block-node.js";
         });
         const overMap = this.overMap;
 
-        const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0); // 1px margin, 2px spacing
+        const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
+        const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
         this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(TILES.BLANK);
+
+        
+        
+        this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
+        const wallLayer = this.wallLayer;
+
 
         const groundLayer = this.groundLayer;
         var self = this;
         const blocks = new Array(this.overMap.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 
+
+        self.scene.manager.objectManager = new ObjectManager(scene);
         overMap.blocks.forEach(function (block, index) {
-            blocks[block.y][block.x] = new Block(self.scene,groundLayer, block); /// Backwards on purpose to not require array flip
+            blocks[block.y][block.x] = new Block(self.scene,groundLayer,wallLayer, block); /// Backwards on purpose to not require array flip
             
         });
 
@@ -47,7 +58,6 @@ import BlockNode from "./exterior-block-node.js";
         let nodesHeight = parseInt(this.overMap.sectionsHeight + 3);
         let nodesWidth = parseInt(this.overMap.sectionsWidth + 3);
         const nodes = new Array(nodesHeight).fill().map(() => new Array(nodesWidth).fill(0));
-
         overMap.nodes.forEach(function (node, index) {
             nodes[node.y][node.x] = new BlockNode(groundLayer, node); /// Backwards on purpose to not require array flip
 
@@ -202,20 +212,38 @@ import BlockNode from "./exterior-block-node.js";
                 }
             }
         });
+        this.nodes = nodes;
 
-        overMap.blocks.forEach(function (block, index) {
-            self.setCorners(block);
-            blocks[block.y][block.x].buildProperties(); 
-        });
+        
 
         this.blocks = blocks;
         this.block = null;
         this.ground = new ExteriorGround(this.scene);
-        this.ground.initializeTiles(this.groundLayer);
+        
     }
 
     create () {
-        
+        const blocks = this.blocks;
+        self = this;
+        this.overMap.blocks.forEach(function (block, index) {
+            blocks[block.y][block.x].buildProperties();
+            blocks[block.y][block.x].buildObjects(); 
+            self.setCorners(block);
+            
+        });
+        const objectManager = this.scene.manager.objectManager;
+        const nodes = this.nodes;
+        this.overMap.nodes.forEach(function (node, index) {
+            nodes[node.y][node.x].buildObjects(objectManager); 
+        });
+        this.ground.initializeTiles(this.groundLayer);
+    }
+
+    createItems () {
+        const blocks = this.blocks;
+        this.overMap.blocks.forEach(function (block, index) {
+            blocks[block.y][block.x].buildItems(); 
+        });
     }
 
     update () {
@@ -251,6 +279,7 @@ import BlockNode from "./exterior-block-node.js";
         this.overMap.blocks.forEach(function (block, index) {
             blocks[block.y][block.x].buildProperties(); 
         });
+
     }
 
     setCorners (block) {
@@ -264,6 +293,7 @@ import BlockNode from "./exterior-block-node.js";
             // Bottom / South side of street!
             recipe_x = block.left+1;
             recipe_y = block.top+1;
+            
             //self.cookRecipe(recipe_x, recipe_y, recipe);
             /// Start with plain cement fill for sidewalks
             this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,block.width-2, 2);
@@ -327,6 +357,14 @@ import BlockNode from "./exterior-block-node.js";
             self.cookRecipe(recipe_x, recipe_y, recipe);
         }
 
+    }
+
+    getBlockNodeProperties (_x,_y) {
+        return this.nodes[_y][_x].node;
+    }
+
+    getBlockNode (_x,_y) {
+        return this.nodes[_y][_x];
     }
 
 

@@ -29,10 +29,11 @@ export default class Block {
     },
     */
 
-    constructor(scene, groundLayer, block) {
+    constructor(scene, groundLayer, wallLayer, block) {
         this.scene = scene;
         this.block = block;
         this.groundLayer = groundLayer;
+        this.wallLayer = wallLayer;
         this.propertyLines = [];
         this.setGround();
     }
@@ -142,7 +143,7 @@ export default class Block {
         prop.lines.bottom = this.block.top + prop.lines.y + prop.lines.height;
         prop.lines.right = prop.lines.left + prop.lines.width;
 
-        let propertyLine = new PropertyLine(this, prop);
+        let propertyLine = new PropertyLine(this.scene, this, prop);
         
         this.propertyLines.push(propertyLine);
     }
@@ -165,5 +166,22 @@ export default class Block {
         });
         return property;
     }
+
+    buildObjects () {
+        const block = this.block;
+        if (this.block.offset.n > 0) {
+            this.scene.manager.objectManager.newObjectToWorld(block.left+8, block.top+1,'WOOD_POLE');
+            
+        }
     
+    }
+
+    buildItems () {
+        const block = this.block;
+        if (this.block.offset.n > 0) {
+            this.scene.manager.itemManager.newItemToWorld(block.left+3, block.top+2,'APPLE');
+        }
+    
+    }
+
 }

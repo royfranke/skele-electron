@@ -216,7 +216,8 @@ export default class HudDisplay {
                 
                 if (this.slots[slot_y][slot_x].icon != null && slot_y == 0) {
                     this.slots[slot_y][slot_x].icon.destroy();
-                    this.slots[slot_y][slot_x].icon = this.addIcon(slot_x, slot_y, state, frameName)
+                    this.slots[slot_y][slot_x].icon = this.addIcon(slot_x, slot_y, state, frameName);
+                    
                 }
                 
             }
@@ -281,6 +282,7 @@ export default class HudDisplay {
             this.slots[1][slot_x].icon.destroy();
             if (new_icon.info != null) {
                 this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, new_icon.info.use, new_icon.info.icon);
+
             }
             else {
                 this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'EMPTY','empty');
@@ -308,13 +310,20 @@ export default class HudDisplay {
     }
 
     addPocketTip (message) {
-        const tip =  this.scene.add.dom(this.view.right + 32, this.view.top, 'div', '', message).setClassName('pocket-tip').setOrigin(1,0).setScrollFactor(0);
+        const tip =  this.scene.add.dom(this.view.right + 32, this.view.top, 'div', '', message).setClassName('pocket-tip').setOrigin(1,0).setScrollFactor(0).setDepth(150000);
         return tip;
     }
 
     setSlipVisible (slot_x, visible) {
         if (this.slots[1][slot_x].slip != null) {
             this.slots[1][slot_x].slip.setVisible(visible);
+            if (visible) {
+                var slotMargin = {
+                    x: this.view.right - (24 + (slot_x*40)),
+                    y: this.view.top + 64,
+                };
+                this.slots[1][slot_x].slip.setPosition(slotMargin.x,slotMargin.y);
+            }
         }
     }
 
@@ -364,23 +373,59 @@ export default class HudDisplay {
     arrowDown (slot_x) {
         var pocket = this.scene.manager.hud.pocket.getPocket(slot_x);
         var state = pocket.STATE;
-        if (state != 'EMPTY') {
-            if (pocket[state].info.type == 'BAG') {
+        if (state != 'EMPTY' && pocket[state].info.type == 'BAG') {
+            if (pocket[state].info.items.length > 1) {
                 pocket[state].nextItem();
+                var sound_var = Phaser.Math.RND.between(1,3);
+                this.scene.manager.hud.hudSound.play('BAG_RUMMAGE_'+sound_var);
+                var arrow = this.getArrow(slot_x);
+                var pos = this.getArrowPosition(slot_x);
+                var tween = this.scene.tweens.add({
+                    targets: [ arrow ],
+                    y: pos.y + 4,
+                    x: pos.x,
+                    duration: 100,
+                    ease: 'Sine.easeIn',
+                    loop: 0,
+                    yoyo: true,
+                });
+                tween.on('complete', () => {
+                    this.scene.manager.hud.hudInput.setSelectedContents(-1);
+                    this.refreshDisplay();
+                    var new_item = this.slots[1][slot_x].icon;
+                    this.scene.tweens.add({
+                        targets: [ new_item ],
+                        y: new_item.y - 2,
+                        x: new_item.x,
+                        duration: 250,
+                        ease: 'Sine.easeIn',
+                        loop: 0,
+                        yoyo: true,
+                    });
+                });
+
             }
+            else { // Only one item in bag
+                //var sound_var = Phaser.Math.RND.between(1,3);
+                //this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var); replace with more subtle
+                var arrow = this.getArrow(slot_x);
+                var pos = this.getArrowPosition(slot_x);
+                var tween = this.scene.tweens.add({
+                    targets: [ arrow ],
+                    x: pos.x - 1,
+                    duration: 100,
+                    ease: 'Sine.easeIn',
+                    loop: 1,
+                    yoyo: true,
+                });
+                tween.on('complete', () => {
+                    this.scene.manager.hud.hudInput.setSelectedContents(-1);
+                    this.refreshDisplay();
+
+                });
+            }
+            
         }
-        
-        var arrow = this.getArrow(slot_x);
-        var pos = this.getArrowPosition(slot_x);
-        this.scene.tweens.add({
-            targets: [ arrow ],
-            y: pos.y + 4,
-            x: pos.x,
-            duration: 100,
-            ease: 'Sine.easeIn',
-            loop: 0,
-            yoyo: true,
-        });
     }
 
     setArrowColor (slot_x, status) {
@@ -487,7 +532,8 @@ export default class HudDisplay {
         var _x = this.view.right - (margin.x);
         var _y = this.view.top + margin.y;
 
-        this.scene.manager.fx.itemWoosh(_x,_y,delay);
+        //this.scene.manager.fx.itemWoosh(_x,_y,delay);
+        //this.scene.manager.fx.itemSparkle(_x,_y,delay);
     }
 
     openPockets () {

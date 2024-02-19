@@ -60,7 +60,6 @@ export default class HudInput {
                 }
                 if (selected == content_length - 1) {
                     this.scene.manager.hud.arrowDown(this.selected.pocket);
-                    //selected = content_length - 2; TODO: TEST
                 }
                 
                 this.selected.contents = selected;
@@ -151,6 +150,8 @@ export default class HudInput {
                     this.refreshDisplay();
                 }
                 else {
+                    var sound_var = Phaser.Math.RND.between(1,3);
+                    this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var);
                     this.scene.manager.hud.newPocketTip('My hands are full...',3000);
                     //put the thing back in the bag
                     pocket[state].addItem(item);

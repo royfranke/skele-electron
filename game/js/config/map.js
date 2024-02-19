@@ -540,26 +540,26 @@ const MAP_CONFIG = {
             block_tile_x: 80,
             block_tile_y: 120,
             tile_x: 80,
-            tile_y: 120,
+            tile_y: 124,
             width: 40,
-            height: 30,
-            top: 120,
+            height: 26,
+            top: 124,
             right: 120,
             bottom: 150,
             left: 80,
             center: {
                 x: 100,
-                y: 135
+                y: 137
             },
             ground: "marsh",
             offset: {
-                n: 0,
+                n: 4,
                 e: 0,
                 s: 0,
                 w: 0,
             },
             bounds: {
-                n: "",
+                n: "Shadow Drive",
                 e: "",
                 s: "",
                 w: "",
@@ -728,26 +728,26 @@ const MAP_CONFIG = {
             tile_x: 84,
             tile_y: 94,
             width: 34,
-            height: 26,
+            height: 23,
             top: 94,
             right: 118,
-            bottom: 120,
+            bottom: 117,
             left: 84,
             center: {
                 x: 101,
-                y: 107
+                y: 105.5
             },
             ground: "grass",
             offset: {
                 n: 4,
                 e: 2,
-                s: 0,
+                s: 3,
                 w: 4,
             },
             bounds: {
                 n: "Lowland Street",
                 e: "Index Street",
-                s: "",
+                s: "Shadow Drive",
                 w: "Yew Street",
             }
         },
@@ -808,6 +808,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -816,6 +817,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -847,6 +849,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -855,6 +858,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -863,7 +867,8 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 3,
                     sidewalk: 2,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 0, found: 1
                 },
             },
         },
@@ -889,6 +894,7 @@ const MAP_CONFIG = {
                     connect: 4,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 0,
                     found: 1
                 },
                 e: {
@@ -897,6 +903,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -905,6 +912,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -936,6 +944,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -944,6 +953,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -973,6 +983,7 @@ const MAP_CONFIG = {
                     connect: 4,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 0,
                     found: 1
                 },
                 e: {
@@ -981,6 +992,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -989,6 +1001,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1018,6 +1031,7 @@ const MAP_CONFIG = {
                     connect: 1,
                     sidewalk: 2,
                     parking: 0,
+                    signal: 2,
                     found: 1
                 },
                 e: {
@@ -1026,6 +1040,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 5,
                     sidewalk: 2,
+                    signal: 2,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1034,6 +1049,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 3,
                     sidewalk: 2,
+                    signal: 2,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1042,7 +1058,8 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 2,
                     sidewalk: 2,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 2, found: 1
                 },
             },
         },
@@ -1068,6 +1085,7 @@ const MAP_CONFIG = {
                     connect: 2,
                     sidewalk: 2,
                     parking: 0,
+                    signal: 0,
                     found: 1
                 },
                 e: {
@@ -1076,6 +1094,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 4,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1084,6 +1103,7 @@ const MAP_CONFIG = {
                     dir: "n",
                     connect: 4,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1092,7 +1112,8 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 0, found: 1
                 },
             },
         },
@@ -1120,6 +1141,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1128,6 +1150,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1136,7 +1159,8 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 0, found: 1
                 },
             },
         },
@@ -1162,6 +1186,7 @@ const MAP_CONFIG = {
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 2,
                     found: 1
                 },
                 e: {
@@ -1170,6 +1195,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
+                    signal: 2,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1178,6 +1204,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
+                    signal: 2,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1186,7 +1213,8 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 0,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 2, found: 1
                 },
             },
         },
@@ -1212,14 +1240,16 @@ const MAP_CONFIG = {
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 1,
                     found: 1
                 },
                 e: {
                     lanes: 1,
                     name: "Shadow Drive",
                     dir: "ew",
-                    connect: -1,
+                    connect: 3,
                     sidewalk: 1,
+                    signal: 1,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1228,6 +1258,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1236,7 +1267,8 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 1,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 1, found: 1
                 },
             },
         },
@@ -1264,6 +1296,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1272,6 +1305,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 5,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1301,6 +1335,7 @@ const MAP_CONFIG = {
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 0,
                     found: 1
                 },
                 e: {
@@ -1309,6 +1344,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 3,
                     sidewalk: 2,
+                    signal: 1,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1317,6 +1353,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
+                    signal: 1,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1325,7 +1362,8 @@ const MAP_CONFIG = {
                     dir: "e",
                     connect: 1,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 1, found: 1
                 },
             },
         },
@@ -1351,6 +1389,7 @@ const MAP_CONFIG = {
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 0,
                     found: 1
                 },
                 e: {
@@ -1359,6 +1398,7 @@ const MAP_CONFIG = {
                     dir: "e",
                     connect: 2,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1367,6 +1407,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1398,6 +1439,7 @@ const MAP_CONFIG = {
                     dir: "w",
                     connect: 2,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1406,6 +1448,7 @@ const MAP_CONFIG = {
                     dir: "s",
                     connect: 2,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1437,6 +1480,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1445,6 +1489,7 @@ const MAP_CONFIG = {
                     dir: "n",
                     connect: 2,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1453,7 +1498,8 @@ const MAP_CONFIG = {
                     dir: "w",
                     connect: 1,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 0, found: 1
                 },
             },
         },
@@ -1463,13 +1509,13 @@ const MAP_CONFIG = {
             center_x: 120,
             center_y: 120,
             tile_x: 118,
-            tile_y: 118,
-            top: 118,
+            tile_y: 117,
+            top: 117,
             right: 123,
-            bottom: 123,
+            bottom: 124,
             left: 118,
             width: 5,
-            height: 5,
+            height: 7,
 
             streets: {
                 n: {
@@ -1479,6 +1525,7 @@ const MAP_CONFIG = {
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 0,
                     found: 1
                 },
                 e: {
@@ -1487,6 +1534,7 @@ const MAP_CONFIG = {
                     dir: "w",
                     connect: 4,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1495,10 +1543,17 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
-                    found: 0
+                    lanes: 1,
+                    name: "Shadow Drive",
+                    dir: "ew",
+                    connect: 2,
+                    sidewalk: 1,
+                    parking: 0,
+                    signal: 3, found: 1
                 },
             },
         },
@@ -1524,6 +1579,7 @@ const MAP_CONFIG = {
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 1,
                     found: 1
                 },
                 e: {
@@ -1532,6 +1588,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1540,6 +1597,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 5,
                     sidewalk: 1,
+                    signal: 1,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1548,7 +1606,8 @@ const MAP_CONFIG = {
                     dir: "w",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 0, found: 1
                 },
             },
         },
@@ -1576,6 +1635,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1584,6 +1644,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1592,7 +1653,8 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
-                    parking: 0, found: 1
+                    parking: 0,
+                    signal: 0, found: 1
                 },
             },
         },
@@ -1618,6 +1680,7 @@ const MAP_CONFIG = {
                     connect: 0,
                     sidewalk: 1,
                     parking: 0,
+                    signal: 2,
                     found: 1
                 },
                 e: {
@@ -1626,6 +1689,7 @@ const MAP_CONFIG = {
                     dir: "ew",
                     connect: 4,
                     sidewalk: 1,
+                    signal: 0,
                     parking: 0, found: 1
                 },
                 s: {
@@ -1634,6 +1698,7 @@ const MAP_CONFIG = {
                     dir: "ns",
                     connect: 2,
                     sidewalk: 2,
+                    signal: 2,
                     parking: 0, found: 1
                 },
                 w: {
@@ -1736,7 +1801,7 @@ const MAP_CONFIG = {
                 number: "101",
                 street: "Yew Street",
             }
-        }
+        },
 
     ]
 

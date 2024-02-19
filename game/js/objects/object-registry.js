@@ -1,7 +1,7 @@
-/* Item Registry */
-/* Manages items in the world, not yet adapted for electron */
+/* Object Registry */
+/* Manages objects in the world, not yet adapted for electron */
 
-export default class ItemRegistry {
+export default class ObjectRegistry {
 
     registry;
 
@@ -13,7 +13,7 @@ export default class ItemRegistry {
         return (_x+"_"+_y in this.registry);
     }
 
-    getItem (_x, _y) {
+    getObject (_x, _y) {
         if (!this.placeEmpty(_x,_y)) {
             return this.registry[_x+"_"+_y];
         }
@@ -29,31 +29,31 @@ export default class ItemRegistry {
         }
     }
 
-    placeItem (item, _x, _y) {
-        var added = this.addItem(item, _x, _y);
-        item.setRegistration(added,{x: _x, y: _y});
+    placeObject (object, _x, _y) {
+        var added = this.addObject(object, _x, _y);
+        object.setRegistration(added,{x: _x, y: _y});
         return added;
-        /// Should be feedback for when an item cannot be placed (for now the only condition is that another item cannot already be on the tile)
+        /// Should be feedback for when an object cannot be placed (for now the only condition is that another object cannot already be on the tile)
     }
 
-    addItem (item, _x, _y) {
-        // Do not refer to this directly, use placeitem
+    addObject (object, _x, _y) {
+        // Do not refer to this directly, use placeobject
         if (this.placeEmpty(_x,_y)) {
-            this.registry[_x+"_"+_y] = item;
-            /// Item needs a method (setRegistration) that can be flagged to trigger an in-world sprite
+            this.registry[_x+"_"+_y] = object;
+            /// Object needs a method (setRegistration) that can be flagged to trigger an in-world sprite
             return true;
         }
         else {
-            // An item is already on this tile
+            // An object is already on this tile
             console.log("Something here already: "+_x+" "+_y);
             return false;
         }
     }
 
-    removeItem (_x, _y) {
+    removeObject (_x, _y) {
         if (!this.placeEmpty(_x,_y)) {
-            const item = this.registry[_x+"_"+_y];
-            item.setRegistration(false);
+            const object = this.registry[_x+"_"+_y];
+            object.setRegistration(false);
             this.registry[_x+"_"+_y] = null;
 
             if (this.registry.hasOwnProperty(_x+"_"+_y)) {

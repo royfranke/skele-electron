@@ -36,6 +36,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0); // 1px margin, 2px spacing
         
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
+        
 
         var y_start = 0;
         var x_start = 0;

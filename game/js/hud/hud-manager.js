@@ -54,7 +54,7 @@ export default class HudManager {
             for (const [key, value] of Object.entries(this.scene.app.input.INPUT)) {
                 if (this.scene.app.input.INPUT[key].TAP) {
                     this.hudInput.input(key);
-                    this.hudSound.play('UI_ARROW');
+                    //this.hudSound.play('UI_ARROW');
                 }
             }
         }
@@ -72,7 +72,8 @@ export default class HudManager {
 
     tapSlip (slot_x) {
         this.hudDisplay.tapSlip(slot_x);
-        this.hudSound.play('UI_SELECT');
+        //this.hudSound.play('UI_SELECT');
+        //TODO: replace with more subtle sound
     }
 
     newPocketTip(message,duration=0) {

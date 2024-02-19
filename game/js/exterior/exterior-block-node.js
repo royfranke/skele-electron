@@ -2,46 +2,6 @@ import TILES from "../config/atlas/tile-weights.js";
 /* ExteriorBlockNode Class */
 
 export default class ExteriorBlockNode {
-    /*
-            x: 3,
-            y: 0,
-            center_x: 120,
-            center_y: 0,
-            tile_x: 114,
-            tile_y: -3,
-            top: -3,
-            right: 127,
-            bottom: 4,
-            left: 114,
-            width: 13,
-            height: 7,
-
-            streets: {  
-                n: {
-                                        found: 0
-                },
-                e: {
-                                        lanes: 1,
-                    name: "Northern Boundary",
-                    dir: "ew",
-                    connect: -1,
-                    sidewalk: 1,
-                    parking: 0,                    found: 1
-                },
-                s: {
-                                        lanes: 2,
-                    name: "Index Street",
-                    dir: "ns",
-                    connect: 1,
-                    sidewalk: 1,
-                    parking: 0,                    found: 1
-                },
-                w: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        found: 0
-                },
-            },
-        }
-    */
 
     constructor(groundLayer, node) {
         this.node = node;
@@ -57,6 +17,32 @@ export default class ExteriorBlockNode {
 
         groundLayer.weightedRandomize(TILES.CURB.SOUTHWEST_INSET_, node.left, node.bottom,1, 1);
         groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_INSET_, node.right, node.bottom ,1, 1);
+    }
+
+    buildObjects (objectManager) {
+        const node = this.node;
+        if (this.node.streets.n.signal > 0) {
+            var _x = node.left - 1;
+            var _y = node.top - 4;
+            objectManager.newObjectToWorld(_x, _y,'STOP_N');
+        }
+        if (this.node.streets.e.signal > 0) {
+            var _x = node.right + 6;
+            var _y = node.top - 1;
+            objectManager.newObjectToWorld(_x, _y,'STOP_E');
+        }
+        
+        if (this.node.streets.s.signal > 0) {
+            var _x = node.right;
+            var _y = node.bottom + 6;
+            objectManager.newObjectToWorld(_x, _y,'STOP_S');
+        }
+        if (this.node.streets.w.signal > 0) {
+            var _x = node.left - 6;
+            var _y = node.bottom;
+            objectManager.newObjectToWorld(_x, _y,'STOP_W');
+        }
+    
     }
     
 }

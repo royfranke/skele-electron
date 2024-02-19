@@ -91,6 +91,15 @@ export default class PreloadAnim {
       repeat: 0,
     });
 
+    anims.create({
+      key: "sparkle",
+      frames: anims.generateFrameNumbers("fx_sparkle", 
+       { start: 0, end: 8 }
+      ),
+      frameRate: 8,
+      repeat: 0,
+    });
+
   }
 
 

@@ -1,11 +1,11 @@
-import Item from "./item.js";
+import Object from "./object.js";
 
-/* Item Bag Class */
+/* Object Bag Class */
 
-export default class ItemBag extends Item {
-    constructor(scene, item, items = []) {
-        super(scene, item);
-        this.actions = [{ action: 'PICK UP', object: this }, { action: 'OPEN', object: this }];
+export default class ObjectBag extends Object {
+    constructor(scene, object, items = []) {
+        super(scene, object);
+        this.actions = [{ action: 'OPEN', object: this }];
         if (items.length > 0) {
             this.info.items = items;
         }
@@ -24,17 +24,17 @@ export default class ItemBag extends Item {
             this.info.items.push(item);
             return true;
         } else {
-            console.log("Bag.addItem: no more room in bag.");
+            console.log("Chest.addObject: no more room in chest.");
             return false;
         }
     }
 
     pullItem(place = 0) {
         if (this.info.items.length >= place + 1) {
-            var item = this.info.items.splice(place, 1);
-            return item[0];
+            var object = this.info.items.splice(place, 1);
+            return object[0];
         } else {
-            console.warn("Bag.pullItem: this bag does not contain an item at the requested position (" + place + ")");
+            console.warn("Chest.pullItem: this bag does not contain an item at the requested position (" + place + ")");
             return false;
         }
     }
@@ -43,7 +43,7 @@ export default class ItemBag extends Item {
         if (this.info.items.length >= place + 1) {
             this.info.items.splice(place, 1);
         } else {
-            console.warn("Bag.discardItem: this bag does not contain an item at the requested position (" + place + ")");
+            console.warn("Chest.discardItem: this bag does not contain an object at the requested position (" + place + ")");
         }
     }
 
@@ -62,12 +62,6 @@ export default class ItemBag extends Item {
     }
 
     doAction(action) {
-        if (action == 'WEAR' || action == 'PUT AWAY' || action == 'PICK UP') {
-            var valid = this.scene.manager.hud.availablePocket(this);
-            if (valid) {
-                this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
-            }
-        }
         if (action == 'OPEN') {
             /// change focus to ui chest window
             this.scene.manager.setFocus('CHEST');

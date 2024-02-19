@@ -43,8 +43,17 @@ export default class ItemManager {
         return item;
     }
 
+    newItemToWorld (_x,_y,slug,items=[]) {
+        var item = this.newItem(slug,items);
+        var result = this.putItemInWorld(item,_x,_y);
+        if (!result) {
+            console.warn('Could not add to world: '+item);
+            return false;
+        }
+        return item;
+    }
+
     putItemInBag (item,exclude=null) {
-        console.log('Putting this item in a bag from item manager...');
         var result = this.scene.manager.hud.availableBag(item,exclude);
         if (!result) {
             this.scene.manager.hud.hudDisplay.tellBrain('No space found...',2000,'missing');
@@ -53,7 +62,6 @@ export default class ItemManager {
     }
 
     putItemInWorld (item, _x, _y) {
-        console.log('Putting this item in the world from item manager...');
         var result = this.registry.placeItem(item,_x,_y);
         if (!result) {
             this.scene.manager.hud.hudDisplay.tellBrain('Something here already',2000,'missing');
@@ -61,5 +69,8 @@ export default class ItemManager {
         return result;
     }
 
+    openChest (item) {
+        console.log(item);
+    }
     
 }

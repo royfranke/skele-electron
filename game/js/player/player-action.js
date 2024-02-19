@@ -72,6 +72,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             this.actionTileLast = this.actionTile;
 
             this.addItemActions();
+            this.addObjectActions();
             
         }
         else {
@@ -95,6 +96,13 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         var item = this.scene.manager.itemManager.registry.getItem(this.actionTile.x,this.actionTile.y);
         if (item != null) {
             item.addActions();
+        }
+    }
+
+    addObjectActions () {
+        var object = this.scene.manager.objectManager.registry.getObject(this.actionTile.x,this.actionTile.y);
+        if (object != null) {
+            object.addActions();
         }
     }
 
