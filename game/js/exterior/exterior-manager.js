@@ -43,7 +43,7 @@ import ObjectManager from "../objects/object-manager.js";
         const blocks = new Array(this.overMap.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 
 
-        self.scene.manager.objectManager = new ObjectManager(scene);
+        //self.scene.manager.objectManager = new ObjectManager(scene);
         overMap.blocks.forEach(function (block, index) {
             blocks[block.y][block.x] = new Block(self.scene,groundLayer,wallLayer, block); /// Backwards on purpose to not require array flip
             
@@ -244,6 +244,7 @@ import ObjectManager from "../objects/object-manager.js";
         this.overMap.blocks.forEach(function (block, index) {
             blocks[block.y][block.x].buildItems(); 
         });
+        
     }
 
     update () {

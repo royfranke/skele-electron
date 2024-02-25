@@ -31,6 +31,102 @@ const OBJECTS = {
         portal: 0,
         actions: [],
     },
+      BUS_STOP_A_: {
+        name: 'Bus Stop A',
+        slug: 'BUS_STOP_A_', 
+        type: 'BUS_SIGN',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:52
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+    },
+      BUS_STOP_B_: {
+        name: 'Bus Stop B',
+        slug: 'BUS_STOP_B_', 
+        type: 'BUS_SIGN',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:52
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+    },
+      BUS_STOP_C_: {
+        name: 'Bus Stop C',
+        slug: 'BUS_STOP_C_', 
+        type: 'BUS_SIGN',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:52
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+    },
       HYDRANT_CITY_: {
         name: 'City Hydrant',
         slug: 'HYDRANT_CITY_', 
@@ -98,6 +194,38 @@ const OBJECTS = {
           }, {
             name: 'KNOCK'
           },],
+    },
+      WINDOW_DOUBLE_: {
+        name: 'Double Window',
+        slug: 'WINDOW_DOUBLE_', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        portal: 0,
+        actions: [],
     },
       POSTBOX_S: {
         name: 'Postal Service Box',
@@ -360,6 +488,6 @@ const OBJECTS = {
         varieties: 20,
         portal: 0,
         actions: [],
-    }
+    },
   };
 export default OBJECTS;

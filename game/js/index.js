@@ -5,6 +5,7 @@ import NewGameScene from "./scene/3_new-game.js";
 import LoadGameScene from "./scene/4_load-game.js";
 import GameScene from "./scene/6_game.js";
 import InteriorScene from "./scene/7_interior.js";
+import CourtScene from "./scene/8_court.js";
 
 const config = {
   type: Phaser.WEBGL,
@@ -20,12 +21,13 @@ const config = {
     NewGameScene,
     LoadGameScene,
     GameScene,
-    InteriorScene
+    InteriorScene,
+    CourtScene
   ],
   physics: {
     default: "arcade",
     arcade: {
-      debug: true,
+      //debug: true,
       gravity: { y: 0 },
     },
   },

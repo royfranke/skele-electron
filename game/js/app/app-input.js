@@ -1,3 +1,7 @@
+/*
+ * Manages application input
+ */
+
 export default class AppInput {
 
   constructor(scene) {

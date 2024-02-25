@@ -18,7 +18,6 @@ export default class MainMenuScene extends Phaser.Scene {
             this.add.dom(start_left + (4*i), start_top - (4*i), 'div','animation-delay:'+(i*.5)+'s;width: '+view.width+'px;color:'+color[i],'Skele Summer').setOrigin(0).setClassName('title-card');
         }
 
-
         this.add.dom(view.left, view.bottom - 32, 'div','','v.1.0.0 Skele').setOrigin(0).setClassName('footer');
     }
 

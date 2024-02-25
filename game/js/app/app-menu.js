@@ -1,7 +1,7 @@
 import MENU from "../config/app-menus.js";
-/* global Phaser */
 /*
- * Gets injected into every scene
+ * Manages application menus
+ * MAIN | PAUSE | SETTINGS
  */
 
 export default class AppMenu {
@@ -21,6 +21,7 @@ export default class AppMenu {
         const view = this.view;
         var menu_list = [];
         this.menu.forEach(function (menu_item, index) {
+            // TODO: Come back to swap these int out for margin vars
             var element = self.add.dom(view.left + 16,
                 (index * 30) + view.top + 16, 'div', '', `${menu_item.LABEL}`).setClassName(selected == index ? 'menu-item menu-item-selected' : 'menu-item' ).setOrigin(0,0);
             menu_list.push(element);
@@ -68,7 +69,7 @@ export default class AppMenu {
         }
 
         if (this.menu[this.selected].TYPE == 'FUNCTION') {
-            
+            /// TODO: if the menu item is a function, do that function
         }
     }
 

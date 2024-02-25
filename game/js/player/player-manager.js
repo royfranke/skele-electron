@@ -43,7 +43,7 @@ export default class PlayerManager {
     }
 
     getFocusChange () {
-        return this.manager.gameFocus.changed();
+        return this.manager.gameFocus.getChanged();
     }
 
     getState () {

@@ -1,17 +1,15 @@
 import STATES from "../config/app-states.js";
 
-/* global Phaser */
 /*
- * Gets injected into every scene
+ * Manages application state 
+ * SPLASH | MAIN | SETTINGS | NEW | LOAD | GAME | TUTORIAL
  */
 
 export default class AppState {
 
-    state=null;
-    last_state=null;
-
     constructor(state) {
        this.valid_states = STATES;
+       this.state = null;
        this.setState(state);
     }
 
@@ -21,6 +19,10 @@ export default class AppState {
 
     getLastState () {
         return this.last_state;
+    }
+
+    getStateConfig () {
+        return this.valid_states[this.state];
     }
 
     setState (state) {

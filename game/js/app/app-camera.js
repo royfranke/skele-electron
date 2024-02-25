@@ -1,6 +1,6 @@
-/* global Phaser */
 /*
- * Gets injected into every scene
+ * Manages application viewport
+ * Including: camera, scale, fade, view, position, follow, bounds
  */
 
 export default class AppCamera {
@@ -31,7 +31,6 @@ export default class AppCamera {
     }
 
     start () {
-
         this.camera.setBackgroundColor('#4b424a');
         this.camera.fadeIn(this.state.fadeIn, 0, 0, 0);
     }

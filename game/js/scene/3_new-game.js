@@ -9,6 +9,7 @@ export default class NewGameScene extends Phaser.Scene {
 
     create() {
         this.manager = new AppManager(this,'NEW');
+        
     }
 
     update() {

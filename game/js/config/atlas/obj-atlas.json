@@ -1,6 +1,60 @@
 {
   "frames": [
         {
+		"filename": "BUS_STOP_A_-1",
+		"frame": {"x":192,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+    {
+		"filename": "BUS_STOP_A_-2",
+		"frame": {"x":240,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+    {
+		"filename": "BUS_STOP_A_-3",
+		"frame": {"x":288,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+      {
+		"filename": "BUS_STOP_B_-1",
+		"frame": {"x":208,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+    {
+		"filename": "BUS_STOP_B_-2",
+		"frame": {"x":256,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+    {
+		"filename": "BUS_STOP_B_-3",
+		"frame": {"x":304,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+      {
+		"filename": "BUS_STOP_C_-1",
+		"frame": {"x":224,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+    {
+		"filename": "BUS_STOP_C_-2",
+		"frame": {"x":272,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+    {
+		"filename": "BUS_STOP_C_-3",
+		"frame": {"x":320,"y":192,"w":16,"h":64},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},     
+      {
 		"filename": "HYDRANT_CITY_-1",
 		"frame": {"x":320,"y":0,"w":16,"h":32},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":32 },
@@ -107,6 +161,30 @@
 		"frame": {"x":160,"y":192,"w":32,"h":48},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":48 },
 		"sourceSize": {"w":32,"h":48 }
+	},     
+      {
+		"filename": "WINDOW_DOUBLE_-1",
+		"frame": {"x":336,"y":192,"w":32,"h":32},
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32 },
+		"sourceSize": {"w":32,"h":32 }
+	},     
+    {
+		"filename": "WINDOW_DOUBLE_-2",
+		"frame": {"x":368,"y":192,"w":32,"h":32},
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32 },
+		"sourceSize": {"w":32,"h":32 }
+	},     
+    {
+		"filename": "WINDOW_DOUBLE_-3",
+		"frame": {"x":400,"y":192,"w":32,"h":32},
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32 },
+		"sourceSize": {"w":32,"h":32 }
+	},     
+    {
+		"filename": "WINDOW_DOUBLE_-4",
+		"frame": {"x":432,"y":192,"w":32,"h":32},
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32 },
+		"sourceSize": {"w":32,"h":32 }
 	},     
         {
 		"filename": "SCREEN_DOOR_-1",
@@ -305,6 +383,6 @@
 		"frame": {"x":304,"y":0,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
-	}     
+	}  
     ]
 }

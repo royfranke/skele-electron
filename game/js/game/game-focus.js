@@ -7,13 +7,10 @@ import STATES from "../config/focus-states.js";
 
 export default class GameFocus {
 
-    focus='NOT_LOADED';
-    last_focus='NOT_LOADED';
-
     constructor() {
-
        this.valid_states = STATES;
-
+       this.focus='NOT_LOADED';
+       this.last_focus='NOT_LOADED';
     }
 
     getFocus () {
@@ -24,7 +21,7 @@ export default class GameFocus {
         return this.valid_states[this.last_focus];
     }
 
-    changed () {
+    getChanged () {
         var focus = this.getFocus();
         var last_focus = this.getLastFocus();
         return (focus.name != last_focus.name);

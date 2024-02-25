@@ -4,25 +4,36 @@ import AppInput from "./app-input.js";
 import AppCamera from "./app-camera.js";
 /* global Phaser */
 /*
- * Gets injected into every scene
+ * Top level manager
  */
-
 export default class AppManager {
-
-    state=null;
-    input=null;
-    menu=null;
 
     constructor(scene, state_name) {
        this.scene = scene;
+       this.appState = new AppState(state_name);   
+       this.create();
+    }
 
-       this.appState = new AppState(state_name);
-       
-       this.state = this.appState.valid_states[state_name]; /// State Config Object
+    create () {
+        this.state = this.appState.getStateConfig();
+        this.camera = new AppCamera(this.scene, this.state);
+        this.initializeMenu();
+        this.initializeInput();
+        this.startScene();
+    }
 
-       if (this.state.input) {
+    initializeMenu () {
+        if (this.state.menu) {
+            this.menu = new AppMenu(this.scene, this.state.name, this.camera.view);
+        }
+        else {
+            this.menu = null;
+       }
+    }
+
+    initializeInput () {
+        if (this.state.input) {
             this.input = new AppInput(this.scene);
-
             if (this.state.app_input) {
                 this.input.initializeAppKeys();
             }
@@ -30,14 +41,9 @@ export default class AppManager {
                 this.input.initializeProgKeys();
             }
        }
-
-       this.camera = new AppCamera(this.scene, this.state);
-
-       if (this.state.menu) {
-        this.menu = new AppMenu(this.scene, this.state.name, this.camera.view);
+       else {
+            this.input = null;
        }
-       
-       this.startScene();
     }
 
     getView () {

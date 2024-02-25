@@ -7,36 +7,33 @@ import STATES from "../config/game-states.js";
 
 export default class GameState {
 
-    state='NOT_LOADED';
-    last_state='NOT_LOADED';
-
     constructor() {
-
-       this.valid_states = STATES;
-
+        this.valid_states = STATES;
+        this.state = 'NOT_LOADED';
+        this.last_state = 'NOT_LOADED';
     }
 
-    getState () {
+    getState() {
         return this.valid_states[this.state];
     }
 
-    getLastState () {
+    getLastState() {
         return this.valid_states[this.last_state];
     }
 
-    setState (state) {
+    setState(state) {
         if (this.validState(state)) {
             this.last_state = this.state;
             this.state = state;
         }
     }
 
-    validState (state) {
+    validState(state) {
         if (this.valid_states.hasOwnProperty(state)) {
             return true;
         }
         else {
-            console.warn("Nonvalid game state passed: "+state);
+            console.warn("Nonvalid game state passed: " + state);
         }
     }
 

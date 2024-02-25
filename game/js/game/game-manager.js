@@ -1,10 +1,7 @@
 import GameState from "./game-state.js";
 import GameFocus from "./game-focus.js";
 import GameFX from "./game-fx.js";
-import GameInput from "./game-input.js";
 import GameUtilities from "./game-utilities.js";
-import GameCamera from "./game-camera.js";
-import GameClock from "./game-clock.js";
 import HudManager from "../hud/hud-manager.js";
 import ItemManager from "../items/item-manager.js";
 import ObjectManager from "../objects/object-manager.js";
@@ -33,23 +30,13 @@ export default class GameManager {
        this.state = this.getState();
        this.time = new TimeManager();
        this.fx = new GameFX(this.scene);
-
-           
-
-       for (var i=0;i<80;i++) {
-            
-            var tests = {
-                second: 0,
-                minute: 15,
-                hour: 4,
-                day: i
-            };
-            /*
-            var checking = this.time.getDate(tests);
-            console.log(checking.weekday+" "+checking.day+" "+checking.month);
-            */
-       }
+       this.objectManager = new ObjectManager(this.scene);
+       this.itemManager = new ItemManager(this.scene);
        
+    }
+
+    create () {
+
     }
     
     openChest (chest) {
@@ -76,7 +63,7 @@ export default class GameManager {
     }
 
     getFocusChange () {
-        return this.gameFocus.changed();
+        return this.gameFocus.getChanged();
     }
 
     getState () {
@@ -136,26 +123,25 @@ export default class GameManager {
             
             this.hud = new HudManager(this.scene);
             this.watch = this.hud.hudDisplay.tellWatch('00:00AM','positive');
-            this.itemManager = new ItemManager(this.scene);
+            
 
             this.scene[this.scene.place].createItems();
-            
-            //this.objectManager = new ObjectManager(this.scene);
+            this.hud.refreshDisplay();
             this.setFocus('PLAYER');
             /// After loading functions...
             this.setState('LOADED');
 
 
             //var plastic = this.itemManager.newItemToPockets('PLASTIC_BAG_1');
-            var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN');
+            //var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN');
 
 
-            var apple = this.itemManager.newItem('POSTCARD_BACK_1');
-            backpack.addItem(apple);
-            var cupcake = this.itemManager.newItem('BANANA');
+            //var apple = this.itemManager.newItem('POSTCARD_BACK_1');
+            //backpack.addItem(apple);
+            //var cupcake = this.itemManager.newItem('BANANA');
             //backpack.addItem(cupcake);
-            var bag = this.itemManager.newItem('LUNCH_BAG_USED',[cupcake]);
-            backpack.addItem(bag);
+            //var bag = this.itemManager.newItem('LUNCH_BAG_USED',[cupcake]);
+            //backpack.addItem(bag);
 
             this.setState('LOADED');
             this.setState('OVERWORLD');

@@ -46,7 +46,7 @@ import ObjectManager from "../objects/object-manager.js";
         this.buildRoom(this.interior.rooms[0]);
 
         this.ground = new InteriorGround(this.scene);
-        this.scene.manager.objectManager = new ObjectManager(this.scene);
+        //this.scene.manager.objectManager = new ObjectManager(this.scene);
     }
 
     create () {
@@ -82,7 +82,7 @@ import ObjectManager from "../objects/object-manager.js";
         var doorway_y = room.doors[0].y;
        
         /// TODO - Doesnt work.
-        this.scene.manager.objectManager.newObjectToWorld(doorway_x,doorway_y,'DOOR_WINDOWS_SMALL_');
+        //this.scene.manager.objectManager.newObjectToWorld(doorway_x,doorway_y,'DOOR_WINDOWS_SMALL_');
             
         this.player_start_x = room.doors[0].x + 1;
         this.player_start_y = room.doors[0].y - 1;

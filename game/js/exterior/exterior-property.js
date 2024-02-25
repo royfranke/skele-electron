@@ -66,6 +66,7 @@ address: {
         this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].LOWER_RIGHT_, _x + building_width, _y, 1, 1);
 
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2), _y - 1,'DOOR_WINDOWS_SMALL_');
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2) + 2, _y - 1,'WINDOW_DOUBLE_');
         
 
         this.block.wallLayer.removeTileAt(left+Math.floor(width/2), _y);

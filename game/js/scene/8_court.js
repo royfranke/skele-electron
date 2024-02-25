@@ -1,15 +1,14 @@
 import AppManager from "../app/app-manager.js";
 import GameManager from "../game/game-manager.js";
-import ExteriorManager from "../exterior/exterior-manager.js";
-import InteriorManager from "../interior/interior-manager.js";
+import CourtManager from "../court/court-manager.js";
 import PreloadManager from "../preload/preload-manager.js";
 import PlayerManager from "../player/player-manager.js";
 /**
- * Game
+ * Game Court
  */
-export default class GameScene extends Phaser.Scene {
+export default class CourtScene extends Phaser.Scene {
     constructor() {
-        super("Game Scene");
+        super("Court Scene");
         
     }
 
@@ -19,14 +18,13 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        this.place = 'exterior';
-        console.log('Creating '+this.place+' scene');
+        this.place = 'court';
         this.preload.preloadAnim();
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
-        this.exterior = new ExteriorManager(this);
-        this.player = new PlayerManager(this, 32, 32);
-        this.exterior.create();
+        this.court = new CourtManager(this);
+        this.player = new PlayerManager(this, 1, 1);
+        this.court.create();
         this.player.create();
     }
 
@@ -34,10 +32,10 @@ export default class GameScene extends Phaser.Scene {
         this.app.update();
         this.manager.update();
         this.player.update();
-        this.exterior.update();
+        this.court.update();
     }
 
     portalTo() {
-        this.scene.switch('Court Scene');
+        this.scene.switch('Game Scene');
     }
 }
