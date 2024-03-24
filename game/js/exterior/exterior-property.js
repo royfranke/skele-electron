@@ -1,5 +1,6 @@
 import TILES from "../config/atlas/tile-weights.js";
 import WALLTILES from "../config/atlas/wall-tile-weights.js";
+import STOOP from "../config/options/stoop.js";
 /* ExteriorProperty Class */
 
 export default class ExteriorProperty {
@@ -49,9 +50,11 @@ address: {
         this.block.groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 1, height - (yard + 4));
         
         this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, left+Math.floor(width/2), top + height - yard - 1, 2,  yard + 3);
+        
 
-        this.block.groundLayer.weightedRandomize(TILES.STAIRS.CEMENT_, left+Math.floor(width/2), top + height - yard + 1, 2,  1);
+        
 
+        
         
         var _x = left + 1;
         var _y = top + height - yard;
@@ -65,18 +68,21 @@ address: {
         this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].LOWER_, _x + 1, _y, building_width - 1, 1);
         this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].LOWER_RIGHT_, _x + building_width, _y, 1, 1);
 
-        this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2), _y - 1,'DOOR_WINDOWS_SMALL_');
-        this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2) + 2, _y - 1,'WINDOW_DOUBLE_');
         
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2) + 3, _y - 1,'WINDOW_2_YELLOW_WORN_');
 
-        this.block.wallLayer.removeTileAt(left+Math.floor(width/2), _y);
-        this.block.wallLayer.removeTileAt(left+Math.floor(width/2)+1, _y);
-        _y = _y - 2;
+        this.buildStoop(left+Math.floor(width/2), _y);
 
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_LEFT_, _x, _y, 1, 2);
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2), _y - 1,'DOOR_WINDOWS_SMALL_');
+        
+        this.scene.manager.objectManager.newObjectToWorld(left + 1, _y + yard,'CHAINLINK_S_3_COMPLETE');
+        
+        _y = _y - 3;
 
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_, _x + 1, _y, building_width - 1, 2);
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_RIGHT_, _x + building_width, _y, 1, 2);
+        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_LEFT_, _x, _y, 1, 3);
+
+        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_, _x + 1, _y, building_width - 1, 3);
+        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_RIGHT_, _x + building_width, _y, 1, 3);
 
 
         _y = _y - 1;
@@ -87,5 +93,35 @@ address: {
         
     }
 
+    buildStoop (_x, _y) {
+        var facing = 's';
+        var stoop = Phaser.Math.RND.between(1,2)
+        var stairs = Phaser.Math.RND.between(1,3);
+        var width = Phaser.Math.RND.between(2,3);
+
+        var landing_material = STOOP.LANDING[Phaser.Math.RND.between(0,STOOP.LANDING.length - 1)];
+        var steps_material = STOOP.STEPS[Phaser.Math.RND.between(0,STOOP.STEPS.length - 1)];
+        var rail_material = STOOP.RAILS[Phaser.Math.RND.between(0,STOOP.RAILS.length - 1)];
+
+        // Lay landing tiles
+        this.block.groundLayer.weightedRandomize(TILES[landing_material.MATERIAL][landing_material.VARIETY[0]], _x, _y, width,  stoop);
+
+        // Lay stair tiles
+        this.block.groundLayer.weightedRandomize(TILES.STAIRS[steps_material.MATERIAL], _x, _y + stoop, width,  stairs);
+
+        // Lay stair rail objects
+        this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y,rail_material.MATERIAL+'_STAIR_RAIL_L_'+stoop+'_'+stairs+'_');
+        this.scene.manager.objectManager.newObjectToWorld(_x + width, _y,rail_material.MATERIAL+'_STAIR_RAIL_R_'+stoop+'_'+stairs+'_');
+
+        // Remove wall tiles for building where stoop sits
+        for (var i=0;i<width;i++) {
+            this.block.wallLayer.removeTileAt(_x+i, _y);
+        }
+
+        return {
+            height: stoop + stairs,
+            width: width
+        };
+    }
     
 }

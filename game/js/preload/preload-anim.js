@@ -63,15 +63,6 @@ export default class PreloadAnim {
       frameRate: 8,
       repeat: -1,
     });
-
-    anims.create({
-      key: "INT_WINDOW_BLINDS",
-      frames: anims.generateFrameNumbers("int_window", 
-        { start: 0, end: 3 }
-      ),
-      frameRate: 8,
-      repeat: -1,
-    });
   
     anims.create({
       key: "dust_cloud",

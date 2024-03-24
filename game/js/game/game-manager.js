@@ -8,35 +8,35 @@ import ObjectManager from "../objects/object-manager.js";
 import TimeManager from "../time/time-manager.js";
 /* global Phaser */
 /*
- * Gets injected into the game scene
+ * Game level manager
  */
 
 export default class GameManager {
 
-    state=null;
-    last_state=null;
-    focus=null;
-    last_focus=null;
-    input=null;
-
     constructor(scene) {
        this.scene = scene;
-       this.app = this.scene.app;
-       this.hud = null;
-       this.utilities = new GameUtilities();
-       this.gameFocus = new GameFocus();
-       this.focus = this.getFocus();
        this.gameState = new GameState();
-       this.state = this.getState();
-       this.time = new TimeManager();
-       this.fx = new GameFX(this.scene);
-       this.objectManager = new ObjectManager(this.scene);
-       this.itemManager = new ItemManager(this.scene);
+       this.app = this.scene.app;
+       
+       this.create();
        
     }
 
     create () {
+        this.hud = null;
+        this.utilities = new GameUtilities();
 
+        this.gameFocus = new GameFocus();
+        this.fx = new GameFX(this.scene);
+        
+        this.time = new TimeManager();
+
+        this.objectManager = new ObjectManager(this.scene);
+        this.itemManager = new ItemManager(this.scene);
+    }
+
+    wake () {
+        this.hud.refreshDisplay();
     }
     
     openChest (chest) {
@@ -54,7 +54,7 @@ export default class GameManager {
         if (focus_string == 'POCKETS') {
             this.hud.setState('VISIBLE_FOCUSED');
         }
-
+        this.hud.refreshDisplay();
         return this.gameFocus.setFocus(focus_string);
     }
 
@@ -67,7 +67,7 @@ export default class GameManager {
     }
 
     getState () {
-        return this.gameState.getState();
+        return this.gameState.getStateConfig();
     }
 
     setState (state_string) {
@@ -83,12 +83,8 @@ export default class GameManager {
     }
 
     update () {
-        this.last_state = this.getLastState();
         this.state = this.getState();
 
-        if (this.last_state.name != this.state.name) {
-            this.stateChanged();
-        }
         if (this.state.name == 'NOT_LOADED') { this.loadGame(); }
 
         if (this.state.input) {
@@ -112,10 +108,6 @@ export default class GameManager {
         }
     }
 
-    stateChanged () {
-
-    }
-
     loadGame () {
         if (this.state.name == 'NOT_LOADED') {
             this.app.camera.camera.setBackgroundColor('#4b424a');
@@ -126,7 +118,7 @@ export default class GameManager {
             
 
             this.scene[this.scene.place].createItems();
-            this.hud.refreshDisplay();
+            
             this.setFocus('PLAYER');
             /// After loading functions...
             this.setState('LOADED');

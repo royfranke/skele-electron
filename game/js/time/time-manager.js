@@ -1,17 +1,19 @@
+import DATA from "../data/new.js";
+
 /* Time Manager Class */
 
 export default class TimeManager {
 
-    constructor(now={second: 0, minute: 15, hour: 8, day: 1}) {
+    constructor() {
         
-        this.now = now;
+        this.now = DATA.TIME;
         this.month = ['June','July','August'];
         this.start_date = 3; // June 3rd, start date
         this.daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday','Monday'];
     }
 
     update () {
-        this.incrementSecond(1);
+        this.incrementSecond(.25);
     }
 
     getTime (current=this.now) {

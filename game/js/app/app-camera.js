@@ -24,6 +24,12 @@ export default class AppCamera {
             right: this.camera.displayWidth*1.5,
             bottom: this.camera.displayHeight*1.5,
             left: this.camera.displayWidth/2,
+            margin: {
+                top: 16,
+                right: 16,
+                bottom: 16,
+                left: 16
+            }
         }
 
         this.view.height = this.view.bottom - this.view.top;
@@ -48,5 +54,7 @@ export default class AppCamera {
     setBounds (width, height) {
         this.camera.setBounds(0, 0, width, height);
     }
+
+    //create transition iris open and close effects for between scenes/rooms
 
 }

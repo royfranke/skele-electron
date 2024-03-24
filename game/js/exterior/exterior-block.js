@@ -170,9 +170,9 @@ export default class Block {
     buildObjects () {
         const block = this.block;
         if (this.block.offset.n > 0) {
-            this.scene.manager.objectManager.newObjectToWorld(block.left+8, block.top+1,'WOOD_POLE');
-            
+            //this.scene.manager.objectManager.newObjectToWorld(block.left+8, block.top+1,'WOOD_POLE');   
         }
+        
     
     }
 

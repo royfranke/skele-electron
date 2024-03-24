@@ -1,33 +1,19 @@
-const PLAYER_STATES = {
+const NPC_STATES = {
     IDLE: {
         name: 'IDLE',
-        input: true,
         speed: 0
     },
     WALK: {
         name: 'WALK',
-        input: true,
-        speed: 70
+        speed: 65
     },
     RUN: {
         name: 'RUN',
-        input: true,
-        speed: 140
+        speed: 145
     },
     DIG: {
         name: 'DIG',
-        input: false,
         speed: 0
-    },
-    EAT: {
-        name: 'EAT',
-        input: false,
-        speed: 0
-    },
-    HOP: {
-        name: 'HOP',
-        input: true,
-        speed: 80
     },
     PICKUP: {
         name: 'PICKUP',
@@ -37,17 +23,23 @@ const PLAYER_STATES = {
         name: 'EXCHANGE',
         speed: 0
     },
+    EAT: {
+        name: 'EAT',
+        speed: 0
+    },
+    HOP: {
+        name: 'HOP',
+        speed: 80
+    },
     PUSH: {
         name: 'PUSH',
-        input: true,
         speed: 20
     },
     PULL: {
         name: 'PULL',
-        input: true,
         speed: -20
     },
 };
     
-    export default PLAYER_STATES;
+    export default NPC_STATES;
     

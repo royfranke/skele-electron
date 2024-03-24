@@ -8,6 +8,8 @@
 
     constructor(scene) {
         this.scene = scene;
+
+        /// Point this to const DATA js
         this.questLog = {
             current: [],
             complete: [],

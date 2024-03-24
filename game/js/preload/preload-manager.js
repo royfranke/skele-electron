@@ -1,5 +1,6 @@
 import PRELOAD_IMAGE from "./preload-image.js";
 import PRELOAD_SOUND from "./preload-sound.js";
+import PRELOAD_ATLAS from "./preload-atlas.js";
 import SPRITE_DIR from "../config/sprite-dir.js";
 import PreloadAnim from "./preload-anim.js";
 
@@ -16,22 +17,14 @@ export default class Preloader{
       self.load.audio(sound.NAME, [ '../game/assets/'+sound.PATH ]);
     });
 
+    PRELOAD_ATLAS.forEach(function (atlas, index) {
+      self.load.atlas(atlas.NAME, '../game/assets/'+atlas.PATH.SPRITE, '../game/assets/'+atlas.PATH.JSON);
+    });
+
     this.preloadStateSprites();
     this.preloadInventorySprites();
   
-    this.scene.load.atlas('OBJECTS', '../game/assets/spritesheets/a_OBJECTS.png', '../game/js/config/atlas/obj-atlas.json');
-    
-   
-    this.scene.load.atlas('BLOCK', '../game/assets/spritesheets/a_BLOCK.png', '../game/assets/atlas/BLOCK.json');
-    this.scene.load.atlas('POCKET_BLOCK', '../game/assets/spritesheets/pocket_block.png', '../game/assets/atlas/POCKET_BLOCK.json');
-    this.scene.load.atlas('POCKET_ARROW', '../game/assets/spritesheets/pocket_arrow.png', '../game/assets/atlas/POCKET_ARROW.json');
-    this.scene.load.atlas('BLOCK_ARROW', '../game/assets/spritesheets/a_ARROW.png', '../game/assets/atlas/BLOCK_ARROW.json');
 
-    this.scene.load.atlas('ITEMS', '../game/assets/spritesheets/a_ITEM.png', '../game/js/config/atlas/item-atlas.json');
-    
-    this.scene.load.atlas('EMPTY', '../game/assets/spritesheets/a_EMPTY.png', '../game/assets/atlas/EMPTY.json');
-    this.scene.load.atlas('COINPURSE', '../game/assets/spritesheets/a_COINPURSE.png', '../game/assets/atlas/COINPURSE.json');
-    
     this.scene.load.spritesheet(
       "dust",
       "../game/assets/spritesheets/dust_1-sheet.png",
@@ -56,24 +49,6 @@ export default class Preloader{
       {
         frameWidth: 32,
         frameHeight: 32
-      }
-    );
-
-    this.scene.load.spritesheet(
-      "int_window",
-      "../game/assets/spritesheets/a_INT_WINDOW.png",
-      {
-        frameWidth: 32,
-        frameHeight: 32
-      }
-    );
-
-    this.scene.load.spritesheet(
-      "int_door",
-      "../game/assets/spritesheets/a_INT_DOOR.png",
-      {
-        frameWidth: 32,
-        frameHeight: 48
       }
     );
 

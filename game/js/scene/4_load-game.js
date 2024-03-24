@@ -9,6 +9,10 @@ export default class LoadGameScene extends Phaser.Scene {
 
     create() {
         this.manager = new AppManager(this,'LOAD');
+        const view = this.manager.getView();
+        /// Splash HTML styled in index.html
+        this.add.dom(view.left+ view.margin.left, view.top 
+            + view.margin.top, 'div','','Slot 1').setOrigin(0).setClassName('saved-game');
     }
 
     update() {

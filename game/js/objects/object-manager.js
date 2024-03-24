@@ -36,9 +36,10 @@ export default class ObjectManager {
     }
 
     putObjectInWorld (object, _x, _y) {
-        console.log('Putting this object in the world from object manager...');
+
         var result = this.registry.placeObject(object,_x,_y);
         if (!result) {
+            console.log('Could not put this object in the world from object manager...');
             this.scene.manager.hud.hudDisplay.tellBrain('Something here already',2000,'missing');
         }
         this.scene.physics.add.collider(this.scene.player.playerSprite.sprite, object.sprite);

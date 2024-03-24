@@ -1,24 +1,28 @@
 import STATES from "../config/game-states.js";
 
-/* global Phaser */
 /*
- * Gets injected into the game scene
+ * Manages game state 
+ * NOT LOADED | LOADING | LOADED | TUTORIAL | OVERWORLD | DREAM | COURT | INTERIOR
  */
 
 export default class GameState {
 
     constructor() {
         this.valid_states = STATES;
-        this.state = 'NOT_LOADED';
-        this.last_state = 'NOT_LOADED';
+        this.state = null;
+        this.setState('NOT_LOADED');
     }
 
-    getState() {
+    getState () {
+        return this.state;
+    }
+
+    getLastState () {
+        return this.last_state;
+    }
+
+    getStateConfig () {
         return this.valid_states[this.state];
-    }
-
-    getLastState() {
-        return this.valid_states[this.last_state];
     }
 
     setState(state) {

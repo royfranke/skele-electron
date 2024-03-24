@@ -13,13 +13,13 @@ export default class CourtScene extends Phaser.Scene {
     }
 
     preload () {
-        this.preload = new PreloadManager(this);
+        //this.preload = new PreloadManager(this);
         
     }
 
     create() {
         this.place = 'court';
-        this.preload.preloadAnim();
+        //this.preload.preloadAnim();
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
         this.court = new CourtManager(this);

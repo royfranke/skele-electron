@@ -4,36 +4,21 @@ import SPRITE_DIR from "../config/sprite-dir.js";
  * Gets injected into game scene
  */
 
-export default class PlayerSprite {
+export default class NpcSprite {
 
-  constructor(scene, _x, _y) {
+  constructor(scene, npc, _x, _y) {
     this.scene = scene;
+    this.npc = npc;
     this.facing = 's';
     this.dir_faces = SPRITE_DIR.DIR_FACES;
     this.sprite = this.scene.physics.add.sprite(_x, _y, "player-IDLE", 0).setSize(16, 12).setOffset(8, 16);
-
+    this.setCollider();
   }
 
   setCollider () {
-    if (this.scene.place == 'exterior') {
-      this.setExteriorCollider();
-    }
-    if (this.scene.place == 'interior') {
-      this.setInteriorCollider();
-    }
+    this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);
   }
 
-  setInteriorCollider() {
-    this.scene.physics.add.collider(this.sprite, this.scene.interior.groundLayer);
-    this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
-
-  }
-
-  setExteriorCollider() {
-    this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
-    this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
-    console.log('collider set');
-  }
 
   createShadow() {
     
@@ -48,36 +33,38 @@ export default class PlayerSprite {
   }
 
   update() {
-    var state = this.scene.player.getState();
-    const speed = this.scene.player.speed;
-    this.facing = this.scene.player.getFacing(this.facing);
+    var state = this.npc.getState();
+    var speed = this.npc.getSpeed();
+    
     this.sprite.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true);
 
-    if (state.name == 'WALK') {
+    var flip = (this.facing == 'nw' || this.facing == 'w' || this.facing == 'sw') ? true : false;
+    this.sprite.setFlipX(flip); 
+    
+    if (state.name == 'WALK' || state.name == 'IDLE') {
       this.sprite.body.setVelocity(0);
     }
 
+    if (state.name == 'WALK' || state.name == 'RUN') {
+      // Horizontal movement
+      if (this.facing == 'w' || this.facing == 'nw' || this.facing == 'sw') {
+        this.sprite.body.setVelocityX(-speed);
+      } else if (this.facing == 'e' || this.facing == 'ne' || this.facing == 'se') {
+        this.sprite.body.setVelocityX(speed);
+      }
+    
+      // Vertical movement
+      if (this.facing == 'n' || this.facing == 'nw' || this.facing == 'ne') {
+        this.sprite.body.setVelocityY(-speed);
+      } else if (this.facing == 's' || this.facing == 'sw' || this.facing == 'se') {
+        this.sprite.body.setVelocityY(speed);
+      }
 
-    var input = this.scene.player.playerInput;
-    // Horizontal movement
-    if (input.left) {
-      this.sprite.body.setVelocityX(-speed);
-    } else if (input.right) {
-      this.sprite.body.setVelocityX(speed);
+      // Normalize and scale the velocity so that sprite can't move faster along a diagonal
+      this.sprite.body.velocity.normalize().scale(speed);
     }
-    var flip = (this.facing == 'nw' || this.facing == 'w' || this.facing == 'sw') ? true : false;
-    this.sprite.setFlipX(flip);
-    // Vertical movement
-    if (input.up) {
-      this.sprite.body.setVelocityY(-speed);
-    } else if (input.down) {
-      this.sprite.body.setVelocityY(speed);
-    }
 
-    // Normalize and scale the velocity so that sprite can't move faster along a diagonal
-    this.sprite.body.velocity.normalize().scale(speed);
-
-    const underfoot = this.scene.player.underfoot;
+    const underfoot = this.npc.underfoot;
     if (underfoot != undefined) {
       if (underfoot.TYPE == 'LEAVES') {
           this.footMask.setPosition(this.sprite.x, this.sprite.y - 7);
@@ -121,11 +108,8 @@ export default class PlayerSprite {
     */
   }
 
-
   freeze() {
     this.sprite.anims.stop();
     this.sprite.body.setVelocity(0);
-    this.sprite.anims.stop();
-    this.action.showMenu = false;
   }
 }

@@ -96,7 +96,7 @@ export default class PlayerManager {
             if (this.state.input) {
                 this.updateActiveTile();
                 this.playerInput.update();
-                if (this.state.name != 'HOP') {
+                if (this.state.name != 'HOP' || this.state.name != 'PICKUP' || this.state.name != 'EXCHANGE') {
                     if (this.playerInput.held) {
                         if (this.playerInput.run) {
                             this.setState('RUN');

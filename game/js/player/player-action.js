@@ -73,7 +73,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
             this.addItemActions();
             this.addObjectActions();
-            
         }
         else {
             this.actionTileFresh = false;

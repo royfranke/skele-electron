@@ -53,8 +53,6 @@ import ObjectManager from "../objects/object-manager.js";
             blocks[prop.block.y][prop.block.x].addPropertyLine(prop); /// Backwards on purpose to not require array flip
             
         });
-
-        console.log(blocks);
         let nodesHeight = parseInt(this.overMap.sectionsHeight + 3);
         let nodesWidth = parseInt(this.overMap.sectionsWidth + 3);
         const nodes = new Array(nodesHeight).fill().map(() => new Array(nodesWidth).fill(0));
@@ -254,6 +252,7 @@ import ObjectManager from "../objects/object-manager.js";
         if (this.lastBlock.x != thisBlock.x || this.lastBlock.y != thisBlock.y) {
             this.lastBlock = thisBlock;
             this.block = this.getBlock(thisBlock.x, thisBlock.y);
+            this.updateMiniMap(this.block.block);
         }
 
         if (this.lastTile.x != x || this.lastTile.y != y) {
@@ -273,6 +272,28 @@ import ObjectManager from "../objects/object-manager.js";
         }
 
         
+    }
+
+    updateMiniMap (block) {
+        var contents = [[],[],[],[],[]];
+        var center_x =  block.x;
+        var center_y =  block.y;
+        if (block) {
+            for (var i=0;i<5;i++) {
+                for (var j=0;j<5;j++) {
+                    contents[i][j] = '';
+                    if (this.validBlock(center_x - 2 + j,center_y - 2 + i)) {
+                        var square = this.getBlockProperties(center_x - 2 + j,center_y - 2 + i);
+                        square.offset.n > 0 ? contents[i][j] += 'N' : contents[i][j] = '';
+                        square.offset.e > 0 ? contents[i][j] += 'E' : contents[i][j] = '';
+                        square.offset.s > 0 ? contents[i][j] += 'S' : contents[i][j] = '';
+                        square.offset.w > 0 ? contents[i][j] += 'W' : contents[i][j] = '';
+                    }
+                }
+            }
+        }
+        this.scene.manager.hud.hudDisplay.drawMapBox(contents);
+    
     }
 
     buildCity () {
@@ -455,6 +476,13 @@ import ObjectManager from "../objects/object-manager.js";
             }
         }
         return position_string;
+    }
+
+    validBlock (_x,_y) {
+        if (_x < 0 || _y < 0 || _x >= this.overMap.sectionsWidth || _y >= this.overMap.sectionsHeight) {
+            return false;
+        }
+        return true;
     }
 
 }

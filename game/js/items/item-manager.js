@@ -7,7 +7,11 @@ export default class ItemManager {
 
     constructor(scene) {
         this.scene = scene;
-        this.factory = new ItemFactory(this.scene);
+        this.initializeScene(scene);
+    }
+
+    initializeScene(scene) {
+        this.factory = new ItemFactory(scene);
         this.registry = new ItemRegistry();
     }
 

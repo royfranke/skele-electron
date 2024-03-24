@@ -6,6 +6,8 @@ const SPRITE_DIR = {
         'DIG',
         'EAT',
         'HOP',
+        'EXCHANGE', 
+        'PICKUP',
         'PUSH',
         'PULL'
     ],
@@ -203,6 +205,54 @@ const SPRITE_DIR = {
             S: {
                 START: 0,
                 END: 10,
+            }
+        },
+    },
+    PICKUP: {
+        ANIM: {
+            N: {
+                START: 0,
+                END: 8,
+            },
+            N_SIDE: {
+                START: 0,
+                END: 8,
+            },
+            SIDE: {
+                START: 0,
+                END: 8,
+            },
+            S_SIDE: {
+                START: 0,
+                END: 8,
+            },
+            S: {
+                START: 0,
+                END: 8,
+            }
+        },
+    },
+    EXCHANGE: {
+        ANIM: {
+            N: {
+                START: 0,
+                END: 3,
+            },
+            N_SIDE: {
+                START: 0,
+                END: 3,
+            },
+            SIDE: {
+                START: 0,
+                END: 3,
+            },
+            S_SIDE: {
+                START: 0,
+                END: 3,
+            },
+            S: {
+                START: 0,
+                END: 3,
             }
         },
     },

@@ -9,13 +9,11 @@ export default class HudDisplay {
 
     constructor(scene,view) {
        this.scene = scene;
-       
-       this.scene.textures.get('BLOCK');
        this.scene.textures.get('POCKET_BLOCK');
        this.scene.textures.get('POCKET_ARROW');
-       this.scene.textures.get('BLOCK_ARROW');
        this.scene.textures.get('EMPTY');
        this.scene.textures.get('ITEMS');
+       this.scene.textures.get('MINIMAP');
        this.pocket_actions = null;
        this.view = view;
        this.valid_states = STATES;
@@ -705,7 +703,7 @@ export default class HudDisplay {
     }
 
     addMapBox () {
-        this.mapBox = {box: null, flag: null};
+        this.mapBox = {box: null, flag: null, draw_group: this.scene.add.group()};
         let _x = this.view.left + this.margin.left;
         let _y = this.view.bottom - (96 + this.margin.bottom)
         this.mapBox.box = this.scene.add.image(_x,_y, 'mapBox').setOrigin(0).setScrollFactor(0).setDepth(100100);
@@ -714,6 +712,23 @@ export default class HudDisplay {
 
     tellMapBoxFlag (content) {
         this.mapBox.flag.setText(content);
+    }
+
+    drawMapBox (contents=[[],[],[],[],[]]) {
+        this.mapBox.draw_group.clear(true,true);
+        var _x = this.view.left + this.margin.left + 8;
+        var _y = this.view.bottom - (88 + this.margin.bottom)
+        const self = this.scene;
+
+        contents.forEach((content_row, y_index) => {
+            content_row.forEach((content_col, x_index) => {
+                if (content_col != '') {
+                    var map_tile = self.add.image(_x + (x_index * 16),_y + (y_index * 16), 'MINIMAP', content_col).setOrigin(0).setScrollFactor(0).setDepth(100221);
+                    this.mapBox.draw_group.add(map_tile);
+                    
+                }
+            });
+        });
     }
 
     tellDialogBox (content) {

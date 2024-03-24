@@ -23,7 +23,10 @@ export default class CourtGame {
     }
 
     buildItems () {
-        this.scene.manager.itemManager.newItemToWorld(3, 2,'APPLE');
+        var sardines = this.scene.manager.itemManager.newItem('SARDINES');
+        var newspaper = this.scene.manager.itemManager.newItem('NEWSPAPER');
+        var lotto = this.scene.manager.itemManager.newItem('LOTTO');
+        this.scene.manager.itemManager.newItemToWorld(3, 2,'BACKPACK_PURPLE',[sardines, newspaper,lotto]);
     
     }
 

@@ -16,6 +16,9 @@ const app_menus = {
     { LABEL: 'Graphics', TYPE: 'FUNCTION', LOADER: 'settingGraphics' },
     { LABEL: 'Volume', TYPE: 'FUNCTION', LOADER: 'settingVolume' },
     { LABEL: 'Options', TYPE: 'FUNCTION', LOADER: 'settingOptions' }
+  ],
+  LOAD: [
+    { LABEL: 'Back to Menu', TYPE: 'SCENE', LOADER: 'MAIN' },
   ]
 };
 
