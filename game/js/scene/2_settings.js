@@ -8,11 +8,11 @@ export default class SystemSettingsScene extends Phaser.Scene {
     }
 
     create() {
-        this.manager = new AppManager(this,'SETTINGS');
+        this.app = new AppManager(this,'SETTINGS');
     }
 
     update() {
-        this.manager.update();
+        this.app.update();
     }
 
 }

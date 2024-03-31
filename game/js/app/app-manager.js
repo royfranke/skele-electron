@@ -2,6 +2,8 @@ import AppState from "./app-state.js";
 import AppMenu from "./app-menu.js";
 import AppInput from "./app-input.js";
 import AppCamera from "./app-camera.js";
+import AppView from "./app-view.js";
+import SaveManager from "../save/save-manager.js";
 /* global Phaser */
 /*
  * Top level manager
@@ -17,8 +19,10 @@ export default class AppManager {
     create () {
         this.state = this.appState.getStateConfig();
         this.camera = new AppCamera(this.scene, this.state);
+        this.appView = new AppView(this.scene, this.getView(),this.state.name);
         this.initializeMenu();
         this.initializeInput();
+        this.initializeSave();
         this.startScene();
     }
 
@@ -43,6 +47,15 @@ export default class AppManager {
        }
        else {
             this.input = null;
+       }
+    }
+
+    initializeSave () {
+        if (this.state.save) {
+            this.saveManager = new SaveManager(this.scene, this.state.name);
+        }
+        else {
+            this.saveManager = null;
        }
     }
 

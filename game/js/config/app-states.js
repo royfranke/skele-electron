@@ -2,12 +2,13 @@ const APP_STATES = {
     SPLASH: {
         name: 'SPLASH',
         super: 'Splash',
-        fadeIn: 1000,
+        fadeIn: 500,
         fadeOut: 500,
-        autoEnd: 2000,
+        autoEnd: 1500,
         next: 'MAIN',
         menu: false,
-        input: false
+        input: false,
+        save: false
     },
     MAIN: {
         name: 'MAIN',
@@ -18,7 +19,8 @@ const APP_STATES = {
         menu: true,
         input: true,
         app_input: true,
-        prog_input: false
+        prog_input: false,
+        save: false
     },
     SETTINGS: {
         name: 'SETTINGS',
@@ -29,7 +31,8 @@ const APP_STATES = {
         menu: true,
         input: true,
         app_input: true,
-        prog_input: true
+        prog_input: true,
+        save: false
     },
     NEW: {
         name: 'NEW',
@@ -40,7 +43,8 @@ const APP_STATES = {
         menu: true,
         input: true,
         app_input: true,
-        prog_input: false
+        prog_input: false,
+        save: true
     },
     LOAD: {
         name: 'LOAD',
@@ -51,7 +55,8 @@ const APP_STATES = {
         menu: true,
         input: true,
         app_input: true,
-        prog_input: false
+        prog_input: false,
+        save: true
     },
     TUTORIAL: {
         name: 'TUTORIAL',
@@ -62,7 +67,8 @@ const APP_STATES = {
         menu: false,
         input: true,
         app_input: true,
-        prog_input: true
+        prog_input: true,
+        save: false
     },
     GAME: {
         name: 'GAME',
@@ -73,7 +79,8 @@ const APP_STATES = {
         menu: false,
         input: true,
         app_input: true,
-        prog_input: true
+        prog_input: true,
+        save: true
     },
 };
 

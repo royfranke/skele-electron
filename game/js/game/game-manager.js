@@ -15,24 +15,18 @@ export default class GameManager {
 
     constructor(scene) {
        this.scene = scene;
-       this.gameState = new GameState();
-       this.app = this.scene.app;
-       
        this.create();
-       
     }
 
     create () {
-        this.hud = null;
+        this.gameState = new GameState();
         this.utilities = new GameUtilities();
-
         this.gameFocus = new GameFocus();
-        this.fx = new GameFX(this.scene);
-        
+        this.hud = null;
         this.time = new TimeManager();
-
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
+        this.fx = new GameFX(this.scene);
     }
 
     wake () {
@@ -79,7 +73,7 @@ export default class GameManager {
     }
 
     getView () {
-        return this.app.camera.view;
+        return this.scene.app.camera.view;
     }
 
     update () {
@@ -110,7 +104,7 @@ export default class GameManager {
 
     loadGame () {
         if (this.state.name == 'NOT_LOADED') {
-            this.app.camera.camera.setBackgroundColor('#4b424a');
+            this.scene.app.camera.camera.setBackgroundColor('#4b424a');
             this.setState('LOADING');
             
             this.hud = new HudManager(this.scene);

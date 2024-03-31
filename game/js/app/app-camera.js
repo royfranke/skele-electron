@@ -8,7 +8,6 @@ export default class AppCamera {
     constructor(scene, state) {
        this.scene = scene;
        this.state = state;
-       this.view = null;
        this.camera = this.scene.cameras.main;
        this.camera.setZoom(2);
        this.setView();

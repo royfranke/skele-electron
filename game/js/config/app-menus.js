@@ -17,6 +17,9 @@ const app_menus = {
     { LABEL: 'Volume', TYPE: 'FUNCTION', LOADER: 'settingVolume' },
     { LABEL: 'Options', TYPE: 'FUNCTION', LOADER: 'settingOptions' }
   ],
+  NEW: [
+    { LABEL: 'Back to Menu', TYPE: 'SCENE', LOADER: 'MAIN' },
+  ],
   LOAD: [
     { LABEL: 'Back to Menu', TYPE: 'SCENE', LOADER: 'MAIN' },
   ]

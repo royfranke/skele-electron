@@ -65,7 +65,7 @@ export default class AppMenu {
 
     select () {
         if (this.menu[this.selected].TYPE == 'SCENE') {
-            this.scene.manager.endScene(this.menu[this.selected].LOADER);
+            this.scene.app.endScene(this.menu[this.selected].LOADER);
         }
 
         if (this.menu[this.selected].TYPE == 'FUNCTION') {
