@@ -12,6 +12,7 @@ export default class PreloadAnim {
     const states = SPRITE_DIR.STATES;
     const faces = SPRITE_DIR.FACES;
     
+    
     states.forEach(function (state, index) {
       faces.forEach(function (face, index) {
         anims.create({

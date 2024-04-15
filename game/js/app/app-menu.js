@@ -9,23 +9,51 @@ export default class AppMenu {
     constructor(scene, state, view) {
        this.scene = scene;
        this.view = view;
+       this.menu_back = null;
+       this.last_selected = -1;
        this.selected = 0;
-       
+       this.arrow = null;
+       this.nineslice = null;
        this.menu = MENU[state];
+
+       this.scene.textures.get('POCKET_BLOCK');
+       this.scene.textures.get('POCKET_ARROW');
+
        this.menu_list = this.buildMenu(view);
+       
+        
+    }
+
+    drawMenu () {
+        const max_height = this.view.bottom - (this.view.top + this.view.margin.top + this.view.margin.bottom);
+        const height = (this.menu.length * 18) + 20;
+        if (height > max_height) {  height = max_height; }
+
+        this.nineslice = this.scene.add.nineslice(this.view.left + this.view.margin.left,this.view.top + this.view.margin.top, 'POCKET_BLOCK', 'BAG_FOCUSED', 128, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+
+        this.arrow = this.scene.add.image(this.view.left + (this.view.margin.left * 1.5),this.view.top + this.view.margin.top + 20, 'POCKET_ARROW', 'ITEM_ARROW_SELECTED').setScrollFactor(0).setDepth(1010).setAngle(-90);
     }
 
     buildMenu () {
-        const self = this.scene;
+        this.drawMenu();
+        const self = this;
         const selected = this.selected;
         const view = this.view;
         var menu_list = [];
         this.menu.forEach(function (menu_item, index) {
             // TODO: Come back to swap these int out for margin vars
-            var element = self.add.dom(view.left + 16,
-                (index * 30) + view.top + 16, 'div', '', `${menu_item.LABEL}`).setClassName(selected == index ? 'menu-item menu-item-selected' : 'menu-item' ).setOrigin(0,0);
+            var element = self.scene.add.dom(view.left + (view.margin.left * 2),
+                (index * 18) + view.top + view.margin.top + 8, 'div', '', `${menu_item.LABEL}`).setClassName(selected == index ? 'menu-item menu-item-selected' : 'menu-item' ).setOrigin(0,0);
+            if (menu_item.BUTTON_STICK) {
+                self.scene.add.image(view.left + (view.margin.left * 1.5),(index * 18) + view.top + view.margin.top + 20, 'POCKET_ARROW', 'BAG_ARROW_SELECTED').setScrollFactor(0).setDepth(1000).setAngle(-90);
+            }
+
+            if (menu_item.BUTTON == 'BACK') {
+                self.menu_back = menu_item;
+            }
             menu_list.push(element);
         });
+        
         return menu_list;
     }
 
@@ -36,9 +64,13 @@ export default class AppMenu {
         if (selected < 0) {
             selected = this.menu_list.length - 1;
         }
+        this.last_selected = this.selected;
         this.selected = selected;
 
         for (var i=0;i<this.menu_list.length;i++) {
+            if (selected == i) {
+                this.arrow.setY(this.menu_list[i].y + 12);
+            }
             this.menu_list[i].setClassName(selected == i ? 'menu-item menu-item-selected' : 'menu-item');
         }
         
@@ -52,8 +84,24 @@ export default class AppMenu {
             break;
             case 'SELECT': this.select();
             break;
+            case 'BACK': 
+                if (this.menu_back != null) {
+                    this.back();
+                }
+            break;
         }
     }
+
+    back () {  
+        if (this.menu_back.TYPE == 'SCENE') {
+            this.scene.app.endScene(this.menu_back.LOADER);
+        }
+
+        if (this.menu_back.TYPE == 'FUNCTION') {
+            /// TODO: if the menu item is a function, do that function
+        }
+     }
+
 
     down () {
         this.setSelected(this.selected + 1);

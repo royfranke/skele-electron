@@ -4,6 +4,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
 
+
 const fs = require('fs');
 
 function saveData(data,slot=0) {

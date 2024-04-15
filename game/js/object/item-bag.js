@@ -6,9 +6,9 @@ export default class ItemBag extends Item {
     constructor(scene, item, items = []) {
         super(scene, item);
         this.actions = [{ action: 'PICK UP', object: this }, { action: 'OPEN', object: this }];
-        if (items.length > 0) {
-            this.info.items = items;
-        }
+
+        this.info.items = items;
+
     }
 
     isFull() {
@@ -70,7 +70,6 @@ export default class ItemBag extends Item {
         }
         if (action == 'OPEN') {
             /// change focus to ui chest window
-            this.scene.manager.setFocus('CHEST');
             this.scene.manager.openChest(this);
         }
         this.scene.player.action.clearActions();

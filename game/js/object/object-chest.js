@@ -63,8 +63,6 @@ export default class ObjectBag extends Object {
 
     doAction(action) {
         if (action == 'OPEN') {
-            /// change focus to ui chest window
-            this.scene.manager.setFocus('CHEST');
             this.scene.manager.openChest(this);
         }
         this.scene.player.action.clearActions();

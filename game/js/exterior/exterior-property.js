@@ -47,57 +47,99 @@ address: {
 
         //this.block.groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 2, height - (yard + 1));
         //this.block.groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, left+1, top + height - (yard + 1), width - 2,  yard);
-        this.block.groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 1, height - (yard + 4));
+        this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, left+1, top + 1, width - 1, height - (yard + 4));
         
-        this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, left+Math.floor(width/2), top + height - yard - 1, 2,  yard + 3);
-        
-
-        
-
         
         
         var _x = left + 1;
         var _y = top + height - yard;
 
-        var colors = ['YELLOW','BROWN','RED','GRAY','WHITE'];
-        var color_choice = Phaser.Math.RND.between(0,colors.length - 1);
         var building_width = width - 2;
+        var material = Phaser.Math.RND.between(0,1);
+        console.log(material);
+        if (material == 0) {
+            var colors = ['YELLOW','BROWN','RED','GRAY','WHITE'];
+            var color_choice = Phaser.Math.RND.between(0,colors.length - 1);
+            var wallKind = WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'];
+        }
+        else {
+            var colors = ['YELLOW','GRAY','PURPLE','BLUE'];
+            var color_choice = Phaser.Math.RND.between(0,colors.length - 1);
+            var wallKind = WALLTILES.SIDING[colors[color_choice]+"_"];
+        }
+        
+        this.block.wallLayer.weightedRandomize(wallKind.LOWER_LEFT_, _x, _y, 1, 1);
 
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].LOWER_LEFT_, _x, _y, 1, 1);
-
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].LOWER_, _x + 1, _y, building_width - 1, 1);
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].LOWER_RIGHT_, _x + building_width, _y, 1, 1);
+        this.block.wallLayer.weightedRandomize(wallKind.LOWER_, _x + 1, _y, building_width - 1, 1);
+        this.block.wallLayer.weightedRandomize(wallKind.LOWER_RIGHT_, _x + building_width, _y, 1, 1);
 
         
-        this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2) + 3, _y - 1,'WINDOW_2_YELLOW_WORN_');
+        this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2), _y - 1,'WINDOW_2_YELLOW_WORN_');
 
-        this.buildStoop(left+Math.floor(width/2), _y);
+        this.buildEntry(_x + 1, _y-1);
 
-        this.front_door = this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2), _y - 1,'DOOR_WINDOWS_SMALL_');
-        
-        this.scene.manager.objectManager.newObjectToWorld(left + 1, _y + yard,'CHAINLINK_S_3_COMPLETE');
         
         _y = _y - 3;
 
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_LEFT_, _x, _y, 1, 3);
+        this.block.wallLayer.weightedRandomize(wallKind.MID_LEFT_, _x, _y, 1, 3);
 
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_, _x + 1, _y, building_width - 1, 3);
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].MID_RIGHT_, _x + building_width, _y, 1, 3);
+        this.block.wallLayer.weightedRandomize(wallKind.MID_, _x + 1, _y, building_width - 1, 3);
+        this.block.wallLayer.weightedRandomize(wallKind.MID_RIGHT_, _x + building_width, _y, 1, 3);
 
 
         _y = _y - 1;
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].TOP_LEFT_, _x, _y, 1, 1);
+        this.block.wallLayer.weightedRandomize(wallKind.TOP_LEFT_, _x, _y, 1, 1);
 
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].TOP_, _x + 1, _y, building_width - 1, 1);
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'].TOP_RIGHT_, _x + building_width, _y, 1, 1);
+        this.block.wallLayer.weightedRandomize(wallKind.TOP_, _x + 1, _y, building_width - 1, 1);
+        this.block.wallLayer.weightedRandomize(wallKind.TOP_RIGHT_, _x + building_width, _y, 1, 1);
         
+    }
+
+    buildYardBorder (_x, width=2) {
+        /// _x is for the path gap
+        var left_length = _x - this.prop.lines.left;
+        var right_length = this.prop.lines.right - (_x + width) - 1; // - 1 accomodates mailbox to the right of the front walk
+        if (left_length < 7) {
+            this.scene.manager.objectManager.newObjectToWorld(this.prop.lines.left, this.prop.lines.bottom,'CHAINLINK_S_'+left_length+'_COMPLETE');
+        }
+        else {
+            this.scene.manager.objectManager.newObjectToWorld(this.prop.lines.left, this.prop.lines.bottom,'BOXELDER');
+        }
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + width, this.prop.lines.bottom,'MAILBOX_1');
+
+        if (right_length < 7) {
+            this.scene.manager.objectManager.newObjectToWorld(_x + width + 1, this.prop.lines.bottom,'CHAINLINK_S_'+right_length+'_COMPLETE');
+        }
+        else {
+            this.block.groundLayer.weightedRandomize(TILES.DIRT.FILL_, _x + width + 1,this.prop.lines.bottom, 6, 2);
+            this.scene.manager.objectManager.newObjectToWorld(_x + width + 1, this.prop.lines.bottom,'BOXELDER');
+            this.scene.manager.objectManager.newObjectToWorld(_x + width + 3, this.prop.lines.bottom,'BOXELDER');
+            this.scene.manager.objectManager.newObjectToWorld(_x + width + 5, this.prop.lines.bottom,'BOXELDER');
+        }
+    }
+
+    buildFrontWalk (_x, _y) {
+        var width = 2;
+        var height = this.prop.lines.bottom - _y + 1;
+        this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, _x, _y, width,  height);
+    }
+
+    buildEntry (_x, _y) {
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'DOOR_WINDOWS_SMALL_');
+        this.stoop = this.buildStoop(_x, _y + 1);
+        this.buildFrontWalk(_x, _y + this.stoop.height + 1);
+        this.buildYardBorder(_x, this.stoop.width);
     }
 
     buildStoop (_x, _y) {
         var facing = 's';
-        var stoop = Phaser.Math.RND.between(1,2)
-        var stairs = Phaser.Math.RND.between(1,3);
-        var width = Phaser.Math.RND.between(2,3);
+        //var stoop = Phaser.Math.RND.between(1,2);
+        //var stairs = Phaser.Math.RND.between(1,2);
+        //var width = Phaser.Math.RND.between(2,3);
+        var stoop = 1;
+        var stairs = 1;
+        var width = 2;
 
         var landing_material = STOOP.LANDING[Phaser.Math.RND.between(0,STOOP.LANDING.length - 1)];
         var steps_material = STOOP.STEPS[Phaser.Math.RND.between(0,STOOP.STEPS.length - 1)];

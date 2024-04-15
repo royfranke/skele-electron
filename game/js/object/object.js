@@ -18,9 +18,6 @@ export default class Object {
         });
         this.world_actions = actions;
 
-        
-
-
     }
 
     addActions() { //Add actions to world

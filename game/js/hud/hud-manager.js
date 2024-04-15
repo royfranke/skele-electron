@@ -61,13 +61,38 @@ export default class HudManager {
         
     }
 
+    chestHold () {
+        if (this.hudDisplay.chest != null && this.hudDisplay.chest.items.length > 0) {
+            let item = this.hudDisplay.chest.items[0];
+            var placed = this.scene.manager.hud.availablePocket(item);
+                
+                if (placed != false) {
+                    console.log("Placed! Refreshing");
+                    this.hudDisplay.chest.items.shift();
+                    this.refreshChest();
+                }
+                else {
+                    var sound_var = Phaser.Math.RND.between(1,3);
+                    this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var);
+                    this.scene.manager.hud.newPocketTip('My hands are full...',3000);
+                }
+        }
+    }
+
+    chestArrowDown () {
+        this.hudDisplay.chestArrowDown();
+    }
+
     arrowDown (slot_x) {
         this.hudDisplay.arrowDown(slot_x);
-        
     }
 
     refreshDisplay () {
         return this.hudDisplay.refreshDisplay();
+    }
+
+    refreshChest () {
+        return this.hudDisplay.refreshChest();
     }
 
     tapSlip (slot_x) {

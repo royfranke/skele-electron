@@ -58,7 +58,11 @@ import GROUND_TYPE from "../config/atlas/ground-types.js";
             var tile = layer.getTileAt(_x,_y);
             var tile_type = this.groundLookup[tile.index];
 
-            if (tile_type == undefined) { console.warn('Failed at '+_x+' '+_y); return; }
+            if (tile_type == undefined) { 
+                //console.warn('Failed at '+_x+' '+_y);
+                //return;
+                tile_type = 'DIRT';
+            }
             var tile_attr = this.groundType[tile_type];
             var border_votes = [];
             var position_index = 0;

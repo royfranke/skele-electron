@@ -17,6 +17,7 @@ export default class AppManager {
     }
 
     create () {
+        
         this.state = this.appState.getStateConfig();
         this.camera = new AppCamera(this.scene, this.state);
         this.appView = new AppView(this.scene, this.getView(),this.state.name);
@@ -24,6 +25,11 @@ export default class AppManager {
         this.initializeInput();
         this.initializeSave();
         this.startScene();
+
+        this.scene.events.on(Phaser.Scenes.Events.WAKE, function ()
+        {
+            this.camera.wake();
+        }, this);
     }
 
     initializeMenu () {
@@ -73,6 +79,9 @@ export default class AppManager {
                     this.menu.input(key);
                 }
             }
+            if (this.state.name == 'LOAD' && this.menu.selected != this.menu.last_selected) {
+                this.appView.selectLoad(this.menu.selected);
+            }
         }
     }
 
@@ -104,7 +113,7 @@ export default class AppManager {
         if (this.appState.validState(state)) {
             var new_scene = this.appState.valid_states[state].super;
             /// Context from which scene switch is called is important outside of scene
-            this.scene.scene.start(new_scene);
+            this.scene.scene.switch(new_scene);
         }
     }
 }

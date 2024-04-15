@@ -37,6 +37,10 @@ export default class GameManager {
         this.itemManager.openChest(chest);
     }
 
+    closeChest () {
+        this.itemManager.closeChest();
+    }
+
     getFocus () {
         return this.gameFocus.getFocus();
     }
@@ -78,17 +82,36 @@ export default class GameManager {
 
     update () {
         this.state = this.getState();
+       
 
         if (this.state.name == 'NOT_LOADED') { this.loadGame(); }
 
+        
         if (this.state.input) {
+            var focus = this.getFocus();
             if (this.scene.app.input.INPUT.INVENTORY.TAP) {
-                var focus = this.getFocus();
                 if (focus.name == 'PLAYER' || focus.name == 'MAP') {
                     this.setFocus('POCKETS');
                 }
                 else if (focus.name == 'POCKETS' || focus.name == 'CHEST') {
+                    this.closeChest();
                     this.setFocus('PLAYER');  
+                }
+            }
+            if (this.scene.app.input.INPUT.BACK.TAP) {
+                if (focus.name == 'POCKETS' || focus.name == 'CHEST') {
+                    this.closeChest();
+                    this.setFocus('PLAYER');  
+                }
+            }
+            if (this.scene.app.input.INPUT.DOWN.TAP) {
+                if (focus.name == 'CHEST') {
+                    this.hud.chestArrowDown();
+                }
+            }
+            if (this.scene.app.input.INPUT.SELECT.TAP) {
+                if (focus.name == 'CHEST') {
+                    this.hud.chestHold();
                 }
             }
         }

@@ -238,7 +238,7 @@ import ObjectManager from "../objects/object-manager.js";
     }
 
     createItems () {
-        const blocks = this.blocks;
+        let blocks = this.blocks;
         this.overMap.blocks.forEach(function (block, index) {
             blocks[block.y][block.x].buildItems(); 
         });

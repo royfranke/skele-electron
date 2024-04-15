@@ -6,7 +6,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: true,
     CANPLANT: true,
-    CANSTAKE: true
+    CANSTAKE: true,
+    COLLIDES: false,
+    USEMASK: false
   },
   CROSSWALK: {
     TYPE: "CROSSWALK",
@@ -15,7 +17,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   STREET: {
     TYPE: "STREET",
@@ -24,7 +28,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   CURB: {
     TYPE: "CURB",
@@ -33,7 +39,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   CEMENT: {
     TYPE: "CEMENT",
@@ -42,7 +50,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   GRASS: {
     TYPE: "GRASS",
@@ -51,7 +61,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: true,
     CANPLANT: true,
-    CANSTAKE: true
+    CANSTAKE: true,
+    COLLIDES: false,
+    USEMASK: true
   },
   MEADOW: {
     TYPE: "MEADOW",
@@ -60,7 +72,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: true,
     CANPLANT: false,
-    CANSTAKE: true
+    CANSTAKE: true,
+    COLLIDES: false,
+    USEMASK: true
   },
   LEAVES: {
     TYPE: "LEAVES",
@@ -69,7 +83,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: true,
     CANPLANT: false,
-    CANSTAKE: true
+    CANSTAKE: true,
+    COLLIDES: false,
+    USEMASK: true
   },
   HEDGE: {
     TYPE: "HEDGE",
@@ -78,7 +94,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: true,
+    USEMASK: false
   },
   ASPHALT: {
     TYPE: "ASPHALT",
@@ -87,7 +105,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   PLAZA: {
     TYPE: "PLAZA",
@@ -96,7 +116,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   MARSH: {
     TYPE: "MARSH",
@@ -105,7 +127,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: true
   },
   MULCH: {
     TYPE: "MULCH",
@@ -114,7 +138,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: true,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: true
   },
   FOUNDATION: {
     TYPE: "FOUNDATION",
@@ -123,7 +149,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   GARDEN: {
     TYPE: "GARDEN",
@@ -132,7 +160,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: true,
     CANPLANT: true,
-    CANSTAKE: true
+    CANSTAKE: true,
+    COLLIDES: false,
+    USEMASK: true
   },
   TILE: {
     TYPE: "TILE",
@@ -141,7 +171,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   PLANK: {
     TYPE: "PLANK",
@@ -150,7 +182,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   CARPET: {
     TYPE: "CARPET",
@@ -159,7 +193,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: true
   },
   LINOLEUM: {
     TYPE: "LINOLEUM",
@@ -168,7 +204,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   },
   EMPTY: {
     TYPE: "EMPTY",
@@ -177,7 +215,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: true,
+    USEMASK: false
   },
   STAIRS: {
     TYPE: "STAIRS",
@@ -186,7 +226,9 @@ const GROUND_TYPE = {
     FILLTILE: true,
     CANDIG: false,
     CANPLANT: false,
-    CANSTAKE: false
+    CANSTAKE: false,
+    COLLIDES: false,
+    USEMASK: false
   }
 };
 

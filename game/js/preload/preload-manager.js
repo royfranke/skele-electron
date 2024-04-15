@@ -1,10 +1,11 @@
 import PRELOAD_IMAGE from "./preload-image.js";
 import PRELOAD_SOUND from "./preload-sound.js";
 import PRELOAD_ATLAS from "./preload-atlas.js";
+import PRELOAD_JSON from "./preload-json.js";
 import SPRITE_DIR from "../config/sprite-dir.js";
 import PreloadAnim from "./preload-anim.js";
 
-export default class Preloader{
+export default class PreloadManager{
   constructor(scene) {
     this.scene = scene;
     var self = this.scene;
@@ -19,6 +20,10 @@ export default class Preloader{
 
     PRELOAD_ATLAS.forEach(function (atlas, index) {
       self.load.atlas(atlas.NAME, '../game/assets/'+atlas.PATH.SPRITE, '../game/assets/'+atlas.PATH.JSON);
+    });
+
+    PRELOAD_JSON.forEach(function (record, index) {
+      self.load.json(record.NAME, '../game/'+record.PATH.JSON);
     });
 
     this.preloadStateSprites();

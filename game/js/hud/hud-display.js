@@ -86,6 +86,7 @@ export default class HudDisplay {
             display: null
         };
         this.coinPurseUI = null;
+        this.chest = null;
         this.addCoinPurse(); 
         this.addWatch(); 
         this.makeFocusHints();
@@ -302,9 +303,12 @@ export default class HudDisplay {
             x: 24 + (slot_x*40),
             y: 64,
         };
-        var right = this.view.right;
-        const slip =  this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', text).setClassName('select-slip').setOrigin(1,0).setScrollFactor(0).setVisible(false);
-        return slip;
+        let slip = this.makeSlip(this.view.right - slotMargin.x, this.view.top + (slotMargin.y), text);
+        return slip.setScrollFactor(0).setVisible(false);
+    }
+
+    makeSlip (_x,_y, text='HOLD') {
+        return  this.scene.add.dom(_x,_y, 'div', '', text).setClassName('select-slip').setOrigin(1,0);
     }
 
     addPocketTip (message) {
@@ -431,6 +435,58 @@ export default class HudDisplay {
         arrow.setFrame('BAG_ARROW_'+status);
     }
 
+
+    chestArrowDown () {
+        if (this.chest != null) {
+            var arrow = this.chest.arrow;
+            if (this.chest.items.length > 1) {
+                this.chest.item.nextItem();
+                var sound_var = Phaser.Math.RND.between(1,3);
+                this.scene.manager.hud.hudSound.play('BAG_RUMMAGE_'+sound_var);
+                
+                var tween = this.scene.tweens.add({
+                    targets: [ arrow ],
+                    y: this.chest.arrow.y + 4,
+                    x: this.chest.arrow.x,
+                    duration: 100,
+                    ease: 'Sine.easeIn',
+                    loop: 0,
+                    yoyo: true,
+                });
+                tween.on('complete', () => {
+                    this.refreshChest();
+                    var new_item = this.chest.icon;
+                    this.scene.tweens.add({
+                        targets: [ new_item ],
+                        y: new_item.y - 2,
+                        x: new_item.x,
+                        duration: 250,
+                        ease: 'Sine.easeIn',
+                        loop: 0,
+                        yoyo: true,
+                    });
+                });
+
+            }
+            else { // Only one item in bag
+                //var sound_var = Phaser.Math.RND.between(1,3);
+                //this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var); replace with more subtle
+                var tween = this.scene.tweens.add({
+                    targets: [ arrow ],
+                    x: this.chest.arrow.x - 1,
+                    duration: 100,
+                    ease: 'Sine.easeIn',
+                    loop: 1,
+                    yoyo: true,
+                });
+                tween.on('complete', () => {
+                    //this.refreshChest();
+                });
+            }
+            
+        }
+    }
+
     setSlotVisible (slot_x, slot_y, visible) {
         this.slots[slot_y][slot_x].slot.setVisible(visible);
         if (this.slots[slot_y][slot_x].icon != null) {
@@ -451,27 +507,31 @@ export default class HudDisplay {
     }
 
     addSlot (slot_x, slot_y) {
-        let slot = this.scene.add.image(0,0, 'POCKET_BLOCK', 'HAND_UNFOCUSED').setOrigin(0);
-        slot.setScrollFactor(0);
-        slot.setDepth(100000);
-        const slotMargin = {
-            x: 16 + (slot_x*40),
+        let slotMargin = {
+            x: 48 + (slot_x*40),
             y: 16 + (slot_y*36),
         };
-        slot.setPosition((this.view.right - slot.displayWidth) - (slotMargin.x), this.view.top + (slotMargin.y));
+        let slot = this.makeSlot((this.view.right - slotMargin.x),(this.view.top + slotMargin.y));
+        slot.setScrollFactor(0);
         return slot;
     }
 
-    addArrow (slot_x, slot_y, status) {
-        let slot = this.scene.add.image(0,0, 'POCKET_ARROW', 'BAG_ARROW_'+status).setOrigin(0);
-        slot.setScrollFactor(0);
-        slot.setDepth(100000);
+    makeSlot (_x,_y) {
+        return this.scene.add.image(_x,_y, 'POCKET_BLOCK', 'HAND_UNFOCUSED').setOrigin(0).setDepth(100000);
+    }
+
+    addArrow (slot_x, slot_y) {
         const slotMargin = {
-            x: 16 + (slot_x*40),
+            x: 48 + (slot_x*40),
             y: 8 + (slot_y*40),
         };
-        slot.setPosition((this.view.right - slot.displayWidth) - (slotMargin.x), this.view.top + (slotMargin.y));
-        return slot;
+        let arrow = this.makeArrow((this.view.right - slotMargin.x),(this.view.top + slotMargin.y));
+        arrow.setScrollFactor(0);
+        return arrow;
+    }
+
+    makeArrow (_x,_y) {
+        return this.scene.add.image(_x,_y, 'POCKET_ARROW', 'BAG_ARROW_FOCUSED').setOrigin(0).setDepth(100000);
     }
 
     getArrowPosition (slot_x) {
@@ -503,6 +563,7 @@ export default class HudDisplay {
         let _y = this.view.top + 16;
         this.watch.block = this.scene.add.image(_x,_y,  'POCKET_BLOCK', 'ITEM_FOCUSED').setOrigin(0).setScrollFactor(0).setDepth(100000);
         this.watch.icon = this.scene.add.image(_x + 8,_y + 8, 'ITEMS', 'DIGITAL_WATCH').setOrigin(0).setScrollFactor(0).setDepth(100001);
+      
     }
 
 
@@ -510,16 +571,20 @@ export default class HudDisplay {
         if (textureName != 'EMPTY') {
             textureName = 'ITEMS';
         }
-        let icon = this.scene.add.image(0,0, textureName,frameName).setOrigin(0);
-        icon.setScrollFactor(0);
-        icon.setDepth(100100);
+        
         var margin = {
-            x: 24 + (slot_x*40),
+            x: 40 + (slot_x*40),
             y: 24 + (slot_y*36),
         };
-        var right = this.view.right;
-        icon.setPosition(right - (icon.displayWidth) - (margin.x), this.view.top + (margin.y));
+
+        let icon = this.makeIcon((this.view.right - margin.x),(this.view.top + margin.y), textureName, frameName);
+        icon.setScrollFactor(0);
+
         return icon;
+    }
+
+    makeIcon (_x,_y, textureName, frameName) {
+        return this.scene.add.image(_x,_y, textureName,frameName).setOrigin(0).setDepth(100100);
     }
 
     addFX (slot_x, slot_y, delay=0) {
@@ -532,6 +597,50 @@ export default class HudDisplay {
 
         //this.scene.manager.fx.itemWoosh(_x,_y,delay);
         //this.scene.manager.fx.itemSparkle(_x,_y,delay);
+    }
+
+    openChest (item) {
+        this.closeChest();
+        this.chest = {item: item, slip: null, slot: null, arrow: null, icon: null, items: item.info.items};
+        var _x = this.scene.player.snappedStanding.x + 48;
+        var _y = this.scene.player.snappedStanding.y - 32;
+        this.chest.slot = this.makeSlot(_x,_y);
+        
+        if (this.chest.items.length > 0) {
+            this.chest.icon = this.makeIcon(this.chest.slot.x + 8,this.chest.slot.y + 8, 'ITEMS', this.chest.items[0].info.icon);
+            this.chest.slip = this.makeSlip(this.chest.slot.x,this.chest.slot.y, 'TAKE');
+        }
+        else {
+            this.chest.icon = this.makeIcon(this.chest.slot.x + 8,this.chest.slot.y + 8, 'EMPTY', 'empty')
+        }
+
+        this.chest.arrow = this.makeArrow(_x,_y + 36);
+    }
+
+    refreshChest () {
+        if (this.chest != null) {
+            this.chest.icon.destroy();
+            if (this.chest.items.length > 0) {
+                this.chest.icon = this.makeIcon(this.chest.slot.x + 8,this.chest.slot.y + 8, 'ITEMS', this.chest.items[0].info.icon);
+            }
+            else {
+                this.chest.icon = this.makeIcon(this.chest.slot.x + 8,this.chest.slot.y + 8, 'EMPTY', 'empty')
+            }
+        }
+    }
+
+    closeChest () {
+        if (this.chest != null) {
+            this.chest.icon.destroy();
+            this.chest.slot.destroy();
+            this.chest.arrow.destroy();
+            if (this.chest.slip != null) {
+                this.chest.slip.destroy();
+            }
+            this.chest.items = [];
+            this.chest.item = null;
+            this.chest = null;
+        }
     }
 
     openPockets () {
@@ -706,8 +815,10 @@ export default class HudDisplay {
         this.mapBox = {box: null, flag: null, draw_group: this.scene.add.group()};
         let _x = this.view.left + this.margin.left;
         let _y = this.view.bottom - (96 + this.margin.bottom)
-        this.mapBox.box = this.scene.add.image(_x,_y, 'mapBox').setOrigin(0).setScrollFactor(0).setDepth(100100);
+        this.mapBox.box = this.scene.add.nineslice(_x,_y, 'POCKET_BLOCK', 'BAG_UNFOCUSED', 96, 96, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(100105);
         this.mapBox.flag = this.scene.add.dom(_x,_y + 96, 'div','', 'Mini Map').setClassName('mini-map-flag').setOrigin(0).setScrollFactor(0);
+
+        
     }
 
     tellMapBoxFlag (content) {

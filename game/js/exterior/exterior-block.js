@@ -177,10 +177,25 @@ export default class Block {
     }
 
     buildItems () {
-        const block = this.block;
-        if (this.block.offset.n > 0) {
-            this.scene.manager.itemManager.newItemToWorld(block.left+3, block.top+2,'APPLE');
-        }
+        /*
+            var content = [];
+            if (Phaser.Math.RND.between(0,1) == 1) {
+                content.push(this.scene.manager.itemManager.newItem('APPLE'));
+            }
+            if (Phaser.Math.RND.between(0,2) == 1) {
+                content.push(this.scene.manager.itemManager.newItem('ENVELOPE_FRONT_1'));
+            }
+            if (Phaser.Math.RND.between(0,2) == 1) {
+                content.push(this.scene.manager.itemManager.newItem('CUPCAKE_PINK'));
+            }
+
+            if (Phaser.Math.RND.between(0,1) == 1) {
+            this.scene.manager.itemManager.newItemToWorld(this.block.left+3, this.block.top+2,'BACKPACK_PURPLE',content);
+            }
+            else {
+                this.scene.manager.itemManager.newItemToWorld(this.block.left+3, this.block.top+2,'BACKPACK_CANVAS',content);
+            }
+        */
     
     }
 

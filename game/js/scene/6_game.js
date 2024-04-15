@@ -34,6 +34,7 @@ export default class GameScene extends Phaser.Scene {
         this.exterior.create();
         this.player.create();
         this.npcs.create();
+
     }
 
     update() {

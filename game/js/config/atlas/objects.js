@@ -31,6 +31,38 @@ const OBJECTS = {
         portal: 0,
         actions: [],
     },
+      BOXELDER: {
+        name: 'Boxelder',
+        slug: 'BOXELDER', 
+        type: 'TREE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:12
+        },
+        offset: {
+          x:10, 
+          y:38
+        },
+        varieties: 7,
+        portal: 0,
+        actions: [],
+    },
       BUS_STOP_A_: {
         name: 'Bus Stop A',
         slug: 'BUS_STOP_A_', 
@@ -1568,6 +1600,139 @@ const OBJECTS = {
           y:0
         },
         varieties: 9,
+        portal: 0,
+        actions: [],
+    },
+      MAILBOX_1: {
+        name: 'Mailbox 1',
+        slug: 'MAILBOX_1', 
+        type: 'MAILBOX',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:29, 
+          w:13,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:24, 
+          w:13
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 5,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN'
+          }, {
+            name: 'CLOSE'
+          },],
+slots: '0',
+items: []    },
+      MAPLE_5X7: {
+        name: 'Maple 5x7',
+        slug: 'MAPLE_5X7', 
+        type: 'TREE',
+        bounding: {
+          h:7, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:6
+        },
+        sprite: {
+          h:112, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:12
+        },
+        offset: {
+          x:34, 
+          y:96
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+    },
+      MAPLE_7X7: {
+        name: 'Maple 7x7',
+        slug: 'MAPLE_7X7', 
+        type: 'TREE',
+        bounding: {
+          h:7, 
+          w:7
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:112, 
+          w:112,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:48, 
+          y:80
+        },
+        varieties: 0,
+        portal: 0,
+        actions: [],
+    },
+      MAPLE_7X7: {
+        name: 'Maple 7x7',
+        slug: 'MAPLE_7X7', 
+        type: 'TREE',
+        bounding: {
+          h:7, 
+          w:7
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:3, 
+          y:6
+        },
+        sprite: {
+          h:112, 
+          w:112,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:48, 
+          y:96
+        },
+        varieties: 1,
         portal: 0,
         actions: [],
     },

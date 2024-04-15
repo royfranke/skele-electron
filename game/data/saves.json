@@ -1,0 +1,19 @@
+{"slots": [
+	{
+		"ID": 1,
+        "HEADLINE": "New in Town",
+        "TIME": "11:15AM",
+        "DAY_COUNT": 1,
+        "DAY": "Friday",
+        "DATE": "June 3rd, 1994"
+	},
+    {
+		"ID": 2,
+        "HEADLINE": "Fresh Meat",
+        "TIME": "9:32AM",
+        "DAY_COUNT": 3,
+        "DAY": "Sunday",
+        "DATE": "June 5th, 1994"
+	}
+]
+}

@@ -74,7 +74,12 @@ export default class ItemManager {
     }
 
     openChest (item) {
-        console.log(item);
+        this.scene.manager.setFocus('CHEST');
+        this.scene.manager.hud.hudDisplay.openChest(item);
+    }
+
+    closeChest () {
+        this.scene.manager.hud.hudDisplay.closeChest();
     }
     
 }

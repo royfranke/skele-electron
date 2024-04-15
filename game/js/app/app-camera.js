@@ -40,6 +40,11 @@ export default class AppCamera {
         this.camera.fadeIn(this.state.fadeIn, 0, 0, 0);
     }
 
+    wake () {
+        this.camera.setBackgroundColor('#4b424a');
+        this.camera.fadeIn(this.state.fadeIn, 0, 0, 0);
+    }
+
     end () {
         this.camera.fadeOut(this.state.fadeOut, 0, 0, 0);        
     }
