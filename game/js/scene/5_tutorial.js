@@ -8,10 +8,10 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     create() {
-        this.manager = new AppManager(this,'TUTORIAL');
+        this.app = new AppManager(this,'TUTORIAL');
     }
 
     update() {
-        this.manager.update();
+        this.app.update();
     }
 }

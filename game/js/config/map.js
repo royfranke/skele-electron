@@ -1614,16 +1614,16 @@ const MAP_CONFIG = {
             address: {
                 name: "",
                 facing: "S",
+                dir: "W",
                 number: "101",
                 street: "Apple Street",
             }
         },
-        
                 {
             lines: {
                 x: 15,
                 y: 4,
-                width: 15,
+                width: 14,
                 height: 22
             },
             block: {
@@ -1633,16 +1633,16 @@ const MAP_CONFIG = {
             address: {
                 name: "",
                 facing: "S",
+                dir: "W",
                 number: "103",
                 street: "Apple Street",
             }
         },
-        
                 {
             lines: {
                 x: 0,
                 y: 4,
-                width: 15,
+                width: 14,
                 height: 22
             },
             block: {
@@ -1652,11 +1652,11 @@ const MAP_CONFIG = {
             address: {
                 name: "",
                 facing: "S",
+                dir: "W",
                 number: "105",
                 street: "Apple Street",
             }
         },
-        
                 {
             lines: {
                 x: 33,
@@ -1671,16 +1671,16 @@ const MAP_CONFIG = {
             address: {
                 name: "",
                 facing: "S",
+                dir: "W",
                 number: "101",
                 street: "Tuna Melt Street",
             }
         },
-        
                 {
             lines: {
                 x: 22,
                 y: 2,
-                width: 11,
+                width: 10,
                 height: 20
             },
             block: {
@@ -1690,16 +1690,16 @@ const MAP_CONFIG = {
             address: {
                 name: "",
                 facing: "S",
+                dir: "W",
                 number: "103",
                 street: "Tuna Melt Street",
             }
         },
-        
                 {
             lines: {
                 x: 11,
                 y: 2,
-                width: 11,
+                width: 10,
                 height: 20
             },
             block: {
@@ -1709,16 +1709,16 @@ const MAP_CONFIG = {
             address: {
                 name: "",
                 facing: "S",
+                dir: "W",
                 number: "105",
                 street: "Tuna Melt Street",
             }
         },
-        
                 {
             lines: {
-                x: 0,
+                x: 2,
                 y: 2,
-                width: 11,
+                width: 8,
                 height: 20
             },
             block: {
@@ -1728,11 +1728,11 @@ const MAP_CONFIG = {
             address: {
                 name: "",
                 facing: "S",
+                dir: "W",
                 number: "107",
                 street: "Tuna Melt Street",
             }
-        },
-        
+        }
             ]
     
 };

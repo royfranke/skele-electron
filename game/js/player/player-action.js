@@ -16,7 +16,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     actionTileFresh;
     actionTileLookUp;
 
-    actionMarker;
 
     // Set in clearActions
     actionsMap;
@@ -45,10 +44,15 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     createMarker () {
+        /*
         const marker = this.scene.add.sprite(0,0, "action-marker", 0).setOrigin(0);
         marker.anims.play("action-marker", false);
         marker.setVisible(false);
-        return marker;
+        */
+       let marker = this.scene.manager.fx.handleFX('SELECTOR_VALID_',0,0);
+       marker.setOrigin(0);
+       marker.setVisible(false);
+       return marker;
     }
 
     showMarker (showing) {
@@ -71,12 +75,16 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             this.clearActions();
             this.actionTileLast = this.actionTile;
 
-            this.addItemActions();
-            this.addObjectActions();
+            this.refreshActions();
         }
         else {
             this.actionTileFresh = false;
         }
+    }
+
+    refreshActions() {
+        this.addItemActions();
+        this.addObjectActions();
     }
 
     updateActionAvailability() {
@@ -159,7 +167,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             
             this.digUp(this.scene.player.snappedStanding.x, this.scene.player.snappedStanding.y);
             setTimeout(() => {
-                this.locale.ground.placeTileType(this.actionTile.x, this.actionTile.y,  this.locale.groundLayer, 'DIRT', true);
+                this.locale.ground.placeTileType(this.actionTile.x, this.actionTile.y, 'DIRT', true);
             }, 500);
             this.digUp(this.scene.player.snappedStanding.x, this.scene.player.snappedStanding.y);
             setTimeout(() => {
@@ -169,7 +177,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
     
     digUp(_x,_y) {
-        this.scene.manager.fx.dustUp(_x,_y,500);
+        this.scene.manager.fx.playFX('CLOUD_DUST_',_x+8,_y+8,500);
         /// Get odds on this tile from somewhere
         const yielded = [1,1,1,1,5,5,10,10,25,25];
         var empties = Phaser.Math.RND.between(4, 20);

@@ -85,7 +85,7 @@ export default class PlayerManager {
 
     create () {
       this.playerSprite.setCollider();
-      this.playerSprite.createShadow();
+      this.playerSprite.createFooting();
     }
 
     update () {
@@ -236,14 +236,14 @@ export default class PlayerManager {
         
         //this.debugUnderfootTile.setPosition(this.snappedStanding.x, this.snappedStanding.y);
         this.underfootLast = this.underfoot;
-        this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y, groundLayer);
-        this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y, groundLayer);
+        this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y);
+        this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y);
     
       }
 
       addCoin (coin_amount) {
         this.coinpurse.addCoin(coin_amount);
-        this.scene.manager.hud.hudDisplay.popCoin(`${coin_amount}¢`,'positive');     
+        this.scene.manager.hud.hudCoinpurse.popCoin(`${coin_amount}¢`,'positive');     
       }
 
 }

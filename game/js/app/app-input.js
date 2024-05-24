@@ -32,6 +32,7 @@ export default class AppInput {
     this.PROG_KEYS = this.scene.input.keyboard.addKeys({
         PAUSE:       KeyCodes.SPACE,
         INVENTORY:   KeyCodes.I,
+        NOTEBOOK:    KeyCodes.N,
         MAP:         KeyCodes.M,
         MORE:        KeyCodes.C,
         RUN:         KeyCodes.SHIFT,

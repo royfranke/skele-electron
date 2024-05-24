@@ -1,5 +1,12 @@
 const PRELOAD_ATLAS = [
     {
+        NAME: 'FX',
+        PATH: {
+            SPRITE: 'spritesheets/a_FX.png',
+            JSON: 'atlas/fx-atlas.json'
+        }
+    },
+    {
         NAME: 'OBJECTS',
         PATH: {
             SPRITE: 'spritesheets/a_OBJECTS.png',
@@ -11,13 +18,6 @@ const PRELOAD_ATLAS = [
         PATH: {
             SPRITE: 'spritesheets/a_ITEM.png',
             JSON: 'atlas/item-atlas.json'
-        }
-    },
-    {
-        NAME: 'MINIMAP',
-        PATH: {
-            SPRITE: 'spritesheets/mini-map-tiles.png',
-            JSON: 'atlas/mini-map-atlas.json'
         }
     },
     {

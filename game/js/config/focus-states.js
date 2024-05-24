@@ -17,6 +17,9 @@ const FOCUS_STATES = {
     POCKETS: {
         name: 'POCKETS'
     },
+    NOTEBOOK: {
+        name: 'NOTEBOOK'
+    },
     MAP: {
         name: 'MAP'
     }

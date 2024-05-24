@@ -56,14 +56,14 @@ export default class ItemManager {
         }
         return item;
     }
-
+/*
     putItemInBag (item,exclude=null) {
         var result = this.scene.manager.hud.availableBag(item,exclude);
         if (!result) {
             this.scene.manager.hud.hudDisplay.tellBrain('No space found...',2000,'missing');
         }
         return result;
-    }
+    }*/
 
     putItemInWorld (item, _x, _y) {
         var result = this.registry.placeItem(item,_x,_y);
@@ -75,11 +75,7 @@ export default class ItemManager {
 
     openChest (item) {
         this.scene.manager.setFocus('CHEST');
-        this.scene.manager.hud.hudDisplay.openChest(item);
-    }
-
-    closeChest () {
-        this.scene.manager.hud.hudDisplay.closeChest();
+        this.scene.manager.hud.hudChest.openChest(item);
     }
     
 }

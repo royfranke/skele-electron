@@ -41,13 +41,13 @@ address: {
         //check for "detached" tag-- make perimeter of space around building if found
 
         console.log('Building...');
-        console.log(this.prop.address.number+' '+this.prop.address.street);
+        console.log(this.prop.address.number+' '+this.prop.address.dir+' '+this.prop.address.street);
 
         let yard = 4;
 
         //this.block.groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 2, height - (yard + 1));
         //this.block.groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, left+1, top + height - (yard + 1), width - 2,  yard);
-        this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, left+1, top + 1, width - 1, height - (yard + 4));
+        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_ASPHALT_, left+1, top + 3, width - 1, height - (yard + 7));
         
         
         

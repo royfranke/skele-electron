@@ -4,12 +4,15 @@ import DATA from "../data/new.js";
 
 export default class TimeManager {
 
-    constructor() {
-        
-        this.now = DATA.TIME;
+    constructor(now=DATA.TIME) {
+        this.now = now;
         this.month = ['June','July','August'];
         this.start_date = 3; // June 3rd, start date
         this.daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday','Monday'];
+    }
+
+    setTime (time) {
+        this.now = time;
     }
 
     update () {

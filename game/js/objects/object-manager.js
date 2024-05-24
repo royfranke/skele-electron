@@ -12,6 +12,10 @@ export default class ObjectManager {
 
     }
 
+    update () {
+        this.registry.update();
+    }
+
     newObject (slug,items=[]) {
         return this.factory.newObject(slug,items);
     }
@@ -40,7 +44,6 @@ export default class ObjectManager {
         var result = this.registry.placeObject(object,_x,_y);
         if (!result) {
             console.log('Could not put this object in the world from object manager...');
-            this.scene.manager.hud.hudDisplay.tellBrain('Something here already',2000,'missing');
         }
         this.scene.physics.add.collider(this.scene.player.playerSprite.sprite, object.sprite);
         return result;

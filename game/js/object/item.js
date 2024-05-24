@@ -33,19 +33,22 @@ export default class Item {
         this.scene.player.action.clearActions();
 
         if (action == 'PICK UP') {
-            var valid = this.scene.manager.hud.availablePocket(this);
-            if (valid) {
-                if (this.scene.player.state.name != 'PICKUP') {
-                    this.scene.player.setState('PICKUP');
-                    setTimeout(() => {
-                        this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
-                        this.scene.player.setState('IDLE');
-                    }, 1000);
-                }
-                
-            }
+            this.pickupItem();
         }
         
+    }
+
+    pickupItem() {
+        var valid = this.scene.manager.hud.availablePocket(this);
+        if (valid) {
+            if (this.scene.player.state.name != 'PICKUP') {
+                this.scene.player.setState('PICKUP');
+                setTimeout(() => {
+                    this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
+                    this.scene.player.setState('IDLE');
+                }, 1000);
+            } 
+        }
     }
 
     nextItem (new_item) {
@@ -84,6 +87,11 @@ export default class Item {
 
     setPocketActions(actions) {
         this.actions = actions;
+    }
+
+    addItem(item) {
+        // Not a bag.
+        return false;
     }
 
     destroySprite() {

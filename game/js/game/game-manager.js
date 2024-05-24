@@ -1,11 +1,12 @@
 import GameState from "./game-state.js";
 import GameFocus from "./game-focus.js";
-import GameFX from "./game-fx.js";
+import FXManager from "../fx/fx-manager.js";
 import GameUtilities from "./game-utilities.js";
 import HudManager from "../hud/hud-manager.js";
 import ItemManager from "../items/item-manager.js";
 import ObjectManager from "../objects/object-manager.js";
 import TimeManager from "../time/time-manager.js";
+
 /* global Phaser */
 /*
  * Game level manager
@@ -26,7 +27,8 @@ export default class GameManager {
         this.time = new TimeManager();
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
-        this.fx = new GameFX(this.scene);
+        this.fx = new FXManager(this.scene);
+
     }
 
     wake () {
@@ -38,7 +40,7 @@ export default class GameManager {
     }
 
     closeChest () {
-        this.itemManager.closeChest();
+        this.hud.closeChest();
     }
 
     getFocus () {
@@ -50,7 +52,10 @@ export default class GameManager {
             this.hud.setState('VISIBLE_UNFOCUSED');
         }
         if (focus_string == 'POCKETS') {
-            this.hud.setState('VISIBLE_FOCUSED');
+            this.hud.setState('POCKETS_FOCUSED');
+        }
+        if (focus_string == 'NOTEBOOK') {
+            this.hud.setState('NOTEBOOK_FOCUSED');
         }
         this.hud.refreshDisplay();
         return this.gameFocus.setFocus(focus_string);
@@ -82,14 +87,11 @@ export default class GameManager {
 
     update () {
         this.state = this.getState();
-       
-
         if (this.state.name == 'NOT_LOADED') { this.loadGame(); }
-
-        
         if (this.state.input) {
-            var focus = this.getFocus();
-            if (this.scene.app.input.INPUT.INVENTORY.TAP) {
+            const focus = this.getFocus();
+            const input = this.scene.app.input.INPUT;
+            if (input.INVENTORY.TAP) {
                 if (focus.name == 'PLAYER' || focus.name == 'MAP') {
                     this.setFocus('POCKETS');
                 }
@@ -98,18 +100,26 @@ export default class GameManager {
                     this.setFocus('PLAYER');  
                 }
             }
-            if (this.scene.app.input.INPUT.BACK.TAP) {
+            if (input.NOTEBOOK.TAP) {
+                if (focus.name != 'NOTEBOOK') {
+                    this.setFocus('NOTEBOOK');
+                }
+                else {
+                    this.setFocus('PLAYER');  
+                }
+            }
+            if (input.BACK.TAP) {
                 if (focus.name == 'POCKETS' || focus.name == 'CHEST') {
                     this.closeChest();
                     this.setFocus('PLAYER');  
                 }
             }
-            if (this.scene.app.input.INPUT.DOWN.TAP) {
+            if (input.DOWN.TAP) {
                 if (focus.name == 'CHEST') {
                     this.hud.chestArrowDown();
                 }
             }
-            if (this.scene.app.input.INPUT.SELECT.TAP) {
+            if (input.SELECT.TAP) {
                 if (focus.name == 'CHEST') {
                     this.hud.chestHold();
                 }
@@ -123,6 +133,7 @@ export default class GameManager {
             var time = this.time.getDigitalTime();
             this.watch.setText(time.hour+':'+time.minute+time.period);
         }
+        this.objectManager.update();
     }
 
     loadGame () {
@@ -131,26 +142,17 @@ export default class GameManager {
             this.setState('LOADING');
             
             this.hud = new HudManager(this.scene);
-            this.watch = this.hud.hudDisplay.tellWatch('00:00AM','positive');
+            this.watch = this.hud.hudWatch.tellWatch('00:00AM','positive');
             
 
             this.scene[this.scene.place].createItems();
             
             this.setFocus('PLAYER');
             /// After loading functions...
-            this.setState('LOADED');
 
-
-            //var plastic = this.itemManager.newItemToPockets('PLASTIC_BAG_1');
-            //var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN');
-
-
-            //var apple = this.itemManager.newItem('POSTCARD_BACK_1');
-            //backpack.addItem(apple);
-            //var cupcake = this.itemManager.newItem('BANANA');
-            //backpack.addItem(cupcake);
-            //var bag = this.itemManager.newItem('LUNCH_BAG_USED',[cupcake]);
-            //backpack.addItem(bag);
+            var postcard = this.itemManager.newItem('POSTCARD_BACK_1');
+            var banana = this.itemManager.newItem('BANANA');
+            var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN',[postcard, banana]);
 
             this.setState('LOADED');
             this.setState('OVERWORLD');

@@ -1,6 +1,7 @@
 
 import SPRITE_DIR from "../config/sprite-dir.js";
-import MONEY from "../reference/money.js";
+import OBJECTS from "../config/atlas/objects.js";
+import FXS from "../config/atlas/fxs.js";
 
 export default class PreloadAnim {
   constructor(scene) {
@@ -12,7 +13,42 @@ export default class PreloadAnim {
     const states = SPRITE_DIR.STATES;
     const faces = SPRITE_DIR.FACES;
     
-    
+    const objects = OBJECTS;
+    for (const [key, object] of Object.entries(objects)) {
+      for (const [key, state] of Object.entries(object.states)) {
+        if (state.frames.length > 0) {
+          let frames = [];
+          state.frames.forEach(function (frame) {
+            frames.push({ key: 'OBJECTS', frame: frame });
+          });
+            anims.create({
+              key: object.slug+"-"+state.name,
+              frames: frames,
+              frameRate: 8,
+              repeat: 0,
+            });
+            console.log('Created animation for '+object.slug+'-'+state.name);
+          }
+        }
+    }
+
+
+    const fxs = FXS;
+    for (const [key, fx] of Object.entries(fxs)) {
+        if (fx.frames.length > 0) {
+          let frames = [];
+          fx.frames.forEach(function (frame) {
+            frames.push({ key: 'FX', frame: frame });
+          });
+            anims.create({
+              key: fx.slug,
+              frames: frames,
+              frameRate: 8,
+              repeat: fx.repeat,
+            });
+          } 
+    }
+
     states.forEach(function (state, index) {
       faces.forEach(function (face, index) {
         anims.create({
@@ -26,36 +62,6 @@ export default class PreloadAnim {
       });
     });
 
-    const moneyAnims = MONEY.ANIM;
-    const coins = MONEY.COINS;
-
-    coins.forEach(function (coin, index) {
-      anims.create({
-        key: "COIN-"+coin,
-        frames: anims.generateFrameNumbers("coins", 
-          { start: moneyAnims[coin].START, end: moneyAnims[coin].END }
-        ),
-        frameRate: 8,
-        repeat: -1,
-      });
-      anims.create({
-        key: "COIN-"+coin+"-HEADS",
-        frames: anims.generateFrameNumbers("coins", 
-          { start: moneyAnims[coin].HEADS.START, end: moneyAnims[coin].HEADS.END }
-        ),
-        frameRate: 8,
-        repeat: -1,
-      });
-      anims.create({
-        key: "COIN-"+coin+"-TAILS",
-        frames: anims.generateFrameNumbers("coins", 
-          { start: moneyAnims[coin].TAILS.START, end: moneyAnims[coin].TAILS.END }
-        ),
-        frameRate: 8,
-        repeat: -1,
-      });
-    });
-
     anims.create({
       key: "action-marker",
       frames: anims.generateFrameNumbers("action-marker", 
@@ -63,33 +69,6 @@ export default class PreloadAnim {
       ),
       frameRate: 8,
       repeat: -1,
-    });
-  
-    anims.create({
-      key: "dust_cloud",
-      frames: anims.generateFrameNumbers("dust", 
-       { start: 0, end: 4 }
-      ),
-      frameRate: 8,
-      repeat: 0,
-    });
-
-    anims.create({
-      key: "fx_woosh",
-      frames: anims.generateFrameNumbers("fx_item", 
-       { start: 0, end: 8 }
-      ),
-      frameRate: 8,
-      repeat: 0,
-    });
-
-    anims.create({
-      key: "sparkle",
-      frames: anims.generateFrameNumbers("fx_sparkle", 
-       { start: 0, end: 8 }
-      ),
-      frameRate: 8,
-      repeat: 0,
     });
 
   }

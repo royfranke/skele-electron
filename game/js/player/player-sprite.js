@@ -14,7 +14,7 @@ export default class PlayerSprite {
 
   }
 
-  setCollider () {
+  setCollider() {
     if (this.scene.place == 'exterior') {
       this.setExteriorCollider();
     }
@@ -35,21 +35,18 @@ export default class PlayerSprite {
     console.log('collider set');
   }
 
-  createShadow() {
-    
+  createFooting() {
+
     this.footShadow = this.scene.add.ellipse(0, 0, 12, 6, 0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY);
     this.footShadow.setAlpha(.5);
-    this.footMask = this.scene.add.circle(0,0, 16, 0x6666ff);
+    this.footMask = this.scene.add.circle(0, 0, 16, 0x6666ff);
     this.footMask.setVisible(false);
     this.sprite.setMask(new Phaser.Display.Masks.BitmapMask(this.scene, this.footMask));
-    
-
     //this.shadow = this.scene.add.sprite(0,0, "player-IDLE", 0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
   }
 
   update() {
     var state = this.scene.player.getState();
-    const speed = this.scene.player.speed;
     this.facing = this.scene.player.getFacing(this.facing);
     this.sprite.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true);
 
@@ -57,62 +54,8 @@ export default class PlayerSprite {
       this.sprite.body.setVelocity(0);
     }
 
-
-    var input = this.scene.player.playerInput;
-    // Horizontal movement
-    if (input.left) {
-      this.sprite.body.setVelocityX(-speed);
-    } else if (input.right) {
-      this.sprite.body.setVelocityX(speed);
-    }
-    var flip = (this.facing == 'nw' || this.facing == 'w' || this.facing == 'sw') ? true : false;
-    this.sprite.setFlipX(flip);
-    // Vertical movement
-    if (input.up) {
-      this.sprite.body.setVelocityY(-speed);
-    } else if (input.down) {
-      this.sprite.body.setVelocityY(speed);
-    }
-
-    // Normalize and scale the velocity so that sprite can't move faster along a diagonal
-    this.sprite.body.velocity.normalize().scale(speed);
-
-    const underfoot = this.scene.player.underfoot;
-    if (underfoot != undefined) {
-      if (underfoot.TYPE == 'LEAVES') {
-          this.footMask.setPosition(this.sprite.x, this.sprite.y - 7);
-          //this.footShadow.setVisible(false);
-          this.footShadow.setVisible(true);
-          this.footShadow.setScale(1.25);
-          this.footShadow.setPosition(this.sprite.x, this.sprite.y + 8);
-        }
-        else if (underfoot.TYPE == 'MULCH') {
-          this.footMask.setPosition(this.sprite.x, this.sprite.y - 6);
-          this.footShadow.setVisible(true);
-          this.footShadow.setScale(1.25);
-          this.footShadow.setPosition(this.sprite.x, this.sprite.y + 9);
-        }
-        else if (underfoot.TYPE == 'GRASS') {
-          this.footMask.setPosition(this.sprite.x, this.sprite.y - 6);
-          this.footShadow.setVisible(true);
-          this.footShadow.setScale(1);
-          this.footShadow.setPosition(this.sprite.x, this.sprite.y + 9);
-        }
-        else {
-          this.footMask.setPosition(this.sprite.x, this.sprite.y);
-          this.footShadow.setVisible(true);
-          this.footShadow.setScale(1);
-          this.footShadow.setPosition(this.sprite.x, this.sprite.y+10);
-        }
-  }
-  else {
-    this.footShadow.setVisible(true);
-    this.footShadow.setScale(1);
-    this.footShadow.setPosition(this.sprite.x, this.sprite.y + 12);
-  }
-    this.sprite.setDepth(this.sprite.y + 8);
-    this.footShadow.setDepth(this.sprite.depth - 1);
-    this.footMask.setDepth(this.sprite.depth + 1);
+    this.updateVelocity();
+    this.updateFooting();
 
     /*
     this.shadow.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true);
@@ -121,11 +64,70 @@ export default class PlayerSprite {
     */
   }
 
+  updateVelocity () {
+    const speed = this.scene.player.speed;
+    let input = this.scene.player.playerInput;
+    // Horizontal movement
+    
+    var flip = (this.facing == 'nw' || this.facing == 'w' || this.facing == 'sw') ? true : false;
+    this.sprite.setFlipX(flip);
+
+    this.move({up: input.up, right: input.right, down: input.down, left: input.left}, speed);
+  }
+  
+  move (dir={up: false, right: false, down: false, left: false}, speed) {
+    if (dir.up) {
+      this.sprite.body.setVelocityY(-speed);
+    } else if (dir.down) {
+      this.sprite.body.setVelocityY(speed);
+    }
+
+    if (dir.left) {
+      this.sprite.body.setVelocityX(-speed);
+    } else if (dir.right) {
+      this.sprite.body.setVelocityX(speed);
+    }
+
+    this.sprite.body.velocity.normalize().scale(speed);
+  }
+
+  updateFooting () {
+    let underfoot = this.scene.player.underfoot;
+    this.updateFootMask(underfoot);
+    this.updateFootShadow(underfoot);
+    this.sprite.setDepth(this.sprite.y + 8);
+  }
+
+  updateFootMask(underfoot) {
+    var _y = this.sprite.y;
+    if (underfoot != undefined) {
+      if (underfoot.USEMASK) {
+          _y = _y - underfoot.ZINDEX;
+      }
+    }
+    this.footMask.setPosition(this.sprite.x, _y);
+    this.footMask.setDepth(this.sprite.depth + 1);
+    return;
+  }
+
+  updateFootShadow(underfoot) {
+    var _y = this.sprite.y + 12;
+    var scale = 1;
+    if (underfoot != undefined) {
+      if (underfoot.USEMASK && underfoot.ZINDEX > 0) {
+          _y = Math.floor(_y - (underfoot.ZINDEX / 2));
+          scale = (underfoot.ZINDEX / 25) + scale;
+      }
+    }
+    this.footShadow.setPosition(this.sprite.x, _y);
+    this.footShadow.setScale(scale);
+    this.footShadow.setDepth(this.sprite.depth - 1);
+    return;
+  }
 
   freeze() {
     this.sprite.anims.stop();
     this.sprite.body.setVelocity(0);
-    this.sprite.anims.stop();
     this.action.showMenu = false;
   }
 }

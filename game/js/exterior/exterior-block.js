@@ -167,13 +167,124 @@ export default class Block {
         return property;
     }
 
+    getAdjoiningNodes (_x,_y) {
+        var nodes = {NW:null, NE:null, SE:null, SW:null};
+        nodes.NW = this.scene.exterior.getBlockNodeProperties(_x, _y);
+        nodes.NE = this.scene.exterior.getBlockNodeProperties(_x+1, _y);
+        nodes.SE = this.scene.exterior.getBlockNodeProperties(_x+1, _y+1);
+        nodes.SW = this.scene.exterior.getBlockNodeProperties(_x, _y+1);
+        return nodes;
+    }
+
     buildObjects () {
-        const block = this.block;
-        if (this.block.offset.n > 0) {
+        this.nodes = this.getAdjoiningNodes(this.block.x, this.block.y);
+        console.log(this.nodes);
+
+        if (this.nodes.NW != null) {
+            var stop = this.nodes.NW.streets.s.signal == 1 ? 'S' : null;
+            if (stop != null) {
+                this.buildStreetPole(this.block.left+1, this.block.top+1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+            }
+            if (this.nodes.NW.streets.s.signal == 2) {
+                this.buildTrafficLight(this.block.left+1, this.block.top+1,'NW');
+            }
+        }
+        if (this.nodes.NE != null) {
+            var stop = this.nodes.NE.streets.w.signal == 1 ? 'W' : null;
+            if (stop != null) {
+                this.buildStreetPole(this.block.right-1, this.block.top+1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+            }
+            if (this.nodes.NE.streets.s.signal == 2) {
+                this.buildTrafficLight(this.block.right-1, this.block.top+1,'NE');
+            }
+        }
+
+        if (this.nodes.SE != null) {
+            var stop = this.nodes.SE.streets.n.signal == 1 ? 'N' : null;
+            if (stop != null) {
+                this.buildStreetPole(this.block.right-1, this.block.bottom-1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+            }
+            if (this.nodes.SE.streets.e.signal == 2) {
+                this.buildTrafficLight(this.block.right-1, this.block.bottom-1,'SE');
+            }
+        }
+
+        if (this.nodes.SW != null) {
+            var stop = this.nodes.SW.streets.e.signal == 1 ? 'E' : null;
+            if (stop != null) {
+                this.buildStreetPole(this.block.left+1, this.block.bottom-1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+            }
+            if (this.nodes.SW.streets.e.signal == 2) {
+                this.buildTrafficLight(this.block.left+1, this.block.bottom-1,'SW');
+            }
+            
+        }
+        /*
+        if (this.block.offset.s > 0) {
             //this.scene.manager.objectManager.newObjectToWorld(block.left+8, block.top+1,'WOOD_POLE');   
+            this.scene.manager.objectManager.newObjectToWorld(this.block.right-6, this.block.bottom-1,'HYDRANT_CITY_');
+        }
+
+        if (this.block.offset.s > 0 && this.block.offset.e > 0) { // LOWER RIGHT
+            this.buildStreetPole(this.block.right-1, this.block.bottom-1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:'N'});
+
+        }
+
+        if (this.block.offset.n > 0 && this.block.offset.w > 0) { // UPPER LEFT
+            /// node here equals block x y
+            this.buildStreetPole(this.block.left+1, this.block.top+1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:'S'});
+
+        }
+
+*/
+    
+    
+    }
+
+    buildTrafficLight (_x,_y,corner) {
+        var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
+        var facing = '';
+        var flip = false;
+        switch (corner) {
+            case 'NE':
+                flip = true;
+                facing = 'W';
+            break;
+            case 'NW':
+                facing = 'W';
+            break;
+            case 'SE':
+                facing = 'SE';
+            break;
+            case 'SW':
+                flip = true;
+                facing = 'SE';
+            break;
+        }
+        var slotted = this.scene.manager.objectManager.objectInfo('WALK_SIGNAL_'+facing+'_');
+        pole.setSlot(0,2,slotted,flip);
+    }
+
+    buildStreetPole (_x,_y,signs={NS:null,EW:null,STOP:null}) {
+
+        var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
+
+        if (signs.NS != null) {
+            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');
+            pole.setSlot(.5,4.25,slotted);
         }
         
-    
+        if (signs.EW != null) {
+            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
+            pole.setSlot(.5,3.75,slotted);
+        }
+        
+        if (signs.STOP != null) {
+            var slotted = this.scene.manager.objectManager.objectInfo('STOP_SIGN_'+signs.STOP);
+            var behind = signs.STOP == 'N' || signs.STOP == 'E' ? true : false;
+            pole.setSlot(.5,2,slotted,false,behind);
+        }
+
     }
 
     buildItems () {

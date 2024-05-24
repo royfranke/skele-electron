@@ -27,46 +27,7 @@ export default class PreloadManager{
     });
 
     this.preloadStateSprites();
-    this.preloadInventorySprites();
   
-
-    this.scene.load.spritesheet(
-      "dust",
-      "../game/assets/spritesheets/dust_1-sheet.png",
-      {
-        frameWidth: 32,
-        frameHeight: 12
-      }
-    );
-
-    this.scene.load.spritesheet(
-      "fx_item",
-      "../game/assets/spritesheets/fx_item_1.png",
-      {
-        frameWidth: 16,
-        frameHeight: 16
-      }
-    );
-
-    this.scene.load.spritesheet(
-      "fx_sparkle",
-      "../game/assets/spritesheets/sparkle.png",
-      {
-        frameWidth: 32,
-        frameHeight: 32
-      }
-    );
-
-
-    this.scene.load.spritesheet(
-      "coin",
-      "../game/assets/spritesheets/COINS-sheet.png",
-      {
-        frameWidth: 16,
-        frameHeight: 16
-      }
-    );
-
     this.scene.load.spritesheet(
       "action-marker",
       "../game/assets/spritesheets/action-marker.png",
@@ -84,19 +45,6 @@ export default class PreloadManager{
     this.anim = new PreloadAnim(this.scene);
   }
 
-
-
-  preloadInventorySprites () {
-    const loading = this.scene.load;
-    loading.spritesheet(
-      "coins",
-      "../game/assets/spritesheets/COINS-sheet.png",
-      {
-        frameWidth: 16,
-        frameHeight: 16
-      }
-    );
-  }
 
   preloadStateSprites () {
     const loading = this.scene.load;

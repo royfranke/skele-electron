@@ -14,8 +14,13 @@ const HUD_STATES = {
         input: false,
         visible: true
     },
-    VISIBLE_FOCUSED: {
-        name: 'VISIBLE_FOCUSED',
+    POCKETS_FOCUSED: {
+        name: 'POCKETS_FOCUSED',
+        input: true,
+        visible: true
+    },
+    NOTEBOOK_FOCUSED: {
+        name: 'NOTEBOOK_FOCUSED',
         input: true,
         visible: true
     },

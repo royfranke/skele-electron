@@ -1,9 +1,11 @@
 import TILES from "../config/atlas/tile-weights.js";
+import EDGETILES from "../config/atlas/edge-tile-weights.js";
 import COOK from "../config/atlas/tile-recipes.js";
 import WALLTILES from "../config/atlas/wall-tile-weights.js";
 import MAP_CONFIG from "../config/map.js";
 import ExteriorGround from "./exterior-ground.js";
 import Block from "./exterior-block.js";
+import Navigator from "../navigator/navigator-manager.js";
 import BlockNode from "./exterior-block-node.js";
 import ObjectManager from "../objects/object-manager.js";
 
@@ -15,6 +17,8 @@ import ObjectManager from "../objects/object-manager.js";
 
     constructor(scene) {
         this.scene = scene;
+
+        this.nav = new Navigator(scene);
 
         this.overMap = MAP_CONFIG;
         this.lastBlock = {x: 0, y: 0};
@@ -29,11 +33,11 @@ import ObjectManager from "../objects/object-manager.js";
         const overMap = this.overMap;
 
         const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
+        const edge_tileset = this.map.addTilesetImage("edge", null, 16, 16, 0, 0);
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
-        this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(TILES.BLANK);
+        this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(1);
+        this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset);
 
-        
-        
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
         const wallLayer = this.wallLayer;
 
@@ -212,11 +216,9 @@ import ObjectManager from "../objects/object-manager.js";
         });
         this.nodes = nodes;
 
-        
-
         this.blocks = blocks;
         this.block = null;
-        this.ground = new ExteriorGround(this.scene);
+        this.ground = new ExteriorGround(this.groundLayer, this.edgeLayer);
         
     }
 
@@ -234,7 +236,8 @@ import ObjectManager from "../objects/object-manager.js";
         this.overMap.nodes.forEach(function (node, index) {
             nodes[node.y][node.x].buildObjects(objectManager); 
         });
-        this.ground.initializeTiles(this.groundLayer);
+        this.ground.initializeTiles();
+        
     }
 
     createItems () {
@@ -252,9 +255,10 @@ import ObjectManager from "../objects/object-manager.js";
         if (this.lastBlock.x != thisBlock.x || this.lastBlock.y != thisBlock.y) {
             this.lastBlock = thisBlock;
             this.block = this.getBlock(thisBlock.x, thisBlock.y);
-            this.updateMiniMap(this.block.block);
-        }
 
+            //this.updateDirections();
+        }
+/*
         if (this.lastTile.x != x || this.lastTile.y != y) {
             this.lastTile = {x: x, y: y};
             if (this.block) {
@@ -262,38 +266,24 @@ import ObjectManager from "../objects/object-manager.js";
                 var map_message = this.getPositionString(quad.v, quad.h, this.block.block);
                 var prop = this.block.onProperty(x,y);
                 if (prop) {
-                    map_message = 'at '+prop.address.number+' '+prop.address.street;
+                    map_message = 'at '+prop.address.number+' '+prop.address.dir+' '+prop.address.street;
                 }
                 if (map_message != '') {
                     map_message = 'I am ' + map_message;
                 }
-                this.scene.manager.hud.hudDisplay.tellMapBoxFlag(map_message);
+                //this.scene.manager.hud.hudDisplay.tellMapBoxFlag(map_message);
             }
         }
-
+*/
         
     }
 
-    updateMiniMap (block) {
-        var contents = [[],[],[],[],[]];
-        var center_x =  block.x;
-        var center_y =  block.y;
-        if (block) {
-            for (var i=0;i<5;i++) {
-                for (var j=0;j<5;j++) {
-                    contents[i][j] = '';
-                    if (this.validBlock(center_x - 2 + j,center_y - 2 + i)) {
-                        var square = this.getBlockProperties(center_x - 2 + j,center_y - 2 + i);
-                        square.offset.n > 0 ? contents[i][j] += 'N' : contents[i][j] = '';
-                        square.offset.e > 0 ? contents[i][j] += 'E' : contents[i][j] = '';
-                        square.offset.s > 0 ? contents[i][j] += 'S' : contents[i][j] = '';
-                        square.offset.w > 0 ? contents[i][j] += 'W' : contents[i][j] = '';
-                    }
-                }
-            }
-        }
-        this.scene.manager.hud.hudDisplay.drawMapBox(contents);
-    
+    updateDirections () {
+        
+            var plot = this.nav.plotRoutes(1,1,4,3,'intersection');
+            var directions = plot.join(" ");
+            this.scene.manager.hud.hudDisplay.drawDirections(directions);
+
     }
 
     buildCity () {
@@ -382,10 +372,17 @@ import ObjectManager from "../objects/object-manager.js";
     }
 
     getBlockNodeProperties (_x,_y) {
-        return this.nodes[_y][_x].node;
+        /// first make sure this.nodes.[_y][_x] exists
+        if (this.nodes[_y] == undefined || this.nodes[_y][_x] == undefined) {
+            return null;
+        }
+        return this.nodes[_y][_x].node == undefined ? null : this.nodes[_y][_x].node;
     }
 
     getBlockNode (_x,_y) {
+        if (this.nodes[_y] == undefined || this.nodes[_y][_x] == undefined) {
+            return null;
+        }
         return this.nodes[_y][_x];
     }
 

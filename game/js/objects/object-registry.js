@@ -9,6 +9,14 @@ export default class ObjectRegistry {
         this.registry = {};
     }
 
+    update () {
+        Object.entries(this.registry).forEach(([key, value]) => {
+            if (value != null) {
+                value.update();
+            }
+        });
+    }
+
     dirtySlot (_x, _y) {
         return (_x+"_"+_y in this.registry);
     }

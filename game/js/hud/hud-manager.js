@@ -2,7 +2,15 @@ import HudState from "./hud-state.js";
 import HudInput from "./hud-input.js";
 import HudSound from "./hud-sound.js";
 import HudPocket from "./hud-pocket.js";
+import HudPockets from "./hud-pockets.js";
+import HudFactory from "./hud-factory.js";
 import HudDisplay from "./hud-display.js";
+import HudChest from "./hud-chest.js";
+import HudWatch from "./hud-watch.js";
+import HudNotebook from "./hud-notebook.js";
+import HudCoinpurse from "./hud-coinpurse.js";
+import HudFocusHints from "./hud-focus-hints.js";
+
 /* global Phaser */
 /*
  * Gets injected into the game scene
@@ -10,16 +18,17 @@ import HudDisplay from "./hud-display.js";
 
 export default class HudManager {
 
-    state=null;
-    last_state=null;
-    input=null;
-
     constructor(scene) {
        this.scene = scene;
        this.game = this.scene.manager;
+       this.factory = new HudFactory(this.scene);
+       this.hudChest = new HudChest(this.scene, this.factory);
+       this.hudPockets = new HudPockets(this.scene, this.factory);
+       this.hudWatch = new HudWatch(this.scene, this.factory);
+       this.hudNotebook = new HudNotebook(this.scene, this.factory);
+       this.hudFocusHints = new HudFocusHints(this.scene, this.factory);
+       this.hudCoinpurse = new HudCoinpurse(this.scene, this.factory);
        this.hudState = new HudState();
-       this.hudInput = new HudInput(this.scene);
-       this.hudSound = new HudSound(this.scene);
        this.state = this.getState();
        this.loadHud();
     }
@@ -62,13 +71,13 @@ export default class HudManager {
     }
 
     chestHold () {
-        if (this.hudDisplay.chest != null && this.hudDisplay.chest.items.length > 0) {
-            let item = this.hudDisplay.chest.items[0];
+        if (this.hudChest.chest != null && this.hudChest.chest.items.length > 0) {
+            let item = this.hudChest.chest.items[0];
             var placed = this.scene.manager.hud.availablePocket(item);
                 
                 if (placed != false) {
                     console.log("Placed! Refreshing");
-                    this.hudDisplay.chest.items.shift();
+                    this.hudChest.chest.items.shift();
                     this.refreshChest();
                 }
                 else {
@@ -80,23 +89,27 @@ export default class HudManager {
     }
 
     chestArrowDown () {
-        this.hudDisplay.chestArrowDown();
+        this.hudChest.chestArrowDown();
     }
 
     arrowDown (slot_x) {
-        this.hudDisplay.arrowDown(slot_x);
+        this.hudPockets.arrowDown(slot_x);
     }
 
     refreshDisplay () {
-        return this.hudDisplay.refreshDisplay();
+        return this.hudPockets.refreshDisplay();
     }
 
     refreshChest () {
-        return this.hudDisplay.refreshChest();
+        return this.hudChest.refreshChest();
+    }
+
+    closeChest () {
+        this.hudChest.closeChest();
     }
 
     tapSlip (slot_x) {
-        this.hudDisplay.tapSlip(slot_x);
+        this.hudPockets.tapSlip(slot_x);
         //this.hudSound.play('UI_SELECT');
         //TODO: replace with more subtle sound
     }
@@ -111,25 +124,29 @@ export default class HudManager {
 
     stateChanged () {
         if (this.state.name == 'INVISIBLE') {
-            this.hudDisplay.pocketsVisible(false);
+            this.hudPockets.pocketsVisible(false);
         }
         if (!this.last_state || this.last_state.name == 'INVISIBLE') {
-            this.hudDisplay.pocketsVisible(true);
+            this.hudPockets.pocketsVisible(true);
         }
         if (this.state.name == 'VISIBLE_FOCUSED') {
-            this.hudDisplay.openPockets();
+            this.hudPockets.openPockets();
+            this.hudCoinpurse.openCoinpurse();
         }
         if (this.state.name == 'VISIBLE_UNFOCUSED') {
-            this.hudDisplay.closePockets();
+            this.hudPockets.closePockets();
+            this.hudCoinpurse.closeCoinpurse();
         }
     }
 
     loadHud () {
         if (this.state.name == 'NOT_LOADED') {
+            this.hudInput = new HudInput(this.scene);
+            this.hudSound = new HudSound(this.scene);
             this.setState('LOADING');
             console.log('Loading HUD.');
             this.pocket = new HudPocket(this.scene);
-            this.hudDisplay = new HudDisplay(this.scene,this.getView());
+            this.hudDisplay = new HudDisplay(this.scene,this.factory);
             /// After loading functions...
             this.setState('LOADED');
             console.log('Loaded HUD.');

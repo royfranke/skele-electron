@@ -408,3 +408,40 @@ body,
   font-size: 12px;
   box-shadow: 2px -1px 0 #968bab;
 }
+
+.hud-directions {
+  border: 1px solid #465e62;
+  border-radius: 4px;
+  font-family: 'defaultFont';
+  font-size: 10px;
+  line-height: 1em;
+  background-color: #bad2e0;
+  color: #4b424a;
+  text-align: left;
+  padding: 4px 6px;
+}
+
+.coinpurse {
+  background-color: #ccc890;
+  border: 1px solid;
+  color:#465e62;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'defaultFont';
+}
+
+.coinpurse-positive {
+  background-color: #d8ffb7;
+  border: 1px solid #74b453;
+}
+
+.coinpurse-negative {
+  background-color: #f8c7cf;
+  border: 1px solid #fc5c46;
+}
+
+.coinpurse-missing {
+  background-color: #c4d7e3;
+  border: 1px solid #465e62;
+}

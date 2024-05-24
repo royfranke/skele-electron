@@ -30,6 +30,7 @@ const OBJECTS = {
         varieties: 0,
         portal: 0,
         actions: [],
+        states: [],
     },
       BOXELDER: {
         name: 'Boxelder',
@@ -62,6 +63,7 @@ const OBJECTS = {
         varieties: 7,
         portal: 0,
         actions: [],
+        states: [],
     },
       BUS_STOP_A_: {
         name: 'Bus Stop A',
@@ -94,6 +96,7 @@ const OBJECTS = {
         varieties: 3,
         portal: 0,
         actions: [],
+        states: [],
     },
       BUS_STOP_B_: {
         name: 'Bus Stop B',
@@ -126,6 +129,7 @@ const OBJECTS = {
         varieties: 3,
         portal: 0,
         actions: [],
+        states: [],
     },
       BUS_STOP_C_: {
         name: 'Bus Stop C',
@@ -158,6 +162,7 @@ const OBJECTS = {
         varieties: 3,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_1_1_: {
         name: 'Cement Stair Rail L 1-1',
@@ -190,6 +195,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_1_2_: {
         name: 'Cement Stair Rail L 1-2',
@@ -222,6 +228,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_1_3_: {
         name: 'Cement Stair Rail L 1-3',
@@ -254,6 +261,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_1_4_: {
         name: 'Cement Stair Rail L 1-4',
@@ -286,6 +294,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_2_1_: {
         name: 'Cement Stair Rail L 2-1',
@@ -318,6 +327,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_2_2_: {
         name: 'Cement Stair Rail L 2-2',
@@ -350,6 +360,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_2_3_: {
         name: 'Cement Stair Rail L 2-3',
@@ -382,6 +393,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_3_1_: {
         name: 'Cement Stair Rail L 3-1',
@@ -414,6 +426,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_L_3_2_: {
         name: 'Cement Stair Rail L 3-2',
@@ -446,6 +459,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_1_1_: {
         name: 'Cement Stair Rail R 1-1',
@@ -478,6 +492,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_1_2_: {
         name: 'Cement Stair Rail R 1-2',
@@ -510,6 +525,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_1_3_: {
         name: 'Cement Stair Rail R 1-3',
@@ -542,6 +558,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_1_4_: {
         name: 'Cement Stair Rail R 1-4',
@@ -574,6 +591,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_2_1_: {
         name: 'Cement Stair Rail R 2-1',
@@ -606,6 +624,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_2_2_: {
         name: 'Cement Stair Rail R 2-2',
@@ -638,6 +657,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_2_3_: {
         name: 'Cement Stair Rail R 2-3',
@@ -670,6 +690,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_3_1_: {
         name: 'Cement Stair Rail R 3-1',
@@ -702,6 +723,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CEMENT_STAIR_RAIL_R_3_2_: {
         name: 'Cement Stair Rail R 3-2',
@@ -734,6 +756,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_1_COMPLETE: {
         name: 'Chainlink 1',
@@ -766,6 +789,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_1_OPEN: {
         name: 'Chainlink 1 Open',
@@ -798,6 +822,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_2_COMPLETE: {
         name: 'Chainlink 2',
@@ -830,6 +855,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_3_COMPLETE: {
         name: 'Chainlink 3',
@@ -862,6 +888,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_3_OPEN: {
         name: 'Chainlink 3 Open',
@@ -894,6 +921,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_4_COMPLETE: {
         name: 'Chainlink 4',
@@ -926,6 +954,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_4_OPEN: {
         name: 'Chainlink 4 Open',
@@ -958,6 +987,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_5_COMPLETE: {
         name: 'Chainlink 5',
@@ -990,6 +1020,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_6_COMPLETE: {
         name: 'Chainlink 6',
@@ -1022,6 +1053,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       CHAINLINK_S_6_OPEN: {
         name: 'Chainlink 6 Open',
@@ -1054,6 +1086,7 @@ const OBJECTS = {
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
     },
       HYDRANT_CITY_: {
         name: 'City Hydrant',
@@ -1086,6 +1119,51 @@ const OBJECTS = {
         varieties: 12,
         portal: 0,
         actions: [],
+        states: [],
+    },
+      SPECIAL_NEWS_BOX_: {
+        name: 'City News Box',
+        slug: 'SPECIAL_NEWS_BOX_', 
+        type: 'NEWSPAPER_BOX_',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 6,
+        portal: 0,
+        actions: [ {
+            name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED',]
+          },],
+        states: [            {
+              name: 'COIN_LOCKED',
+              transition: 'false',
+              frames: ['SPECIAL_NEWS_BOX_-1', ]
+              }, {
+              name: 'COIN_DISPENSING',
+              transition: 'COIN_RETRACTING',
+              frames: ['SPECIAL_NEWS_BOX_-2', 'SPECIAL_NEWS_BOX_-3', 'SPECIAL_NEWS_BOX_-4', 'SPECIAL_NEWS_BOX_-5', 'SPECIAL_NEWS_BOX_-6', ]
+              },
+          ],
     },
       CONE_FALLEN: {
         name: 'Cone Fallen',
@@ -1118,6 +1196,7 @@ const OBJECTS = {
         varieties: 6,
         portal: 0,
         actions: [],
+        states: [],
     },
       CONE_UPRIGHT: {
         name: 'Cone Upright',
@@ -1150,6 +1229,7 @@ const OBJECTS = {
         varieties: 6,
         portal: 0,
         actions: [],
+        states: [],
     },
       DOOR_WINDOWS_SMALL_: {
         name: 'Door with Small Windows',
@@ -1182,10 +1262,29 @@ const OBJECTS = {
         varieties: 6,
         portal: 1,
         actions: [ {
-            name: 'OPEN'
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
           }, {
-            name: 'KNOCK'
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
           },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
     },
       WINDOW_DOUBLE_: {
         name: 'Double Window',
@@ -1218,6 +1317,7 @@ const OBJECTS = {
         varieties: 4,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_BLUE_WORN_: {
         name: 'Double Window Blue Worn',
@@ -1250,6 +1350,7 @@ const OBJECTS = {
         varieties: 9,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_GREEN_WORN_: {
         name: 'Double Window Green Worn',
@@ -1282,6 +1383,7 @@ const OBJECTS = {
         varieties: 9,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_HONEY_WOOD_: {
         name: 'Double Window Honey Wood',
@@ -1314,6 +1416,7 @@ const OBJECTS = {
         varieties: 0,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_Pink_WORN_: {
         name: 'Double Window Pink Worn',
@@ -1346,6 +1449,7 @@ const OBJECTS = {
         varieties: 0,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_PURPLE_WORN_: {
         name: 'Double Window Purple Worn',
@@ -1378,6 +1482,7 @@ const OBJECTS = {
         varieties: 9,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_Red_WORN_: {
         name: 'Double Window Red Worn',
@@ -1410,6 +1515,7 @@ const OBJECTS = {
         varieties: 0,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_CREAM_WORN_: {
         name: 'Double Window Worn Cream',
@@ -1442,6 +1548,7 @@ const OBJECTS = {
         varieties: 9,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_GRAY_WORN_: {
         name: 'Double Window Worn Gray',
@@ -1474,38 +1581,7 @@ const OBJECTS = {
         varieties: 9,
         portal: 0,
         actions: [],
-    },
-      WINDOW_2_RED_WORN_: {
-        name: 'Double Window Worn Red Brown',
-        slug: 'WINDOW_2_RED_WORN_', 
-        type: 'WINDOW_EXT_',
-        bounding: {
-          h:3, 
-          w:2
-        },
-        base: {
-          h:1, 
-          w:2,
-          x:0, 
-          y:2
-        },
-        sprite: {
-          h:48, 
-          w:32,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:48, 
-          w:32
-        },
-        offset: {
-          x:0, 
-          y:0
-        },
-        varieties: 0,
-        portal: 0,
-        actions: [],
+        states: [],
     },
       WINDOW_2_RED_BROWN_WORN_: {
         name: 'Double Window Worn Red Brown',
@@ -1538,6 +1614,40 @@ const OBJECTS = {
         varieties: 0,
         portal: 0,
         actions: [],
+        states: [],
+    },
+      WINDOW_2_RED_WORN_: {
+        name: 'Double Window Worn Red Brown',
+        slug: 'WINDOW_2_RED_WORN_', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:48, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 0,
+        portal: 0,
+        actions: [],
+        states: [],
     },
       WINDOW_2_WOOD_WORN_: {
         name: 'Double Window Worn Wood',
@@ -1570,6 +1680,7 @@ const OBJECTS = {
         varieties: 0,
         portal: 0,
         actions: [],
+        states: [],
     },
       WINDOW_2_YELLOW_WORN_: {
         name: 'Double Window Worn Yellow',
@@ -1602,6 +1713,7 @@ const OBJECTS = {
         varieties: 9,
         portal: 0,
         actions: [],
+        states: [],
     },
       MAILBOX_1: {
         name: 'Mailbox 1',
@@ -1624,20 +1736,39 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:24, 
-          w:13
+          h:16, 
+          w:12
         },
         offset: {
           x:0, 
-          y:0
+          y:14
         },
         varieties: 5,
         portal: 0,
         actions: [ {
-            name: 'OPEN'
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
           }, {
-            name: 'CLOSE'
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
           },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['MAILBOX_1-1', ]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['MAILBOX_1-2', 'MAILBOX_1-3', 'MAILBOX_1-4', 'MAILBOX_1-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_1-5', ]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['MAILBOX_1-4', 'MAILBOX_1-3', 'MAILBOX_1-2', 'MAILBOX_1-1', ]
+              },
+          ],
 slots: '0',
 items: []    },
       MAPLE_5X7: {
@@ -1671,38 +1802,7 @@ items: []    },
         varieties: 1,
         portal: 0,
         actions: [],
-    },
-      MAPLE_7X7: {
-        name: 'Maple 7x7',
-        slug: 'MAPLE_7X7', 
-        type: 'TREE',
-        bounding: {
-          h:7, 
-          w:7
-        },
-        base: {
-          h:1, 
-          w:1,
-          x:0, 
-          y:0
-        },
-        sprite: {
-          h:112, 
-          w:112,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:16, 
-          w:16
-        },
-        offset: {
-          x:48, 
-          y:80
-        },
-        varieties: 0,
-        portal: 0,
-        actions: [],
+        states: [],
     },
       MAPLE_7X7: {
         name: 'Maple 7x7',
@@ -1735,6 +1835,40 @@ items: []    },
         varieties: 1,
         portal: 0,
         actions: [],
+        states: [],
+    },
+      PLACEHOLDER: {
+        name: 'PLACEHOLDER',
+        slug: 'PLACEHOLDER', 
+        type: 'TREE',
+        bounding: {
+          h:7, 
+          w:7
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:112, 
+          w:112,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:48, 
+          y:80
+        },
+        varieties: 0,
+        portal: 0,
+        actions: [],
+        states: [],
     },
       POSTBOX_S: {
         name: 'Postal Service Box',
@@ -1767,8 +1901,18 @@ items: []    },
         varieties: 0,
         portal: 0,
         actions: [ {
-            name: 'OPEN'
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
           },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },
+          ],
     },
       SCREEN_DOOR_: {
         name: 'Screen Door',
@@ -1801,10 +1945,29 @@ items: []    },
         varieties: 2,
         portal: 1,
         actions: [ {
-            name: 'OPEN'
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
           }, {
-            name: 'KNOCK'
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
           },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
     },
       SODIUM: {
         name: 'Sodium Light',
@@ -1837,6 +2000,7 @@ items: []    },
         varieties: 0,
         portal: 0,
         actions: [],
+        states: [],
     },
       STOP_E: {
         name: 'Stop Sign East',
@@ -1869,6 +2033,40 @@ items: []    },
         varieties: 2,
         portal: 0,
         actions: [],
+        states: [],
+    },
+      STOP_SIGN_E: {
+        name: 'Stop Sign East Sign Only',
+        slug: 'STOP_SIGN_E', 
+        type: 'TRAFFIC_SIGN',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+        states: [],
     },
       STOP_N: {
         name: 'Stop Sign North',
@@ -1901,6 +2099,40 @@ items: []    },
         varieties: 3,
         portal: 0,
         actions: [],
+        states: [],
+    },
+      STOP_SIGN_N: {
+        name: 'Stop Sign North Sign Only',
+        slug: 'STOP_SIGN_N', 
+        type: 'TRAFFIC_SIGN',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+        states: [],
     },
       STOP_S: {
         name: 'Stop Sign South',
@@ -1933,6 +2165,40 @@ items: []    },
         varieties: 3,
         portal: 0,
         actions: [],
+        states: [],
+    },
+      STOP_SIGN_S: {
+        name: 'Stop Sign South Sign Only',
+        slug: 'STOP_SIGN_S', 
+        type: 'TRAFFIC_SIGN',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+        states: [],
     },
       STOP_W: {
         name: 'Stop Sign West',
@@ -1965,52 +2231,21 @@ items: []    },
         varieties: 3,
         portal: 0,
         actions: [],
+        states: [],
     },
-      STREET_SIGN_EW_: {
-        name: 'Street Sign East West',
-        slug: 'STREET_SIGN_EW_', 
-        type: 'STREET_SIGN',
-        bounding: {
-          h:1, 
-          w:2
-        },
-        base: {
-          h:0, 
-          w:0,
-          x:2, 
-          y:1
-        },
-        sprite: {
-          h:16, 
-          w:32,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:16, 
-          w:32
-        },
-        offset: {
-          x:0, 
-          y:0
-        },
-        varieties: 6,
-        portal: 0,
-        actions: [],
-    },
-      STREET_SIGN_NS_: {
-        name: 'Street Sign North South',
-        slug: 'STREET_SIGN_NS_', 
-        type: 'STREET_SIGN',
+      STOP_SIGN_W: {
+        name: 'Stop Sign West Sign Only',
+        slug: 'STOP_SIGN_W', 
+        type: 'TRAFFIC_SIGN',
         bounding: {
           h:2, 
           w:2
         },
         base: {
-          h:0, 
-          w:0,
-          x:2, 
-          y:2
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
         },
         sprite: {
           h:32, 
@@ -2029,6 +2264,183 @@ items: []    },
         varieties: 3,
         portal: 0,
         actions: [],
+        states: [],
+    },
+      STREET_SIGN_EW_: {
+        name: 'Street Sign East West',
+        slug: 'STREET_SIGN_EW_', 
+        type: 'STREET_SIGN',
+        bounding: {
+          h:1, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 6,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      STREET_SIGN_NS_: {
+        name: 'Street Sign North South',
+        slug: 'STREET_SIGN_NS_', 
+        type: 'STREET_SIGN',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      DAILY_NEWS_BOX_: {
+        name: 'Town Daily Box',
+        slug: 'DAILY_NEWS_BOX_', 
+        type: 'NEWSPAPER_BOX_',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 6,
+        portal: 0,
+        actions: [ {
+            name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED',]
+          },],
+        states: [            {
+              name: 'COIN_LOCKED',
+              transition: 'false',
+              frames: ['DAILY_NEWS_BOX_-1', ]
+              }, {
+              name: 'COIN_DISPENSING',
+              transition: 'COIN_RETRACTING',
+              frames: ['DAILY_NEWS_BOX_-2', 'DAILY_NEWS_BOX_-3', 'DAILY_NEWS_BOX_-4', 'DAILY_NEWS_BOX_-5', 'DAILY_NEWS_BOX_-6', ]
+              },
+          ],
+    },
+      WALK_SIGNAL_SE_: {
+        name: 'Walk Signal SE',
+        slug: 'WALK_SIGNAL_SE_', 
+        type: 'TRAFFIC_LIGHT_PED_',
+        bounding: {
+          h:2, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 5,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WALK_SIGNAL_W_: {
+        name: 'Walk Signal W',
+        slug: 'WALK_SIGNAL_W_', 
+        type: 'TRAFFIC_LIGHT_PED_',
+        bounding: {
+          h:2, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+        states: [],
     },
       WOOD_POLE: {
         name: 'Wood Utility Pole',
@@ -2061,6 +2473,7 @@ items: []    },
         varieties: 20,
         portal: 0,
         actions: [],
+        states: [],
     },
   };
 export default OBJECTS;

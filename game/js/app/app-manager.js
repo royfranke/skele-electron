@@ -38,7 +38,7 @@ export default class AppManager {
         }
         else {
             this.menu = null;
-       }
+        }
     }
 
     initializeInput () {

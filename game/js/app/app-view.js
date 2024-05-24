@@ -34,19 +34,17 @@ export default class AppView {
     }
 
     createMain() {
-
         var start_top = this.view.top + (this.view.height / 1.5);
         var start_left = this.view.left;
         var color = ['#32675a', '#3d56d2', '#7758ab', '#974d9e', '#d93232', '#f47832', '#ed931e', '#f2b22b', '#f8d239'];
         for (var i = 0; i < color.length; i++) {
-            this.scene.add.dom(start_left + (4 * i), start_top - (4 * i), 'div', 'animation-delay:' + (i * .5) + 's;width: ' + this.view.width + 'px;color:' + color[i], 'Skele Summer').setOrigin(0).setClassName('title-card');
+            this.scene.add.dom(start_left + (4 * i), start_top - (4 * i), 'div', 'animation-delay:' + (i * .5) + 's;width: ' + this.view.width + 'px;color:' + color[i], 'Summer Break').setOrigin(0).setClassName('title-card');
         }
 
         this.scene.add.dom(this.view.left, this.view.bottom - 32, 'div', '', 'v.1.0.1 Skele').setOrigin(0).setClassName('footer');
     }
 
     createSettings() {
-
         var start_top = this.view.top + (this.view.height / 1.5);
         var start_left = this.view.left;
         var color = ['#32675a', '#3d56d2', '#7758ab', '#974d9e', '#d93232', '#f47832', '#ed931e', '#f2b22b', '#f8d239'];
@@ -58,9 +56,6 @@ export default class AppView {
         var left  = this.view.left + (this.view.margin.left*2) + 128;
         var width = this.view.right - left - this.view.margin.right;
         this.scene.add.nineslice(left,this.view.top + this.view.margin.top, 'POCKET_BLOCK', 'BAG_UNFOCUSED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
-        this.scene.add.dom(this.view.left, this.view.bottom - 32, 'div', '', 'v.1.0.1 Skele').setOrigin(0).setClassName('footer');
-
-        
     }
 
     createLoad() {
@@ -94,8 +89,6 @@ export default class AppView {
                     top+this.view.margin.top, 'div', '', '- EMPTY -').setClassName('slot-header').setOrigin(0,0);
             }
         }
-
-        this.scene.add.dom(this.view.left, this.view.bottom - 32, 'div', '', 'v.1.0.1 Skele').setOrigin(0).setClassName('footer');
     }
 
 
@@ -108,9 +101,7 @@ export default class AppView {
                 if (selected > 0) {
                     this.slots[selected - 1].setTexture('POCKET_BLOCK','HAND_FOCUSED');
                 }
-                
             }
-            
         }
     }
 
