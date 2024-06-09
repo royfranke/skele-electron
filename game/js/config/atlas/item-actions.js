@@ -1,11 +1,31 @@
 const ITEM_ACTIONS = {
-        ALCOHOL: {
-        type: 'ALCOHOL',
-        actions: ['DRINK',]   
-    },
         BAG: {
         type: 'BAG',
         actions: ['OPEN',]   
+    },
+        BOX: {
+        type: 'BOX',
+        actions: ['OPEN',]   
+    },
+        CARD: {
+        type: 'CARD',
+        actions: ['FLIP',]   
+    },
+        CASSEROLE_DISH: {
+        type: 'CASSEROLE_DISH',
+        actions: ['PLACE',]   
+    },
+        CHALK: {
+        type: 'CHALK',
+        actions: ['DRAW',]   
+    },
+        CHARM: {
+        type: 'CHARM',
+        actions: ['WAIT',]   
+    },
+        CRAYON: {
+        type: 'CRAYON',
+        actions: ['DRAW',]   
     },
         DELIVERY: {
         type: 'DELIVERY',
@@ -15,9 +35,17 @@ const ITEM_ACTIONS = {
         type: 'DRINK',
         actions: ['DRINK',]   
     },
+        FLYER: {
+        type: 'FLYER',
+        actions: ['READ',]   
+    },
         FOOD: {
         type: 'FOOD',
         actions: ['EAT',]   
+    },
+        HOOCH: {
+        type: 'HOOCH',
+        actions: ['DRINK',]   
     },
         ID: {
         type: 'ID',
@@ -42,6 +70,10 @@ const ITEM_ACTIONS = {
         MEDIA: {
         type: 'MEDIA',
         actions: ['READ','PLAY',]   
+    },
+        MUG: {
+        type: 'MUG',
+        actions: ['DRINK',]   
     },
         NOTEBOOK: {
         type: 'NOTEBOOK',

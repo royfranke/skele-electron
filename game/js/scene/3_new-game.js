@@ -20,7 +20,7 @@ export default class NewGameScene extends Phaser.Scene {
 
     saveGameData(data,slot) {
         // Replace `data` and `slot` with the actual data and slot you want to save
-        console.log("I'm going to call main.js's 'myfunc'");
+        console.log("I'm going to call save-data");
         window.api.invoke('save-data', data)
             .then(function(res) {
                 console.log(res); // will print "This worked!" to the browser console

@@ -22,4 +22,18 @@ export default class SystemSettingsScene extends Phaser.Scene {
         this.app.update();
     }
 
+    saveSettingsData(data) {
+        // Replace `data` and `slot` with the actual data and slot you want to save
+        console.log("I'm going to call 'save-settings'");
+        window.api.invoke('save-settings', data)
+            .then(function(res) {
+                console.log(res); // will print "This worked!" to the browser console
+            })
+            .catch(function(err) {
+                console.error(err); // will print "This didn't work!" to the browser console.
+            });
+    }
+
+    
+
 }

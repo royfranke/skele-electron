@@ -53,8 +53,6 @@ export default class GameUtilities {
         if (this.inBounds(_x, _y, layer)) {
             var tile = layer.getTileAt(_x,_y);
             var old_tile_type = GROUND_LOOKUP[tile.index];
-            console.log('Tile was: '+old_tile_type);
-            console.log('Tile should become: '+tile_type);
             if (tile_type != old_tile_type || forceRedraw) {
                 layer.weightedRandomize(TILES[tile_type].FILL_, _x,_y,1,1);
                 this.changeTile(_x, _y, layer, edgeLayer);
@@ -322,5 +320,38 @@ export default class GameUtilities {
             }
         }
     }
+
+    updateFooting (ground,obj) {
+        this.updateFootMask(ground,obj);
+        this.updateFootShadow(ground,obj);
+        obj.sprite.setDepth(obj.sprite.y + 8);
+      }
+    
+      updateFootMask(ground,obj) {
+        var _y = obj.sprite.y;
+        if (ground != undefined) {
+          if (ground.USEMASK) {
+              _y = _y - ground.ZINDEX;
+          }
+        }
+        obj.footMask.setPosition(obj.sprite.x, _y);
+        obj.footMask.setDepth(obj.sprite.depth + 1);
+        return;
+      }
+    
+      updateFootShadow(ground,obj) {
+        var _y = obj.sprite.y + 12;
+        var scale = 1;
+        if (ground != undefined) {
+          if (ground.USEMASK && ground.ZINDEX > 0) {
+              _y = Math.floor(_y - (ground.ZINDEX / 2));
+              scale = (ground.ZINDEX / 25) + scale;
+          }
+        }
+        obj.footShadow.setPosition(obj.sprite.x, _y);
+        obj.footShadow.setScale(scale);
+        obj.footShadow.setDepth(obj.sprite.depth - 1);
+        return;
+      }
 
 }

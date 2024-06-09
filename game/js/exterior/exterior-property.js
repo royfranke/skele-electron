@@ -126,7 +126,7 @@ address: {
     }
 
     buildEntry (_x, _y) {
-        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'DOOR_WINDOWS_SMALL_');
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'EXT_DOOR_WINDOWS_WHITE');
         this.stoop = this.buildStoop(_x, _y + 1);
         this.buildFrontWalk(_x, _y + this.stoop.height + 1);
         this.buildYardBorder(_x, this.stoop.width);

@@ -39,57 +39,7 @@ const MONEY = {
         'TWENTY',
         'FIFTY',
         'HUNDRED',
-    ],
-    ANIM: {
-        QUARTER: {
-            START: 0,
-            END: 7,
-            HEADS: {
-                START: 4,
-                END: 7,
-            },
-            TAILS: {
-                START: 0,
-                END: 3,
-            }
-        },
-        NICKEL: {
-            START: 8,
-            END: 15,
-            HEADS: {
-                START: 12,
-                END: 15,
-            },
-            TAILS: {
-                START: 8,
-                END: 11,
-            }
-        },
-        DIME: {
-            START: 16,
-            END: 23,
-            HEADS: {
-                START: 16,
-                END: 19,
-            },
-            TAILS: {
-                START: 20,
-                END: 23,
-            }
-        },
-        PENNY: {
-            START: 24,
-            END: 31,
-            HEADS: {
-                START: 24,
-                END: 27,
-            },
-            TAILS: {
-                START: 28,
-                END: 31,
-            }
-        }
-    },
+    ]
 };
 
 export default MONEY;

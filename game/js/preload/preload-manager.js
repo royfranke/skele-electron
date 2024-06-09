@@ -27,15 +27,7 @@ export default class PreloadManager{
     });
 
     this.preloadStateSprites();
-  
-    this.scene.load.spritesheet(
-      "action-marker",
-      "../game/assets/spritesheets/action-marker.png",
-      {
-        frameWidth: 32,
-        frameHeight: 32
-      }
-    );
+
 
     //this.preloadAnim = new PreloadAnim(this.scene);
   }

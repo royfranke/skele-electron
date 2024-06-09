@@ -7,7 +7,8 @@ export default class HudFactory {
             ARROW:100050,
             SLOT:100000,
             ICON:100100,
-            FX:100200,
+            STACK:100200,
+            FX:100300,
        };
     }
 
@@ -31,6 +32,10 @@ export default class HudFactory {
     makeFX (fx_slug, _x, _y, delay=0) {
         var fx = this.scene.manager.fx.playFX(fx_slug,_x,_y,delay);
         fx.setDepth(this.depth.FX).setScrollFactor(0);
+    }
+
+    makeStackIndicator (_x,_y) {
+        return this.scene.add.dom(_x, _y, 'div', '', '0').setClassName('stack-indicator').setOrigin(0).setDepth(this.depth.STACK).setScrollFactor(0);
     }
 
 }

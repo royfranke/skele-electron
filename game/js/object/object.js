@@ -16,7 +16,13 @@ export default class Object {
 
         // If there are varieties, randomize variety
         // this is also where variety vs. animation frames should be set
-        this.variety = Phaser.Math.Between(1, this.info.varieties);
+        if (this.info.states.length > 0) {
+            this.variety = 1;
+        }
+        else {
+            this.variety = Phaser.Math.Between(1, this.info.varieties);
+        }
+        
 
         
         let actions = [];
@@ -130,7 +136,7 @@ export default class Object {
         });
         if (action == 'OPEN' && this.info.portal == 1) {
             /// Go to portal... (maybe this is redraw of ground)
-            this.scene.portalTo();
+            //this.scene.portalTo();
         }
         
     }
@@ -147,7 +153,7 @@ export default class Object {
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setSize(this.info.size.w, this.info.size.h).setDepth(y_pixels + (this.info.sprite.h));
 
         if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_') {
-            this.glass = this.scene.add.sprite(x_pixels, y_pixels, 'OBJECTS', this.info.slug+'-'+this.variety, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1).setTint(0xed931e);
+            this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xed931e).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1);
         }
 
         this.sprite.body.setOffset(this.info.offset.x + (this.info.sprite.w/2), this.info.offset.y + (this.info.sprite.h/2));

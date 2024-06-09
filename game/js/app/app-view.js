@@ -1,4 +1,5 @@
 
+import SettingsManager from "../settings/settings-manager.js";
 /*
  * Manages application view
  * SPLASH | MAIN | SETTINGS | NEW | LOAD | GAME | TUTORIAL
@@ -21,6 +22,7 @@ export default class AppView {
         }
         if (state_name === 'SETTINGS') {
             this.createSettings();
+            //this.settings = new SettingsManager(this.scene);
         }
         if (state_name === 'LOAD') {
             this.createLoad();
@@ -45,6 +47,7 @@ export default class AppView {
     }
 
     createSettings() {
+        this.settingsManager = new SettingsManager(this.scene);
         var start_top = this.view.top + (this.view.height / 1.5);
         var start_left = this.view.left;
         var color = ['#32675a', '#3d56d2', '#7758ab', '#974d9e', '#d93232', '#f47832', '#ed931e', '#f2b22b', '#f8d239'];
@@ -56,6 +59,8 @@ export default class AppView {
         var left  = this.view.left + (this.view.margin.left*2) + 128;
         var width = this.view.right - left - this.view.margin.right;
         this.scene.add.nineslice(left,this.view.top + this.view.margin.top, 'POCKET_BLOCK', 'BAG_UNFOCUSED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+
+       // this.settingsManager.saveSettings('input');
     }
 
     createLoad() {

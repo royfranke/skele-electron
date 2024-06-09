@@ -10,11 +10,6 @@ export default class HudCoinpurse {
 
         this.view = this.scene.manager.getView();
 
-        this.position = {
-            x: this.view.left + this.view.margin.left,
-            y: this.view.top + this.view.margin.top
-        };
-
         this.coinPurse = {
             block: null,
             icon: null,
@@ -42,8 +37,13 @@ export default class HudCoinpurse {
     }
 
     addCoinPurse() {
-        this.coinPurse.block = this.makeBlock(this.position.x, this.position.y, 32, 32, 'BAG_FOCUSED');
-        this.coinPurse.icon = this.scene.add.image(this.position.x+8, this.position.y+8, 'COINPURSE', 'COINPURSE_closed').setOrigin(0).setScrollFactor(0).setDepth(100001);
+        let position = {
+            x: this.view.left + this.view.margin.left,
+            y: this.view.top + this.view.margin.top
+        };
+
+        this.coinPurse.block = this.makeBlock(position.x, position.y, 32, 32, 'BAG_FOCUSED');
+        this.coinPurse.icon = this.scene.add.image(position.x+8, position.y+8, 'COINPURSE', 'COINPURSE_closed').setOrigin(0).setScrollFactor(0).setDepth(100001);
     }
 
 

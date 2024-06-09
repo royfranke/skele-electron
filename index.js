@@ -8,7 +8,7 @@ const path = require('node:path')
 const fs = require('fs');
 
 function saveData(data,slot=0) {
-  fs.writeFile("data/data_"+slot+".json", JSON.stringify(data), function(err) {
+  fs.writeFile("./game/data/data_"+slot+".json", JSON.stringify(data), function(err) {
     if(err) {
         return console.log(err);
     }
@@ -16,6 +16,15 @@ function saveData(data,slot=0) {
   }); 
 }
 
+function saveSettings(data) {
+  console.log("Trying to save settings... for "+data.type);
+  fs.writeFile("./game/data/config_"+(data.type.toLowerCase())+".json", JSON.stringify(data.data), function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    return console.log(data.type+" settings were saved!");
+  }); 
+}
 
 
 const createWindow = () => {
@@ -51,6 +60,10 @@ app.whenReady().then(() => {
 
 ipcMain.handle('save-data', async (event, data) => {
   saveData(data); 
+});
+
+ipcMain.handle('save-settings', async (event, data) => {
+  saveSettings(data); 
 });
 
 

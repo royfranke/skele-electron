@@ -7,9 +7,9 @@ export default class Item {
         this.tile_x = 0;
         this.tile_y = 0;
         this.sprite = null;
-        
+        this.stackCount = 1;
         this.info = item;
-        this.pocket_actions = [];
+        this.actions = ['PUT AWAY'];
         this.world_actions = [{ action: 'PICK UP', object: this }];
     }
 
@@ -31,11 +31,31 @@ export default class Item {
 
     doAction(action) {
         this.scene.player.action.clearActions();
-
         if (action == 'PICK UP') {
             this.pickupItem();
         }
-        
+    }
+
+    isStackable(amount=0) {
+        return (this.stackCount + amount <= this.info.stack);
+    }
+
+    updateStackCount (amount) {
+        this.stackCount += amount;
+        this.updateStackAction();
+    }
+
+    updateStackAction () {
+        if (this.stackCount > 1) {
+            if (!this.actions.includes('DROP ONE')) {
+                this.actions.push('DROP ONE');
+            }
+        }
+        else {
+            if (this.actions.includes('DROP ONE')) {
+                this.actions.splice(this.actions.indexOf('DROP ONE'), 1);
+            }
+        }
     }
 
     pickupItem() {
@@ -56,7 +76,6 @@ export default class Item {
     }
 
     transitionTo (new_item) {
-        console.log('Transitioning to...'+new_item);
         this.info = this.scene.manager.itemManager.itemInfo(new_item);
     }
 
@@ -67,7 +86,7 @@ export default class Item {
         var x_pixels = _x * 16;
         var y_pixels = _y * 16;
 
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.info.icon, 0).setOrigin(0, 0).setDepth(y_pixels + 8);
+        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.info.icon, 0).setOrigin(.5,0).setDepth(y_pixels + 8);
         /// tween
         const tween = this.scene.add.tween({
             targets: this.sprite,
@@ -79,11 +98,25 @@ export default class Item {
         });
 
         tween.on('complete', () => {
+            this.createFooting();
+            let locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.court;
+            let ground = locale.ground.getGround(this.tile_x, this.tile_y);
+            // utilities
+            locale.ground.util.updateFooting(ground,this);
         /// put footmask here - item has landed
+
         });
-        this.sprite_shadow = this.scene.add.ellipse(x_pixels, y_pixels + 10, 12, 6, 0x000000).setOrigin(0, 0);
-        this.sprite_shadow.setAlpha(.25);
+        
     }
+    
+    createFooting() {
+        this.footShadow = this.scene.add.ellipse(0, 0, 12, 6, 0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY);
+        this.footShadow.setAlpha(.5);
+        this.footMask = this.scene.add.circle(0, 0, 16, 0x6666ff);
+        this.footMask.setVisible(false);
+        this.sprite.setMask(new Phaser.Display.Masks.BitmapMask(this.scene, this.footMask));
+        //this.shadow = this.scene.add.sprite(0,0, "player-IDLE", 0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
+      }
 
     setPocketActions(actions) {
         this.actions = actions;
@@ -96,9 +129,13 @@ export default class Item {
 
     destroySprite() {
         this.sprite.destroy();
-        this.sprite_shadow.destroy();
+        this.footMask.destroy();
+        this.footShadow.destroy();
         this.sprite = null;
-        this.sprite_shadow = null;
+    }
+
+    destroy() {
+        this.sprite.destroy();
     }
 }
 

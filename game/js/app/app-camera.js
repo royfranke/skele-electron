@@ -32,6 +32,7 @@ export default class AppCamera {
         }
 
         this.view.height = this.view.bottom - this.view.top;
+        this.view.windowHeight = this.view.height - this.view.margin.top - this.view.margin.bottom;
         this.view.width = this.view.right - this.view.left;
     }
 

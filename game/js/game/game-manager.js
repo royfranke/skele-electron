@@ -5,6 +5,7 @@ import GameUtilities from "./game-utilities.js";
 import HudManager from "../hud/hud-manager.js";
 import ItemManager from "../items/item-manager.js";
 import ObjectManager from "../objects/object-manager.js";
+import LootManager from "../loot/loot-manager.js";
 import TimeManager from "../time/time-manager.js";
 
 /* global Phaser */
@@ -27,6 +28,7 @@ export default class GameManager {
         this.time = new TimeManager();
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
+        this.loot = new LootManager(this.scene);
         this.fx = new FXManager(this.scene);
 
     }
@@ -152,8 +154,12 @@ export default class GameManager {
 
             var postcard = this.itemManager.newItem('POSTCARD_BACK_1');
             var banana = this.itemManager.newItem('BANANA');
-            var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN',[postcard, banana]);
+            var flyers = this.itemManager.newItem('FLYER_PINK');
+            flyers.updateStackCount(12);
+            var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN',[postcard, banana, flyers]);
 
+            this.itemManager.newItemToPockets('RAKE');
+            this.itemManager.newItemToPockets('SPADE');
             this.setState('LOADED');
             this.setState('OVERWORLD');
             

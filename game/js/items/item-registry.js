@@ -29,7 +29,6 @@ export default class ItemRegistry {
 
     placeItem (item, _x, _y) {
         var added = this.addItem(item, _x, _y);
-        item.setRegistration(added,{x: _x, y: _y});
         return added;
         /// Should be feedback for when an item cannot be placed (for now the only condition is that another item cannot already be on the tile)
     }
@@ -39,9 +38,19 @@ export default class ItemRegistry {
         if (this.placeEmpty(_x,_y)) {
             this.registry[_x+"_"+_y] = item;
             /// Item needs a method (setRegistration) that can be flagged to trigger an in-world sprite
+            item.setRegistration(true,{x: _x, y: _y});
             return true;
         }
         else {
+            if (this.registry[_x+"_"+_y].info.slug == item.info.slug) {
+                /// The item in this spot matches the item being placed
+                /// Check to see if the item is stackable
+                if (this.registry[_x+"_"+_y].isStackable()) {
+                    this.registry[_x+"_"+_y].updateStackCount(item.stackCount);
+                    item.setRegistration(false);
+                    return true;
+                }
+            }
             // An item is already on this tile
             console.log("Something here already: "+_x+" "+_y);
             return false;

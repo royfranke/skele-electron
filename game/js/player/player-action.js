@@ -3,24 +3,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
  *	Updates available actions
  */
  export default class PlayerAction {
-    
-    allowed;
-    showActive;
-    showMenu;
-    
-    selected;
-    committed;
-
-    actionTile;
-    actionTileLast;
-    actionTileFresh;
-    actionTileLookUp;
-
-
-    // Set in clearActions
-    actionsMap;
-    availableActions;
-    menu;
 
     constructor(scene) {
         this.scene = scene;
@@ -44,11 +26,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     createMarker () {
-        /*
-        const marker = this.scene.add.sprite(0,0, "action-marker", 0).setOrigin(0);
-        marker.anims.play("action-marker", false);
-        marker.setVisible(false);
-        */
        let marker = this.scene.manager.fx.handleFX('SELECTOR_VALID_',0,0);
        marker.setOrigin(0);
        marker.setVisible(false);
@@ -124,13 +101,32 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             y: parseInt(this.actionTile.y + mods['my'])*16
         };
         if (this.scene.player.underAction != null) {
-            if (this.scene.player.underAction.CANDIG) {
-                this.addAction({action: 'DIG', object: ''});
-            }
+            this.getGroundActions(this.scene.player.underAction);
         }
         
 
         this.updateMarker();
+    }
+
+    getGroundActions (ground) {
+        if (ground != null) {
+            for (var i=0;i<ground.ACTIONS.length;i++) {
+                var req_met = false;
+                if (ground.ACTIONS[i].ITEM != '') {
+
+                    var found = this.scene.manager.hud.pocket.findInPockets(ground.ACTIONS[i].ITEM);
+                    
+                    if (found != false) {req_met = true;}
+                }
+                else { // No items required
+                    req_met = true;
+                }
+
+                if (req_met) {
+                    this.addAction({action: ground.ACTIONS[i].ACTION.toUpperCase(), object: '', ground: ground.ACTIONS[i].GROUND, fx: ground.ACTIONS[i].FX});
+                }
+            }
+        }
     }
 
     update () {
@@ -143,15 +139,21 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
         if (this.scene.player.playerInput.select && this.availableActions.length > 0 ) {
             let obj = this.availableActions[0].object;
+            if (obj != '' && obj != undefined) {
+                obj.doAction(this.availableActions[0].action);
+            }
+            else {
+                this.doAction();
+            }
+            /*
             if (obj != '') {
-              obj.doAction(this.availableActions[0].action);
               return 'PULL';
             }
             else {
-              this.doAction(this.availableActions[0].action);
               //this.sprite.anims.currentAnim.getFrameByProgress(0);
               return this.availableActions[0].action;
             }
+            */
           }
 
         if (this.scene.player.playerInput.more && this.availableActions.length > 1 ) {
@@ -160,41 +162,39 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         }
     }
 
-    doAction (action_string) {
-        
-        if (action_string == 'DIG' && this.scene.player.state.name != 'DIG') {
-            this.scene.player.setState('DIG');
+    doAction () {
+        let action = this.availableActions[0];
+        if (this.scene.player.state.name == 'IDLE') {
+            this.scene.player.setState(action.action.toUpperCase());
+            //this.scene.player.setState("DIG");
+            if (action.fx != undefined && action.fx != '') {
+                this.scene.manager.fx.playFX(action.fx,this.scene.player.snappedStanding.x+8,this.scene.player.snappedStanding.y+8,500);
+            }
+            if (action.ground != undefined && action.ground != '') {
+                this.scene.time.addEvent({
+                    delay: 500,
+                    loop: false,
+                    callback: () => {
+                        // Fade out
+                        this.locale.ground.placeTileType(this.actionTile.x, this.actionTile.y, action.ground, true);
+                        /// Add loot manager call here
+                        this.scene.manager.loot.digUp(this.actionTile.x, this.actionTile.y);
+                    }
+                })
+                this.scene.time.addEvent({
+                    delay: 1000,
+                    loop: false,
+                    callback: () => {
+                        // Fade out
+                        this.scene.player.setState('IDLE');
+                    }
+                })
+            }
+
             
-            this.digUp(this.scene.player.snappedStanding.x, this.scene.player.snappedStanding.y);
-            setTimeout(() => {
-                this.locale.ground.placeTileType(this.actionTile.x, this.actionTile.y, 'DIRT', true);
-            }, 500);
-            this.digUp(this.scene.player.snappedStanding.x, this.scene.player.snappedStanding.y);
-            setTimeout(() => {
-                this.scene.player.setState('IDLE');
-            }, 1000);
         }
     }
     
-    digUp(_x,_y) {
-        this.scene.manager.fx.playFX('CLOUD_DUST_',_x+8,_y+8,500);
-        /// Get odds on this tile from somewhere
-        const yielded = [1,1,1,1,5,5,10,10,25,25];
-        var empties = Phaser.Math.RND.between(4, 20);
-        
-        for (var i=0;i<empties;i++) {
-          yielded.push(0)
-        }
-        
-        Phaser.Utils.Array.Shuffle(yielded);
-        if (yielded[0] > 0) {
-            setTimeout(() => {
-                this.scene.player.addCoin(yielded[0]);
-                this.scene.manager.fx.coinUp(_x,_y,yielded[0],'');
-            }, 250);
-        }
-    }
-
     addAction(newAction) {
         //action, object
         const map = this.actionsMap;
@@ -202,7 +202,9 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             map.set(newAction.action, true);    // set any value to Map
             this.availableActions.push({
                 action: newAction.action,
-                object: newAction.object
+                object: newAction.object,
+                ground: newAction.ground,
+                fx: newAction.fx
             });
         }
         this.actionsMap = map;
@@ -219,7 +221,9 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             this.availableActions.forEach(function (action, index) {
                 displayActions.push({
                     action: action.action,
-                    object: action.object
+                    object: action.object,
+                    ground: action.ground,
+                    fx: action.fx
                 });
             });
 

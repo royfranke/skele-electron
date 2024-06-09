@@ -47,8 +47,8 @@ export default class AppManager {
             if (this.state.app_input) {
                 this.input.initializeAppKeys();
             }
-            if (this.state.prog_input) {
-                this.input.initializeProgKeys();
+            if (this.state.avail_input) {
+                this.input.initializeAvailableKeys();
             }
        }
        else {

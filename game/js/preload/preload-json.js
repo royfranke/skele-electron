@@ -4,6 +4,12 @@ const PRELOAD_JSON = [
         PATH: {
             JSON: 'data/saves.json'
         }
+    },
+    {
+        NAME: 'INPUTCONFIG',
+        PATH: {
+            JSON: 'data/config_input.json'
+        }
     }
 ];
 

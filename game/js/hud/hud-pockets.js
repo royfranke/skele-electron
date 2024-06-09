@@ -34,6 +34,7 @@ export default class HudPockets {
                 slot: this.addSlot(x, y, 'blue'),
                 icon: this.addIcon(x, y, 'EMPTY', 'empty'),
                 item: null,
+                stack: this.addStackIndicator(x, y),
                 drop: this.addDrop(x),
             };
             y = 1;
@@ -52,6 +53,10 @@ export default class HudPockets {
 
         }
         return slots;
+    }
+
+    getSlotItem(slot_x, slot_y) {
+        return this.slots[slot_y][slot_x].item;
     }
 
     addIcon(slot_x, slot_y, textureName, frameName) {
@@ -102,13 +107,27 @@ export default class HudPockets {
         if (this.slots[1][slot_x].icon != null) {
             this.slots[1][slot_x].icon.destroy();
             if (new_icon.info != null) {
-                this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, new_icon.info.use, new_icon.info.icon);
-
+                this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'ITEMS', this.getStackIcon(new_icon));
             }
             else {
                 this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'EMPTY', 'empty');
             }
         }
+    }
+
+    getStackIcon(item) {
+        let icon = item.info.icon;
+        if (item.stackCount > 1 && item.info.stacks.length > 0) {
+            /// An alternative icon may exist in relation to the stack size...
+            for (var i=0;i<item.info.stacks.length;i++) {
+                var stack = item.info.stacks[i];
+                if (item.stackCount < stack.lessThan && item.stackCount > stack.greaterThan) {
+                    icon = stack.icon;
+                    break;
+                }
+            }
+        }
+        return icon;
     }
 
     setSlotColor(slot_x, slot_y, status = 'UNFOCUSED') {
@@ -257,6 +276,18 @@ export default class HudPockets {
                 this.slots[0][i].drop.setVisible(true);
             }
         }
+    }
+
+    addStackIndicator(slot_x, slot_y) {
+        let slotMargin = {
+            x: 26 + (slot_x * 40),
+            y: 38 + (slot_y * 36),
+        };
+        return this.makeStackIndicator((this.view.right - slotMargin.x), (this.view.top + slotMargin.y));
+    }
+
+    makeStackIndicator(_x, _y) {
+        return this.factory.makeStackIndicator(_x, _y);
     }
 
     addSlip(slot_x, text = 'HOLD') {
@@ -427,9 +458,18 @@ export default class HudPockets {
                 
                 if (state == 'EMPTY') {
                     var frameName = pocket[state].ICON;
+                    if (this.slots[slot_y][slot_x].stack != undefined) {
+                        this.slots[slot_y][slot_x].stack.setVisible(false);
+                    }
                 }
                 else {
-                    var frameName = pocket[state].info.icon;
+                    var frameName = this.getStackIcon(pocket[state]);
+                    if (this.slots[slot_y][slot_x].stack != undefined) {
+                        this.slots[slot_y][slot_x].stack.setVisible(pocket[state].stackCount > 1);
+                    if (pocket[state].stackCount > 1) {
+                        this.slots[slot_y][slot_x].stack.setText(pocket[state].stackCount);
+                    }
+                    }
                 }
                 
                 if (this.slots[slot_y][slot_x].icon != null && slot_y == 0) {

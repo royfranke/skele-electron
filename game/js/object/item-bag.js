@@ -5,7 +5,7 @@ import Item from "./item.js";
 export default class ItemBag extends Item {
     constructor(scene, item, items = []) {
         super(scene, item);
-        this.actions = [{ action: 'PICK UP', object: this }, { action: 'OPEN', object: this }];
+        this.actions = [{ action: 'PICK UP', object: this, ground: '', fx: ''}, { action: 'OPEN', object: this, ground: '', fx: '' }];
 
         this.info.items = items;
 

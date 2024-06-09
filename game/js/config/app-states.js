@@ -19,19 +19,19 @@ const APP_STATES = {
         menu: true,
         input: true,
         app_input: true,
-        prog_input: false,
+        avail_input: false,
         save: false
     },
     SETTINGS: {
         name: 'SETTINGS',
         super: 'System Settings',
         fadeIn: 500,
-        fadeOut: 1000,
+        fadeOut: 500,
         autoEnd: 0,
-        menu: true,
+        menu: false,
         input: true,
-        app_input: true,
-        prog_input: true,
+        app_input: false,
+        avail_input: true,
         save: false
     },
     NEW: {
@@ -43,7 +43,7 @@ const APP_STATES = {
         menu: true,
         input: true,
         app_input: true,
-        prog_input: false,
+        avail_input: false,
         save: true
     },
     LOAD: {
@@ -55,7 +55,7 @@ const APP_STATES = {
         menu: true,
         input: true,
         app_input: true,
-        prog_input: false,
+        avail_input: false,
         save: true
     },
     TUTORIAL: {
@@ -67,7 +67,7 @@ const APP_STATES = {
         menu: false,
         input: true,
         app_input: true,
-        prog_input: true,
+        avail_input: true,
         save: false
     },
     GAME: {
@@ -79,7 +79,7 @@ const APP_STATES = {
         menu: false,
         input: true,
         app_input: true,
-        prog_input: true,
+        avail_input: false,
         save: true
     },
 };

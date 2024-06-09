@@ -7,55 +7,53 @@ export default class AppInput {
   constructor(scene) {
     this.scene = scene;
     this.INPUT = {};
-    this.initialized_app = false;
-    this.initialized_prog = false;
+    this.config = {};
+    this.available = {};
+    this.initialized = false;
+    this.available_initialized = false;
+    this.configJSON = this.scene.cache.json.get('INPUTCONFIG');
   }
 
   initializeAppKeys () {
     const { KeyCodes } = Phaser.Input.Keyboard;
-    this.APP_KEYS = this.scene.input.keyboard.addKeys({
-        UP:          KeyCodes.UP,
-        RIGHT:       KeyCodes.RIGHT,
-        LEFT:        KeyCodes.LEFT,
-        DOWN:        KeyCodes.DOWN,
-        SELECT:      KeyCodes.X,
-        BACK:        KeyCodes.Z,
-    });
+
+    for (const [key, value] of Object.entries(this.configJSON.CUSTOM)) {
+      this.config[key] = KeyCodes[value];
+    }
+
+    this.APP_KEYS = this.scene.input.keyboard.addKeys(this.config);
     for (const [key, value] of Object.entries(this.APP_KEYS)) {
         this.INPUT[key] = {TAP: false, HOLD: false};
     }
-    this.initialized_app = true;
+    this.initialized = true;
   }
-/* TODO: Make programable keys set from settings file */
-  initializeProgKeys () {
+
+  initializeAvailableKeys () {
     const { KeyCodes } = Phaser.Input.Keyboard;
-    this.PROG_KEYS = this.scene.input.keyboard.addKeys({
-        PAUSE:       KeyCodes.SPACE,
-        INVENTORY:   KeyCodes.I,
-        NOTEBOOK:    KeyCodes.N,
-        MAP:         KeyCodes.M,
-        MORE:        KeyCodes.C,
-        RUN:         KeyCodes.SHIFT,
-        HOP:         KeyCodes.V
-    });
-    for (const [key, value] of Object.entries(this.PROG_KEYS)) {
+
+    for (const [key, value] of Object.entries(this.configJSON.AVAILABLE)) {
+      this.available[key] = KeyCodes[value];
+    }
+
+    this.AVAIL_KEYS = this.scene.input.keyboard.addKeys(this.available);
+    for (const [key, value] of Object.entries(this.AVAIL_KEYS)) {
         this.INPUT[key] = {TAP: false, HOLD: false};
     }
-    this.initialized_prog = true;
+    this.available_initialized = true;
   }
 
   update() {
-    if (this.initialized_app) {
+    if (this.initialized) {
         for (const [key, value] of Object.entries(this.APP_KEYS)) {
             this.INPUT[key].TAP = Phaser.Input.Keyboard.JustDown(value);
             this.INPUT[key].HOLD = value.isDown;
         }
     }
-    if (this.initialized_prog) {
-        for (const [key, value] of Object.entries(this.PROG_KEYS)) {
-            this.INPUT[key].TAP = Phaser.Input.Keyboard.JustDown(value);
-            this.INPUT[key].HOLD = value.isDown;
-        }
+    if (this.available_initialized) {
+      for (const [key, value] of Object.entries(this.AVAIL_KEYS)) {
+          this.INPUT[key].TAP = Phaser.Input.Keyboard.JustDown(value);
+          this.INPUT[key].HOLD = value.isDown;
+      }
     }
   }
 

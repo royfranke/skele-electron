@@ -15,7 +15,7 @@ export default class SaveManager {
             this.save = this.newSave();
         }
         else {
-            this.save
+            //this.save
         }
     }
 

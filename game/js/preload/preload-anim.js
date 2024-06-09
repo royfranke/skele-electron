@@ -62,14 +62,6 @@ export default class PreloadAnim {
       });
     });
 
-    anims.create({
-      key: "action-marker",
-      frames: anims.generateFrameNumbers("action-marker", 
-       { start: 0, end: 3}
-      ),
-      frameRate: 8,
-      repeat: -1,
-    });
 
   }
 

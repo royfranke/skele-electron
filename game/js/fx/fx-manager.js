@@ -28,7 +28,7 @@ export default class FXManager {
 
 
     coinUp(_x,_y,value=1) {
-        this.newBounceFX('COIN_'+value+'_',_x,_y);
+        this.newBounceFX('COIN_'+value+'_',_x+8,_y);
     }
 
 }

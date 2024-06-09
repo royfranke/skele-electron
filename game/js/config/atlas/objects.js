@@ -1252,17 +1252,19 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:48, 
-          w:32
+          h:36, 
+          w:18
         },
         offset: {
-          x:0, 
-          y:0
+          x:7, 
+          y:13
         },
         varieties: 6,
         portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
           }, {
             name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
           },],
@@ -1273,6 +1275,15 @@ const OBJECTS = {
               }, {
               name: 'OPENING',
               transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
               frames: []
               },
                       {
@@ -1583,9 +1594,9 @@ const OBJECTS = {
         actions: [],
         states: [],
     },
-      WINDOW_2_RED_BROWN_WORN_: {
+      WINDOW_2_RED_WORN_: {
         name: 'Double Window Worn Red Brown',
-        slug: 'WINDOW_2_RED_BROWN_WORN_', 
+        slug: 'WINDOW_2_RED_WORN_', 
         type: 'WINDOW_EXT_',
         bounding: {
           h:3, 
@@ -1616,9 +1627,9 @@ const OBJECTS = {
         actions: [],
         states: [],
     },
-      WINDOW_2_RED_WORN_: {
+      WINDOW_2_RED_BROWN_WORN_: {
         name: 'Double Window Worn Red Brown',
-        slug: 'WINDOW_2_RED_WORN_', 
+        slug: 'WINDOW_2_RED_BROWN_WORN_', 
         type: 'WINDOW_EXT_',
         bounding: {
           h:3, 
@@ -1714,6 +1725,72 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: [],
+    },
+      EXT_DOOR_WINDOWS_WHITE: {
+        name: 'Ext Door Windows White',
+        slug: 'EXT_DOOR_WINDOWS_WHITE', 
+        type: 'EXT_DOOR_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:36, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:12
+        },
+        varieties: 5,
+        portal: 1,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['EXT_DOOR_WINDOWS_WHITE-1', ]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['EXT_DOOR_WINDOWS_WHITE-2', 'EXT_DOOR_WINDOWS_WHITE-3', 'EXT_DOOR_WINDOWS_WHITE-4', 'EXT_DOOR_WINDOWS_WHITE-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['EXT_DOOR_WINDOWS_WHITE-5', ]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['EXT_DOOR_WINDOWS_WHITE-4', 'EXT_DOOR_WINDOWS_WHITE-3', 'EXT_DOOR_WINDOWS_WHITE-2', 'EXT_DOOR_WINDOWS_WHITE-1', ]
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
     },
       MAILBOX_1: {
         name: 'Mailbox 1',
@@ -1837,6 +1914,61 @@ items: []    },
         actions: [],
         states: [],
     },
+      PAYPHONE: {
+        name: 'Payphone',
+        slug: 'PAYPHONE', 
+        type: 'PAY_PHONE',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:10
+        },
+        offset: {
+          x:3, 
+          y:32
+        },
+        varieties: 4,
+        portal: 0,
+        actions: [ {
+            name: 'CALL', stateTrigger: 'CALLING', validStates: ['DEFAULT',]
+          }, {
+            name: 'ANSWER', stateTrigger: 'ANSWERING', validStates: ['RINGING',]
+          },],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['PAYPHONE-1', ]
+              }, {
+              name: 'CALLING',
+              transition: 'DEFAULT',
+              frames: ['PAYPHONE-4', ]
+              },
+                      {
+              name: 'RINGING',
+              transition: 'DEFAULT',
+              frames: ['PAYPHONE-1', 'PAYPHONE-2', ]
+              }, {
+              name: 'ANSWERING',
+              transition: 'DEFAULT',
+              frames: ['PAYPHONE-4', ]
+              },
+          ],
+    },
       PLACEHOLDER: {
         name: 'PLACEHOLDER',
         slug: 'PLACEHOLDER', 
@@ -1947,6 +2079,8 @@ items: []    },
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
           }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
             name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
           },],
         states: [            {
@@ -1956,6 +2090,15 @@ items: []    },
               }, {
               name: 'OPENING',
               transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
               frames: []
               },
                       {

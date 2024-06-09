@@ -38,10 +38,29 @@ export default class HudPocket {
         return false;
     }
 
+    findInPockets(item_slug) {
+        var found = false;
+        this.pockets.forEach(function (pocket, index) {
+            if (!found) {
+                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.slug == item_slug) {
+                    found = index;
+                }
+            }
+        });
+        return found;
+    }
+
     availablePocket(item) {
         let self = this;
         var found = false;
         this.pockets.forEach(function (pocket, index) {
+            if (!found) {
+                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.slug == item.info.slug && pocket[pocket.STATE].isStackable()) {
+                    found = true;
+                    pocket[pocket.STATE].updateStackCount(item.stackCount);
+                    self.scene.manager.hud.refreshDisplay();
+                }
+            }
             if (!found) {
                 if (pocket.STATE == 'EMPTY' && pocket[item.info.use] != 'DISALLOWED') {
                     self.setPocket(index, item.info.use, item);
@@ -59,7 +78,19 @@ export default class HudPocket {
             if (!found) {
                 if (exclude != index) {
                     if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == 'BAG') {
-                        if (pocket[pocket.STATE].addItem(item)) {
+
+                        //The below needs to apply to all the contents of the bag, not stacking the bag itself
+                        pocket[pocket.STATE].info.items.forEach(function (bag_item) {
+                         if (!found) {
+                            if (bag_item.info.slug == item.info.slug && bag_item.isStackable(item.stackCount)) {
+                                found = true;
+                                bag_item.updateStackCount(item.stackCount);
+                                self.scene.manager.hud.refreshDisplay();
+                            }
+                         }
+                        });
+                        
+                        if (!found && pocket[pocket.STATE].addItem(item)) {
                             found = true;
                             self.scene.manager.hud.refreshDisplay();
                         }
@@ -80,12 +111,17 @@ export default class HudPocket {
         var pocket = this.getPocket(pocketIndex);
         if (action_string == 'DROP' && pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];
-
             var placed = this.scene.manager.itemManager.putItemInWorld(item, _x, _y);
             if (placed) {
                 this.setPocket(pocketIndex, 'EMPTY');
             }
-
+        }
+        else if (action_string == 'DROP ONE' && pocket.STATE != 'EMPTY') {
+            var item = pocket[pocket.STATE];
+            var placed = this.scene.manager.itemManager.newItemToWorld(_x, _y, item.info.icon);
+            if (placed) {
+                item.updateStackCount(-1);
+            }
         }
         else if (action_string == 'PUT AWAY' && pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];

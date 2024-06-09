@@ -15,14 +15,6 @@ const PRELOAD_IMAGE = [
         NAME: 'floor',
         PATH: 'tilesets/interior-atlas.png'
     },
-    {
-        NAME: 'mapBox',
-        PATH: 'spritesheets/map-box.png'
-    },
-    {
-        NAME: 'panelBox',
-        PATH: 'spritesheets/TEST_PANEL.png'
-    },
 ];
 
 export default PRELOAD_IMAGE;

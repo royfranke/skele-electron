@@ -313,6 +313,16 @@ body,
   color: #e2f2f3;
 }
 
+.stack-indicator {
+  border: 1px solid #465e62;
+  padding: 0 4px;
+  border-radius: 24px;
+  font-family: 'defaultFont';
+  font-size: 10px;
+  background-color: #4c4e8f;
+  color: #f8f8f8;
+}
+
 .button-tap:before {
   text-shadow: 0;
   background-color: #2d4275;
@@ -356,17 +366,6 @@ body,
   width:42px;
 }
 
-.mini-map-flag {
-  border: 1px solid;
-  padding-right: 4px;
-  border-radius: 4px;
-  font-family: 'defaultFont';
-  font-size: 12px;
-  background-color: #ccc890;
-  color: #465e62;
-  text-align: right;
-  padding: 0 6px;
-}
 
 .dialog-box {
   border: 1px solid;
