@@ -5,14 +5,22 @@ const ITEMS = {
         use:  'HOLDS',
         icon: 'APPLE',
         type: 'FOOD',
-        description: '',
+        description: 'Comes from trees and stores and cafeterias. Hackneyed to give; best enjoyed alone, high in the air, at dusk.',
         actions: [ {
             name: 'EAT',
             consume: false,
             transition: 'APPLE_TRASH',
           },],
         stack: 3,
-        stacks: [        ],
+        stacks: [ {
+            icon: 'APPLE_15',
+            lessThan: 3,
+            greaterThan: 1
+          }, {
+            icon: 'APPLE_16',
+            lessThan: 4,
+            greaterThan: 2
+          }        ],
     },
       APPLE_TRASH: {
         name: 'Apple Core',
@@ -20,7 +28,7 @@ const ITEMS = {
         use:  'HOLDS',
         icon: 'APPLE_TRASH',
         type: 'TRASH',
-        description: '',
+        description: 'A rumpled bit of organic material, curled at the edges by plasmolysis. It has a low, sweet odor.',
         actions: [ {
             name: 'CHUCK',
             consume: false,
@@ -42,7 +50,15 @@ const ITEMS = {
             transition: 'BANANA_TRASH',
           },],
         stack: 3,
-        stacks: [        ],
+        stacks: [ {
+            icon: 'BANANA_13',
+            lessThan: 3,
+            greaterThan: 1
+          }, {
+            icon: 'BANANA_14',
+            lessThan: 4,
+            greaterThan: 2
+          }        ],
     },
       BANANA_TRASH: {
         name: 'Banana Peel',
@@ -220,13 +236,13 @@ items: []    },
         use:  'HOLDS',
         icon: 'CASSEROLE_DISH_1',
         type: 'CASSEROLE_DISH',
-        description: '',
+        description: 'A ceramic casserole dish with a motif of thin green lines.',
         actions: [ {
             name: 'PLACE',
             consume: false,
             transition: false,
           },],
-        stack: 0,
+        stack: 1,
         stacks: [        ],
     },
       CASSEROLE_DISH_2: {
@@ -235,7 +251,7 @@ items: []    },
         use:  'HOLDS',
         icon: 'CASSEROLE_DISH_2',
         type: 'CASSEROLE_DISH',
-        description: '',
+        description: 'A ceramic casserole dish with a motif of tightly drawn leaves set on a wide meander.',
         actions: [ {
             name: 'PLACE',
             consume: false,
@@ -250,13 +266,13 @@ items: []    },
         use:  'HOLDS',
         icon: 'CASSEROLE_DISH_3',
         type: 'CASSEROLE_DISH',
-        description: '',
+        description: 'A terracotta casserole dish with a smooth stoneware interior.',
         actions: [ {
             name: 'PLACE',
             consume: false,
             transition: false,
           },],
-        stack: 0,
+        stack: 1,
         stacks: [        ],
     },
       CASSEROLE_DISH_4: {
@@ -295,7 +311,7 @@ items: []    },
         use:  'HOLDS',
         icon: 'CASSEROLE_DISH_6',
         type: 'CASSEROLE_DISH',
-        description: '',
+        description: 'An earthenware casserole dish banded with maroon.',
         actions: [ {
             name: 'PLACE',
             consume: false,
@@ -606,6 +622,33 @@ items: []    },
         actions: [],
         stack: 1,
         stacks: [        ],
+    },
+      FLYER_GRAY: {
+        name: 'Gray Flyer',
+        slug: 'FLYER_GRAY', 
+        use:  'HOLDS',
+        icon: 'FLYER_GRAY',
+        type: 'FLYER',
+        description: '',
+        actions: [ {
+            name: 'READ',
+            consume: false,
+            transition: false,
+          },],
+        stack: 25,
+        stacks: [ {
+            icon: 'FLYER_GRAY_10',
+            lessThan: 4,
+            greaterThan: 1
+          }, {
+            icon: 'FLYER_GRAY_11',
+            lessThan: 11,
+            greaterThan: 3
+          }, {
+            icon: 'FLYER_GRAY_12',
+            lessThan: 26,
+            greaterThan: 10
+          }        ],
     },
       LUNCH_BAG_GREASY: {
         name: 'Greasy Lunch Bag',
@@ -984,6 +1027,33 @@ items: []    },
         actions: [],
         stack: 1,
         stacks: [        ],
+    },
+      FLYER_MISSING: {
+        name: 'Missing Person Flyer',
+        slug: 'FLYER_MISSING', 
+        use:  'HOLDS',
+        icon: 'FLYER_MISSING',
+        type: 'FLYER',
+        description: '',
+        actions: [ {
+            name: 'READ',
+            consume: false,
+            transition: false,
+          },],
+        stack: 25,
+        stacks: [ {
+            icon: 'FLYER_MISSING_7',
+            lessThan: 4,
+            greaterThan: 1
+          }, {
+            icon: 'FLYER_MISSING_8',
+            lessThan: 11,
+            greaterThan: 3
+          }, {
+            icon: 'FLYER_MISSING_9',
+            lessThan: 26,
+            greaterThan: 10
+          }        ],
     },
       MUFFIN: {
         name: 'Muffin',
@@ -1858,13 +1928,40 @@ items: []    },
         stack: 0,
         stacks: [        ],
     },
+      FLYER_YELLOW: {
+        name: 'Yellow Flyer',
+        slug: 'FLYER_YELLOW', 
+        use:  'HOLDS',
+        icon: 'FLYER_YELLOW',
+        type: 'FLYER',
+        description: '',
+        actions: [ {
+            name: 'READ',
+            consume: false,
+            transition: false,
+          },],
+        stack: 25,
+        stacks: [ {
+            icon: 'FLYER_YELLOW_4',
+            lessThan: 4,
+            greaterThan: 1
+          }, {
+            icon: 'FLYER_YELLOW_5',
+            lessThan: 11,
+            greaterThan: 3
+          }, {
+            icon: 'FLYER_YELLOW_6',
+            lessThan: 26,
+            greaterThan: 10
+          }        ],
+    },
       ZENER_1: {
         name: 'Zener Card (Circle)',
         slug: 'ZENER_1', 
         use:  'HOLDS',
         icon: 'ZENER_1',
         type: 'CARD',
-        description: '',
+        description: 'A playing card with a floral blue backside. The face side shows the yellow outline of a circle.',
         actions: [ {
             name: 'FLIP',
             consume: false,
@@ -1879,7 +1976,7 @@ items: []    },
         use:  'HOLDS',
         icon: 'ZENER_2',
         type: 'CARD',
-        description: '',
+        description: 'A playing card with a floral blue backside. The face side shows two lines intersecting: a red plus.',
         actions: [ {
             name: 'FLIP',
             consume: false,
@@ -1894,7 +1991,7 @@ items: []    },
         use:  'HOLDS',
         icon: 'ZENER_4',
         type: 'CARD',
-        description: '',
+        description: 'A playing card with a floral blue backside. The face side shows the blue outline of a square.',
         actions: [ {
             name: 'FLIP',
             consume: false,
@@ -1909,7 +2006,7 @@ items: []    },
         use:  'HOLDS',
         icon: 'ZENER_5',
         type: 'CARD',
-        description: '',
+        description: 'A playing card with a floral blue backside. The face side shows the green outline of a five-pointed star.',
         actions: [ {
             name: 'FLIP',
             consume: false,
@@ -1924,7 +2021,7 @@ items: []    },
         use:  'HOLDS',
         icon: 'ZENER_3',
         type: 'CARD',
-        description: '',
+        description: 'A playing card with a floral blue backside. The face side shows three wavy blue lines.',
         actions: [ {
             name: 'FLIP',
             consume: false,

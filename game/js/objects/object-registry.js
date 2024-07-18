@@ -1,9 +1,7 @@
 /* Object Registry */
-/* Manages objects in the world, not yet adapted for electron */
+/* Manages objects in the world */
 
 export default class ObjectRegistry {
-
-    registry;
 
     constructor() {
         this.registry = {};

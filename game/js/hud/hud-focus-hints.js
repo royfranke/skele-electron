@@ -23,7 +23,7 @@ export default class HudFocusHints {
                 char: 'N',
                 focus: 'NOTEBOOK',
                 x: (this.view.left + this.view.margin.left),
-                y: this.view.bottom - 168
+                y: this.view.bottom - (this.view.margin.bottom + 56)
             },
         ];
 
@@ -58,15 +58,15 @@ export default class HudFocusHints {
     }
 
     setKeyTip (tip, active=false) {
-        if (tip != null) {
+        if (tip != null && this.hints[tip] != undefined ) {
             let style = active ? '-active' : '';
-            tip.setClassName('key-tip'+style);
+            this.hints[tip].setClassName('key-tip'+style);
         }
     }
 
     changeFocus (from, to) {
-        this.setKeyTip(this.hints[from], false);
-        this.setKeyTip(this.hints[to], true);
+        this.setKeyTip(from, false);
+        this.setKeyTip(to, true);
     }
 
 }

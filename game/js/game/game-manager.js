@@ -7,6 +7,7 @@ import ItemManager from "../items/item-manager.js";
 import ObjectManager from "../objects/object-manager.js";
 import LootManager from "../loot/loot-manager.js";
 import TimeManager from "../time/time-manager.js";
+import AnnouncementRegistry from "../announcements/announcement-registry.js";
 
 /* global Phaser */
 /*
@@ -26,6 +27,7 @@ export default class GameManager {
         this.gameFocus = new GameFocus();
         this.hud = null;
         this.time = new TimeManager();
+        this.announce = new AnnouncementRegistry();
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
         this.loot = new LootManager(this.scene);
@@ -36,9 +38,13 @@ export default class GameManager {
     wake () {
         this.hud.refreshDisplay();
     }
+
+    openBag (bag) {
+        this.itemManager.openBag(bag);
+    }
     
     openChest (chest) {
-        this.itemManager.openChest(chest);
+        this.objectManager.openChest(chest);
     }
 
     closeChest () {
@@ -58,6 +64,9 @@ export default class GameManager {
         }
         if (focus_string == 'NOTEBOOK') {
             this.hud.setState('NOTEBOOK_FOCUSED');
+        }
+        if (focus_string == 'ZENER') {
+            this.hud.setState('ZENER_FOCUSED');
         }
         this.hud.refreshDisplay();
         return this.gameFocus.setFocus(focus_string);
@@ -115,16 +124,36 @@ export default class GameManager {
                     this.closeChest();
                     this.setFocus('PLAYER');  
                 }
+                if (focus.name == 'NOTEBOOK') {
+                    this.setFocus('PLAYER');  
+                }
+                if (focus.name == 'ZENER') {
+                    this.setFocus('PLAYER');  
+                }
             }
             if (input.DOWN.TAP) {
                 if (focus.name == 'CHEST') {
                     this.hud.chestArrowDown();
                 }
             }
+            if (input.RIGHT.TAP) {
+                if (focus.name == 'ZENER') {
+                    this.hud.hudZener.arrowRight();
+                }
+            }
+            if (input.LEFT.TAP) {
+                if (focus.name == 'ZENER') {
+                    this.hud.hudZener.arrowLeft();
+                }
+            }
             if (input.SELECT.TAP) {
                 if (focus.name == 'CHEST') {
                     this.hud.chestHold();
                 }
+                if (focus.name == 'ZENER') {
+                    this.hud.hudZener.select();
+                }
+                /// Select zener card
             }
         }
         if (this.state.time) {
@@ -156,10 +185,10 @@ export default class GameManager {
             var banana = this.itemManager.newItem('BANANA');
             var flyers = this.itemManager.newItem('FLYER_PINK');
             flyers.updateStackCount(12);
-            var backpack = this.itemManager.newItemToPockets('BACKPACK_GREEN',[postcard, banana, flyers]);
+            this.itemManager.newItemToPockets('BACKPACK_GREEN',[postcard, banana, flyers]);
 
-            this.itemManager.newItemToPockets('RAKE');
-            this.itemManager.newItemToPockets('SPADE');
+            //this.itemManager.newItemToPockets('RAKE');
+            //this.itemManager.newItemToPockets('SPADE');
             this.setState('LOADED');
             this.setState('OVERWORLD');
             

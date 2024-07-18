@@ -33,8 +33,7 @@ export default class ItemManager {
     }
 
     addItemToPockets (item) {
-        var result = this.scene.manager.hud.availablePocket(item);
-        return result;
+        return this.scene.manager.hud.availablePocket(item);
     }
 
     newItemToPockets (slug,items=[]) {
@@ -44,7 +43,7 @@ export default class ItemManager {
             console.warn('Could not add to pocket: '+item);
             console.log(item);
         }
-        return item;
+        return result;
     }
 
     newItemToWorld (_x,_y,slug,items=[]) {
@@ -73,9 +72,9 @@ export default class ItemManager {
         return result;
     }
 
-    openChest (item) {
+    openBag (item) {
         this.scene.manager.setFocus('CHEST');
-        this.scene.manager.hud.hudChest.openChest(item);
+        this.scene.manager.hud.hudChest.openBag(item);
     }
     
 }

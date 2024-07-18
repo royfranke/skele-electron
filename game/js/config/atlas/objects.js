@@ -1259,7 +1259,7 @@ const OBJECTS = {
           x:7, 
           y:13
         },
-        varieties: 6,
+        varieties: 0,
         portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
@@ -1294,6 +1294,50 @@ const OBJECTS = {
               name: 'KNOCKING',
               transition: 'WAITING',
               frames: []
+              },
+          ],
+    },
+      DOORMAT_1: {
+        name: 'Doormat 1',
+        slug: 'DOORMAT_1', 
+        type: 'DOORMAT',
+        bounding: {
+          h:1, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [ {
+            name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['DOORMAT_1-1', ]
+              }, {
+              name: 'LOOKING_UNDER',
+              transition: 'DEFAULT',
+              frames: ['DOORMAT_1-1', 'DOORMAT_1-2', 'DOORMAT_1-3', 'DOORMAT_1-2', 'DOORMAT_1-1', ]
               },
           ],
     },
@@ -1714,17 +1758,281 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:48, 
-          w:32
+          h:24, 
+          w:24
         },
         offset: {
-          x:0, 
-          y:0
+          x:4, 
+          y:12
         },
         varieties: 9,
         portal: 0,
         actions: [],
         states: [],
+    },
+      EXT_DOOR_WINDOWS_GRAY: {
+        name: 'Ext Door Windows Gray',
+        slug: 'EXT_DOOR_WINDOWS_GRAY', 
+        type: 'EXT_DOOR_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:36, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:12
+        },
+        varieties: 5,
+        portal: 1,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['EXT_DOOR_WINDOWS_GRAY-1', ]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['EXT_DOOR_WINDOWS_GRAY-2', 'EXT_DOOR_WINDOWS_GRAY-3', 'EXT_DOOR_WINDOWS_GRAY-4', 'EXT_DOOR_WINDOWS_GRAY-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['EXT_DOOR_WINDOWS_GRAY-5', ]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['EXT_DOOR_WINDOWS_GRAY-4', 'EXT_DOOR_WINDOWS_GRAY-3', 'EXT_DOOR_WINDOWS_GRAY-2', 'EXT_DOOR_WINDOWS_GRAY-1', ]
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
+    },
+      EXT_DOOR_WINDOWS_GREEN: {
+        name: 'Ext Door Windows Green',
+        slug: 'EXT_DOOR_WINDOWS_GREEN', 
+        type: 'EXT_DOOR_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:36, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:12
+        },
+        varieties: 5,
+        portal: 1,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['EXT_DOOR_WINDOWS_GREEN-1', ]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['EXT_DOOR_WINDOWS_GREEN-2', 'EXT_DOOR_WINDOWS_GREEN-3', 'EXT_DOOR_WINDOWS_GREEN-4', 'EXT_DOOR_WINDOWS_GREEN-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['EXT_DOOR_WINDOWS_GREEN-5', ]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['EXT_DOOR_WINDOWS_GREEN-4', 'EXT_DOOR_WINDOWS_GREEN-3', 'EXT_DOOR_WINDOWS_GREEN-2', 'EXT_DOOR_WINDOWS_GREEN-1', ]
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
+    },
+      EXT_DOOR_WINDOWS_ORANGE: {
+        name: 'Ext Door Windows Orange',
+        slug: 'EXT_DOOR_WINDOWS_ORANGE', 
+        type: 'EXT_DOOR_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:36, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:12
+        },
+        varieties: 0,
+        portal: 1,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
+    },
+      EXT_DOOR_WINDOWS_PURPLE: {
+        name: 'Ext Door Windows Purple',
+        slug: 'EXT_DOOR_WINDOWS_PURPLE', 
+        type: 'EXT_DOOR_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:36, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:12
+        },
+        varieties: 0,
+        portal: 1,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
     },
       EXT_DOOR_WINDOWS_WHITE: {
         name: 'Ext Door Windows White',
@@ -1792,6 +2100,160 @@ const OBJECTS = {
               },
           ],
     },
+      EXT_DOOR_WINDOWS_YELLOW: {
+        name: 'Ext Door Windows Yellow',
+        slug: 'EXT_DOOR_WINDOWS_YELLOW', 
+        type: 'EXT_DOOR_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:36, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:12
+        },
+        varieties: 0,
+        portal: 1,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'KNOCKING',
+              transition: 'WAITING',
+              frames: []
+              },
+          ],
+    },
+      EXT_WINDOW_2_OPENS: {
+        name: 'Ext Window 2 Opens',
+        slug: 'EXT_WINDOW_2_OPENS', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:21, 
+          w:28
+        },
+        offset: {
+          x:2, 
+          y:13
+        },
+        varieties: 10,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      FLYER_GRAY: {
+        name: 'Gray Flyer',
+        slug: 'FLYER_GRAY', 
+        type: 'FLYER',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 8,
+        portal: 0,
+        actions: [ {
+            name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT',]
+          }, {
+            name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_GRAY-1', ]
+              }, {
+              name: 'READING',
+              transition: 'DEFAULT',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_GRAY-1', ]
+              }, {
+              name: 'GUSTING',
+              transition: 'DEFAULT',
+              frames: ['FLYER_GRAY-1', 'FLYER_GRAY-2', 'FLYER_GRAY-3', 'FLYER_GRAY-4', 'FLYER_GRAY-5', 'FLYER_GRAY-6', 'FLYER_GRAY-7', 'FLYER_GRAY-8', ]
+              },
+          ],
+    },
       MAILBOX_1: {
         name: 'Mailbox 1',
         slug: 'MAILBOX_1', 
@@ -1826,6 +2288,8 @@ const OBJECTS = {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN',]
           },],
         states: [            {
               name: 'CLOSED',
@@ -1844,6 +2308,216 @@ const OBJECTS = {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['MAILBOX_1-4', 'MAILBOX_1-3', 'MAILBOX_1-2', 'MAILBOX_1-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_1-5', ]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
+              },
+          ],
+slots: '0',
+items: []    },
+      MAILBOX_SHINY: {
+        name: 'Mailbox Shiny',
+        slug: 'MAILBOX_SHINY', 
+        type: 'MAILBOX',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:10, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:18
+        },
+        varieties: 5,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['MAILBOX_SHINY-1', ]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['MAILBOX_SHINY-1', 'MAILBOX_SHINY-2', 'MAILBOX_SHINY-3', 'MAILBOX_SHINY-4', 'MAILBOX_SHINY-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_SHINY-5', ]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['MAILBOX_SHINY-5', 'MAILBOX_SHINY-4', 'MAILBOX_SHINY-3', 'MAILBOX_SHINY-2', 'MAILBOX_SHINY-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_SHINY-5', ]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['MAILBOX_SHINY-5', ]
+              },
+          ],
+slots: '0',
+items: []    },
+      MAILBOX_SLEEK: {
+        name: 'Mailbox Sleek',
+        slug: 'MAILBOX_SLEEK', 
+        type: 'MAILBOX',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:10, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:18
+        },
+        varieties: 5,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['MAILBOX_SLEEK-1', ]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['MAILBOX_SLEEK-1', 'MAILBOX_SLEEK-2', 'MAILBOX_SLEEK-3', 'MAILBOX_SLEEK-4', 'MAILBOX_SLEEK-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_SLEEK-5', ]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['MAILBOX_SLEEK-5', 'MAILBOX_SLEEK-4', 'MAILBOX_SLEEK-3', 'MAILBOX_SLEEK-2', 'MAILBOX_SLEEK-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_SLEEK-5', ]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['MAILBOX_SLEEK-5', ]
+              },
+          ],
+slots: '0',
+items: []    },
+      MAILBOX_WEATHERED: {
+        name: 'Mailbox Weathered',
+        slug: 'MAILBOX_WEATHERED', 
+        type: 'MAILBOX',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:10, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:18
+        },
+        varieties: 5,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['MAILBOX_WEATHERED-1', ]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['MAILBOX_WEATHERED-1', 'MAILBOX_WEATHERED-2', 'MAILBOX_WEATHERED-3', 'MAILBOX_WEATHERED-4', 'MAILBOX_WEATHERED-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_WEATHERED-5', ]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['MAILBOX_WEATHERED-5', 'MAILBOX_WEATHERED-4', 'MAILBOX_WEATHERED-3', 'MAILBOX_WEATHERED-2', 'MAILBOX_WEATHERED-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['MAILBOX_WEATHERED-5', ]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['MAILBOX_WEATHERED-5', ]
               },
           ],
 slots: '0',
@@ -1914,6 +2588,61 @@ items: []    },
         actions: [],
         states: [],
     },
+      FLYER_MISSING: {
+        name: 'Missing Person Flyer',
+        slug: 'FLYER_MISSING', 
+        type: 'FLYER',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 8,
+        portal: 0,
+        actions: [ {
+            name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT',]
+          }, {
+            name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_MISSING-8', ]
+              }, {
+              name: 'READING',
+              transition: 'DEFAULT',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_MISSING-8', ]
+              }, {
+              name: 'GUSTING',
+              transition: 'DEFAULT',
+              frames: ['FLYER_MISSING-1', 'FLYER_MISSING-2', 'FLYER_MISSING-3', 'FLYER_MISSING-4', 'FLYER_MISSING-5', 'FLYER_MISSING-6', 'FLYER_MISSING-7', 'FLYER_MISSING-8', ]
+              },
+          ],
+    },
       PAYPHONE: {
         name: 'Payphone',
         slug: 'PAYPHONE', 
@@ -1969,6 +2698,61 @@ items: []    },
               },
           ],
     },
+      FLYER_PINK: {
+        name: 'Pink Flyer',
+        slug: 'FLYER_PINK', 
+        type: 'FLYER',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 8,
+        portal: 0,
+        actions: [ {
+            name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT',]
+          }, {
+            name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_PINK-8', ]
+              }, {
+              name: 'READING',
+              transition: 'DEFAULT',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_PINK-8', ]
+              }, {
+              name: 'GUSTING',
+              transition: 'DEFAULT',
+              frames: ['FLYER_PINK-1', 'FLYER_PINK-2', 'FLYER_PINK-3', 'FLYER_PINK-4', 'FLYER_PINK-5', 'FLYER_PINK-6', 'FLYER_PINK-7', 'FLYER_PINK-8', ]
+              },
+          ],
+    },
       PLACEHOLDER: {
         name: 'PLACEHOLDER',
         slug: 'PLACEHOLDER', 
@@ -2007,30 +2791,30 @@ items: []    },
         slug: 'POSTBOX_S', 
         type: 'POSTBOX',
         bounding: {
-          h:1, 
-          w:1
+          h:2, 
+          w:2
         },
         base: {
           h:1, 
           w:1,
           x:0, 
-          y:0
+          y:1
         },
         sprite: {
-          h:16, 
-          w:16,
+          h:32, 
+          w:21,
           x:0, 
           y:0
         },
         size: {
           h:16, 
-          w:16
+          w:19
         },
         offset: {
-          x:0, 
-          y:0
+          x:1, 
+          y:16
         },
-        varieties: 0,
+        varieties: 2,
         portal: 0,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
@@ -2038,11 +2822,11 @@ items: []    },
         states: [            {
               name: 'CLOSED',
               transition: 'false',
-              frames: []
+              frames: ['POSTBOX_S-1', ]
               }, {
               name: 'OPENING',
               transition: 'OPEN',
-              frames: []
+              frames: ['POSTBOX_S-2', ]
               },
           ],
     },
@@ -2074,7 +2858,7 @@ items: []    },
           x:0, 
           y:0
         },
-        varieties: 2,
+        varieties: 0,
         portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
@@ -2585,6 +3369,755 @@ items: []    },
         actions: [],
         states: [],
     },
+      WICKET_NS: {
+        name: 'Wicket Horizontal',
+        slug: 'WICKET_NS', 
+        type: 'WICKET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:4, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 3,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WICKET_E: {
+        name: 'Wicket Vertical East',
+        slug: 'WICKET_E', 
+        type: 'WICKET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:4
+        },
+        offset: {
+          x:12, 
+          y:0
+        },
+        varieties: 2,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WICKET_W: {
+        name: 'Wicket Vertical West',
+        slug: 'WICKET_W', 
+        type: 'WICKET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:4
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_2_BROWN: {
+        name: 'Wood Fence 2 Brown',
+        slug: 'WOOD_FENCE_2_BROWN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_2_HONEY: {
+        name: 'Wood Fence 2 Honey',
+        slug: 'WOOD_FENCE_2_HONEY', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_2_WEATHERED: {
+        name: 'Wood Fence 2 Weathered',
+        slug: 'WOOD_FENCE_2_WEATHERED', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_3_BROWN: {
+        name: 'Wood Fence 3 Brown',
+        slug: 'WOOD_FENCE_3_BROWN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_3_BROWN_OPEN: {
+        name: 'Wood Fence 3 Brown Open',
+        slug: 'WOOD_FENCE_3_BROWN_OPEN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_3_HONEY: {
+        name: 'Wood Fence 3 Honey',
+        slug: 'WOOD_FENCE_3_HONEY', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_3_HONEY_OPEN: {
+        name: 'Wood Fence 3 Honey Open',
+        slug: 'WOOD_FENCE_3_HONEY_OPEN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_3_WEATHERED: {
+        name: 'Wood Fence 3 Weathered',
+        slug: 'WOOD_FENCE_3_WEATHERED', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_3_WEATHERED_OPEN: {
+        name: 'Wood Fence 3 Weathered Open',
+        slug: 'WOOD_FENCE_3_WEATHERED_OPEN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_4_BROWN: {
+        name: 'Wood Fence 4 Brown',
+        slug: 'WOOD_FENCE_4_BROWN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_4_BROWN_OPEN: {
+        name: 'Wood Fence 4 Brown Open',
+        slug: 'WOOD_FENCE_4_BROWN_OPEN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_4_HONEY: {
+        name: 'Wood Fence 4 Honey',
+        slug: 'WOOD_FENCE_4_HONEY', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_4_HONEY_OPEN: {
+        name: 'Wood Fence 4 Honey Open',
+        slug: 'WOOD_FENCE_4_HONEY_OPEN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_4_WEATHERED: {
+        name: 'Wood Fence 4 Weathered',
+        slug: 'WOOD_FENCE_4_WEATHERED', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_4_WEATHERED_OPEN: {
+        name: 'Wood Fence 4 Weathered Open',
+        slug: 'WOOD_FENCE_4_WEATHERED_OPEN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_5_BROWN: {
+        name: 'Wood Fence 5 Brown',
+        slug: 'WOOD_FENCE_5_BROWN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:5,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:80
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_5_HONEY: {
+        name: 'Wood Fence 5 Honey',
+        slug: 'WOOD_FENCE_5_HONEY', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:5,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:80
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_5_WEATHERED: {
+        name: 'Wood Fence 5 Weathered',
+        slug: 'WOOD_FENCE_5_WEATHERED', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:5,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:80
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_SIDE_TABLE: {
+        name: 'Wood Side Table',
+        slug: 'WOOD_SIDE_TABLE', 
+        type: 'SIDE_TABLE',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 4,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED',]
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN',]
+          },],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },
+          ],
+slots: '0',
+items: []    },
       WOOD_POLE: {
         name: 'Wood Utility Pole',
         slug: 'WOOD_POLE', 
@@ -2617,6 +4150,61 @@ items: []    },
         portal: 0,
         actions: [],
         states: [],
+    },
+      FLYER_YELLOW: {
+        name: 'Yellow Flyer',
+        slug: 'FLYER_YELLOW', 
+        type: 'FLYER',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 8,
+        portal: 0,
+        actions: [ {
+            name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT',]
+          }, {
+            name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT',]
+          },],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_YELLOW-8', ]
+              }, {
+              name: 'READING',
+              transition: 'DEFAULT',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['FLYER_YELLOW-8', ]
+              }, {
+              name: 'GUSTING',
+              transition: 'DEFAULT',
+              frames: ['FLYER_YELLOW-1', 'FLYER_YELLOW-2', 'FLYER_YELLOW-3', 'FLYER_YELLOW-4', 'FLYER_YELLOW-5', 'FLYER_YELLOW-6', 'FLYER_YELLOW-7', 'FLYER_YELLOW-8', ]
+              },
+          ],
     },
   };
 export default OBJECTS;

@@ -11,7 +11,7 @@ export default class HudNotebook {
 
        this.position = {
             x: this.view.left + this.view.margin.left,
-            y: this.view.bottom - 148
+            y: this.view.bottom - (this.view.margin.bottom + 32)
         };
 
         this.notebook = {

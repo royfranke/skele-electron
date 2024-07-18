@@ -9,8 +9,13 @@ export default class Item {
         this.sprite = null;
         this.stackCount = 1;
         this.info = item;
+        this.name = this.info.name;
         this.actions = ['PUT AWAY'];
         this.world_actions = [{ action: 'PICK UP', object: this }];
+    }
+
+    setName (name) {
+        this.name = name;
     }
 
     addActions() { //Add actions to world
@@ -43,6 +48,9 @@ export default class Item {
     updateStackCount (amount) {
         this.stackCount += amount;
         this.updateStackAction();
+        if (this.sprite != null) {
+            this.sprite.setTexture('ITEMS', this.getStackIcon());
+        }
     }
 
     updateStackAction () {
@@ -63,10 +71,20 @@ export default class Item {
         if (valid) {
             if (this.scene.player.state.name != 'PICKUP') {
                 this.scene.player.setState('PICKUP');
-                setTimeout(() => {
-                    this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
-                    this.scene.player.setState('IDLE');
-                }, 1000);
+
+                this.scene.time.addEvent({
+                    delay: 500,
+                    callback: ()=>{
+                        this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
+                    }
+                });
+
+                this.scene.time.addEvent({
+                    delay: 1000,
+                    callback: ()=>{
+                        this.scene.player.setState('IDLE');
+                    }
+                });
             } 
         }
     }
@@ -79,6 +97,21 @@ export default class Item {
         this.info = this.scene.manager.itemManager.itemInfo(new_item);
     }
 
+    getStackIcon() {
+        let icon = this.info.icon;
+        if (this.stackCount > 1 && this.info.stacks.length > 0) {
+            /// An alternative icon may exist in relation to the stack size...
+            for (var i=0;i<this.info.stacks.length;i++) {
+                var stack = this.info.stacks[i];
+                if (this.stackCount < stack.lessThan && this.stackCount > stack.greaterThan) {
+                    icon = stack.icon;
+                    break;
+                }
+            }
+        }
+        return icon;
+    }
+
     setTileLocation(_x, _y) {
         this.tile_x = _x;
         this.tile_y = _y;
@@ -86,7 +119,7 @@ export default class Item {
         var x_pixels = _x * 16;
         var y_pixels = _y * 16;
 
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.info.icon, 0).setOrigin(.5,0).setDepth(y_pixels + 8);
+        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.getStackIcon(), 0).setOrigin(.5,0).setDepth(y_pixels + 8);
         /// tween
         const tween = this.scene.add.tween({
             targets: this.sprite,

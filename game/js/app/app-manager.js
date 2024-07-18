@@ -104,9 +104,13 @@ export default class AppManager {
     endScene (switchToKey) {
         this.camera.end(switchToKey);
         const state = this.state;
-        setTimeout(() => {
-            this.switchTo(switchToKey);
-        }, state.fadeOut);
+
+        this.scene.time.addEvent({
+            delay: state.fadeOut,
+            callback: ()=>{
+                this.switchTo(switchToKey);
+            }
+        });
     }
 
     switchTo (state) {

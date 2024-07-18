@@ -26,12 +26,27 @@ export default class HudFactory {
     }
 
     makeIcon (_x,_y, textureName, frameName) {
-        return this.scene.add.image(_x,_y, textureName,frameName).setOrigin(0).setDepth(this.depth.ICON).setScrollFactor(0);
+        return this.scene.add.sprite(_x,_y, textureName,frameName).setOrigin(0).setDepth(this.depth.ICON).setScrollFactor(0);
     }
 
     makeFX (fx_slug, _x, _y, delay=0) {
         var fx = this.scene.manager.fx.playFX(fx_slug,_x,_y,delay);
-        fx.setDepth(this.depth.FX).setScrollFactor(0);
+    }
+
+    makeHudFX (fx_slug, _x, _y, delay=0) {
+        var fx = this.scene.manager.fx.handleHudFX(fx_slug,_x,_y);
+
+        if (delay > 0) { // This delay is for the destroy call
+            this.scene.time.delayedCall(delay, () => {
+                fx.destroy();
+            });
+        }
+        else {
+            fx.once('animationcomplete', () => {
+                fx.destroy()
+            })
+        }
+        
     }
 
     makeStackIndicator (_x,_y) {

@@ -19,7 +19,9 @@ export default class ObjectFactory {
 
     newObject (slug,items=[]) {
         if (this.validObject(slug)) {
-            if (this.valid_objects[slug].type == 'CHEST') {
+            /// TODO: Get a chest bool from the object info
+            /// Could also be an array of valid items to fit in the chest
+            if (this.valid_objects[slug].type == 'MAILBOX') {
                 var object = new ObjectChest(this.scene,this.valid_objects[slug],items);
             }
             else {
@@ -27,6 +29,9 @@ export default class ObjectFactory {
             }
             
             return object; /// Returns a non-sprite obj
+        }
+        else {
+            console.warn("Nonvalid object slug passed in object factory: "+slug);
         }
         return false;
     }

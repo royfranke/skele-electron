@@ -9,7 +9,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.court;
         this.actionTile = {x: 0, y: 0};
         this.actionTileLast = {x: 0, y: 0};
-        this.actionTileFresh = true;
+
         this.actionTileLookUp = SPRITE_DIR.DIR_TILE;
         this.actionsGroup = this.scene.add.group();
 
@@ -44,19 +44,15 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.snappedWorldPoint = this.locale.groundLayer.tileToWorldXY(this.actionTile.x, this.actionTile.y);
 
         this.actionMarker.setPosition(this.snappedWorldPoint.x - 8, this.snappedWorldPoint.y - 8);
-
         
         if (this.actionTileLast.x != this.actionTile.x || this.actionTileLast.y != this.actionTile.y) {
             //this.debugActionTile.setPosition(this.snappedWorldPoint.x, this.snappedWorldPoint.y);
-            this.actionTileFresh = true;
+            this.scene.manager.announce.loadAnnouncements(this.actionTile.x, this.actionTile.y);
             this.clearActions();
             this.actionTileLast = this.actionTile;
-
             this.refreshActions();
         }
-        else {
-            this.actionTileFresh = false;
-        }
+
     }
 
     refreshActions() {
@@ -190,8 +186,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                     }
                 })
             }
-
-            
         }
     }
     

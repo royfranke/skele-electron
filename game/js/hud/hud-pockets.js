@@ -9,6 +9,7 @@ export default class HudPockets {
         this.factory = factory;
         this.view = this.scene.manager.getView();
         this.slots = this.addPockets();
+        this.pocket_textblock = this.addPocketTextBlock();
         this.pocket_actions = null;
         this.item_actions = this.scene.add.group();
     }
@@ -24,6 +25,17 @@ export default class HudPockets {
     addFX(fx_slug, _x, _y, delay = 0) {
         var fx = this.scene.manager.fx.playFX(fx_slug, _x, _y, delay);
         fx.setDepth(100200).setScrollFactor(0);
+    }
+
+    addPocketTextBlock () {
+        const margin = {
+            x: 24,
+            y: 16 + (2*40),
+        };
+        var display_width = 104;
+
+        return this.scene.add.dom((this.view.right - display_width) - (margin.x), this.view.top + (margin.y), 'div', {'max-width':display_width+'px'}, '').setClassName('pocket-textblock').setOrigin(0).setScrollFactor(0).setVisible(false);
+
     }
 
     addPockets() {
@@ -107,27 +119,12 @@ export default class HudPockets {
         if (this.slots[1][slot_x].icon != null) {
             this.slots[1][slot_x].icon.destroy();
             if (new_icon.info != null) {
-                this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'ITEMS', this.getStackIcon(new_icon));
+                this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'ITEMS', new_icon.getStackIcon());
             }
             else {
                 this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'EMPTY', 'empty');
             }
         }
-    }
-
-    getStackIcon(item) {
-        let icon = item.info.icon;
-        if (item.stackCount > 1 && item.info.stacks.length > 0) {
-            /// An alternative icon may exist in relation to the stack size...
-            for (var i=0;i<item.info.stacks.length;i++) {
-                var stack = item.info.stacks[i];
-                if (item.stackCount < stack.lessThan && item.stackCount > stack.greaterThan) {
-                    icon = stack.icon;
-                    break;
-                }
-            }
-        }
-        return icon;
     }
 
     setSlotColor(slot_x, slot_y, status = 'UNFOCUSED') {
@@ -154,7 +151,7 @@ export default class HudPockets {
         var pocket = this.scene.manager.hud.pocket.getPocket(slot_x);
         var state = pocket.STATE;
         if (state != 'EMPTY' && pocket[state].info.type == 'BAG') {
-            if (pocket[state].info.items.length > 1) {
+            if (pocket[state].items.length > 1) {
                 pocket[state].nextItem();
                 var sound_var = Phaser.Math.RND.between(1, 3);
                 this.scene.manager.hud.hudSound.play('BAG_RUMMAGE_' + sound_var);
@@ -222,11 +219,11 @@ export default class HudPockets {
     }
 
     openPockets() {
-        //this.setKeyTip(this.hints.POCKETS, true);
+        this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', true);
     }
 
     closePockets() {
-        //this.pocket_textblock.setVisible(false);
+        this.pocket_textblock.setVisible(false);
         for (var r = 0; r < 3; r++) {
             var pocket = this.scene.manager.hud.pocket.getPocket(r); // new HudPocket Obj?
 
@@ -240,7 +237,7 @@ export default class HudPockets {
         this.clearActions();
         this.showDrop(-1);
         this.setSlipsVisible(false);
-        //this.setKeyTip(this.hints.POCKETS, false);
+        this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', false);
         //this.changeFocus();
     }
 
@@ -384,7 +381,7 @@ export default class HudPockets {
 
     refreshDisplay () {
         this.clearActions();
-        //this.pocket_textblock.setVisible(false);
+        this.pocket_textblock.setVisible(false);
         const selected = this.scene.manager.hud.hudInput.selected;
         for (let i=0;i<3;i++) {
             let slot_y = i;
@@ -406,8 +403,8 @@ export default class HudPockets {
                         this.setSlipVisible(slot_x,false);
                     }
 
-                    if (pocket[state].info.items.length > 0) {
-                        this.setContentsIcon(r,pocket[state].info.items[0]);
+                    if (pocket[state].items.length > 0) {
+                        this.setContentsIcon(r,pocket[state].items[0]);
                     }
                     else {
                         this.setSlipVisible(r,false);
@@ -428,8 +425,8 @@ export default class HudPockets {
                     /// It's an item that has actions
                     this.pocket_actions = this.drawActions(r,selected.actions,pocket[state].actions);
                     if (pocket[state].info.description != '') {
-                        //this.pocket_textblock.setText(pocket[state].info.description);
-                        //this.pocket_textblock.setVisible(true);
+                        this.pocket_textblock.setText(pocket[state].info.description);
+                        this.pocket_textblock.setVisible(true);
                     }
                 }
 
@@ -452,7 +449,7 @@ export default class HudPockets {
                         //this.setPocketTip(pocket[state].NAME);
                     }
                     else {
-                        //this.setPocketTip(pocket[state].info.name);
+                        //this.setPocketTip(pocket[state].name);
                     }
                 }
                 
@@ -463,7 +460,7 @@ export default class HudPockets {
                     }
                 }
                 else {
-                    var frameName = this.getStackIcon(pocket[state]);
+                    var frameName = pocket[state].getStackIcon();
                     if (this.slots[slot_y][slot_x].stack != undefined) {
                         this.slots[slot_y][slot_x].stack.setVisible(pocket[state].stackCount > 1);
                     if (pocket[state].stackCount > 1) {

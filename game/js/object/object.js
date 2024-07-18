@@ -1,7 +1,9 @@
+import Announcer from './announcer.js';
+
 /* Object Class */
 
 export default class Object {
-    constructor(scene, object) {
+    constructor(scene, object, items=[]) {
         this.scene = scene;
 
         /// Starts out not registered, no tile location, no sprite
@@ -13,6 +15,9 @@ export default class Object {
         
         // Imbue this object with the config object info
         this.info = object;
+        this.announcer = null;
+        this.announcement = null;
+        this.name = this.info.name;
 
         // If there are varieties, randomize variety
         // this is also where variety vs. animation frames should be set
@@ -23,7 +28,6 @@ export default class Object {
             this.variety = Phaser.Math.Between(1, this.info.varieties);
         }
         
-
         
         let actions = [];
         // Iterate through the config actions and add this object as the action object
@@ -41,17 +45,41 @@ export default class Object {
         if (this.info.states.length > 0) {
             this.state = this.info.states[0];
         }
+        this.chestFunctions(items);
+    }
+
+    setShadow (_x,_y,frame) {
+        this.shadow = this.scene.add.sprite(_x,_y, "OBJECTS", frame).setOrigin(.5,0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
+        this.shadow.setFlipX(true).setDepth(this.sprite.depth - 1);
+    }
+
+    setName (name) {
+        this.name = name;
+    }
+
+    setAnnouncement (announcement) {
+        this.announcement = announcement;
+        this.setAnnouncer();
+    }
+
+    setAnnouncer () {
+        if (this.announcer == null) {
+            this.announcer = new Announcer(this.scene, this);
+        }
+        this.announcer.setAnnouncement(this.announcement);
+    }
+
+    chestFunctions (items) {
+        /// Used within object-chest.js to extend constructor from object.js
     }
 
     update () {
-        
         if (this.state != this.last_state) { // State change
             if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition != 'false') {
                 this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
                 var transition = this.state.transition;
                 this.sprite.once('animationcomplete', () => {
                     this.setState(transition);
-                    this.scene.player.action.refreshActions();
                 });
             }
         }
@@ -70,7 +98,13 @@ export default class Object {
                     player_action.addAction(action);
                 }
             });
+            this.addChestActions();
         }
+        
+    }
+
+    addChestActions() {
+        /// Used within object-chest.js to extend addActions from object.js
     }
     
 
@@ -126,7 +160,7 @@ export default class Object {
 
     doAction(action) {
         this.scene.player.action.clearActions();
-        const self = this;
+        var self = this;
         this.world_actions.forEach(function (world_action) {
             if (world_action.action == action) {
                 if (world_action.stateTrigger != null) {
@@ -151,6 +185,8 @@ export default class Object {
         var frame = this.info.slug+'-'+this.variety;
 
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setSize(this.info.size.w, this.info.size.h).setDepth(y_pixels + (this.info.sprite.h));
+
+        //this.setShadow(x_pixels, y_pixels, frame);
 
         if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_') {
             this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xed931e).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1);

@@ -2,26 +2,26 @@ import Object from "./object.js";
 
 /* Object Bag Class */
 
-export default class ObjectBag extends Object {
-    constructor(scene, object, items = []) {
-        super(scene, object);
-        this.actions = [{ action: 'OPEN', object: this }];
+export default class ObjectChest extends Object {
+
+    chestFunctions(items) {
+        this.items = [];
         if (items.length > 0) {
-            this.info.items = items;
+            this.items = items;
         }
     }
 
     isFull() {
-        return this.info.items.length >= this.info.slots;
+        return this.items.length >= this.info.slots;
     }
 
     isEmpty() {
-        return this.info.items.length === 0;
+        return this.items.length === 0;
     }
 
     addItem(item) {
         if (!this.isFull()) {
-            this.info.items.push(item);
+            this.items.push(item);
             return true;
         } else {
             console.log("Chest.addObject: no more room in chest.");
@@ -30,8 +30,8 @@ export default class ObjectBag extends Object {
     }
 
     pullItem(place = 0) {
-        if (this.info.items.length >= place + 1) {
-            var object = this.info.items.splice(place, 1);
+        if (this.items.length >= place + 1) {
+            var object = this.items.splice(place, 1);
             return object[0];
         } else {
             console.warn("Chest.pullItem: this bag does not contain an item at the requested position (" + place + ")");
@@ -40,31 +40,67 @@ export default class ObjectBag extends Object {
     }
 
     discardItem(place = 0) {
-        if (this.info.items.length >= place + 1) {
-            this.info.items.splice(place, 1);
+        if (this.items.length >= place + 1) {
+            this.items.splice(place, 1);
         } else {
             console.warn("Chest.discardItem: this bag does not contain an object at the requested position (" + place + ")");
         }
     }
 
     nextItem() {
-        if (this.info.items.length > 1) {
-            var item = this.info.items.shift();
-            this.info.items.push(item);
+        if (this.items.length > 1) {
+            var item = this.items.shift();
+            this.items.push(item);
         }
-    }
-
-    addActions() { // Adds world actions
-        var player_action = this.scene.player.action;
-        this.actions.forEach(function (action) {
-            player_action.addAction(action);
-        });
     }
 
     doAction(action) {
-        if (action == 'OPEN') {
+        this.scene.player.action.clearActions();
+        var self = this;
+        this.world_actions.forEach(function (world_action) {
+            if (world_action.action == action) {
+                if (world_action.stateTrigger != null) {
+                    self.setState(world_action.stateTrigger);
+                }
+            }
+        });
+        if (action == 'LOOK INSIDE') {
+            /// change focus to ui chest window
             this.scene.manager.openChest(this);
         }
-        this.scene.player.action.clearActions();
+        /*
+        If the first nine characters of the action string are 'PUT AWAY ', then the player is trying to put an item in the bag.
+        */
+        if (action.substring(0, 9) == 'PUT AWAY ') {
+            var items = this.scene.manager.hud.pocket.getHeldItems();
+            var putAway = false;
+            items.forEach(function (item) {
+                if (action == 'PUT AWAY '+item.item.name.toUpperCase() && !putAway) {
+                    putAway = true;
+                    let placed = self.addItem(item.item);
+                    if (placed) {
+                        self.scene.manager.hud.pocket.setPocket(item.pocketIndex, 'EMPTY');
+                        var sound_var = Phaser.Math.RND.between(1, 3);
+                        self.scene.manager.hud.hudSound.play('ITEM_PUT_AWAY_' + sound_var);
+                    }
+                    self.scene.manager.hud.refreshDisplay();
+                }
+            });
+        }
     }
+
+    addChestActions() {
+        var player_action = this.scene.player.action;
+        var items = this.scene.manager.hud.pocket.getHeldItems();
+        var self = this;
+       
+        if (this.state != null && this.state.name == 'OPEN') {
+            items.forEach(function (item) {
+                player_action.addAction({ action: 'PUT AWAY '+item.item.name.toUpperCase(), object: self, ground: '', fx: '' });
+            });
+        }
+        /// Get what the player is holding and add actions
+        /// to add to this chest in the world
+    }
+
 }

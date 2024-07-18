@@ -50,7 +50,8 @@ export default class ObjectManager {
     }
 
     openChest (object) {
-        console.log(object);
+        this.scene.manager.setFocus('CHEST');
+        this.scene.manager.hud.hudChest.openChest(object);
     }
     
 }

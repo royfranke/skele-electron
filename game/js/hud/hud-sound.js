@@ -1,4 +1,3 @@
-//import STATES from "../config/sound-states.js";
 
 /* global Phaser */
 /*
@@ -12,7 +11,6 @@ export default class HudSound {
 
     constructor(scene) {
         this.scene = scene;
-       //this.valid_states = STATES;
 
     }
 

@@ -28,7 +28,7 @@ export default class GameScene extends Phaser.Scene {
             this.manager.wake();
         }, this);
         this.exterior = new ExteriorManager(this);
-        this.player = new PlayerManager(this, 32, 32);
+        this.player = new PlayerManager(this, 80, 32);
         this.npcs = new NpcManager(this);
         
         this.exterior.create();

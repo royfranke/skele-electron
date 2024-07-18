@@ -36,6 +36,26 @@ const PRELOAD_SOUND = [
         PATH: 'sound/bag-rummage-3.wav'
     },
     {
+        NAME: 'CARD_CLICK_1',
+        PATH: 'sound/card-click-1.wav'
+    },
+    {
+        NAME: 'CARD_CLICK_2',
+        PATH: 'sound/card-click-2.wav'
+    },
+    {
+        NAME: 'CARD_CLICK_3',
+        PATH: 'sound/card-click-3.wav'
+    },
+    {
+        NAME: 'CARD_SHUFFLE_MID',
+        PATH: 'sound/card-shuffle-mid.wav'
+    },
+    {
+        NAME: 'CARD_SHUFFLE_SMALL',
+        PATH: 'sound/card-shuffle-small.wav'
+    },
+    {
         NAME: 'SKELE_INVALID_1',
         PATH: 'sound/skele-invalid-1.wav'
     },

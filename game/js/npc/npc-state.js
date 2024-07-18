@@ -7,8 +7,7 @@ import STATES from "../config/npc-states.js";
 
 export default class NpcState {
 
-
-    constructor(state) {
+    constructor() {
        this.last_state = null;
        this.state = null;
        this.valid_states = STATES;

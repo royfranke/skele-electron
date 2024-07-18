@@ -2,6 +2,7 @@ import TILES from "../config/atlas/tile-weights.js";
 import EDGETILES from "../config/atlas/edge-tile-weights.js";
 import COOK from "../config/atlas/tile-recipes.js";
 import WALLTILES from "../config/atlas/wall-tile-weights.js";
+import ROOFTILES from "../config/atlas/roof-tile-weights.js";
 import MAP_CONFIG from "../config/map.js";
 import ExteriorGround from "./exterior-ground.js";
 import Block from "./exterior-block.js";
@@ -35,13 +36,15 @@ import ObjectManager from "../objects/object-manager.js";
         const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
         const edge_tileset = this.map.addTilesetImage("edge", null, 16, 16, 0, 0);
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
+        const roof_tileset = this.map.addTilesetImage("roof", null, 16, 16, 0, 0);
+        
         this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(1);
         this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset);
-
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
+        this.roofLayer = this.map.createBlankLayer("Roof", roof_tileset);
+        this.roofLayer.setDepth(1000);
         const wallLayer = this.wallLayer;
-
-
+        const roofLayer = this.roofLayer;
         const groundLayer = this.groundLayer;
         var self = this;
         const blocks = new Array(this.overMap.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
@@ -49,7 +52,7 @@ import ObjectManager from "../objects/object-manager.js";
 
         //self.scene.manager.objectManager = new ObjectManager(scene);
         overMap.blocks.forEach(function (block, index) {
-            blocks[block.y][block.x] = new Block(self.scene,groundLayer,wallLayer, block); /// Backwards on purpose to not require array flip
+            blocks[block.y][block.x] = new Block(self.scene,groundLayer,wallLayer,roofLayer, block); /// Backwards on purpose to not require array flip
             
         });
 

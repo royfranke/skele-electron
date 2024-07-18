@@ -5,8 +5,10 @@ import HudPocket from "./hud-pocket.js";
 import HudPockets from "./hud-pockets.js";
 import HudFactory from "./hud-factory.js";
 import HudDisplay from "./hud-display.js";
+import HudDialog from "./hud-dialog.js";
 import HudChest from "./hud-chest.js";
 import HudWatch from "./hud-watch.js";
+import HudZener from "./hud-zener.js";
 import HudNotebook from "./hud-notebook.js";
 import HudCoinpurse from "./hud-coinpurse.js";
 import HudFocusHints from "./hud-focus-hints.js";
@@ -26,9 +28,11 @@ export default class HudManager {
        this.hudPockets = new HudPockets(this.scene, this.factory);
        this.hudWatch = new HudWatch(this.scene, this.factory);
        this.hudNotebook = new HudNotebook(this.scene, this.factory);
+       this.hudDialog = new HudDialog(this.scene, this.factory);
        this.hudFocusHints = new HudFocusHints(this.scene, this.factory);
        this.hudCoinpurse = new HudCoinpurse(this.scene, this.factory);
        this.hudState = new HudState();
+       this.hudZener = new HudZener(this.scene, this.factory);
        this.state = this.getState();
        this.loadHud();
     }
@@ -129,13 +133,19 @@ export default class HudManager {
         if (!this.last_state || this.last_state.name == 'INVISIBLE') {
             this.hudPockets.pocketsVisible(true);
         }
-        if (this.state.name == 'VISIBLE_FOCUSED') {
+        if (this.state.name == 'POCKETS_FOCUSED') {
             this.hudPockets.openPockets();
             this.hudCoinpurse.openCoinpurse();
         }
-        if (this.state.name == 'VISIBLE_UNFOCUSED') {
+        if (this.state.name != 'POCKETS_FOCUSED') {
             this.hudPockets.closePockets();
             this.hudCoinpurse.closeCoinpurse();
+        }
+        if (this.state.name == 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name != 'ZENER_FOCUSED') {
+            this.hudZener.openZener();
+        }
+        if (this.state.name != 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name == 'ZENER_FOCUSED') {
+            this.hudZener.closeZener();
         }
     }
 
@@ -150,6 +160,8 @@ export default class HudManager {
             /// After loading functions...
             this.setState('LOADED');
             console.log('Loaded HUD.');
+            //this.hudDialog.tellDialogBox('I got these— these cards. I got one of each and I mix em and then you tell me which card is next. Got it?');
+            //this.hudDialog.tellReplyBox('Yep.\nHow do I know which one is next?\nSounds dumb.');
         }
     }
 

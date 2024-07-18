@@ -11,6 +11,7 @@ const config = {
   type: Phaser.WEBGL,
   width: 960,
   height: 540,
+  seed: 14,
   backgroundColor: "#3a3a50",
   parent: "game-container",
   pixelArt: true,

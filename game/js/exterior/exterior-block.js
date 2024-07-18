@@ -29,11 +29,12 @@ export default class Block {
     },
     */
 
-    constructor(scene, groundLayer, wallLayer, block) {
+    constructor(scene, groundLayer, wallLayer, roofLayer, block) {
         this.scene = scene;
         this.block = block;
         this.groundLayer = groundLayer;
         this.wallLayer = wallLayer;
+        this.roofLayer = roofLayer;
         this.propertyLines = [];
         this.setGround();
     }
@@ -178,12 +179,11 @@ export default class Block {
 
     buildObjects () {
         this.nodes = this.getAdjoiningNodes(this.block.x, this.block.y);
-        console.log(this.nodes);
 
         if (this.nodes.NW != null) {
             var stop = this.nodes.NW.streets.s.signal == 1 ? 'S' : null;
             if (stop != null) {
-                this.buildStreetPole(this.block.left+1, this.block.top+1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+                this.buildStreetPole(this.block.left+1, this.block.top+1,{EW:this.block.bounds.n,NS:this.block.bounds.w, STOP:stop});
             }
             if (this.nodes.NW.streets.s.signal == 2) {
                 this.buildTrafficLight(this.block.left+1, this.block.top+1,'NW');
@@ -192,7 +192,7 @@ export default class Block {
         if (this.nodes.NE != null) {
             var stop = this.nodes.NE.streets.w.signal == 1 ? 'W' : null;
             if (stop != null) {
-                this.buildStreetPole(this.block.right-1, this.block.top+1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+                this.buildStreetPole(this.block.right-1, this.block.top+1,{EW:this.block.bounds.n,NS:this.block.bounds.e, STOP:stop});
             }
             if (this.nodes.NE.streets.s.signal == 2) {
                 this.buildTrafficLight(this.block.right-1, this.block.top+1,'NE');
@@ -202,7 +202,7 @@ export default class Block {
         if (this.nodes.SE != null) {
             var stop = this.nodes.SE.streets.n.signal == 1 ? 'N' : null;
             if (stop != null) {
-                this.buildStreetPole(this.block.right-1, this.block.bottom-1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+                this.buildStreetPole(this.block.right-1, this.block.bottom-1,{EW:this.block.bounds.s,NS:this.block.bounds.e, STOP:stop});
             }
             if (this.nodes.SE.streets.e.signal == 2) {
                 this.buildTrafficLight(this.block.right-1, this.block.bottom-1,'SE');
@@ -212,7 +212,7 @@ export default class Block {
         if (this.nodes.SW != null) {
             var stop = this.nodes.SW.streets.e.signal == 1 ? 'E' : null;
             if (stop != null) {
-                this.buildStreetPole(this.block.left+1, this.block.bottom-1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:stop});
+                this.buildStreetPole(this.block.left+1, this.block.bottom-1,{EW:this.block.bounds.s,NS:this.block.bounds.w, STOP:stop});
             }
             if (this.nodes.SW.streets.e.signal == 2) {
                 this.buildTrafficLight(this.block.left+1, this.block.bottom-1,'SW');
@@ -272,11 +272,14 @@ export default class Block {
         if (signs.NS != null) {
             var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');
             pole.setSlot(.5,4.25,slotted);
+            //pole.setAnnouncement(signs.NS);
         }
         
         if (signs.EW != null) {
             var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
             pole.setSlot(.5,3.75,slotted);
+            pole.setAnnouncement(signs.EW);
+            /* Need to fix for correct signs output to buildstreetpole */
         }
         
         if (signs.STOP != null) {
@@ -284,7 +287,6 @@ export default class Block {
             var behind = signs.STOP == 'N' || signs.STOP == 'E' ? true : false;
             pole.setSlot(.5,2,slotted,false,behind);
         }
-
     }
 
     buildItems () {

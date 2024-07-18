@@ -50,12 +50,22 @@ export default class HudPocket {
         return found;
     }
 
+    getHeldItems() {
+        var heldItems = [];
+        this.pockets.forEach(function (pocket, index) {
+            if (pocket.STATE != 'EMPTY') {
+                heldItems.push({pocketIndex: index, item: pocket[pocket.STATE]});
+            }
+        });
+        return heldItems;
+    }
+
     availablePocket(item) {
         let self = this;
         var found = false;
         this.pockets.forEach(function (pocket, index) {
             if (!found) {
-                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.slug == item.info.slug && pocket[pocket.STATE].isStackable()) {
+                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.slug == item.info.slug && pocket[pocket.STATE].isStackable(item.stackCount)) {
                     found = true;
                     pocket[pocket.STATE].updateStackCount(item.stackCount);
                     self.scene.manager.hud.refreshDisplay();
@@ -80,7 +90,7 @@ export default class HudPocket {
                     if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == 'BAG') {
 
                         //The below needs to apply to all the contents of the bag, not stacking the bag itself
-                        pocket[pocket.STATE].info.items.forEach(function (bag_item) {
+                        pocket[pocket.STATE].items.forEach(function (bag_item) {
                          if (!found) {
                             if (bag_item.info.slug == item.info.slug && bag_item.isStackable(item.stackCount)) {
                                 found = true;
@@ -118,7 +128,7 @@ export default class HudPocket {
         }
         else if (action_string == 'DROP ONE' && pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];
-            var placed = this.scene.manager.itemManager.newItemToWorld(_x, _y, item.info.icon);
+            var placed = this.scene.manager.itemManager.newItemToWorld(_x, _y, item.info.slug);
             if (placed) {
                 item.updateStackCount(-1);
             }

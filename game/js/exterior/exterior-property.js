@@ -1,35 +1,94 @@
 import TILES from "../config/atlas/tile-weights.js";
 import WALLTILES from "../config/atlas/wall-tile-weights.js";
+import ROOFTILES from "../config/atlas/roof-tile-weights.js";
 import STOOP from "../config/options/stoop.js";
-/* ExteriorProperty Class */
+import EXT_DOOR from "../config/options/ext-door.js";
+/* PropertyLine Class */
 
-export default class ExteriorProperty {
+export default class PropertyLine {
 
-/*
-lines: {
-    x: {{ prop.x }},
-    y: {{ prop.y }},
-    width: {{ prop.width }},
-    height: {{ prop.height }}
-},
-block: {
-    x: {{ prop.blockX }},
-    y: {{ prop.blockY }}
-},
-address: {
-    name: "{{ prop.name }}",
-    facing: "{{ prop.facing }}",
-    number: "{{ prop.addressNumber }}",
-    street: "{{ prop.addressStreet }}",
-}
-*/
     constructor(scene, block, prop) {
         this.scene = scene;
         this.block = block;
         this.prop = prop;
+
+        this.setMaterials();
     }
 
-    buildIt () {
+    setMaterials(settings = {}) {
+
+        if (!settings.hasOwnProperty('mailbox')) {
+            let colors = ['WEATHERED', 'SHINY', 'SLEEK'];
+            settings.mailbox = this.roll(colors);
+        }
+        if (!settings.hasOwnProperty('fence')) {
+            let fence_types = ['WOOD_FENCE', 'CHAINLINK_S'];
+            let fence_options = {
+                'WOOD_FENCE': [
+                    'BROWN',
+                    'HONEY',
+                    'WEATHERED'
+                ],
+                'CHAINLINK_S': [
+                    'COMPLETE',
+                ]
+            };
+            settings.fence = {
+                prefix: this.roll(fence_types)
+            };
+            settings.fence.suffix = this.roll(fence_options[settings.fence.prefix]);
+
+        }
+        if (!settings.hasOwnProperty('door')) {
+            settings.door = this.roll(EXT_DOOR);
+        }
+        if (!settings.hasOwnProperty('foundation')) {
+            settings.foundation = {
+                height: this.roll([1, 1, 1, 0, 1, 1, 1, 1, 2]),
+            };
+            if (settings.foundation.height > 0) {
+
+                settings.foundation.material = WALLTILES.BRICK.RED_WEATHERED_;
+                //roll foundation options
+                // Allow stoop
+
+                if (!settings.hasOwnProperty('stoop')) {
+                    settings.stoop = {
+                        landing: {
+                            width: this.roll([2, 3]),
+                            depth: this.roll([1, 2]),
+                            material: this.roll(STOOP.LANDING)
+                        },
+                        steps: {
+                            height: settings.foundation.height,
+                            material: this.roll(STOOP.STEPS),
+                        },
+                        rail: {
+                            material: this.roll(STOOP.RAILS)
+                        }
+                    };
+
+                }
+            }
+        }
+        if (!settings.hasOwnProperty('levels')) {
+            settings.levels = [];
+            settings.levels.push({ height: this.roll([3, 4, 4, 4, 5]) });
+        }
+        if (!settings.hasOwnProperty('roof')) {
+            settings.roof = {
+                height: 8
+            };
+        }
+
+        this.settings = settings;
+    }
+
+    roll(array) {
+        return array[Phaser.Math.RND.between(0, array.length - 1)];
+    }
+
+    buildIt() {
         const top = this.prop.lines.top;
         const left = this.prop.lines.left;
         const bottom = this.prop.lines.bottom;
@@ -39,125 +98,288 @@ address: {
         const facing = this.prop.address.facing;
 
         //check for "detached" tag-- make perimeter of space around building if found
-
-        console.log('Building...');
-        console.log(this.prop.address.number+' '+this.prop.address.dir+' '+this.prop.address.street);
+        console.log("Building " + this.prop.address.number + " " + this.prop.address.street + "...");
 
         let yard = 4;
 
         //this.block.groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 2, height - (yard + 1));
         //this.block.groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, left+1, top + height - (yard + 1), width - 2,  yard);
-        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_ASPHALT_, left+1, top + 3, width - 1, height - (yard + 7));
-        
-        
-        
+
+
         var _x = left + 1;
-        var _y = top + height - yard;
+        //var _y = top + height - yard;
+        var _y = bottom - yard;
 
         var building_width = width - 2;
-        var material = Phaser.Math.RND.between(0,1);
-        console.log(material);
+        var material = this.roll([0, 1, 1, 1]);
+
         if (material == 0) {
-            var colors = ['YELLOW','BROWN','RED','GRAY','WHITE'];
-            var color_choice = Phaser.Math.RND.between(0,colors.length - 1);
-            var wallKind = WALLTILES.BRICK[colors[color_choice]+'_CEMENT_'];
+            var colors = ['YELLOW', 'BROWN', 'RED', 'GRAY', 'WHITE'];
+            var wallKind = WALLTILES.BRICK[this.roll(colors) + '_CEMENT_'];
         }
         else {
-            var colors = ['YELLOW','GRAY','PURPLE','BLUE'];
-            var color_choice = Phaser.Math.RND.between(0,colors.length - 1);
-            var wallKind = WALLTILES.SIDING[colors[color_choice]+"_"];
+            var colors = ['ORANGE', 'YELLOW', 'GREEN', 'GRAY', 'PURPLE', 'BLUE'];
+            var wallKind = WALLTILES.SIDING[this.roll(colors) + "_"];
         }
-        
-        this.block.wallLayer.weightedRandomize(wallKind.LOWER_LEFT_, _x, _y, 1, 1);
 
-        this.block.wallLayer.weightedRandomize(wallKind.LOWER_, _x + 1, _y, building_width - 1, 1);
-        this.block.wallLayer.weightedRandomize(wallKind.LOWER_RIGHT_, _x + building_width, _y, 1, 1);
+        if (this.settings.foundation.height > 0) {
+            /// _y here is where the building meets the ground
+            /// If there is a foundation, this is where the stairs meet the ground.
+            this.buildFoundation(_x, _y, building_width, this.settings.foundation.height, this.settings.foundation.material);
+            _y = _y - 1;
+        }
 
-        
-        this.scene.manager.objectManager.newObjectToWorld(left+Math.floor(width/2), _y - 1,'WINDOW_2_YELLOW_WORN_');
+        _y = _y - this.settings.foundation.height;
+        this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
 
-        this.buildEntry(_x + 1, _y-1);
+        ////
+        ///this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_ASPHALT_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
 
-        
-        _y = _y - 3;
+        /*
+        this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height) + 1, building_width + 2, this.settings.roof.height/2, ROOFTILES.PITCHED.METAL_SOUTH_);
 
-        this.block.wallLayer.weightedRandomize(wallKind.MID_LEFT_, _x, _y, 1, 3);
+        this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height + this.settings.roof.height/2) + 1, building_width + 2, this.settings.roof.height/2, ROOFTILES.PITCHED.METAL_NORTH_);
+       */
 
-        this.block.wallLayer.weightedRandomize(wallKind.MID_, _x + 1, _y, building_width - 1, 3);
-        this.block.wallLayer.weightedRandomize(wallKind.MID_RIGHT_, _x + building_width, _y, 1, 3);
+        this.buildPitchedRoof(_x - 1, _y - (this.settings.levels[0].height) + 1, building_width + 2, this.settings.roof.height, 'SHINGLES_');
 
+        this.scene.manager.objectManager.newObjectToWorld(left + Math.floor(width / 2), _y, 'EXT_WINDOW_2_OPENS');
 
-        _y = _y - 1;
-        this.block.wallLayer.weightedRandomize(wallKind.TOP_LEFT_, _x, _y, 1, 1);
+        this.buildEntry(_x + 1, _y);
 
-        this.block.wallLayer.weightedRandomize(wallKind.TOP_, _x + 1, _y, building_width - 1, 1);
-        this.block.wallLayer.weightedRandomize(wallKind.TOP_RIGHT_, _x + building_width, _y, 1, 1);
-        
     }
 
-    buildYardBorder (_x, width=2) {
+    buildPitchedRoofColumn(_x, _y, height, north, south, material) {
+        var roofLayer = this.block.roofLayer;
+        if (south != 2) {
+            roofLayer.weightedRandomize(material['REPEAT_3_SOUTH_'], _x, _y, 1, 1);
+            roofLayer.weightedRandomize(material['REPEAT_1_SOUTH_'], _x, _y - 1, 1, 1);
+        }
+        else {
+            roofLayer.weightedRandomize(material['REPEAT_2_SOUTH_'], _x, _y, 1, 1);
+            roofLayer.weightedRandomize(material['MID_'], _x, _y - 1, 1, 1);
+        }
+
+        roofLayer.weightedRandomize(material['REPEAT_' + north + '_NORTH_'], _x, _y - height, 1, 1);
+
+        roofLayer.weightedRandomize(material['MID_'], _x, (_y - height) + 1, 1, height - 2);
+    }
+
+    buildPitchedRoofCap(_x, _y, height, north, south, material) {
+        var roofLayer = this.block.roofLayer;
+
+        roofLayer.weightedRandomize(material['PEAK_' + south + '_SOUTH_'], _x, _y, 1, 1);
+
+        roofLayer.weightedRandomize(material['PEAK_' + north + '_NORTH_'], _x, _y - height, 1, 1);
+
+        roofLayer.weightedRandomize(material['PEAK_EDGE_'], _x, (_y - height) + 1, 1, height - 1);
+
+    }
+
+    buildPitchedRoof(_x, _y, width, height, material) {
+        var w_material = ROOFTILES.PITCHED[material + 'WEST_'];
+        var e_material = ROOFTILES.PITCHED[material + 'EAST_'];
+        var roofLayer = this.block.roofLayer;
+        /// Lower left is _x, _y
+
+        var colors = ['ORANGE', 'YELLOW', 'GREEN', 'GRAY', 'PURPLE', 'BLUE'];
+        var wallKind = WALLTILES.SIDING[this.roll(colors) + "_"];
+        this.buildFacadeSection(_x + 1, _y - 1, width - 2, 3, wallKind);
+        // First determine which roof parts we need
+
+        var w_side_width = Math.floor(width / 2);
+        var w_side_remaining = w_side_width;
+        var w_side_place = 0;
+        var w_y = _y;
+
+        var north = 1;
+        var south = 2;
+
+        while (w_side_remaining > 1) {
+
+            this.buildPitchedRoofColumn(_x + w_side_place, Math.ceil(w_y), height, north, south, w_material);
+
+            north = north == 1 ? 2 : 1;
+            south = south == 1 ? 2 : 1;
+
+            w_side_place++;
+            w_side_remaining--;
+            w_y = w_y - .5;
+        }
+        // Then do roof cap
+        this.buildPitchedRoofCap(_x + w_side_place, Math.ceil(w_y), height, north, south, w_material);
+
+        ////////////////////////////
+        // Start fresh for east side
+        var e_side_width = Math.ceil(width / 2);
+        var e_side_remaining = e_side_width;
+        var e_side_place = 0;
+        var e_y = _y;
+
+        north = 1;
+        south = 2;
+
+        while (e_side_remaining > 1) {
+                
+                this.buildPitchedRoofColumn(_x + (width - 1) - e_side_place, Math.ceil(e_y), height, north, south, e_material);
+    
+                north = north == 1 ? 2 : 1;
+                south = south == 1 ? 2 : 1;
+    
+                e_side_place++;
+                e_side_remaining--;
+                e_y = e_y - .5;
+            }
+        // Then do roof cap
+        this.buildPitchedRoofCap(_x + w_side_width, Math.ceil(e_y), height, north, south, e_material);
+    }
+
+    buildRoofSection(_x, _y, width, height, material) {
+        var roofLayer = this.block.roofLayer;
+
+        /// Lower left is _x, _y
+        roofLayer.weightedRandomize(material.LOWER_LEFT_, _x, _y, 1, 1);
+        roofLayer.weightedRandomize(material.LOWER_, _x + 1, _y, width - 2, 1);
+        roofLayer.weightedRandomize(material.LOWER_RIGHT_, _x + width - 1, _y, 1, 1);
+
+        if (height > 2) {
+            // go up by the number of mid tiles (height-2)
+            _y = _y - (height - 2);
+            roofLayer.weightedRandomize(material.MID_LEFT_, _x, _y, 1, height - 2);
+            roofLayer.weightedRandomize(material.MID_, _x + 1, _y, width - 2, height - 2);
+            roofLayer.weightedRandomize(material.MID_RIGHT_, _x + width - 1, _y, 1, height - 2);
+        }
+        if (height > 1) {
+            _y = _y - 1;
+            roofLayer.weightedRandomize(material.TOP_LEFT_, _x, _y, 1, 1);
+            roofLayer.weightedRandomize(material.TOP_, _x + 1, _y, width - 2, 1);
+            roofLayer.weightedRandomize(material.TOP_RIGHT_, _x + width - 1, _y, 1, 1);
+        }
+
+    }
+
+    buildFacadeSection(_x, _y, width, height, material) {
+        this.block.groundLayer.weightedRandomize(TILES.DIRT.FILL_, _x - 1, _y - height, width + 2, height + 2);
+        /// Lower left is _x, _y
+        this.block.wallLayer.weightedRandomize(material.LOWER_LEFT_, _x, _y, 1, 1);
+        this.block.wallLayer.weightedRandomize(material.LOWER_, _x + 1, _y, width - 2, 1);
+        this.block.wallLayer.weightedRandomize(material.LOWER_RIGHT_, _x + width - 1, _y, 1, 1);
+
+        if (height > 2) {
+            // go up by the number of mid tiles (height-2)
+            _y = _y - (height - 2);
+            this.block.wallLayer.weightedRandomize(material.MID_LEFT_, _x, _y, 1, height - 2);
+            this.block.wallLayer.weightedRandomize(material.MID_, _x + 1, _y, width - 2, height - 2);
+            this.block.wallLayer.weightedRandomize(material.MID_RIGHT_, _x + width - 1, _y, 1, height - 2);
+        }
+        if (height > 1) {
+            _y = _y - 1;
+            this.block.wallLayer.weightedRandomize(material.TOP_LEFT_, _x, _y, 1, 1);
+            this.block.wallLayer.weightedRandomize(material.TOP_, _x + 1, _y, width - 2, 1);
+            this.block.wallLayer.weightedRandomize(material.TOP_RIGHT_, _x + width - 1, _y, 1, 1);
+        }
+
+
+
+    }
+
+    buildFoundation(_x, _y, width, height, material) {
+        this.buildFacadeSection(_x, _y - height, width, height, material);
+        //this.block.wallLayer.weightedRandomize(material.MID_, _x, _y - height, width, height);
+    }
+
+    buildYardBorder(_x, width = 2) {
         /// _x is for the path gap
         var left_length = _x - this.prop.lines.left;
         var right_length = this.prop.lines.right - (_x + width) - 1; // - 1 accomodates mailbox to the right of the front walk
-        if (left_length < 7) {
-            this.scene.manager.objectManager.newObjectToWorld(this.prop.lines.left, this.prop.lines.bottom,'CHAINLINK_S_'+left_length+'_COMPLETE');
+
+        if (left_length < 6) {
+            this.buildFence(this.prop.lines.left, this.prop.lines.bottom, left_length, this.settings.fence.prefix, this.settings.fence.suffix);
         }
         else {
-            this.scene.manager.objectManager.newObjectToWorld(this.prop.lines.left, this.prop.lines.bottom,'BOXELDER');
+            this.scene.manager.objectManager.newObjectToWorld(this.prop.lines.left, this.prop.lines.bottom, 'BOXELDER');
         }
 
-        this.scene.manager.objectManager.newObjectToWorld(_x + width, this.prop.lines.bottom,'MAILBOX_1');
+        this.mailbox = this.buildMailbox(_x + width, this.prop.lines.bottom);
 
-        if (right_length < 7) {
-            this.scene.manager.objectManager.newObjectToWorld(_x + width + 1, this.prop.lines.bottom,'CHAINLINK_S_'+right_length+'_COMPLETE');
+
+        if (right_length < 6) {
+            this.buildFence(_x + width + 1, this.prop.lines.bottom, right_length, this.settings.fence.prefix, this.settings.fence.suffix);
         }
         else {
-            this.block.groundLayer.weightedRandomize(TILES.DIRT.FILL_, _x + width + 1,this.prop.lines.bottom, 6, 2);
-            this.scene.manager.objectManager.newObjectToWorld(_x + width + 1, this.prop.lines.bottom,'BOXELDER');
-            this.scene.manager.objectManager.newObjectToWorld(_x + width + 3, this.prop.lines.bottom,'BOXELDER');
-            this.scene.manager.objectManager.newObjectToWorld(_x + width + 5, this.prop.lines.bottom,'BOXELDER');
+            this.block.groundLayer.weightedRandomize(TILES.DIRT.FILL_, _x + width + 1, this.prop.lines.bottom, 6, 2);
+            this.scene.manager.objectManager.newObjectToWorld(_x + width + 1, this.prop.lines.bottom, 'BOXELDER');
+            this.scene.manager.objectManager.newObjectToWorld(_x + width + 3, this.prop.lines.bottom, 'BOXELDER');
+            this.scene.manager.objectManager.newObjectToWorld(_x + width + 5, this.prop.lines.bottom, 'WICKET_NS');
         }
     }
 
-    buildFrontWalk (_x, _y) {
+    buildFence(_x, _y, width = 2, prefix = 'WOOD_FENCE', suffix = 'BROWN') {
+        this.scene.manager.objectManager.newObjectToWorld(_x, _y, prefix + '_' + width + '_' + suffix);
+    }
+
+    buildMailbox(_x, _y) {
+
+        let mailbox = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'MAILBOX_' + this.settings.mailbox);
+
+        mailbox.setName('MAILBOX ' + this.prop.address.number + ' ' + this.prop.address.street);
+
+        mailbox.setAnnouncement(this.prop.address.number);
+
+        return mailbox;
+    }
+
+    buildFrontWalk(_x, _y) {
         var width = 2;
         var height = this.prop.lines.bottom - _y + 1;
-        this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, _x, _y, width,  height);
+        this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, _x, _y, width, height);
     }
 
-    buildEntry (_x, _y) {
-        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'EXT_DOOR_WINDOWS_WHITE');
-        this.stoop = this.buildStoop(_x, _y + 1);
-        this.buildFrontWalk(_x, _y + this.stoop.height + 1);
-        this.buildYardBorder(_x, this.stoop.width);
+    buildEntry(_x, _y) {
+        
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'EXT_DOOR_' + this.settings.door);
+
+        //this.doormat = this.scene.manager.objectManager.newObjectToWorld(_x, _y + 1, 'DOORMAT_1');
+        if (this.settings.foundation.height > 0) {
+            this.buildStoop(_x, _y + 1);
+            this.buildFrontWalk(_x, _y + 1 + this.settings.foundation.height + this.settings.stoop.landing.depth);
+        }
+        else {
+            this.buildFrontWalk(_x, _y + 1);
+        }
+
+        this.buildYardBorder(_x, 2); // path width
     }
 
-    buildStoop (_x, _y) {
+    buildStoop(_x, _y) {
         var facing = 's';
-        //var stoop = Phaser.Math.RND.between(1,2);
-        //var stairs = Phaser.Math.RND.between(1,2);
-        //var width = Phaser.Math.RND.between(2,3);
-        var stoop = 1;
-        var stairs = 1;
-        var width = 2;
+        var stoop = this.settings.stoop.landing.depth;
+        var width = this.settings.stoop.landing.width;
+        var stairs = this.settings.stoop.steps.height;
 
-        var landing_material = STOOP.LANDING[Phaser.Math.RND.between(0,STOOP.LANDING.length - 1)];
-        var steps_material = STOOP.STEPS[Phaser.Math.RND.between(0,STOOP.STEPS.length - 1)];
-        var rail_material = STOOP.RAILS[Phaser.Math.RND.between(0,STOOP.RAILS.length - 1)];
+
+        var landing_material = this.settings.stoop.landing.material;
+        var steps_material = this.settings.stoop.steps.material;
+        var rail_material = this.settings.stoop.rail.material;
+
+        // Lay roof tiles
+        this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height - 2), width + 2, 3, ROOFTILES.PITCHED.METAL_SOUTH_);
 
         // Lay landing tiles
-        this.block.groundLayer.weightedRandomize(TILES[landing_material.MATERIAL][landing_material.VARIETY[0]], _x, _y, width,  stoop);
+        this.block.groundLayer.weightedRandomize(TILES[landing_material.MATERIAL][landing_material.VARIETY[0]], _x, _y, width, stoop);
 
         // Lay stair tiles
-        this.block.groundLayer.weightedRandomize(TILES.STAIRS[steps_material.MATERIAL], _x, _y + stoop, width,  stairs);
+        this.block.groundLayer.weightedRandomize(TILES.STAIRS[steps_material.MATERIAL], _x, _y + stoop, width, stairs);
 
         // Lay stair rail objects
-        this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y,rail_material.MATERIAL+'_STAIR_RAIL_L_'+stoop+'_'+stairs+'_');
-        this.scene.manager.objectManager.newObjectToWorld(_x + width, _y,rail_material.MATERIAL+'_STAIR_RAIL_R_'+stoop+'_'+stairs+'_');
+        this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y, rail_material.MATERIAL + '_STAIR_RAIL_L_' + stoop + '_' + stairs + '_');
+        this.scene.manager.objectManager.newObjectToWorld(_x + width, _y, rail_material.MATERIAL + '_STAIR_RAIL_R_' + stoop + '_' + stairs + '_');
 
         // Remove wall tiles for building where stoop sits
-        for (var i=0;i<width;i++) {
-            this.block.wallLayer.removeTileAt(_x+i, _y);
+        for (var j = 0; j < parseInt(stoop + stairs); j++) {
+            for (var i = 0; i < width; i++) {
+                this.block.wallLayer.removeTileAt(_x + i, _y + j);
+            }
         }
 
         return {
@@ -165,5 +387,5 @@ address: {
             width: width
         };
     }
-    
+
 }

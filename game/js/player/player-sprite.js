@@ -26,13 +26,15 @@ export default class PlayerSprite {
   setInteriorCollider() {
     this.scene.physics.add.collider(this.sprite, this.scene.interior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
+    this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
 
   }
 
   setExteriorCollider() {
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
-    console.log('collider set');
+    this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
+
   }
 
   createFooting() {
@@ -67,8 +69,8 @@ export default class PlayerSprite {
   updateVelocity () {
     const speed = this.scene.player.speed;
     let input = this.scene.player.playerInput;
-    // Horizontal movement
     
+    // Horizontal movement
     var flip = (this.facing == 'nw' || this.facing == 'w' || this.facing == 'sw') ? true : false;
     this.sprite.setFlipX(flip);
 

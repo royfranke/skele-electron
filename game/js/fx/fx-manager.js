@@ -18,6 +18,10 @@ export default class FXManager {
         return this.factory.newFX(slug,_x,_y);
     }
 
+    handleHudFX (slug,_x,_y) {
+        return this.factory.handleHudFX(slug,_x,_y);
+    }
+
     handleFX (slug,_x,_y) {
         return this.factory.handleFX(slug,_x,_y);
     }

@@ -44,13 +44,13 @@ export default class AppInput {
 
   update() {
     if (this.initialized) {
-        for (const [key, value] of Object.entries(this.APP_KEYS)) {
+        for (var [key, value] of Object.entries(this.APP_KEYS)) {
             this.INPUT[key].TAP = Phaser.Input.Keyboard.JustDown(value);
             this.INPUT[key].HOLD = value.isDown;
         }
     }
     if (this.available_initialized) {
-      for (const [key, value] of Object.entries(this.AVAIL_KEYS)) {
+      for (var [key, value] of Object.entries(this.AVAIL_KEYS)) {
           this.INPUT[key].TAP = Phaser.Input.Keyboard.JustDown(value);
           this.INPUT[key].HOLD = value.isDown;
       }

@@ -46,11 +46,39 @@ export default class FXFactory {
         return false;
     }
 
+    // For when you want to return the FX instead of self destroying
+    handleHudFX (slug, _x, _y) {
+        if (this.validFX(slug)) {
+            
+            var fx = this.scene.add.sprite(_x, _y, "FX", 0);
+            fx.setDepth(100300).setOrigin(0).setScrollFactor(0);
+            fx.anims.play(slug, false);
+            
+            return fx;
+        }
+        return false;
+    }
+
     newFX (slug, _x, _y) {
         if (this.validFX(slug)) {
             
             var fx = this.scene.add.sprite(_x, _y, "FX", 0);
             fx.setDepth(_y + fx.height);
+            fx.anims.play(slug, false);
+            fx.once('animationcomplete', () => {
+                fx.destroy()
+            })
+            
+            return true;
+        }
+        return false;
+    }
+
+    hudFX (slug, _x, _y) {
+        if (this.validFX(slug)) {
+            
+            var fx = this.scene.add.sprite(_x, _y, "FX", 0);
+            fx.setDepth(100300).setScrollFactor(0);
             fx.anims.play(slug, false);
             fx.once('animationcomplete', () => {
                 fx.destroy()

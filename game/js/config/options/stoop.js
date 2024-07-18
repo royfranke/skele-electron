@@ -21,8 +21,7 @@ const STOOP = {
             VARIETY: []
         },
     ],
-    
+
 };
-    
-    export default STOOP;
-    
+
+export default STOOP;

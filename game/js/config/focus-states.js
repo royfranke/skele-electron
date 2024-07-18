@@ -22,6 +22,9 @@ const FOCUS_STATES = {
     },
     MAP: {
         name: 'MAP'
+    },
+    ZENER: {
+        name: 'ZENER'
     }
 };
 

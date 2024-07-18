@@ -329,6 +329,14 @@ body,
   color: #4280dd;
 }
 
+.chest-textblock {
+  font-family: 'defaultFont';
+  font-size: 10px;
+  line-height: 1em;
+  color: #4b424a;
+  text-align: left;
+}
+
 .pocket-textblock {
   border: 1px solid #465e62;
   border-radius: 4px;
@@ -342,7 +350,7 @@ body,
 }
 
 
-.pocket-tip {
+.pocket-tip, .announcer, .score {
   border: 1px solid;
   padding-right: 4px;
   border-radius: 4px;
@@ -352,6 +360,22 @@ body,
   color: #465e62;
   text-align: right;
   padding: 0 6px;
+}
+
+.score {
+
+}
+
+.score-label {
+  font-size: 12px;
+  font-family: 'menuInfo';
+  color: #46465e;
+}
+
+.game-instructions {
+  font-family: 'menuInfo';
+  color: #46465e;
+  font-size: 12px;
 }
 
 .watch-time {
@@ -377,6 +401,24 @@ body,
   color: #465e62;
   text-align: left;
   padding: 0 6px;
+}
+
+.dialog-text {
+  font-family: 'defaultFont';
+  font-size: 14px;
+  color: #3f3c35;
+  text-align: left;
+  padding: 8px 10px;
+  max-width:192px;
+}
+
+.reply-text {
+  font-family: 'defaultFont';
+  font-size: 14px;
+  color: #3f3c35;
+  text-align: left;
+  padding: 8px 10px;
+  max-width:102px;
 }
 
 .thought-default {

@@ -25,15 +25,15 @@ export default class ItemFactory {
             }
             else {
                 var item = new Item(this.scene,this.valid_items[slug]);
-                //var actions = this.getPocketActions(item);
-                //item.setPocketActions(actions);
+                var actions = this.getPocketActions(item);
+                item.setPocketActions(actions);
             }
             
             return item; /// Returns a non-sprite obj
         }
         return false;
     }
-/*
+
     getPocketActions (item) {
         var put_away = false;
         var type = item.info.type;
@@ -48,7 +48,7 @@ export default class ItemFactory {
         }
         return ACTIONS[type].actions;
     }
-*/
+
 
     validItem (slug) {
         if (this.valid_items.hasOwnProperty(slug)) {

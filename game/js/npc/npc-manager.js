@@ -11,7 +11,7 @@ export default class NpcManager {
     }
 
     create () {
-      this.newNpcToWorld(40,40,'CAROL');
+      this.newNpcToWorld(84,33,'CAROL');
     }
 
     update () {

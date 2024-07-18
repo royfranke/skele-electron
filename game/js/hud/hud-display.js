@@ -25,7 +25,6 @@ export default class HudDisplay {
             left:16,
        };
 
-        this.tellDialogBox('Telling.');
     }
 
     newPocketTip (message,duration=0) {
@@ -43,17 +42,6 @@ export default class HudDisplay {
     addPocketTip (message) {
         const tip =  this.scene.add.dom(this.view.right + 32, this.view.top, 'div', '', message).setClassName('pocket-tip').setOrigin(1,0).setScrollFactor(0).setDepth(150000);
         return tip;
-    }
-
-    addPocketTextBlock () {
-        const margin = {
-            x: 24,
-            y: 16 + (2*40),
-        };
-        var display_width = 104;
-
-        return this.scene.add.dom((this.view.right - display_width) - (margin.x), this.view.top + (margin.y), 'div', {'max-width':display_width+'px'}, '').setClassName('pocket-textblock').setOrigin(0).setScrollFactor(0).setVisible(false);
-
     }
 
 
@@ -96,39 +84,4 @@ export default class HudDisplay {
         
     }
 
-    tellDialogBox (content) {
-        if (!this.currentDialog) {
-            let box = this.addDialogBox();
-            box.setText(content);
-            this.currentDialog = true;
-        }
-    }
-
-    addDialogBox () {
-        let _x = this.view.left + 112;
-        let _y = this.view.bottom - (96 + this.margin.bottom);
-
-        let dialogBox = this.scene.add.dom(_x,_y, 'div','', 'Dialog').setOrigin(0).setScrollFactor(0).setClassName('dialog-box');
-
-        
-/*
-        let dialogContent = this.scene.add.text(_x,_y, '', {
-            font: "16px defaultFont",
-            fill: "#3a3a50",
-            padding: { x: 16, y: 16 },
-          })
-          .setScrollFactor(0)
-          .setWordWrapWidth(320)
-          .setMaxLines(3).setDepth(101100);
-          */
-          
-          this.scene.time.addEvent({
-            delay: 3000,
-            callback: ()=>{
-                dialogBox.destroy();
-                this.currentDialog = false;
-            }
-        });
-        return dialogBox;
-    }
 }

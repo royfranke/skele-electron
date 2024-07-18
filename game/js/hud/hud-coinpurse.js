@@ -43,7 +43,7 @@ export default class HudCoinpurse {
         };
 
         this.coinPurse.block = this.makeBlock(position.x, position.y, 32, 32, 'BAG_FOCUSED');
-        this.coinPurse.icon = this.scene.add.image(position.x+8, position.y+8, 'COINPURSE', 'COINPURSE_closed').setOrigin(0).setScrollFactor(0).setDepth(100001);
+        this.coinPurse.icon = this.makeIcon(position.x+8, position.y+8, 'COINPURSE', 'COINPURSE_closed');
     }
 
 
@@ -71,6 +71,7 @@ export default class HudCoinpurse {
 
 
     openCoinpurse() {
+        console.log("Opening coinpurse.");
         this.scene.player.coinpurse.updateTotal();
         this.coinPurse.icon.setFrame('COINPURSE_open');
         var coinTotal = this.scene.player.coinpurse.getFormattedTotal();

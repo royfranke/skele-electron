@@ -19,6 +19,11 @@ const HUD_STATES = {
         input: true,
         visible: true
     },
+    ZENER_FOCUSED: {
+        name: 'ZENER_FOCUSED',
+        input: true,
+        visible: true
+    },
     NOTEBOOK_FOCUSED: {
         name: 'NOTEBOOK_FOCUSED',
         input: true,

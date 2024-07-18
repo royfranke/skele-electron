@@ -45,7 +45,7 @@ export default class ItemRegistry {
             if (this.registry[_x+"_"+_y].info.slug == item.info.slug) {
                 /// The item in this spot matches the item being placed
                 /// Check to see if the item is stackable
-                if (this.registry[_x+"_"+_y].isStackable()) {
+                if (this.registry[_x+"_"+_y].isStackable(item.stackCount)) {
                     this.registry[_x+"_"+_y].updateStackCount(item.stackCount);
                     item.setRegistration(false);
                     return true;

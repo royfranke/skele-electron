@@ -12,6 +12,10 @@ const PRELOAD_IMAGE = [
         PATH: 'tilesets/wall-atlas.png'
     },
     {
+        NAME: 'roof',
+        PATH: 'tilesets/roof-atlas.png'
+    },
+    {
         NAME: 'floor',
         PATH: 'tilesets/interior-atlas.png'
     },
