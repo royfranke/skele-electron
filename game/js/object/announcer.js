@@ -6,71 +6,217 @@ export default class Announcer {
         this.scene = scene;
         this.object = object;
         this.state = 'UNFORMED';
+        this.announced = null;
     }
 
-    showAnnouncement (show=false) {
-        if (this.announce != null && !show) {
-            this.hideAnnouncement();
+    showAnnouncements (show=false) {
+        if (this.announced != null && !show) {
+            this.hideAnnouncements();
         }
-        else if (this.announce == null && show) {
-            this.drawAnnouncement();
+        else if (this.announced == null && show) {
+            this.drawAnnouncements();
         }
     }
 
-    setAnnouncement (announcement) {
-        this.clearAnnouncement();
-        this.announcement = announcement;
+    setAnnouncements (announcements) {
+        this.clearAnnouncements();
+        this.announcements = announcements;
         
         var _x =this.object.tile_x;
         var _y = this.object.tile_y;
         this.scene.manager.announce.placeAnnouncer(this,_x,_y);
     }
 
-    drawAnnouncement () {
+    drawAnnouncements () {
         if (this.state == 'UNFORMED') {
             var _x = this.object.sprite.x + Math.floor(this.object.sprite.width/2);
             var _y = this.object.sprite.y - 16;
-            this.announce =  this.scene.add.dom(_x,_y, 'div', '', this.announcement).setClassName('announcer').setOrigin(0).setDepth(1500);
-            this.announce.setPosition(_x - (this.announce.displayWidth/2), _y);
+            var self = this.scene;
+            var announced = [];
+            this.announcements.forEach((announcement, index) => {
+                if (announcement.kind == 'DEFAULT') {
+                    let announce = self.add.dom(_x,_y, 'div', '', announcement.announcement).setClassName('announcer').setOrigin(0).setDepth(1500);
+                    announce.setPosition(_x - (announce.displayWidth/2), _y + (index * 16));
+                    announced.push(announce);
+                }
+                else if (announcement.kind.slice(0, 15) === 'STREET_SIGN_NS_') {
+
+                    let formatted_announcement = this.formatAnnouncement(announcement.announcement, 'STREET_SIGN');
+                    
+                    switch(announcement.kind.slice(-2)) {
+                        case 'NW':
+                            _x = this.object.sprite.x + Math.floor(this.object.sprite.width) + 32;
+                            _y = this.object.sprite.y + 16;
+                        break;
+                        case 'NE':
+                            _x = this.object.sprite.x - 32;
+                            _y = this.object.sprite.y + 16;
+                        break;
+                        case 'SW':
+                            _x = this.object.sprite.x + Math.floor(this.object.sprite.width) + 32;
+                            _y = this.object.sprite.y + this.object.sprite.height - 16;
+                        break;
+                        case 'SE':
+                            _x = this.object.sprite.x - 32;
+                            _y = this.object.sprite.y + this.object.sprite.height - 16;
+                        break;
+                    }
+
+                    let announce = self.add.bitmapText(_x, _y + 48, 'SkeleStreetSigns', formatted_announcement, 12).setOrigin(.5).setDepth(2).setRotation(Phaser.Math.DegToRad(90));
+                    announced.push(announce);
+
+                    let sign = self.add.nineslice(_x + 2, _y + 48, 'STREET_SIGN', 'SIGN_BLANK', announce.displayWidth + 24, 16, 8,8,8,8).setOrigin(.5).setDepth(0).setRotation(Phaser.Math.DegToRad(90));
+
+                    announced.push(sign);
+                }
+                else if (announcement.kind.slice(0, 15) == 'STREET_SIGN_EW_') {
+                    
+                    let formatted_announcement = this.formatAnnouncement(announcement.announcement, 'STREET_SIGN');
+                    _y = this.object.sprite.y + Math.floor(this.object.sprite.height);
+
+                    switch(announcement.kind.slice(-2)) {
+                        case 'NW':
+                            _x = this.object.sprite.x - 32;
+                            _y = this.object.sprite.y + this.object.sprite.height + 16;
+                        break;
+                        case 'NE':
+                            _x = this.object.sprite.x + this.object.sprite.width + 32;
+                            _y = this.object.sprite.y + this.object.sprite.height + 16;
+                        break;
+                        case 'SW':
+                            _x = this.object.sprite.x + Math.floor(this.object.sprite.width) - 32;
+                            _y = this.object.sprite.y + this.object.sprite.height - 32;
+                        break;
+                        case 'SE':
+                            _x = this.object.sprite.x + this.object.sprite.width + 32;
+                            _y = this.object.sprite.y + this.object.sprite.height - 32;
+                        break;
+                    }
+                    
+                    
+                    
+                    let announce = self.add.bitmapText(_x, _y, 'SkeleStreetSigns', formatted_announcement, 12).setOrigin(.5).setDepth(3);
+                    announced.push(announce);
+                    
+                    let sign = self.add.nineslice(_x,_y - 2, 'STREET_SIGN', 'SIGN_BLANK', announce.displayWidth + 24, 16, 8,8,8,8).setOrigin(.5).setDepth(1);
+
+                    announced.push(sign);
+                    
+                }
+                
+            });
+            this.announced = announced;
+            //this.announce =  this.scene.add.dom(_x,_y, 'div', '', this.announcements[0].announcement).setClassName('announcer').setOrigin(0).setDepth(1500);
             
-            this.bounceAnnouncement();
+            this.bounceAnnouncements();
             this.state = 'FORMED';
         }
     }
 
-    hideAnnouncement () {
+    formatAnnouncement (announcement, rule) {
+        if (rule == 'STREET_SIGN') {
+            // change the announcement string to uppercase
+            announcement = announcement.toUpperCase();
+            // split on the last space in the string, and make a var for the last word
+            var last_space = announcement.lastIndexOf(' ');
+            var last_word = announcement.slice(last_space + 1);
+            var street_name = announcement.slice(0, last_space);
+            var last_abbr = '';
+
+            switch (last_word) {
+                case 'AVENUE':
+                    last_abbr = 'ave';
+                    break;
+                case 'BOULEVARD':
+                    last_abbr = 'blvd';
+                    break;
+                case 'CIRCLE':
+                    last_abbr = 'cir';
+                    break;
+                case 'COURT':
+                    last_abbr = 'ct';
+                    break;
+                case 'CROSSING':
+                    last_abbr = 'xing';
+                    break;
+                case 'DRIVE':
+                    last_abbr = 'dr';
+                    break;
+                case 'LANE':
+                    last_abbr = 'ln';
+                    break;
+                case 'PARKWAY':
+                    last_abbr = 'pkwy';
+                    break;
+                case 'PLAZA':
+                    last_abbr = 'plz';
+                    break;
+                case 'ROAD':
+                    last_abbr = 'rd';
+                    break;
+                case 'STREET':
+                    last_abbr = 'st';
+                    break;
+                case 'TERRACE':
+                    last_abbr = 'ter';
+                    break;
+                case 'TRAIL':
+                    last_abbr = 'trl';
+                    break;
+                case 'WAY':
+                    last_abbr = 'way';
+                    break;
+            }
+            announcement = street_name + ' ' + last_abbr;
+        }
+        return announcement;
+    } 
+
+    hideAnnouncements () {
         var _y = this.object.sprite.y - 16;
-        var tween = this.scene.add.tween({
-            targets: this.announce,
-            y: _y + 4,
-            alpha: 0,
-            duration: 500,
-            yoyo: false,
-            ease: 'Sine.easeIn',
-            repeat: 0
+        var last = this.announced.length - 1;
+        this.announced.forEach((announce,index) => {
+            var tween = this.scene.add.tween({
+                targets: announce,
+                y: announce.y + 4,
+                alpha: 0,
+                duration: 500,
+                yoyo: false,
+                ease: 'Sine.easeIn',
+                repeat: 0
+            });
+
+            tween.on('complete', () => {
+                if (index == last) {
+                    this.clearAnnouncements();
+                }
+            });
         });
 
-        tween.on('complete', () => {
-            this.clearAnnouncement();
+        
+        
+    }
+
+    bounceAnnouncements () {
+        var _y = this.object.sprite.y - 16;
+        this.announced.forEach((announce) => {
+            this.scene.add.tween({
+                targets: announce,
+                y: announce.y - 4,
+                duration: 1000,
+                yoyo: true,
+                ease: 'Sine.easeOut',
+                repeat: -1
+            });
         });
     }
 
-    bounceAnnouncement () {
-        var _y = this.object.sprite.y - 16;
-        this.scene.add.tween({
-            targets: this.announce,
-            y: _y - 4,
-            duration: 1000,
-            yoyo: true,
-            ease: 'Sine.easeOut',
-            repeat: -1
-        });
-    }
-
-    clearAnnouncement () {
-        if (this.announce != null) {
-            this.announce.destroy();
-            this.announce = null;
+    clearAnnouncements () {
+        if (this.announced != null) {
+            this.announced.forEach((announce) => {
+                announce.destroy();
+            });
+            this.announced = null;
         }
         this.state = 'UNFORMED';
     }

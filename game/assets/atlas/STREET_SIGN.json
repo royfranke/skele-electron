@@ -1,0 +1,9 @@
+{"frames": [
+	{
+		"filename": "SIGN_BLANK",
+		"frame": {"x":0,"y":0,"w":64,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":64,"h":16},
+		"sourceSize": {"w":64,"h":16}
+	}
+]
+}

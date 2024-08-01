@@ -9,7 +9,16 @@ export default class HudFactory {
             ICON:100100,
             STACK:100200,
             FX:100300,
+            TEXT:100400,
        };
+    }
+
+    makeBitmapText (_x,_y, width, size=16) {
+        return this.scene.add.bitmapText(_x, _y, 'SkeleNotebook', '', size).setOrigin(0).setDepth(this.depth.TEXT).setScrollFactor(0).setMaxWidth(width);
+    }
+
+    makeNotebook (_x,_y) {
+        return this.scene.add.image(_x,_y, 'NOTEBOOK_OPEN').setOrigin(0).setDepth(this.depth.SLOT).setScrollFactor(0);
     }
 
     makeBlock (_x,_y, width=32, height=32, frameName='HAND_UNFOCUSED') {
@@ -19,6 +28,16 @@ export default class HudFactory {
         else {
             return this.scene.add.nineslice(_x,_y, 'POCKET_BLOCK', frameName, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
         } 
+    }
+
+    makeSideArrow (_x,_y, frameName='BAG_ARROW_FOCUSED', left=false) {
+        if (left) {
+            return this.scene.add.image(_x,_y, 'POCKET_ARROW', frameName).setOrigin(0).setDepth(this.depth.ARROW).setScrollFactor(0).setAngle(90);
+        }
+        else {
+            return this.scene.add.image(_x,_y, 'POCKET_ARROW', frameName).setOrigin(0).setFlipY(true).setDepth(this.depth.ARROW).setScrollFactor(0).setAngle(90);
+        }
+        
     }
 
     makeArrow (_x,_y, frameName='BAG_ARROW_FOCUSED') {

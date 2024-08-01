@@ -141,6 +141,12 @@ export default class HudManager {
             this.hudPockets.closePockets();
             this.hudCoinpurse.closeCoinpurse();
         }
+        if (this.state.name == 'NOTEBOOK_FOCUSED') {
+            this.hudNotebook.openNotebook();
+        }
+        if (this.state.name != 'NOTEBOOK_FOCUSED') {
+            this.hudNotebook.closeNotebook();
+        }
         if (this.state.name == 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name != 'ZENER_FOCUSED') {
             this.hudZener.openZener();
         }
@@ -162,6 +168,7 @@ export default class HudManager {
             console.log('Loaded HUD.');
             //this.hudDialog.tellDialogBox('I got these— these cards. I got one of each and I mix em and then you tell me which card is next. Got it?');
             //this.hudDialog.tellReplyBox('Yep.\nHow do I know which one is next?\nSounds dumb.');
+            
         }
     }
 

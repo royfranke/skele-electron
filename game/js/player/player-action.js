@@ -6,7 +6,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
     constructor(scene) {
         this.scene = scene;
-        this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.court;
+        this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
         this.actionTile = {x: 0, y: 0};
         this.actionTileLast = {x: 0, y: 0};
 

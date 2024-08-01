@@ -41,6 +41,7 @@ export default class ZenerManager {
 
     select () {
         if (this.deck.state == 'AWAITING GUESS') {
+            /// TODO: Handle Sound variation in hudsound
             var sound_var = Phaser.Math.RND.between(1, 3);
             this.scene.manager.hud.hudSound.play('CARD_CLICK_' + sound_var);
             this.makeGuess();

@@ -46,7 +46,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     portalTo() {
-        this.scene.switch('Court Scene');
+        this.scene.switch('Interior Scene');
     }
     
 }

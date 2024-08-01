@@ -26,7 +26,7 @@ export default class PlayerSprite {
   setInteriorCollider() {
     this.scene.physics.add.collider(this.sprite, this.scene.interior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
-    this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
+    this.scene.interior.wallLayer.setCollisionByExclusion([-1]);
 
   }
 

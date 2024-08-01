@@ -64,6 +64,12 @@ export default class HudFocusHints {
         }
     }
 
+    getKeyTip (tip) {
+        if (tip != null && this.hints[tip] != undefined ) {
+            return this.hints[tip];
+        }
+    }
+
     changeFocus (from, to) {
         this.setKeyTip(from, false);
         this.setKeyTip(to, true);

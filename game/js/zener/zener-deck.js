@@ -27,7 +27,6 @@ export default class ZenerDeck {
 
     startTurn () {
         if (this.state != 'NOT LOADED' && this.deck.length == 0) {
-            console.log("Setting from startTurn");
             this.setState('GAME OVER');
         }
         if (this.state == 'NOT LOADED') {
@@ -125,7 +124,6 @@ export default class ZenerDeck {
             streak_best: this.streak_best,
             correct: 0,
             incorrect: 0
-        
         };
 
         for (let card in this.guesses) {

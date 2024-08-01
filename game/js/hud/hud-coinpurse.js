@@ -71,7 +71,6 @@ export default class HudCoinpurse {
 
 
     openCoinpurse() {
-        console.log("Opening coinpurse.");
         this.scene.player.coinpurse.updateTotal();
         this.coinPurse.icon.setFrame('COINPURSE_open');
         var coinTotal = this.scene.player.coinpurse.getFormattedTotal();

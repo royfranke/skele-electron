@@ -5,7 +5,7 @@ const POCKET_CONFIG = {
             STATE: 'EMPTY',
             EMPTY: {NAME:'shoulders', ICON:'shoulders'},
             HOLDS: 'DISALLOWED',
-            EQUIPT: 'DISALLOWED',
+            USES: 'DISALLOWED',
             WEARS: null,
         },
         {
@@ -13,7 +13,7 @@ const POCKET_CONFIG = {
             STATE: 'EMPTY',
             EMPTY: {NAME:'right', ICON:'rightHand'},
             HOLDS: null,
-            EQUIPT: null,
+            USES: null,
             WEARS: 'DISALLOWED'
         },
         {
@@ -21,14 +21,14 @@ const POCKET_CONFIG = {
             STATE: 'EMPTY',
             EMPTY: {NAME:'left', ICON:'leftHand'},
             HOLDS: null,
-            EQUIPT: null,
+            USES: null,
             WEARS: 'DISALLOWED'
         }],
         STATES: [
             'EMPTY',
             'HOLDS',
             'WEARS',
-            'EQUIPT'
+            'USES'
         ],
     }
 };

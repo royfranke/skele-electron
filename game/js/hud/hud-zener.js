@@ -2,6 +2,8 @@ import ZenerManager from "../zener/zener-manager.js";
 
 /*
  * Controls the Zener HUD interface
+ * Deploys the ZenerManager to control the game
+ * 
  */
 
 export default class HudZener {
@@ -330,6 +332,11 @@ export default class HudZener {
             });
           });
 
+        this.tallyScore();
+    }
+
+    tallyScore () {
+
     }
 
     lastCard () {
@@ -369,10 +376,6 @@ export default class HudZener {
 
             });
         });
-
-        
-
-
     }
 
     setupBoard() {
@@ -403,7 +406,12 @@ export default class HudZener {
             this.board.score[0].object.setText('Streak! - ' + score.streak);
         }
         else {
-            this.board.score[0].object.setText('No Streak');
+            if (score.streak_best > 1) {
+                this.board.score[0].object.setText('Best Streak: ' + score.streak_best);
+            }
+            else {
+                this.board.score[0].object.setText('No Streak');
+            }
         }
 
         this.board.score[1].object.setText('Hits: ' + score.correct);

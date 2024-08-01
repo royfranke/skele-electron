@@ -5,7 +5,7 @@ const HUD_REGIONS = {
             STATE: 'EMPTY',
             EMPTY: {NAME:'shoulders', ICON:'shoulders'},
             HOLDS: 'DISALLOWED',
-            EQUIPT: 'DISALLOWED',
+            USES: 'DISALLOWED',
             WEARS: null,
         },
         {
@@ -13,7 +13,7 @@ const HUD_REGIONS = {
             STATE: 'EMPTY',
             EMPTY: {NAME:'right', ICON:'rightHand'},
             HOLDS: null,
-            EQUIPT: null,
+            USES: null,
             WEARS: 'DISALLOWED'
         },
         {
@@ -21,7 +21,7 @@ const HUD_REGIONS = {
             STATE: 'EMPTY',
             EMPTY: {NAME:'left', ICON:'leftHand'},
             HOLDS: null,
-            EQUIPT: null,
+            USES: null,
             WEARS: 'DISALLOWED'
         }],
     },

@@ -47,7 +47,28 @@ const PRELOAD_ATLAS = [
             SPRITE: 'spritesheets/pocket_arrow.png',
             JSON: 'atlas/POCKET_ARROW.json'
         }
-    }
+    },
+    {
+        NAME: 'NOTEBOOK_OPEN',
+        PATH: {
+            SPRITE: 'spritesheets/a_NOTEBOOK.png',
+            JSON: 'atlas/NOTEBOOK.json'
+        }
+    },
+    {
+        NAME: 'STREET_SIGN',
+        PATH: {
+            SPRITE: 'spritesheets/street_sign.png',
+            JSON: 'atlas/STREET_SIGN.json'
+        }
+    },
+    {
+        NAME: 'WATCH',
+        PATH: {
+            SPRITE: 'spritesheets/watch-slice.png',
+            JSON: 'atlas/WATCH.json'
+        }
+    },
 ];
 
 export default PRELOAD_ATLAS;

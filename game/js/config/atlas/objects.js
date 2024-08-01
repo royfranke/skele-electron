@@ -1318,8 +1318,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
-          w:32
+          h:0, 
+          w:0
         },
         offset: {
           x:0, 
@@ -2199,9 +2199,9 @@ const OBJECTS = {
         actions: [],
         states: [],
     },
-      FLYER_GRAY: {
+      OBJ_FLYER_GRAY: {
         name: 'Gray Flyer',
-        slug: 'FLYER_GRAY', 
+        slug: 'OBJ_FLYER_GRAY', 
         type: 'FLYER',
         bounding: {
           h:1, 
@@ -2237,7 +2237,7 @@ const OBJECTS = {
         states: [            {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_GRAY-1', ]
+              frames: ['OBJ_FLYER_GRAY-1', ]
               }, {
               name: 'READING',
               transition: 'DEFAULT',
@@ -2246,11 +2246,11 @@ const OBJECTS = {
                       {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_GRAY-1', ]
+              frames: ['OBJ_FLYER_GRAY-1', ]
               }, {
               name: 'GUSTING',
               transition: 'DEFAULT',
-              frames: ['FLYER_GRAY-1', 'FLYER_GRAY-2', 'FLYER_GRAY-3', 'FLYER_GRAY-4', 'FLYER_GRAY-5', 'FLYER_GRAY-6', 'FLYER_GRAY-7', 'FLYER_GRAY-8', ]
+              frames: ['OBJ_FLYER_GRAY-1', 'OBJ_FLYER_GRAY-2', 'OBJ_FLYER_GRAY-3', 'OBJ_FLYER_GRAY-4', 'OBJ_FLYER_GRAY-5', 'OBJ_FLYER_GRAY-6', 'OBJ_FLYER_GRAY-7', 'OBJ_FLYER_GRAY-8', ]
               },
           ],
     },
@@ -2588,9 +2588,42 @@ items: []    },
         actions: [],
         states: [],
     },
-      FLYER_MISSING: {
+      METAL_POLE: {
+        name: 'Metal Utility Pole',
+        slug: 'METAL_POLE', 
+        type: 'UTILITY_POLE',
+        bounding: {
+          h:7, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:6
+        },
+        sprite: {
+          h:112, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:12
+        },
+        offset: {
+          x:2, 
+          y:96
+        },
+        varieties: 16,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      OBJ_FLYER_MISSING: {
         name: 'Missing Person Flyer',
-        slug: 'FLYER_MISSING', 
+        slug: 'OBJ_FLYER_MISSING', 
         type: 'FLYER',
         bounding: {
           h:1, 
@@ -2626,7 +2659,7 @@ items: []    },
         states: [            {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_MISSING-8', ]
+              frames: ['OBJ_FLYER_MISSING-8', ]
               }, {
               name: 'READING',
               transition: 'DEFAULT',
@@ -2635,11 +2668,11 @@ items: []    },
                       {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_MISSING-8', ]
+              frames: ['OBJ_FLYER_MISSING-8', ]
               }, {
               name: 'GUSTING',
               transition: 'DEFAULT',
-              frames: ['FLYER_MISSING-1', 'FLYER_MISSING-2', 'FLYER_MISSING-3', 'FLYER_MISSING-4', 'FLYER_MISSING-5', 'FLYER_MISSING-6', 'FLYER_MISSING-7', 'FLYER_MISSING-8', ]
+              frames: ['OBJ_FLYER_MISSING-1', 'OBJ_FLYER_MISSING-2', 'OBJ_FLYER_MISSING-3', 'OBJ_FLYER_MISSING-4', 'OBJ_FLYER_MISSING-5', 'OBJ_FLYER_MISSING-6', 'OBJ_FLYER_MISSING-7', 'OBJ_FLYER_MISSING-8', ]
               },
           ],
     },
@@ -2698,9 +2731,9 @@ items: []    },
               },
           ],
     },
-      FLYER_PINK: {
+      OBJ_FLYER_PINK: {
         name: 'Pink Flyer',
-        slug: 'FLYER_PINK', 
+        slug: 'OBJ_FLYER_PINK', 
         type: 'FLYER',
         bounding: {
           h:1, 
@@ -2736,7 +2769,7 @@ items: []    },
         states: [            {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_PINK-8', ]
+              frames: ['OBJ_FLYER_PINK-8', ]
               }, {
               name: 'READING',
               transition: 'DEFAULT',
@@ -2745,11 +2778,11 @@ items: []    },
                       {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_PINK-8', ]
+              frames: ['OBJ_FLYER_PINK-8', ]
               }, {
               name: 'GUSTING',
               transition: 'DEFAULT',
-              frames: ['FLYER_PINK-1', 'FLYER_PINK-2', 'FLYER_PINK-3', 'FLYER_PINK-4', 'FLYER_PINK-5', 'FLYER_PINK-6', 'FLYER_PINK-7', 'FLYER_PINK-8', ]
+              frames: ['OBJ_FLYER_PINK-1', 'OBJ_FLYER_PINK-2', 'OBJ_FLYER_PINK-3', 'OBJ_FLYER_PINK-4', 'OBJ_FLYER_PINK-5', 'OBJ_FLYER_PINK-6', 'OBJ_FLYER_PINK-7', 'OBJ_FLYER_PINK-8', ]
               },
           ],
     },
@@ -3259,6 +3292,39 @@ items: []    },
         actions: [],
         states: [],
     },
+      TELEPHONE_POLE_TOP: {
+        name: 'Telephone Pole Top',
+        slug: 'TELEPHONE_POLE_TOP', 
+        type: 'UTILITY_POLE_TOP',
+        bounding: {
+          h:2, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
       DAILY_NEWS_BOX_: {
         name: 'Town Daily Box',
         slug: 'DAILY_NEWS_BOX_', 
@@ -3302,6 +3368,138 @@ items: []    },
               frames: ['DAILY_NEWS_BOX_-2', 'DAILY_NEWS_BOX_-3', 'DAILY_NEWS_BOX_-4', 'DAILY_NEWS_BOX_-5', 'DAILY_NEWS_BOX_-6', ]
               },
           ],
+    },
+      TRAFFIC_LIGHT_ARM_SOUTH: {
+        name: 'Traffic Light Arm',
+        slug: 'TRAFFIC_LIGHT_ARM_SOUTH', 
+        type: 'TRAFFIC_LIGHT_ARM',
+        bounding: {
+          h:2, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      TRAFFIC_LIGHT_EAST: {
+        name: 'Traffic Light East',
+        slug: 'TRAFFIC_LIGHT_EAST', 
+        type: 'TRAFFIC_LIGHT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      TRAFFIC_LIGHT_NORTH: {
+        name: 'Traffic Light North',
+        slug: 'TRAFFIC_LIGHT_NORTH', 
+        type: 'TRAFFIC_LIGHT_',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:48, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      TRAFFIC_LIGHT_SOUTH: {
+        name: 'Traffic Light South',
+        slug: 'TRAFFIC_LIGHT_SOUTH', 
+        type: 'TRAFFIC_LIGHT_',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        portal: 0,
+        actions: [],
+        states: [],
     },
       WALK_SIGNAL_SE_: {
         name: 'Walk Signal SE',
@@ -4151,9 +4349,9 @@ items: []    },
         actions: [],
         states: [],
     },
-      FLYER_YELLOW: {
+      OBJ_FLYER_YELLOW: {
         name: 'Yellow Flyer',
-        slug: 'FLYER_YELLOW', 
+        slug: 'OBJ_FLYER_YELLOW', 
         type: 'FLYER',
         bounding: {
           h:1, 
@@ -4189,7 +4387,7 @@ items: []    },
         states: [            {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_YELLOW-8', ]
+              frames: ['OBJ_FLYER_YELLOW-8', ]
               }, {
               name: 'READING',
               transition: 'DEFAULT',
@@ -4198,11 +4396,11 @@ items: []    },
                       {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['FLYER_YELLOW-8', ]
+              frames: ['OBJ_FLYER_YELLOW-8', ]
               }, {
               name: 'GUSTING',
               transition: 'DEFAULT',
-              frames: ['FLYER_YELLOW-1', 'FLYER_YELLOW-2', 'FLYER_YELLOW-3', 'FLYER_YELLOW-4', 'FLYER_YELLOW-5', 'FLYER_YELLOW-6', 'FLYER_YELLOW-7', 'FLYER_YELLOW-8', ]
+              frames: ['OBJ_FLYER_YELLOW-1', 'OBJ_FLYER_YELLOW-2', 'OBJ_FLYER_YELLOW-3', 'OBJ_FLYER_YELLOW-4', 'OBJ_FLYER_YELLOW-5', 'OBJ_FLYER_YELLOW-6', 'OBJ_FLYER_YELLOW-7', 'OBJ_FLYER_YELLOW-8', ]
               },
           ],
     },

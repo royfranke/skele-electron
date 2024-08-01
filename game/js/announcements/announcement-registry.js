@@ -19,12 +19,12 @@ export default class AnnouncementRegistry {
             this.current_announcements = [];
         }
         for (var i=0; i<this.current_announcements.length; i++) {
-            this.current_announcements[i].showAnnouncement(true);
+            this.current_announcements[i].showAnnouncements(true);
         }
         /// Get the difference between the last announcements and the current announcements and remove the last announcements that don't exist in the current announcements
         for (var i=0; i<this.last_announcements.length; i++) {
             if (!this.current_announcements.includes(this.last_announcements[i])) {
-                this.last_announcements[i].showAnnouncement(false);
+                this.last_announcements[i].showAnnouncements(false);
             }
         }
     }

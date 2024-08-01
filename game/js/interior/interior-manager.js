@@ -33,19 +33,20 @@ import ObjectManager from "../objects/object-manager.js";
         });
 
         const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
+        const edge_tileset = this.map.addTilesetImage("edge", null, 16, 16, 0, 0);
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
 
         
         
         this.groundLayer = this.map.createBlankLayer("Ground", tileset);
-
+        this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset);
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
 
 
         this.interior.rooms = this.makeRooms();
         this.buildRoom(this.interior.rooms[0]);
 
-        this.ground = new InteriorGround(this.scene);
+        this.ground = new InteriorGround(this.groundLayer, this.edgeLayer);
         //this.scene.manager.objectManager = new ObjectManager(this.scene);
     }
 
@@ -364,7 +365,7 @@ import ObjectManager from "../objects/object-manager.js";
         }); */
 
         this.buildRoom(this.interior.rooms[next_room]);
-        this.scene.player.setPosition(this.player_start_x, this.player_start_y);
+        this.scene.player.setPositionTile(this.player_start_x, this.player_start_y);
         this.player_in_room = next_room;
     }
 

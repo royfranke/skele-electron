@@ -11,6 +11,7 @@ export default class HudDisplay {
        this.factory = factory;
        this.scene.textures.get('POCKET_BLOCK');
        this.scene.textures.get('POCKET_ARROW');
+       this.scene.textures.get('NOTEBOOK');
        this.scene.textures.get('EMPTY');
 
        this.view = this.scene.manager.getView();

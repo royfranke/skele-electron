@@ -79,7 +79,7 @@ export default class PlayerManager {
     }
   }
 
-  setPosition(x_, y_) {
+  setPositionTile(x_, y_) {
     this.playerSprite.sprite.setPosition(x_ * 16, y_ * 16);
   }
 
@@ -91,11 +91,15 @@ export default class PlayerManager {
   update() {
     var focus = this.getFocus();
     if (focus.name == 'PLAYER') {
+
       this.last_state = this.getLastState();
       this.state = this.getState();
+
       if (this.state.input) {
+
         this.updateActiveTile();
         this.playerInput.update();
+
         if (this.state.name != 'HOP' || this.state.name != 'PICKUP' || this.state.name != 'EXCHANGE') {
           if (this.playerInput.held) {
             if (this.playerInput.run) {
@@ -125,7 +129,7 @@ export default class PlayerManager {
       var last = this.getLastFocus();
       if (last.name == 'PLAYER') { //If focus was just changed off the player
         this.speed = 0;
-        //this.setState('IDLE');
+        this.setState('IDLE');
         //this.resetInputs();
         // TODO: Do an initial state set on switch from player
       }
@@ -159,10 +163,12 @@ export default class PlayerManager {
     if (this.state.name == 'HOP') {
       return 60;
     }
+    /// TODO: Separate curb/hop handling from getspeed
     if (this.underfoot != undefined && this.underfoot.TYPE == 'CURB' && this.state.name != 'HOP') {
       this.setState('HOP');
+      
       setTimeout(() => {
-        this.setState('IDLE');
+        this.setState('WALK');
       }, 500);
       return 80;
     }

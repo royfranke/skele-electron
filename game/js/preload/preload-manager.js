@@ -10,6 +10,10 @@ export default class PreloadManager{
     this.scene = scene;
     var self = this.scene;
 
+    self.load.bitmapFont('SkeleNotebook', '../game/assets/fonts/SkeleNotebook16.png', '../game/assets/fonts/SkeleNotebook16.xml');
+    self.load.bitmapFont('SkeleStreetSigns', '../game/assets/fonts/SkeleStreetSigns.png', '../game/assets/fonts/SkeleStreetSigns.xml');
+    self.load.bitmapFont('SkeleWatch', '../game/assets/fonts/SkeleWatch.png', '../game/assets/fonts/SkeleWatch.xml');
+
     PRELOAD_IMAGE.forEach(function (image, index) {
       self.load.image(image.NAME, '../game/assets/'+image.PATH);
     });
@@ -28,12 +32,9 @@ export default class PreloadManager{
 
     this.preloadStateSprites();
 
-
-    //this.preloadAnim = new PreloadAnim(this.scene);
   }
 
   preloadAnim () {
-    console.log('preloading animations')
     this.anim = new PreloadAnim(this.scene);
   }
 

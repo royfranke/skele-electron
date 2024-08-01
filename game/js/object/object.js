@@ -16,7 +16,7 @@ export default class Object {
         // Imbue this object with the config object info
         this.info = object;
         this.announcer = null;
-        this.announcement = null;
+        this.announcements = [];
         this.name = this.info.name;
 
         // If there are varieties, randomize variety
@@ -57,8 +57,11 @@ export default class Object {
         this.name = name;
     }
 
-    setAnnouncement (announcement) {
-        this.announcement = announcement;
+    setAnnouncement (announcement, kind='DEFAULT') {
+        this.announcements.push({
+            announcement: announcement,
+            kind: kind
+        });
         this.setAnnouncer();
     }
 
@@ -66,7 +69,7 @@ export default class Object {
         if (this.announcer == null) {
             this.announcer = new Announcer(this.scene, this);
         }
-        this.announcer.setAnnouncement(this.announcement);
+        this.announcer.setAnnouncements(this.announcements);
     }
 
     chestFunctions (items) {
@@ -170,7 +173,7 @@ export default class Object {
         });
         if (action == 'OPEN' && this.info.portal == 1) {
             /// Go to portal... (maybe this is redraw of ground)
-            //this.scene.portalTo();
+            this.scene.portalTo();
         }
         
     }
@@ -189,7 +192,7 @@ export default class Object {
         //this.setShadow(x_pixels, y_pixels, frame);
 
         if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_') {
-            this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xed931e).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1);
+            this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1);
         }
 
         this.sprite.body.setOffset(this.info.offset.x + (this.info.sprite.w/2), this.info.offset.y + (this.info.sprite.h/2));

@@ -103,7 +103,7 @@ export default class GameManager {
             const focus = this.getFocus();
             const input = this.scene.app.input.INPUT;
             if (input.INVENTORY.TAP) {
-                if (focus.name == 'PLAYER' || focus.name == 'MAP') {
+                if (focus.name == 'PLAYER' || focus.name == 'MAP' || focus.name == 'NOTEBOOK') {
                     this.setFocus('POCKETS');
                 }
                 else if (focus.name == 'POCKETS' || focus.name == 'CHEST') {
@@ -113,6 +113,7 @@ export default class GameManager {
             }
             if (input.NOTEBOOK.TAP) {
                 if (focus.name != 'NOTEBOOK') {
+                    this.closeChest();
                     this.setFocus('NOTEBOOK');
                 }
                 else {
@@ -140,10 +141,16 @@ export default class GameManager {
                 if (focus.name == 'ZENER') {
                     this.hud.hudZener.arrowRight();
                 }
+                if (focus.name == 'NOTEBOOK') {
+                    this.hud.hudNotebook.arrowRight();
+                }
             }
             if (input.LEFT.TAP) {
                 if (focus.name == 'ZENER') {
                     this.hud.hudZener.arrowLeft();
+                }
+                if (focus.name == 'NOTEBOOK') {
+                    this.hud.hudNotebook.arrowLeft();
                 }
             }
             if (input.SELECT.TAP) {
@@ -153,7 +160,6 @@ export default class GameManager {
                 if (focus.name == 'ZENER') {
                     this.hud.hudZener.select();
                 }
-                /// Select zener card
             }
         }
         if (this.state.time) {
@@ -162,7 +168,7 @@ export default class GameManager {
         if (this.hud != null) {
             this.hud.update();
             var time = this.time.getDigitalTime();
-            this.watch.setText(time.hour+':'+time.minute+time.period);
+            this.watch.setText(time.hour+':'+time.minute+"B");
         }
         this.objectManager.update();
     }
@@ -173,19 +179,21 @@ export default class GameManager {
             this.setState('LOADING');
             
             this.hud = new HudManager(this.scene);
-            this.watch = this.hud.hudWatch.tellWatch('00:00AM','positive');
+            this.watch = this.hud.hudWatch.tellWatch('--:--MB');
             
 
             this.scene[this.scene.place].createItems();
             
             this.setFocus('PLAYER');
             /// After loading functions...
+            var staple_gun = this.itemManager.newItem('STAPLE_GUN');
+            this.scene.manager.hud.availablePocket(staple_gun);
 
-            var postcard = this.itemManager.newItem('POSTCARD_BACK_1');
-            var banana = this.itemManager.newItem('BANANA');
             var flyers = this.itemManager.newItem('FLYER_PINK');
             flyers.updateStackCount(12);
-            this.itemManager.newItemToPockets('BACKPACK_GREEN',[postcard, banana, flyers]);
+            
+            this.scene.manager.hud.availablePocket(flyers);
+
 
             //this.itemManager.newItemToPockets('RAKE');
             //this.itemManager.newItemToPockets('SPADE');

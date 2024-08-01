@@ -44,7 +44,7 @@ export default class PropertyLine {
         }
         if (!settings.hasOwnProperty('foundation')) {
             settings.foundation = {
-                height: this.roll([1, 1, 1, 0, 1, 1, 1, 1, 2]),
+                height: this.roll([1]),
             };
             if (settings.foundation.height > 0) {
 
@@ -98,7 +98,6 @@ export default class PropertyLine {
         const facing = this.prop.address.facing;
 
         //check for "detached" tag-- make perimeter of space around building if found
-        console.log("Building " + this.prop.address.number + " " + this.prop.address.street + "...");
 
         let yard = 4;
 
@@ -319,7 +318,7 @@ export default class PropertyLine {
     }
 
     buildMailbox(_x, _y) {
-
+        var newspaper = this.scene.manager.itemManager.newItemToWorld(_x - 1, _y, 'NEWSPAPER');
         let mailbox = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'MAILBOX_' + this.settings.mailbox);
 
         mailbox.setName('MAILBOX ' + this.prop.address.number + ' ' + this.prop.address.street);
@@ -363,7 +362,7 @@ export default class PropertyLine {
         var rail_material = this.settings.stoop.rail.material;
 
         // Lay roof tiles
-        this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height - 2), width + 2, 3, ROOFTILES.PITCHED.METAL_SOUTH_);
+        //this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height - 2), width + 2, 3, ROOFTILES.SHINGLES.SOUTH_);
 
         // Lay landing tiles
         this.block.groundLayer.weightedRandomize(TILES[landing_material.MATERIAL][landing_material.VARIETY[0]], _x, _y, width, stoop);

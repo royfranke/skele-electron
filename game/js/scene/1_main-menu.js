@@ -14,7 +14,9 @@ export default class MainMenuScene extends Phaser.Scene {
 
     create() {
         this.app = new AppManager(this,'MAIN');
-        
+        const test = this.add.bitmapText(400, 200, 'SkeleNotebook', '', 16);
+        test.setText('Curses, Neighbors, & Frogs $1.29');
+
     }
 
     update() {

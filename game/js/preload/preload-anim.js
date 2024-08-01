@@ -27,7 +27,6 @@ export default class PreloadAnim {
               frameRate: 8,
               repeat: 0,
             });
-            console.log('Created animation for '+object.slug+'-'+state.name);
           }
         }
     }
