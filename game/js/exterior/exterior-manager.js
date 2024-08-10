@@ -4,7 +4,7 @@ import COOK from "../config/atlas/tile-recipes.js";
 import WALLTILES from "../config/atlas/wall-tile-weights.js";
 import ROOFTILES from "../config/atlas/roof-tile-weights.js";
 import MAP_CONFIG from "../config/map.js";
-import ExteriorGround from "./exterior-ground.js";
+import Ground from "../handler/ground.js";
 import Block from "./exterior-block.js";
 import Navigator from "../navigator/navigator-manager.js";
 import BlockNode from "./exterior-block-node.js";
@@ -221,7 +221,7 @@ import ObjectManager from "../objects/object-manager.js";
 
         this.blocks = blocks;
         this.block = null;
-        this.ground = new ExteriorGround(this.groundLayer, this.edgeLayer);
+        this.ground = new Ground(this.groundLayer, this.edgeLayer);
         
     }
 
@@ -240,6 +240,12 @@ import ObjectManager from "../objects/object-manager.js";
             nodes[node.y][node.x].buildObjects(objectManager); 
         });
         this.ground.initializeTiles();
+
+        
+        this.groundLayer.setTint(0xb2977e);
+        this.edgeLayer.setTint(0xb2977e);
+        this.wallLayer.setTint(0xbda766);
+        this.roofLayer.setTint(0x465e62);
         
     }
 

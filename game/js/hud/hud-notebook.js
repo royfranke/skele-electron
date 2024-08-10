@@ -30,7 +30,7 @@ export default class HudNotebook {
                     y: this.view.bottom,
                 },
                 page: {
-                    x: this.view.left + (this.view.margin.left*2.5),
+                    x: this.view.left + 43,
                     y: this.view.bottom + 16,
                     width: 72,
                     height: 88
@@ -127,7 +127,9 @@ export default class HudNotebook {
     openNotebook() {
         this.scene.manager.hud.hudFocusHints.setKeyTip('NOTEBOOK', true);
         var keytip = this.scene.manager.hud.hudFocusHints.getKeyTip('NOTEBOOK');
-
+        this.notebook.panel.setFrame('NOTEBOOK_OPEN');
+        // To redraw page
+        this.manager.setSelected(this.manager.selected);
         this.scene.tweens.add({
             targets: [keytip],
             y: this.position.focused.keytip.y,
@@ -184,15 +186,16 @@ export default class HudNotebook {
 
         this.notebook.arrow.left.setVisible(true);
         this.notebook.arrow.right.setVisible(true);
-
     }
 
     closeNotebook() {
         this.notebook.arrow.left.setVisible(false);
         this.notebook.arrow.right.setVisible(false);
         this.notebook.block.setFrame('HAND_UNFOCUSED');
+        //this.notebook.panel.setFrame('NOTEBOOK_CLOSED_RED');
         this.state = 'UNFOCUSED';
         this.scene.manager.hud.hudFocusHints.setKeyTip('NOTEBOOK', false);
+        
         var keytip = this.scene.manager.hud.hudFocusHints.getKeyTip('NOTEBOOK');
 
         this.scene.tweens.add({

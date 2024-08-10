@@ -14,11 +14,11 @@ export default class MainMenuScene extends Phaser.Scene {
 
     create() {
         this.app = new AppManager(this,'MAIN');
-        const test = this.add.bitmapText(400, 200, 'SkeleNotebook', '', 16);
-        test.setText('Curses, Neighbors, & Frogs $1.29');
+        const test = this.add.bitmapText(400, 200, 'SkeleReceipt', '', 8);
+        test.setText('1X CURSES - 10.29\n2X FROGS --- 5.00\n1X BROOM -- 12.00\n1X POTION -- 3.00\nTOTAL: --- $30.29\n\nTHANK YOU!');
 
     }
-
+    
     update() {
         this.app.update();
     }

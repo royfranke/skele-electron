@@ -192,8 +192,8 @@ export default class GameManager {
             var flyers = this.itemManager.newItem('FLYER_PINK');
             flyers.updateStackCount(12);
             
-            this.scene.manager.hud.availablePocket(flyers);
-
+            //this.scene.manager.hud.availablePocket(flyers);
+            this.scene.manager.itemManager.newItemToPockets('BACKPACK_PURPLE',[flyers]);
 
             //this.itemManager.newItemToPockets('RAKE');
             //this.itemManager.newItemToPockets('SPADE');

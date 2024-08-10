@@ -21,54 +21,12 @@ const PRELOAD_ATLAS = [
         }
     },
     {
-        NAME: 'EMPTY',
+        NAME: 'UI',
         PATH: {
-            SPRITE: 'spritesheets/a_EMPTY.png',
-            JSON: 'atlas/EMPTY.json'
+            SPRITE: 'spritesheets/a_UI.png',
+            JSON: 'atlas/ui-atlas.json'
         }
-    },
-    {
-        NAME: 'COINPURSE',
-        PATH: {
-            SPRITE: 'spritesheets/a_COINPURSE.png',
-            JSON: 'atlas/COINPURSE.json'
-        }
-    },
-    {
-        NAME: 'POCKET_BLOCK',
-        PATH: {
-            SPRITE: 'spritesheets/pocket_block.png',
-            JSON: 'atlas/POCKET_BLOCK.json'
-        }
-    },
-    {
-        NAME: 'POCKET_ARROW',
-        PATH: {
-            SPRITE: 'spritesheets/pocket_arrow.png',
-            JSON: 'atlas/POCKET_ARROW.json'
-        }
-    },
-    {
-        NAME: 'NOTEBOOK_OPEN',
-        PATH: {
-            SPRITE: 'spritesheets/a_NOTEBOOK.png',
-            JSON: 'atlas/NOTEBOOK.json'
-        }
-    },
-    {
-        NAME: 'STREET_SIGN',
-        PATH: {
-            SPRITE: 'spritesheets/street_sign.png',
-            JSON: 'atlas/STREET_SIGN.json'
-        }
-    },
-    {
-        NAME: 'WATCH',
-        PATH: {
-            SPRITE: 'spritesheets/watch-slice.png',
-            JSON: 'atlas/WATCH.json'
-        }
-    },
+    }
 ];
 
 export default PRELOAD_ATLAS;

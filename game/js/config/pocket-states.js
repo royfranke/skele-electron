@@ -3,7 +3,7 @@ const POCKET_CONFIG = {
         SLOTS: [{
             TYPE: 'SHOULDERS',
             STATE: 'EMPTY',
-            EMPTY: {NAME:'shoulders', ICON:'shoulders'},
+            EMPTY: {NAME:'shoulders', ICON:'SHOULDERS'},
             HOLDS: 'DISALLOWED',
             USES: 'DISALLOWED',
             WEARS: null,
@@ -11,7 +11,7 @@ const POCKET_CONFIG = {
         {
             TYPE: 'HAND',
             STATE: 'EMPTY',
-            EMPTY: {NAME:'right', ICON:'rightHand'},
+            EMPTY: {NAME:'right', ICON:'RIGHT_HAND'},
             HOLDS: null,
             USES: null,
             WEARS: 'DISALLOWED'
@@ -19,7 +19,7 @@ const POCKET_CONFIG = {
         {
             TYPE: 'HAND',
             STATE: 'EMPTY',
-            EMPTY: {NAME:'left', ICON:'leftHand'},
+            EMPTY: {NAME:'left', ICON:'LEFT_HAND'},
             HOLDS: null,
             USES: null,
             WEARS: 'DISALLOWED'

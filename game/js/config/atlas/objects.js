@@ -3369,8 +3369,41 @@ items: []    },
               },
           ],
     },
+      TRAFFIC_LIGHT_ARM_EAST: {
+        name: 'Traffic Light Arm East',
+        slug: 'TRAFFIC_LIGHT_ARM_EAST', 
+        type: 'TRAFFIC_LIGHT_ARM',
+        bounding: {
+          h:6, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:5
+        },
+        sprite: {
+          h:96, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
       TRAFFIC_LIGHT_ARM_SOUTH: {
-        name: 'Traffic Light Arm',
+        name: 'Traffic Light Arm South',
         slug: 'TRAFFIC_LIGHT_ARM_SOUTH', 
         type: 'TRAFFIC_LIGHT_ARM',
         bounding: {
@@ -3699,6 +3732,39 @@ items: []    },
         actions: [],
         states: [],
     },
+      WOOD_FENCE_2_VERTICAL_BROWN: {
+        name: 'Wood Fence 2 Brown Vertical',
+        slug: 'WOOD_FENCE_2_VERTICAL_BROWN', 
+        type: 'FENCE',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:2, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:8
+        },
+        offset: {
+          x:8, 
+          y:32
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
       WOOD_FENCE_2_HONEY: {
         name: 'Wood Fence 2 Honey',
         slug: 'WOOD_FENCE_2_HONEY', 
@@ -3732,6 +3798,39 @@ items: []    },
         actions: [],
         states: [],
     },
+      WOOD_FENCE_2_VERTICAL_HONEY: {
+        name: 'Wood Fence 2 Honey Vertical',
+        slug: 'WOOD_FENCE_2_VERTICAL_HONEY', 
+        type: 'FENCE',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:2, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:8
+        },
+        offset: {
+          x:8, 
+          y:32
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
       WOOD_FENCE_2_WEATHERED: {
         name: 'Wood Fence 2 Weathered',
         slug: 'WOOD_FENCE_2_WEATHERED', 
@@ -3759,6 +3858,39 @@ items: []    },
         offset: {
           x:0, 
           y:40
+        },
+        varieties: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+    },
+      WOOD_FENCE_2_VERTICAL_WEATHERED: {
+        name: 'Wood Fence 2 Weathered Vertical',
+        slug: 'WOOD_FENCE_2_VERTICAL_WEATHERED', 
+        type: 'FENCE',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:2, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:8
+        },
+        offset: {
+          x:8, 
+          y:32
         },
         varieties: 1,
         portal: 0,

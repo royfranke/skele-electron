@@ -58,7 +58,7 @@ export default class HudWatch {
 
         this.watch.display = this.scene.add.bitmapText(this.view.left + 102, this.view.top + this.view.margin.top + 8, 'SkeleWatch', "00:00MB", 16).setScrollFactor(0).setOrigin(0).setDepth(15000);
 
-        this.watch.slice = this.scene.add.nineslice(this.view.left + 96, this.view.top + this.view.margin.top, 'WATCH', 'WATCH_SLICE', this.watch.display.displayWidth + 2, 28, 8,8,8,8).setScrollFactor(0).setOrigin(0).setDepth(14000);
+        this.watch.slice = this.scene.add.nineslice(this.view.left + 96, this.view.top + this.view.margin.top, 'UI', 'HUD_DIGITAL_WATCH_FACE', this.watch.display.displayWidth + 2, 28, 8,8,8,8).setScrollFactor(0).setOrigin(0).setDepth(14000);
     }
 
     tellWatch (content,timing=0,status='default') {

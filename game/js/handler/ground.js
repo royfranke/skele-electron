@@ -2,9 +2,9 @@ import GameUtilities from "../game/game-utilities.js";
 
 
 /**
- * Overworld Ground Class
+ * Ground Class
  */
- export default class ExteriorGround {
+ export default class Ground {
     constructor(layer, edgeLayer) {
 
         this.layer = layer;
@@ -12,10 +12,6 @@ import GameUtilities from "../game/game-utilities.js";
 
         this.util = new GameUtilities();
 
-    }
-
-    highlightTile(_x, _y) {
-        //this.placeTileType(_x, _y, 'PLAZA', true);
     }
 
     initializeTiles () {

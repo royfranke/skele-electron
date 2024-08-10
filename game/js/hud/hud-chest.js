@@ -140,7 +140,7 @@ export default class HudChest {
             this.chest.slip = this.makeSlip(this.position.slip.x,this.position.slip.y, 'TAKE');
         }
         else {
-            this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'EMPTY', 'empty')
+            this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'UI', 'EMPTY_SYMBOL')
         }
 
         this.chest.arrow = this.factory.makeArrow(this.chest.slot.x, this.chest.slot.y + 36);
@@ -172,7 +172,7 @@ export default class HudChest {
             this.chest.slip = this.makeSlip(this.position.slip.x,this.position.slip.y, 'TAKE');
         }
         else {
-            this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'EMPTY', 'empty')
+            this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'UI', 'EMPTY_SYMBOL')
         }
 
         this.chest.arrow = this.factory.makeArrow(this.chest.slot.x, this.chest.slot.y + 36);
@@ -205,7 +205,7 @@ export default class HudChest {
                 this.chest.text.setVisible(true);
             }
             else {
-                this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'EMPTY', 'empty')
+                this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'UI', 'EMPTY_SYMBOL')
             }
         }
     }

@@ -58,7 +58,7 @@ export default class AppView {
         
         var left  = this.view.left + (this.view.margin.left*2) + 128;
         var width = this.view.right - left - this.view.margin.right;
-        this.scene.add.nineslice(left,this.view.top + this.view.margin.top, 'POCKET_BLOCK', 'BAG_UNFOCUSED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+        this.scene.add.nineslice(left,this.view.top + this.view.margin.top, 'UI', 'BAG_UNFOCUSED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
        // this.settingsManager.saveSettings('input');
     }
@@ -75,7 +75,7 @@ export default class AppView {
         console.log(SAVES);
         for (var i=0;i<3;i++) {
             var top = this.view.top + this.view.margin.top + ((height + 4) *i);
-            var slot_slice = this.scene.add.nineslice(left, top, 'POCKET_BLOCK', 'SHOULDERS_SELECTED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+            var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'SHOULDERS_SELECTED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
             
             this.slots.push(slot_slice);
 
@@ -100,11 +100,11 @@ export default class AppView {
     selectLoad (selected) {
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
-                this.slots[i].setTexture('POCKET_BLOCK','SHOULDERS_SELECTED');
+                this.slots[i].setTexture('UI','SHOULDERS_SELECTED');
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].setTexture('POCKET_BLOCK','HAND_FOCUSED');
+                    this.slots[selected - 1].setTexture('UI','HAND_FOCUSED');
                 }
             }
         }

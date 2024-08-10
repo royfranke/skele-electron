@@ -65,7 +65,7 @@ export default class Announcer {
                     let announce = self.add.bitmapText(_x, _y + 48, 'SkeleStreetSigns', formatted_announcement, 12).setOrigin(.5).setDepth(2).setRotation(Phaser.Math.DegToRad(90));
                     announced.push(announce);
 
-                    let sign = self.add.nineslice(_x + 2, _y + 48, 'STREET_SIGN', 'SIGN_BLANK', announce.displayWidth + 24, 16, 8,8,8,8).setOrigin(.5).setDepth(0).setRotation(Phaser.Math.DegToRad(90));
+                    let sign = self.add.nineslice(_x + 2, _y + 48, 'UI', 'STREET_SIGN', announce.displayWidth + 24, 16, 8,8,8,8).setOrigin(.5).setDepth(0).setRotation(Phaser.Math.DegToRad(90));
 
                     announced.push(sign);
                 }
@@ -98,7 +98,7 @@ export default class Announcer {
                     let announce = self.add.bitmapText(_x, _y, 'SkeleStreetSigns', formatted_announcement, 12).setOrigin(.5).setDepth(3);
                     announced.push(announce);
                     
-                    let sign = self.add.nineslice(_x,_y - 2, 'STREET_SIGN', 'SIGN_BLANK', announce.displayWidth + 24, 16, 8,8,8,8).setOrigin(.5).setDepth(1);
+                    let sign = self.add.nineslice(_x,_y - 2, 'UI', 'STREET_SIGN', announce.displayWidth + 24, 16, 8,8,8,8).setOrigin(.5).setDepth(1);
 
                     announced.push(sign);
                     

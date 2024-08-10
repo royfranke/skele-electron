@@ -130,10 +130,10 @@ export default class Object {
 
         var frame = slotted_object.slug+'-'+variety;
 
-        var x_pixels = (slot_x - base.x) * 16;
-        var y_pixels = (slot_y - base.y) * 16;
+        var x_pixels = Math.floor((slot_x - base.x) * 16);
+        var y_pixels = Math.floor((slot_y - base.y) * 16);
 
-        var y_depth = (this.tile_y - this.info.base.y) * 16;
+        var y_depth = Math.floor((this.tile_y - this.info.base.y) * 16);
 
         var depth = behind ? y_depth + (this.info.sprite.h - _y) : (this.tile_y * 16) + (this.info.sprite.h + _y);
 
@@ -188,7 +188,7 @@ export default class Object {
         var frame = this.info.slug+'-'+this.variety;
 
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setSize(this.info.size.w, this.info.size.h).setDepth(y_pixels + (this.info.sprite.h));
-
+//.setTint(0xffffff, 0xb2977e, 0x787b69, 0x465e62)
         //this.setShadow(x_pixels, y_pixels, frame);
 
         if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_') {

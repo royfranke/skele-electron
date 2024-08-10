@@ -16,8 +16,7 @@ export default class AppMenu {
        this.nineslice = null;
        this.menu = MENU[state];
 
-       this.scene.textures.get('POCKET_BLOCK');
-       this.scene.textures.get('POCKET_ARROW');
+       this.scene.textures.get('UI');
 
        this.menu_list = this.buildMenu(view);
        
@@ -29,9 +28,9 @@ export default class AppMenu {
         const height = (this.menu.length * 18) + 20;
         if (height > max_height) {  height = max_height; }
 
-        this.nineslice = this.scene.add.nineslice(this.view.left + this.view.margin.left,this.view.top + this.view.margin.top, 'POCKET_BLOCK', 'BAG_FOCUSED', 128, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+        this.nineslice = this.scene.add.nineslice(this.view.left + this.view.margin.left,this.view.top + this.view.margin.top, 'UI', 'BAG_FOCUSED', 128, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
-        this.arrow = this.scene.add.image(this.view.left + (this.view.margin.left * 1.5),this.view.top + this.view.margin.top + 20, 'POCKET_ARROW', 'ITEM_ARROW_SELECTED').setScrollFactor(0).setDepth(1010).setAngle(-90);
+        this.arrow = this.scene.add.image(this.view.left + (this.view.margin.left * 1.5),this.view.top + this.view.margin.top + 20, 'UI', 'ITEM_ARROW_SELECTED').setScrollFactor(0).setDepth(1010).setAngle(-90);
     }
 
     buildMenu () {
@@ -45,7 +44,7 @@ export default class AppMenu {
             var element = self.scene.add.dom(view.left + (view.margin.left * 2),
                 (index * 18) + view.top + view.margin.top + 8, 'div', '', `${menu_item.LABEL}`).setClassName(selected == index ? 'menu-item menu-item-selected' : 'menu-item' ).setOrigin(0,0);
             if (menu_item.BUTTON_STICK) {
-                self.scene.add.image(view.left + (view.margin.left * 1.5),(index * 18) + view.top + view.margin.top + 20, 'POCKET_ARROW', 'BAG_ARROW_SELECTED').setScrollFactor(0).setDepth(1000).setAngle(-90);
+                self.scene.add.image(view.left + (view.margin.left * 1.5),(index * 18) + view.top + view.margin.top + 20, 'UI', 'BAG_ARROW_SELECTED').setScrollFactor(0).setDepth(1000).setAngle(-90);
             }
 
             if (menu_item.BUTTON == 'BACK') {

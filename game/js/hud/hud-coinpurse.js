@@ -26,12 +26,12 @@ export default class HudCoinpurse {
 
     popCoin(amount_string, status = 'default') {
         this.tellCoinpurse(amount_string, 750, status);
-        this.coinPurse.icon.setFrame('COINPURSE_pop');
+        this.coinPurse.icon.setFrame('COINPURSE_POP');
 
         this.scene.time.addEvent({
             delay: 125,
             callback: ()=>{
-                this.coinPurse.icon.setFrame('COINPURSE_closed');
+                this.coinPurse.icon.setFrame('COINPURSE_CLOSED');
             }
         });
     }
@@ -43,7 +43,7 @@ export default class HudCoinpurse {
         };
 
         this.coinPurse.block = this.makeBlock(position.x, position.y, 32, 32, 'BAG_FOCUSED');
-        this.coinPurse.icon = this.makeIcon(position.x+8, position.y+8, 'COINPURSE', 'COINPURSE_closed');
+        this.coinPurse.icon = this.makeIcon(position.x+8, position.y+8, 'UI', 'COINPURSE_CLOSED');
     }
 
 
@@ -66,13 +66,13 @@ export default class HudCoinpurse {
 
     closeCoinpurse() {
         this.clearCoinpurseTell();
-        this.coinPurse.icon.setFrame('COINPURSE_closed');
+        this.coinPurse.icon.setFrame('COINPURSE_CLOSED');
     }
 
 
     openCoinpurse() {
         this.scene.player.coinpurse.updateTotal();
-        this.coinPurse.icon.setFrame('COINPURSE_open');
+        this.coinPurse.icon.setFrame('COINPURSE_OPEN');
         var coinTotal = this.scene.player.coinpurse.getFormattedTotal();
 
         this.clearCoinpurseTell();

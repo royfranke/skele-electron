@@ -18,30 +18,30 @@ export default class HudFactory {
     }
 
     makeNotebook (_x,_y) {
-        return this.scene.add.image(_x,_y, 'NOTEBOOK_OPEN').setOrigin(0).setDepth(this.depth.SLOT).setScrollFactor(0);
+        return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.SLOT).setScrollFactor(0);
     }
 
     makeBlock (_x,_y, width=32, height=32, frameName='HAND_UNFOCUSED') {
         if (width == 32 && height == 32) {
-            return this.scene.add.image(_x,_y, 'POCKET_BLOCK', frameName).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
+            return this.scene.add.image(_x,_y, 'UI', frameName).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
         }
         else {
-            return this.scene.add.nineslice(_x,_y, 'POCKET_BLOCK', frameName, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
+            return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
         } 
     }
 
     makeSideArrow (_x,_y, frameName='BAG_ARROW_FOCUSED', left=false) {
         if (left) {
-            return this.scene.add.image(_x,_y, 'POCKET_ARROW', frameName).setOrigin(0).setDepth(this.depth.ARROW).setScrollFactor(0).setAngle(90);
+            return this.scene.add.image(_x,_y, 'UI', frameName).setOrigin(0).setDepth(this.depth.ARROW).setScrollFactor(0).setAngle(90);
         }
         else {
-            return this.scene.add.image(_x,_y, 'POCKET_ARROW', frameName).setOrigin(0).setFlipY(true).setDepth(this.depth.ARROW).setScrollFactor(0).setAngle(90);
+            return this.scene.add.image(_x,_y, 'UI', frameName).setOrigin(0).setFlipY(true).setDepth(this.depth.ARROW).setScrollFactor(0).setAngle(90);
         }
         
     }
 
     makeArrow (_x,_y, frameName='BAG_ARROW_FOCUSED') {
-        return this.scene.add.image(_x,_y, 'POCKET_ARROW', frameName).setOrigin(0).setDepth(this.depth.ARROW).setScrollFactor(0);
+        return this.scene.add.image(_x,_y, 'UI', frameName).setOrigin(0).setDepth(this.depth.ARROW).setScrollFactor(0);
     }
 
     makeIcon (_x,_y, textureName, frameName) {

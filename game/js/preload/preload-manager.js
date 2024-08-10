@@ -1,6 +1,7 @@
 import PRELOAD_IMAGE from "./preload-image.js";
 import PRELOAD_SOUND from "./preload-sound.js";
 import PRELOAD_ATLAS from "./preload-atlas.js";
+import PRELOAD_FONT from "./preload-font.js";
 import PRELOAD_JSON from "./preload-json.js";
 import SPRITE_DIR from "../config/sprite-dir.js";
 import PreloadAnim from "./preload-anim.js";
@@ -10,16 +11,16 @@ export default class PreloadManager{
     this.scene = scene;
     var self = this.scene;
 
-    self.load.bitmapFont('SkeleNotebook', '../game/assets/fonts/SkeleNotebook16.png', '../game/assets/fonts/SkeleNotebook16.xml');
-    self.load.bitmapFont('SkeleStreetSigns', '../game/assets/fonts/SkeleStreetSigns.png', '../game/assets/fonts/SkeleStreetSigns.xml');
-    self.load.bitmapFont('SkeleWatch', '../game/assets/fonts/SkeleWatch.png', '../game/assets/fonts/SkeleWatch.xml');
-
     PRELOAD_IMAGE.forEach(function (image, index) {
       self.load.image(image.NAME, '../game/assets/'+image.PATH);
     });
 
     PRELOAD_SOUND.forEach(function (sound, index) {
       self.load.audio(sound.NAME, [ '../game/assets/'+sound.PATH ]);
+    });
+
+    PRELOAD_FONT.forEach(function (font, index) { 
+      self.load.bitmapFont(font.NAME, '../game/assets/fonts/'+font.NAME+'.png', '../game/assets/fonts/'+font.NAME+'.xml');
     });
 
     PRELOAD_ATLAS.forEach(function (atlas, index) {

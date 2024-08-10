@@ -44,7 +44,7 @@ export default class HudPockets {
             var y = 0;
             slots[y][x] = {
                 slot: this.addSlot(x, y, 'blue'),
-                icon: this.addIcon(x, y, 'EMPTY', 'empty'),
+                icon: this.addIcon(x, y, 'UI', 'EMPTY_SYMBOL'),
                 item: null,
                 stack: this.addStackIndicator(x, y),
                 drop: this.addDrop(x),
@@ -52,7 +52,7 @@ export default class HudPockets {
             y = 1;
             slots[y][x] = {
                 slot: this.addSlot(x, y, 'silver'),
-                icon: this.addIcon(x, y, 'EMPTY', 'empty'),
+                icon: this.addIcon(x, y, 'UI', 'EMPTY_SYMBOL'),
                 item: null,
                 slip: this.addSlip(x, 'HOLD')
             };
@@ -72,9 +72,17 @@ export default class HudPockets {
     }
 
     addIcon(slot_x, slot_y, textureName, frameName) {
-        if (textureName != 'EMPTY') {
-            textureName = 'ITEMS';
+
+        if (textureName == 'EMPTY') {
+            textureName = 'UI';
         }
+        else if (frameName == 'EMPTY_SYMBOL') {
+            textureName = 'UI';
+        }
+        else {
+            textureName = 'ITEMS';
+        } 
+    
 
         var margin = {
             x: 48 + (slot_x * 40),
@@ -122,7 +130,7 @@ export default class HudPockets {
                 this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'ITEMS', new_icon.getStackIcon());
             }
             else {
-                this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'EMPTY', 'empty');
+                this.slots[1][slot_x].icon = this.addIcon(slot_x, 1, 'UI', 'EMPTY_SYMBOL');
             }
         }
     }
