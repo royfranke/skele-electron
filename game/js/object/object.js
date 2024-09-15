@@ -12,6 +12,7 @@ export default class Object {
         this.tile_y = 0;
         this.sprite = null;
         this.state = null;
+        this.slotted = [];
         
         // Imbue this object with the config object info
         this.info = object;
@@ -77,6 +78,7 @@ export default class Object {
     }
 
     update () {
+        
         if (this.state != this.last_state) { // State change
             if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition != 'false') {
                 this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
@@ -90,6 +92,8 @@ export default class Object {
             
             
         }
+
+
     }
 
     addActions() { //Add actions to world
@@ -152,6 +156,7 @@ export default class Object {
            sprite.setFlipX(true);
         }
         
+        this.slotted.push(sprite);
 /* 
         if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_') {
             this.glass = this.scene.add.sprite(x_pixels, y_pixels, 'OBJECTS', this.info.slug+'-'+this.variety, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1).setTint(0xed931e);
@@ -172,10 +177,23 @@ export default class Object {
             }
         });
         if (action == 'OPEN' && this.info.portal == 1) {
+            /// Get portal location info from object -- what room_id, x, y, player facing direction
             /// Go to portal... (maybe this is redraw of ground)
-            this.scene.portalTo();
+            /// Have this after opening anim of doors
+            this.scene.portalTo(6);
         }
         
+    }
+
+    setLight (keylight) {
+        if (this.sprite != null) {
+            this.sprite.setTint(keylight.objects_tint);
+            for (var i = 0; i < this.slotted.length; i++) {
+                this.slotted[i].setTint(keylight.objects_tint);
+            }
+            
+            this.setGlass(keylight.reflection_color, keylight.glass_opacity);
+        }
     }
 
     setTileLocation(_x, _y) {
@@ -183,27 +201,53 @@ export default class Object {
         this.tile_y = _y;
         const base = this.info.base;
 
-        var x_pixels = (_x - base.x) * 16;
-        var y_pixels = (_y - base.y) * 16;
+        var x_pixels = (_x - base.x) * 16 + this.info.sprite.x;
+        var y_pixels = (_y - base.y) * 16 + this.info.sprite.y;
         var frame = this.info.slug+'-'+this.variety;
 
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setSize(this.info.size.w, this.info.size.h).setDepth(y_pixels + (this.info.sprite.h));
-//.setTint(0xffffff, 0xb2977e, 0x787b69, 0x465e62)
+        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h));
+
+        if (this.info.solid) {
+            this.sprite.setSize(this.info.size.w, this.info.size.h);
+            this.sprite.body.setOffset(this.info.offset.x + (this.info.sprite.w/2), this.info.offset.y + (this.info.sprite.h/2));
+        }
+//this.sprite.setTint(0xe88dad, 0xb2977e, 0x787b69, 0x465e62)
         //this.setShadow(x_pixels, y_pixels, frame);
 
-        if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_') {
-            this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1);
+        if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_' || this.info.type == 'STORE_DOOR_' || this.info.type == 'STORE_WINDOW_EXT') {
+            this.createGlass();
         }
 
-        this.sprite.body.setOffset(this.info.offset.x + (this.info.sprite.w/2), this.info.offset.y + (this.info.sprite.h/2));
+    }
 
+    createGlass() {
+        
+        var x_pixels = (this.tile_x - this.info.base.x) * 16;
+        var y_pixels = (this.tile_y - this.info.base.y) * 16;
+        this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xbad2e0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1);
+
+        this.behind_glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 2);
+
+        //this.setGlass(0x89bcc6,.9);
+
+    }
+
+    setGlass (color, alpha) {
+        if (this.glass != null) {
+            this.glass.setFillStyle(color, alpha);
+        }
+    }
+
+    setBehindGlass (color) {
+        if (this.behind_glass != null) {
+            this.behind_glass.setFillStyle(color, 1);
+        }
     }
     
 
     setState (state_name) {
         this.last_state = this.state;
         this.state = this.info.states.find(state => state.name === state_name);
-        
     }
 
     destroySprite() {

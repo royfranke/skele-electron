@@ -7,8 +7,9 @@ const path = require('node:path')
 
 const fs = require('fs');
 
-function saveData(data,slot=0) {
-  fs.writeFile("./game/data/data_"+slot+".json", JSON.stringify(data), function(err) {
+function saveData(data) {
+  console.log("Trying to save data... for slot "+data.slot);
+  fs.writeFile("./game/data/saves/slot_"+data.slot+".json", JSON.stringify(data.data), function(err) {
     if(err) {
         return console.log(err);
     }

@@ -17,7 +17,7 @@ export default class FXFactory {
 
             const tween = this.scene.add.tween({
                 targets: fx,
-                y: _y - 32,
+                y: _y - 24,
                 duration: 450,
                 yoyo: true,
                 ease: 'Sine.easeOut',

@@ -40,9 +40,9 @@ const APP_STATES = {
         fadeIn: 1000,
         fadeOut: 1000,
         autoEnd: 0,
-        menu: true,
-        input: true,
-        app_input: true,
+        menu: false,
+        input: false,
+        app_input: false,
         avail_input: false,
         save: true
     },

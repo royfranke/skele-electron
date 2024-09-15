@@ -1,4 +1,5 @@
 import SPRITE_DIR from "../config/sprite-dir.js";
+import KEYLIGHTS from "../config/key-light.js";
 /* global Phaser */
 /*
  * Gets injected into game scene
@@ -6,12 +7,11 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
 export default class PlayerSprite {
 
-  constructor(scene, _x, _y) {
+  constructor(scene) {
     this.scene = scene;
     this.facing = 's';
     this.dir_faces = SPRITE_DIR.DIR_FACES;
-    this.sprite = this.scene.physics.add.sprite(_x, _y, "player-IDLE", 0).setSize(16, 12).setOffset(8, 16);
-
+    this.sprite = this.scene.physics.add.sprite(0,0, "player-IDLE", 0).setSize(16, 12).setOffset(8, 16);
   }
 
   setCollider() {
@@ -38,7 +38,6 @@ export default class PlayerSprite {
   }
 
   createFooting() {
-
     this.footShadow = this.scene.add.ellipse(0, 0, 12, 6, 0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY);
     this.footShadow.setAlpha(.5);
     this.footMask = this.scene.add.circle(0, 0, 16, 0x6666ff);
@@ -58,6 +57,7 @@ export default class PlayerSprite {
 
     this.updateVelocity();
     this.updateFooting();
+    this.updateKeyLight();
 
     /*
     this.shadow.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true);
@@ -91,6 +91,13 @@ export default class PlayerSprite {
     }
 
     this.sprite.body.velocity.normalize().scale(speed);
+  }
+
+  updateKeyLight () {
+    let keylight = this.scene.manager.time.keylight;
+    if (KEYLIGHTS[keylight] != undefined) {
+      this.sprite.setTint(KEYLIGHTS[keylight].skeles_tint);
+    }
   }
 
   updateFooting () {

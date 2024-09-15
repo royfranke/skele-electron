@@ -155,8 +155,8 @@ export default class GameUtilities {
             if (tile_attr.BITMAP) {
                 if (!TILES[tile_type].BITMAP_) {
                     if (tile_type == 'ROOF') {
-                        if (TILES.ROOF.BITMAP_ASPHALT_ != undefined) {
-                            layer.putTileAt(TILES[tile_type].BITMAP_ASPHALT_[0].index[mapped_index],_x,_y);
+                        if (TILES.ROOF.BITMAP_BRICK_ != undefined) {
+                            layer.putTileAt(TILES[tile_type].BITMAP_BRICK_[0].index[mapped_index],_x,_y);
                         }
                     }
                     else if (tile_type == 'DIRT' && border_votes.includes('CEMENT')) {

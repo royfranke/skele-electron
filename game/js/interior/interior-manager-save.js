@@ -1,6 +1,5 @@
 import TILES from "../config/atlas/tile-weights.js";
 import WALLTILES from "../config/atlas/wall-tile-weights.js";
-//import COOK from "../config/tiles/interior/tile-recipes.js";
 
 /**
  * 	Manage Interiors (Non-overworld tile scenes)

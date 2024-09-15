@@ -12,6 +12,11 @@ export default class InteriorScene extends Phaser.Scene {
         
     }
 
+    init (data) {
+        console.log(data.room_id);
+        this.room_id = data.room_id;
+    }
+
     preload () {
         //this.preload = new PreloadManager(this);
         
@@ -23,8 +28,7 @@ export default class InteriorScene extends Phaser.Scene {
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
         this.interior = new InteriorManager(this);
-        var player_entry = this.interior.getEntry();
-        this.player = new PlayerManager(this, player_entry.x, player_entry.y);
+        this.player = new PlayerManager(this);
         this.interior.create();
         this.player.create();
     }
@@ -37,6 +41,6 @@ export default class InteriorScene extends Phaser.Scene {
     }
 
     portalTo() {
-        this.scene.start('Exterior Scene');
+        this.scene.switch('Exterior Scene');
     }
 }

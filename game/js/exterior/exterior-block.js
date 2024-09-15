@@ -45,6 +45,9 @@ export default class Block {
         if (block.ground.toUpperCase() == 'FOREST') {
             this.setForest();
         }
+        else if (block.ground.toUpperCase() == 'DIRT') {
+            groundLayer.weightedRandomize(TILES.MULCH.FILL_, block.left, block.top, block.width, block.height);
+        }
         else {
             groundLayer.weightedRandomize(TILES[block.ground.toUpperCase()].FILL_, block.left, block.top, block.width, block.height);
         }
@@ -151,7 +154,7 @@ export default class Block {
 
     buildProperties () {
         this.propertyLines.forEach(function (prop, index) {
-            prop.buildIt();
+            prop.buildShop();
         });
     }
 

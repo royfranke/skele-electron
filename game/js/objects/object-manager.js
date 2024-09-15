@@ -9,7 +9,6 @@ export default class ObjectManager {
         this.scene = scene;
         this.factory = new ObjectFactory(this.scene);
         this.registry = new ObjectRegistry();
-
     }
 
     update () {
@@ -32,7 +31,7 @@ export default class ObjectManager {
         var object = this.newObject(slug,items);
         var result = this.putObjectInWorld(object,_x,_y);
         if (!result) {
-            console.warn('Could not add to world: '+object);
+            console.warn('Could not add to world: '+slug);
             return false;
         }
         
@@ -45,7 +44,9 @@ export default class ObjectManager {
         if (!result) {
             console.log('Could not put this object in the world from object manager...');
         }
-        this.scene.physics.add.collider(this.scene.player.playerSprite.sprite, object.sprite);
+        if (object.info.solid == 1) {
+            this.scene.physics.add.collider(this.scene.player.playerSprite.sprite, object.sprite);
+        }
         return result;
     }
 

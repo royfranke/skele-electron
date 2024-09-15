@@ -13,8 +13,8 @@ export default class HudFactory {
        };
     }
 
-    makeBitmapText (_x,_y, width, size=16) {
-        return this.scene.add.bitmapText(_x, _y, 'SkeleNotebook', '', size).setOrigin(0).setDepth(this.depth.TEXT).setScrollFactor(0).setMaxWidth(width);
+    makeBitmapText (_x,_y, width, size=16, font='SkeleNotebook') {
+        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0).setDepth(this.depth.TEXT).setScrollFactor(0).setMaxWidth(width);
     }
 
     makeNotebook (_x,_y) {
@@ -48,6 +48,10 @@ export default class HudFactory {
         return this.scene.add.sprite(_x,_y, textureName,frameName).setOrigin(0).setDepth(this.depth.ICON).setScrollFactor(0);
     }
 
+    makeIconContents (_x,_y, textureName, frameName) {
+        return this.scene.add.sprite(_x,_y, textureName,frameName).setOrigin(0).setDepth(this.depth.ICON+1).setScrollFactor(0);
+    }
+
     makeFX (fx_slug, _x, _y, delay=0) {
         var fx = this.scene.manager.fx.playFX(fx_slug,_x,_y,delay);
     }
@@ -60,10 +64,13 @@ export default class HudFactory {
                 fx.destroy();
             });
         }
-        else {
+        else if (delay == 0){
             fx.once('animationcomplete', () => {
                 fx.destroy()
             })
+        }
+        else {
+            return fx;
         }
         
     }

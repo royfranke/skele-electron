@@ -11,6 +11,7 @@ export default class PropertyLine {
         this.scene = scene;
         this.block = block;
         this.prop = prop;
+        this.gates = []; // For rolling gates
 
         this.setMaterials();
     }
@@ -25,8 +26,8 @@ export default class PropertyLine {
             let fence_types = ['WOOD_FENCE', 'CHAINLINK_S'];
             let fence_options = {
                 'WOOD_FENCE': [
-                    'BROWN',
                     'HONEY',
+                    'BROWN',
                     'WEATHERED'
                 ],
                 'CHAINLINK_S': [
@@ -73,7 +74,8 @@ export default class PropertyLine {
         }
         if (!settings.hasOwnProperty('levels')) {
             settings.levels = [];
-            settings.levels.push({ height: this.roll([3, 4, 4, 4, 5]) });
+            settings.levels.push({ height: this.roll([4, 4, 4, 5]) });
+            settings.levels.push({ height: this.roll([4, 4, 4, 5]) });
         }
         if (!settings.hasOwnProperty('roof')) {
             settings.roof = {
@@ -88,6 +90,73 @@ export default class PropertyLine {
         return array[Phaser.Math.RND.between(0, array.length - 1)];
     }
 
+    showIt() {
+        const top = this.prop.lines.top;
+        const left = this.prop.lines.left;
+        const bottom = this.prop.lines.bottom;
+        const right = this.prop.lines.right;
+        const width = this.prop.lines.width;
+        const height = this.prop.lines.height;
+        const facing = this.prop.address.facing;
+        
+        this.scene.manager.objectManager.newObjectToWorld(left, top, 'CONE_UPRIGHT');
+        this.scene.manager.objectManager.newObjectToWorld(right - 1, top, 'CONE_UPRIGHT');
+        this.scene.manager.objectManager.newObjectToWorld(left, bottom - 1, 'CONE_UPRIGHT');
+        this.scene.manager.objectManager.newObjectToWorld(right - 1, bottom - 1, 'CONE_UPRIGHT');
+
+    }
+
+    buildShop() {
+        var top = this.prop.lines.top;
+        var left = this.prop.lines.left;
+        var bottom = this.prop.lines.bottom;
+        var right = this.prop.lines.right;
+        var width = this.prop.lines.width;
+        var height = this.prop.lines.height;
+        var facing = this.prop.address.facing;
+
+        var building_width = width;
+        var colors = ['RED_COMMERCIAL']
+        var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
+
+        var _x = left;
+        var _y = bottom - 1;
+        var level_position = _y;
+
+        for (var i = 0; i < this.settings.levels.length; i++) {
+            this.buildFacadeSection(_x, level_position, building_width, this.settings.levels[i].height, wallKind);
+            level_position = level_position - this.settings.levels[i].height;
+        }
+
+        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_, _x, (level_position - this.settings.roof.height) + 1, building_width, this.settings.roof.height);
+
+
+        
+        this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROLLING_GATE_DOOR'));
+        this.gates[0].sprite.setDepth(this.gates[0].sprite.depth + 1);
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'EXT_DOOR_STORE_BLACK');
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'EXT_WINDOW_STORE_4_CLAD');
+        this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'ROLLING_GATE_WIDE'));
+        this.gates[1].sprite.setDepth(this.gates[1].sprite.depth + 1);
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 6, _y, 'EXT_WINDOW_STORE_4_CLAD');
+        this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + 6, _y, 'ROLLING_GATE_WIDE'));
+        this.gates[2].sprite.setDepth(this.gates[2].sprite.depth + 1);
+
+        this.setRollingGates('OPENING');
+    }
+
+    setRollingGate(gate_index, state_name)  {
+        this.gates[gate_index].setState(state_name);
+    }
+
+    setRollingGates(state_name) {
+        for (var i = 0; i < this.gates.length; i++) {
+            this.gates[i].setState(state_name);
+        }
+    }
+
     buildIt() {
         const top = this.prop.lines.top;
         const left = this.prop.lines.left;
@@ -99,7 +168,7 @@ export default class PropertyLine {
 
         //check for "detached" tag-- make perimeter of space around building if found
 
-        let yard = 4;
+        let yard = 3;
 
         //this.block.groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 2, height - (yard + 1));
         //this.block.groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, left+1, top + height - (yard + 1), width - 2,  yard);
@@ -110,11 +179,15 @@ export default class PropertyLine {
         var _y = bottom - yard;
 
         var building_width = width - 2;
-        var material = this.roll([0, 1, 1, 1]);
+        var material = this.roll([0, 1, 1, 2]);
 
         if (material == 0) {
             var colors = ['YELLOW', 'BROWN', 'RED', 'GRAY', 'WHITE'];
             var wallKind = WALLTILES.BRICK[this.roll(colors) + '_CEMENT_'];
+        }
+        else if (material == 1) {
+            var colors = ['RED_COMMERCIAL']
+            var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
         }
         else {
             var colors = ['ORANGE', 'YELLOW', 'GREEN', 'GRAY', 'PURPLE', 'BLUE'];
@@ -132,7 +205,7 @@ export default class PropertyLine {
         this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
 
         ////
-        ///this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_ASPHALT_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
+        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
 
         /*
         this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height) + 1, building_width + 2, this.settings.roof.height/2, ROOFTILES.PITCHED.METAL_SOUTH_);
@@ -140,9 +213,9 @@ export default class PropertyLine {
         this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height + this.settings.roof.height/2) + 1, building_width + 2, this.settings.roof.height/2, ROOFTILES.PITCHED.METAL_NORTH_);
        */
 
-        this.buildPitchedRoof(_x - 1, _y - (this.settings.levels[0].height) + 1, building_width + 2, this.settings.roof.height, 'SHINGLES_');
+        //this.buildPitchedRoof(_x - 1, _y - (this.settings.levels[0].height) + 1, building_width + 2, this.settings.roof.height, 'SHINGLES_');
 
-        this.scene.manager.objectManager.newObjectToWorld(left + Math.floor(width / 2), _y, 'EXT_WINDOW_2_OPENS');
+        this.scene.manager.objectManager.newObjectToWorld(left + Math.floor(width / 2), _y, 'EXT_WINDOW_2_YELLOW_BRICK_T_');
 
         this.buildEntry(_x + 1, _y);
 
@@ -293,7 +366,9 @@ export default class PropertyLine {
         var right_length = this.prop.lines.right - (_x + width) - 1; // - 1 accomodates mailbox to the right of the front walk
 
         if (left_length < 6) {
+            
             this.buildFence(this.prop.lines.left, this.prop.lines.bottom, left_length, this.settings.fence.prefix, this.settings.fence.suffix);
+
         }
         else {
             this.scene.manager.objectManager.newObjectToWorld(this.prop.lines.left, this.prop.lines.bottom, 'BOXELDER');
@@ -304,6 +379,10 @@ export default class PropertyLine {
 
         if (right_length < 6) {
             this.buildFence(_x + width + 1, this.prop.lines.bottom, right_length, this.settings.fence.prefix, this.settings.fence.suffix);
+
+            if (this.settings.fence.prefix != 'CHAINLINK_S') {
+                this.buildFence(_x + width + right_length, this.prop.lines.bottom - 3, 4, this.settings.fence.prefix, this.settings.fence.suffix, false);
+                }
         }
         else {
             this.block.groundLayer.weightedRandomize(TILES.DIRT.FILL_, _x + width + 1, this.prop.lines.bottom, 6, 2);
@@ -313,8 +392,9 @@ export default class PropertyLine {
         }
     }
 
-    buildFence(_x, _y, width = 2, prefix = 'WOOD_FENCE', suffix = 'BROWN') {
-        this.scene.manager.objectManager.newObjectToWorld(_x, _y, prefix + '_' + width + '_' + suffix);
+    buildFence(_x, _y, width = 2, prefix = 'WOOD_FENCE', suffix = 'BROWN', horizontal = true) {
+        let orientation = horizontal ? '' : 'VERTICAL_';
+        this.scene.manager.objectManager.newObjectToWorld(_x, _y, prefix + '_' + width + '_' + orientation + suffix);
     }
 
     buildMailbox(_x, _y) {

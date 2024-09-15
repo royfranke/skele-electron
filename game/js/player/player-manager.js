@@ -15,20 +15,19 @@ export default class PlayerManager {
   input = null;
 
 
-  constructor(scene, x_, y_) {
+  constructor(scene) {
     this.scene = scene;
     this.app = this.scene.app;
     this.manager = this.scene.manager;
     this.playerState = new PlayerState();
     this.state = this.getState();
     this.playerInput = new PlayerInput(this.scene);
-    this.playerSprite = new PlayerSprite(this.scene, x_ * 16, y_ * 16);
+    //// Get player position from save
+    this.playerSprite = new PlayerSprite(this.scene);
     this.coinpurse = new PlayerCoinpurse();
     this.action = new PlayerAction(this.scene);
-
     this.app.camera.follow(this.playerSprite.sprite);
     this.locale = this.scene[this.scene.place];
-
     this.underfoot = null;
   }
 
@@ -249,7 +248,6 @@ export default class PlayerManager {
 
   addCoin(coin_amount) {
     this.coinpurse.addCoin(coin_amount);
-    this.scene.manager.hud.hudCoinpurse.popCoin(`${coin_amount}¢`, 'positive');
   }
 
 }

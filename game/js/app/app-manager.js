@@ -23,13 +23,17 @@ export default class AppManager {
         this.appView = new AppView(this.scene, this.getView(),this.state.name);
         this.initializeMenu();
         this.initializeInput();
-        this.initializeSave();
+        this.initializeSaveManager();
         this.startScene();
 
         this.scene.events.on(Phaser.Scenes.Events.WAKE, function ()
         {
             this.camera.wake();
         }, this);
+    }
+
+    loadGame (data) {
+        this.scene.scene.start('Game Scene',{slot: data});
     }
 
     initializeMenu () {
@@ -40,6 +44,7 @@ export default class AppManager {
             this.menu = null;
         }
     }
+
 
     initializeInput () {
         if (this.state.input) {
@@ -56,13 +61,19 @@ export default class AppManager {
        }
     }
 
-    initializeSave () {
+    initializeSaveManager () {
         if (this.state.save) {
-            this.saveManager = new SaveManager(this.scene, this.state.name);
+            this.saveManager = new SaveManager(this.scene);
         }
         else {
             this.saveManager = null;
-       }
+        }
+    }
+
+    initializeSave () {
+        if (this.saveManager != null && this.scene.slot != undefined) {
+            this.saveManager.initializeSave();
+        }
     }
 
     getView () {

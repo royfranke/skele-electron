@@ -4,6 +4,7 @@ import ExteriorManager from "../exterior/exterior-manager.js";
 import PreloadManager from "../preload/preload-manager.js";
 import PlayerManager from "../player/player-manager.js";
 import NpcManager from "../npc/npc-manager.js";
+
 /**
  * Game
  */
@@ -11,6 +12,11 @@ export default class GameScene extends Phaser.Scene {
     constructor() {
         super("Game Scene");
         
+    }
+
+    init (data) {
+        console.log(data.slot);
+        this.slot = data.slot;
     }
 
     preload () {
@@ -28,13 +34,15 @@ export default class GameScene extends Phaser.Scene {
             this.manager.wake();
         }, this);
         this.exterior = new ExteriorManager(this);
-        this.player = new PlayerManager(this, 80, 32);
+        this.player = new PlayerManager(this);
         this.npcs = new NpcManager(this);
         
         this.exterior.create();
         this.player.create();
         this.npcs.create();
 
+        //// Load the save!
+        this.app.initializeSave();
     }
 
     update() {
@@ -45,8 +53,8 @@ export default class GameScene extends Phaser.Scene {
         this.exterior.update();
     }
 
-    portalTo() {
-        this.scene.switch('Interior Scene');
+    portalTo(room_id) {
+        this.scene.start('Interior Scene', {room_id: room_id});
     }
     
 }

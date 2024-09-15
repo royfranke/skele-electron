@@ -16,7 +16,7 @@ import Room from "../object/room.js";
         this.player_start_x = 3;
         this.player_start_y = 7;
         this.built = false;
-        this.room = new Room(this.scene, 1);
+        this.room = new Room(this.scene, this.scene.room_id);
 
         this.createMap();
         

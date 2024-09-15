@@ -115,6 +115,15 @@ export default class AppMenu {
             this.scene.app.endScene(this.menu[this.selected].LOADER);
         }
 
+        if (this.menu[this.selected].TYPE == 'LOADSAVE') {
+            var slot = this.menu[this.selected].LOADER;
+            
+            if (this.scene.cache.json.get(slot)) {
+                var load_data = this.scene.cache.json.get(slot);
+                this.scene.app.loadGame(load_data);
+            }
+        }
+
         if (this.menu[this.selected].TYPE == 'FUNCTION') {
             /// TODO: if the menu item is a function, do that function
         }

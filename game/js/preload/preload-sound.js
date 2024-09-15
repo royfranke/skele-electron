@@ -56,6 +56,10 @@ const PRELOAD_SOUND = [
         PATH: 'sound/card-shuffle-small.wav'
     },
     {
+        NAME: 'COIN_CLINK_1',
+        PATH: 'sound/coin-clink-1.wav'
+    },
+    {
         NAME: 'SKELE_INVALID_1',
         PATH: 'sound/skele-invalid-1.wav'
     },

@@ -23,7 +23,7 @@ export default class CourtScene extends Phaser.Scene {
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
         this.court = new CourtManager(this);
-        this.player = new PlayerManager(this, 1, 1);
+        this.player = new PlayerManager(this);
         this.court.create();
         this.player.create();
     }

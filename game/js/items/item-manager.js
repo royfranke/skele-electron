@@ -40,7 +40,7 @@ export default class ItemManager {
         var item = this.newItem(slug,items);
         var result = this.addItemToPockets(item);
         if (!result) {
-            console.warn('Could not add to pocket: '+item);
+            console.warn('Could not add to pocket: '+slug);
             console.log(item);
         }
         return result;
@@ -50,7 +50,7 @@ export default class ItemManager {
         var item = this.newItem(slug,items);
         var result = this.putItemInWorld(item,_x,_y);
         if (!result) {
-            console.warn('Could not add to world: '+item);
+            console.warn('Could not add to world: '+slug);
             return false;
         }
         return item;

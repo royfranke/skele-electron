@@ -10,6 +10,12 @@ const PRELOAD_FONT = [
     },
     {
         NAME: 'SkeleWatch',
+    },
+    {
+        NAME: 'SkeleHype',
+    },
+    {
+        NAME: 'SkeleButton',
     }
 ];
 

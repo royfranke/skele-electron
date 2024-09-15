@@ -1,22 +1,37 @@
 import DATA from "../data/new.js";
+import DAY_DATA from "../data/days.js";
 
 /* Time Manager Class */
 
 export default class TimeManager {
 
-    constructor(now=DATA.TIME) {
+    constructor(now={hour: 6, minute: 0, second: 0, day: 1}) {
         this.now = now;
         this.month = ['June','July','August'];
         this.start_date = 3; // June 3rd, start date
         this.daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday','Monday'];
+
+        this.keyLightOrder = ['astronomicalDawn','nauticalDawn', 'civilDawn', 'sunrise', 'morning', 'solarNoon', 'afternoon', 'sunset', 'civilDusk', 'nauticalDusk', 'astronomicalDusk', 'night'];
+
+        this.today = this.getDate();
+        
     }
 
-    setTime (time) {
-        this.now = time;
+    setTimeFromSave (time) {
+        this.now = {
+            hour: time.HOUR,
+            minute: time.MINUTE,
+            second: time.SECOND,
+            day: time.DAY
+        };
+        this.setToday();
+        this.updateCurrentLightState();
+        console.log(this.today);
     }
 
     update () {
-        this.incrementSecond(.25);
+        this.incrementSecond(.5);
+        //this.incrementSecond(30);
     }
 
     getTime (current=this.now) {
@@ -41,12 +56,38 @@ export default class TimeManager {
         return time;
     }
 
+    setToday () {
+        this.today = this.getDate();
+    }
+
+    updateCurrentLightState () { 
+        this.keylight = this.getCurrentLightState();   
+    }
+
+    getCurrentLightState () {
+        /*
+        Get the current hour and minute as a single integer -- stringify the hour and minute and concatenate them to compare to our state times
+        */
+       var data = this.today.day_data;
+       var compare = (this.now.hour * 60) + this.now.minute;
+       var state = 'night';
+       
+       for (var i = 0; i < this.keyLightOrder.length; i++) {
+           if (compare >= data[this.keyLightOrder[i]]) {
+               state = this.keyLightOrder[i];
+           }
+       }
+       return state;
+
+    }
+
     getDate (elapsed=this.now) {
         var date = {
             day: elapsed.day + this.start_date,
             month: this.month[0],
             year: 1994,
-            weekday: 'Monday'
+            weekday: this.getWeekDayName(elapsed),
+            day_data: DAY_DATA[elapsed.day]
         };
         
         if (elapsed.day > (30 - this.start_date) && elapsed.day <= (61 - this.start_date)) {
@@ -58,10 +99,12 @@ export default class TimeManager {
             date.day = elapsed.day - (61 - this.start_date);
         }
 
-            // Calculate the weekday name
-        const weekdayIndex = ( elapsed.day + this.start_date) % 7;
-        date.weekday = this.daysOfWeek[weekdayIndex];
         return date;
+    }
+
+    getWeekDayName (elapsed=this.now) {
+        let weekdayIndex = ( elapsed.day + this.start_date) % 7;
+        return this.daysOfWeek[weekdayIndex];
     }
     
     incrementSecond(increment) {
@@ -90,6 +133,8 @@ export default class TimeManager {
             this.now.minute += 60;
             this.incrementHour(-1);
         }
+
+        this.updateCurrentLightState();
     }
 
     incrementHour(increment) {
@@ -108,6 +153,7 @@ export default class TimeManager {
 
     incrementDay(increment) {
         this.now.day += increment;
+        this.setToday();
     }
 
 }

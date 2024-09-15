@@ -9,6 +9,7 @@ import Block from "./exterior-block.js";
 import Navigator from "../navigator/navigator-manager.js";
 import BlockNode from "./exterior-block-node.js";
 import ObjectManager from "../objects/object-manager.js";
+import KEYLIGHT from "../config/key-light.js";
 
 /**
  * 	Manage Exteriors (Overworld tile scenes)
@@ -18,6 +19,7 @@ import ObjectManager from "../objects/object-manager.js";
 
     constructor(scene) {
         this.scene = scene;
+        this.keylight = KEYLIGHT;
 
         this.nav = new Navigator(scene);
 
@@ -240,13 +242,15 @@ import ObjectManager from "../objects/object-manager.js";
             nodes[node.y][node.x].buildObjects(objectManager); 
         });
         this.ground.initializeTiles();
+        
+    }
 
-        
-        this.groundLayer.setTint(0xb2977e);
-        this.edgeLayer.setTint(0xb2977e);
-        this.wallLayer.setTint(0xbda766);
-        this.roofLayer.setTint(0x465e62);
-        
+    setKeyLight (key_light_name) {
+        var phase = this.keylight[key_light_name];
+        this.groundLayer.setTint(phase.ground_tint);
+        this.edgeLayer.setTint(phase.ground_tint);
+        this.wallLayer.setTint(phase.wall_tint);
+        this.roofLayer.setTint(phase.roof_tint);
     }
 
     createItems () {
@@ -308,63 +312,65 @@ import ObjectManager from "../objects/object-manager.js";
         var recipe = self.cook('SIDEWALK_2X2');
         var recipe_x = 0;
         var recipe_y = 0;
+        var sidewalk_depth = 3;
 
         if (block.offset.n > 0) {
             // Top / North Side of block
             // Bottom / South side of street!
-            recipe_x = block.left+1;
-            recipe_y = block.top+1;
+            recipe_x = block.left;
+            recipe_y = block.top;
             
             //self.cookRecipe(recipe_x, recipe_y, recipe);
             /// Start with plain cement fill for sidewalks
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,block.width-2, 2);
+            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,block.width-2, sidewalk_depth);
         }
 
         if (block.offset.e > 0) {
             // Right / East Side of block
             // Left / West side of street!
-            recipe_x = block.right-2;
-            recipe_y = block.top+1;
+            recipe_x = block.right-sidewalk_depth;
+            recipe_y = block.top;
+            
             //self.cookRecipe(recipe_x, recipe_y, recipe);
             /// Start with plain cement fill for sidewalks
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,2, block.height-2);
+            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,sidewalk_depth, block.height-2);
         }
 
         if (block.offset.s > 0) {
             // Bottom / South Side of block
             // Top / North side of street!
             recipe_x = block.left+1;
-            recipe_y = block.bottom-2;
+            recipe_y = block.bottom-sidewalk_depth;
             /// Start with plain cement fill for sidewalks
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,block.width-2, 2);
+            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,block.width-2, sidewalk_depth);
         }
 
         if (block.offset.w > 0) {
             // Left / West Side of block
             // Right / East side of street!
-            recipe_x = block.left+1;
-            recipe_y = block.top+1;
+            recipe_x = block.left;
+            recipe_y = block.top;
             /// Start with plain cement fill for sidewalks
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,2, block.height-2);
+            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, recipe_x, recipe_y,sidewalk_depth, block.height);
         }
 
         if (block.offset.n > 0 && block.offset.w > 0) { // Upper left
-            this.groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_, block.left, block.top,1, 1);
-            recipe_x = block.left+1;
-            recipe_y = block.top+1;
+            this.groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_, block.left - 1, block.top - 1,1, 1);
+            recipe_x = block.left;
+            recipe_y = block.top;
             self.cookRecipe(recipe_x, recipe_y, recipe);
             
         }
         if (block.offset.n > 0 && block.offset.e > 0) {  // Upper right
-            this.groundLayer.weightedRandomize(TILES.CURB.SOUTHWEST_, block.right, block.top,1, 1);
+            this.groundLayer.weightedRandomize(TILES.CURB.SOUTHWEST_, block.right, block.top - 1,1, 1);
 
             recipe_x = block.right-recipe.WIDTH;
-            recipe_y = block.top+1;
+            recipe_y = block.top;
             self.cookRecipe(recipe_x, recipe_y, recipe);
 
         }
         if (block.offset.s > 0 && block.offset.w > 0) { // Lower left
-            this.groundLayer.weightedRandomize(TILES.CURB.NORTHEAST_, block.left, block.bottom,1, 1);
+            this.groundLayer.weightedRandomize(TILES.CURB.NORTHEAST_, block.left - 1, block.bottom,1, 1);
 
             recipe_x = block.left+1;
             recipe_y = block.bottom-recipe.HEIGHT;

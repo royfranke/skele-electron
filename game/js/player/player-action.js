@@ -80,9 +80,11 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     addObjectActions () {
-        var object = this.scene.manager.objectManager.registry.getObject(this.actionTile.x,this.actionTile.y);
-        if (object != null) {
-            object.addActions();
+        var objects = this.scene.manager.objectManager.registry.getObjects(this.actionTile.x,this.actionTile.y);
+        if (objects != null && objects.length > 0) {
+            objects.forEach(object => {
+                object.addActions();
+            });
         }
     }
 

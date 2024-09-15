@@ -2,7 +2,7 @@ const DATA = {
     TIME: {
         second: 0,
         minute: 25,
-        hour: 9,
+        hour: 7,
         day: 1
     }
 };

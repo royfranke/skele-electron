@@ -164,6 +164,10 @@ export default class GameManager {
         }
         if (this.state.time) {
             this.time.update();
+            if (this.scene.exterior != null) {
+                this.scene.exterior.setKeyLight(this.getKeyLight());
+                this.objectManager.registry.updateLights(this.getKeyLight());
+            }
         }
         if (this.hud != null) {
             this.hud.update();
@@ -177,8 +181,8 @@ export default class GameManager {
         if (this.state.name == 'NOT_LOADED') {
             this.scene.app.camera.camera.setBackgroundColor('#4b424a');
             this.setState('LOADING');
-            
             this.hud = new HudManager(this.scene);
+            this.scene.player.coinpurse.setHud(this.hud.hudCoinpurse);
             this.watch = this.hud.hudWatch.tellWatch('--:--MB');
             
 
@@ -186,21 +190,25 @@ export default class GameManager {
             
             this.setFocus('PLAYER');
             /// After loading functions...
-            var staple_gun = this.itemManager.newItem('STAPLE_GUN');
-            this.scene.manager.hud.availablePocket(staple_gun);
+            //var staple_gun = this.itemManager.newItem('STAPLE_GUN');
+            //this.scene.manager.hud.availablePocket(staple_gun);
 
-            var flyers = this.itemManager.newItem('FLYER_PINK');
-            flyers.updateStackCount(12);
+            //var flyers = this.itemManager.newItem('FLYER_PINK');
+            //flyers.updateStackCount(12);
             
             //this.scene.manager.hud.availablePocket(flyers);
-            this.scene.manager.itemManager.newItemToPockets('BACKPACK_PURPLE',[flyers]);
-
+            //this.scene.manager.itemManager.newItemToPockets('BACKPACK_PURPLE');
+            //let mac = this.itemManager.newItem('CASSEROLE_MAC');
             //this.itemManager.newItemToPockets('RAKE');
-            //this.itemManager.newItemToPockets('SPADE');
+            //this.itemManager.newItemToPockets('CASSEROLE_DISH_1',[mac]);
             this.setState('LOADED');
             this.setState('OVERWORLD');
             
         }
+    }
+
+    getKeyLight () {
+        return this.time.keylight;
     }
 
 }

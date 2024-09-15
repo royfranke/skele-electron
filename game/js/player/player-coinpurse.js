@@ -9,6 +9,7 @@ export default class PlayerCoinpurse {
     constructor() {
         this.total = 0;
         this.coinRef = MONEY.COIN;
+        this.hud = null;
 
         this.contents = {
             COIN: {
@@ -29,6 +30,15 @@ export default class PlayerCoinpurse {
         };
 
         this.total = 0;
+    }
+
+    setContents (contents) {
+        this.contents = contents;
+        this.updateTotal();
+    }
+
+    setHud (hud) {
+        this.hud = hud;
     }
 
     availableCoins (coin_amount_array) {
@@ -93,7 +103,7 @@ export default class PlayerCoinpurse {
             spent = parseInt(element + spent);
         });
         let spent_formatted = this.formatMoney(spent);
-        //this.popCoin(`${spent_formatted}`,'negative');
+        this.popCoin(`${spent_formatted}`,'negative');
         this.updateTotal();
     }
 
@@ -107,7 +117,7 @@ export default class PlayerCoinpurse {
         let coin = this.coinRef[coin_amount];
         this.contents.COIN[coin]++;
         let amount_string = coin_amount;
-        //this.popCoin(`${coin_amount}¢`,'positive');
+        this.popCoin(`${coin_amount}`,'positive');
         this.updateTotal();
     }
 
@@ -123,6 +133,34 @@ export default class PlayerCoinpurse {
     getFormattedTotal () {
         var total = this.updateTotal();
         return this.formatMoney(total);
+    }
+
+    getTalliedTotal () {
+        this.total = [];
+          for (const [key, value] of Object.entries(this.contents.COIN)) {
+            this.total.push({text: value, icon: this.coinRef[key]});
+          }
+        return this.total;
+    }
+
+    getTally (contents=[{text: 1, icon: 1}]) {
+        let tally = [];
+        contents.forEach(coin => {
+            if (coin.text > 0) {
+                tally.push({
+                    text: coin.text, 
+                    icon: coin.icon
+                });
+            }
+        });
+        return tally;
+    }
+
+    popCoin (amount_string, status = 'default') {
+        var amount = this.getTally([{text: 1, icon: amount_string}]);
+        if (this.hud != null) {
+            this.hud.popCoin(amount, status);
+        }
     }
 
     

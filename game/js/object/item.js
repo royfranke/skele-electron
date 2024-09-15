@@ -97,8 +97,7 @@ export default class Item {
         this.info = this.scene.manager.itemManager.itemInfo(new_item);
     }
 
-    getStackIcon() {
-        let icon = this.info.icon;
+    getStackIcon(icon=this.info.icon) {
         if (this.stackCount > 1 && this.info.stacks.length > 0) {
             /// An alternative icon may exist in relation to the stack size...
             for (var i=0;i<this.info.stacks.length;i++) {
@@ -132,7 +131,7 @@ export default class Item {
 
         tween.on('complete', () => {
             this.createFooting();
-            let locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.court;
+            let locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
             let ground = locale.ground.getGround(this.tile_x, this.tile_y);
             // utilities
             locale.ground.util.updateFooting(ground,this);
@@ -169,6 +168,10 @@ export default class Item {
 
     destroy() {
         this.sprite.destroy();
+    }
+
+    hasContents() {
+        return false;
     }
 }
 

@@ -14,7 +14,6 @@ export default class LoadGameScene extends Phaser.Scene {
     }
 
     create() {
-        this.SAVES = this.cache.json.get('SAVES');
         this.app = new AppManager(this,'LOAD');
     }
 
