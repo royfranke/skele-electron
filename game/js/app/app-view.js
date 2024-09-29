@@ -36,6 +36,7 @@ export default class AppView {
     }
 
     createMain() {
+
         var start_top = this.view.top + (this.view.height / 1.5);
         var start_left = this.view.left;
         var color = ['#32675a', '#3d56d2', '#7758ab', '#974d9e', '#d93232', '#f47832', '#ed931e', '#f2b22b', '#f8d239'];
@@ -43,7 +44,10 @@ export default class AppView {
             this.scene.add.dom(start_left + (4 * i), start_top - (4 * i), 'div', 'animation-delay:' + (i * .5) + 's;width: ' + this.view.width + 'px;color:' + color[i], 'Summer Break').setOrigin(0).setClassName('title-card');
         }
 
-        this.scene.add.dom(this.view.left, this.view.bottom - 32, 'div', '', 'v.1.0.1 Skele').setOrigin(0).setClassName('footer');
+
+        let version = this.scene.add.bitmapText(this.view.left + this.view.margin.left, this.view.bottom - this.view.margin.bottom, 'SkeleNotebook', 'v.1.0.2 Skele\'s Summer Break', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
+
+        this.scene.add.nineslice(version.x - 8,version.y - 5, 'UI', 'BLOCK_MID_BROWN_BORDER', version.displayWidth + 16, version.displayHeight + 8, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
     }
 
     createSettings() {
@@ -78,7 +82,6 @@ export default class AppView {
                 SAVES.push(this.scene.cache.json.get('SLOT_'+i));
             }
         }
-        console.log(SAVES);
         for (var i=0;i<3;i++) {
             var top = this.view.top + this.view.margin.top + ((height + 4) *i);
             var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'SHOULDERS_SELECTED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
@@ -104,11 +107,11 @@ export default class AppView {
     selectLoad (selected) {
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
-                this.slots[i].setTexture('UI','SHOULDERS_SELECTED');
+                this.slots[i].setTexture('UI','BLOCK_MID_BLUE_BORDER');
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].setTexture('UI','HAND_FOCUSED');
+                    this.slots[selected - 1].setTexture('UI','BLOCK_MID_CREAM_BORDER');
                 }
             }
         }

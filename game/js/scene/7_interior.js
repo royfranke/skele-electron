@@ -13,8 +13,9 @@ export default class InteriorScene extends Phaser.Scene {
     }
 
     init (data) {
-        console.log(data.room_id);
-        this.room_id = data.room_id;
+        this.used_portal = data.portal;
+        this.room_id = data.portal.room_id;
+        this.slot = data.slot;
     }
 
     preload () {
@@ -31,6 +32,10 @@ export default class InteriorScene extends Phaser.Scene {
         this.player = new PlayerManager(this);
         this.interior.create();
         this.player.create();
+        this.player.setPositionTile(this.used_portal.x,this.used_portal.y);
+        this.player.setFacing(this.used_portal.facing);
+         //// Load the save!
+         this.app.initializeRoomSave();
     }
 
     update() {
@@ -40,7 +45,15 @@ export default class InteriorScene extends Phaser.Scene {
         this.interior.update();
     }
 
-    portalTo() {
-        this.scene.switch('Exterior Scene');
+    portalTo(portal) {
+        if (portal.room_id == -1) {
+            this.scene.stop('Interior Scene');
+            this.scene.switch('Exterior Scene');
+        }
+        else {
+            this.scene.stop('Interior Scene');
+            this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
+        }
+        
     }
 }

@@ -15,7 +15,6 @@ export default class GameScene extends Phaser.Scene {
     }
 
     init (data) {
-        console.log(data.slot);
         this.slot = data.slot;
     }
 
@@ -24,6 +23,9 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        if (this.slot.SAVE.HEADLINE == 'NEW') {
+            console.log("New Game");
+        }
         // Replace the exterior and interior classes with a ground class interpretter in its own ground/ground-manager.js
         this.preload.preloadAnim();
         this.place = 'exterior';
@@ -53,8 +55,12 @@ export default class GameScene extends Phaser.Scene {
         this.exterior.update();
     }
 
-    portalTo(room_id) {
-        this.scene.start('Interior Scene', {room_id: room_id});
+    portalTo(portal) {
+        console.log(portal);
+        /// Before portal, save the game
+        this.slot = this.app.softSaveGameData();
+        console.log(this.slot);
+        this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
     }
     
 }

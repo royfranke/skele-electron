@@ -19,15 +19,15 @@ export default class HudPocket {
             var new_item = null;
             if (pocket.STATE != 'EMPTY') {
                 var items = [];
-console.log(pocket[pocket.STATE]);
+//console.log(pocket[pocket.STATE]);
                 if (pocket[pocket.STATE].ITEMS != undefined) {
                     
                     pocket[pocket.STATE].ITEMS.forEach(function (item) {
-                        console.log(item.ITEM);
+                        //console.log(item.ITEM);
                         items.push(itemManager.newItem(item.ITEM));
                     });
                 }
-console.log(items);
+//console.log(items);
                 new_item = itemManager.newItem(pocket[pocket.STATE].ITEM, items);
                 
             }

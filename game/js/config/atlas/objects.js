@@ -67,7 +67,7 @@ const OBJECTS = {
         states: [{
               name: 'SWAYING',
               transition: 'false',
-              frames: ['BEADED_CURTAIN_BODEGA-1','BEADED_CURTAIN_BODEGA-2','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-5','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-2']},{
+              frames: ['BEADED_CURTAIN_BODEGA-1','BEADED_CURTAIN_BODEGA-2','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-5','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-2',]},{
               name: 'BISECTED',
               transition: 'false',
               frames: ['BEADED_CURTAIN_BODEGA-6','BEADED_CURTAIN_BODEGA-7','BEADED_CURTAIN_BODEGA-8',]},{
@@ -110,6 +110,48 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          LIT_SIGN_BONEDEGA: {
+        name: 'Bone-Dega Sign',
+        slug: 'LIT_SIGN_BONEDEGA', 
+        type: 'LIT_SIGN',
+        bounding: {
+          h:7, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:6
+        },
+        sprite: {
+          h:56, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'OFF',
+              transition: 'false',
+              frames: ['LIT_SIGN_BONEDEGA-1',]},{
+              name: 'ON',
+              transition: 'false',
+              frames: ['LIT_SIGN_BONEDEGA-2',]},{
+              name: 'FLICKER',
+              transition: 'ON',
+              frames: ['LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2',]},]    },
           BOXELDER: {
         name: 'Boxelder',
         slug: 'BOXELDER', 
@@ -1309,6 +1351,105 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          COUNTERTOP_S_1_1: {
+        name: 'Countertop 1 S',
+        slug: 'COUNTERTOP_S_1_1', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_SW_1_1: {
+        name: 'Countertop 1 SW',
+        slug: 'COUNTERTOP_SW_1_1', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:36, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_W_1_1: {
+        name: 'Countertop 1 W',
+        slug: 'COUNTERTOP_W_1_1', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
           DOOR_WINDOWS_SMALL_: {
         name: 'Door with Small Windows',
         slug: 'DOOR_WINDOWS_SMALL_', 
@@ -2196,8 +2337,8 @@ const OBJECTS = {
           y:12
         },
         varieties: 5,
-        solid: 1,
-        portal: 0,
+        solid: 0,
+        portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -2251,8 +2392,8 @@ const OBJECTS = {
           y:12
         },
         varieties: 5,
-        solid: 1,
-        portal: 0,
+        solid: 0,
+        portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -2306,8 +2447,8 @@ const OBJECTS = {
           y:12
         },
         varieties: 5,
-        solid: 1,
-        portal: 0,
+        solid: 0,
+        portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -2361,8 +2502,8 @@ const OBJECTS = {
           y:12
         },
         varieties: 5,
-        solid: 1,
-        portal: 0,
+        solid: 0,
+        portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -2416,8 +2557,8 @@ const OBJECTS = {
           y:12
         },
         varieties: 5,
-        solid: 1,
-        portal: 0,
+        solid: 0,
+        portal: 1,
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -2442,74 +2583,6 @@ const OBJECTS = {
               frames: ['INT_DOOR_WHITE-4', 'INT_DOOR_WHITE-3', 'INT_DOOR_WHITE-2', 'INT_DOOR_WHITE-1', ]
               },
           ]    },
-          MAILBOX_1: {
-        name: 'Mailbox 1',
-        slug: 'MAILBOX_1', 
-        type: 'MAILBOX',
-        bounding: {
-          h:2, 
-          w:1
-        },
-        base: {
-          h:1, 
-          w:1,
-          x:0, 
-          y:1
-        },
-        sprite: {
-          h:29, 
-          w:13,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:16, 
-          w:12
-        },
-        offset: {
-          x:0, 
-          y:14
-        },
-        varieties: 5,
-        solid: 1,
-        portal: 0,
-        actions: [ {
-            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
-          }, {
-            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
-          }, {
-            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
-          }],
-        states: [            {
-              name: 'CLOSED',
-              transition: 'false',
-              frames: ['MAILBOX_1-1',]
-              }, {
-              name: 'OPENING',
-              transition: 'OPEN',
-              frames: ['MAILBOX_1-2', 'MAILBOX_1-3', 'MAILBOX_1-4', 'MAILBOX_1-5', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['MAILBOX_1-5',]
-              }, {
-              name: 'CLOSING',
-              transition: 'CLOSED',
-              frames: ['MAILBOX_1-4', 'MAILBOX_1-3', 'MAILBOX_1-2', 'MAILBOX_1-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['MAILBOX_1-5',]
-              }, {
-              name: 'LOOKING_INSIDE',
-              transition: 'OPEN',
-              frames: []
-              },
-          ],
-            slots: 0,
-            items: []    },
           MAILBOX_SHINY: {
         name: 'Mailbox Shiny',
         slug: 'MAILBOX_SHINY', 
@@ -2868,6 +2941,39 @@ const OBJECTS = {
               frames: ['OBJ_FLYER_MISSING-1', 'OBJ_FLYER_MISSING-2', 'OBJ_FLYER_MISSING-3', 'OBJ_FLYER_MISSING-4', 'OBJ_FLYER_MISSING-5', 'OBJ_FLYER_MISSING-6', 'OBJ_FLYER_MISSING-7', 'OBJ_FLYER_MISSING-8', ]
               },
           ]    },
+          OVEN_1: {
+        name: 'Oven 1',
+        slug: 'OVEN_1', 
+        type: 'OVEN',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:14, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 5,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
           PAYPHONE: {
         name: 'Payphone',
         slug: 'PAYPHONE', 
@@ -3110,7 +3216,7 @@ const OBJECTS = {
               frames: ['ROLLING_GATE_DOOR-2','ROLLING_GATE_DOOR-3','ROLLING_GATE_DOOR-4','ROLLING_GATE_DOOR-5','ROLLING_GATE_DOOR-6','ROLLING_GATE_DOOR-7','ROLLING_GATE_DOOR-8','ROLLING_GATE_DOOR-9','ROLLING_GATE_DOOR-10','ROLLING_GATE_DOOR-11','ROLLING_GATE_DOOR-12','ROLLING_GATE_DOOR-13','ROLLING_GATE_DOOR-14','ROLLING_GATE_DOOR-15','ROLLING_GATE_DOOR-16',]},{
               name: 'CLOSING',
               transition: 'CLOSED',
-              frames: ['ROLLING_GATE_DOOR-15','ROLLING_GATE_DOOR-14','ROLLING_GATE_DOOR-13','ROLLING_GATE_DOOR-12','ROLLING_GATE_DOOR-11','ROLLING_GATE_DOOR-10','ROLLING_GATE_DOOR-9','ROLLING_GATE_DOOR-8','ROLLING_GATE_DOOR-7','ROLLING_GATE_DOOR-6','ROLLING_GATE_DOOR-5','ROLLING_GATE_DOOR-4','ROLLING_GATE_DOOR-3','ROLLING_GATE_DOOR-2','ROLLING_GATE_DOOR-1']},]    },
+              frames: ['ROLLING_GATE_DOOR-15','ROLLING_GATE_DOOR-14','ROLLING_GATE_DOOR-13','ROLLING_GATE_DOOR-12','ROLLING_GATE_DOOR-11','ROLLING_GATE_DOOR-10','ROLLING_GATE_DOOR-9','ROLLING_GATE_DOOR-8','ROLLING_GATE_DOOR-7','ROLLING_GATE_DOOR-6','ROLLING_GATE_DOOR-5','ROLLING_GATE_DOOR-4','ROLLING_GATE_DOOR-3','ROLLING_GATE_DOOR-2','ROLLING_GATE_DOOR-1',]},]    },
           ROLLING_GATE_WIDE: {
         name: 'Rolling Security Wide Gate',
         slug: 'ROLLING_GATE_WIDE', 
@@ -3155,7 +3261,7 @@ const OBJECTS = {
               frames: ['ROLLING_GATE_WIDE-2','ROLLING_GATE_WIDE-3','ROLLING_GATE_WIDE-4','ROLLING_GATE_WIDE-5','ROLLING_GATE_WIDE-6','ROLLING_GATE_WIDE-7','ROLLING_GATE_WIDE-8','ROLLING_GATE_WIDE-9','ROLLING_GATE_WIDE-10','ROLLING_GATE_WIDE-11','ROLLING_GATE_WIDE-12','ROLLING_GATE_WIDE-13','ROLLING_GATE_WIDE-14','ROLLING_GATE_WIDE-15','ROLLING_GATE_WIDE-16',]},{
               name: 'CLOSING',
               transition: 'CLOSED',
-              frames: ['ROLLING_GATE_WIDE-15','ROLLING_GATE_WIDE-14','ROLLING_GATE_WIDE-13','ROLLING_GATE_WIDE-12','ROLLING_GATE_WIDE-11','ROLLING_GATE_WIDE-10','ROLLING_GATE_WIDE-9','ROLLING_GATE_WIDE-8','ROLLING_GATE_WIDE-7','ROLLING_GATE_WIDE-6','ROLLING_GATE_WIDE-5','ROLLING_GATE_WIDE-4','ROLLING_GATE_WIDE-3','ROLLING_GATE_WIDE-2','ROLLING_GATE_WIDE-1']},]    },
+              frames: ['ROLLING_GATE_WIDE-15','ROLLING_GATE_WIDE-14','ROLLING_GATE_WIDE-13','ROLLING_GATE_WIDE-12','ROLLING_GATE_WIDE-11','ROLLING_GATE_WIDE-10','ROLLING_GATE_WIDE-9','ROLLING_GATE_WIDE-8','ROLLING_GATE_WIDE-7','ROLLING_GATE_WIDE-6','ROLLING_GATE_WIDE-5','ROLLING_GATE_WIDE-4','ROLLING_GATE_WIDE-3','ROLLING_GATE_WIDE-2','ROLLING_GATE_WIDE-1',]},]    },
           SCREEN_DOOR_: {
         name: 'Screen Door',
         slug: 'SCREEN_DOOR_', 
@@ -3832,7 +3938,7 @@ const OBJECTS = {
               frames: ['TRAFFIC_LIGHT_EAST-1',]},{
               name: 'GREEN',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_EAST-4']},{
+              frames: ['TRAFFIC_LIGHT_EAST-4',]},{
               name: 'YELLOW',
               transition: 'false',
               frames: ['TRAFFIC_LIGHT_EAST-3',]},{
@@ -3928,7 +4034,121 @@ const OBJECTS = {
               frames: ['TRAFFIC_LIGHT_SOUTH-3',]},{
               name: 'RED',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_SOUTH-2']},]    },
+              frames: ['TRAFFIC_LIGHT_SOUTH-2',]},]    },
+          UNDERCOUNTER_CABINET_1_S: {
+        name: 'Undercounter Cabinet 1 S',
+        slug: 'UNDERCOUNTER_CABINET_1_S', 
+        type: 'CABINET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:6
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_1_S-1',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_1_S-2', 'UNDERCOUNTER_CABINET_1_S-3', 'UNDERCOUNTER_CABINET_1_S-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_1_S-4',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_1_S-3', 'UNDERCOUNTER_CABINET_1_S-2', 'UNDERCOUNTER_CABINET_1_S-1', ]
+              },
+          ],
+            slots: 4,
+            items: []    },
+          UNDERCOUNTER_CABINET_1_W: {
+        name: 'Undercounter Cabinet 1 W',
+        slug: 'UNDERCOUNTER_CABINET_1_W', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:20, 
+          w:12
+        },
+        offset: {
+          x:20, 
+          y:8
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_1_W-4',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_1_W-3', 'UNDERCOUNTER_CABINET_1_W-2', 'UNDERCOUNTER_CABINET_1_W-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_1_W-1',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_1_W-2', 'UNDERCOUNTER_CABINET_1_W-3', 'UNDERCOUNTER_CABINET_1_W-4', ]
+              },
+          ],
+            slots: 4,
+            items: []    },
           WALK_SIGNAL_SE_: {
         name: 'Walk Signal SE',
         slug: 'WALK_SIGNAL_SE_', 
@@ -3973,7 +4193,7 @@ const OBJECTS = {
               frames: ['WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-2',]},{
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
-              frames: ['WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-2']},]    },
+              frames: ['WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-2',]},]    },
           WALK_SIGNAL_W_: {
         name: 'Walk Signal W',
         slug: 'WALK_SIGNAL_W_', 
@@ -4018,7 +4238,7 @@ const OBJECTS = {
               frames: ['WALK_SIGNAL_W_-2',]},{
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
-              frames: ['WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-2']},]    },
+              frames: ['WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-2',]},]    },
           WICKET_NS: {
         name: 'Wicket Horizontal',
         slug: 'WICKET_NS', 

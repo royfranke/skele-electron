@@ -3,6 +3,9 @@ const PRELOAD_FONT = [
         NAME: 'SkeleNotebook',
     },
     {
+        NAME: 'SkeleDino',
+    },
+    {
         NAME: 'SkeleStreetSigns',
     },
     {
@@ -16,6 +19,9 @@ const PRELOAD_FONT = [
     },
     {
         NAME: 'SkeleButton',
+    },
+    {
+        NAME: 'SkeleNewsprint',
     }
 ];
 

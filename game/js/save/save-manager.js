@@ -17,9 +17,25 @@ export default class SaveManager {
         //this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
     }
 
+    initializeRoomSave () {
+        var data = this.scene.slot;
+        this.scene.manager.time.setTimeFromSave(data.TIME);
+        this.scene.player.coinpurse.setContents(data.COINPURSE);
+        //this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
+    }
+
     saveNewGameData() {
         let save = this.newSave();
         this.scene.saveNewGameData(save.data,save.slot);
+    }
+
+    softSaveGameData() {
+        /// For going through portals
+        /// Via scene, get various data we intend to write to the save
+        console.log("Soft saving game data");
+        let data = this.scene.slot;
+        data.TIME = this.scene.manager.time.setSaveFromTime();
+        return data;
     }
 
 

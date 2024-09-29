@@ -128,13 +128,14 @@ export default class PropertyLine {
             level_position = level_position - this.settings.levels[i].height;
         }
 
-        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_, _x, (level_position - this.settings.roof.height) + 1, building_width, this.settings.roof.height);
+        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, (level_position - this.settings.roof.height) + 1, building_width, this.settings.roof.height);
 
 
         
         this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROLLING_GATE_DOOR'));
         this.gates[0].sprite.setDepth(this.gates[0].sprite.depth + 1);
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'EXT_DOOR_STORE_BLACK');
+        this.front_door.setPortal({room_id: '1', x:3, y: 13, facing: 'n'});
 
         this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'EXT_WINDOW_STORE_4_CLAD');
         this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'ROLLING_GATE_WIDE'));
@@ -179,14 +180,14 @@ export default class PropertyLine {
         var _y = bottom - yard;
 
         var building_width = width - 2;
-        var material = this.roll([0, 1, 1, 2]);
+        var material = this.roll([0, 1, 1, 2, 2]);
 
         if (material == 0) {
             var colors = ['YELLOW', 'BROWN', 'RED', 'GRAY', 'WHITE'];
             var wallKind = WALLTILES.BRICK[this.roll(colors) + '_CEMENT_'];
         }
         else if (material == 1) {
-            var colors = ['RED_COMMERCIAL']
+            var colors = ['RED_COMMERCIAL', 'YELLOW_COMMERCIAL'];
             var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
         }
         else {
@@ -205,7 +206,7 @@ export default class PropertyLine {
         this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
 
         ////
-        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
+        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
 
         /*
         this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height) + 1, building_width + 2, this.settings.roof.height/2, ROOFTILES.PITCHED.METAL_SOUTH_);
@@ -418,6 +419,8 @@ export default class PropertyLine {
         
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'EXT_DOOR_' + this.settings.door);
 
+        /// Get the portal from the property object, whenever that gets built out... Until then, hardcode it.
+        this.front_door.setPortal({room_id: '6', x:3, y: 9, facing: 'N'});
         //this.doormat = this.scene.manager.objectManager.newObjectToWorld(_x, _y + 1, 'DOORMAT_1');
         if (this.settings.foundation.height > 0) {
             this.buildStoop(_x, _y + 1);

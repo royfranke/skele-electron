@@ -70,7 +70,20 @@ const PRELOAD_SOUND = [
     {
         NAME: 'SKELE_INVALID_3',
         PATH: 'sound/skele-invalid-3.wav'
+    },
+    {
+        NAME: 'FOCUS_TIP_NOTEBOOK',
+        PATH: 'sound/click-tip-notebook.wav'
+    },
+    {
+        NAME: 'FOCUS_TIP_POCKETS',
+        PATH: 'sound/click-tip-pockets.wav'
+    },
+    {
+        NAME: 'FOCUS_TIP_PLAYER',
+        PATH: 'sound/click-tip-player.wav'
     }
+
 ];
 
 export default PRELOAD_SOUND;

@@ -17,6 +17,15 @@ export default class TimeManager {
         
     }
 
+    setSaveFromTime () {
+        return {
+            HOUR: this.now.hour,
+            MINUTE: this.now.minute,
+            SECOND: this.now.second,
+            DAY: this.now.day
+        }
+    }
+
     setTimeFromSave (time) {
         this.now = {
             hour: time.HOUR,

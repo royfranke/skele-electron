@@ -1,4 +1,3 @@
-import STATES from "../config/hud-states.js";
 /* global Phaser */
 /*
  * Gets injected into the game scene

@@ -68,6 +68,10 @@ export default class PlayerManager {
 
   }
 
+  setFacing(facing) {
+    this.playerSprite.facing = facing.toLowerCase();
+  }
+
   getFacing(facing) {
     var focus = this.getFocus();
     if (focus.name == 'PLAYER') {

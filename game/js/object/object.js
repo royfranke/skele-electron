@@ -12,6 +12,7 @@ export default class Object {
         this.tile_y = 0;
         this.sprite = null;
         this.state = null;
+        this.portal = null;
         this.slotted = [];
         
         // Imbue this object with the config object info
@@ -180,9 +181,19 @@ export default class Object {
             /// Get portal location info from object -- what room_id, x, y, player facing direction
             /// Go to portal... (maybe this is redraw of ground)
             /// Have this after opening anim of doors
-            this.scene.portalTo(6);
-        }
-        
+            if (this.portal != null) {
+                this.scene.portalTo(this.portal);
+            }
+            else {
+                console.log("No portal set for this object");
+            }
+        } 
+    }
+
+    setPortal (portal) {
+        console.log("Setting portal");
+        console.log(portal);
+        this.portal = portal;
     }
 
     setLight (keylight) {

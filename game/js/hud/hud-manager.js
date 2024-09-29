@@ -130,29 +130,42 @@ export default class HudManager {
         if (this.state.name == 'INVISIBLE') {
             this.hudPockets.pocketsVisible(false);
         }
+
+        /// Show Pockets
         if (!this.last_state || this.last_state.name == 'INVISIBLE') {
             this.hudPockets.pocketsVisible(true);
         }
         if (this.state.name == 'POCKETS_FOCUSED') {
             this.hudPockets.openPockets();
             this.hudCoinpurse.openCoinpurse();
+            //this.hudSound.play('FOCUS_TIP_POCKETS');
         }
         if (this.state.name != 'POCKETS_FOCUSED') {
             this.hudPockets.closePockets();
             this.hudCoinpurse.closeCoinpurse();
         }
-        if (this.state.name == 'NOTEBOOK_FOCUSED') {
+
+        /// Open Notebook
+        if (this.state.name == 'NOTEBOOK_FOCUSED' && this.last_state != null && this.last_state.name != 'NOTEBOOK_FOCUSED') {
             this.hudNotebook.openNotebook();
+            this.hudSound.play('FOCUS_TIP_NOTEBOOK');
         }
-        if (this.state.name != 'NOTEBOOK_FOCUSED') {
+
+        /// Close Notebook
+        if (this.state.name != 'NOTEBOOK_FOCUSED' && this.last_state != null && this.last_state.name == 'NOTEBOOK_FOCUSED') {
             this.hudNotebook.closeNotebook();
         }
+
+        /// Open Card Game (Zener)
         if (this.state.name == 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name != 'ZENER_FOCUSED') {
             this.hudZener.openZener();
         }
+
+        /// Close Card Game (Zener)
         if (this.state.name != 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name == 'ZENER_FOCUSED') {
             this.hudZener.closeZener();
         }
+        
     }
 
     loadHud () {

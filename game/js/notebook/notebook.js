@@ -29,7 +29,6 @@ export default class Notebook {
     }
 
     getPage (index=0) {
-        console.log(this.pages[index]);
         return this.pages[index];
     }
 }

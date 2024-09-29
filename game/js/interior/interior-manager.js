@@ -68,14 +68,13 @@ import Room from "../object/room.js";
             var _x = 1;
             var _y = 5;
             
-
             /// Hardcoded floor tiles for now
             this.groundLayer.weightedRandomize(TILES.TILE.CHECKERED_BLUE_WHITE_, _x, _y, this.config.floorWidth, this.config.floorHeight);
             const groundLayer = this.groundLayer;
             
 
-            for (let i = 0; i < this.room.config.roomData.removalList.length; i++) {
-                let removal = this.room.config.roomData.removalList[i];
+            for (let i = 0; i < this.config.roomData.removalList.length; i++) {
+                let removal = this.config.roomData.removalList[i];
                 groundLayer.putTileAt(0, _x + removal.x, _y + removal.y);
             }
             this.drawFloorCutAway();
@@ -90,7 +89,11 @@ import Room from "../object/room.js";
         var _y = 5;
         for (let i = 0; i < this.room.config.roomData.featureList.length; i++) {
             let feature = this.room.config.roomData.featureList[i];
-            this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
+            let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
+            if (obj != null && feature.params != undefined && feature.params.portal != undefined) {
+                obj.setPortal(feature.params.portal);
+            }
+
 
         }
     }

@@ -1,6 +1,363 @@
 {
-    "room_1": {"room_id":"1","name":"Bonedega","floorWidth":"10","floorHeight":"10","overallWidth":"12","overallHeight":"12","roomData":{"featureList":[{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN","goto":"-1"},{"x":"3","y":"7","slug":"SHOP_SHELVES_BLUE"},{"x":"5","y":"7","slug":"SHOP_SHELVES_BLUE"},{"x":"0","y":"9","slug":"EXT_DOOR_STORE_BLACK"}],"removalList":[{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"}]}},
-    "room_6":{"room_id":"6","name":"Auntie Room 1","floorWidth":"10","floorHeight":"8","overallWidth":"12","overallHeight":"10","roomData":{"featureList":[{"x":"6","y":"2","slug":"INT_DOOR_WHITE","goto":"-1"}],"removalList":[{"x":"5","y":"0"},{"x":"6","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"5","y":"1"},{"x":"6","y":"1"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"5","y":"2"},{"x":"6","y":"2"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"0","y":"6"},{"x":"1","y":"6"},{"x":"2","y":"6"},{"x":"3","y":"6"},{"x":"0","y":"7"},{"x":"1","y":"7"},{"x":"2","y":"7"},{"x":"3","y":"7"}]}},
-    "room_4": {"room_id":"4","name":"Auntie Kitchen","floorWidth":"4","floorHeight":"6","overallWidth":"6","overallHeight":"8","roomData":{"featureList":[{"x":"4","y":"4","slug":"INT_DOOR_WHITE","goto":"5"},{"x":"1","y":"6","slug":"INT_DOOR_WHITE"}],"removalList":[]}},
-"room_5": {"room_id":"5","name":"Auntie Living Room","floorWidth":"5","floorHeight":"5","overallWidth":"7","overallHeight":"7","roomData":{"featureList":[{"x":"0","y":"-1","slug":"INT_DOOR_WHITE","goto":"4"},{"x":"-1","y":"1","slug":"INT_DOOR_WHITE"}],"removalList":[]}}
+    "room_1": {
+        "room_id": "1",
+        "name": "Bonedega",
+        "floorWidth": "10",
+        "floorHeight": "10",
+        "overallWidth": "12",
+        "overallHeight": "12",
+        "roomData": {
+            "featureList": [
+                {
+                    "x": "3",
+                    "y": "0",
+                    "slug": "COUNTERTOP_S_1_1",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "3",
+                    "y": "0",
+                    "slug": "UNDERCOUNTER_CABINET_1_S",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "4",
+                    "y": "0",
+                    "slug": "COUNTERTOP_S_1_1",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "5",
+                    "y": "0",
+                    "slug": "COUNTERTOP_S_1_1",
+                    "params": {}
+                },
+                {
+                    "x": "0",
+                    "y": "3",
+                    "slug": "BODEGA_STORE_COUNTER",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "5",
+                    "y": "3",
+                    "slug": "BEADED_CURTAIN_BODEGA",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "8",
+                    "y": "3",
+                    "slug": "INT_DOOR_GREEN_SIGN",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "7",
+                    "y": "4",
+                    "slug": "PAYPHONE",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "3",
+                    "y": "7",
+                    "slug": "SHOP_SHELVES_BLUE",
+                    "params": "[object Object]"
+                },
+                {
+                    "x": "5",
+                    "y": "7",
+                    "slug": "SHOP_SHELVES_BLUE",
+                    "params": "[object Object]"
+                }
+            ],
+            "removalList": [
+                {
+                    "x": "7",
+                    "y": "0"
+                },
+                {
+                    "x": "8",
+                    "y": "0"
+                },
+                {
+                    "x": "9",
+                    "y": "0"
+                },
+                {
+                    "x": "7",
+                    "y": "1"
+                },
+                {
+                    "x": "8",
+                    "y": "1"
+                },
+                {
+                    "x": "9",
+                    "y": "1"
+                },
+                {
+                    "x": "7",
+                    "y": "2"
+                },
+                {
+                    "x": "8",
+                    "y": "2"
+                },
+                {
+                    "x": "9",
+                    "y": "2"
+                },
+                {
+                    "x": "7",
+                    "y": "3"
+                },
+                {
+                    "x": "8",
+                    "y": "3"
+                },
+                {
+                    "x": "9",
+                    "y": "3"
+                }
+            ]
+        }
+    },
+    "room_6": {
+        "room_id": "6",
+        "name": "Auntie Room 1",
+        "floorWidth": "10",
+        "floorHeight": "8",
+        "overallWidth": "12",
+        "overallHeight": "10",
+        "roomData": {
+            "featureList": [
+                {
+                    "x": "3",
+                    "y": "0",
+                    "slug": "UNDERCOUNTER_CABINET_1_S",
+                    "params": {}
+                },
+                {
+                    "x": "2",
+                    "y": "0",
+                    "slug": "UNDERCOUNTER_CABINET_1_S",
+                    "params": {}
+                },
+                {
+                    "x": "4",
+                    "y": "1",
+                    "slug": "UNDERCOUNTER_CABINET_1_W",
+                    "params": {}
+                },
+                {
+                    "x": "2",
+                    "y": "0",
+                    "slug": "COUNTERTOP_S_1_1",
+                    "params": {}
+                },
+                {
+                    "x": "4",
+                    "y": "0",
+                    "slug": "COUNTERTOP_SW_1_1",
+                    "params": {}
+                },
+                {
+                    "x": "1",
+                    "y": "0",
+                    "slug": "OVEN_1",
+                    "params": {}
+                },
+                {
+                    "x": "5",
+                    "y": "3",
+                    "slug": "WOOD_SIDE_TABLE",
+                    "params": {}
+                },
+                {
+                    "x": "6",
+                    "y": "2",
+                    "slug": "INT_DOOR_WHITE",
+                    "params": {}
+                }
+            ],
+            "removalList": [
+                {
+                    "x": "5",
+                    "y": "0"
+                },
+                {
+                    "x": "6",
+                    "y": "0"
+                },
+                {
+                    "x": "7",
+                    "y": "0"
+                },
+                {
+                    "x": "8",
+                    "y": "0"
+                },
+                {
+                    "x": "9",
+                    "y": "0"
+                },
+                {
+                    "x": "5",
+                    "y": "1"
+                },
+                {
+                    "x": "6",
+                    "y": "1"
+                },
+                {
+                    "x": "7",
+                    "y": "1"
+                },
+                {
+                    "x": "8",
+                    "y": "1"
+                },
+                {
+                    "x": "9",
+                    "y": "1"
+                },
+                {
+                    "x": "5",
+                    "y": "2"
+                },
+                {
+                    "x": "6",
+                    "y": "2"
+                },
+                {
+                    "x": "7",
+                    "y": "2"
+                },
+                {
+                    "x": "8",
+                    "y": "2"
+                },
+                {
+                    "x": "9",
+                    "y": "2"
+                },
+                {
+                    "x": "0",
+                    "y": "6"
+                },
+                {
+                    "x": "1",
+                    "y": "6"
+                },
+                {
+                    "x": "2",
+                    "y": "6"
+                },
+                {
+                    "x": "3",
+                    "y": "6"
+                },
+                {
+                    "x": "0",
+                    "y": "7"
+                },
+                {
+                    "x": "1",
+                    "y": "7"
+                },
+                {
+                    "x": "2",
+                    "y": "7"
+                },
+                {
+                    "x": "3",
+                    "y": "7"
+                }
+            ]
+        }
+    },
+    "room_4": {
+        "room_id": "4",
+        "name": "Auntie Kitchen",
+        "floorWidth": "4",
+        "floorHeight": "6",
+        "overallWidth": "6",
+        "overallHeight": "8",
+        "roomData": {
+            "featureList": [
+                {
+                    "x": "4",
+                    "y": "4",
+                    "slug": "INT_DOOR_WHITE",
+                    "goto": "5"
+                },
+                {
+                    "x": "1",
+                    "y": "6",
+                    "slug": "INT_DOOR_WHITE"
+                }
+            ],
+            "removalList": []
+        }
+    },
+    "room_5": {
+        "room_id": "5",
+        "name": "Auntie Living Room",
+        "floorWidth": "5",
+        "floorHeight": "5",
+        "overallWidth": "7",
+        "overallHeight": "7",
+        "roomData": {
+            "featureList": [
+                {
+                    "x": "0",
+                    "y": "-1",
+                    "slug": "INT_DOOR_WHITE",
+                    "goto": "4"
+                },
+                {
+                    "x": "-1",
+                    "y": "1",
+                    "slug": "INT_DOOR_WHITE"
+                }
+            ],
+            "removalList": []
+        }
+    },
+    "room_8": {
+        "room_id": "8",
+        "name": "Bonedega Backroom",
+        "floorWidth": "3",
+        "floorHeight": "5",
+        "overallWidth": "5",
+        "overallHeight": "7",
+        "roomData": {
+            "featureList": [
+                {
+                    "x": "1",
+                    "y": "0",
+                    "slug": "OVEN_1",
+                    "params": {}
+                },
+                {
+                    "x": "1",
+                    "y": "4",
+                    "slug": "INT_DOOR_GREEN_SIGN",
+                    "params": {
+                        "portal": {
+                            "room_id": 1,
+                            "x": 10,
+                            "y": 8,
+                            "facing": "s"
+                        }
+                    }
+                }
+            ],
+            "removalList": [
+                {
+                    "x": "0",
+                    "y": "4"
+                }
+            ]
+        }
+    }
 }

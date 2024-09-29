@@ -109,213 +109,217 @@ const TILE_WEIGHTS = {
   METAL: {
 },
   FLAT: {
+    ROOF_BITMAP_BRICK_: {
+                                                    },
+    ROOF_BITMAP_BRICK_CEMENT_: {
+                                                    },
 },
   PITCHED: {
     METAL_NORTH_: {
         TOP_LEFT_:
           [{
-            index: [85],
+            index: [181],
             weight: 1
           }],
         TOP_:
           [{
-            index: [86, 87, 88, 89],
+            index: [182, 183, 184, 185],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [90],
+            index: [186],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [91],
+            index: [187],
             weight: 1
           }],
         MID_:
           [{
-            index: [92, 93, 94, 95],
+            index: [188, 189, 190, 191],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [96],
+            index: [192],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [97],
+            index: [193],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [98, 99, 100, 101],
+            index: [194, 195, 196, 197],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [102],
+            index: [198],
             weight: 1
           }],
                               },
     METAL_SOUTH_: {
         TOP_LEFT_:
           [{
-            index: [103],
+            index: [199],
             weight: 1
           }],
         TOP_:
           [{
-            index: [104, 105, 106, 107],
+            index: [200, 201, 202, 203],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [108],
+            index: [204],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [109],
+            index: [205],
             weight: 1
           }],
         MID_:
           [{
-            index: [110, 111, 112, 113],
+            index: [206, 207, 208, 209],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [114],
+            index: [210],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [115],
+            index: [211],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [116, 117, 118, 119],
+            index: [212, 213, 214, 215],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [120],
+            index: [216],
             weight: 1
           }],
                               },
     SHINGLES_EAST_: {
                   MID_:
           [{
-            index: [126, 130, 131, 132, 135, 136],
+            index: [222, 226, 227, 228, 231, 232],
             weight: 1
           }],
                     REPEAT_1_NORTH_:
           [{
-            index: [128],
+            index: [224],
             weight: 1
           }],
         REPEAT_2_NORTH_:
           [{
-            index: [127],
+            index: [223],
             weight: 1
           }],
         PEAK_1_NORTH_:
           [{
-            index: [122],
+            index: [218],
             weight: 1
           }],
         PEAK_2_NORTH_:
           [{
-            index: [121],
+            index: [217],
             weight: 1
           }],
         REPEAT_1_SOUTH_:
           [{
-            index: [140],
+            index: [236],
             weight: 1
           }],
         REPEAT_2_SOUTH_:
           [{
-            index: [139],
+            index: [235],
             weight: 1
           }],
         REPEAT_3_SOUTH_:
           [{
-            index: [138],
+            index: [234],
             weight: 1
           }],
           PEAK_1_SOUTH_:
           [{
-            index: [134],
+            index: [230],
             weight: 1
           }],
         PEAK_2_SOUTH_:
           [{
-            index: [133],
+            index: [229],
             weight: 1
           }],
         PEAK_EDGE_:
           [{
-            index: [125, 129],
+            index: [221, 225],
             weight: 1
           }],
       },
     SHINGLES_WEST_: {
                   MID_:
           [{
-            index: [147, 149, 150, 151, 153, 154],
+            index: [243, 245, 246, 247, 249, 250],
             weight: 1
           }],
                     REPEAT_1_NORTH_:
           [{
-            index: [145],
+            index: [241],
             weight: 1
           }],
         REPEAT_2_NORTH_:
           [{
-            index: [146],
+            index: [242],
             weight: 1
           }],
         PEAK_1_NORTH_:
           [{
-            index: [143],
+            index: [239],
             weight: 1
           }],
         PEAK_2_NORTH_:
           [{
-            index: [144],
+            index: [240],
             weight: 1
           }],
         REPEAT_1_SOUTH_:
           [{
-            index: [157],
+            index: [253],
             weight: 1
           }],
         REPEAT_2_SOUTH_:
           [{
-            index: [158],
+            index: [254],
             weight: 1
           }],
         REPEAT_3_SOUTH_:
           [{
-            index: [159],
+            index: [255],
             weight: 1
           }],
           PEAK_1_SOUTH_:
           [{
-            index: [155],
+            index: [251],
             weight: 1
           }],
         PEAK_2_SOUTH_:
           [{
-            index: [156],
+            index: [252],
             weight: 1
           }],
         PEAK_EDGE_:
           [{
-            index: [148, 152],
+            index: [244, 248],
             weight: 1
           }],
       },

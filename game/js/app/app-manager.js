@@ -76,6 +76,16 @@ export default class AppManager {
         }
     }
 
+    initializeRoomSave () {
+        if (this.saveManager != null && this.scene.slot != undefined) {
+            this.saveManager.initializeRoomSave();
+        }
+    }
+
+    softSaveGameData () {
+        return this.saveManager.softSaveGameData();
+    }
+
     getView () {
         return this.camera.view;
     }
