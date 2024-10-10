@@ -98,6 +98,11 @@ export default class HudNotebook {
         this.addNotebook();
     }
 
+    setNotebookState (state) {
+        /// FOCUSED, UNFOCUSED
+        this.state = state;
+    }
+
     makeBlock (_x,_y, width=32, height=32, frameName='HAND_UNFOCUSED') {
         return this.factory.makeBlock(_x,_y,width,height,frameName);
     }
@@ -129,7 +134,6 @@ export default class HudNotebook {
 
     openNotebook() {
         this.scene.manager.hud.hudFocusHints.setKeyTip('NOTEBOOK', true);
-        var keytip = this.scene.manager.hud.hudFocusHints.getKeyTip('NOTEBOOK');
         this.notebook.panel.setFrame('NOTEBOOK_OPEN');
         // To redraw page
         this.manager.setSelected(this.manager.selected);
@@ -166,7 +170,7 @@ export default class HudNotebook {
             yoyo: false,
         });
         load_panel.on('complete', () => {
-            this.state = 'FOCUSED';
+            this.setNotebookState('FOCUSED');
         });
 
         this.scene.tweens.add({
@@ -188,7 +192,7 @@ export default class HudNotebook {
         this.notebook.arrow.right.setVisible(false);
         this.notebook.block.setFrame('HAND_UNFOCUSED');
         //this.notebook.panel.setFrame('NOTEBOOK_CLOSED_RED');
-        this.state = 'UNFOCUSED';
+        this.setNotebookState('UNFOCUSED');
         this.scene.manager.hud.hudFocusHints.setKeyTip('NOTEBOOK', false);
         /*
         var keytip = this.scene.manager.hud.hudFocusHints.getKeyTip('NOTEBOOK');
@@ -277,7 +281,7 @@ export default class HudNotebook {
 
     arrowRight () {
         if (this.state == 'FOCUSED') {
-            this.state = 'UNFOCUSED'; 
+            this.setNotebookState('UNFOCUSED'); 
             this.notebook.arrow.right.setFrame('BAG_ARROW_SELECTED');
             this.notebook.icon.anims.play('NOTEBOOK_NEXT');
 /// Arrow down tween on right arrow
@@ -292,7 +296,7 @@ export default class HudNotebook {
             });
             this.manager.selectNext();
             tween.on('complete', () => {
-                this.state = 'FOCUSED';
+               this.setNotebookState('FOCUSED');
                 this.notebook.arrow.right.setFrame('BAG_ARROW_FOCUSED');
             });
             
@@ -302,7 +306,7 @@ export default class HudNotebook {
 
     arrowLeft () {
         if (this.state == 'FOCUSED') {
-            this.state = 'UNFOCUSED';
+            this.setNotebookState('UNFOCUSED');
             this.manager.selectPrevious();
             
             this.notebook.arrow.left.setFrame('BAG_ARROW_SELECTED');
@@ -318,7 +322,7 @@ export default class HudNotebook {
             });
 
             tween.on('complete', () => {
-                this.state = 'FOCUSED';
+                this.setNotebookState('FOCUSED');
                 this.notebook.arrow.left.setFrame('BAG_ARROW_FOCUSED');
             });
         }

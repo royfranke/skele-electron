@@ -43,7 +43,6 @@ export default class HudFocusHints {
     makeFocusHint (hint) {
         if (hint != null) {
 
-            //let keyTip =  this.scene.add.dom(hint.x,hint.y, 'div', '', hint.char).setClassName('key-tip').setOrigin(0).setScrollFactor(0);
             let keyTip = {
                 block: this.makeBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_YELLOW'),
                 text: this.makeBitmapText(hint.x+5, hint.y+3, 16, 12, 'SkeleButton')

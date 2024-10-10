@@ -3,8 +3,6 @@
  *	
  */
  export default class QuestManager {
-    scene;
-    questLog;
 
     constructor(scene) {
         this.scene = scene;

@@ -24,7 +24,7 @@ export default class HudDisplay {
        };
 
     }
-
+/*
     newPocketTip (message,duration=0) {
         var tip = this.addPocketTip(message);
         
@@ -42,7 +42,7 @@ export default class HudDisplay {
         return tip;
     }
 
-
+*/
     tellBrain (content,timing=0,status='default') {
         var _x = this.scene.player.snappedStanding.x
         var _y = this.scene.player.snappedStanding.y - 32;

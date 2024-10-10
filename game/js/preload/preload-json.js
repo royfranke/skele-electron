@@ -1,11 +1,5 @@
 const PRELOAD_JSON = [
     {
-        NAME: 'SAVES',
-        PATH: {
-            JSON: 'data/saves.json'
-        }
-    },
-    {
         NAME: 'SLOT_0',
         PATH: {
             JSON: 'data/saves/slot_0.json'

@@ -11,7 +11,13 @@ export default class HudPockets {
         this.slots = this.addPockets();
         this.pocket_textblock = this.addPocketTextBlock();
         this.pocket_actions = null;
-        this.item_actions = this.scene.add.group();
+        this.state = null;
+    }
+
+    setPocketsState(state) {
+        /// OPEN, CLOSED
+        this.state = state;
+        console.log("Setting pockets state to: " + state);
     }
 
     makeBlock(_x, _y, width = 32, height = 32, frameName = 'HAND_UNFOCUSED') {
@@ -20,6 +26,13 @@ export default class HudPockets {
 
     makeIcon(_x, _y, textureName, frameName) {
         return this.factory.makeIcon(_x + 8, _y + 8, textureName, frameName);
+    }
+
+    makeBitmapText (_x,_y, width, text, size, font="SkeleDino") {
+        let bitmap = this.factory.makeBitmapText(_x,_y, width, size, font);
+        bitmap.setText(text);
+        bitmap.setLineSpacing(8);
+        return bitmap;
     }
 
     makeIconContents(_x, _y, textureName, frameName) {
@@ -33,12 +46,18 @@ export default class HudPockets {
 
     addPocketTextBlock() {
         const margin = {
-            x: 24,
-            y: 16 + (2 * 40),
+            x: 8,
+            y: this.view.margin.top + 96,
         };
-        var display_width = 104;
+        var display_width = 144;
+        
 
-        return this.scene.add.dom((this.view.right - display_width) - (margin.x), this.view.top + (margin.y), 'div', { 'max-width': display_width + 'px' }, '').setClassName('pocket-textblock').setOrigin(0).setScrollFactor(0).setVisible(false);
+        let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleDino');
+
+        let block = this.makeBlock(text.x - 8, text.y - 12, display_width, 32, 'BLOCK_MID_SKY_BORDER');
+        
+        return {block: block, text: text};
+
 
     }
 
@@ -121,7 +140,7 @@ export default class HudPockets {
             y: 8 + (slot_y * 40),
         };
         let arrow = this.factory.makeArrow((this.view.right - slotMargin.x), (this.view.top + slotMargin.y));
-        arrow.setScrollFactor(0);
+        arrow.setVisible(false);
         return arrow;
     }
 
@@ -244,14 +263,22 @@ export default class HudPockets {
     }
 
     openPockets() {
+        if (this.scene.manager.hud.state.name != 'POCKETS_FOCUSED') {
+            this.closePockets();
+        }
+        if (this.state == 'OPEN') {
+            return;
+        }
+
         this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', true);
+        this.setPocketsState('OPEN');
+
     }
 
     closePockets() {
-        this.pocket_textblock.setVisible(false);
-        for (var r = 0; r < 3; r++) {
-            var pocket = this.scene.manager.hud.pocket.getPocket(r); // new HudPocket Obj?
 
+        this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', false);
+        for (var r = 0; r < 3; r++) {
             this.setSlotColor(r, 0, 'UNFOCUSED');
         }
         for (var i = 1; i < 3; i++) {
@@ -259,18 +286,18 @@ export default class HudPockets {
                 this.setSlotVisible(r, i, false);
             }
         }
-        this.clearActions();
+        this.clearPocketDisplay();
+
         this.showDrop(-1);
         this.setSlipsVisible(false);
-        this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', false);
-        //this.changeFocus();
+        this.setPocketsState('CLOSED');
+        
     }
 
     pocketsVisible(visible) {
         for (var i = 0; i < 3; i++) {
             for (var r = 0; r < 3; r++) {
                 this.setSlotVisible(r, i, visible);
-                //this.refreshDisplay();
             }
         }
     }
@@ -287,6 +314,12 @@ export default class HudPockets {
 
         let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
         let button_text = this.scene.add.bitmapText(button_block.x + 4, button_block.y + 5, 'SkeleNotebook', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+
+
+        block.setVisible(false);
+        drop_text.setVisible(false);
+        button_block.setVisible(false);
+        button_text.setVisible(false);
 
         return {
             block: block,
@@ -338,6 +371,11 @@ export default class HudPockets {
             y: 64,
         };
         let slip = this.makeSlip(this.view.right - slotMargin.x, this.view.top + (slotMargin.y), text);
+        
+        slip.block.setVisible(false);
+        slip.text.setVisible(false);
+        slip.button.setVisible(false);
+        slip.button_text.setVisible(false);
         return slip;
     }
 
@@ -364,7 +402,10 @@ export default class HudPockets {
     clearActions() {
         if (this.pocket_actions != null) {
             this.pocket_actions.forEach(function (action, index) {
-                action.destroy();
+                action.block.destroy();
+                action.text.destroy();
+                action.button.destroy();
+                action.button_text.destroy();
             });
         }
     }
@@ -397,11 +438,31 @@ export default class HudPockets {
 
     itemAction(slot_x, action_y, selected, action) {
         const slotMargin = {
-            x: 48 + (slot_x * 40),
+            x: 42 + (slot_x * 40),
             y: 56 + (action_y * 16),
         };
-        var right = this.view.right;
-        return this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', action).setClassName(selected == true ? 'select-slip' : 'select-slip-not-selected').setOrigin(0).setScrollFactor(0);
+
+        let slip_text = this.scene.add.bitmapText(this.view.right - slotMargin.x, this.view.top + slotMargin.y, 'SkeleNotebook', action, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+
+        let block = this.makeBlock(slip_text.x - 6,slip_text.y - 5, slip_text.displayWidth + 12, 16, (selected ? 'BLOCK_MID_YELLOW_RIGHT' : 'BLOCK_MID_BLUE'));
+        block.setOrigin(0);
+
+        let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
+        button_block.setOrigin(0);
+        let button_text = this.scene.add.bitmapText(button_block.x + 3, button_block.y + 5, 'SkeleNotebook', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+
+        if (!selected) {
+            button_block.setVisible(false);
+            button_text.setVisible(false);
+        }
+        return {
+            block: block,
+            text: slip_text,
+            button: button_block,
+            button_text: button_text
+        };
+        //return this.makeSlip(this.view.right - slotMargin.x, this.view.top + slotMargin.y, action);
+        //return this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', action).setClassName(selected == true ? 'select-slip' : 'select-slip-not-selected').setOrigin(0).setScrollFactor(0);
     }
 
     setSlipVisible(slot_x, visible) {
@@ -410,15 +471,6 @@ export default class HudPockets {
             this.slots[1][slot_x].slip.text.setVisible(visible);
             this.slots[1][slot_x].slip.button.setVisible(visible);
             this.slots[1][slot_x].slip.button_text.setVisible(visible);
-            /*
-            if (visible) {
-                var slotMargin = {
-                    x: this.view.right - (24 + (slot_x * 40)),
-                    y: this.view.top + 64,
-                };
-                this.slots[1][slot_x].slip.setPosition(slotMargin.x, slotMargin.y);
-            }
-                */
         }
     }
 
@@ -443,11 +495,15 @@ export default class HudPockets {
 
     }
 
+    clearPocketDisplay() {
+        this.clearActions();
+        this.pocket_textblock.block.setVisible(false);
+        this.pocket_textblock.text.setVisible(false);
+    }
 
 
     refreshDisplay() {
-        this.clearActions();
-        this.pocket_textblock.setVisible(false);
+        this.clearPocketDisplay();
         const selected = this.scene.manager.hud.hudInput.selected;
         for (let i = 0; i < 3; i++) {
             let slot_y = i;
@@ -486,13 +542,12 @@ export default class HudPockets {
                 if (state != 'EMPTY' && selected.pocket != r && pocket[state].info.type == 'BAG') {
                     this.setSlipVisible(r, false);
                 }
-                this.item_actions.clear();
+                
                 if (state != 'EMPTY' && selected.pocket == r && pocket[state].info.type != 'BAG' && i == 0) {
                     /// It's an item that has actions
                     this.pocket_actions = this.drawActions(r, selected.actions, pocket[state].actions);
                     if (pocket[state].info.description != '') {
-                        this.pocket_textblock.setText(pocket[state].info.description);
-                        this.pocket_textblock.setVisible(true);
+                        this.setPocketDescription(pocket[state].info.description);
                     }
                 }
 
@@ -557,6 +612,19 @@ export default class HudPockets {
 
             }
         }
-        this.scene.manager.hud.stateChanged();
+        if (this.state != 'OPEN') {
+            this.closePockets();
+        }
+    }
+
+    setPocketDescription(description) {
+        this.pocket_textblock.text.setText(description);
+        //this.pocket_textblock.block.setVisible(true);
+        this.pocket_textblock.block.destroy();
+
+        this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, this.pocket_textblock.text.width + 16, this.pocket_textblock.text.height + 24, 'BLOCK_MID_SKY_BORDER');
+        let text_height = this.pocket_textblock.text.getTextBounds().local.height;
+        this.pocket_textblock.block.displayHeight = text_height + 24;
+        this.pocket_textblock.text.setVisible(true);
     }
 }

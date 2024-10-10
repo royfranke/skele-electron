@@ -180,6 +180,40 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
     },
+      BOWL_4: {
+        name: 'Bowl 4',
+        slug: 'BOWL_4', 
+        use:  'HOLDS',
+        icon: 'BOWL_4',
+        type: 'BOWL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        actions: [ {
+            name: 'PLACE',
+            consume: false,
+            transition: false,
+          },],
+        stack: 0,
+        stacks: [        ],
+    },
+      BOWL_5: {
+        name: 'Bowl 5',
+        slug: 'BOWL_5', 
+        use:  'HOLDS',
+        icon: 'BOWL_5',
+        type: 'BOWL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        actions: [ {
+            name: 'PLACE',
+            consume: false,
+            transition: false,
+          },],
+        stack: 0,
+        stacks: [        ],
+    },
       CRAYON_BROWN: {
         name: 'Brown Crayon',
         slug: 'CRAYON_BROWN', 
@@ -300,6 +334,43 @@ const ITEMS = {
         stacks: [        ],
 slots: '6',
 items: []    },
+      CASSEROLE_BROWNIE: {
+        name: 'Casserole Brownie',
+        slug: 'CASSEROLE_BROWNIE', 
+        use:  'HOLDS',
+        icon: 'CASSEROLE_BROWNIE',
+        type: 'CASSEROLE',
+        description: '',
+        contains: [],
+        containedBy: [ 'CASSEROLE_DISH'],
+        actions: [ {
+            name: 'SERVE',
+            consume: false,
+            transition: false,
+          },],
+        stack: 9,
+        stacks: [ {
+            icon: 'CASSEROLE_BROWNIE_21',
+            lessThan: 2,
+            greaterThan: 0
+          }, {
+            icon: 'CASSEROLE_BROWNIE_22',
+            lessThan: 5,
+            greaterThan: 1
+          }, {
+            icon: 'CASSEROLE_BROWNIE_23',
+            lessThan: 7,
+            greaterThan: 4
+          }, {
+            icon: 'CASSEROLE_BROWNIE_24',
+            lessThan: 9,
+            greaterThan: 6
+          }, {
+            icon: 'CASSEROLE_BROWNIE_25',
+            lessThan: 10,
+            greaterThan: 8
+          }        ],
+    },
       CASSEROLE_CORN_BREAD: {
         name: 'Casserole Corn Bread',
         slug: 'CASSEROLE_CORN_BREAD', 

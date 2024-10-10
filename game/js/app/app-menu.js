@@ -19,35 +19,21 @@ export default class AppMenu {
        this.menu_list = this.buildMenu();
        this.setSelected(0);
     }
-/*
-    drawMenu () {
-        const max_height = this.view.bottom - (this.view.top + this.view.margin.top + this.view.margin.bottom);
-        const height = (this.menu.length * 18) + 20;
-        if (height > max_height) {  height = max_height; }
 
-        for (var i=0;i<this.menu.length;i++) {
-            this.menu[i].LABEL = this.menu[i].LABEL.toUpperCase();
-        }
-        this.nineslice = this.scene.add.nineslice(this.view.left + this.view.margin.left,this.view.top + this.view.margin.top, 'UI', 'BLOCK_MID_BLUE_BORDER', 128, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
-        
-
-        this.arrow = this.scene.add.nineslice(this.view.left + (this.view.margin.left * 1.5),this.view.top + this.view.margin.top + 20, 'UI', 'BLOCK_MID_BLUE_BORDER_LEFT', 24, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1010);
-    }
-*/
     buildMenu () {
-       //this.drawMenu();
         const self = this;
         const view = this.view;
         var menu_list = [];
         
         this.menu.forEach(function (menu_item, index) {
 
-            var block = self.scene.add.nineslice(view.left + view.margin.left + 24,(view.top + view.margin.top) + (28 * index), 'UI', 'BLOCK_MID_ORANGE', 128, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+            var block = self.scene.add.nineslice(view.left + view.margin.left + 24,(view.top + view.margin.top) + (28 * index), 'UI', 'BLOCK_MID_ORANGE', 96, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
             var text = self.scene.add.bitmapText(block.x + 6,block.y + 8, 'SkeleDino', menu_item.LABEL, 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
             if (menu_item.BUTTON_STICK) {
                 //self.scene.add.image(view.left + (view.margin.left * 1.5),(index * 18) + view.top + view.margin.top + 20, 'UI', 'BAG_ARROW_SELECTED').setScrollFactor(0).setDepth(1000).setAngle(-90);
+                
             }
 
             if (menu_item.BUTTON == 'BACK') {
@@ -58,7 +44,7 @@ export default class AppMenu {
 
         let selector_block = this.scene.add.nineslice(menu_list[0].block.x - 24, menu_list[0].block.y, 'UI', 'BLOCK_MID_ORANGE_LEFT', 24, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1010);
         let selector_text = this.scene.add.bitmapText(selector_block.x + 8,selector_block.y + 4, 'SkeleButton', 'X', 16).setOrigin(0).setScrollFactor(0).setDepth(1011);
-        let selector_frame = this.scene.add.nineslice(selector_block.x,(view.top + view.margin.top), 'UI', 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME', 128 + 24, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1200);
+        let selector_frame = this.scene.add.nineslice(selector_block.x,(view.top + view.margin.top), 'UI', 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME', 96 + 24, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1200);
 
         this.selector = {block: selector_block, text: selector_text, frame: selector_frame};
         

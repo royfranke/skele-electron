@@ -45,7 +45,7 @@ export default class AppView {
         }
 
 
-        let version = this.scene.add.bitmapText(this.view.left + this.view.margin.left, this.view.bottom - this.view.margin.bottom, 'SkeleNotebook', 'v.1.0.2 Skele\'s Summer Break', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
+        let version = this.scene.add.bitmapText(this.view.left + this.view.margin.left, this.view.bottom - this.view.margin.bottom, 'SkeleNotebook', 'v.'+this.scene.version+' Skele\'s Summer Break', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
         this.scene.add.nineslice(version.x - 8,version.y - 5, 'UI', 'BLOCK_MID_BROWN_BORDER', version.displayWidth + 16, version.displayHeight + 8, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
     }
@@ -75,7 +75,6 @@ export default class AppView {
         var width = this.view.right - left - this.view.margin.right;
 
         this.slots = [];
-        //var SAVES = this.scene.SAVES.slots;
         var SAVES = [];
         for (var i=0;i<3;i++) {
             if (this.scene.cache.json.get('SLOT_'+i)) {
@@ -84,13 +83,14 @@ export default class AppView {
         }
         for (var i=0;i<3;i++) {
             var top = this.view.top + this.view.margin.top + ((height + 4) *i);
-            var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'SHOULDERS_SELECTED', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+            var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_BLUE_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
+            var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_YELLOW_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
             
-            this.slots.push(slot_slice);
+            this.slots.push({slice: slot_slice, selector: slot_highlight});
 
             if (SAVES.length > i) {
-                this.scene.add.dom(left,
-                    top, 'div', '', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY).setClassName('slot-header').setOrigin(0,0);
+                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleDino', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+
                 this.scene.add.dom(left+this.view.margin.left,
                 top+this.view.margin.top, 'div', '', SAVES[i].SAVE.HEADLINE).setClassName('slot-header').setOrigin(0,0);
             }
@@ -107,11 +107,13 @@ export default class AppView {
     selectLoad (selected) {
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
-                this.slots[i].setTexture('UI','BLOCK_MID_BLUE_BORDER');
+                this.slots[i].slice.setTexture('UI','BLOCK_MID_BLUE_BORDER');
+                this.slots[i].selector.setVisible(false);
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].setTexture('UI','BLOCK_MID_CREAM_BORDER');
+                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_CREAM_BORDER');
+                    this.slots[selected - 1].selector.setVisible(true);
                 }
             }
         }

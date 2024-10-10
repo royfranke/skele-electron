@@ -1,4 +1,3 @@
-import DATA from "../data/new.js";
 import DAY_DATA from "../data/days.js";
 
 /* Time Manager Class */

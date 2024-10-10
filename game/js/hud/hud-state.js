@@ -7,12 +7,11 @@ import STATES from "../config/hud-states.js";
 
 export default class HudState {
 
-    state='NOT_LOADED';
-    last_state='NOT_LOADED';
 
     constructor() {
-
-       this.valid_states = STATES;
+        this.state='NOT_LOADED';
+        this.last_state='NOT_LOADED';
+        this.valid_states = STATES;
 
     }
 

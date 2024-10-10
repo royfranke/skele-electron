@@ -6,6 +6,7 @@ import PreloadManager from "../preload/preload-manager.js";
 export default class MainMenuScene extends Phaser.Scene {
     constructor() {
         super("Main Menu");
+        this.version = '1.0.2';
     }
 
     preload () {

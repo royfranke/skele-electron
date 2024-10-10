@@ -87,7 +87,7 @@ export default class HudManager {
                 else {
                     var sound_var = Phaser.Math.RND.between(1,3);
                     this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var);
-                    this.scene.manager.hud.newPocketTip('My hands are full...',3000);
+                    //this.scene.manager.hud.newPocketTip('My hands are full...',3000);
                 }
         }
     }
@@ -117,11 +117,11 @@ export default class HudManager {
         //this.hudSound.play('UI_SELECT');
         //TODO: replace with more subtle sound
     }
-
+/*
     newPocketTip(message,duration=0) {
         this.hudDisplay.newPocketTip(message,duration);
     }
-
+*/
     availablePocket (item) {
         return this.pocket.availablePocket(item);
     }
@@ -130,30 +130,30 @@ export default class HudManager {
         if (this.state.name == 'INVISIBLE') {
             this.hudPockets.pocketsVisible(false);
         }
-
         /// Show Pockets
         if (!this.last_state || this.last_state.name == 'INVISIBLE') {
             this.hudPockets.pocketsVisible(true);
         }
-        if (this.state.name == 'POCKETS_FOCUSED') {
-            this.hudPockets.openPockets();
-            this.hudCoinpurse.openCoinpurse();
+        else
+            {
+            if (this.state.name == 'POCKETS_FOCUSED') {
+                this.hudPockets.openPockets();
+                this.hudCoinpurse.openCoinpurse();
             //this.hudSound.play('FOCUS_TIP_POCKETS');
-        }
-        if (this.state.name != 'POCKETS_FOCUSED') {
-            this.hudPockets.closePockets();
-            this.hudCoinpurse.closeCoinpurse();
-        }
+            }
+            if (this.last_state.name == 'POCKETS_FOCUSED' && this.state.name != 'POCKETS_FOCUSED') {
+                this.hudPockets.closePockets();
+                this.hudCoinpurse.closeCoinpurse();
+            }
+            if (this.last_state.name != 'NOTEBOOK_FOCUSED' && this.state.name == 'NOTEBOOK_FOCUSED') {
+                this.hudNotebook.openNotebook();
 
-        /// Open Notebook
-        if (this.state.name == 'NOTEBOOK_FOCUSED' && this.last_state != null && this.last_state.name != 'NOTEBOOK_FOCUSED') {
-            this.hudNotebook.openNotebook();
-            this.hudSound.play('FOCUS_TIP_NOTEBOOK');
-        }
-
-        /// Close Notebook
-        if (this.state.name != 'NOTEBOOK_FOCUSED' && this.last_state != null && this.last_state.name == 'NOTEBOOK_FOCUSED') {
-            this.hudNotebook.closeNotebook();
+                this.hudSound.play('FOCUS_TIP_NOTEBOOK');
+            }
+            /// Close Notebook
+            if (this.state.name != 'NOTEBOOK_FOCUSED' && this.last_state.name == 'NOTEBOOK_FOCUSED') {
+                this.hudNotebook.closeNotebook();
+            }
         }
 
         /// Open Card Game (Zener)

@@ -1,6 +1,6 @@
 export default class HudInput {
 
-    paused=false;
+    paused = false;
 
     constructor(scene) {
         this.scene = scene;
@@ -12,104 +12,108 @@ export default class HudInput {
         }
     }
 
-    refreshDisplay () {
-        this.scene.manager.hud.refreshDisplay();
+    refreshDisplay() {
+        if (this.scene.manager.hud.hudPockets.state == 'OPEN') {
+            this.scene.manager.hud.hudPockets.refreshDisplay();
+        }
     }
 
-    setSelectedPocket (selected=0) {
-        if (selected >= this.pocket_length) {
-            selected = 0;
-        }
-        if (selected < 0) {
-            selected = this.pocket_length - 1;
-        }
-        this.selected.pocket = selected;
-        this.selected.contents = 0; /// Reset the contents selector
-        this.selected.actions = 0; /// Reset the actions selector
-        
-    }
-
-    setSelectedContents (from_selected) {
-        var pocket = this.scene.manager.hud.pocket.getPocket(this.selected.pocket);
-
-        var state = pocket.STATE;
-        if (state != 'EMPTY') {
-
-            var isBag = (pocket[state].info.type == 'BAG');
-
-            if (!isBag) {
-                var selected = this.selected.actions + (from_selected);
-                var content_length = pocket[state].actions.length;
-                if (selected < -1) { // -1 == DROP action
-                    selected = content_length - 1;
-                    /// Down arrow on inventory content            
-                }
-                else if (selected >= content_length) {
-                    selected = 0;
-                }
-    
-                this.selected.actions = selected; 
-                this.selected.contents = 0; /// Reset the contents selector
+    setSelectedPocket(selected = 0) {
+        if (this.scene.manager.hud.hudPockets.state == 'OPEN') {
+            if (selected >= this.pocket_length) {
+                selected = 0;
             }
-            else { // It's a bag
-                var selected = this.selected.contents + (from_selected);
-                var content_length = 3;
-                if (selected >= content_length || selected < -1) {
-                    selected = content_length - 1;
-                    /// Down arrow on inventory content            
-                }
-                if (selected == content_length - 1) {
-                    this.scene.manager.hud.arrowDown(this.selected.pocket);
-                }
-                
-                this.selected.contents = selected;
-                this.selected.actions = 0; /// Reset the actions selector
+            if (selected < 0) {
+                selected = this.pocket_length - 1;
             }
-
-            
+            this.selected.pocket = selected;
+            this.selected.contents = 0; /// Reset the contents selector
+            this.selected.actions = 0; /// Reset the actions selector
         }
     }
 
-    input (key) {
+    setSelectedContents(from_selected) {
+        if (this.scene.manager.hud.hudPockets.state == 'OPEN') {
+            var pocket = this.scene.manager.hud.pocket.getPocket(this.selected.pocket);
+
+            var state = pocket.STATE;
+            if (state != 'EMPTY') {
+
+                var isBag = (pocket[state].info.type == 'BAG');
+
+                if (!isBag) {
+                    var selected = this.selected.actions + (from_selected);
+                    var content_length = pocket[state].actions.length;
+                    if (selected < -1) { // -1 == DROP action
+                        selected = content_length - 1;
+                        /// Down arrow on inventory content            
+                    }
+                    else if (selected >= content_length) {
+                        selected = 0;
+                    }
+
+                    this.selected.actions = selected;
+                    this.selected.contents = 0; /// Reset the contents selector
+                }
+                else { // It's a bag
+                    var selected = this.selected.contents + (from_selected);
+                    var content_length = 3;
+                    if (selected >= content_length || selected < -1) {
+                        selected = content_length - 1;
+                        /// Down arrow on inventory content            
+                    }
+                    if (selected == content_length - 1) {
+                        this.scene.manager.hud.arrowDown(this.selected.pocket);
+                    }
+
+                    this.selected.contents = selected;
+                    this.selected.actions = 0; /// Reset the actions selector
+                }
+
+            }
+        }
+    }
+
+    input(key) {
         switch (key) {
             case 'UP': this.up();
-            break;
+                break;
             case 'DOWN': this.down();
-            break;
+                break;
             case 'RIGHT': this.right();
-            break;
+                break;
             case 'LEFT': this.left();
-            break;
+                break;
             case 'SELECT': this.select();
-            break;
+                break;
             case 'BACK': this.back();
-            break;
+                break;
         }
         this.refreshDisplay();
     }
 
-    down () {
+    down() {
         this.setSelectedContents(1);
     }
 
-    up () {
+    up() {
         this.setSelectedContents(-1);
     }
 
-    left () {
+    left() {
         this.setSelectedPocket(this.selected.pocket + 1);
     }
 
-    right () {
+    right() {
         this.setSelectedPocket(this.selected.pocket - 1);
 
     }
 
 
-    select () {
+    select() {
         if (this.selected.contents == -1) {
-            
-            var doAction = this.scene.manager.hud.pocket.doAction(this.selected.pocket,'DROP');
+
+            var doAction = this.scene.manager.hud.pocket.doAction(this.selected.pocket, 'DROP');
             if (doAction) {
                 console.log('Action done-- refresh display');
                 this.refreshDisplay();
@@ -126,8 +130,8 @@ export default class HudInput {
                     else {
                         var action = 'DROP';
                     }
-                    
-                    var doAction = this.scene.manager.hud.pocket.doAction(this.selected.pocket,action);
+
+                    var doAction = this.scene.manager.hud.pocket.doAction(this.selected.pocket, action);
 
                     if (doAction) {
                         console.log('Action done-- refresh display');
@@ -144,25 +148,25 @@ export default class HudInput {
             if (state != 'EMPTY') {
                 var item = pocket[state].pullItem(0);
                 var placed = this.scene.manager.hud.availablePocket(item);
-                
+
                 if (placed != false) {
                     console.log("Placed! Refreshing");
                     this.refreshDisplay();
                 }
                 else {
-                    var sound_var = Phaser.Math.RND.between(1,3);
-                    this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var);
-                    this.scene.manager.hud.newPocketTip('My hands are full...',3000);
+                    var sound_var = Phaser.Math.RND.between(1, 3);
+                    this.scene.manager.hud.hudSound.play('SKELE_INVALID_' + sound_var);
+                    ///this.scene.manager.hud.newPocketTip('My hands are full...',3000);
                     //put the thing back in the bag
                     pocket[state].addItem(item);
                 }
             }
-            
+
         }
     }
 
-    back () {
-        
+    back() {
+
     }
 
 

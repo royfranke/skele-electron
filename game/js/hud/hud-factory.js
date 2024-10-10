@@ -13,6 +13,16 @@ export default class HudFactory {
        };
     }
 
+    makeQuote (quote, _x,_y, width, size=16, font='SkeleNewsprint') {
+        
+        let quote_text = this.makeBitmapText(_x, _y, width, size, font);
+        quote_text.setText(quote);
+
+        let quote_block = this.makeBlock(_x-16,_y-16, width+32, quote_text.displayHeight+32, 'BLOCK_MID_CREAM_BORDER');
+
+        return {block: quote_block, text: quote_text};
+    }
+
     makeBitmapText (_x,_y, width, size=16, font='SkeleNotebook') {
         return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0).setDepth(this.depth.TEXT).setScrollFactor(0).setMaxWidth(width);
     }

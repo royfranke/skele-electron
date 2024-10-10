@@ -94,15 +94,16 @@ export default class HudPocket {
                 if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.slug == item.info.slug && pocket[pocket.STATE].isStackable(item.stackCount)) {
                     found = true;
                     pocket[pocket.STATE].updateStackCount(item.stackCount);
-                    self.scene.manager.hud.refreshDisplay();
                 }
             }
             if (!found) {
                 if (pocket.STATE == 'EMPTY' && pocket[item.info.use] != 'DISALLOWED') {
                     self.setPocket(index, item.info.use, item);
                     found = true;
-                    self.scene.manager.hud.refreshDisplay();
                 }
+            }
+            if (found) {
+                self.scene.manager.hud.refreshDisplay();
             }
         });
         return found;

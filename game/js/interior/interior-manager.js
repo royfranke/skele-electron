@@ -126,9 +126,9 @@ import Room from "../object/room.js";
                     //this.wallLayer.weightedRandomize(WALLTILES.BORDER.SECTIONED_.TOP_RIGHT_, x, y, 1, 1);
                 }
                 if (this_tile_blank && !lower_tile_blank) {
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.GREEN_PURPLE_.LOWER_, x, y, 1, 1);
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.GREEN_PURPLE_.MID_, x, y-1, 1, 1);
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.GREEN_PURPLE_.TOP_, x, y-2, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.DARK_GREEN_WORN_.LOWER_, x, y, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.DARK_GREEN_WORN_.MID_, x, y-1, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.DARK_GREEN_WORN_.TOP_, x, y-2, 1, 1);
 
                     ////
                     removeRoofTiles.push({x: x, y: y});

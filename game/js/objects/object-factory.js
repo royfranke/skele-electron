@@ -21,7 +21,7 @@ export default class ObjectFactory {
         if (this.validObject(slug)) {
             /// TODO: Get a chest bool from the object info
             /// Could also be an array of valid items to fit in the chest
-            if (this.valid_objects[slug].type == 'MAILBOX') {
+            if (this.valid_objects[slug].slots != undefined && this.valid_objects[slug].slots > 0) {
                 var object = new ObjectChest(this.scene,this.valid_objects[slug],items);
             }
             else {

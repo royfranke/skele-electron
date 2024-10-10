@@ -8,6 +8,18 @@ const STOOP = {
             MATERIAL: 'PLAZA',
             VARIETY: ['FILL_']
         },
+        {
+            MATERIAL: 'PLANK',
+            VARIETY: ['FILL_']
+        },
+        {
+            MATERIAL: 'PLANK',
+            VARIETY: ['WORN_']
+        },
+        {
+            MATERIAL: 'PLANK',
+            VARIETY: ['BROWN_']
+        },
     ],
     RAILS: [
         {

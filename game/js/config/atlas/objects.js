@@ -1396,7 +1396,7 @@ const OBJECTS = {
           h:1, 
           w:1,
           x:1, 
-          y:1
+          y:2
         },
         sprite: {
           h:36, 
@@ -2583,6 +2583,72 @@ const OBJECTS = {
               frames: ['INT_DOOR_WHITE-4', 'INT_DOOR_WHITE-3', 'INT_DOOR_WHITE-2', 'INT_DOOR_WHITE-1', ]
               },
           ]    },
+          TABLE_WOOD_FOLDING_JAMMED: {
+        name: 'Jammed Folding Wood Table',
+        slug: 'TABLE_WOOD_FOLDING_JAMMED', 
+        type: 'TABLE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:20
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
+          TABLE_WOOD_DECOR: {
+        name: 'Lightly Decorative Wood Table',
+        slug: 'TABLE_WOOD_DECOR', 
+        type: 'TABLE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:20
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
           MAILBOX_SHINY: {
         name: 'Mailbox Shiny',
         slug: 'MAILBOX_SHINY', 
@@ -2972,8 +3038,52 @@ const OBJECTS = {
         varieties: 5,
         solid: 1,
         portal: 0,
-        actions: [],
-        states: []    },
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }, {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['OVEN_1-1',]
+              }, {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: []
+              },
+                      {
+              name: 'ON',
+              transition: 'false',
+              frames: ['OVEN_1-5',]
+              }, {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: []
+              },
+                      {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['OVEN_1-1',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['OVEN_1-2', 'OVEN_1-3', 'OVEN_1-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['OVEN_1-4',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['OVEN_1-3', 'OVEN_1-2', 'OVEN_1-1', ]
+              },
+          ]    },
           PAYPHONE: {
         name: 'Payphone',
         slug: 'PAYPHONE', 
@@ -3128,8 +3238,206 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          PORCH_ROOF_4x2_BROWN: {
+        name: 'Porch Roof 4x2 Brown',
+        slug: 'PORCH_ROOF_4x2_BROWN', 
+        type: 'PORCH_ROOF',
+        bounding: {
+          h:4, 
+          w:6
+        },
+        base: {
+          h:2, 
+          w:4,
+          x:1, 
+          y:4
+        },
+        sprite: {
+          h:55, 
+          w:81,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          PORCH_ROOF_4x2_GREEN: {
+        name: 'Porch Roof 4x2 Green',
+        slug: 'PORCH_ROOF_4x2_GREEN', 
+        type: 'PORCH_ROOF',
+        bounding: {
+          h:4, 
+          w:6
+        },
+        base: {
+          h:2, 
+          w:4,
+          x:1, 
+          y:4
+        },
+        sprite: {
+          h:55, 
+          w:81,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          PORCH_ROOF_4x2_PURPLE: {
+        name: 'Porch Roof 4x2 Purple',
+        slug: 'PORCH_ROOF_4x2_PURPLE', 
+        type: 'PORCH_ROOF',
+        bounding: {
+          h:4, 
+          w:6
+        },
+        base: {
+          h:2, 
+          w:4,
+          x:1, 
+          y:4
+        },
+        sprite: {
+          h:55, 
+          w:81,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          PORCH_ROOF_4x2_TAN: {
+        name: 'Porch Roof 4x2 Tan',
+        slug: 'PORCH_ROOF_4x2_TAN', 
+        type: 'PORCH_ROOF',
+        bounding: {
+          h:4, 
+          w:6
+        },
+        base: {
+          h:2, 
+          w:4,
+          x:1, 
+          y:4
+        },
+        sprite: {
+          h:55, 
+          w:81,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          PORCH_STAIR_RAIL_LEFT: {
+        name: 'Porch Stair Rail Left',
+        slug: 'PORCH_STAIR_RAIL_LEFT', 
+        type: 'STAIR_RAIL',
+        bounding: {
+          h:5, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:3
+        },
+        sprite: {
+          h:68, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:4
+        },
+        offset: {
+          x:15, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
+          POSTBOX_E: {
+        name: 'Postbox East',
+        slug: 'POSTBOX_E', 
+        type: 'POSTBOX',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:14
+        },
+        offset: {
+          x:9, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
           POSTBOX_S: {
-        name: 'Postal Service Box',
+        name: 'Postbox South',
         slug: 'POSTBOX_S', 
         type: 'POSTBOX',
         bounding: {
@@ -3138,40 +3446,29 @@ const OBJECTS = {
         },
         base: {
           h:1, 
-          w:1,
+          w:2,
           x:0, 
           y:1
         },
         sprite: {
           h:32, 
-          w:21,
+          w:32,
           x:0, 
           y:0
         },
         size: {
-          h:16, 
-          w:19
+          h:12, 
+          w:14
         },
         offset: {
-          x:1, 
+          x:12, 
           y:16
         },
-        varieties: 2,
+        varieties: 1,
         solid: 1,
         portal: 0,
-        actions: [ {
-            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
-          }],
-        states: [            {
-              name: 'CLOSED',
-              transition: 'false',
-              frames: ['POSTBOX_S-1',]
-              }, {
-              name: 'OPENING',
-              transition: 'OPEN',
-              frames: ['POSTBOX_S-2', ]
-              },
-          ]    },
+        actions: [],
+        states: []    },
           ROLLING_GATE_DOOR: {
         name: 'Rolling Security Door Gate',
         slug: 'ROLLING_GATE_DOOR', 
@@ -3357,6 +3654,39 @@ const OBJECTS = {
           y:24
         },
         varieties: 2,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
+          TABLE_WOOD_SIMPLE: {
+        name: 'Simple Wood Table',
+        slug: 'TABLE_WOOD_SIMPLE', 
+        type: 'TABLE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:20
+        },
+        varieties: 1,
         solid: 1,
         portal: 0,
         actions: [],
@@ -3790,6 +4120,72 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          TOASTER: {
+        name: 'Toaster',
+        slug: 'TOASTER', 
+        type: 'TOASTER',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:4, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:20
+        },
+        varieties: 13,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }, {
+            name: 'TOAST', stateTrigger: 'TOASTING', validStates: ['ON']
+          }],
+        states: [            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['TOASTER-1',]
+              }, {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: []
+              },
+                      {
+              name: 'ON',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: []
+              },
+                      {
+              name: 'ON',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'TOASTING',
+              transition: 'EJECTING_TOAST',
+              frames: []
+              },
+          ]    },
           DAILY_NEWS_BOX_: {
         name: 'Town Daily Box',
         slug: 'DAILY_NEWS_BOX_', 
@@ -4056,7 +4452,7 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
+          h:6, 
           w:16
         },
         offset: {
@@ -4070,6 +4466,8 @@ const OBJECTS = {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
         states: [            {
               name: 'CLOSED',
@@ -4088,6 +4486,15 @@ const OBJECTS = {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_1_S-3', 'UNDERCOUNTER_CABINET_1_S-2', 'UNDERCOUNTER_CABINET_1_S-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_1_S-4',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
               },
           ],
             slots: 4,
@@ -4114,10 +4521,10 @@ const OBJECTS = {
         },
         size: {
           h:20, 
-          w:12
+          w:8
         },
         offset: {
-          x:20, 
+          x:22, 
           y:8
         },
         varieties: 4,
@@ -4127,6 +4534,8 @@ const OBJECTS = {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
         states: [            {
               name: 'CLOSED',
@@ -4145,6 +4554,15 @@ const OBJECTS = {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_1_W-2', 'UNDERCOUNTER_CABINET_1_W-3', 'UNDERCOUNTER_CABINET_1_W-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_1_W-1',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
               },
           ],
             slots: 4,
@@ -5264,27 +5682,38 @@ const OBJECTS = {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
         states: [            {
               name: 'CLOSED',
               transition: 'false',
-              frames: []
+              frames: ['WOOD_SIDE_TABLE-1',]
               }, {
               name: 'OPENING',
               transition: 'OPEN',
-              frames: []
+              frames: ['WOOD_SIDE_TABLE-4', 'WOOD_SIDE_TABLE-3', 'WOOD_SIDE_TABLE-2', ]
               },
                       {
               name: 'OPEN',
               transition: 'false',
-              frames: []
+              frames: ['WOOD_SIDE_TABLE-2',]
               }, {
               name: 'CLOSING',
               transition: 'CLOSED',
+              frames: ['WOOD_SIDE_TABLE-3', 'WOOD_SIDE_TABLE-4', 'WOOD_SIDE_TABLE-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['WOOD_SIDE_TABLE-2',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
               frames: []
               },
           ],
-            slots: 0,
+            slots: 4,
             items: []    },
           WOOD_POLE: {
         name: 'Wood Utility Pole',

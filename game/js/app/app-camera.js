@@ -41,6 +41,8 @@ export default class AppCamera {
         this.camera.fadeIn(this.state.fadeIn, 0, 0, 0);
     }
 
+
+
     wake () {
         this.camera.setBackgroundColor('#4b424a');
         this.camera.fadeIn(this.state.fadeIn, 0, 0, 0);
@@ -59,6 +61,7 @@ export default class AppCamera {
     setBounds (width, height) {
         this.camera.setBounds(0, 0, width, height);
     }
+    
 
     //create transition iris open and close effects for between scenes/rooms
 

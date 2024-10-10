@@ -68,7 +68,7 @@ export default class GameManager {
         if (focus_string == 'ZENER') {
             this.hud.setState('ZENER_FOCUSED');
         }
-        this.hud.refreshDisplay();
+
         return this.gameFocus.setFocus(focus_string);
     }
 
@@ -179,9 +179,11 @@ export default class GameManager {
 
     loadGame () {
         if (this.state.name == 'NOT_LOADED') {
+            this.view = this.getView();
             this.scene.app.camera.camera.setBackgroundColor('#4b424a');
             this.setState('LOADING');
             this.hud = new HudManager(this.scene);
+            //this.hud.factory.makeQuote('When you get a bad feeling, don’t ignore it.',this.view.left + this.view.margin.left, this.view.top + this.view.margin.top, this.view.width - (this.view.margin.left + this.view.margin.right), 16);
             this.scene.player.coinpurse.setHud(this.hud.hudCoinpurse);
             this.watch = this.hud.hudWatch.tellWatch('--:--MB');
             
