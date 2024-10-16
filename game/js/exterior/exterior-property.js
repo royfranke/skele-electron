@@ -169,9 +169,11 @@ export default class PropertyLine {
 
         //check for "detached" tag-- make perimeter of space around building if found
 
-
+        
 
         let yard = 5;
+
+        this.settings.roof.height = height - (this.settings.foundation.height + yard + 3);
 
         //this.block.groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 2, height - (yard + 1));
         //this.block.groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, left+1, top + height - (yard + 1), width - 2,  yard);
@@ -209,7 +211,7 @@ export default class PropertyLine {
         this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
 
         ////
-        this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
+        
 
         /*
         this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height) + 1, building_width + 2, this.settings.roof.height/2, ROOFTILES.PITCHED.METAL_SOUTH_);
@@ -218,10 +220,19 @@ export default class PropertyLine {
        */
 
         if (building_width % 2 == 0) {
+            /////
+            this.scene.manager.objectManager.newObjectToWorld(_x - 1,_y + 1, 'GUTTER_DOWNSPOUT_'+this.settings.levels[0].height+'_W');
             this.buildPitchedRoof(_x, _y - (this.settings.levels[0].height) + 1, building_width, this.settings.roof.height, 'SHINGLES_');
+            this.scene.manager.objectManager.newObjectToWorld(_x + building_width,_y  - (this.settings.levels[0].height) + 1, 'GUTTER_SECTION_E_S_CAP');
+
+        }
+        else {
+            this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
+            this.scene.manager.objectManager.newObjectToWorld(_x - 1,_y, 'DOWNSPOUT_'+this.settings.levels[0].height+'_W');
         }
 
-        this.scene.manager.objectManager.newObjectToWorld(_x + 5, _y, 'EXT_WINDOW_2_YELLOW_BRICK_T_');
+        var colors = ['YELLOW', 'GREEN', 'BLUE', 'GRAY'];
+        this.scene.manager.objectManager.newObjectToWorld(_x + 5, _y, 'EXT_WINDOW_2_'+this.roll(colors)+'_BRICK_T_');
         
         this.buildEntry(_x + 1, _y);
 
@@ -431,6 +442,16 @@ export default class PropertyLine {
         var width = 2;
         var height = this.prop.lines.bottom - _y + 1;
         this.block.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, _x, _y, width, height);
+
+
+        // Separate from front walk later
+       var left_lawn_width =  _x - this.prop.lines.left; // lawn width
+       var left_lawn_height = this.prop.lines.bottom - _y + 1; // lawn height
+       this.buildLawn(this.prop.lines.left, _y, left_lawn_width, left_lawn_height);
+
+       var right_lawn_width = this.prop.lines.right - _x - width; // lawn width
+
+       this.buildLawn(this.prop.lines.left + left_lawn_width + width, _y, right_lawn_width, left_lawn_height);
     }
 
     buildEntry(_x, _y) {

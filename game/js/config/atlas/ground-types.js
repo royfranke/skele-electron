@@ -11,6 +11,16 @@ const GROUND_TYPE = {
     CHILDPREF: 0,
     ANIMALPREF: 1,
     ACTIONS: [
+         { ITEM: "SACK_GRASS_SEED",
+       ACTION: "plant",
+       FX: "CLOUD_DUST_",
+       GROUND: "GRASS"
+      } ,
+         { ITEM: "SACK_MULCH",
+       ACTION: "pour out",
+       FX: "CLOUD_DUST_",
+       GROUND: "MULCH"
+      } 
         ]
   },
   CROSSWALK: {

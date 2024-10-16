@@ -203,6 +203,7 @@ export default class GameManager {
             //let mac = this.itemManager.newItem('CASSEROLE_MAC');
             //this.itemManager.newItemToPockets('RAKE');
             //this.itemManager.newItemToPockets('CASSEROLE_DISH_1',[mac]);
+            this.wake();
             this.setState('LOADED');
             this.setState('OVERWORLD');
             

@@ -2,73 +2,73 @@
   "frames": [
         {
 		"filename": "BEADED_CURTAIN_BODEGA-1",
-		"frame": {"x":480,"y":587,"w":32,"h":64},
+		"frame": {"x":672,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-2",
-		"frame": {"x":512,"y":587,"w":32,"h":64},
+		"frame": {"x":704,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-3",
-		"frame": {"x":544,"y":587,"w":32,"h":64},
+		"frame": {"x":736,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-4",
-		"frame": {"x":576,"y":587,"w":32,"h":64},
+		"frame": {"x":0,"y":643,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-5",
-		"frame": {"x":608,"y":587,"w":32,"h":64},
+		"frame": {"x":32,"y":643,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-6",
-		"frame": {"x":640,"y":587,"w":32,"h":64},
+		"frame": {"x":64,"y":643,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-7",
-		"frame": {"x":672,"y":587,"w":32,"h":64},
+		"frame": {"x":96,"y":643,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-8",
-		"frame": {"x":704,"y":587,"w":32,"h":64},
+		"frame": {"x":128,"y":643,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "BEADED_CURTAIN_BODEGA-9",
-		"frame": {"x":736,"y":587,"w":32,"h":64},
+		"frame": {"x":160,"y":643,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
       {
 		"filename": "BODEGA_STORE_COUNTER-1",
-		"frame": {"x":0,"y":651,"w":80,"h":64},
+		"frame": {"x":192,"y":643,"w":80,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":80,"h":64 },
 		"sourceSize": {"w":80,"h":64 }
 	},    
       {
 		"filename": "LIT_SIGN_BONEDEGA-1",
-		"frame": {"x":480,"y":407,"w":48,"h":56},
+		"frame": {"x":642,"y":407,"w":48,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":48,"h":56 },
 		"sourceSize": {"w":48,"h":56 }
 	},    
     {
 		"filename": "LIT_SIGN_BONEDEGA-2",
-		"frame": {"x":528,"y":407,"w":48,"h":56},
+		"frame": {"x":690,"y":407,"w":48,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":48,"h":56 },
 		"sourceSize": {"w":48,"h":56 }
 	},    
@@ -116,55 +116,55 @@
 	},    
       {
 		"filename": "BUS_STOP_A_-1",
-		"frame": {"x":576,"y":523,"w":16,"h":64},
+		"frame": {"x":0,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "BUS_STOP_A_-2",
-		"frame": {"x":624,"y":523,"w":16,"h":64},
+		"frame": {"x":48,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "BUS_STOP_A_-3",
-		"frame": {"x":672,"y":523,"w":16,"h":64},
+		"frame": {"x":96,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
       {
 		"filename": "BUS_STOP_B_-1",
-		"frame": {"x":592,"y":523,"w":16,"h":64},
+		"frame": {"x":16,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "BUS_STOP_B_-2",
-		"frame": {"x":640,"y":523,"w":16,"h":64},
+		"frame": {"x":64,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "BUS_STOP_B_-3",
-		"frame": {"x":688,"y":523,"w":16,"h":64},
+		"frame": {"x":112,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
       {
 		"filename": "BUS_STOP_C_-1",
-		"frame": {"x":608,"y":523,"w":16,"h":64},
+		"frame": {"x":32,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "BUS_STOP_C_-2",
-		"frame": {"x":656,"y":523,"w":16,"h":64},
+		"frame": {"x":80,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "BUS_STOP_C_-3",
-		"frame": {"x":704,"y":523,"w":16,"h":64},
+		"frame": {"x":128,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
@@ -176,49 +176,49 @@
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_1_2_-1",
-		"frame": {"x":720,"y":523,"w":16,"h":64},
+		"frame": {"x":144,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_1_3_-1",
-		"frame": {"x":144,"y":651,"w":16,"h":80},
+		"frame": {"x":368,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_1_4_-1",
-		"frame": {"x":288,"y":651,"w":16,"h":96},
+		"frame": {"x":544,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_2_1_-1",
-		"frame": {"x":752,"y":523,"w":16,"h":64},
+		"frame": {"x":176,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_2_2_-1",
-		"frame": {"x":176,"y":651,"w":16,"h":80},
+		"frame": {"x":400,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_2_3_-1",
-		"frame": {"x":320,"y":651,"w":16,"h":96},
+		"frame": {"x":576,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_3_1_-1",
-		"frame": {"x":208,"y":651,"w":16,"h":80},
+		"frame": {"x":432,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_L_3_2_-1",
-		"frame": {"x":352,"y":651,"w":16,"h":96},
+		"frame": {"x":608,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
@@ -230,49 +230,49 @@
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_1_2_-1",
-		"frame": {"x":736,"y":523,"w":16,"h":64},
+		"frame": {"x":160,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_1_3_-1",
-		"frame": {"x":160,"y":651,"w":16,"h":80},
+		"frame": {"x":384,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_1_4_-1",
-		"frame": {"x":304,"y":651,"w":16,"h":96},
+		"frame": {"x":560,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_2_1_-1",
-		"frame": {"x":0,"y":587,"w":16,"h":64},
+		"frame": {"x":192,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_2_2_-1",
-		"frame": {"x":192,"y":651,"w":16,"h":80},
+		"frame": {"x":416,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_2_3_-1",
-		"frame": {"x":336,"y":651,"w":16,"h":96},
+		"frame": {"x":592,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_3_1_-1",
-		"frame": {"x":224,"y":651,"w":16,"h":80},
+		"frame": {"x":448,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
       {
 		"filename": "CEMENT_STAIR_RAIL_R_3_2_-1",
-		"frame": {"x":368,"y":651,"w":16,"h":96},
+		"frame": {"x":624,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
@@ -553,6 +553,30 @@
 		"sourceSize": {"w":32,"h":16 }
 	},    
       {
+		"filename": "DOWNSPOUT_4_E-1",
+		"frame": {"x":352,"y":643,"w":16,"h":73},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":73 },
+		"sourceSize": {"w":16,"h":73 }
+	},    
+      {
+		"filename": "DOWNSPOUT_4_W-1",
+		"frame": {"x":336,"y":643,"w":16,"h":73},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":73 },
+		"sourceSize": {"w":16,"h":73 }
+	},    
+      {
+		"filename": "DOWNSPOUT_5_E-1",
+		"frame": {"x":528,"y":643,"w":16,"h":89},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":89 },
+		"sourceSize": {"w":16,"h":89 }
+	},    
+      {
+		"filename": "DOWNSPOUT_5_W-1",
+		"frame": {"x":512,"y":643,"w":16,"h":89},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":89 },
+		"sourceSize": {"w":16,"h":89 }
+	},    
+      {
 		"filename": "EXT_DOOR_WINDOWS_GRAY-1",
 		"frame": {"x":448,"y":160,"w":32,"h":48},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":48 },
@@ -674,91 +698,91 @@
 	},    
       {
 		"filename": "EXT_DOOR_STORE_BLACK-1",
-		"frame": {"x":160,"y":407,"w":32,"h":56},
+		"frame": {"x":322,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_BLACK-2",
-		"frame": {"x":192,"y":407,"w":32,"h":56},
+		"frame": {"x":354,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_BLACK-3",
-		"frame": {"x":224,"y":407,"w":32,"h":56},
+		"frame": {"x":386,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_BLACK-4",
-		"frame": {"x":256,"y":407,"w":32,"h":56},
+		"frame": {"x":418,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_BLACK-5",
-		"frame": {"x":288,"y":407,"w":32,"h":56},
+		"frame": {"x":450,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
       {
 		"filename": "EXT_DOOR_STORE_METAL-1",
-		"frame": {"x":320,"y":407,"w":32,"h":56},
+		"frame": {"x":482,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_METAL-2",
-		"frame": {"x":352,"y":407,"w":32,"h":56},
+		"frame": {"x":514,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_METAL-3",
-		"frame": {"x":384,"y":407,"w":32,"h":56},
+		"frame": {"x":546,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_METAL-4",
-		"frame": {"x":416,"y":407,"w":32,"h":56},
+		"frame": {"x":578,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_METAL-5",
-		"frame": {"x":448,"y":407,"w":32,"h":56},
+		"frame": {"x":610,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
       {
 		"filename": "EXT_DOOR_STORE_WHITE-1",
-		"frame": {"x":0,"y":407,"w":32,"h":56},
+		"frame": {"x":162,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_WHITE-2",
-		"frame": {"x":32,"y":407,"w":32,"h":56},
+		"frame": {"x":194,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_WHITE-3",
-		"frame": {"x":64,"y":407,"w":32,"h":56},
+		"frame": {"x":226,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_WHITE-4",
-		"frame": {"x":96,"y":407,"w":32,"h":56},
+		"frame": {"x":258,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
     {
 		"filename": "EXT_DOOR_STORE_WHITE-5",
-		"frame": {"x":128,"y":407,"w":32,"h":56},
+		"frame": {"x":290,"y":407,"w":32,"h":56},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":56 },
 		"sourceSize": {"w":32,"h":56 }
 	},    
@@ -833,6 +857,66 @@
 		"frame": {"x":496,"y":0,"w":16,"h":16},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
 		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "GUTTER_DOWNSPOUT_4_E-1",
+		"frame": {"x":736,"y":643,"w":16,"h":105},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":105 },
+		"sourceSize": {"w":16,"h":105 }
+	},    
+      {
+		"filename": "GUTTER_DOWNSPOUT_4_W-1",
+		"frame": {"x":720,"y":643,"w":16,"h":105},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":105 },
+		"sourceSize": {"w":16,"h":105 }
+	},    
+      {
+		"filename": "GUTTER_DOWNSPOUT_5_E-1",
+		"frame": {"x":0,"y":876,"w":16,"h":121},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":121 },
+		"sourceSize": {"w":16,"h":121 }
+	},    
+      {
+		"filename": "GUTTER_DOWNSPOUT_5_W-1",
+		"frame": {"x":752,"y":755,"w":16,"h":121},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":121 },
+		"sourceSize": {"w":16,"h":121 }
+	},    
+        {
+		"filename": "GUTTER_SECTION_E-1",
+		"frame": {"x":480,"y":352,"w":16,"h":52},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":52 },
+		"sourceSize": {"w":16,"h":52 }
+	},    
+      {
+		"filename": "GUTTER_SECTION_E_N_CAP-1",
+		"frame": {"x":448,"y":352,"w":16,"h":52},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":52 },
+		"sourceSize": {"w":16,"h":52 }
+	},    
+      {
+		"filename": "GUTTER_SECTION_E_S_CAP-1",
+		"frame": {"x":512,"y":352,"w":16,"h":52},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":52 },
+		"sourceSize": {"w":16,"h":52 }
+	},    
+      {
+		"filename": "GUTTER_SECTION_W-1",
+		"frame": {"x":464,"y":352,"w":16,"h":52},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":52 },
+		"sourceSize": {"w":16,"h":52 }
+	},    
+      {
+		"filename": "GUTTER_SECTION_W_N_CAP-1",
+		"frame": {"x":432,"y":352,"w":16,"h":52},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":52 },
+		"sourceSize": {"w":16,"h":52 }
+	},    
+      {
+		"filename": "GUTTER_SECTION_W_S_CAP-1",
+		"frame": {"x":496,"y":352,"w":16,"h":52},
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":52 },
+		"sourceSize": {"w":16,"h":52 }
 	},    
       {
 		"filename": "INT_DOOR_GREEN-1",
@@ -1088,109 +1172,109 @@
 	},    
       {
 		"filename": "MAPLE_5X7-1",
-		"frame": {"x":272,"y":763,"w":80,"h":112},
+		"frame": {"x":560,"y":755,"w":80,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":80,"h":112 },
 		"sourceSize": {"w":80,"h":112 }
 	},    
       {
 		"filename": "MAPLE_7X7-1",
-		"frame": {"x":352,"y":763,"w":112,"h":112},
+		"frame": {"x":640,"y":755,"w":112,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":112,"h":112 },
 		"sourceSize": {"w":112,"h":112 }
 	},    
       {
 		"filename": "METAL_POLE-1",
-		"frame": {"x":16,"y":763,"w":16,"h":112},
+		"frame": {"x":304,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-2",
-		"frame": {"x":32,"y":763,"w":16,"h":112},
+		"frame": {"x":320,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-3",
-		"frame": {"x":48,"y":763,"w":16,"h":112},
+		"frame": {"x":336,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-4",
-		"frame": {"x":64,"y":763,"w":16,"h":112},
+		"frame": {"x":352,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-5",
-		"frame": {"x":80,"y":763,"w":16,"h":112},
+		"frame": {"x":368,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-6",
-		"frame": {"x":96,"y":763,"w":16,"h":112},
+		"frame": {"x":384,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-7",
-		"frame": {"x":112,"y":763,"w":16,"h":112},
+		"frame": {"x":400,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-8",
-		"frame": {"x":128,"y":763,"w":16,"h":112},
+		"frame": {"x":416,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-9",
-		"frame": {"x":144,"y":763,"w":16,"h":112},
+		"frame": {"x":432,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-10",
-		"frame": {"x":160,"y":763,"w":16,"h":112},
+		"frame": {"x":448,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-11",
-		"frame": {"x":176,"y":763,"w":16,"h":112},
+		"frame": {"x":464,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-12",
-		"frame": {"x":192,"y":763,"w":16,"h":112},
+		"frame": {"x":480,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-13",
-		"frame": {"x":208,"y":763,"w":16,"h":112},
+		"frame": {"x":496,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-14",
-		"frame": {"x":224,"y":763,"w":16,"h":112},
+		"frame": {"x":512,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-15",
-		"frame": {"x":240,"y":763,"w":16,"h":112},
+		"frame": {"x":528,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "METAL_POLE-16",
-		"frame": {"x":256,"y":763,"w":16,"h":112},
+		"frame": {"x":544,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
@@ -1346,31 +1430,31 @@
 	},    
         {
 		"filename": "PORCH_ROOF_4x2_BROWN-1",
-		"frame": {"x":432,"y":352,"w":81,"h":55},
+		"frame": {"x":528,"y":352,"w":81,"h":55},
     "spriteSourceSize": {"x":0,"y":0,"w":81,"h":55 },
 		"sourceSize": {"w":81,"h":55 }
 	},    
       {
 		"filename": "PORCH_ROOF_4x2_GREEN-1",
-		"frame": {"x":513,"y":352,"w":81,"h":55},
+		"frame": {"x":609,"y":352,"w":81,"h":55},
     "spriteSourceSize": {"x":0,"y":0,"w":81,"h":55 },
 		"sourceSize": {"w":81,"h":55 }
 	},    
       {
 		"filename": "PORCH_ROOF_4x2_PURPLE-1",
-		"frame": {"x":675,"y":352,"w":81,"h":55},
+		"frame": {"x":81,"y":407,"w":81,"h":55},
     "spriteSourceSize": {"x":0,"y":0,"w":81,"h":55 },
 		"sourceSize": {"w":81,"h":55 }
 	},    
       {
 		"filename": "PORCH_ROOF_4x2_TAN-1",
-		"frame": {"x":594,"y":352,"w":81,"h":55},
+		"frame": {"x":0,"y":407,"w":81,"h":55},
     "spriteSourceSize": {"x":0,"y":0,"w":81,"h":55 },
 		"sourceSize": {"w":81,"h":55 }
 	},    
       {
 		"filename": "PORCH_STAIR_RAIL_LEFT-1",
-		"frame": {"x":80,"y":651,"w":64,"h":68},
+		"frame": {"x":272,"y":643,"w":64,"h":68},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":68 },
 		"sourceSize": {"w":64,"h":68 }
 	},    
@@ -1388,193 +1472,193 @@
 	},    
       {
 		"filename": "ROLLING_GATE_DOOR-1",
-		"frame": {"x":576,"y":407,"w":32,"h":58},
+		"frame": {"x":0,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-2",
-		"frame": {"x":608,"y":407,"w":32,"h":58},
+		"frame": {"x":32,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-3",
-		"frame": {"x":640,"y":407,"w":32,"h":58},
+		"frame": {"x":64,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-4",
-		"frame": {"x":672,"y":407,"w":32,"h":58},
+		"frame": {"x":96,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-5",
-		"frame": {"x":704,"y":407,"w":32,"h":58},
+		"frame": {"x":128,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-6",
-		"frame": {"x":736,"y":407,"w":32,"h":58},
+		"frame": {"x":160,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-7",
-		"frame": {"x":0,"y":465,"w":32,"h":58},
+		"frame": {"x":192,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-8",
-		"frame": {"x":32,"y":465,"w":32,"h":58},
+		"frame": {"x":224,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-9",
-		"frame": {"x":64,"y":465,"w":32,"h":58},
+		"frame": {"x":256,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-10",
-		"frame": {"x":96,"y":465,"w":32,"h":58},
+		"frame": {"x":288,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-11",
-		"frame": {"x":128,"y":465,"w":32,"h":58},
+		"frame": {"x":320,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-12",
-		"frame": {"x":160,"y":465,"w":32,"h":58},
+		"frame": {"x":352,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-13",
-		"frame": {"x":192,"y":465,"w":32,"h":58},
+		"frame": {"x":384,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-14",
-		"frame": {"x":224,"y":465,"w":32,"h":58},
+		"frame": {"x":416,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-15",
-		"frame": {"x":256,"y":465,"w":32,"h":58},
+		"frame": {"x":448,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-16",
-		"frame": {"x":288,"y":465,"w":32,"h":58},
+		"frame": {"x":480,"y":463,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
       {
 		"filename": "ROLLING_GATE_WIDE-1",
-		"frame": {"x":320,"y":465,"w":64,"h":58},
+		"frame": {"x":512,"y":463,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-2",
-		"frame": {"x":384,"y":465,"w":64,"h":58},
+		"frame": {"x":576,"y":463,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-3",
-		"frame": {"x":448,"y":465,"w":64,"h":58},
+		"frame": {"x":640,"y":463,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-4",
-		"frame": {"x":512,"y":465,"w":64,"h":58},
+		"frame": {"x":704,"y":463,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-5",
-		"frame": {"x":576,"y":465,"w":64,"h":58},
+		"frame": {"x":0,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-6",
-		"frame": {"x":640,"y":465,"w":64,"h":58},
+		"frame": {"x":64,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-7",
-		"frame": {"x":704,"y":465,"w":64,"h":58},
+		"frame": {"x":128,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-8",
-		"frame": {"x":0,"y":523,"w":64,"h":58},
+		"frame": {"x":192,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-9",
-		"frame": {"x":64,"y":523,"w":64,"h":58},
+		"frame": {"x":256,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-10",
-		"frame": {"x":128,"y":523,"w":64,"h":58},
+		"frame": {"x":320,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-11",
-		"frame": {"x":192,"y":523,"w":64,"h":58},
+		"frame": {"x":384,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-12",
-		"frame": {"x":256,"y":523,"w":64,"h":58},
+		"frame": {"x":448,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-13",
-		"frame": {"x":320,"y":523,"w":64,"h":58},
+		"frame": {"x":512,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-14",
-		"frame": {"x":384,"y":523,"w":64,"h":58},
+		"frame": {"x":576,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-15",
-		"frame": {"x":448,"y":523,"w":64,"h":58},
+		"frame": {"x":640,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-16",
-		"frame": {"x":512,"y":523,"w":64,"h":58},
+		"frame": {"x":704,"y":521,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
@@ -1598,13 +1682,13 @@
 	},    
         {
 		"filename": "STOP_E-1",
-		"frame": {"x":288,"y":587,"w":32,"h":64},
+		"frame": {"x":480,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "STOP_E-2",
-		"frame": {"x":320,"y":587,"w":32,"h":64},
+		"frame": {"x":512,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
@@ -1628,19 +1712,19 @@
 	},    
       {
 		"filename": "STOP_N-1",
-		"frame": {"x":128,"y":587,"w":32,"h":64},
+		"frame": {"x":320,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "STOP_N-2",
-		"frame": {"x":160,"y":587,"w":32,"h":64},
+		"frame": {"x":352,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "STOP_N-3",
-		"frame": {"x":192,"y":587,"w":32,"h":64},
+		"frame": {"x":384,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
@@ -1664,19 +1748,19 @@
 	},    
       {
 		"filename": "STOP_S-1",
-		"frame": {"x":384,"y":587,"w":32,"h":64},
+		"frame": {"x":576,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "STOP_S-2",
-		"frame": {"x":416,"y":587,"w":32,"h":64},
+		"frame": {"x":608,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "STOP_S-3",
-		"frame": {"x":448,"y":587,"w":32,"h":64},
+		"frame": {"x":640,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
@@ -1700,19 +1784,19 @@
 	},    
       {
 		"filename": "STOP_W-1",
-		"frame": {"x":224,"y":587,"w":32,"h":64},
+		"frame": {"x":416,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "STOP_W-2",
-		"frame": {"x":256,"y":587,"w":32,"h":64},
+		"frame": {"x":448,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
     {
 		"filename": "STOP_W-3",
-		"frame": {"x":352,"y":587,"w":32,"h":64},
+		"frame": {"x":544,"y":579,"w":32,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
 		"sourceSize": {"w":32,"h":64 }
 	},    
@@ -1922,7 +2006,7 @@
 	},    
       {
 		"filename": "TRAFFIC_LIGHT_ARM_EAST-1",
-		"frame": {"x":432,"y":651,"w":32,"h":96},
+		"frame": {"x":688,"y":643,"w":32,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":96 },
 		"sourceSize": {"w":32,"h":96 }
 	},    
@@ -1964,25 +2048,25 @@
 	},    
       {
 		"filename": "TRAFFIC_LIGHT_SOUTH-1",
-		"frame": {"x":16,"y":587,"w":16,"h":64},
+		"frame": {"x":208,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "TRAFFIC_LIGHT_SOUTH-2",
-		"frame": {"x":32,"y":587,"w":16,"h":64},
+		"frame": {"x":224,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "TRAFFIC_LIGHT_SOUTH-3",
-		"frame": {"x":48,"y":587,"w":16,"h":64},
+		"frame": {"x":240,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
     {
 		"filename": "TRAFFIC_LIGHT_SOUTH-4",
-		"frame": {"x":64,"y":587,"w":16,"h":64},
+		"frame": {"x":256,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
@@ -2132,7 +2216,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_2_VERTICAL_BROWN-1",
-		"frame": {"x":96,"y":587,"w":16,"h":64},
+		"frame": {"x":288,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
@@ -2144,7 +2228,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_2_VERTICAL_HONEY-1",
-		"frame": {"x":80,"y":587,"w":16,"h":64},
+		"frame": {"x":272,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
@@ -2156,7 +2240,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_2_VERTICAL_WEATHERED-1",
-		"frame": {"x":112,"y":587,"w":16,"h":64},
+		"frame": {"x":304,"y":579,"w":16,"h":64},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
 		"sourceSize": {"w":16,"h":64 }
 	},    
@@ -2174,7 +2258,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_3_VERTICAL_BROWN-1",
-		"frame": {"x":256,"y":651,"w":16,"h":80},
+		"frame": {"x":480,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
@@ -2192,7 +2276,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_3_VERTICAL_HONEY-1",
-		"frame": {"x":240,"y":651,"w":16,"h":80},
+		"frame": {"x":464,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
@@ -2210,7 +2294,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_3_VERTICAL_WEATHERED-1",
-		"frame": {"x":272,"y":651,"w":16,"h":80},
+		"frame": {"x":496,"y":643,"w":16,"h":80},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":80 },
 		"sourceSize": {"w":16,"h":80 }
 	},    
@@ -2228,7 +2312,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_4_VERTICAL_BROWN-1",
-		"frame": {"x":400,"y":651,"w":16,"h":96},
+		"frame": {"x":656,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
@@ -2246,7 +2330,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_4_VERTICAL_HONEY-1",
-		"frame": {"x":384,"y":651,"w":16,"h":96},
+		"frame": {"x":640,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
@@ -2264,7 +2348,7 @@
 	},    
       {
 		"filename": "WOOD_FENCE_4_VERTICAL_WEATHERED-1",
-		"frame": {"x":416,"y":651,"w":16,"h":96},
+		"frame": {"x":672,"y":643,"w":16,"h":96},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":96 },
 		"sourceSize": {"w":16,"h":96 }
 	},    
@@ -2312,121 +2396,121 @@
 	},    
       {
 		"filename": "WOOD_POLE-1",
-		"frame": {"x":464,"y":651,"w":16,"h":112},
+		"frame": {"x":752,"y":643,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-2",
-		"frame": {"x":480,"y":651,"w":16,"h":112},
+		"frame": {"x":0,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-3",
-		"frame": {"x":496,"y":651,"w":16,"h":112},
+		"frame": {"x":16,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-4",
-		"frame": {"x":512,"y":651,"w":16,"h":112},
+		"frame": {"x":32,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-5",
-		"frame": {"x":528,"y":651,"w":16,"h":112},
+		"frame": {"x":48,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-6",
-		"frame": {"x":544,"y":651,"w":16,"h":112},
+		"frame": {"x":64,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-7",
-		"frame": {"x":560,"y":651,"w":16,"h":112},
+		"frame": {"x":80,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-8",
-		"frame": {"x":576,"y":651,"w":16,"h":112},
+		"frame": {"x":96,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-9",
-		"frame": {"x":592,"y":651,"w":16,"h":112},
+		"frame": {"x":112,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-10",
-		"frame": {"x":608,"y":651,"w":16,"h":112},
+		"frame": {"x":128,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-11",
-		"frame": {"x":624,"y":651,"w":16,"h":112},
+		"frame": {"x":144,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-12",
-		"frame": {"x":640,"y":651,"w":16,"h":112},
+		"frame": {"x":160,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-13",
-		"frame": {"x":656,"y":651,"w":16,"h":112},
+		"frame": {"x":176,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-14",
-		"frame": {"x":672,"y":651,"w":16,"h":112},
+		"frame": {"x":192,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-15",
-		"frame": {"x":688,"y":651,"w":16,"h":112},
+		"frame": {"x":208,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-16",
-		"frame": {"x":704,"y":651,"w":16,"h":112},
+		"frame": {"x":224,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-17",
-		"frame": {"x":720,"y":651,"w":16,"h":112},
+		"frame": {"x":240,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-18",
-		"frame": {"x":736,"y":651,"w":16,"h":112},
+		"frame": {"x":256,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-19",
-		"frame": {"x":752,"y":651,"w":16,"h":112},
+		"frame": {"x":272,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
     {
 		"filename": "WOOD_POLE-20",
-		"frame": {"x":0,"y":763,"w":16,"h":112},
+		"frame": {"x":288,"y":755,"w":16,"h":112},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":112 },
 		"sourceSize": {"w":16,"h":112 }
 	},    
@@ -2477,6 +2561,6 @@
 		"frame": {"x":624,"y":0,"w":16,"h":16},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
 		"sourceSize": {"w":16,"h":16 }
-	}
+	}   
     ]
 }

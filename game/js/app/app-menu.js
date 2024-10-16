@@ -29,7 +29,7 @@ export default class AppMenu {
 
             var block = self.scene.add.nineslice(view.left + view.margin.left + 24,(view.top + view.margin.top) + (28 * index), 'UI', 'BLOCK_MID_ORANGE', 96, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
-            var text = self.scene.add.bitmapText(block.x + 6,block.y + 8, 'SkeleDino', menu_item.LABEL, 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
+            var text = self.scene.add.bitmapText(block.x + 6,block.y + 8, 'SkeleTalk', menu_item.LABEL, 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
             if (menu_item.BUTTON_STICK) {
                 //self.scene.add.image(view.left + (view.margin.left * 1.5),(index * 18) + view.top + view.margin.top + 20, 'UI', 'BAG_ARROW_SELECTED').setScrollFactor(0).setDepth(1000).setAngle(-90);

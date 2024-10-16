@@ -27,6 +27,7 @@ export default class HudFocusHints {
         ];
 
         this.makeFocusHints();
+
     }
 
     makeBlock(_x, _y, width = 24, height = 24, frameName = 'BLOCK_MID_YELLOW') {
@@ -44,7 +45,7 @@ export default class HudFocusHints {
         if (hint != null) {
 
             let keyTip = {
-                block: this.makeBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_YELLOW'),
+                block: this.makeBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_BLUE'),
                 text: this.makeBitmapText(hint.x+5, hint.y+3, 16, 12, 'SkeleButton')
             };
             keyTip.text.setText(hint.char);

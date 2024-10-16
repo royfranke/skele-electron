@@ -3,6 +3,9 @@ const PRELOAD_FONT = [
         NAME: 'SkeleNotebook',
     },
     {
+        NAME: 'SkeleTalk',
+    },
+    {
         NAME: 'SkeleDino',
     },
     {

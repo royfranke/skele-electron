@@ -28,7 +28,7 @@ export default class HudPockets {
         return this.factory.makeIcon(_x + 8, _y + 8, textureName, frameName);
     }
 
-    makeBitmapText (_x,_y, width, text, size, font="SkeleDino") {
+    makeBitmapText (_x,_y, width, text, size, font="SkeleTalk") {
         let bitmap = this.factory.makeBitmapText(_x,_y, width, size, font);
         bitmap.setText(text);
         bitmap.setLineSpacing(8);
@@ -52,10 +52,10 @@ export default class HudPockets {
         var display_width = 144;
         
 
-        let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleDino');
+        let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleTalk');
 
-        let block = this.makeBlock(text.x - 8, text.y - 12, display_width, 32, 'BLOCK_MID_SKY_BORDER');
-        
+        let block = this.makeBlock(text.x - 8, text.y - 12, display_width, 32, 'BLOCK_MID_CREAM_BORDER');
+        block.setVisible(false);
         return {block: block, text: text};
 
 
@@ -79,6 +79,9 @@ export default class HudPockets {
                 icon_contents: null,
                 slip: this.addSlip(x, 'HOLD')
             };
+
+            slots[y][x].slot.setVisible(false);
+            slots[y][x].icon.setVisible(false);
 
             y = 2;
             slots[y][x] = {
@@ -278,6 +281,7 @@ export default class HudPockets {
     closePockets() {
 
         this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', false);
+
         for (var r = 0; r < 3; r++) {
             this.setSlotColor(r, 0, 'UNFOCUSED');
         }
@@ -310,10 +314,10 @@ export default class HudPockets {
 
         let block = this.makeBlock(this.view.right - slotMargin.x, this.view.top + (slotMargin.y), 32, 16, 'BLOCK_MID_YELLOW');
 
-        let drop_text = this.scene.add.bitmapText(block.x + 6, block.y + 5, 'SkeleNotebook', 'DROP', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let drop_text = this.scene.add.bitmapText(block.x + 6, block.y + 5, 'SkeleTalk', 'DROP', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
-        let button_text = this.scene.add.bitmapText(button_block.x + 4, button_block.y + 5, 'SkeleNotebook', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let button_text = this.scene.add.bitmapText(button_block.x + 4, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
 
         block.setVisible(false);
@@ -358,7 +362,9 @@ export default class HudPockets {
             x: 26 + (slot_x * 40),
             y: 38 + (slot_y * 36),
         };
-        return this.makeStackIndicator((this.view.right - slotMargin.x), (this.view.top + slotMargin.y));
+        let stack = this.makeStackIndicator((this.view.right - slotMargin.x), (this.view.top + slotMargin.y));
+        stack.setVisible(false);
+        return stack;
     }
 
     makeStackIndicator(_x, _y) {
@@ -384,12 +390,12 @@ export default class HudPockets {
         let block = this.makeBlock(_x, _y, 32, 16, 'BLOCK_MID_YELLOW_RIGHT');
         block.setOrigin(1,0);
 
-        let slip_text = this.scene.add.bitmapText(block.x - 6, block.y + 5, 'SkeleNotebook', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let slip_text = this.scene.add.bitmapText(block.x - 6, block.y + 5, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
 
         let button_block = this.makeBlock(block.x - block.width, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
         button_block.setOrigin(1,0);
-        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleNotebook', 'X', 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         return {
             block: block,
@@ -442,14 +448,14 @@ export default class HudPockets {
             y: 56 + (action_y * 16),
         };
 
-        let slip_text = this.scene.add.bitmapText(this.view.right - slotMargin.x, this.view.top + slotMargin.y, 'SkeleNotebook', action, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let slip_text = this.scene.add.bitmapText(this.view.right - slotMargin.x, this.view.top + slotMargin.y, 'SkeleTalk', action, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         let block = this.makeBlock(slip_text.x - 6,slip_text.y - 5, slip_text.displayWidth + 12, 16, (selected ? 'BLOCK_MID_YELLOW_RIGHT' : 'BLOCK_MID_BLUE'));
         block.setOrigin(0);
 
         let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
         button_block.setOrigin(0);
-        let button_text = this.scene.add.bitmapText(button_block.x + 3, button_block.y + 5, 'SkeleNotebook', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let button_text = this.scene.add.bitmapText(button_block.x + 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         if (!selected) {
             button_block.setVisible(false);
@@ -622,7 +628,7 @@ export default class HudPockets {
         //this.pocket_textblock.block.setVisible(true);
         this.pocket_textblock.block.destroy();
 
-        this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, this.pocket_textblock.text.width + 16, this.pocket_textblock.text.height + 24, 'BLOCK_MID_SKY_BORDER');
+        this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, this.pocket_textblock.text.width + 16, this.pocket_textblock.text.height + 24, 'BLOCK_MID_CREAM_BORDER');
         let text_height = this.pocket_textblock.text.getTextBounds().local.height;
         this.pocket_textblock.block.displayHeight = text_height + 24;
         this.pocket_textblock.text.setVisible(true);

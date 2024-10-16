@@ -121,7 +121,7 @@ export default class HudNotebook {
 
         this.notebook.panel = this.factory.makeNotebook(this.position.unfocused.panel.x,this.position.unfocused.panel.y);
 
-        this.notebook.page = this.makeBitmapText(this.position.focused.page.x, this.position.focused.page.y, this.position.unfocused.page.width, '', 8);
+        this.notebook.page = this.makeBitmapText(this.position.unfocused.page.x, this.position.unfocused.page.y, this.position.unfocused.page.width, '', 8);
 
         this.notebook.arrow.left = this.factory.makeSideArrow(this.position.unfocused.arrow.left.x,this.position.unfocused.arrow.left.y, 'BAG_ARROW_FOCUSED',true);
 

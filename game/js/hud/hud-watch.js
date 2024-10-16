@@ -53,7 +53,7 @@ export default class HudWatch {
     }
 
     addWatch () {
-        this.watch.block = this.makeBlock(this.position.x,this.position.y, 32, 32, 'ITEM_FOCUSED');
+        this.watch.block = this.makeBlock(this.position.x,this.position.y, 32, 32, 'ITEM_UNFOCUSED');
         this.watch.icon = this.makeIcon(this.position.x,this.position.y, 'ITEMS', 'DIGITAL_WATCH');
 
         this.watch.display = this.scene.add.bitmapText(this.view.left + 102, this.view.top + this.view.margin.top + 8, 'SkeleWatch', "00:00MB", 16).setScrollFactor(0).setOrigin(0).setDepth(15000);

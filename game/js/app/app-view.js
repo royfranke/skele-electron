@@ -89,7 +89,7 @@ export default class AppView {
             this.slots.push({slice: slot_slice, selector: slot_highlight});
 
             if (SAVES.length > i) {
-                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleDino', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
                 this.scene.add.dom(left+this.view.margin.left,
                 top+this.view.margin.top, 'div', '', SAVES[i].SAVE.HEADLINE).setClassName('slot-header').setOrigin(0,0);

@@ -66,7 +66,7 @@ export default class HudCoinpurse {
             y: this.view.top + this.view.margin.top
         };
 
-        this.coinPurse.block = this.makeBlock(position.x, position.y, 32, 32, 'BAG_FOCUSED');
+        this.coinPurse.block = this.makeBlock(position.x, position.y, 32, 32, 'BAG_UNFOCUSED');
         this.coinPurse.icon = this.makeIcon(position.x+8, position.y+8, 'UI', 'COINPURSE_CLOSED');
     }
 
@@ -133,7 +133,7 @@ export default class HudCoinpurse {
             });
             content = new_content;
        }
-        let flag_text = this.scene.add.bitmapText(_x + 19, _y + 6, 'SkeleNotebook', content, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let flag_text = this.scene.add.bitmapText(_x + 19, _y + 6, 'SkeleTalk', content, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
        
 
 

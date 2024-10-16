@@ -35,9 +35,13 @@ export default class Announcer {
             var announced = [];
             this.announcements.forEach((announcement, index) => {
                 if (announcement.kind == 'DEFAULT') {
-                    let announce = self.add.dom(_x,_y, 'div', '', announcement.announcement).setClassName('announcer').setOrigin(0).setDepth(1500);
-                    announce.setPosition(_x - (announce.displayWidth/2), _y + (index * 16));
+
+                    let announce = self.add.bitmapText(_x, _y + 1, 'SkeleNewsprint', announcement.announcement, 8).setOrigin(.5).setDepth(_y + 16);
+
                     announced.push(announce);
+
+                    let sign = self.add.nineslice(_x,_y, 'UI', 'BLOCK_MID_YELLOW_BORDER', announce.displayWidth + 12, 20, 8,8,8,8).setOrigin(.5).setDepth(_y + 15);
+                    announced.push(sign);
                 }
                 else if (announcement.kind.slice(0, 15) === 'STREET_SIGN_NS_') {
 

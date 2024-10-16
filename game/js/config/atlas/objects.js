@@ -1560,6 +1560,138 @@ const OBJECTS = {
               frames: ['DOORMAT_1-1', 'DOORMAT_1-2', 'DOORMAT_1-3', 'DOORMAT_1-2', 'DOORMAT_1-1', ]
               },
           ]    },
+          DOWNSPOUT_4_E: {
+        name: 'Downspout 4 E',
+        slug: 'DOWNSPOUT_4_E', 
+        type: 'GUTTER',
+        bounding: {
+          h:5, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:4
+        },
+        sprite: {
+          h:73, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          DOWNSPOUT_4_W: {
+        name: 'Downspout 4 W',
+        slug: 'DOWNSPOUT_4_W', 
+        type: 'GUTTER',
+        bounding: {
+          h:5, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:4
+        },
+        sprite: {
+          h:73, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          DOWNSPOUT_5_E: {
+        name: 'Downspout 5 E',
+        slug: 'DOWNSPOUT_5_E', 
+        type: 'GUTTER',
+        bounding: {
+          h:6, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:5
+        },
+        sprite: {
+          h:89, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          DOWNSPOUT_5_W: {
+        name: 'Downspout 5 W',
+        slug: 'DOWNSPOUT_5_W', 
+        type: 'GUTTER',
+        bounding: {
+          h:6, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:5
+        },
+        sprite: {
+          h:89, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
           EXT_DOOR_WINDOWS_GRAY: {
         name: 'Ext Door Windows Gray',
         slug: 'EXT_DOOR_WINDOWS_GRAY', 
@@ -2308,6 +2440,369 @@ const OBJECTS = {
               frames: ['OBJ_FLYER_GRAY-1', 'OBJ_FLYER_GRAY-2', 'OBJ_FLYER_GRAY-3', 'OBJ_FLYER_GRAY-4', 'OBJ_FLYER_GRAY-5', 'OBJ_FLYER_GRAY-6', 'OBJ_FLYER_GRAY-7', 'OBJ_FLYER_GRAY-8', ]
               },
           ]    },
+          GUTTER_DOWNSPOUT_4_E: {
+        name: 'Gutter and Downspout 4 E',
+        slug: 'GUTTER_DOWNSPOUT_4_E', 
+        type: 'GUTTER',
+        bounding: {
+          h:7, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:6
+        },
+        sprite: {
+          h:105, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_DOWNSPOUT_4_W: {
+        name: 'Gutter and Downspout 4 W',
+        slug: 'GUTTER_DOWNSPOUT_4_W', 
+        type: 'GUTTER',
+        bounding: {
+          h:7, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:6
+        },
+        sprite: {
+          h:105, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_DOWNSPOUT_5_E: {
+        name: 'Gutter and Downspout 5 E',
+        slug: 'GUTTER_DOWNSPOUT_5_E', 
+        type: 'GUTTER',
+        bounding: {
+          h:8, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:7
+        },
+        sprite: {
+          h:121, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_DOWNSPOUT_5_W: {
+        name: 'Gutter and Downspout 5 W',
+        slug: 'GUTTER_DOWNSPOUT_5_W', 
+        type: 'GUTTER',
+        bounding: {
+          h:8, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:7
+        },
+        sprite: {
+          h:121, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_SECTION: {
+        name: 'Gutter Section',
+        slug: 'GUTTER_SECTION', 
+        type: 'GUTTER',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 0,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_SECTION_E: {
+        name: 'Gutter Section E',
+        slug: 'GUTTER_SECTION_E', 
+        type: 'GUTTER',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_SECTION_E_N_CAP: {
+        name: 'Gutter Section E N Cap',
+        slug: 'GUTTER_SECTION_E_N_CAP', 
+        type: 'GUTTER',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_SECTION_E_S_CAP: {
+        name: 'Gutter Section E S Cap',
+        slug: 'GUTTER_SECTION_E_S_CAP', 
+        type: 'GUTTER',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_SECTION_W: {
+        name: 'Gutter Section W',
+        slug: 'GUTTER_SECTION_W', 
+        type: 'GUTTER',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_SECTION_W_N_CAP: {
+        name: 'Gutter Section W N Cap',
+        slug: 'GUTTER_SECTION_W_N_CAP', 
+        type: 'GUTTER',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          GUTTER_SECTION_W_S_CAP: {
+        name: 'Gutter Section W S Cap',
+        slug: 'GUTTER_SECTION_W_S_CAP', 
+        type: 'GUTTER',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
           INT_DOOR_GREEN: {
         name: 'Int Door Green',
         slug: 'INT_DOOR_GREEN', 
