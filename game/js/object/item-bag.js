@@ -19,12 +19,12 @@ export default class ItemBag extends Item {
         return this.items.length === 0;
     }
 
-    addItem(item) {
+    bagItem(item) {
         if (!this.isFull()) {
             this.items.push(item);
             return true;
         } else {
-            console.log("Bag.addItem: no more room in bag.");
+            console.log("Bag.bagItem: no more room in bag.");
             return false;
         }
     }
@@ -89,7 +89,7 @@ export default class ItemBag extends Item {
             items.forEach(function (item) {
                 if (action == 'PUT AWAY '+item.item.name.toUpperCase() && !putAway) {
                     putAway = true;
-                    let placed = self.addItem(item.item);
+                    let placed = self.bagItem(item.item);
                     if (placed) {
                         self.scene.manager.hud.pocket.setPocket(item.pocketIndex, 'EMPTY');
                         var sound_var = Phaser.Math.RND.between(1, 3);

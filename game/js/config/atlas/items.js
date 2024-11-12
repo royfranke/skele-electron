@@ -8,11 +8,6 @@ const ITEMS = {
         description: 'Comes from trees and stores and cafeterias. Hackneyed to give; best enjoyed alone, high in the air, at dusk.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: 'APPLE_TRASH',
-          },],
         stack: 3,
         stacks: [ {
             icon: 'APPLE_15',
@@ -27,6 +22,26 @@ const ITEMS = {
             lessThan: 2,
             greaterThan: 0
           }        ],
+        interactions: {
+            group_8: {
+                req_group_name: 'Eat Apple',
+                req_pocket_action: 'EAT',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'APPLE_TRASH',
+                req_result_data_key: 'HUNGER',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'APPLE'
+                    }
+                                ]
+
+            }        },
     },
       APPLE_TRASH: {
         name: 'Apple Core',
@@ -37,13 +52,10 @@ const ITEMS = {
         description: 'A rumpled bit of organic material, curled at the edges by plasmolysis. It has a low, sweet odor.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'CHUCK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       BANANA: {
         name: 'Banana',
@@ -54,11 +66,6 @@ const ITEMS = {
         description: 'Platonically ripe. You have a hard time remembering that yellow Giggle Taffy is modeled after the banana, and not the other way around.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: 'BANANA_TRASH',
-          },],
         stack: 3,
         stacks: [ {
             icon: 'BANANA_13',
@@ -69,6 +76,8 @@ const ITEMS = {
             lessThan: 4,
             greaterThan: 2
           }        ],
+        interactions: {
+        },
     },
       BANANA_TRASH: {
         name: 'Banana Peel',
@@ -79,13 +88,10 @@ const ITEMS = {
         description: 'A slapstick icon.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'CHUCK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUFFIN_BERRY: {
         name: 'Berry Muffin',
@@ -96,13 +102,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: true,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       BIRD_SEED_BAG: {
         name: 'Bird Seed',
@@ -113,17 +116,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CRAYON_BLUE: {
         name: 'Blue Crayon',
@@ -134,13 +130,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       NOTEBOOK_BLUE: {
         name: 'Blue Notebook',
@@ -151,17 +144,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MILK_BODEGA: {
         name: 'Bodega Milk',
@@ -172,13 +158,64 @@ const ITEMS = {
         description: 'A quart of 0.8% milk— the best dairy your bodega has on hand.  Expires day after tomorrow.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+            group_3: {
+                req_group_name: 'Pour milk into bowl',
+                req_pocket_action: 'POUR MILK INTO BOWL',
+                req_world_action: 'POUR MILK INTO BOWL',
+                req_state: '',
+                req_result_item: 'BOWL_MILK',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },            group_4: {
+                req_group_name: 'Pour bowl of milk and Champs cereal',
+                req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_world_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            }        },
     },
       BOWL_4: {
         name: 'Bowl 4',
@@ -189,13 +226,88 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+            group_3: {
+                req_group_name: 'Pour milk into bowl',
+                req_pocket_action: 'POUR MILK INTO BOWL',
+                req_world_action: 'POUR MILK INTO BOWL',
+                req_state: '',
+                req_result_item: 'BOWL_MILK',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },            group_4: {
+                req_group_name: 'Pour bowl of milk and Champs cereal',
+                req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_world_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },            group_5: {
+                req_group_name: 'Pour Champs cereal into bowl',
+                req_pocket_action: 'POUR CEREAL INTO BOWL',
+                req_world_action: 'POUR CEREAL INTO BOWL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1'
+                    }
+                                ]
+
+            }        },
     },
       BOWL_5: {
         name: 'Bowl 5',
@@ -206,13 +318,88 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+            group_3: {
+                req_group_name: 'Pour milk into bowl',
+                req_pocket_action: 'POUR MILK INTO BOWL',
+                req_world_action: 'POUR MILK INTO BOWL',
+                req_state: '',
+                req_result_item: 'BOWL_MILK',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },            group_4: {
+                req_group_name: 'Pour bowl of milk and Champs cereal',
+                req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_world_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },            group_5: {
+                req_group_name: 'Pour Champs cereal into bowl',
+                req_pocket_action: 'POUR CEREAL INTO BOWL',
+                req_world_action: 'POUR CEREAL INTO BOWL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1'
+                    }
+                                ]
+
+            }        },
     },
       STORE_BREAD: {
         name: 'Bread',
@@ -223,17 +410,14 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [ {
             icon: 'STORE_BREAD_28',
             lessThan: 10,
             greaterThan: 1
           }        ],
+        interactions: {
+        },
     },
       CRAYON_BROWN: {
         name: 'Brown Crayon',
@@ -244,13 +428,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       BANANA_BRUISED: {
         name: 'Bruised Banana',
@@ -261,13 +442,10 @@ const ITEMS = {
         description: 'Pretty sure it’s still good. Borderline banana bread worthy.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: 'BANANA_TRASH',
-          },],
         stack: 3,
         stacks: [        ],
+        interactions: {
+        },
     },
       DIGITAL_WATCH: {
         name: 'BSC-100 Digital Watch',
@@ -278,13 +456,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       BUS_TICKET: {
         name: 'Bus Ticket',
@@ -295,13 +470,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       CUPCAKE_CREAM: {
         name: 'Buttercream Cupcake',
@@ -312,13 +484,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: true,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SODA_RED: {
         name: 'Cane Soda',
@@ -329,13 +498,10 @@ const ITEMS = {
         description: 'An often flat, sometimes metallic generic soda.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: 'SODA_RED_TRASH',
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BACKPACK_CANVAS: {
         name: 'Canvas Backpack',
@@ -346,13 +512,10 @@ const ITEMS = {
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '6',
 items: []    },
       CASSEROLE_BROWNIE: {
@@ -364,11 +527,6 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [ 'CASSEROLE_DISH'],
-        actions: [ {
-            name: 'SERVE',
-            consume: false,
-            transition: false,
-          },],
         stack: 9,
         stacks: [ {
             icon: 'CASSEROLE_BROWNIE_21',
@@ -391,6 +549,8 @@ items: []    },
             lessThan: 10,
             greaterThan: 8
           }        ],
+        interactions: {
+        },
     },
       CASSEROLE_CORN_BREAD: {
         name: 'Casserole Corn Bread',
@@ -401,13 +561,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [ 'CASSEROLE_DISH'],
-        actions: [ {
-            name: 'SERVE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_DISH_1: {
         name: 'Casserole Dish 1',
@@ -418,13 +575,10 @@ items: []    },
         description: 'A ceramic casserole dish with a motif of thin green lines.',
         contains: ['CASSEROLE'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_DISH_2: {
         name: 'Casserole Dish 2',
@@ -435,13 +589,10 @@ items: []    },
         description: 'A ceramic casserole dish with a motif of tightly drawn leaves set on a wide meander.',
         contains: ['CASSEROLE'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_DISH_3: {
         name: 'Casserole Dish 3',
@@ -452,13 +603,10 @@ items: []    },
         description: 'A terracotta casserole dish with a smooth stoneware interior.',
         contains: ['CASSEROLE'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_DISH_4: {
         name: 'Casserole Dish 4',
@@ -469,13 +617,10 @@ items: []    },
         description: '',
         contains: ['CASSEROLE'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_DISH_5: {
         name: 'Casserole Dish 5',
@@ -486,13 +631,10 @@ items: []    },
         description: '',
         contains: ['CASSEROLE'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_DISH_6: {
         name: 'Casserole Dish 6',
@@ -503,13 +645,10 @@ items: []    },
         description: 'An earthenware casserole dish banded with maroon.',
         contains: ['CASSEROLE'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_MAC: {
         name: 'Casserole Mac',
@@ -520,13 +659,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [ 'CASSEROLE_DISH'],
-        actions: [ {
-            name: 'SERVE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSEROLE_POTATO_SALAD: {
         name: 'Casserole Potato Salad',
@@ -537,13 +673,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [ 'CASSEROLE_DISH'],
-        actions: [ {
-            name: 'SERVE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSETTE_BLACK: {
         name: 'Cassette Tape Black',
@@ -554,9 +687,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSETTE_BLUE: {
         name: 'Cassette Tape Blue',
@@ -567,9 +701,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSETTE_RED: {
         name: 'Cassette Tape Red',
@@ -580,9 +715,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CASSETTE_YELLOW: {
         name: 'Cassette Tape Yellow',
@@ -593,9 +729,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CEREAL_BOX_1: {
         name: 'Champs Breakfast Cereal',
@@ -606,13 +743,88 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+            group_4: {
+                req_group_name: 'Pour bowl of milk and Champs cereal',
+                req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_world_action: 'POUR BOWL OF MILK AND CEREAL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },            group_5: {
+                req_group_name: 'Pour Champs cereal into bowl',
+                req_pocket_action: 'POUR CEREAL INTO BOWL',
+                req_world_action: 'POUR CEREAL INTO BOWL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM_KIND',
+                    result: 'FILLED',
+                    ITEM_KIND: 'BOWL',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1'
+                    }
+                                ]
+
+            },            group_6: {
+                req_group_name: 'Pour Champs cereal into bowl of milk',
+                req_pocket_action: 'POUR CEREAL INTO BOWL',
+                req_world_action: 'POUR CEREAL INTO BOWL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'BOWL_MILK',
+                    },
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1'
+                    }
+                                ]
+
+            }        },
     },
       CEREAL_1: {
         name: 'Champs Cereal',
@@ -623,13 +835,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CEREAL_1: {
         name: 'Champs Cereal in Milk',
@@ -640,13 +849,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CHINESE_FOOD: {
         name: 'Chinese Food',
@@ -657,9 +863,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CHINESE_FOOD_MARKED: {
         name: 'Chinese Food (Marked)',
@@ -670,9 +877,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CUPCAKE_CHOCOLATE: {
         name: 'Chocolate Cupcake',
@@ -683,9 +891,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       MILK_CHOCOLATE: {
         name: 'Chocolate Milk',
@@ -696,13 +905,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       PUDDING_CHOCOLATE: {
         name: 'Chocolate Pudding',
@@ -713,9 +919,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       LUNCH_BAG_CLEAN: {
         name: 'Clean Lunch Bag',
@@ -726,9 +933,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '2',
 items: []    },
       PAPER_BAG_CLEAN: {
@@ -740,9 +948,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '3',
 items: []    },
       CLOVES: {
@@ -754,9 +963,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       COOKIE: {
         name: 'Cookie',
@@ -767,9 +977,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       COOKING_POT: {
         name: 'Cooking Pot',
@@ -780,13 +991,10 @@ items: []    },
         description: '',
         contains: ['POT_CONTENTS'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       POT_GREEN_SOUP: {
         name: 'Cooking Pot Green Soup',
@@ -797,17 +1005,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [ 'POT'],
-        actions: [ {
-            name: 'SERVE',
-            consume: true,
-            transition: false,
-          }, {
-            name: 'STIR',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       POT_RED_SOUP: {
         name: 'Cooking Pot Tomato Soup',
@@ -818,17 +1019,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [ 'POT'],
-        actions: [ {
-            name: 'SERVE',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'STIR',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       POT_WATER: {
         name: 'Cooking Pot Water',
@@ -839,21 +1033,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [ 'POT'],
-        actions: [ {
-            name: 'POUR OUT',
-            consume: true,
-            transition: false,
-          }, {
-            name: 'SERVE',
-            consume: true,
-            transition: false,
-          }, {
-            name: 'STIR',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CEREAL_BOX_2: {
         name: 'Corn-O’s',
@@ -864,13 +1047,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CRAYON_PACK: {
         name: 'Cray-oh-no Crayons',
@@ -881,17 +1061,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BEER: {
         name: 'Driver’s Brew',
@@ -902,13 +1075,10 @@ items: []    },
         description: 'The label shows a sunglasses wearing dog driving a convertible up an S shaped road, one paw slung over a poodle’s shoulder. ‘Ride Life’s Curves’ 4.5% ABV',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CEREAL_BOX_3: {
         name: 'Early Bird Berry Blast',
@@ -919,13 +1089,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CEREAL_3: {
         name: 'Early Bird Berry Blast Cereal',
@@ -936,13 +1103,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SODA_RED_TRASH: {
         name: 'Empty Cane Soda Can',
@@ -953,13 +1117,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'CHUCK',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       ENVELOPE_BACK_1: {
         name: 'Envelope (Back)',
@@ -970,17 +1131,34 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'FLIP',
-            consume: false,
-            transition: 'ENVELOPE_FRONT_1',
-          },],
         stack: 3,
         stacks: [        ],
+        interactions: {
+            group_2: {
+                req_group_name: 'Mail Letter',
+                req_pocket_action: 'MAIL',
+                req_world_action: 'MAIL',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'LETTERS',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'MAILED',
+                    ITEM_KIND: 'MAIL',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'UNTOUCHED',
+                    OBJ_TYPE: 'POSTBOX'
+                    }
+                                ]
+
+            }        },
     },
       ENVELOPE_FRONT_1: {
         name: 'Envelope (Front)',
@@ -991,17 +1169,34 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'FLIP',
-            consume: false,
-            transition: 'ENVELOPE_BACK_1',
-          },],
         stack: 3,
         stacks: [        ],
+        interactions: {
+            group_2: {
+                req_group_name: 'Mail Letter',
+                req_pocket_action: 'MAIL',
+                req_world_action: 'MAIL',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'LETTERS',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'MAILED',
+                    ITEM_KIND: 'MAIL',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'UNTOUCHED',
+                    OBJ_TYPE: 'POSTBOX'
+                    }
+                                ]
+
+            }        },
     },
       FANNY_PACK: {
         name: 'Fanny Pack',
@@ -1012,13 +1207,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
 slots: '3',
 items: []    },
       PAPER_FIFTY: {
@@ -1030,13 +1222,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SHOW',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [        ],
+        interactions: {
+        },
     },
       PAPER_FIVE: {
         name: 'Five Dollar Bill',
@@ -1047,13 +1236,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SHOW',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [        ],
+        interactions: {
+        },
     },
       FLOPPY_BLUE: {
         name: 'Floppy Disk Blue',
@@ -1064,9 +1250,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       FLOPPY_GREEN: {
         name: 'Floppy Disk Green',
@@ -1077,9 +1264,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       FLOPPY_RED: {
         name: 'Floppy Disk Red',
@@ -1090,9 +1278,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       FLOPPY_YELLOW: {
         name: 'Floppy Disk Yellow',
@@ -1103,9 +1292,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       SODA_GREEN: {
         name: 'Fresco Lime-o Soda(TM)',
@@ -1116,9 +1306,10 @@ items: []    },
         description: 'A refreshing, caffeine-free, high-fructose corn syrup loaded carbonated beverage.',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       PIZZA_BOX_CLEAN: {
         name: 'Fresh Pizza Box',
@@ -1129,9 +1320,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       FRYING_PAN: {
         name: 'Frying Pan',
@@ -1142,13 +1334,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       FLYER_GRAY: {
         name: 'Gray Flyer',
@@ -1159,11 +1348,6 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_GRAY_10',
@@ -1178,6 +1362,8 @@ items: []    },
             lessThan: 26,
             greaterThan: 10
           }        ],
+        interactions: {
+        },
     },
       LUNCH_BAG_GREASY: {
         name: 'Greasy Lunch Bag',
@@ -1188,9 +1374,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '2',
 items: []    },
       PAPER_BAG_GREASY: {
@@ -1202,9 +1389,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '3',
 items: []    },
       PIZZA_BOX_GREASY: {
@@ -1216,9 +1404,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BACKPACK_GREEN: {
         name: 'Green Backpack',
@@ -1229,9 +1418,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '6',
 items: []    },
       CRAYON_GREEN: {
@@ -1243,13 +1433,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       NOTEBOOK_GREEN: {
         name: 'Green Notebook',
@@ -1260,17 +1447,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       HEDGE_TRIMMERS: {
         name: 'Hedge Trimmers',
@@ -1281,13 +1461,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       VHS_HOME: {
         name: 'Home Video VHS',
@@ -1298,9 +1475,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CEREAL_BOX_4: {
         name: 'Honey Swirls',
@@ -1311,13 +1489,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       PAPER_HUNDRED: {
         name: 'Hundred Dollar Bill',
@@ -1328,13 +1503,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SHOW',
-            consume: false,
-            transition: false,
-          },],
         stack: 10,
         stacks: [        ],
+        interactions: {
+        },
     },
       INSTANT_NOODLES_RED: {
         name: 'Instant Noodles Beef',
@@ -1345,13 +1517,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: true,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       INSTANT_NOODLES_ORANGE: {
         name: 'Instant Noodles Chicken',
@@ -1362,13 +1531,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       INSTANT_NOODLES_BLUE: {
         name: 'Instant Noodles Shrimp',
@@ -1379,13 +1545,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       INSTANT_NOODLES_GREEN: {
         name: 'Instant Noodles Vegetables',
@@ -1396,13 +1559,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: true,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       JUMP_ROPE: {
         name: 'Jump Rope',
@@ -1413,13 +1573,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'PLAY',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_1: {
         name: 'Key 1',
@@ -1430,9 +1587,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_10: {
         name: 'Key 10',
@@ -1443,9 +1601,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_11: {
         name: 'Key 11',
@@ -1456,9 +1615,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_12: {
         name: 'Key 12',
@@ -1469,9 +1629,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_2: {
         name: 'Key 2',
@@ -1482,9 +1643,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_3: {
         name: 'Key 3',
@@ -1495,9 +1657,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_4: {
         name: 'Key 4',
@@ -1508,9 +1671,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_5: {
         name: 'Key 5',
@@ -1521,9 +1685,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_6: {
         name: 'Key 6',
@@ -1534,9 +1699,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_7: {
         name: 'Key 7',
@@ -1547,9 +1713,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_8: {
         name: 'Key 8',
@@ -1560,9 +1727,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       KEY_9: {
         name: 'Key 9',
@@ -1573,9 +1741,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BACKPACK_BROWN: {
         name: 'Leather Rucksack',
@@ -1586,9 +1755,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '6',
 items: []    },
       LIBRARY_CARD: {
@@ -1600,9 +1770,10 @@ items: []    },
         description: 'Your local passport to global consciousness. You may check out up to three (3) books at a time.',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       LIGHTER: {
         name: 'Lighter',
@@ -1613,13 +1784,10 @@ items: []    },
         description: 'Even a new lighter feels as if it were found near a dumpster: grubby, with an aura of transient fortune.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       LOTTO: {
         name: 'Lotto Ticket',
@@ -1630,13 +1798,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       RABBITS_FOOT: {
         name: 'Lucky Rabbit’s Foot',
@@ -1647,13 +1812,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'WAIT',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       CIGARETTE_MENTHOL: {
         name: 'Menthol Frost',
@@ -1664,9 +1826,10 @@ items: []    },
         description: 'A pack of Menthol Frost Cigarettes. Smells sort of like spearmint. Mom’s brand. Manufactured by the Reaper Company.',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BOWL_MILK: {
         name: 'Milk in Bowl',
@@ -1677,13 +1840,52 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+            group_6: {
+                req_group_name: 'Pour Champs cereal into bowl of milk',
+                req_pocket_action: 'POUR CEREAL INTO BOWL',
+                req_world_action: 'POUR CEREAL INTO BOWL',
+                req_state: '',
+                req_result_item: 'CEREAL_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'BOWL_MILK',
+                    },
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'CEREAL_BOX_1'
+                    }
+                                ]
+
+            },            group_7: {
+                req_group_name: 'Drink bowl of milk',
+                req_pocket_action: 'DRINK',
+                req_world_action: 'DRINK',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'THIRST',
+                req_result_data_set: '',
+                req_result_data_modify: '3',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'CONSUMED',
+                    ITEM: 'BOWL_MILK'
+                    }
+                                ]
+
+            }        },
     },
       FLYER_MISSING: {
         name: 'Missing Person Flyer',
@@ -1694,11 +1896,6 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_MISSING_7',
@@ -1713,6 +1910,8 @@ items: []    },
             lessThan: 26,
             greaterThan: 10
           }        ],
+        interactions: {
+        },
     },
       MUFFIN: {
         name: 'Muffin',
@@ -1723,9 +1922,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_1: {
         name: 'Mug 1',
@@ -1736,13 +1936,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_2: {
         name: 'Mug 2',
@@ -1753,13 +1950,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_3: {
         name: 'Mug 3',
@@ -1770,13 +1964,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_4: {
         name: 'Mug 4',
@@ -1787,13 +1978,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_5: {
         name: 'Mug 5',
@@ -1804,13 +1992,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_6: {
         name: 'Mug 6',
@@ -1821,13 +2006,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_7: {
         name: 'Mug 7',
@@ -1838,13 +2020,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_8: {
         name: 'Mug 8',
@@ -1855,13 +2034,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MUG_9: {
         name: 'Mug 9',
@@ -1872,13 +2048,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       NEWSPAPER: {
         name: 'Newspaper',
@@ -1889,21 +2062,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'LITTER',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'CHUCK',
-            consume: false,
-            transition: false,
-          },],
         stack: 4,
         stacks: [        ],
+        interactions: {
+        },
     },
       PAPER_ONE: {
         name: 'One Dollar Bill',
@@ -1914,13 +2076,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SHOW',
-            consume: false,
-            transition: false,
-          },],
         stack: 50,
         stacks: [        ],
+        interactions: {
+        },
     },
       SARDINES: {
         name: 'Open Pigeon of the Sea Sardines',
@@ -1931,9 +2090,10 @@ items: []    },
         description: 'A tidy row of oily, factory-farmed noodle fish, ready for a handful of crackers.',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CRAYON_ORANGE: {
         name: 'Orange Crayon',
@@ -1944,13 +2104,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       CUPCAKE_PINK: {
         name: 'Pink Cupcake',
@@ -1961,13 +2118,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: true,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       FLYER_PINK: {
         name: 'Pink Flyer',
@@ -1978,11 +2132,6 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_PINK_1',
@@ -1997,6 +2146,8 @@ items: []    },
             lessThan: 26,
             greaterThan: 10
           }        ],
+        interactions: {
+        },
     },
       PIZZA_BOX_USED: {
         name: 'Pizza Box',
@@ -2007,9 +2158,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       PLASTIC_BAG_1: {
         name: 'Plastic Bag 1',
@@ -2020,9 +2172,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '3',
 items: []    },
       PLASTIC_BAG_2: {
@@ -2034,9 +2187,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '3',
 items: []    },
       PLATE_1: {
@@ -2048,13 +2202,10 @@ items: []    },
         description: '',
         contains: ['PLATE_CONTENTS'],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 4,
         stacks: [        ],
+        interactions: {
+        },
     },
       POCKET_KNIFE: {
         name: 'Pocket Knife',
@@ -2065,9 +2216,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       POSTCARD_BACK_1: {
         name: 'Postcard (Back)',
@@ -2078,17 +2230,34 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'FLIP',
-            consume: false,
-            transition: 'POSTCARD_FRONT_1',
-          },],
         stack: 3,
         stacks: [        ],
+        interactions: {
+            group_2: {
+                req_group_name: 'Mail Letter',
+                req_pocket_action: 'MAIL',
+                req_world_action: 'MAIL',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'LETTERS',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'MAILED',
+                    ITEM_KIND: 'MAIL',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'UNTOUCHED',
+                    OBJ_TYPE: 'POSTBOX'
+                    }
+                                ]
+
+            }        },
     },
       POSTCARD_FRONT_1: {
         name: 'Postcard (Front)',
@@ -2099,17 +2268,34 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'FLIP',
-            consume: false,
-            transition: 'POSTCARD_BACK_1',
-          },],
         stack: 3,
         stacks: [        ],
+        interactions: {
+            group_2: {
+                req_group_name: 'Mail Letter',
+                req_pocket_action: 'MAIL',
+                req_world_action: 'MAIL',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'LETTERS',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'MAILED',
+                    ITEM_KIND: 'MAIL',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'UNTOUCHED',
+                    OBJ_TYPE: 'POSTBOX'
+                    }
+                                ]
+
+            }        },
     },
       PRETZEL: {
         name: 'Pretzel',
@@ -2120,9 +2306,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BUS_TICKET_PUNCH: {
         name: 'Punched Bus Ticket',
@@ -2133,13 +2320,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       CRAYON_PURPLE: {
         name: 'Purple Crayon',
@@ -2150,13 +2334,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       RAKE: {
         name: 'Rake',
@@ -2167,13 +2348,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       JELLY_RASPBERRY: {
         name: 'Raspberry Jelly',
@@ -2184,13 +2362,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 2,
         stacks: [        ],
+        interactions: {
+        },
     },
       CIGARETTE_STRONG: {
         name: 'Red Cigarettes',
@@ -2201,9 +2376,10 @@ items: []    },
         description: 'A pack of unfiltered, lung blackening Red Cigarettes. Manufactured by the Reaper Company.',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CRAYON_RED: {
         name: 'Red Crayon',
@@ -2214,13 +2390,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       GELATIN_RED: {
         name: 'Red Jelly-o',
@@ -2231,9 +2404,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       NOTEBOOK_RED: {
         name: 'Red Notebook',
@@ -2244,17 +2418,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SACK_GRASS_SEED: {
         name: 'Sack of Grass Seed',
@@ -2265,13 +2432,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'POUR OUT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SACK_MULCH: {
         name: 'Sack of Mulch',
@@ -2282,13 +2446,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'POUR OUT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       BACKPACK_PURPLE: {
         name: 'School Bag',
@@ -2299,9 +2460,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '6',
 items: []    },
       SCISSORS: {
@@ -2313,13 +2475,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SARDINES_PRODUCT: {
         name: 'Sealed Pigeon of the Sea Sardines',
@@ -2330,9 +2489,10 @@ items: []    },
         description: 'A sealed tin of oily, factory-farmed noodle fish.',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BASKET_BLUE: {
         name: 'Shopping Basket Blue',
@@ -2343,9 +2503,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BASKET_RED: {
         name: 'Shopping Basket Red',
@@ -2356,11 +2517,6 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 3,
         stacks: [ {
             icon: 'BASKET_RED_18',
@@ -2375,6 +2531,8 @@ items: []    },
             lessThan: 2,
             greaterThan: 0
           }        ],
+        interactions: {
+        },
     },
       SHOVEL: {
         name: 'Shovel',
@@ -2385,13 +2543,10 @@ items: []    },
         description: 'Grave digger joke here.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SODA_BLUE: {
         name: 'SHQUINK-Ahhhh Soda(TM)',
@@ -2402,9 +2557,10 @@ items: []    },
         description: 'Feeling parched? Good thing you have a SHQUINK-Ahhhh Soda(TM).',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       SIDEWALK_CHALK_BLUE_: {
         name: 'Sidewalk Chalk (Blue)',
@@ -2415,13 +2571,34 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+            group_1: {
+                req_group_name: 'Draw with Chalk on Cement',
+                req_pocket_action: 'DRAW',
+                req_world_action: 'DRAW',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: '14',
+                    ITEM_KIND: 'CHALK',
+                    },
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'GROUND',
+                    result: '0',
+                    GROUND: 'cement'
+                    }
+                                ]
+
+            }        },
     },
       SIDEWALK_CHALK_PINK_: {
         name: 'Sidewalk Chalk (Pink)',
@@ -2432,13 +2609,34 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+            group_1: {
+                req_group_name: 'Draw with Chalk on Cement',
+                req_pocket_action: 'DRAW',
+                req_world_action: 'DRAW',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: '14',
+                    ITEM_KIND: 'CHALK',
+                    },
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'GROUND',
+                    result: '0',
+                    GROUND: 'cement'
+                    }
+                                ]
+
+            }        },
     },
       SIDEWALK_CHALK_YELLOW_: {
         name: 'Sidewalk Chalk (Yellow)',
@@ -2449,13 +2647,34 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+            group_1: {
+                req_group_name: 'Draw with Chalk on Cement',
+                req_pocket_action: 'DRAW',
+                req_world_action: 'DRAW',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: '14',
+                    ITEM_KIND: 'CHALK',
+                    },
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'GROUND',
+                    result: '0',
+                    GROUND: 'cement'
+                    }
+                                ]
+
+            }        },
     },
       SIDEWALK_CHALK_: {
         name: 'Sidewalk Chalk Discount Pack',
@@ -2466,17 +2685,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '3',
 items: []    },
       MILK_SKIM: {
@@ -2488,13 +2700,10 @@ items: []    },
         description: 'A quart of blue-tinged milk. Thin but refreshing.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SOUP_CONTAINER_LARGE: {
         name: 'Soup Container (Large)',
@@ -2505,9 +2714,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       SOUP_CONTAINER_SMALL: {
         name: 'Soup Container (Small)',
@@ -2518,9 +2728,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       SPADE: {
         name: 'Spade',
@@ -2531,13 +2742,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       SPRAY_PAINT: {
         name: 'Spray Paint',
@@ -2548,13 +2756,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       STAPLE_GUN: {
         name: 'Staple Gun',
@@ -2565,13 +2770,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       STAPLES: {
         name: 'Staples',
@@ -2582,17 +2784,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'FOLD',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'UNFOLD',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       STICK_1: {
         name: 'Stick 1',
@@ -2603,17 +2798,14 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'PLACE',
-            consume: false,
-            transition: false,
-          },],
         stack: 8,
         stacks: [ {
             icon: 'STICK_1_26',
             lessThan: 2,
             greaterThan: 0
           }        ],
+        interactions: {
+        },
     },
       JELLY_STRAWBERRY: {
         name: 'Strawberry* Jelly',
@@ -2624,13 +2816,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 2,
         stacks: [        ],
+        interactions: {
+        },
     },
       NEWSPAPER_SUNDAY: {
         name: 'Sunday Paper',
@@ -2641,21 +2830,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'LITTER',
-            consume: false,
-            transition: false,
-          }, {
-            name: 'CHUCK',
-            consume: false,
-            transition: false,
-          },],
         stack: 3,
         stacks: [        ],
+        interactions: {
+        },
     },
       PAPER_TEN: {
         name: 'Ten Dollar Bill',
@@ -2666,13 +2844,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SHOW',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [        ],
+        interactions: {
+        },
     },
       TOAST: {
         name: 'Toast',
@@ -2683,17 +2858,14 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 4,
         stacks: [ {
             icon: 'TOAST_27',
             lessThan: 10,
             greaterThan: 1
           }        ],
+        interactions: {
+        },
     },
       BREAKFAST_TART_PINK: {
         name: 'Twap Tart',
@@ -2704,13 +2876,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       BREAKFAST_TART_PURPLE: {
         name: 'Twap Tart Berry Blast',
@@ -2721,13 +2890,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       PAPER_TWENTY: {
         name: 'Twenty Dollar Bill',
@@ -2738,13 +2904,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SHOW',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [        ],
+        interactions: {
+        },
     },
       PAPER_TWO: {
         name: 'Two Dollar Bill',
@@ -2755,13 +2918,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SHOW',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [        ],
+        interactions: {
+        },
     },
       PAPER_TWONTY: {
         name: 'Twonty Dollars',
@@ -2772,13 +2932,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'SCRUTINIZE',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [        ],
+        interactions: {
+        },
     },
       LUNCH_BAG_USED: {
         name: 'Used Lunch Bag',
@@ -2789,9 +2946,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '2',
 items: []    },
       PAPER_BAG_USED: {
@@ -2803,9 +2961,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
 slots: '3',
 items: []    },
       CUPCAKE_WHITE: {
@@ -2817,13 +2976,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: true,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       PUDDING_VANILLA: {
         name: 'Vanilla Pudding',
@@ -2834,9 +2990,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       VHS_WHITE: {
         name: 'VHS Bland',
@@ -2847,9 +3004,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       VHS_BLUE: {
         name: 'VHS Blue',
@@ -2860,9 +3018,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       VHS_YELLOW: {
         name: 'VHS Yellow',
@@ -2873,9 +3032,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       CIGARETTE_SLIM: {
         name: 'Warm n’ Toasty Cigarettes',
@@ -2886,9 +3046,10 @@ items: []    },
         description: 'A pack of smokey Warm n’ Toasty Cigarettes. Manufactured by the Reaper Company.',
         contains: [],
         containedBy: [],
-        actions: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       WATERING_CAN: {
         name: 'Watering Can',
@@ -2899,13 +3060,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'OPEN',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       MILK_WHOLE: {
         name: 'Whole Milk',
@@ -2916,13 +3074,10 @@ items: []    },
         description: 'A quart of rich and often undigestible cow sourced milk. It looks just like it does in cereal commercials.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRINK',
-            consume: false,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       CRAYON_YELLOW: {
         name: 'Yellow Crayon',
@@ -2933,13 +3088,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'DRAW',
-            consume: false,
-            transition: false,
-          },],
         stack: 5,
         stacks: [        ],
+        interactions: {
+        },
     },
       CUPCAKE_YELLOW: {
         name: 'Yellow Cupcake',
@@ -2950,13 +3102,10 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'EAT',
-            consume: true,
-            transition: false,
-          },],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
     },
       FLYER_YELLOW: {
         name: 'Yellow Flyer',
@@ -2967,11 +3116,6 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'READ',
-            consume: false,
-            transition: false,
-          },],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_YELLOW_4',
@@ -2986,6 +3130,8 @@ items: []    },
             lessThan: 26,
             greaterThan: 10
           }        ],
+        interactions: {
+        },
     },
       ZENER_1: {
         name: 'Zener Card (Circle)',
@@ -2996,13 +3142,10 @@ items: []    },
         description: 'A playing card with a floral blue backside. The face side shows the yellow outline of a circle.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'FLIP',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       ZENER_2: {
         name: 'Zener Card (Plus)',
@@ -3013,13 +3156,10 @@ items: []    },
         description: 'A playing card with a floral blue backside. The face side shows two lines intersecting: a red plus.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'FLIP',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       ZENER_4: {
         name: 'Zener Card (Square)',
@@ -3030,13 +3170,10 @@ items: []    },
         description: 'A playing card with a floral blue backside. The face side shows the blue outline of a square.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'FLIP',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       ZENER_5: {
         name: 'Zener Card (Star)',
@@ -3047,13 +3184,10 @@ items: []    },
         description: 'A playing card with a floral blue backside. The face side shows the green outline of a five-pointed star.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'FLIP',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
       ZENER_3: {
         name: 'Zener Card (Waves)',
@@ -3064,13 +3198,10 @@ items: []    },
         description: 'A playing card with a floral blue backside. The face side shows three wavy blue lines.',
         contains: [],
         containedBy: [],
-        actions: [ {
-            name: 'FLIP',
-            consume: false,
-            transition: false,
-          },],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
     },
   };
 export default ITEMS;

@@ -21,12 +21,16 @@ export default class SaveManager {
         var data = this.scene.slot;
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
-        //this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
     }
 
     saveNewGameData() {
         let save = this.newSave();
         this.scene.saveNewGameData(save.data,save.slot);
+    }
+
+    saveGameData() {
+        let save_data = this.softSaveGameData();
+        this.scene.saveGameData(save_data,save_data.SAVE.SLOT);
     }
 
     softSaveGameData() {
@@ -35,6 +39,9 @@ export default class SaveManager {
         console.log("Soft saving game data");
         let data = this.scene.slot;
         data.TIME = this.scene.manager.time.setSaveFromTime();
+        data.COINPURSE = this.scene.player.coinpurse.setSaveFromCoinpurse();
+        data.NOTEBOOKS = this.scene.manager.hud.hudNotebook.manager.setSaveFromNotebook();
+        data.POCKETS.SLOTS = this.scene.manager.hud.pocket.setSaveFromPockets();
         return data;
     }
 

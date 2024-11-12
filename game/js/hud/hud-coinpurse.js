@@ -17,15 +17,24 @@ export default class HudCoinpurse {
             tell: null
         };
 
-        this.addCoinPurse();
+        this.position = {
+            unfocused: {
+                x: this.view.left + this.view.margin.left,
+                y: this.view.top - 32
+            },
+            focused: {
+                x: this.view.left + this.view.margin.left,
+                y: this.view.top + this.view.margin.top
+            }
+        };
+
     }
 
     makeBlock(_x, _y, width = 32, height = 32, frameName = 'HAND_UNFOCUSED') {
         return this.factory.makeBlock(_x, _y, width, height, frameName);
     }
 
-    popCoin(amount, status = 'default') {
-        //this.tellCoinpurse(amount, 750, status);
+    popCoin(amount=0, status = 'default') {
         let timeline = this.scene.add.timeline([
             {
                 at: 500,
@@ -33,6 +42,7 @@ export default class HudCoinpurse {
                     this.scene.manager.hud.hudSound.play('COIN_CLINK_1');
                     this.coinPurse.block.setFrame('BAG_FOCUSED');
                     this.coinPurse.icon.setFrame('COINPURSE_POP');
+                    this.addFX('SPARKLE_', this.coinPurse.block.x, this.coinPurse.block.y);
                 }
             },
             {
@@ -55,19 +65,43 @@ export default class HudCoinpurse {
                 }
             }
         ]);
-        
+
         timeline.play();
-        
+
     }
 
     addCoinPurse() {
-        let position = {
-            x: this.view.left + this.view.margin.left,
-            y: this.view.top + this.view.margin.top
-        };
+        this.coinPurse.block = this.makeBlock(this.position.focused.x, this.position.focused.y, 32, 32, 'BAG_UNFOCUSED');
+        this.coinPurse.icon = this.makeIcon(this.position.focused.x + 8, this.position.focused.y + 8, 'UI', 'COINPURSE_CLOSED');
+    }
 
-        this.coinPurse.block = this.makeBlock(position.x, position.y, 32, 32, 'BAG_UNFOCUSED');
-        this.coinPurse.icon = this.makeIcon(position.x+8, position.y+8, 'UI', 'COINPURSE_CLOSED');
+    addHiddenCoinPurse() {
+        this.coinPurse.block = this.makeBlock(this.position.unfocused.x, this.position.unfocused.y, 32, 32, 'BAG_UNFOCUSED');
+        this.coinPurse.icon = this.makeIcon(this.position.unfocused.x + 8, this.position.unfocused.y + 8, 'UI', 'COINPURSE_CLOSED');
+    }
+
+    plungeCoinPurse() {
+        if (this.coinPurse.block != null) {
+            this.scene.tweens.add({
+                targets: this.coinPurse.block,
+                y: this.position.focused.y,
+                duration: 1800,
+                repeat: 0,
+                hold: 500,
+                repeatDelay: 500,
+                ease: 'bounce.out'
+            });
+
+            this.scene.tweens.add({
+                targets: this.coinPurse.icon,
+                y: this.position.focused.y + 8,
+                duration: 2000,
+                repeat: 0,
+                hold: 500,
+                repeatDelay: 500,
+                ease: 'bounce.out'
+            });
+        }
     }
 
 
@@ -76,8 +110,7 @@ export default class HudCoinpurse {
     }
 
     addFX(fx_slug, _x, _y, delay = 0) {
-        var fx = this.scene.manager.fx.playFX(fx_slug, _x, _y, delay);
-        fx.setDepth(100200).setScrollFactor(0);
+        this.factory.makeHudFX(fx_slug, _x, _y, delay);
     }
 
     clearCoinpurseTell() {
@@ -90,7 +123,6 @@ export default class HudCoinpurse {
             this.coinPurse.tell = null;
         }
     }
-
 
     closeCoinpurse() {
         this.clearCoinpurseTell();
@@ -112,10 +144,8 @@ export default class HudCoinpurse {
         let _x = this.view.left + (this.view.margin.left);
         let _y = this.view.top + (this.view.margin.top + 40);
 
-       
-       /// Replace this receipt with block/slots for coins that unfurl when inventory is opened
-       var coins = [];
-       if (content.length > 0) {
+        var coins = [];
+        if (content.length > 0) {
             let coin_slots = [];
             let coin_slot_height = 12;
             let coin_slot_width = 72;
@@ -124,53 +154,23 @@ export default class HudCoinpurse {
             var new_content = [];
             content.forEach(coin => {
                 if (coin.text > 0) {
-                    coin.icon = this.scene.add.sprite(_x + 4, _y + line_height + 2, 'FX', 'COIN_'+coin.icon+'_-2').setOrigin(0).setScrollFactor(0).setDepth(100200);
-                    
+                    coin.icon = this.scene.add.sprite(_x + 4, _y + line_height + 2, 'FX', 'COIN_' + coin.icon + '_-2').setOrigin(0).setScrollFactor(0).setDepth(100200);
+
                     line_height += coin_slot_height + coin_slot_spacing;
                     coins.push(coin.icon);
-                    new_content.push(' x '+coin.text);
+                    new_content.push(' x ' + coin.text);
                 }
             });
             content = new_content;
-       }
+        }
         let flag_text = this.scene.add.bitmapText(_x + 19, _y + 6, 'SkeleTalk', content, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
-       
-
 
         let flag_height = flag_text.getTextBounds().global.height + 12;
         let flag_width = flag_text.getTextBounds().global.width + 24;
+        let flag = this.makeBlock(_x, _y, flag_width, flag_height, 'BLOCK_SHALLOW_YELLOW');
 
-       let flag = this.makeBlock(_x, _y, flag_width, flag_height, 'BLOCK_SHALLOW_YELLOW');
-        if (timing > 0) {
-            if (status != 'default') {
-                let tween_to_y = status == 'positive' ? _y - this.view.margin.top : _y + this.view.margin.top;
-                let tween_to_x = status == 'missing' ? _x - this.view.margin.left : _x;
-                let tween_loop = status == 'missing' ? 2 : -1;
-                this.scene.tweens.add({
-                    targets: [flag, flag_text, coins],
-                    y: tween_to_y,
-                    x: tween_to_x,
-                    duration: timing * .75,
-                    ease: 'Sine.easeInOut',
-                    loop: tween_loop,
-                    yoyo: true
-                });
-            }
+        return { flag: flag, text: flag_text, coins: coins };
 
-            this.scene.time.addEvent({
-                delay: timing,
-                callback: ()=>{
-                    flag.destroy();
-                    flag_text.destroy();
-                    coins.forEach(coin => {
-                        coin.destroy();
-                    });
-                }
-            });
-        }
-        else {
-            return {flag: flag, text: flag_text, coins: coins};
-        }
     }
 
 }

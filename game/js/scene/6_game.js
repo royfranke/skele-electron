@@ -43,7 +43,6 @@ export default class GameScene extends Phaser.Scene {
         this.exterior.create();
         this.player.create();
         this.npcs.create();
-
         //// Load the save!
         this.app.initializeSave();
     }
@@ -63,5 +62,22 @@ export default class GameScene extends Phaser.Scene {
         console.log(this.slot);
         this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
     }
+
+    saveGameData(data,slot) {
+        // Replace `data` and `slot` with the actual data and slot you want to save
+        console.log("I'm going to call save-data for slot "+slot);
+        console.log(data);
+        let save_data = {data:data,slot:slot};
+        const manager = this.manager;
+        window.api.invoke('save-data', save_data)
+            .then(function(res) {
+                manager.hud.pocket.setPocketsFromSave();
+                return true;
+            })
+            .catch(function(err) {
+                console.error(err);
+                return false;
+            });
+      }
     
 }

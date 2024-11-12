@@ -35,6 +35,27 @@ export default class PlayerSprite {
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
     this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
 
+    this.setExteriorZones();
+  }
+
+  setExteriorZones () {
+    //const nodes = this.scene.exterior.nodes;
+    const zones = [];
+    var self = this;
+    this.scene.exterior.overMap.nodes.forEach(function (node, index) {
+      var zone = self.scene.add.zone(node.center_x * 16, node.center_y * 16, node.width * 16, node.height * 16);
+
+      // Static body
+      self.scene.physics.add.existing(zone, true); 
+      self.scene.physics.add.overlap(zone, [self.sprite], (_zone, player) =>
+      {
+          self.scene.manager.knowledge.learn('INTERSECTIONS', {name: node.name, x: node.x, y: node.y});
+          //console.log("Overlap with zone: " + index);
+          //console.log(node);
+      });
+    });
+
+    
   }
 
   createFooting() {

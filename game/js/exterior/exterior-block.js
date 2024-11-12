@@ -109,34 +109,6 @@ export default class Block {
         
     }
 
-    setCorners () {
-        if (this.block.offset.w > 0) { // Left
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, this.block.left+1, this.block.top+1,2, this.block.height - 2);
-        }
-        if (this.block.offset.e > 0) { // Right
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, this.block.right-2, this.block.top+1,2, this.block.height - 2);
-        }
-
-        if (this.block.offset.n > 0 && this.block.offset.w > 0) { // Upper left
-            this.groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_, this.block.left, this.block.top,1, 1);
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, this.block.left+1, this.block.top+1,2, 2);
-        }
-        if (this.block.offset.n > 0 && this.block.offset.e > 0) {  // Upper right
-            this.groundLayer.weightedRandomize(TILES.CURB.SOUTHWEST_, this.block.right, this.block.top,1, 1);
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, this.block.right-2, this.block.top+1,2, 2);
-        }
-        if (this.block.offset.s > 0 && this.block.offset.w > 0) { // Lower left
-            this.groundLayer.weightedRandomize(TILES.CURB.NORTHEAST_, this.block.left, this.block.bottom,1, 1);
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, this.block.left+1, this.block.bottom-2,2, 2);
-        }
-        if (this.block.offset.s > 0 && this.block.offset.e > 0) { // LOWER RIGHT
-            this.groundLayer.weightedRandomize(TILES.CURB.NORTHWEST_, this.block.right, this.block.bottom,1, 1);
-            this.groundLayer.weightedRandomize(TILES.CEMENT.FILL_, this.block.right-2, this.block.bottom-2,2, 2);
-        }
-
-        
-    }
-
     addPropertyLine (prop) {
 
         prop.lines.top = this.block.top + prop.lines.y;
@@ -305,7 +277,6 @@ export default class Block {
             var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
             pole.setSlot(.5,3.75,slotted);
             pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_'+corner);
-            /* Need to fix for correct signs output to buildstreetpole */
         }
     }
 
@@ -323,7 +294,6 @@ export default class Block {
             var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
             pole.setSlot(.5,3.75,slotted);
             pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_'+signs.CORNER);
-            /* Need to fix for correct signs output to buildstreetpole */
         }
         
         if (signs.STOP != null) {

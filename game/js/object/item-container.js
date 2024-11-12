@@ -19,12 +19,12 @@ export default class ItemContainer extends Item {
         return this.items.length === 0;
     }
 
-    addItem(item) {
+    addItemToContainer(item) {
         if (!this.isFull()) {
             this.items.push(item);
             return true;
         } else {
-            console.log("Container.addItem: container is full.");
+            console.log("Container.addItemToContainer: container is full.");
             return false;
         }
     }
@@ -72,7 +72,7 @@ export default class ItemContainer extends Item {
             items.forEach(function (item) {
                 if (action == 'PUT AWAY '+item.item.name.toUpperCase() && !putAway) {
                     putAway = true;
-                    let placed = self.addItem(item.item);
+                    let placed = self.addItemToContainer(item.item);
                     if (placed) {
                         self.scene.manager.hud.pocket.setPocket(item.pocketIndex, 'EMPTY');
                         var sound_var = Phaser.Math.RND.between(1, 3);

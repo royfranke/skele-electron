@@ -32,9 +32,20 @@ export default class ItemManager {
         item.destroy();
     }
 
-    addItemToPockets (item) {
-        return this.scene.manager.hud.availablePocket(item);
+    addItemToPockets (item,specific_pocket=null) {
+        return this.scene.manager.hud.availablePocket(item, specific_pocket);
     }
+
+    newItemToPocket (pocketIndex,slug,items=[]) {
+        var item = this.newItem(slug,items);
+        var result = this.addItemToPockets(item,pocketIndex);
+        if (!result) {
+            console.warn('Could not add to pocket '+ pocketIndex +': '+slug);
+            console.log(item);
+        }
+        return result;
+    }
+
 
     newItemToPockets (slug,items=[]) {
         var item = this.newItem(slug,items);

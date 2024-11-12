@@ -20,6 +20,10 @@ export default class NpcSprite {
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
     this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
+    this.sprite.setCollideWorldBounds(true);
+    var others = this.scene.npcs.npcs.getChildren();
+    this.scene.physics.add.collider(this.sprite, others);
+    this.scene.npcs.npcs.add(this.sprite);
   }
 
   createFooting() {

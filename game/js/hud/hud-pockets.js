@@ -9,7 +9,7 @@ export default class HudPockets {
         this.factory = factory;
         this.view = this.scene.manager.getView();
         this.slots = this.addPockets();
-        this.pocket_textblock = this.addPocketTextBlock();
+        this.pocket_textblock = null;
         this.pocket_actions = null;
         this.state = null;
     }
@@ -40,26 +40,9 @@ export default class HudPockets {
     }
 
     addFX(fx_slug, _x, _y, delay = 0) {
-        var fx = this.scene.manager.fx.playFX(fx_slug, _x, _y, delay);
-        fx.setDepth(100200).setScrollFactor(0);
+        this.factory.makeHudFX(fx_slug, _x, _y, delay);
     }
 
-    addPocketTextBlock() {
-        const margin = {
-            x: 8,
-            y: this.view.margin.top + 96,
-        };
-        var display_width = 144;
-        
-
-        let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleTalk');
-
-        let block = this.makeBlock(text.x - 8, text.y - 12, display_width, 32, 'BLOCK_MID_CREAM_BORDER');
-        block.setVisible(false);
-        return {block: block, text: text};
-
-
-    }
 
     addPockets() {
         var slots = [[], [], []];
@@ -105,8 +88,7 @@ export default class HudPockets {
             textureName = 'ITEMS';
         }
 
-
-        var margin = {
+        let margin = {
             x: 48 + (slot_x * 40),
             y: 16 + (slot_y * 36)
         };
@@ -118,7 +100,7 @@ export default class HudPockets {
 
     addIconContents(slot_x, slot_y, textureName, frameName) {
 
-        var margin = {
+        let margin = {
             x: 48 + (slot_x * 40),
             y: 16 + (slot_y * 36)
         };
@@ -138,7 +120,7 @@ export default class HudPockets {
     }
 
     addArrow(slot_x, slot_y) {
-        const slotMargin = {
+        let slotMargin = {
             x: 48 + (slot_x * 40),
             y: 8 + (slot_y * 40),
         };
@@ -148,16 +130,15 @@ export default class HudPockets {
     }
 
     getArrowPosition(slot_x) {
-        const slotMargin = {
+        let slotMargin = {
             x: 16 + (slot_x * 40),
             y: 8 + (2 * 40),
         };
-        var slot = this.slots[2][slot_x].slot;
+        let slot = this.slots[2][slot_x].slot;
         return { x: this.view.right - (slot.displayWidth) - (slotMargin.x), y: this.view.top + (slotMargin.y) };
     }
 
     setContentsIcon(slot_x, new_icon) {
-
         if (this.slots[1][slot_x].icon != null) {
             this.slots[1][slot_x].icon.destroy();
             if (this.slots[1][slot_x].icon_contents != null) {
@@ -176,9 +157,9 @@ export default class HudPockets {
     }
 
     setSlotColor(slot_x, slot_y, status = 'UNFOCUSED') {
-        var pocket = this.scene.manager.hud.pocket.getPocket(slot_x);
-        var type = pocket.TYPE;
-        var state = pocket.STATE;
+        let pocket = this.scene.manager.hud.pocket.getPocket(slot_x);
+        let type = pocket.TYPE;
+        let state = pocket.STATE;
         if (state != 'EMPTY') {
             type = (pocket[state].info.type == 'BAG') ? 'BAG' : 'ITEM';
         }
@@ -200,8 +181,7 @@ export default class HudPockets {
         if (state != 'EMPTY' && pocket[state].info.type == 'BAG') {
             if (pocket[state].items.length > 1) {
                 pocket[state].nextItem();
-                var sound_var = Phaser.Math.RND.between(1, 3);
-                this.scene.manager.hud.hudSound.play('BAG_RUMMAGE_' + sound_var);
+                this.scene.manager.hud.hudSound.play('ARROW_BOBBLE_SELECT');
                 var arrow = this.getArrow(slot_x);
                 var pos = this.getArrowPosition(slot_x);
                 var tween = this.scene.tweens.add({
@@ -232,6 +212,7 @@ export default class HudPockets {
             else { // Only one item in bag
                 //var sound_var = Phaser.Math.RND.between(1,3);
                 //this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var); replace with more subtle
+                this.scene.manager.hud.hudSound.play('ARROW_SINGLE_SELECT');
                 var arrow = this.getArrow(slot_x);
                 var pos = this.getArrowPosition(slot_x);
                 var tween = this.scene.tweens.add({
@@ -253,7 +234,7 @@ export default class HudPockets {
     }
 
     setArrowColor(slot_x, status) {
-        var arrow = this.getArrow(slot_x);
+        let arrow = this.getArrow(slot_x);
         arrow.setFrame('BAG_ARROW_' + status);
     }
 
@@ -261,7 +242,6 @@ export default class HudPockets {
         this.slots[slot_y][slot_x].slot.setVisible(visible);
         if (this.slots[slot_y][slot_x].icon != null) {
             this.slots[slot_y][slot_x].icon.setVisible(visible);
-
         }
     }
 
@@ -314,11 +294,11 @@ export default class HudPockets {
 
         let block = this.makeBlock(this.view.right - slotMargin.x, this.view.top + (slotMargin.y), 32, 16, 'BLOCK_MID_YELLOW');
 
-        let drop_text = this.scene.add.bitmapText(block.x + 6, block.y + 5, 'SkeleTalk', 'DROP', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let drop_text = this.makeBitmapText(block.x + 6, block.y + 5, 48, 'DROP', 8, 'SkeleTalk');
 
         let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
-        let button_text = this.scene.add.bitmapText(button_block.x + 4, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
+        let button_text = this.makeBitmapText(button_block.x + 4, button_block.y + 5, 24, 'X', 8, 'SkeleTalk');
 
         block.setVisible(false);
         drop_text.setVisible(false);
@@ -386,23 +366,7 @@ export default class HudPockets {
     }
 
     makeSlip(_x, _y, text = 'HOLD') {
-
-        let block = this.makeBlock(_x, _y, 32, 16, 'BLOCK_MID_YELLOW_RIGHT');
-        block.setOrigin(1,0);
-
-        let slip_text = this.scene.add.bitmapText(block.x - 6, block.y + 5, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
-
-
-        let button_block = this.makeBlock(block.x - block.width, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
-        button_block.setOrigin(1,0);
-        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
-
-        return {
-            block: block,
-            text: slip_text,
-            button: button_block,
-            button_text: button_text
-        };
+        return this.factory.makeSlip(_x, _y, text);
     }
 
     clearActions() {
@@ -503,8 +467,7 @@ export default class HudPockets {
 
     clearPocketDisplay() {
         this.clearActions();
-        this.pocket_textblock.block.setVisible(false);
-        this.pocket_textblock.text.setVisible(false);
+        this.destroyPocketTextBlock();
     }
 
 
@@ -551,10 +514,10 @@ export default class HudPockets {
                 
                 if (state != 'EMPTY' && selected.pocket == r && pocket[state].info.type != 'BAG' && i == 0) {
                     /// It's an item that has actions
-                    this.pocket_actions = this.drawActions(r, selected.actions, pocket[state].actions);
-                    if (pocket[state].info.description != '') {
-                        this.setPocketDescription(pocket[state].info.description);
-                    }
+                    this.pocket_actions = this.drawActions(r, selected.actions, pocket[state].getPocketActions());
+                    
+                    this.setPocketTextBlock(pocket[state].info.description);
+                    
                 }
 
 
@@ -623,14 +586,55 @@ export default class HudPockets {
         }
     }
 
-    setPocketDescription(description) {
-        this.pocket_textblock.text.setText(description);
-        //this.pocket_textblock.block.setVisible(true);
-        this.pocket_textblock.block.destroy();
+    refreshPocketActions(slot_x) {
+        var pocket = this.scene.manager.hud.pocket.getPocket(slot_x);
+        var state = pocket.STATE;
+        if (state != 'EMPTY' && pocket[state].info.type != 'BAG') {
+            /// It's an item that has actions
+            pocket[state].getPocketActions(true);
+        }
+    }
 
-        this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, this.pocket_textblock.text.width + 16, this.pocket_textblock.text.height + 24, 'BLOCK_MID_CREAM_BORDER');
-        let text_height = this.pocket_textblock.text.getTextBounds().local.height;
-        this.pocket_textblock.block.displayHeight = text_height + 24;
-        this.pocket_textblock.text.setVisible(true);
+
+    addPocketTextBlock() {
+        let margin = {
+            x: 8,
+            y: this.view.margin.top + 96,
+        };
+        let display_width = 144;
+        
+        let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleTalk');
+
+        let block = this.makeBlock(text.x - 8, text.y - 12, display_width, 32, 'BLOCK_MID_CREAM_BORDER');
+        block.setVisible(false);
+
+        return {block: block, text: text};
+    }
+
+    destroyPocketTextBlock() {
+        if (this.pocket_textblock != null) {
+            this.pocket_textblock.block.destroy();
+            this.pocket_textblock.text.destroy();
+            this.pocket_textblock = null;
+        }
+    }
+    
+    setPocketTextBlock(description) {
+        this.destroyPocketTextBlock();
+        
+        if (description != '') {
+            this.pocket_textblock = this.addPocketTextBlock();
+
+            this.pocket_textblock.text.setText(description);
+
+            let text_height = this.pocket_textblock.text.getTextBounds().local.height;
+
+            let text_width = this.pocket_textblock.text.getTextBounds().local.width;
+
+            this.pocket_textblock.block.destroy();
+            this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, text_width + 16, text_height + 24, 'BLOCK_MID_CREAM_BORDER');
+
+            this.pocket_textblock.text.setVisible(true);
+        }
     }
 }

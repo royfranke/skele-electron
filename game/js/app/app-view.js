@@ -91,14 +91,11 @@ export default class AppView {
             if (SAVES.length > i) {
                 this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
-                this.scene.add.dom(left+this.view.margin.left,
-                top+this.view.margin.top, 'div', '', SAVES[i].SAVE.HEADLINE).setClassName('slot-header').setOrigin(0,0);
+                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top*2, 'SkeleMarquee', SAVES[i].SAVE.HEADLINE.toLowerCase().replace(/ /g,"_"), 16).setOrigin(0).setScrollFactor(0).setDepth(1000);
             }
             else {
-                this.scene.add.dom(left,
-                    top, 'div', '', 'Slot '+(i+1)+': Day ???').setClassName('slot-header').setOrigin(0,0);
-                this.scene.add.dom(left+this.view.margin.left,
-                    top+this.view.margin.top, 'div', '', '- EMPTY -').setClassName('slot-header').setOrigin(0,0);
+                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day ???', 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                
             }
         }
     }

@@ -187,7 +187,8 @@ export default class Object {
             else {
                 console.log("No portal set for this object");
             }
-        } 
+        }
+        console.log("Doing action: "+action);
     }
 
     setPortal (portal) {

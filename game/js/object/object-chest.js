@@ -19,7 +19,7 @@ export default class ObjectChest extends Object {
         return this.items.length === 0;
     }
 
-    addItem(item) {
+    addItemToChest(item) {
         if (!this.isFull()) {
             this.items.push(item);
             return true;
@@ -77,7 +77,7 @@ export default class ObjectChest extends Object {
             items.forEach(function (item) {
                 if (action == 'PUT AWAY '+item.item.name.toUpperCase() && !putAway) {
                     putAway = true;
-                    let placed = self.addItem(item.item);
+                    let placed = self.addItemToChest(item.item);
                     if (placed) {
                         self.scene.manager.hud.pocket.setPocket(item.pocketIndex, 'EMPTY');
                         var sound_var = Phaser.Math.RND.between(1, 3);
@@ -86,6 +86,10 @@ export default class ObjectChest extends Object {
                     self.scene.manager.hud.refreshDisplay();
                 }
             });
+        }
+        if (action == 'SAVE') {
+            console.log("Saving game");
+            return this.scene.app.saveManager.saveGameData();
         }
     }
 

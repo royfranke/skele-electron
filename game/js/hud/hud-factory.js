@@ -13,6 +13,8 @@ export default class HudFactory {
        };
     }
 
+
+
     makeQuote (quote, _x,_y, width, size=16, font='SkeleNewsprint') {
         
         let quote_text = this.makeBitmapText(_x, _y, width, size, font);
@@ -21,6 +23,26 @@ export default class HudFactory {
         let quote_block = this.makeBlock(_x-16,_y-16, width+32, quote_text.displayHeight+32, 'BLOCK_MID_CREAM_BORDER');
 
         return {block: quote_block, text: quote_text};
+    }
+
+    makeSlip(_x, _y, text = 'HOLD') {
+        
+
+        let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+
+        let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 16, 'BLOCK_MID_YELLOW_RIGHT');
+        block.setOrigin(1,0);
+
+        let button_block = this.makeBlock(block.x - block.width, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
+        button_block.setOrigin(1,0);
+        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+
+        return {
+            block: block,
+            text: slip_text,
+            button: button_block,
+            button_text: button_text
+        };
     }
 
     makeBitmapText (_x,_y, width, size=16, font='SkeleNotebook') {

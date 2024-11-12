@@ -1,7 +1,5 @@
 export default class HudInput {
 
-    paused = false;
-
     constructor(scene) {
         this.scene = scene;
         this.pocket_length = 3;
@@ -28,7 +26,8 @@ export default class HudInput {
             }
             this.selected.pocket = selected;
             this.selected.contents = 0; /// Reset the contents selector
-            this.selected.actions = 0; /// Reset the actions selector
+            this.selected.actions = 0; ///  Reset the actions selector
+            this.scene.manager.hud.hudPockets.refreshPocketActions(this.selected.pocket);
         }
     }
 
@@ -64,6 +63,7 @@ export default class HudInput {
                     }
                     if (selected == content_length - 1) {
                         this.scene.manager.hud.arrowDown(this.selected.pocket);
+
                     }
 
                     this.selected.contents = selected;
@@ -106,13 +106,11 @@ export default class HudInput {
 
     right() {
         this.setSelectedPocket(this.selected.pocket - 1);
-
     }
 
 
     select() {
         if (this.selected.contents == -1) {
-
             var doAction = this.scene.manager.hud.pocket.doAction(this.selected.pocket, 'DROP');
             if (doAction) {
                 console.log('Action done-- refresh display');
@@ -137,7 +135,6 @@ export default class HudInput {
                         console.log('Action done-- refresh display');
                         this.refreshDisplay();
                     }
-
                 }
             }
         }
@@ -148,7 +145,6 @@ export default class HudInput {
             if (state != 'EMPTY') {
                 var item = pocket[state].pullItem(0);
                 var placed = this.scene.manager.hud.availablePocket(item);
-
                 if (placed != false) {
                     console.log("Placed! Refreshing");
                     this.refreshDisplay();
@@ -158,7 +154,8 @@ export default class HudInput {
                     this.scene.manager.hud.hudSound.play('SKELE_INVALID_' + sound_var);
                     ///this.scene.manager.hud.newPocketTip('My hands are full...',3000);
                     //put the thing back in the bag
-                    pocket[state].addItem(item);
+                    // TODO -- hands full ui feedback
+                    pocket[state].bagItem(item);
                 }
             }
 

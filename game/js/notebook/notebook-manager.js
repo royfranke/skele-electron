@@ -5,20 +5,38 @@ export default class NotebookManager {
 
     constructor(scene) {
         this.scene = scene;
-        this.notebook = new Notebook();
+        this.notebook = new Notebook(this.scene.slot.NOTEBOOKS);
         this.selected = 0;
     }
 
-    selectNext () {
-        this.setSelected(this.selected+1);
+    setSaveFromNotebook() {
+        return {
+            "STATUS": {
+                "CURRENT": {
+                    "NOTEBOOK": 1
+                }
+            },
+            "NOTEBOOK1": {
+                "PAGES": this.notebook.pages,
+                "SPECS": {
+                    "COLOR": "RED"
+                },
+                "EPHEMERA": {
+                }
+            }
+        };
     }
 
-    selectPrevious () {
-        this.setSelected(this.selected-1);
+    selectNext() {
+        this.setSelected(this.selected + 1);
     }
 
-    setSelected (selected=0) {
-        
+    selectPrevious() {
+        this.setSelected(this.selected - 1);
+    }
+
+    setSelected(selected = 0) {
+
         if (selected >= this.notebook.pages.length) {
             selected = 0;
         }
@@ -32,4 +50,3 @@ export default class NotebookManager {
     }
 
 }
-    

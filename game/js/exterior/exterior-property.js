@@ -116,7 +116,7 @@ export default class PropertyLine {
         var facing = this.prop.address.facing;
 
         var building_width = width;
-        var colors = ['RED_COMMERCIAL']
+        var colors = ['RED_COMMERCIAL', 'YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL', 'BLUE_COMMERCIAL', 'BLACK_COMMERCIAL']; // Weighting the array by repeating more desired colors
         var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
 
         var _x = left;
@@ -130,11 +130,11 @@ export default class PropertyLine {
 
         this.block.groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, (level_position - this.settings.roof.height) + 1, building_width, this.settings.roof.height);
 
-
         
         this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROLLING_GATE_DOOR'));
         this.gates[0].sprite.setDepth(this.gates[0].sprite.depth + 1);
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'EXT_DOOR_STORE_BLACK');
+        
         this.front_door.setPortal({room_id: '1', x:3, y: 13, facing: 'n'});
 
         this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'EXT_WINDOW_STORE_4_CLAD');
@@ -159,6 +159,12 @@ export default class PropertyLine {
     }
 
     buildIt() {
+        /// roll for whether this continues as a house or becomes a shop
+        if (this.prop.structure.zoning == 'COMMERCIAL') {
+            this.buildShop();
+            return;
+        }
+
         const top = this.prop.lines.top;
         const left = this.prop.lines.left;
         const bottom = this.prop.lines.bottom;
@@ -405,6 +411,7 @@ export default class PropertyLine {
         }
 
         this.mailbox = this.buildMailbox(_x + width, this.prop.lines.bottom - 1);
+        
 
 
         if (right_length < 6) {
@@ -434,6 +441,7 @@ export default class PropertyLine {
         mailbox.setName('MAILBOX ' + this.prop.address.number + ' ' + this.prop.address.street);
 
         mailbox.setAnnouncement(this.prop.address.number);
+        
 
         return mailbox;
     }

@@ -3176,6 +3176,8 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [ {
+          name: 'SAVE', stateTrigger: 'SAVING', validStates: ['CLOSED']
+        }, {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']

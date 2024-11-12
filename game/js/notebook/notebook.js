@@ -3,29 +3,31 @@
 export default class Notebook {
 
 
-    constructor() {
-        this.pages = [
-            {
-                title: "Shopping List",
-                content: " - Milk\n - Eggs\n - Cereal"
-            },
-            {
-                title: "Chores",
-                content: "1. Laundry\n2. Dishes\n3. Weed garden"
-            },
-            {
-                title: "Curses",
-                content: "#$!&@*\n%#@&$!\n!#$*"
-            },
-            {
-                title: "Phone Numbers",
-                content: "Mom: 555-1213\nAuntie: 555-1212"
-            },
-            {
-                title: "Homework",
-                content: "\"Safe Summer Workbook\"\n - Look both ways or die\n - Don't talk to strangers!!"
-            }
-        ];
+    constructor(save_data) {
+        this.current = save_data.STATUS.CURRENT.NOTEBOOK;
+        this.pages = save_data['NOTEBOOK'+this.current].PAGES;
+    }
+
+    addPage (title, content) {
+        if (this.findPage(title)) {
+            return this.amendPage(title, content);
+        }
+        else {
+            this.pages.push({title, content});
+        }
+    }
+
+    amendPage (title, content) {
+        let page = this.findPage(title);
+        if (page) {
+            page.content += content;
+            return true;
+        }
+        return false;
+    }
+
+    findPage (title) {
+        return this.pages.find(page => page.title === title);
     }
 
     getPage (index=0) {

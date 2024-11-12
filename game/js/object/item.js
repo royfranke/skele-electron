@@ -33,6 +33,7 @@ export default class Item {
             this.destroySprite();
         }
     }
+    
 
     doAction(action) {
         this.scene.player.action.clearActions();
@@ -115,10 +116,10 @@ export default class Item {
         this.tile_x = _x;
         this.tile_y = _y;
 
-        var x_pixels = _x * 16;
+        var x_pixels = (_x * 16) + 8;
         var y_pixels = _y * 16;
 
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.getStackIcon(), 0).setOrigin(.5,0).setDepth(y_pixels + 8);
+        this.sprite = this.scene.physics.add.sprite(x_pixels, y_pixels, 'ITEMS', this.getStackIcon(), 0).setOrigin(.5,0).setDepth(y_pixels + 8);
         /// tween
         const tween = this.scene.add.tween({
             targets: this.sprite,
@@ -149,12 +150,65 @@ export default class Item {
         this.sprite.setMask(new Phaser.Display.Masks.BitmapMask(this.scene, this.footMask));
         //this.shadow = this.scene.add.sprite(0,0, "player-IDLE", 0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
       }
-
-    setPocketActions(actions) {
-        this.actions = actions;
+      
+    findInPocketActions(action_string) {
+        var interactions = this.info.interactions;
+        var pocket_action = false;
+        Object.keys(interactions).forEach(function (interaction, index) {
+            console.log(action_string);
+            console.log(interactions[interaction].req_pocket_action);
+            if (interactions[interaction].req_pocket_action.toUpperCase() == action_string.toUpperCase()) {
+                pocket_action = interactions[interaction];
+            }
+        });
+        console.log(pocket_action);
+        return pocket_action;
     }
 
-    addItem(item) {
+    getPocketActions (refresh=false) {
+        if (refresh) {
+            this.actions = this.refreshPocketActions();
+        }
+        return this.actions;
+    }
+
+    refreshPocketActions () {
+        var put_away = false;
+
+        var interactions = this.info.interactions;
+        var actions_simple = [];
+        var info = this.info;
+        
+        Object.keys(interactions).forEach(function (interaction, index) {
+            var requirement_parts_met = 0;
+            var requirement_parts = interactions[interaction].requires.length;
+            interactions[interaction].requires.forEach(function (requirement, index) {
+                /// If the requirement is for this item or this item kind held in the hand, mark the requirement as met
+                if (requirement.type == 'ITEM'
+                    && requirement.ITEM == info.slug
+                    && (requirement.slot_type == 'IN_HAND'
+                    || requirement.slot_type == 'IN_HAND_OR_ACTIVE')) {
+                    requirement_parts_met++;
+                }
+                if (requirement.type == 'ITEM_KIND'
+                    && requirement.ITEM_KIND == info.type
+                    && requirement.slot_type == 'IN_HAND'
+                    && requirement.slot_type == 'IN_HAND_OR_ACTIVE') {
+                    requirement_parts_met++;
+                }
+                if (requirement_parts_met == requirement_parts) {
+                    actions_simple.push(interactions[interaction].req_pocket_action);
+                }
+            });
+        });
+
+        if (!put_away) {
+            actions_simple.push('PUT AWAY');
+        }
+        return actions_simple;
+    }
+
+    bagItem(item) {
         // Not a bag.
         return false;
     }

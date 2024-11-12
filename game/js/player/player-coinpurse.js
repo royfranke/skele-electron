@@ -7,38 +7,18 @@ import MONEY from "../reference/money.js";
 export default class PlayerCoinpurse {
 
     constructor() {
-        this.total = 0;
+
         this.coinRef = MONEY.COIN;
-        this.hud = null;
-
-        this.contents = {
-            COIN: {
-                PENNY:0,
-                NICKEL:0,
-                DIME:0,
-                QUARTER:4
-            },
-            PAPER: {
-                ONE:0,
-                TWO:0,
-                FIVE:0,
-                TEN:0,
-                TWENTY:0,
-                FIFTY:0,
-                HUNDRED:0,
-            },
-        };
-
         this.total = 0;
+    }
+
+    setSaveFromCoinpurse () {
+            return this.contents;
     }
 
     setContents (contents) {
         this.contents = contents;
         this.updateTotal();
-    }
-
-    setHud (hud) {
-        this.hud = hud;
     }
 
     availableCoins (coin_amount_array) {
@@ -103,7 +83,6 @@ export default class PlayerCoinpurse {
             spent = parseInt(element + spent);
         });
         let spent_formatted = this.formatMoney(spent);
-        this.popCoin(`${spent_formatted}`,'negative');
         this.updateTotal();
     }
 
@@ -117,7 +96,6 @@ export default class PlayerCoinpurse {
         let coin = this.coinRef[coin_amount];
         this.contents.COIN[coin]++;
         let amount_string = coin_amount;
-        this.popCoin(`${coin_amount}`,'positive');
         this.updateTotal();
     }
 
@@ -156,12 +134,4 @@ export default class PlayerCoinpurse {
         return tally;
     }
 
-    popCoin (amount_string, status = 'default') {
-        var amount = this.getTally([{text: 1, icon: amount_string}]);
-        if (this.hud != null) {
-            this.hud.popCoin(amount, status);
-        }
-    }
-
-    
 }

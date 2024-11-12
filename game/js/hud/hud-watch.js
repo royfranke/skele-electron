@@ -48,8 +48,7 @@ export default class HudWatch {
     }
 
     addFX (fx_slug, _x, _y, delay=0) {
-        var fx = this.scene.manager.fx.playFX(fx_slug,_x,_y,delay);
-        fx.setDepth(100200).setScrollFactor(0);
+        this.factory.makeHudFX(fx_slug, _x, _y, delay);
     }
 
     addWatch () {

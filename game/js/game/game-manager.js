@@ -7,7 +7,7 @@ import ItemManager from "../items/item-manager.js";
 import ObjectManager from "../objects/object-manager.js";
 import LootManager from "../loot/loot-manager.js";
 import TimeManager from "../time/time-manager.js";
-import AnnouncementRegistry from "../announcements/announcement-registry.js";
+import KnowledgeManager from "../knowledge/knowledge-manager.js";  
 
 /* global Phaser */
 /*
@@ -27,11 +27,15 @@ export default class GameManager {
         this.gameFocus = new GameFocus();
         this.hud = null;
         this.time = new TimeManager();
-        this.announce = new AnnouncementRegistry();
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
         this.loot = new LootManager(this.scene);
         this.fx = new FXManager(this.scene);
+        this.knowledge = new KnowledgeManager(this.scene);
+    }
+
+    initializeGame () {
+        /// Use this method to gather managers that are not needed for the tutorial/new game
 
     }
 
@@ -183,30 +187,16 @@ export default class GameManager {
             this.scene.app.camera.camera.setBackgroundColor('#4b424a');
             this.setState('LOADING');
             this.hud = new HudManager(this.scene);
-            //this.hud.factory.makeQuote('When you get a bad feeling, don’t ignore it.',this.view.left + this.view.margin.left, this.view.top + this.view.margin.top, this.view.width - (this.view.margin.left + this.view.margin.right), 16);
-            this.scene.player.coinpurse.setHud(this.hud.hudCoinpurse);
             this.watch = this.hud.hudWatch.tellWatch('--:--MB');
             
 
             this.scene[this.scene.place].createItems();
             
             this.setFocus('PLAYER');
-            /// After loading functions...
-            //var staple_gun = this.itemManager.newItem('STAPLE_GUN');
-            //this.scene.manager.hud.availablePocket(staple_gun);
 
-            //var flyers = this.itemManager.newItem('FLYER_PINK');
-            //flyers.updateStackCount(12);
-            
-            //this.scene.manager.hud.availablePocket(flyers);
-            //this.scene.manager.itemManager.newItemToPockets('BACKPACK_PURPLE');
-            //let mac = this.itemManager.newItem('CASSEROLE_MAC');
-            //this.itemManager.newItemToPockets('RAKE');
-            //this.itemManager.newItemToPockets('CASSEROLE_DISH_1',[mac]);
             this.wake();
             this.setState('LOADED');
             this.setState('OVERWORLD');
-            
         }
     }
 

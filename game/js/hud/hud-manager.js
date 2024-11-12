@@ -122,8 +122,8 @@ export default class HudManager {
         this.hudDisplay.newPocketTip(message,duration);
     }
 */
-    availablePocket (item) {
-        return this.pocket.availablePocket(item);
+    availablePocket (item, specific_pocket = null) {
+        return this.pocket.availablePocket(item, specific_pocket);
     }
 
     stateChanged () {
@@ -176,10 +176,11 @@ export default class HudManager {
             console.log('Loading HUD.');
             this.pocket = new HudPocket(this.scene);
             this.hudDisplay = new HudDisplay(this.scene,this.factory);
+            this.hudCoinpurse.addCoinPurse();
             /// After loading functions...
             this.setState('LOADED');
             console.log('Loaded HUD.');
-            //this.hudDialog.tellDialogBox('I got these— these cards. I got one of each and I mix em and then you tell me which card is next. Got it?');
+            //this.hudDialog.tellDialogBox('I got these-- these cards. I got one of each and I mix \'em and then you tell me which card is next. ... Got it?');
             //this.hudDialog.tellReplyBox('Yep.\nHow do I know which one is next?\nSounds dumb.');
             
         }

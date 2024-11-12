@@ -82,6 +82,14 @@ const PRELOAD_SOUND = [
     {
         NAME: 'FOCUS_TIP_PLAYER',
         PATH: 'sound/click-tip-player.wav'
+    },
+    {
+        NAME: 'ARROW_BOBBLE_SELECT',
+        PATH: 'sound/arrow-bobble-select.wav'
+    },
+    {
+        NAME: 'ARROW_SINGLE_SELECT',
+        PATH: 'sound/arrow-single-select.wav'
     }
 
 ];

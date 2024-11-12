@@ -24,7 +24,7 @@ export default class Announcer {
         
         var _x =this.object.tile_x;
         var _y = this.object.tile_y;
-        this.scene.manager.announce.placeAnnouncer(this,_x,_y);
+        this.scene.manager.objectManager.announce.placeAnnouncer(this,_x,_y);
     }
 
     drawAnnouncements () {

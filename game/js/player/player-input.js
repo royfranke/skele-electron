@@ -1,7 +1,5 @@
 export default class PlayerInput {
-
-    paused = false;
-
+    
     constructor(scene) {
         this.scene = scene;
         this.resetInputs();

@@ -65,10 +65,11 @@ import KEYLIGHT from "../config/key-light.js";
         let nodesHeight = parseInt(this.overMap.sectionsHeight + 3);
         let nodesWidth = parseInt(this.overMap.sectionsWidth + 3);
         const nodes = new Array(nodesHeight).fill().map(() => new Array(nodesWidth).fill(0));
+        
+        
         overMap.nodes.forEach(function (node, index) {
             nodes[node.y][node.x] = new BlockNode(groundLayer, node); /// Backwards on purpose to not require array flip
-
-
+            
             if (node.streets.n.found != 0) {
                 /// Get north street coords
                 
@@ -293,7 +294,7 @@ import KEYLIGHT from "../config/key-light.js";
 
     updateDirections () {
         
-            var plot = this.nav.plotRoutes(1,1,4,3,'intersection');
+            var plot = this.nav.plotRoutes(4,4,5,9,'intersection');
             var directions = plot.join(" ");
             this.scene.manager.hud.hudDisplay.drawDirections(directions);
 
@@ -356,6 +357,7 @@ import KEYLIGHT from "../config/key-light.js";
 
         if (block.offset.n > 0 && block.offset.w > 0) { // Upper left
             this.groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_, block.left - 1, block.top - 1,1, 1);
+            this.groundLayer.weightedRandomize(TILES.CURB.SOUTH_, block.left, block.top - 1,1, 1);
             recipe_x = block.left;
             recipe_y = block.top;
             self.cookRecipe(recipe_x, recipe_y, recipe);
@@ -435,6 +437,34 @@ import KEYLIGHT from "../config/key-light.js";
         }
         return quadrant;
 
+    }
+
+    getMailboxTilesFromAddress(dir, number, street) {
+        let mailbox = this.getMailboxFromAddress(dir, number, street);
+        return {x: mailbox.x, y: mailbox.y};
+    }
+
+    getMailboxFromAddress(dir, number, street) {
+       let prop = this.getPropertyFromAddress(dir, number, street);
+       if (!prop) {
+           return;
+       }
+       else {
+        return {x: prop.lines.left,y: prop.lines.bottom};
+       }
+    }
+
+    getPropertyFromAddress(dir, number, street) {
+        var found = false;
+        this.overMap.propertyLines.forEach(function (prop, index) {
+            if (prop.address.number == number && prop.address.street == street && prop.address.dir == dir) {
+                found = prop;
+            }
+        });
+        if (!found) {
+            console.log('Requested property not found: '+dir+' '+number+' '+street);
+        }
+        return found;
     }
 
     cook (recipe_name) {

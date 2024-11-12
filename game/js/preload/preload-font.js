@@ -6,6 +6,9 @@ const PRELOAD_FONT = [
         NAME: 'SkeleTalk',
     },
     {
+        NAME: 'SkeleMarquee',
+    },
+    {
         NAME: 'SkeleDino',
     },
     {

@@ -15,7 +15,7 @@ export default class HudFocusHints {
             {
                 char: 'I',
                 focus: 'POCKETS',
-                x: (this.view.right - (4*40)),
+                x: (this.view.right - 160),
                 y: this.view.top + 24
             },
             {
@@ -37,10 +37,7 @@ export default class HudFocusHints {
     makeBitmapText (_x,_y, width, size=24, font='SkeleButton') {
         return this.factory.makeBitmapText(_x, _y, width, size, font);
     }
-    /*
-    *   key - focusState, part of screen (mapped to key name maybe?)
-    types of keytips -- focus toggle (I, N), preceding an action menu item (X)
-    */
+
     makeFocusHint (hint) {
         if (hint != null) {
 
@@ -82,6 +79,7 @@ export default class HudFocusHints {
         }
     }
 
+    // Not currently being used -- remove?
     changeFocus (from, to) {
         this.setKeyTip(from, false);
         this.setKeyTip(to, true);

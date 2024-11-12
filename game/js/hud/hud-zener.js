@@ -394,7 +394,9 @@ export default class HudZener {
         }
 
         for (let i = 0; i < this.board.score.length; i++) {
-            this.board.score[i].object = this.scene.add.dom(this.board.score[i].x, this.board.score[i].y, 'div', '', this.board.score[i].displayName).setClassName(this.board.score[i].className).setOrigin(0).setDepth(100200).setScrollFactor(0);
+            //this.board.score[i].object = this.scene.add.dom(this.board.score[i].x, this.board.score[i].y, 'div', '', this.board.score[i].displayName).setClassName(this.board.score[i].className).setOrigin(0).setDepth(100200).setScrollFactor(0);
+
+            this.board.score[i].object = this.scene.add.bitmapText(this.board.score[i].x, this.board.score[i].y, 'SkeleTalk', this.board.score[i].displayName, 16).setOrigin(0).setScrollFactor(0).setDepth(100200);
         }
 
         this.drawSelected(0);

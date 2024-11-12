@@ -11,11 +11,15 @@ export default class NpcManager {
     }
 
     create () {
-      this.newNpcToWorld(84,33,'CAROL');
+        let dir = "W";
+        let number = "201";
+        let street = "Sundown Street";
+        let npc_cords = this.scene.exterior.getMailboxTilesFromAddress(dir, number, street);
+      this.newNpcToWorld(npc_cords.x,npc_cords.y,'CAROL');
+      this.newNpcToWorld(npc_cords.x + 2,npc_cords.y,'CAROL');
     }
 
     update () {
-      var registry = this.registry;
       this.list.forEach(npc => {
         npc.update();
       });
@@ -25,6 +29,11 @@ export default class NpcManager {
         this.factory = new NpcFactory(scene);
         this.registry = new NpcRegistry();
         this.list = [];
+        this.newColliderGroup();
+    }
+
+    newColliderGroup () {
+        this.npcs = this.scene.physics.add.group();
     }
 
     newNpc (slug,items=[]) {

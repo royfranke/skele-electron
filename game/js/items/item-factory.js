@@ -18,20 +18,24 @@ export default class ItemFactory {
         return false;
     }
 
-    newItem (slug,items=[]) {
+    newItem (item,items=[]) {
+        // First check if the item is a slug or object
+        if (typeof item === 'string') {
+            var slug = item;
+        }
+        else {
+            var slug = item.ITEM;
+        }
+
         if (this.validItem(slug)) {
             if (this.valid_items[slug].type == 'BAG') {
                 var item = new ItemBag(this.scene,this.valid_items[slug],items);
             }
             else if (this.valid_items[slug].contains.length > 0) {
                 var item = new ItemContainer(this.scene,this.valid_items[slug],items);
-                var actions = this.getPocketActions(item);
-                item.setPocketActions(actions);
             }
             else {
                 var item = new Item(this.scene,this.valid_items[slug]);
-                var actions = this.getPocketActions(item);
-                item.setPocketActions(actions);
             }
             
             return item; /// Returns a non-sprite obj
@@ -41,23 +45,7 @@ export default class ItemFactory {
         return false;
     }
 
-    getPocketActions (item) {
-        var put_away = false;
-        var type = item.info.type;
-        var actions = item.info.actions;
-        var actions_simple = [];
-        actions.forEach(function (action, index) {
-            if (action.name == 'PUT AWAY') {
-                put_away = true;
-            }
-            actions_simple.push(action.name)
-        });
 
-        if (!put_away) {
-            actions_simple.push('PUT AWAY');
-        }
-        return actions_simple;
-    }
 
 
     validItem (slug) {

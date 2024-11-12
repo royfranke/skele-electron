@@ -1,5 +1,6 @@
 import ObjectFactory from "./object-factory.js";
 import ObjectRegistry from "./object-registry.js";
+import AnnouncementRegistry from "../announcements/announcement-registry.js";
 
 /* Object Manager Class */
 
@@ -7,8 +8,10 @@ export default class ObjectManager {
 
     constructor(scene) {
         this.scene = scene;
+        this.announce = new AnnouncementRegistry();
         this.factory = new ObjectFactory(this.scene);
         this.registry = new ObjectRegistry();
+        
     }
 
     update () {
