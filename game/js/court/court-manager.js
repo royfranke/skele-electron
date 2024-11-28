@@ -14,8 +14,6 @@ import CourtGame from "./court-game.js";
         this.returnTile = {x: 0, y: 0};
         this.lastTile = {x: 0, y: 0};
 
-
-        //this.scene.manager.objectManager = new ObjectManager(this.scene);
     }
 
     create () {

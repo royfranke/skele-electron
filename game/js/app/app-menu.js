@@ -13,9 +13,7 @@ export default class AppMenu {
        this.last_selected = -1;
        this.selected = 0;
        this.menu = MENU[state];
-
-       this.scene.textures.get('UI');
-
+       this.background = this.buildBackground();
        this.menu_list = this.buildMenu();
        this.setSelected(0);
     }
@@ -51,6 +49,12 @@ export default class AppMenu {
         return menu_list;
     }
 
+    buildBackground () {
+        const view = this.view;
+
+        this.scene.add.nineslice(view.left,view.top, 'UI', 'BLOCK_MID_DARK_BORDER', view.width, view.height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(800);
+    }
+
     setSelected (selected=0) {
         if (selected >= this.menu_list.length) {
             selected = 0;
@@ -66,8 +70,10 @@ export default class AppMenu {
                 this.selector.block.setY(this.menu_list[i].block.y);
                 this.selector.text.setY(this.menu_list[i].block.y + 4);
                 this.selector.frame.setY(this.menu_list[i].block.y);
+
+                this.selector.frame.setVisible(false);
             }
-            this.menu_list[i].block.setFrame(selected == i ? 'BLOCK_MID_BROWN_RIGHT' : 'BLOCK_MID_DARK_BLUE');
+            this.menu_list[i].block.setFrame(selected == i ? 'BLOCK_MID_MOONSTONE_RIGHT' : 'BLOCK_MID_DARK_BLUE');
         }
         
     }

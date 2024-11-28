@@ -20,7 +20,7 @@ import Room from "../object/room.js";
 
         this.createMap();
         
-        //this.scene.manager.objectManager = new ObjectManager(this.scene);
+ 
     }
 
     create () {

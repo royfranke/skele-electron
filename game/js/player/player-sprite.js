@@ -17,6 +17,7 @@ export default class PlayerSprite {
   setCollider() {
     if (this.scene.place == 'exterior') {
       this.setExteriorCollider();
+      this.scene.manager.plantManager.setCollider();
     }
     if (this.scene.place == 'interior') {
       this.setInteriorCollider();

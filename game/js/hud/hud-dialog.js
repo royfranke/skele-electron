@@ -1,20 +1,17 @@
+import HudCommon from "./hud-common.js";
+
 /*
 Use this class to show, hide, build, and destroy dialog containers and their contents.
-A dialog container is a nine slice block with a div containing text that is followed by a temporary div that allows incoming text to be animated/tweened by different effects.
 
 */
+export default class HudDialog extends HudCommon {
+    constructor(scene) {
+        super(scene);
+    }  
 
-export default class HudDialog {
-    constructor(scene, factory) {
-        this.scene = scene;
-        this.factory = factory;
+    initialize() {
         this.currentDialog = false;
         this.currentReply = false;
-        this.view = this.scene.manager.getView();
-    }
-
-    makeBlock(_x, _y, width = 32, height = 32, frameName = 'BLOCK_MID_CREAM_BORDER') {
-        return this.factory.makeBlock(_x, _y, width, height, frameName);
     }
 
     makeBitmapText (_x,_y, width, text, size, font="SkeleTalk") {

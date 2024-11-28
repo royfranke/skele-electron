@@ -49,7 +49,7 @@ export default class PropertyLine {
             };
             if (settings.foundation.height > 0) {
 
-                settings.foundation.material = WALLTILES.BRICK.RED_WEATHERED_;
+                settings.foundation.material = this.roll([WALLTILES.BRICK.RED_WEATHERED_, WALLTILES.BRICK.YELLOW_WEATHERED_]);
                 //roll foundation options
                 // Allow stoop
 
@@ -411,6 +411,7 @@ export default class PropertyLine {
         }
 
         this.mailbox = this.buildMailbox(_x + width, this.prop.lines.bottom - 1);
+       
         
 
 
@@ -502,9 +503,9 @@ export default class PropertyLine {
 
         ///
 
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK.RED_WEATHERED_.LOWER_LEFT_, _x, _y + stoop.height, 1, 1);
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK.RED_WEATHERED_.LOWER_, _x + 1, _y + stoop.height, stoop.width - 2, 1);
-        this.block.wallLayer.weightedRandomize(WALLTILES.BRICK.RED_WEATHERED_.LOWER_RIGHT_, _x + stoop.width - 1,_y + stoop.height, 1, 1);
+        this.block.wallLayer.weightedRandomize(this.settings.foundation.material['LOWER_LEFT_'], _x, _y + stoop.height, 1, 1);
+        this.block.wallLayer.weightedRandomize(this.settings.foundation.material['LOWER_'], _x + 1, _y + stoop.height, stoop.width - 2, 1);
+        this.block.wallLayer.weightedRandomize(this.settings.foundation.material['LOWER_RIGHT_'], _x + stoop.width - 1,_y + stoop.height, 1, 1);
 
 
         // Lay stair tiles

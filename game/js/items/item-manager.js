@@ -78,7 +78,7 @@ export default class ItemManager {
     putItemInWorld (item, _x, _y) {
         var result = this.registry.placeItem(item,_x,_y);
         if (!result) {
-            this.scene.manager.hud.hudDisplay.tellBrain('Something here already',2000,'missing');
+            this.scene.manager.hud.hudThinking.think('Something here already');
         }
         return result;
     }

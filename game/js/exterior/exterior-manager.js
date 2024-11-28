@@ -8,7 +8,6 @@ import Ground from "../handler/ground.js";
 import Block from "./exterior-block.js";
 import Navigator from "../navigator/navigator-manager.js";
 import BlockNode from "./exterior-block-node.js";
-import ObjectManager from "../objects/object-manager.js";
 import KEYLIGHT from "../config/key-light.js";
 
 /**
@@ -52,7 +51,6 @@ import KEYLIGHT from "../config/key-light.js";
         const blocks = new Array(this.overMap.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 
 
-        //self.scene.manager.objectManager = new ObjectManager(scene);
         overMap.blocks.forEach(function (block, index) {
             blocks[block.y][block.x] = new Block(self.scene,groundLayer,wallLayer,roofLayer, block); /// Backwards on purpose to not require array flip
             

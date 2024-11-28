@@ -11,7 +11,7 @@ import NpcManager from "../npc/npc-manager.js";
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super("Game Scene");
-        
+        this.verbose = false;
     }
 
     init (data) {
@@ -20,14 +20,16 @@ export default class GameScene extends Phaser.Scene {
 
     preload () {
         this.preload = new PreloadManager(this); 
+        this.preload.initialize();
+        this.preload.initializeAnim();
     }
 
     create() {
         if (this.slot.SAVE.HEADLINE == 'NEW') {
-            console.log("New Game");
+            if (this.verbose) console.log("New Game");
         }
         // Replace the exterior and interior classes with a ground class interpretter in its own ground/ground-manager.js
-        this.preload.preloadAnim();
+        
         this.place = 'exterior';
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
@@ -56,17 +58,17 @@ export default class GameScene extends Phaser.Scene {
     }
 
     portalTo(portal) {
-        console.log(portal);
+        if (this.verbose) console.log(portal);
         /// Before portal, save the game
         this.slot = this.app.softSaveGameData();
-        console.log(this.slot);
+        if (this.verbose) console.log(this.slot);
         this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
     }
 
     saveGameData(data,slot) {
         // Replace `data` and `slot` with the actual data and slot you want to save
-        console.log("I'm going to call save-data for slot "+slot);
-        console.log(data);
+        if (this.verbose) console.log("I'm going to call save-data for slot "+slot);
+        if (this.verbose) console.log(data);
         let save_data = {data:data,slot:slot};
         const manager = this.manager;
         window.api.invoke('save-data', save_data)

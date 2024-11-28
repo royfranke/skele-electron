@@ -40,7 +40,7 @@ const createWindow = () => {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('game/index.html')
+  mainWindow.loadFile('./game/index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

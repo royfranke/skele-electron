@@ -67,7 +67,7 @@ export default class PlayerCoinpurse {
         else {
             let missing = this.getMissing(coin_amount_array);
             // TODO: Fix to use hud
-            // this.scene.ui.tellBrain('I need a '+missing[0],2000,'missing');
+            this.scene.manager.hud.think('I need a '+missing[0]+'.');
             return false;
         }
     }

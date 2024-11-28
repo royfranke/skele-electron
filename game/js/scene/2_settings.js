@@ -9,7 +9,7 @@ export default class SystemSettingsScene extends Phaser.Scene {
     }
 
     preload () {
-        this.preload = new PreloadManager(this); 
+        //this.preload = new PreloadManager(this); 
         
     }
 

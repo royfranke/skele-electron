@@ -6,17 +6,19 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
     constructor(scene) {
         this.scene = scene;
+        this.debug = false;
+        this.initialize();
+
+    }
+
+    initialize() {
+        if (this.debug) {this.debugActionTile = this.scene.add.rectangle(0, 0, 16, 16, 0x6666ff).setOrigin(0);}
         this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
         this.actionTile = {x: 0, y: 0};
         this.actionTileLast = {x: 0, y: 0};
-
         this.actionTileLookUp = SPRITE_DIR.DIR_TILE;
         this.actionsGroup = this.scene.add.group();
-
         this.clearActions();
-
-        this.actionMarker = this.createMarker();
-        //this.debugActionTile = this.scene.add.rectangle(0, 0, 16, 16, 0x6666ff).setOrigin(0);
     }
 
     clearActions() {
@@ -25,28 +27,40 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.menu = {x: 0, y: 0};
     }
 
-    createMarker () {
+    showActions (showing) {
+        this.showMenu = showing;
+    }
+
+    addMarker () {
        let marker = this.scene.manager.fx.handleFX('SELECTOR_VALID_',0,0);
        marker.setOrigin(0);
        marker.setVisible(false);
        return marker;
     }
 
+    checkMarker () {
+        if (this.actionMarker == undefined) {
+            this.actionMarker = this.addMarker();
+        }
+    }
+
     showMarker (showing) {
+        this.checkMarker();
         this.actionMarker.setVisible(showing);
     }
 
-    showActions (showing) {
-        this.showMenu = showing;
-    }
-
     updateMarker() {
+        this.checkMarker();
         this.snappedWorldPoint = this.locale.groundLayer.tileToWorldXY(this.actionTile.x, this.actionTile.y);
 
         this.actionMarker.setPosition(this.snappedWorldPoint.x - 8, this.snappedWorldPoint.y - 8);
         
         if (this.actionTileLast.x != this.actionTile.x || this.actionTileLast.y != this.actionTile.y) {
-            //this.debugActionTile.setPosition(this.snappedWorldPoint.x, this.snappedWorldPoint.y);
+
+            if (this.debug) {
+                this.debugActionTile.setPosition(this.snappedWorldPoint.x, this.snappedWorldPoint.y);
+            }
+
             this.scene.manager.objectManager.announce.loadAnnouncements(this.actionTile.x, this.actionTile.y);
             this.clearActions();
             this.actionTileLast = this.actionTile;

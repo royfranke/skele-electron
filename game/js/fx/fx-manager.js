@@ -7,7 +7,7 @@ export default class FXManager {
     constructor(scene) {
         this.scene = scene;
         this.factory = new FXFactory(this.scene);
-        this.scene.textures.get('FX');
+        //this.scene.textures.get('FX');
     }
 
     playFX (slug,_x,_y,delay=0) {

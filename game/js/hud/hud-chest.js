@@ -1,14 +1,15 @@
+import HudCommon from './hud-common.js';
 /*
  * Handles chest interaction UI
- * Pruned 10/24
  */
 
-export default class HudChest {
+export default class HudChest extends HudCommon {
 
-    constructor(scene, factory) {
-        this.scene = scene;
-        this.factory = factory;
-        this.view = this.scene.manager.getView();
+    constructor(scene) {
+        super(scene);
+    }
+
+    initialize() {
         this.position = {
             x: this.view.right - 168,
             y: this.view.top + 128,
@@ -25,7 +26,7 @@ export default class HudChest {
                 }
             },
             slip: {
-                x: this.view.right - (this.view.margin.right / 2),
+                x: this.view.right - this.view.margin.right,
                 y: this.view.top + 108,
             }
         };
@@ -39,18 +40,15 @@ export default class HudChest {
         return bitmap;
     }
 
-    makeIcon(_x, _y, textureName, frameName) {
-        return this.factory.makeIcon(_x + 8, _y + 8, textureName, frameName);
-    }
+
 
     addChestTextBlock() {
         var text = this.makeBitmapText(this.position.container.x + this.position.container.text.x, this.position.container.y + this.position.container.text.y, this.position.container.text.width, '', 8);
-        text.setOrigin(0).setScrollFactor(0).setVisible(false);
+        text.setVisible(false);
         return text;
     }
 
     slipCommand() {
-        //return "TAKE "+this.chest.items[0].name.toUpperCase()+" FROM "+this.chest.item.name.toUpperCase();
         return "TAKE " + this.chest.items[0].name.toUpperCase();
     }
 
@@ -124,55 +122,21 @@ export default class HudChest {
             text: null,
             items: item.items
         };
-        this.chest.container = this.factory.makeBlock(this.position.container.x, this.position.container.y, this.position.container.width, this.position.container.height, 'BLOCK_MID_CREAM_BORDER');
+        this.chest.container = this.makeBlock(this.position.container.x, this.position.container.y, this.position.container.width, this.position.container.height, 'BLOCK_MID_CREAM_BORDER');
 
         this.chest.text = this.addChestTextBlock();
-        this.chest.slot = this.factory.makeBlock(this.position.x, this.position.y, 32, 32, 'BAG_SELECTED');
+        this.chest.slot = this.makeBlock(this.position.x, this.position.y, 32, 32, 'BAG_SELECTED');
         this.chest.arrow = this.factory.makeArrow(this.chest.slot.x, this.chest.slot.y + 36);
 
         this.refreshChest();
     }
 
-
-    openChest(object) {
-        object.setState('OPEN');
-        this.closeChest(); // Use to clean up any existing open chest
-        this.chest = {
-            item: object,
-            slip: null,
-            slot: null,
-            arrow: null,
-            icon: null,
-            container: null,
-            text: null,
-            items: object.items
-        };
-        this.chest.container = this.factory.makeBlock(this.position.container.x, this.position.container.y, this.position.container.width, this.position.container.height, 'BLOCK_MID_CREAM_BORDER');
-
-        this.chest.text = this.addChestTextBlock();
-
-        this.chest.slot = this.factory.makeBlock(this.position.x, this.position.y, 32, 32, 'BAG_SELECTED');
-
-        this.chest.arrow = this.factory.makeArrow(this.chest.slot.x, this.chest.slot.y + 36);
-
-        this.refreshChest();
-    }
 
     makeSlip(_x, _y, text = 'TAKE') {
         this.destroySlip();
         return this.factory.makeSlip(_x, _y, text);
     }
 
-
-    destroySlip() {
-        if (this.chest.slip != null) {
-            this.chest.slip.block.destroy();
-            this.chest.slip.text.destroy();
-            this.chest.slip.button.destroy();
-            this.chest.slip.button_text.destroy();
-            this.chest.slip = null;
-        }
-    }
 
     refreshChest() {
         this.chest.text.setVisible(false);
@@ -198,9 +162,34 @@ export default class HudChest {
             }
             else {
                 this.destroySlip();
-                this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'UI', 'EMPTY_SYMBOL')
+                this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'UI', 'EMPTY_SYMBOL');
             }
         }
+    }
+
+
+    openChest(object) {
+        object.setState('OPEN');
+        this.closeChest(); // Use to clean up any existing open chest
+        this.chest = {
+            item: object,
+            slip: null,
+            slot: null,
+            arrow: null,
+            icon: null,
+            container: null,
+            text: null,
+            items: object.items
+        };
+        this.chest.container = this.makeBlock(this.position.container.x, this.position.container.y, this.position.container.width, this.position.container.height, 'BLOCK_MID_CREAM_BORDER');
+
+        this.chest.text = this.addChestTextBlock();
+
+        this.chest.slot = this.makeBlock(this.position.x, this.position.y, 32, 32, 'BAG_SELECTED');
+
+        this.chest.arrow = this.factory.makeArrow(this.chest.slot.x, this.chest.slot.y + 36);
+
+        this.refreshChest();
     }
 
     closeChest() {
@@ -212,6 +201,16 @@ export default class HudChest {
             this.chest.text.destroy();
             this.destroySlip();
             this.chest = null;
+        }
+    }
+
+    destroySlip() {
+        if (this.chest.slip != null) {
+            this.chest.slip.block.destroy();
+            this.chest.slip.text.destroy();
+            this.chest.slip.button.destroy();
+            this.chest.slip.button_text.destroy();
+            this.chest.slip = null;
         }
     }
 

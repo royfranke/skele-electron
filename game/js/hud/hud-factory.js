@@ -8,6 +8,7 @@ export default class HudFactory {
             SLOT:100000,
             ICON:100100,
             STACK:100200,
+            BUBBLE:100250,
             FX:100300,
             TEXT:100400,
        };
@@ -30,10 +31,10 @@ export default class HudFactory {
 
         let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
-        let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 16, 'BLOCK_MID_YELLOW_RIGHT');
+        let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 16, 'BLOCK_MID_BEIGE_RIGHT');
         block.setOrigin(1,0);
 
-        let button_block = this.makeBlock(block.x - block.width, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
+        let button_block = this.makeBlock(block.x - block.width, block.y, 12, 16, 'BLOCK_MID_ORANGE_LEFT');
         button_block.setOrigin(1,0);
         let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
@@ -49,17 +50,26 @@ export default class HudFactory {
         return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0).setDepth(this.depth.TEXT).setScrollFactor(0).setMaxWidth(width);
     }
 
+
     makeNotebook (_x,_y) {
         return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.SLOT).setScrollFactor(0);
     }
 
     makeBlock (_x,_y, width=32, height=32, frameName='HAND_UNFOCUSED') {
-        if (width == 32 && height == 32) {
-            return this.scene.add.image(_x,_y, 'UI', frameName).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
-        }
-        else {
-            return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
-        } 
+
+        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
+ 
+    }
+
+
+    makeWorldBitmapText (_x,_y, width, size=8, font='SkeleNotebook') {
+        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(.5, 1).setDepth(this.scene.player.snappedStanding.y+2).setMaxWidth(width);
+    }
+
+    makeWorldBlock (_x,_y, width=32, height=32, frameName='BUBBLE_THINKING') {
+
+        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 8,8,8,8).setOrigin(.5,1).setDepth(this.scene.player.snappedStanding.y + 1);
+ 
     }
 
     makeSideArrow (_x,_y, frameName='BAG_ARROW_FOCUSED', left=false) {

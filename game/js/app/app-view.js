@@ -83,7 +83,7 @@ export default class AppView {
         }
         for (var i=0;i<3;i++) {
             var top = this.view.top + this.view.margin.top + ((height + 4) *i);
-            var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_BLUE_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
+            var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
             var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_YELLOW_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
             
             this.slots.push({slice: slot_slice, selector: slot_highlight});
@@ -104,7 +104,7 @@ export default class AppView {
     selectLoad (selected) {
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
-                this.slots[i].slice.setTexture('UI','BLOCK_MID_BLUE_BORDER');
+                this.slots[i].slice.setTexture('UI','BLOCK_MID_LILAC_BORDER');
                 this.slots[i].selector.setVisible(false);
             }
             else {

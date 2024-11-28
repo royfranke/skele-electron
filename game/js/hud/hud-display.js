@@ -1,17 +1,18 @@
 import STATES from "../config/hud-states.js";
+import HudCommon from "./hud-common.js";
 /* global Phaser */
 /*
  * Gets injected into the game scene
  */
 
-export default class HudDisplay {
+export default class HudDisplay extends HudCommon {
 
-    constructor(scene, factory) {
-       this.scene = scene;
-       this.factory = factory;
-       this.scene.textures.get('UI');
+    constructor(scene) {
+        super(scene);
+    }  
 
-       this.view = this.scene.manager.getView();
+    initialize() {
+
        this.valid_states = STATES;
 
        this.currentDialog = false;
@@ -41,8 +42,6 @@ export default class HudDisplay {
         const tip =  this.scene.add.dom(this.view.right + 32, this.view.top, 'div', '', message).setClassName('pocket-tip').setOrigin(1,0).setScrollFactor(0).setDepth(150000);
         return tip;
     }
-
-*/
     tellBrain (content,timing=0,status='default') {
         var _x = this.scene.player.snappedStanding.x
         var _y = this.scene.player.snappedStanding.y - 32;
@@ -70,7 +69,7 @@ export default class HudDisplay {
             return thought;
         }
     }
-
+*/
     drawDirections (directions) {
         if (this.directionsFrame != null) {
             this.directionsFrame.destroy();

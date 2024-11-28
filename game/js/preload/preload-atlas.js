@@ -26,6 +26,13 @@ const PRELOAD_ATLAS = [
             SPRITE: 'spritesheets/a_UI.png',
             JSON: 'atlas/ui-atlas.json'
         }
+    },
+    {
+        NAME: 'PLANTS',
+        PATH: {
+            SPRITE: 'spritesheets/a_PLANTS.png',
+            JSON: 'atlas/plant-atlas.json'
+        }
     }
 ];
 

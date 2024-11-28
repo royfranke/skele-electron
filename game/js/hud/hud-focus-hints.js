@@ -1,16 +1,15 @@
-/* global Phaser */
+import HudCommon from './hud-common.js';
 /*
  * Gets injected into the game scene
  */
 
-export default class HudFocusHints {
+export default class HudFocusHints extends HudCommon {
 
-    constructor(scene, factory) {
-       this.scene = scene;
-       this.factory = factory;
+    constructor(scene) {
+       super(scene);
+    }
 
-       this.view = this.scene.manager.getView();
-
+    initialize () {
        this.focusHints = [
             {
                 char: 'I',
@@ -30,19 +29,10 @@ export default class HudFocusHints {
 
     }
 
-    makeBlock(_x, _y, width = 24, height = 24, frameName = 'BLOCK_MID_YELLOW') {
-        return this.factory.makeBlock(_x, _y, width, height, frameName);
-    }
-
-    makeBitmapText (_x,_y, width, size=24, font='SkeleButton') {
-        return this.factory.makeBitmapText(_x, _y, width, size, font);
-    }
-
     makeFocusHint (hint) {
         if (hint != null) {
-
             let keyTip = {
-                block: this.makeBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_BLUE'),
+                block: this.makeBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_SAPPHIRE'),
                 text: this.makeBitmapText(hint.x+5, hint.y+3, 16, 12, 'SkeleButton')
             };
             keyTip.text.setText(hint.char);
@@ -68,7 +58,7 @@ export default class HudFocusHints {
 
     setKeyTip (tip, active=false) {
         if (tip != null && this.hints[tip] != undefined ) {
-            let style = active ? 'SHALLOW_YELLOW' : 'DEEP_BLUE';
+            let style = active ? 'SHALLOW_YELLOW' : 'DEEP_SAPPHIRE';
             this.hints[tip].block.setFrame('BLOCK_'+style);
         }
     }
@@ -77,12 +67,6 @@ export default class HudFocusHints {
         if (tip != null && this.hints[tip] != undefined ) {
             return this.hints[tip];
         }
-    }
-
-    // Not currently being used -- remove?
-    changeFocus (from, to) {
-        this.setKeyTip(from, false);
-        this.setKeyTip(to, true);
     }
 
 }

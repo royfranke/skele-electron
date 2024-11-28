@@ -10,7 +10,7 @@ export default class LoadGameScene extends Phaser.Scene {
 
 
     preload () {
-        this.preload = new PreloadManager(this); 
+        //this.preload = new PreloadManager(this); 
     }
 
     create() {

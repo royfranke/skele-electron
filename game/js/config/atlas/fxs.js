@@ -61,6 +61,28 @@
                                       ],
                   repeat: 0
               },
+                          DANDELION_CLOUD: {
+                  name: 'Dandelion Cloud',
+                  slug: 'DANDELION_CLOUD',
+                  frames: [
+                                          'DANDELION_CLOUD-1',
+                                          'DANDELION_CLOUD-2',
+                                          'DANDELION_CLOUD-3',
+                                          'DANDELION_CLOUD-4',
+                                          'DANDELION_CLOUD-5',
+                                          'DANDELION_CLOUD-6',
+                                          'DANDELION_CLOUD-7',
+                                          'DANDELION_CLOUD-8',
+                                          'DANDELION_CLOUD-9',
+                                          'DANDELION_CLOUD-10',
+                                          'DANDELION_CLOUD-11',
+                                          'DANDELION_CLOUD-12',
+                                          'DANDELION_CLOUD-13',
+                                          'DANDELION_CLOUD-14',
+                                          'DANDELION_CLOUD-15'
+                                      ],
+                  repeat: 0
+              },
                           COIN_10_: {
                   name: 'Dime',
                   slug: 'COIN_10_',

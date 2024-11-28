@@ -1,30 +1,34 @@
 import ZenerManager from "../zener/zener-manager.js";
-
+import HudCommon from "./hud-common.js";
 /*
  * Controls the Zener HUD interface
  * Deploys the ZenerManager to control the game
  * 
  */
 
-export default class HudZener {
+export default class HudZener extends HudCommon {
 
-    constructor(scene, factory) {
-        this.scene = scene;
+    constructor(scene) {
+        super(scene);
+    }
+
+    initialize() {
         this.open = false;
-        this.factory = factory;
-        this.view = this.scene.manager.getView();
         this.manager = new ZenerManager(this.scene);
         this.boardView = {
             x: this.view.left+88,
-            y: this.view.top+64,
+            y: this.view.top+56,
             width: 272,
-            height: 160,
-            frameName: 'HAND_FOCUSED',
+            height: 176,
+            frameName: 'BLOCK_MID_LILAC_BORDER',
+            frame: {
+                frameName: 'BLOCK_SHALLOW_SAPPHIRE_FRAME'
+            },
             block: null,
         };
         this.results = {
-            positive: ['Correct!','Right!','Good Job!','You got it!'],
-            negative: ['Incorrect!','Nope!','Try Again!','Not Quite!']
+            positive: ['Yes!!','Uh-huh!','That’s it!','You got it!'],
+            negative: ['Uh-uh.','Nope!','Try Again!','No way.','Pfffff. No.']
         };
         this.deckAnimations = [
             {
@@ -192,6 +196,7 @@ export default class HudZener {
     closeZener () {
         if (this.open) {
             this.boardView.block.destroy();
+            this.boardView.frame.block.destroy();
             this.board.deck.slot.block.destroy();
             this.board.deck.icon.icon.destroy();
             this.board.draw.slot.block.destroy();
@@ -245,12 +250,12 @@ export default class HudZener {
             this.scene.manager.hud.hudSound.play('CARD_SHUFFLE_MID');
         }
         if (this.deckCount == 0) {
-            this.addFX('CLOUD_DUST_', this.board.draw.x, this.board.draw.y + 8);
+            this.makeFX('CLOUD_DUST_', this.board.draw.x, this.board.draw.y + 8);
             this.lastDraw();
         }
         if (this.deckCount == 1) {
             this.lastCard();
-            this.addFX('CLOUD_DUST_', this.board.deck.x, this.board.deck.y + 8);
+            this.makeFX('CLOUD_DUST_', this.board.deck.x, this.board.deck.y + 8);
             this.manager.deck.setState('AWAITING GUESS');
         }
     }
@@ -349,10 +354,10 @@ export default class HudZener {
 
     drawReveal (result) {
         if (result.result) {
-            this.addFX('SELECTOR_VALID_', this.board.choices[this.manager.selected].x, this.board.choices[this.manager.selected].y,1000);
-            this.addFX('SPARKLE_', this.board.choices[this.manager.selected].x, this.board.choices[this.manager.selected].y);
+            this.makeFX('SELECTOR_VALID_', this.board.choices[this.manager.selected].x, this.board.choices[this.manager.selected].y,1000);
+            this.makeFX('SPARKLE_', this.board.choices[this.manager.selected].x, this.board.choices[this.manager.selected].y);
         } else {
-            this.addFX('SELECTOR_INVALID_', this.board.choices[this.manager.selected].x, this.board.choices[this.manager.selected].y,1000);
+            this.makeFX('SELECTOR_INVALID_', this.board.choices[this.manager.selected].x, this.board.choices[this.manager.selected].y,1000);
         }
 
         var anim = this.board.draw.icon.icon.anims.play('TURN_CARD_TO_FACE', false);
@@ -381,6 +386,8 @@ export default class HudZener {
     setupBoard() {
         this.deckCount = null;
         this.boardView.block = this.makeBlock(this.boardView.x, this.boardView.y, this.boardView.width, this.boardView.height, this.boardView.frameName);
+
+        this.boardView.frame.block = this.makeBlock(this.boardView.x, this.boardView.y, this.boardView.width, this.boardView.height, this.boardView.frame.frameName);
 
         this.board.deck.slot.block = this.makeBlock(this.board.deck.x, this.board.deck.y, 32, 32, this.board.deck.slot.frameName);
         this.board.deck.icon.icon = this.makeIcon(this.board.deck.x, this.board.deck.y - 16, this.board.deck.icon.textureName, this.board.deck.icon.frameName);
@@ -418,18 +425,6 @@ export default class HudZener {
 
         this.board.score[1].object.setText('Hits: ' + score.correct);
         this.board.score[2].object.setText('Misses: ' + score.incorrect);
-    }
-
-    makeBlock(_x, _y, width = 32, height = 32, frameName = 'HAND_UNFOCUSED') {
-        return this.factory.makeBlock(_x, _y, width, height, frameName);
-    }
-
-    makeIcon(_x, _y, textureName, frameName) {
-        return this.factory.makeIcon(_x + 8, _y + 8, textureName, frameName);
-    }
-
-    addFX (fx_slug, _x, _y, delay = 0) {
-        this.factory.makeHudFX(fx_slug, _x, _y, delay);
     }
 
     resultMessage (result) {

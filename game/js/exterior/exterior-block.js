@@ -47,6 +47,19 @@ export default class Block {
         }
         else {
             groundLayer.weightedRandomize(TILES[block.ground.toUpperCase()].FILL_, block.left, block.top, block.width, block.height);
+            if (block.ground.toUpperCase() == 'GRASS') {
+                ////
+                let sidewalk_h = 3;
+                let sidewalk_w = 3;
+                //// Add some dandelions
+                for (var i=sidewalk_w; i<block.width - (sidewalk_w*2); i++) {
+                    for (var j=sidewalk_h; j<block.height - (sidewalk_h*2); j++) {
+                        if (Phaser.Math.RND.between(0,10) == 1) {
+                            this.scene.manager.plantManager.newPlantToWorld(i + block.left, j + block.top, 'DANDELION',Phaser.Math.RND.between(1,44));
+                        }
+                    }
+                }
+            }
         }
         
     }

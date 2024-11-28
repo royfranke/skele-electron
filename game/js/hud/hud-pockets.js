@@ -1,14 +1,17 @@
+import HudCommon from "./hud-common.js";
 /*
  * Controls the pockets display on the HUD
  */
 
-export default class HudPockets {
+export default class HudPockets extends HudCommon {
 
-    constructor(scene, factory) {
-        this.scene = scene;
-        this.factory = factory;
-        this.view = this.scene.manager.getView();
+    constructor(scene) {
+        super(scene);
+    }
+
+    initialize() {
         this.slots = this.addPockets();
+        //this.highlight = this.addHighlight();
         this.pocket_textblock = null;
         this.pocket_actions = null;
         this.state = null;
@@ -20,16 +23,8 @@ export default class HudPockets {
         console.log("Setting pockets state to: " + state);
     }
 
-    makeBlock(_x, _y, width = 32, height = 32, frameName = 'HAND_UNFOCUSED') {
-        return this.factory.makeBlock(_x, _y, width, height, frameName);
-    }
-
-    makeIcon(_x, _y, textureName, frameName) {
-        return this.factory.makeIcon(_x + 8, _y + 8, textureName, frameName);
-    }
-
-    makeBitmapText (_x,_y, width, text, size, font="SkeleTalk") {
-        let bitmap = this.factory.makeBitmapText(_x,_y, width, size, font);
+    makeBitmapText(_x, _y, width, text, size, font = "SkeleTalk") {
+        let bitmap = this.factory.makeBitmapText(_x, _y, width, size, font);
         bitmap.setText(text);
         bitmap.setLineSpacing(8);
         return bitmap;
@@ -37,10 +32,6 @@ export default class HudPockets {
 
     makeIconContents(_x, _y, textureName, frameName) {
         return this.factory.makeIconContents(_x + 8, _y + 8, textureName, frameName);
-    }
-
-    addFX(fx_slug, _x, _y, delay = 0) {
-        this.factory.makeHudFX(fx_slug, _x, _y, delay);
     }
 
 
@@ -108,6 +99,38 @@ export default class HudPockets {
         let icon = this.makeIconContents((this.view.right - margin.x), (this.view.top + margin.y), textureName, frameName);
 
         return icon;
+    }
+
+    addHighlight() {
+        let highlightMargin = {
+            x: this.view.right - 48,
+            y: this.view.top + this.view.margin.top,
+        };
+        let highlight = this.makeBlock(highlightMargin.x, highlightMargin.y,32,32,'BLOCK_SHALLOW_YELLOW_FRAME');
+        //highlight.setVisible(false);
+        highlight.setDepth(100250);
+        return highlight;
+    }
+
+    setHighlight(slot_x, slot_y) {
+        let slotMargin = {
+            x: 48 + (slot_x * 40),
+            y: 16 + (slot_y * 36),
+        };
+        let highlight = this.highlight;
+        highlight.setPosition(this.view.right - slotMargin.x, this.view.top + slotMargin.y);
+
+        highlight.setVisible(true);
+        highlight.setFrame('BLOCK_SHALLOW_ORANGE_FRAME');
+        this.scene.time.addEvent({
+            delay: 250,
+            callback: () => {
+                highlight.setFrame('BLOCK_SHALLOW_YELLOW_FRAME');
+            }
+        });
+        
+        
+
     }
 
     addSlot(slot_x, slot_y) {
@@ -259,28 +282,27 @@ export default class HudPockets {
     }
 
     closePockets() {
-
         this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', false);
 
-        for (var r = 0; r < 3; r++) {
-            this.setSlotColor(r, 0, 'UNFOCUSED');
-        }
-        for (var i = 1; i < 3; i++) {
-            for (var r = 0; r < 3; r++) {
-                this.setSlotVisible(r, i, false);
+        for (let i = 0; i < 3; i++) {
+            for (let r = 0; r < 3; r++) {
+                if (i == 0) {
+                    this.setSlotColor(r, 0, 'UNFOCUSED');
+                }
+                else {
+                    this.setSlotVisible(r, i, false);
+                }
             }
         }
         this.clearPocketDisplay();
-
         this.showDrop(-1);
         this.setSlipsVisible(false);
         this.setPocketsState('CLOSED');
-        
     }
 
     pocketsVisible(visible) {
-        for (var i = 0; i < 3; i++) {
-            for (var r = 0; r < 3; r++) {
+        for (let i = 0; i < 3; i++) {
+            for (let r = 0; r < 3; r++) {
                 this.setSlotVisible(r, i, visible);
             }
         }
@@ -294,9 +316,9 @@ export default class HudPockets {
 
         let block = this.makeBlock(this.view.right - slotMargin.x, this.view.top + (slotMargin.y), 32, 16, 'BLOCK_MID_YELLOW');
 
-        let drop_text = this.makeBitmapText(block.x + 6, block.y + 5, 48, 'DROP', 8, 'SkeleTalk');
+        let drop_text = this.makeBitmapText(block.x + 4, block.y + 5, 48, 'DROP', 8, 'SkeleTalk');
 
-        let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
+        let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_ORANGE_LEFT');
 
         let button_text = this.makeBitmapText(button_block.x + 4, button_block.y + 5, 24, 'X', 8, 'SkeleTalk');
 
@@ -322,7 +344,7 @@ export default class HudPockets {
                 this.slots[0][i].drop.button_text.setVisible(false);
             }
             else {
-                this.slots[0][i].drop.block.setFrame(selected == true ? 'BLOCK_MID_YELLOW_RIGHT' : 'BLOCK_DEEP_BLUE');
+                this.slots[0][i].drop.block.setFrame(selected == true ? 'BLOCK_MID_BEIGE_RIGHT' : 'BLOCK_MID_LILAC');
                 if (selected) {
                     this.slots[0][i].drop.button.setVisible(true);
                     this.slots[0][i].drop.button_text.setVisible(true);
@@ -357,7 +379,7 @@ export default class HudPockets {
             y: 64,
         };
         let slip = this.makeSlip(this.view.right - slotMargin.x, this.view.top + (slotMargin.y), text);
-        
+
         slip.block.setVisible(false);
         slip.text.setVisible(false);
         slip.button.setVisible(false);
@@ -414,10 +436,10 @@ export default class HudPockets {
 
         let slip_text = this.scene.add.bitmapText(this.view.right - slotMargin.x, this.view.top + slotMargin.y, 'SkeleTalk', action, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
-        let block = this.makeBlock(slip_text.x - 6,slip_text.y - 5, slip_text.displayWidth + 12, 16, (selected ? 'BLOCK_MID_YELLOW_RIGHT' : 'BLOCK_MID_BLUE'));
+        let block = this.makeBlock(slip_text.x - 6, slip_text.y - 5, slip_text.displayWidth + 12, 16, (selected ? 'BLOCK_MID_BEIGE_RIGHT' : 'BLOCK_MID_YELLOW'));
         block.setOrigin(0);
 
-        let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_SKY_LEFT');
+        let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_ORANGE_LEFT');
         button_block.setOrigin(0);
         let button_text = this.scene.add.bitmapText(button_block.x + 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
@@ -445,7 +467,7 @@ export default class HudPockets {
     }
 
     setSlipsVisible(visible) {
-        for (var i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
             this.setSlipVisible(i, visible);
         }
     }
@@ -511,13 +533,13 @@ export default class HudPockets {
                 if (state != 'EMPTY' && selected.pocket != r && pocket[state].info.type == 'BAG') {
                     this.setSlipVisible(r, false);
                 }
-                
+
                 if (state != 'EMPTY' && selected.pocket == r && pocket[state].info.type != 'BAG' && i == 0) {
                     /// It's an item that has actions
                     this.pocket_actions = this.drawActions(r, selected.actions, pocket[state].getPocketActions());
-                    
+
                     this.setPocketTextBlock(pocket[state].info.description);
-                    
+
                 }
 
 
@@ -535,6 +557,7 @@ export default class HudPockets {
 
                 if (selected.pocket == r && selected.contents == i) {
                     this.setSlotColor(r, i, 'SELECTED');
+                    //this.setHighlight(r,i);
                     if (state == 'EMPTY') {
                         //this.setPocketTip(pocket[state].NAME);
                     }
@@ -602,26 +625,18 @@ export default class HudPockets {
             y: this.view.margin.top + 96,
         };
         let display_width = 144;
-        
+
         let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleTalk');
 
         let block = this.makeBlock(text.x - 8, text.y - 12, display_width, 32, 'BLOCK_MID_CREAM_BORDER');
         block.setVisible(false);
 
-        return {block: block, text: text};
+        return { block: block, text: text };
     }
 
-    destroyPocketTextBlock() {
-        if (this.pocket_textblock != null) {
-            this.pocket_textblock.block.destroy();
-            this.pocket_textblock.text.destroy();
-            this.pocket_textblock = null;
-        }
-    }
-    
     setPocketTextBlock(description) {
         this.destroyPocketTextBlock();
-        
+
         if (description != '') {
             this.pocket_textblock = this.addPocketTextBlock();
 
@@ -632,9 +647,17 @@ export default class HudPockets {
             let text_width = this.pocket_textblock.text.getTextBounds().local.width;
 
             this.pocket_textblock.block.destroy();
-            this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, text_width + 16, text_height + 24, 'BLOCK_MID_CREAM_BORDER');
+            this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, text_width + 16, text_height + 24, 'BLOCK_MID_WHITE_BORDER');
 
             this.pocket_textblock.text.setVisible(true);
+        }
+    }
+
+    destroyPocketTextBlock() {
+        if (this.pocket_textblock != null) {
+            this.pocket_textblock.block.destroy();
+            this.pocket_textblock.text.destroy();
+            this.pocket_textblock = null;
         }
     }
 }

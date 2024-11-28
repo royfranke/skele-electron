@@ -5,6 +5,7 @@ import GameUtilities from "./game-utilities.js";
 import HudManager from "../hud/hud-manager.js";
 import ItemManager from "../items/item-manager.js";
 import ObjectManager from "../objects/object-manager.js";
+import PlantManager from "../plants/plant-manager.js";
 import LootManager from "../loot/loot-manager.js";
 import TimeManager from "../time/time-manager.js";
 import KnowledgeManager from "../knowledge/knowledge-manager.js";  
@@ -28,6 +29,7 @@ export default class GameManager {
         this.hud = null;
         this.time = new TimeManager();
         this.objectManager = new ObjectManager(this.scene);
+        this.plantManager = new PlantManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
         this.loot = new LootManager(this.scene);
         this.fx = new FXManager(this.scene);
@@ -171,14 +173,14 @@ export default class GameManager {
             if (this.scene.exterior != null) {
                 this.scene.exterior.setKeyLight(this.getKeyLight());
                 this.objectManager.registry.updateLights(this.getKeyLight());
+                this.plantManager.registry.updateLights(this.getKeyLight());
             }
         }
         if (this.hud != null) {
             this.hud.update();
-            var time = this.time.getDigitalTime();
-            this.watch.setText(time.hour+':'+time.minute+"B");
         }
         this.objectManager.update();
+        this.plantManager.update();
     }
 
     loadGame () {
@@ -187,9 +189,7 @@ export default class GameManager {
             this.scene.app.camera.camera.setBackgroundColor('#4b424a');
             this.setState('LOADING');
             this.hud = new HudManager(this.scene);
-            this.watch = this.hud.hudWatch.tellWatch('--:--MB');
             
-
             this.scene[this.scene.place].createItems();
             
             this.setFocus('PLAYER');

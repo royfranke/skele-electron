@@ -87,13 +87,13 @@ export default class Npc {
           });
           var result = item_manager.newItemToPockets(item_slug, items);
           if (result != false) {
-            this.scene.manager.hud.hudDisplay.tellBrain('You got a new ' + item_slug + '.', 2000, 'missing');
+            this.scene.manager.hud.think('You got a new ' + item_slug + '.');
 
             
             this.greeting = true;
           }
           else {
-            this.scene.manager.hud.hudDisplay.tellBrain('Your pockets are too full.', 2000, 'missing');
+            this.scene.manager.hud.think('Your pockets are too full.');
             return false;
           }
         }
@@ -111,7 +111,7 @@ export default class Npc {
     this.scene.player.action.clearActions();
     if (action == 'GREET') {
       if (!this.greeting) {
-        this.scene.manager.hud.hudDisplay.tellBrain('Hello— have a sack lunch.', 3000, 'missing');
+        this.scene.manager.hud.think('Hello— have a sack lunch.');
         this.greeting = this.givePlayerItem('LUNCH_BAG_USED', ['BANANA', 'APPLE']);
       }
 
@@ -134,7 +134,7 @@ export default class Npc {
     if (action == 'STOP FOLLOWING ME') {
       this.following = null;
       this.clearDestinations();
-      this.scene.manager.hud.hudDisplay.tellBrain('Have an apple.', 2000, 'missing');
+      this.scene.manager.hud.think('Have an apple.');
       this.givePlayerItem('APPLE');
     }
 
