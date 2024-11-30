@@ -35,19 +35,7 @@ export default class SettingsMenu {
         const selected = this.selected;
         const view = this.view;
         var menu_list = [];
-        this.menu.forEach(function (menu_item, index) {
-            // TODO: Come back to swap these int out for margin vars
-            var element = self.scene.add.dom(view.left + (view.margin.left * 2),
-                (index * 18) + view.top + view.margin.top + 8, 'div', '', `${menu_item}`).setClassName(selected == index ? 'menu-item menu-item-selected' : 'menu-item' ).setOrigin(0,0);
-            if (menu_item.BUTTON_STICK) {
-                self.scene.add.image(view.left + (view.margin.left * 1.5),(index * 18) + view.top + view.margin.top + 20, 'UI', 'BAG_ARROW_SELECTED').setScrollFactor(0).setDepth(1000).setAngle(-90);
-            }
 
-            if (menu_item.BUTTON == 'BACK') {
-                self.menu_back = menu_item;
-            }
-            menu_list.push(element);
-        });
         
         return menu_list;
     }

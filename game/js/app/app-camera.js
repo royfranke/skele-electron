@@ -38,18 +38,24 @@ export default class AppCamera {
 
     start () {
         this.camera.setBackgroundColor('#4b424a');
-        this.camera.fadeIn(this.state.fadeIn, 0, 0, 0);
+        if (this.state.fadeIn) {
+            this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
+        }
     }
 
 
 
     wake () {
         this.camera.setBackgroundColor('#4b424a');
-        this.camera.fadeIn(this.state.fadeIn, 0, 0, 0);
+        if (this.state.fadeIn) {
+            this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
+        }
     }
 
     end () {
-        this.camera.fadeOut(this.state.fadeOut, 0, 0, 0);        
+        if (this.state.fadeOut) {
+            this.camera.fadeOut(this.state.fadeOut, 75, 66, 74);
+        }      
     }
 
     follow (followMe) {

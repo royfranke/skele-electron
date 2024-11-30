@@ -12,6 +12,7 @@ export default class AppManager {
 
     constructor(scene, state_name) {
        this.scene = scene;
+       this.verbose = true;
        this.appState = new AppState(state_name);   
        this.create();
     }
@@ -109,6 +110,8 @@ export default class AppManager {
     startScene () {
         const state = this.state;
         this.camera.start();
+        let verbose = this.verbose;
+        if (verbose) {console.log("Starting Scene: "+state.name)};
 
         if (state.autoEnd > 0) {
             this.scene.time.addEvent({
@@ -125,10 +128,11 @@ export default class AppManager {
     endScene (switchToKey) {
         this.camera.end(switchToKey);
         const state = this.state;
-
+        let verbose = this.verbose;
         this.scene.time.addEvent({
             delay: state.fadeOut,
             callback: ()=>{
+                if (verbose) { console.log("Ending/Switching Scene: "+state.name);}
                 this.switchTo(switchToKey);
             }
         });

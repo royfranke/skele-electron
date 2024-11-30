@@ -28,6 +28,7 @@ export default class PlayerSprite {
     this.scene.physics.add.collider(this.sprite, this.scene.interior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
     this.scene.interior.wallLayer.setCollisionByExclusion([-1]);
+    this.sprite.setCollideWorldBounds(true);
 
   }
 
@@ -35,7 +36,7 @@ export default class PlayerSprite {
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
     this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
-
+    this.sprite.setCollideWorldBounds(true);
     this.setExteriorZones();
   }
 

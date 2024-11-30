@@ -775,8 +775,8 @@
 	}
     
                          
-        ,  { 
-		"filename": "SPRAY_PAINT",
+      ,  { 
+		"filename": "SPRAY_PAINT_EMPTY",
 		"frame": {"x":16,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -784,7 +784,7 @@
     
                          
       ,  { 
-		"filename": "SIDEWALK_CHALK_",
+		"filename": "SPRAY_PAINT",
 		"frame": {"x":32,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -792,7 +792,7 @@
     
                          
       ,  { 
-		"filename": "SIDEWALK_CHALK_PINK_",
+		"filename": "SIDEWALK_CHALK_",
 		"frame": {"x":48,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -800,7 +800,7 @@
     
                          
       ,  { 
-		"filename": "SIDEWALK_CHALK_YELLOW_",
+		"filename": "SIDEWALK_CHALK_PINK_",
 		"frame": {"x":64,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -808,7 +808,7 @@
     
                          
       ,  { 
-		"filename": "SIDEWALK_CHALK_BLUE_",
+		"filename": "SIDEWALK_CHALK_YELLOW_",
 		"frame": {"x":80,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -816,7 +816,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_ORANGE",
+		"filename": "SIDEWALK_CHALK_BLUE_",
 		"frame": {"x":96,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -824,7 +824,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_RED",
+		"filename": "CRAYON_ORANGE",
 		"frame": {"x":112,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -832,7 +832,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_BROWN",
+		"filename": "CRAYON_RED",
 		"frame": {"x":128,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -840,7 +840,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_PACK",
+		"filename": "CRAYON_BROWN",
 		"frame": {"x":144,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -848,7 +848,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_YELLOW",
+		"filename": "CRAYON_PACK",
 		"frame": {"x":160,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -856,7 +856,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_GREEN",
+		"filename": "CRAYON_YELLOW",
 		"frame": {"x":176,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -864,7 +864,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_BLUE",
+		"filename": "CRAYON_GREEN",
 		"frame": {"x":192,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -872,7 +872,7 @@
     
                          
       ,  { 
-		"filename": "CRAYON_PURPLE",
+		"filename": "CRAYON_BLUE",
 		"frame": {"x":208,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -880,7 +880,7 @@
     
                          
       ,  { 
-		"filename": "ZENER_1",
+		"filename": "CRAYON_PURPLE",
 		"frame": {"x":224,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -888,7 +888,7 @@
     
                          
       ,  { 
-		"filename": "ZENER_2",
+		"filename": "ZENER_1",
 		"frame": {"x":240,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -896,7 +896,7 @@
     
                          
       ,  { 
-		"filename": "ZENER_3",
+		"filename": "ZENER_2",
 		"frame": {"x":256,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -904,7 +904,7 @@
     
                          
       ,  { 
-		"filename": "ZENER_4",
+		"filename": "ZENER_3",
 		"frame": {"x":272,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -912,7 +912,7 @@
     
                          
       ,  { 
-		"filename": "ZENER_5",
+		"filename": "ZENER_4",
 		"frame": {"x":288,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -920,7 +920,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_DISH_1",
+		"filename": "ZENER_5",
 		"frame": {"x":304,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -928,7 +928,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_DISH_2",
+		"filename": "CASSEROLE_DISH_1",
 		"frame": {"x":320,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -936,7 +936,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_DISH_3",
+		"filename": "CASSEROLE_DISH_2",
 		"frame": {"x":336,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -944,7 +944,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_DISH_4",
+		"filename": "CASSEROLE_DISH_3",
 		"frame": {"x":352,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -952,7 +952,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_DISH_5",
+		"filename": "CASSEROLE_DISH_4",
 		"frame": {"x":368,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -960,7 +960,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_DISH_6",
+		"filename": "CASSEROLE_DISH_5",
 		"frame": {"x":384,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -968,7 +968,7 @@
     
                          
       ,  { 
-		"filename": "MUG_1",
+		"filename": "CASSEROLE_DISH_6",
 		"frame": {"x":400,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -976,7 +976,7 @@
     
                          
       ,  { 
-		"filename": "MUG_2",
+		"filename": "MUG_1",
 		"frame": {"x":416,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -984,7 +984,7 @@
     
                          
       ,  { 
-		"filename": "MUG_3",
+		"filename": "MUG_2",
 		"frame": {"x":432,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -992,7 +992,7 @@
     
                          
       ,  { 
-		"filename": "MUG_4",
+		"filename": "MUG_3",
 		"frame": {"x":448,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1000,7 +1000,7 @@
     
                          
       ,  { 
-		"filename": "MUG_5",
+		"filename": "MUG_4",
 		"frame": {"x":464,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1008,7 +1008,7 @@
     
                          
       ,  { 
-		"filename": "MUG_6",
+		"filename": "MUG_5",
 		"frame": {"x":480,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1016,7 +1016,7 @@
     
                          
       ,  { 
-		"filename": "MUG_7",
+		"filename": "MUG_6",
 		"frame": {"x":496,"y":48,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1024,7 +1024,7 @@
     
                          
       ,  { 
-		"filename": "MUG_8",
+		"filename": "MUG_7",
 		"frame": {"x":0,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1032,7 +1032,7 @@
     
                          
       ,  { 
-		"filename": "MUG_9",
+		"filename": "MUG_8",
 		"frame": {"x":16,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1040,7 +1040,7 @@
     
                          
       ,  { 
-		"filename": "WATERING_CAN",
+		"filename": "MUG_9",
 		"frame": {"x":32,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1048,7 +1048,7 @@
     
                          
       ,  { 
-		"filename": "RAKE",
+		"filename": "WATERING_CAN",
 		"frame": {"x":48,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1056,7 +1056,7 @@
     
                          
       ,  { 
-		"filename": "SPADE",
+		"filename": "RAKE",
 		"frame": {"x":64,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1064,7 +1064,7 @@
     
                          
       ,  { 
-		"filename": "SCISSORS",
+		"filename": "SPADE",
 		"frame": {"x":80,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1072,7 +1072,7 @@
     
                          
       ,  { 
-		"filename": "HEDGE_TRIMMERS",
+		"filename": "SCISSORS",
 		"frame": {"x":96,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1080,7 +1080,7 @@
     
                          
       ,  { 
-		"filename": "RABBITS_FOOT",
+		"filename": "HEDGE_TRIMMERS",
 		"frame": {"x":112,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1088,7 +1088,7 @@
     
                          
       ,  { 
-		"filename": "LIGHTER",
+		"filename": "RABBITS_FOOT",
 		"frame": {"x":128,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1096,7 +1096,7 @@
     
                          
       ,  { 
-		"filename": "SHOVEL",
+		"filename": "LIGHTER",
 		"frame": {"x":144,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1104,7 +1104,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_PINK_3",
+		"filename": "SHOVEL",
 		"frame": {"x":160,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1112,7 +1112,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_PINK_2",
+		"filename": "FLYER_PINK_3",
 		"frame": {"x":176,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1120,7 +1120,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_PINK_1",
+		"filename": "FLYER_PINK_2",
 		"frame": {"x":192,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1128,7 +1128,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_PINK",
+		"filename": "FLYER_PINK_1",
 		"frame": {"x":208,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1136,7 +1136,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_MISSING_9",
+		"filename": "FLYER_PINK",
 		"frame": {"x":224,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1144,7 +1144,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_MISSING_8",
+		"filename": "FLYER_MISSING_9",
 		"frame": {"x":240,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1152,7 +1152,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_MISSING_7",
+		"filename": "FLYER_MISSING_8",
 		"frame": {"x":256,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1160,7 +1160,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_MISSING",
+		"filename": "FLYER_MISSING_7",
 		"frame": {"x":272,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1168,7 +1168,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_GRAY_12",
+		"filename": "FLYER_MISSING",
 		"frame": {"x":288,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1176,7 +1176,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_GRAY_11",
+		"filename": "FLYER_GRAY_12",
 		"frame": {"x":304,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1184,7 +1184,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_GRAY_10",
+		"filename": "FLYER_GRAY_11",
 		"frame": {"x":320,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1192,7 +1192,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_GRAY",
+		"filename": "FLYER_GRAY_10",
 		"frame": {"x":336,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1200,7 +1200,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_YELLOW_6",
+		"filename": "FLYER_GRAY",
 		"frame": {"x":352,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1208,7 +1208,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_YELLOW_5",
+		"filename": "FLYER_YELLOW_6",
 		"frame": {"x":368,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1216,7 +1216,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_YELLOW_4",
+		"filename": "FLYER_YELLOW_5",
 		"frame": {"x":384,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1224,7 +1224,7 @@
     
                          
       ,  { 
-		"filename": "FLYER_YELLOW",
+		"filename": "FLYER_YELLOW_4",
 		"frame": {"x":400,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1232,7 +1232,7 @@
     
                          
       ,  { 
-		"filename": "BANANA_13",
+		"filename": "FLYER_YELLOW",
 		"frame": {"x":416,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1240,8 +1240,16 @@
     
                          
       ,  { 
-		"filename": "BANANA_14",
+		"filename": "BANANA_13",
 		"frame": {"x":432,"y":64,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BANANA_14",
+		"frame": {"x":448,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -1249,7 +1257,7 @@
                          
         ,  { 
 		"filename": "APPLE_15",
-		"frame": {"x":448,"y":64,"w":16,"h":16},
+		"frame": {"x":464,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -1257,7 +1265,7 @@
                          
       ,  { 
 		"filename": "APPLE_16",
-		"frame": {"x":464,"y":64,"w":16,"h":16},
+		"frame": {"x":480,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -1265,14 +1273,6 @@
                          
         ,  { 
 		"filename": "CEREAL_BOX_2",
-		"frame": {"x":480,"y":64,"w":16,"h":16},
-		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
-		"sourceSize": {"w":16,"h":16}
-	}
-    
-                         
-      ,  { 
-		"filename": "CEREAL_BOX_3",
 		"frame": {"x":496,"y":64,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1280,7 +1280,7 @@
     
                          
       ,  { 
-		"filename": "MILK_WHOLE",
+		"filename": "CEREAL_BOX_3",
 		"frame": {"x":0,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1288,7 +1288,7 @@
     
                          
       ,  { 
-		"filename": "MILK_SKIM",
+		"filename": "MILK_WHOLE",
 		"frame": {"x":16,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1296,7 +1296,7 @@
     
                          
       ,  { 
-		"filename": "CEREAL_BOX_1",
+		"filename": "MILK_SKIM",
 		"frame": {"x":32,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1304,7 +1304,7 @@
     
                          
       ,  { 
-		"filename": "CEREAL_BOX_4",
+		"filename": "CEREAL_BOX_1",
 		"frame": {"x":48,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1312,7 +1312,7 @@
     
                          
       ,  { 
-		"filename": "MILK_BODEGA",
+		"filename": "CEREAL_BOX_4",
 		"frame": {"x":64,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1320,7 +1320,7 @@
     
                          
       ,  { 
-		"filename": "MILK_CHOCOLATE",
+		"filename": "MILK_BODEGA",
 		"frame": {"x":80,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1328,7 +1328,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_CORN_BREAD",
+		"filename": "MILK_CHOCOLATE",
 		"frame": {"x":96,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1336,7 +1336,7 @@
     
                          
       ,  { 
-		"filename": "POT_RED_SOUP",
+		"filename": "CASSEROLE_CORN_BREAD",
 		"frame": {"x":112,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1344,7 +1344,7 @@
     
                          
       ,  { 
-		"filename": "BOWL_5",
+		"filename": "POT_RED_SOUP",
 		"frame": {"x":128,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1352,7 +1352,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_MAC",
+		"filename": "BOWL_5",
 		"frame": {"x":144,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1360,7 +1360,7 @@
     
                          
       ,  { 
-		"filename": "COOKING_POT",
+		"filename": "CASSEROLE_MAC",
 		"frame": {"x":160,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1368,8 +1368,16 @@
     
                          
       ,  { 
-		"filename": "BOWL_4",
+		"filename": "COOKING_POT",
 		"frame": {"x":176,"y":80,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BOWL_4",
+		"frame": {"x":192,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -1377,14 +1385,6 @@
                          
         ,  { 
 		"filename": "POT_WATER",
-		"frame": {"x":192,"y":80,"w":16,"h":16},
-		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
-		"sourceSize": {"w":16,"h":16}
-	}
-    
-                         
-      ,  { 
-		"filename": "BIRD_SEED_BAG",
 		"frame": {"x":208,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1392,7 +1392,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_POTATO_SALAD",
+		"filename": "BIRD_SEED_BAG",
 		"frame": {"x":224,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1400,7 +1400,7 @@
     
                          
       ,  { 
-		"filename": "POT_GREEN_SOUP",
+		"filename": "CASSEROLE_POTATO_SALAD",
 		"frame": {"x":240,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1408,7 +1408,7 @@
     
                          
       ,  { 
-		"filename": "BOWL_MILK",
+		"filename": "POT_GREEN_SOUP",
 		"frame": {"x":256,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1416,7 +1416,7 @@
     
                          
       ,  { 
-		"filename": "BASKET_RED",
+		"filename": "BOWL_MILK",
 		"frame": {"x":272,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1424,7 +1424,7 @@
     
                          
       ,  { 
-		"filename": "CEREAL_3",
+		"filename": "BASKET_RED",
 		"frame": {"x":288,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1432,7 +1432,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_ONE",
+		"filename": "CEREAL_3",
 		"frame": {"x":304,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1440,8 +1440,16 @@
     
                          
       ,  { 
-		"filename": "PAPER_TWENTY",
+		"filename": "PAPER_ONE",
 		"frame": {"x":320,"y":80,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PAPER_TWENTY",
+		"frame": {"x":336,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -1449,14 +1457,6 @@
                          
         ,  { 
 		"filename": "CEREAL_1",
-		"frame": {"x":336,"y":80,"w":16,"h":16},
-		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
-		"sourceSize": {"w":16,"h":16}
-	}
-    
-                         
-      ,  { 
-		"filename": "PAPER_TWO",
 		"frame": {"x":352,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1464,7 +1464,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_FIFTY",
+		"filename": "PAPER_TWO",
 		"frame": {"x":368,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1472,15 +1472,15 @@
     
                          
       ,  { 
-		"filename": "BASKET_RED_19",
+		"filename": "PAPER_FIFTY",
 		"frame": {"x":384,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
     
                          
-        ,  { 
-		"filename": "PAPER_FIVE",
+      ,  { 
+		"filename": "BASKET_RED_19",
 		"frame": {"x":400,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1488,7 +1488,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_HUNDRED",
+		"filename": "CEREAL_MILK_3",
 		"frame": {"x":416,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1496,7 +1496,7 @@
     
                          
       ,  { 
-		"filename": "BASKET_RED_18",
+		"filename": "PAPER_FIVE",
 		"frame": {"x":432,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1504,7 +1504,7 @@
     
                          
       ,  { 
-		"filename": "CEREAL_1",
+		"filename": "PAPER_HUNDRED",
 		"frame": {"x":448,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1512,7 +1512,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TEN",
+		"filename": "BASKET_RED_18",
 		"frame": {"x":464,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1520,7 +1520,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TWONTY",
+		"filename": "CEREAL_MILK_1",
 		"frame": {"x":480,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1528,7 +1528,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_BROWNIE_21",
+		"filename": "PAPER_TEN",
 		"frame": {"x":496,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1536,7 +1536,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_BROWNIE_22",
+		"filename": "PAPER_TWONTY",
 		"frame": {"x":0,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1544,7 +1544,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_BROWNIE_23",
+		"filename": "CASSEROLE_BROWNIE_21",
 		"frame": {"x":16,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1552,7 +1552,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_BROWNIE_24",
+		"filename": "CASSEROLE_BROWNIE_22",
 		"frame": {"x":32,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1560,7 +1560,7 @@
     
                          
       ,  { 
-		"filename": "CASSEROLE_BROWNIE",
+		"filename": "CASSEROLE_BROWNIE_23",
 		"frame": {"x":48,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1568,8 +1568,24 @@
     
                          
       ,  { 
-		"filename": "TOAST",
+		"filename": "CASSEROLE_BROWNIE_24",
 		"frame": {"x":64,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CASSEROLE_BROWNIE",
+		"frame": {"x":80,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TOAST",
+		"frame": {"x":96,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -1577,7 +1593,7 @@
                          
             ,  { 
 		"filename": "STORE_BREAD",
-		"frame": {"x":80,"y":96,"w":16,"h":16},
+		"frame": {"x":112,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -1585,22 +1601,6 @@
                          
               ,  { 
 		"filename": "STICK_1",
-		"frame": {"x":96,"y":96,"w":16,"h":16},
-		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
-		"sourceSize": {"w":16,"h":16}
-	}
-    
-                         
-      ,  { 
-		"filename": "FRYING_PAN",
-		"frame": {"x":112,"y":96,"w":16,"h":16},
-		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
-		"sourceSize": {"w":16,"h":16}
-	}
-    
-                         
-      ,  { 
-		"filename": "JELLY_RASPBERRY",
 		"frame": {"x":128,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1608,7 +1608,7 @@
     
                          
       ,  { 
-		"filename": "JUMP_ROPE",
+		"filename": "FRYING_PAN",
 		"frame": {"x":144,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1616,21 +1616,109 @@
     
                          
       ,  { 
-		"filename": "PLATE_1",
+		"filename": "JELLY_RASPBERRY",
 		"frame": {"x":160,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
     
                          
-        ,  { 
-		"filename": "JELLY_STRAWBERRY",
+      ,  { 
+		"filename": "JUMP_ROPE",
 		"frame": {"x":176,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
     
                          
-                                	
+      ,  { 
+		"filename": "PLATE_1",
+		"frame": {"x":192,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TOAST_JELLY",
+		"frame": {"x":208,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "JELLY_STRAWBERRY",
+		"frame": {"x":224,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BOOK_2",
+		"frame": {"x":240,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "COMFORTER_MOTHEATEN",
+		"frame": {"x":256,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BOOK_1",
+		"frame": {"x":272,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CUPCAKE_GILLY",
+		"frame": {"x":288,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TOOTHBRUSH_YELLOW",
+		"frame": {"x":304,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TOOTHBRUSH_BLUE",
+		"frame": {"x":320,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+        ,  { 
+		"filename": "TOOTHPASTE",
+		"frame": {"x":336,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TOOTHBRUSH_RED",
+		"frame": {"x":352,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+                                  	
 ]
 }

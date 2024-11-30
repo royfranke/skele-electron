@@ -460,6 +460,16 @@
                                       ],
                   repeat: 0
               },
+                          UNCRUMPLE_DOLLAR: {
+                  name: 'Uncrumple Dollar',
+                  slug: 'UNCRUMPLE_DOLLAR',
+                  frames: [
+                                          'UNCRUMPLE_DOLLAR-1',
+                                          'UNCRUMPLE_DOLLAR-2',
+                                          'UNCRUMPLE_DOLLAR-3'
+                                      ],
+                  repeat: 0
+              },
                           SELECTOR_VALID_: {
                   name: 'Valid Selector',
                   slug: 'SELECTOR_VALID_',

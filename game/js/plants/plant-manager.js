@@ -52,7 +52,7 @@ export default class PlantManager {
         var plant = this.newPlant(slug,days_old);
         var result = this.putPlantInWorld(plant,_x,_y);
         if (!result) {
-            console.warn('Could not add to world: '+slug);
+            console.warn('Could not put this plant in the world from plant manager: '+slug);
             return false;
         }
         
@@ -61,18 +61,7 @@ export default class PlantManager {
 
     putPlantInWorld (plant, _x, _y) {
 
-        var result = this.registry.placePlant(plant,_x,_y);
-        if (!result) {
-            console.log('Could not put this plant in the world from plant manager...');
-        }
-        /*
-        TODO: Add plant collisions
-        if (plant.info.solid == 1) {
-            this.scene.physics.add.collider(this.scene.player.playerSprite.sprite, plant.sprite);
-        }
-            */
-
-
+        return this.registry.placePlant(plant,_x,_y);
     }
 
 

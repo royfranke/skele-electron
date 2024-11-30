@@ -40,7 +40,7 @@ export default class AppMenu {
             menu_list.push({block: block, text: text});
         });
 
-        let selector_block = this.scene.add.nineslice(menu_list[0].block.x - 24, menu_list[0].block.y, 'UI', 'BLOCK_MID_ORANGE_LEFT', 24, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1010);
+        let selector_block = this.scene.add.nineslice(menu_list[0].block.x - 24, menu_list[0].block.y, 'UI', 'BLOCK_DEEP_ORANGE_LEFT', 24, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1010);
         let selector_text = this.scene.add.bitmapText(selector_block.x + 8,selector_block.y + 4, 'SkeleButton', 'X', 16).setOrigin(0).setScrollFactor(0).setDepth(1011);
         let selector_frame = this.scene.add.nineslice(selector_block.x,(view.top + view.margin.top), 'UI', 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME', 96 + 24, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1200);
 

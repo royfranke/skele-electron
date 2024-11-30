@@ -11,7 +11,7 @@ import NpcManager from "../npc/npc-manager.js";
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super("Game Scene");
-        this.verbose = false;
+        this.verbose = true;
     }
 
     init (data) {
@@ -27,6 +27,7 @@ export default class GameScene extends Phaser.Scene {
     create() {
         if (this.slot.SAVE.HEADLINE == 'NEW') {
             if (this.verbose) console.log("New Game");
+            return this.newGame();
         }
         // Replace the exterior and interior classes with a ground class interpretter in its own ground/ground-manager.js
         
@@ -62,6 +63,17 @@ export default class GameScene extends Phaser.Scene {
         /// Before portal, save the game
         this.slot = this.app.softSaveGameData();
         if (this.verbose) console.log(this.slot);
+        this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
+    }
+
+    newGame() {
+        var portal = {
+            room_id: 2,
+            x: 12,
+            y: 12,
+            facing: 'down'
+        };
+        if (this.verbose) console.log(portal);
         this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
     }
 

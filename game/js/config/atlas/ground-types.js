@@ -360,6 +360,20 @@ const GROUND_TYPE = {
     ANIMALPREF: 0,
     ACTIONS: [
         ]
+  },
+  VOID: {
+    TYPE: "VOID",
+    SPEED: "CRISP",
+    BITMAP: false,
+    EDGE: "NONE",
+    COLLIDES: false,
+    USEMASK: false,
+    ZINDEX: 0,
+    ADULTPREF: 0,
+    CHILDPREF: 0,
+    ANIMALPREF: 0,
+    ACTIONS: [
+        ]
   }
 };
 

@@ -4,13 +4,16 @@ import DAY_DATA from "../data/days.js";
 
 export default class TimeManager {
 
-    constructor(now={hour: 6, minute: 0, second: 0, day: 1}) {
+    constructor(now={hour: 4, minute: 0, second: 0, day: 1, alarm: {set: true, hour: 4, minute: 0}}) {
         this.now = now;
         this.month = ['June','July','August'];
         this.start_date = 3; // June 3rd, start date
         this.daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday','Monday'];
 
         this.keyLightOrder = ['astronomicalDawn','nauticalDawn', 'civilDawn', 'sunrise', 'morning', 'solarNoon', 'afternoon', 'sunset', 'civilDusk', 'nauticalDusk', 'astronomicalDusk', 'night'];
+
+        this.second_increment = .5;
+        this.time_passing = false;
 
         this.today = this.getDate();
         
@@ -21,7 +24,12 @@ export default class TimeManager {
             HOUR: this.now.hour,
             MINUTE: this.now.minute,
             SECOND: this.now.second,
-            DAY: this.now.day
+            DAY: this.now.day,
+            ALARM: {
+                SET: this.now.alarm.set,
+                HOUR: this.now.alarm.hour,
+                MINUTE: this.now.alarm.minute
+            }
         }
     }
 
@@ -30,16 +38,23 @@ export default class TimeManager {
             hour: time.HOUR,
             minute: time.MINUTE,
             second: time.SECOND,
-            day: time.DAY
+            day: time.DAY,
+            alarm: {
+                set: time.ALARM.SET,
+                hour: time.ALARM.HOUR,
+                minute: time.ALARM.MINUTE
+            }
         };
         this.setToday();
         this.updateCurrentLightState();
-        console.log(this.today);
+
     }
 
     update () {
-        this.incrementSecond(.5);
-        //this.incrementSecond(30);
+        if (this.time_passing) {
+            this.incrementSecond(this.second_increment);
+            //this.incrementSecond(30);
+        }
     }
 
     getTime (current=this.now) {
@@ -162,6 +177,15 @@ export default class TimeManager {
     incrementDay(increment) {
         this.now.day += increment;
         this.setToday();
+    }
+
+    getAlarmStatus () {
+        if (this.now.alarm.set == 'TRUE') {
+            return 'C';
+        }
+        else {
+            return 'B';
+        }
     }
 
 }

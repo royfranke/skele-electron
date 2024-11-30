@@ -52,7 +52,7 @@ import Room from "../object/room.js";
         this.buildRoom();
 
         this.ground = new Ground(this.groundLayer, this.edgeLayer);
-
+        this.scene.app.camera.setBounds(this.map.widthInPixels, this.map.heightInPixels);
         
     }
 
@@ -67,9 +67,22 @@ import Room from "../object/room.js";
             /// Start with the floor.
             var _x = 1;
             var _y = 5;
+            var base_flooring = '';
+
+            if (this.config.floorSlug != undefined && this.config.floorSlug != '') {
+                base_flooring += this.config.floorSlug;
+            }
+            else {
+                base_flooring += 'TILE.CHECKERED_WHITE_BROWN_';
+            }
+
+            // Now break apart the flooring string to access the tileset
+            var flooring = base_flooring.split('.');
+ 
+    
+            this.groundLayer.weightedRandomize(TILES[flooring[0]][flooring[1]], _x, _y, this.config.floorWidth, this.config.floorHeight);
             
-            /// Hardcoded floor tiles for now
-            this.groundLayer.weightedRandomize(TILES.TILE.CHECKERED_BLUE_WHITE_, _x, _y, this.config.floorWidth, this.config.floorHeight);
+
             const groundLayer = this.groundLayer;
             
 
