@@ -36,6 +36,12 @@ export default class ItemManager {
         return this.scene.manager.hud.availablePocket(item, specific_pocket);
     }
 
+    newContentToPocket (pocketIndex,slug) {
+        // Get the item in this pocket index and add new slug as contents
+        var item = this.newItem(slug);
+        return this.scene.manager.hud.availableContainer(item, pocketIndex);
+    }
+
     newItemToPocket (pocketIndex,slug,items=[]) {
         var item = this.newItem(slug,items);
         var result = this.addItemToPockets(item,pocketIndex);

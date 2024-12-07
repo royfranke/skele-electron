@@ -18,60 +18,62 @@ import KEYLIGHT from "../config/key-light.js";
 
     constructor(scene) {
         this.scene = scene;
+        this.initialize();
+    }
+
+    initialize () {
         this.keylight = KEYLIGHT;
 
-        this.nav = new Navigator(scene);
+        this.nav = new Navigator(this.scene);
 
-        this.overMap = MAP_CONFIG;
         this.lastBlock = {x: 0, y: 0};
         this.lastTile = {x: 0, y: 0};
 
         this.map = this.scene.make.tilemap({
-            tileWidth: this.overMap.tileSize,
-            tileHeight: this.overMap.tileSize,
-            width: this.overMap.width,
-            height: this.overMap.height,
+            tileWidth: MAP_CONFIG.tileSize,
+            tileHeight: MAP_CONFIG.tileSize,
+            width: MAP_CONFIG.width,
+            height: MAP_CONFIG.height,
         });
-        const overMap = this.overMap;
 
         const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
         const edge_tileset = this.map.addTilesetImage("edge", null, 16, 16, 0, 0);
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
         const roof_tileset = this.map.addTilesetImage("roof", null, 16, 16, 0, 0);
         
-        this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(1);
+        this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(0);
         this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset);
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
         this.roofLayer = this.map.createBlankLayer("Roof", roof_tileset);
         this.roofLayer.setDepth(1000);
-        const wallLayer = this.wallLayer;
-        const roofLayer = this.roofLayer;
-        const groundLayer = this.groundLayer;
-        var self = this;
-        const blocks = new Array(this.overMap.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
+        this.buildMap();
+    }
 
+    buildMap () {
+        const self = this;
+        const blocks = new Array(MAP_CONFIG.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 
-        overMap.blocks.forEach(function (block, index) {
-            blocks[block.y][block.x] = new Block(self.scene,groundLayer,wallLayer,roofLayer, block); /// Backwards on purpose to not require array flip
+        MAP_CONFIG.blocks.forEach(function (block, index) {
+            blocks[block.y][block.x] = new Block(self.scene,self.groundLayer,self.wallLayer,self.roofLayer, block); /// Backwards on purpose to not require array flip
             
         });
 
-        overMap.propertyLines.forEach(function (prop, index) {
+        MAP_CONFIG.propertyLines.forEach(function (prop, index) {
             blocks[prop.block.y][prop.block.x].addPropertyLine(prop); /// Backwards on purpose to not require array flip
             
         });
-        let nodesHeight = parseInt(this.overMap.sectionsHeight + 3);
-        let nodesWidth = parseInt(this.overMap.sectionsWidth + 3);
+        let nodesHeight = parseInt(MAP_CONFIG.sectionsHeight + 3);
+        let nodesWidth = parseInt(MAP_CONFIG.sectionsWidth + 3);
         const nodes = new Array(nodesHeight).fill().map(() => new Array(nodesWidth).fill(0));
         
         
-        overMap.nodes.forEach(function (node, index) {
-            nodes[node.y][node.x] = new BlockNode(groundLayer, node); /// Backwards on purpose to not require array flip
+        MAP_CONFIG.nodes.forEach(function (node, index) {
+            nodes[node.y][node.x] = new BlockNode(self.groundLayer, node); /// Backwards on purpose to not require array flip
             
             if (node.streets.n.found != 0) {
                 /// Get north street coords
                 
-                var block_tiles = (overMap.blockHeight * (node.y - node.streets.n.connect))/2; /// TODO: fix
+                var block_tiles = (MAP_CONFIG.blockHeight * (node.y - node.streets.n.connect))/2; /// TODO: fix
                 var ways = node.streets.n.dir.trim().length;
                 var two_way = ways > 1 ? node.streets.n.dir.toUpperCase()+'_' : '';
                 var recipe_name = 'CROSSWALK_'+ways+'WAY_'+node.streets.n.lanes+'LANE_'+two_way+'N_';
@@ -108,7 +110,7 @@ import KEYLIGHT from "../config/key-light.js";
             }
             else {
                 /// Get east street coords
-                var block_tiles = (overMap.blockWidth * (node.streets.e.connect - node.x))/2; /// TODO: fix
+                var block_tiles = (MAP_CONFIG.blockWidth * (node.streets.e.connect - node.x))/2; /// TODO: fix
                 var ways = node.streets.e.dir.trim().length;
                 var two_way = ways > 1 ? node.streets.e.dir.toUpperCase()+'_' : '';
                 var recipe_name = 'CROSSWALK_'+ways+'WAY_'+node.streets.e.lanes+'LANE_'+two_way+'E_';
@@ -147,7 +149,7 @@ import KEYLIGHT from "../config/key-light.js";
             }
             else {
                 /// Get south street coords
-                var block_tiles = (overMap.blockHeight * (node.streets.s.connect - node.y))/2; /// TODO: fix
+                var block_tiles = (MAP_CONFIG.blockHeight * (node.streets.s.connect - node.y))/2; /// TODO: fix
                 var ways = node.streets.s.dir.trim().length;
                 var two_way = ways > 1 ? node.streets.s.dir.toUpperCase()+'_' : '';
                 var recipe_name = 'CROSSWALK_'+ways+'WAY_'+node.streets.s.lanes+'LANE_'+two_way+'S_';
@@ -184,7 +186,7 @@ import KEYLIGHT from "../config/key-light.js";
             }
             else {
                 /// Get west street coords
-                var block_tiles = (overMap.blockWidth * (node.x - node.streets.w.connect))/2; /// TODO: fix
+                var block_tiles = (MAP_CONFIG.blockWidth * (node.x - node.streets.w.connect))/2; /// TODO: fix
                 var ways = node.streets.w.dir.trim().length;
                 var two_way = ways > 1 ? node.streets.w.dir.toUpperCase()+'_' : '';
                 var recipe_name = 'CROSSWALK_'+ways+'WAY_'+node.streets.w.lanes+'LANE_'+two_way+'W_';
@@ -227,18 +229,17 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     create () {
-        const blocks = this.blocks;
         self = this;
-        this.overMap.blocks.forEach(function (block, index) {
-            blocks[block.y][block.x].buildProperties();
-            blocks[block.y][block.x].buildObjects(); 
+        MAP_CONFIG.blocks.forEach(function (block, index) {
+            self.blocks[block.y][block.x].buildProperties();
+            self.blocks[block.y][block.x].buildObjects(); 
             self.setCorners(block);
             
         });
         const objectManager = this.scene.manager.objectManager;
-        const nodes = this.nodes;
-        this.overMap.nodes.forEach(function (node, index) {
-            nodes[node.y][node.x].buildObjects(objectManager); 
+
+        MAP_CONFIG.nodes.forEach(function (node, index) {
+            self.nodes[node.y][node.x].buildObjects(objectManager); 
         });
         this.ground.initializeTiles();
         
@@ -254,7 +255,7 @@ import KEYLIGHT from "../config/key-light.js";
 
     createItems () {
         let blocks = this.blocks;
-        this.overMap.blocks.forEach(function (block, index) {
+        MAP_CONFIG.blocks.forEach(function (block, index) {
             blocks[block.y][block.x].buildItems(); 
         });
         
@@ -300,7 +301,7 @@ import KEYLIGHT from "../config/key-light.js";
 
     buildCity () {
         const blocks = this.blocks;
-        this.overMap.blocks.forEach(function (block, index) {
+        MAP_CONFIG.blocks.forEach(function (block, index) {
             blocks[block.y][block.x].buildProperties(); 
         });
 
@@ -412,8 +413,8 @@ import KEYLIGHT from "../config/key-light.js";
 
     xyToBlock (_x,_y) {
         return {
-            x: Math.floor(_x/this.overMap.blockWidth),
-            y: Math.floor(_y/this.overMap.blockHeight)
+            x: Math.floor(_x/MAP_CONFIG.blockWidth),
+            y: Math.floor(_y/MAP_CONFIG.blockHeight)
         };
     }
 
@@ -454,7 +455,7 @@ import KEYLIGHT from "../config/key-light.js";
 
     getPropertyFromAddress(dir, number, street) {
         var found = false;
-        this.overMap.propertyLines.forEach(function (prop, index) {
+        MAP_CONFIG.propertyLines.forEach(function (prop, index) {
             if (prop.address.number == number && prop.address.street == street && prop.address.dir == dir) {
                 found = prop;
             }
@@ -519,7 +520,7 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     validBlock (_x,_y) {
-        if (_x < 0 || _y < 0 || _x >= this.overMap.sectionsWidth || _y >= this.overMap.sectionsHeight) {
+        if (_x < 0 || _y < 0 || _x >= MAP_CONFIG.sectionsWidth || _y >= MAP_CONFIG.sectionsHeight) {
             return false;
         }
         return true;

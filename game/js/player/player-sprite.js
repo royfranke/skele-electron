@@ -36,14 +36,15 @@ export default class PlayerSprite {
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
     this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
-    this.sprite.setCollideWorldBounds(true);
-    this.setExteriorZones();
+    //this.sprite.setCollideWorldBounds(true);
+    //this.setExteriorZones();
   }
 
   setExteriorZones () {
     //const nodes = this.scene.exterior.nodes;
     const zones = [];
     var self = this;
+    /// TODO: Fix overmap reference (using map_config)
     this.scene.exterior.overMap.nodes.forEach(function (node, index) {
       var zone = self.scene.add.zone(node.center_x * 16, node.center_y * 16, node.width * 16, node.height * 16);
 
@@ -117,9 +118,11 @@ export default class PlayerSprite {
   }
 
   updateKeyLight () {
-    let keylight = this.scene.manager.time.keylight;
-    if (KEYLIGHTS[keylight] != undefined) {
-      this.sprite.setTint(KEYLIGHTS[keylight].skeles_tint);
+    if (this.scene.manager.time != undefined) {
+      let keylight = this.scene.manager.time.keylight;
+      if (KEYLIGHTS[keylight] != undefined) {
+        this.sprite.setTint(KEYLIGHTS[keylight].skeles_tint);
+      }
     }
   }
 

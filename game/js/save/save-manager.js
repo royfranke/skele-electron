@@ -14,13 +14,31 @@ export default class SaveManager {
         this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
-        //this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
+        if (this.scene.player.coinpurse.contents.STATUS.HAS == 'TRUE') {
+            this.scene.manager.hud.hudCoinpurse.plungeCoinPurse();
+        }
+        this.scene.manager.hud.hudWatch.plungeWatch();
+        this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
     }
 
     initializeRoomSave () {
         var data = this.scene.slot;
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
+
+        if (this.scene.player.coinpurse.contents.STATUS.HAS == 'TRUE') {
+            this.scene.manager.hud.hudCoinpurse.plungeCoinPurse();
+        }
+        this.scene.manager.hud.hudWatch.plungeWatch();
+        this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
+    }
+
+    initializeTutorialSave () {
+        var data = this.scene.slot;
+        this.scene.manager.time.setTimeFromSave(data.TIME);
+        this.scene.player.coinpurse.setContents(data.COINPURSE);
+
+        this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
     }
 
     saveNewGameData() {

@@ -32,6 +32,9 @@ const ITEMS = {
                 req_result_data_key: 'HUNGER',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
@@ -90,6 +93,9 @@ const ITEMS = {
                 req_result_data_key: 'HUNGER',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
@@ -206,6 +212,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -230,6 +239,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -288,6 +300,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -312,6 +327,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -342,6 +360,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -380,6 +401,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -404,6 +428,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -434,6 +461,9 @@ const ITEMS = {
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -819,6 +849,9 @@ items: []    },
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -849,6 +882,9 @@ items: []    },
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -873,15 +909,18 @@ items: []    },
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_ACTIVE',
                     type: 'ITEM',
-                    result: 'TRANSFORMED',
+                    result: 'FILLED',
                     ITEM: 'BOWL_MILK',
                     },
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_ACTIVE',
                     type: 'ITEM',
                     result: 'DEPLETED',
                     ITEM: 'CEREAL_BOX_1'
@@ -1235,6 +1274,9 @@ items: []    },
                 req_result_data_key: 'LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
@@ -1273,6 +1315,9 @@ items: []    },
                 req_result_data_key: 'LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
@@ -1944,15 +1989,18 @@ items: []    },
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_ACTIVE',
                     type: 'ITEM',
-                    result: 'TRANSFORMED',
+                    result: 'FILLED',
                     ITEM: 'BOWL_MILK',
                     },
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_ACTIVE',
                     type: 'ITEM',
                     result: 'DEPLETED',
                     ITEM: 'CEREAL_BOX_1'
@@ -1968,6 +2016,9 @@ items: []    },
                 req_result_data_key: 'THIRST',
                 req_result_data_set: '',
                 req_result_data_modify: '3',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND_OR_ACTIVE',
@@ -2362,6 +2413,9 @@ items: []    },
                 req_result_data_key: 'LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
@@ -2400,6 +2454,9 @@ items: []    },
                 req_result_data_key: 'LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
@@ -2709,7 +2766,7 @@ items: []    },
         stacks: [        ],
         interactions: {
             group_1: {
-                req_group_name: 'Draw with Chalk on Cement',
+                req_group_name: 'Draw Heart with Chalk on Cement',
                 req_pocket_action: 'DRAW',
                 req_world_action: 'DRAW',
                 req_state: '',
@@ -2717,17 +2774,20 @@ items: []    },
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: 'HEART_CHALK',
+                req_result_fx: 'CLOUD_CHALK_',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
                     type: 'ITEM_KIND',
-                    result: '14',
+                    result: 'DEPLETED',
                     ITEM_KIND: 'CHALK',
                     },
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'ON_ACTIVE',
                     type: 'GROUND',
-                    result: '0',
+                    result: 'TEXTURED',
                     GROUND: 'cement'
                     }
                                 ]
@@ -2747,7 +2807,7 @@ items: []    },
         stacks: [        ],
         interactions: {
             group_1: {
-                req_group_name: 'Draw with Chalk on Cement',
+                req_group_name: 'Draw Heart with Chalk on Cement',
                 req_pocket_action: 'DRAW',
                 req_world_action: 'DRAW',
                 req_state: '',
@@ -2755,17 +2815,20 @@ items: []    },
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: 'HEART_CHALK',
+                req_result_fx: 'CLOUD_CHALK_',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
                     type: 'ITEM_KIND',
-                    result: '14',
+                    result: 'DEPLETED',
                     ITEM_KIND: 'CHALK',
                     },
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'ON_ACTIVE',
                     type: 'GROUND',
-                    result: '0',
+                    result: 'TEXTURED',
                     GROUND: 'cement'
                     }
                                 ]
@@ -2785,7 +2848,7 @@ items: []    },
         stacks: [        ],
         interactions: {
             group_1: {
-                req_group_name: 'Draw with Chalk on Cement',
+                req_group_name: 'Draw Heart with Chalk on Cement',
                 req_pocket_action: 'DRAW',
                 req_world_action: 'DRAW',
                 req_state: '',
@@ -2793,17 +2856,20 @@ items: []    },
                 req_result_data_key: '',
                 req_result_data_set: '',
                 req_result_data_modify: '',
+                req_result_texture: 'HEART_CHALK',
+                req_result_fx: 'CLOUD_CHALK_',
+                req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
                     type: 'ITEM_KIND',
-                    result: '14',
+                    result: 'DEPLETED',
                     ITEM_KIND: 'CHALK',
                     },
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'ON_ACTIVE',
                     type: 'GROUND',
-                    result: '0',
+                    result: 'TEXTURED',
                     GROUND: 'cement'
                     }
                                 ]

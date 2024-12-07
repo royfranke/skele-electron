@@ -83,6 +83,13 @@ export default class AppManager {
         }
     }
 
+    initializeTutorialSave () {
+        if (this.saveManager != null && this.scene.slot != undefined) {
+            this.saveManager.initializeTutorialSave();
+        }
+        this.scene.manager.hud.startTutorial();
+    }
+
     softSaveGameData () {
         return this.saveManager.softSaveGameData();
     }

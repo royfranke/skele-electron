@@ -4,11 +4,21 @@ import Item from "./item.js";
 
 export default class ItemContainer extends Item {
     constructor(scene, item, items = []) {
-        super(scene, item);
-        this.actions = [];
+        super(scene, item, items);
+        this.scene = scene;
+        this.registered = false;
+        this.tile_x = 0;
+        this.tile_y = 0;
+        this.sprite = null;
+        this.stackCount = 1;
+        this.info = item;
+        this.name = this.info.name;
+        this.actions = ['PUT AWAY'];
         this.world_actions = [{ action: 'PICK UP', object: this }];
-        this.items = items;
+        console.log("A container has been created.");
         this.fx = null;
+        this.items = items;
+        this.actions = [];
     }
 
     isFull() {
@@ -19,31 +29,50 @@ export default class ItemContainer extends Item {
         return this.items.length === 0;
     }
 
-    addItemToContainer(item) {
+    replaceContents(item) {
+        if (item.slug != undefined) {item = item.slug};
+        if (this.contentsAllowed(item)) {
+            // Don't remove the content until you know the new slug is allowed
+            this.discardContents();
+            this.addContentsToContainer(item);
+        }
+    }
+
+    addContentsToContainer(item) {
         if (!this.isFull()) {
-            this.items.push(item);
-            return true;
+            if (item.slug != undefined) {item = item.slug};
+            if (this.contentsAllowed(item)) {
+                this.items.push(item);
+                console.log("Added contents");
+                console.log(item);
+                return true;
+            }
+            else {
+                console.log("Container.addContentsToContainer: contents not allowed: "+item.slug);
+            return false;
+            }
+            
         } else {
-            console.log("Container.addItemToContainer: container is full.");
+            console.log("Container.addContentsToContainer: container is full.");
             return false;
         }
     }
 
-    pullItem() {
+    pullContents() {
         if (this.items.length >= 1) {
             var item = this.items.splice(0, 1);
             return item[0];
         } else {
-            console.warn("Container.pullItem: this container does not contain an item.");
+            console.warn("Container.pullContents: this container does not contain any contents.");
             return false;
         }
     }
 
-    discardItem() {
+    discardContents() {
         if (this.items.length >= 1) {
             this.items.splice(place, 1);
         } else {
-            console.warn("Container.discardItem: this container is already empty.");
+            console.warn("Container.discardContents: this container is already empty.");
         }
     }
 
@@ -66,10 +95,10 @@ export default class ItemContainer extends Item {
         If the first nine characters of the action string are 'PUT AWAY ', then the player is trying to put an item in the bag.
         */
         if (action.substring(0, 9) == 'PUT AWAY ') {
-            var items = this.scene.manager.hud.pocket.getHeldItems();
+            var contents = this.scene.manager.hud.pocket.getHeldItems();
             var putAway = false;
             var self = this;
-            items.forEach(function (item) {
+            contents.forEach(function (item) {
                 if (action == 'PUT AWAY '+item.item.name.toUpperCase() && !putAway) {
                     putAway = true;
                     let placed = self.addItemToContainer(item.item);
@@ -85,6 +114,15 @@ export default class ItemContainer extends Item {
         this.scene.player.action.clearActions();
     }
 
+    setRegistration(registered, coord = null) {
+        this.registered = registered;
+        if (registered && coord != null) {
+            this.setTileLocation(coord.x, coord.y);
+        } else if (this.sprite != null) {
+            this.destroySprite();
+        }
+    }
+
 
     setTileLocation(_x, _y) {
         this.tile_x = _x;
@@ -95,7 +133,9 @@ export default class ItemContainer extends Item {
 
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.getStackIcon(), 0).setOrigin(.5,0).setDepth(y_pixels + 8);
         this.contents_sprite = null;
+        console.log("Setting tile location");
         if (this.items.length > 0) {
+            console.log("Fetching sprite: "+this.items[0].info.icon);
             this.contents_sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'ITEMS', this.getStackIcon(this.items[0].info.icon), 0).setOrigin(.5,0).setDepth(y_pixels + 9);
         }
         /// tween
@@ -136,8 +176,24 @@ export default class ItemContainer extends Item {
         this.sprite = null;
     }
 
+    contentsAllowed (slug) {
+        let found = false;
+        console.log(this.info.contains);
+        for (let i=0;i<this.info.contains.length;i++) {
+            if (slug == this.info.contains[i]) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
     hasContents() {
         return !this.isEmpty();
+    }
+
+    isContainer () {
+        return true;
     }
 
     createFX() {

@@ -4,6 +4,12 @@ const HUD_STATES = {
         input: false,
         visible: false
     },
+    HUD_LOADED: {
+        name: 'HUD_LOADED',
+        input: false,
+        time: false,
+        visible: false
+    },
     LOADING: {
         name: 'LOADING',
         input: false,

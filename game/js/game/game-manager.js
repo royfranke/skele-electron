@@ -26,23 +26,28 @@ export default class GameManager {
         this.gameState = new GameState();
         this.utilities = new GameUtilities();
         this.gameFocus = new GameFocus();
-        this.hud = null;
-        this.time = new TimeManager();
         this.objectManager = new ObjectManager(this.scene);
-        this.plantManager = new PlantManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
-        this.loot = new LootManager(this.scene);
+        this.hud = new HudManager(this.scene);
         this.fx = new FXManager(this.scene);
-        this.knowledge = new KnowledgeManager(this.scene);
+        
     }
 
     initializeGame () {
         /// Use this method to gather managers that are not needed for the tutorial/new game
-
+        this.time = new TimeManager();
+        
+        this.plantManager = new PlantManager(this.scene);
+        
+        this.loot = new LootManager(this.scene);
+        this.knowledge = new KnowledgeManager(this.scene);
+        this.hud.initializeGameHUD();
     }
 
     wake () {
-        this.hud.refreshDisplay();
+        if (this.hud != null && this.hud.hudInput != undefined) {
+            this.hud.refreshDisplay();
+        }
     }
 
     openBag (bag) {
@@ -104,7 +109,7 @@ export default class GameManager {
 
     update () {
         this.state = this.getState();
-        if (this.state.name == 'NOT_LOADED') { this.loadGame(); }
+        if (this.state.name == 'NOT_LOADED') { return this.loadGame(); }
         if (this.state.input) {
             const focus = this.getFocus();
             const input = this.scene.app.input.INPUT;
@@ -168,7 +173,7 @@ export default class GameManager {
                 }
             }
         }
-        if (this.state.time) {
+        if (this.state.time && this.time != undefined &&  this.time.time_passing) {
             this.time.update();
             if (this.scene.exterior != null) {
                 this.scene.exterior.setKeyLight(this.getKeyLight());
@@ -179,8 +184,13 @@ export default class GameManager {
         if (this.hud != null) {
             this.hud.update();
         }
-        this.objectManager.update();
-        this.plantManager.update();
+        if (this.objectManager != null) {
+            this.objectManager.update();
+        }
+        if (this.plantManager != null) {
+            this.plantManager.update();
+        }
+
     }
 
     loadGame () {
@@ -188,9 +198,11 @@ export default class GameManager {
             this.view = this.getView();
             this.scene.app.camera.camera.setBackgroundColor('#4b424a');
             this.setState('LOADING');
-            this.hud = new HudManager(this.scene);
             
-            this.scene[this.scene.place].createItems();
+            if (this.itemManager != undefined) {
+                this.scene[this.scene.place].createItems();
+            }
+            
             
             this.setFocus('PLAYER');
 

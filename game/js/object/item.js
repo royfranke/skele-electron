@@ -12,6 +12,11 @@ export default class Item {
         this.name = this.info.name;
         this.actions = ['PUT AWAY'];
         this.world_actions = [{ action: 'PICK UP', object: this }];
+        this.initialize();
+    }
+
+    initialize () {
+
     }
 
     setName (name) {
@@ -172,34 +177,47 @@ export default class Item {
         return this.actions;
     }
 
+
+
     refreshPocketActions () {
         var put_away = false;
 
         var interactions = this.info.interactions;
         var actions_simple = [];
         var info = this.info;
-        
+        var self = this.scene;
         Object.keys(interactions).forEach(function (interaction, index) {
             var requirement_parts_met = 0;
             var requirement_parts = interactions[interaction].requires.length;
             interactions[interaction].requires.forEach(function (requirement, index) {
                 /// If the requirement is for this item or this item kind held in the hand, mark the requirement as met
+   
                 if (requirement.type == 'ITEM'
-                    && requirement.ITEM == info.slug
+                    && (requirement.ITEM == info.slug
+                        || 
+                        self.manager.hud.pocket.findInPockets(requirement.ITEM)
+                    )
+                    && (requirement.slot_type == 'IN_HAND'
+                    || requirement.slot_type == 'IN_HAND_OR_ACTIVE')) {
+                        
+                    requirement_parts_met++;
+                }
+                if (requirement.type == 'ITEM_KIND'
+                    && (requirement.ITEM_KIND == info.type
+                        || 
+                        self.manager.hud.pocket.findItemKindInPockets(requirement.ITEM_KIND)
+                    )
                     && (requirement.slot_type == 'IN_HAND'
                     || requirement.slot_type == 'IN_HAND_OR_ACTIVE')) {
                     requirement_parts_met++;
                 }
-                if (requirement.type == 'ITEM_KIND'
-                    && requirement.ITEM_KIND == info.type
-                    && requirement.slot_type == 'IN_HAND'
-                    && requirement.slot_type == 'IN_HAND_OR_ACTIVE') {
-                    requirement_parts_met++;
-                }
-                if (requirement_parts_met == requirement_parts) {
-                    actions_simple.push(interactions[interaction].req_pocket_action);
-                }
+
+                
+                
             });
+            if (requirement_parts_met == requirement_parts) {
+                actions_simple.push(interactions[interaction].req_pocket_action);
+            }
         });
 
         if (!put_away) {
@@ -225,6 +243,10 @@ export default class Item {
     }
 
     hasContents() {
+        return false;
+    }
+
+    isContainer () {
         return false;
     }
 }

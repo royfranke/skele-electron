@@ -192,8 +192,6 @@ export default class Object {
     }
 
     setPortal (portal) {
-        console.log("Setting portal");
-        console.log(portal);
         this.portal = portal;
     }
 

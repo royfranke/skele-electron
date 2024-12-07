@@ -29,12 +29,11 @@ export default class GameScene extends Phaser.Scene {
             if (this.verbose) console.log("New Game");
             return this.newGame();
         }
-        // Replace the exterior and interior classes with a ground class interpretter in its own ground/ground-manager.js
         
         this.place = 'exterior';
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
-        
+        this.manager.initializeGame();
         this.events.on(Phaser.Scenes.Events.WAKE, function ()
         {
             this.manager.wake();
@@ -67,14 +66,11 @@ export default class GameScene extends Phaser.Scene {
     }
 
     newGame() {
-        var portal = {
-            room_id: 2,
-            x: 12,
-            y: 12,
-            facing: 'down'
-        };
-        if (this.verbose) console.log(portal);
-        this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
+        if (this.verbose) {
+            console.log("Start tutorial for slot ");
+            console.log(this.slot);
+        }
+        this.scene.start('Tutorial', {slot: this.slot});
     }
 
     saveGameData(data,slot) {

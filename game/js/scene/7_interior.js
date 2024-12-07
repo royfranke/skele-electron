@@ -1,15 +1,14 @@
 import AppManager from "../app/app-manager.js";
 import GameManager from "../game/game-manager.js";
 import InteriorManager from "../interior/interior-manager.js";
-
 import PlayerManager from "../player/player-manager.js";
+
 /**
  * Interior
  */
 export default class InteriorScene extends Phaser.Scene {
     constructor() {
         super("Interior Scene");
-        
     }
 
     init (data) {
@@ -25,9 +24,13 @@ export default class InteriorScene extends Phaser.Scene {
 
     create() {
         this.place = 'interior';
-        //this.preload.preloadAnim();
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
+        this.manager.initializeGame();
+        this.events.on(Phaser.Scenes.Events.WAKE, function ()
+        {
+            this.manager.wake();
+        }, this);
         this.interior = new InteriorManager(this);
         this.player = new PlayerManager(this);
         this.interior.create();

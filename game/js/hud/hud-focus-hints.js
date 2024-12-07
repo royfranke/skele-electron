@@ -54,6 +54,16 @@ export default class HudFocusHints extends HudCommon {
             var hint = this.makeFocusHint(this.focusHints[i]);
             this.hints[this.focusHints[i].focus] = hint;
         }
+        this.setFocusHintsVisible(false);
+    }
+
+    setFocusHintsVisible (visible) {
+        for (var key in this.hints) {
+            if (this.hints[key] != null) {
+                this.hints[key].block.setVisible(visible);
+                this.hints[key].text.setVisible(visible);
+            }
+        }
     }
 
     setKeyTip (tip, active=false) {

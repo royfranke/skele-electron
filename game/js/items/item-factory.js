@@ -32,6 +32,7 @@ export default class ItemFactory {
                 var item = new ItemBag(this.scene,this.valid_items[slug],items);
             }
             else if (this.valid_items[slug].contains.length > 0) {
+                console.log("This item can have contents");
                 var item = new ItemContainer(this.scene,this.valid_items[slug],items);
             }
             else {

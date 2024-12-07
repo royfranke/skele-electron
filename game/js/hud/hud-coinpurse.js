@@ -108,13 +108,15 @@ export default class HudCoinpurse extends HudCommon {
 
 
     openCoinpurse() {
-        this.scene.player.coinpurse.updateTotal();
-        this.coinPurse.icon.setFrame('COINPURSE_OPEN');
+        if (this.scene.player.coinpurse.contents.STATUS.HAS == 'TRUE') {
+            this.scene.player.coinpurse.updateTotal();
+            this.coinPurse.icon.setFrame('COINPURSE_OPEN');
 
-        var coinTotal = this.scene.player.coinpurse.getTalliedTotal();
+            var coinTotal = this.scene.player.coinpurse.getTalliedTotal();
 
-        this.clearCoinpurseTell();
-        this.coinPurse.tell = this.tellCoinpurse(coinTotal);
+            this.clearCoinpurseTell();
+            this.coinPurse.tell = this.tellCoinpurse(coinTotal);
+        }
     }
 
     tellCoinpurse(content, timing = 0, status = 'default') {

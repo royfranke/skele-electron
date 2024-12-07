@@ -21,7 +21,7 @@ const GAME_STATES = {
         name: 'TUTORIAL',
         input: true,
         time: false,
-        hud: 'VISIBLE_UNFOCUSED'
+        hud: 'INVISIBLE'
     },
     OVERWORLD: {
         name: 'OVERWORLD',

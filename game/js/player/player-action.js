@@ -61,8 +61,9 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                 this.debugActionTile.setPosition(this.snappedWorldPoint.x, this.snappedWorldPoint.y);
             }
 
-            this.scene.manager.objectManager.announce.loadAnnouncements(this.actionTile.x, this.actionTile.y);
-            this.clearActions();
+            if (this.scene.manager.objectManager != undefined) {
+                this.scene.manager.objectManager.announce.loadAnnouncements(this.actionTile.x, this.actionTile.y);
+            }
             this.actionTileLast = this.actionTile;
             this.refreshActions();
         }
@@ -70,6 +71,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     refreshActions() {
+        this.clearActions();
         this.addItemActions();
         this.addObjectActions();
     }
@@ -87,18 +89,22 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     addItemActions () {
-        var item = this.scene.manager.itemManager.registry.getItem(this.actionTile.x,this.actionTile.y);
-        if (item != null) {
-            item.addActions();
-        }
+        if (this.scene.manager.itemManager != undefined) {
+            var item = this.scene.manager.itemManager.registry.getItem(this.actionTile.x,this.actionTile.y);
+            if (item != null) {
+                item.addActions();
+            }
+        } 
     }
 
     addObjectActions () {
-        var objects = this.scene.manager.objectManager.registry.getObjects(this.actionTile.x,this.actionTile.y);
-        if (objects != null && objects.length > 0) {
-            objects.forEach(object => {
-                object.addActions();
-            });
+        if (this.scene.manager.objectManager != undefined) {
+            var objects = this.scene.manager.objectManager.registry.getObjects(this.actionTile.x,this.actionTile.y);
+            if (objects != null && objects.length > 0) {
+                objects.forEach(object => {
+                    object.addActions();
+                });
+            }
         }
     }
 
@@ -121,7 +127,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     getGroundActions (ground) {
-        if (ground != null) {
+        if (ground != null && this.scene.manager.time != undefined && this.scene.manager.time.time_passing) {
             for (var i=0;i<ground.ACTIONS.length;i++) {
                 var req_met = false;
                 if (ground.ACTIONS[i].ITEM != '') {

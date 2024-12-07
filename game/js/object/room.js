@@ -36,9 +36,7 @@ export default class Room {
 
     constructor(scene, room_id) {
         this.scene = scene;
-        console.log("Room ID: "+room_id);
         this.roomsJSON = this.scene.cache.json.get('ROOMS');
-        console.log(this.roomsJSON);
         this.config = this.roomsJSON["room_"+room_id];
 
         this.config = this.convertToInteger(this.config);

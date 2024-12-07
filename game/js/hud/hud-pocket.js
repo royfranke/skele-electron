@@ -8,7 +8,7 @@ export default class HudPocket {
         this.scene = scene;
         this.pockets = POCKET_CONFIG.POCKETS.SLOTS;
         this.states = POCKET_CONFIG.POCKETS.STATES;
-        this.setPocketsFromSave();
+        
     }
     
     setSaveFromPockets() {
@@ -45,10 +45,16 @@ export default class HudPocket {
 
     setPocketsFromSave() {
         console.log("Setting pockets from save");
-        console.log(this.slots);
         console.log(this.scene.slot.POCKETS.SLOTS);
 
-        var itemManager = this.scene.manager.itemManager;
+        if (this.scene.manager != undefined) {
+            var itemManager = this.scene.manager.itemManager;
+        }
+        else {
+            var itemManager = false;
+            console.log("Item Manager is undefined-- is this the tutorial?");
+        }
+        
         
         this.slots = [this.scene.slot.POCKETS.SLOTS.SLOT0, this.scene.slot.POCKETS.SLOTS.SLOT1, this.scene.slot.POCKETS.SLOTS.SLOT2];
 
@@ -57,20 +63,23 @@ export default class HudPocket {
             var new_item = null;
             if (pocket.STATE != 'EMPTY') {
                 var items = [];
-//console.log(pocket[pocket.STATE]);
+
                 if (pocket[pocket.STATE].ITEMS != undefined) {
                     
                     pocket[pocket.STATE].ITEMS.forEach(function (item) {
-                        //console.log(item.ITEM);
-                        let stack_item = itemManager.newItem(item.ITEM);
-                        if (item.STACK != undefined) {
-                            stack_item.stackCount = item.STACK;
+                        if (itemManager != false) {
+                            //console.log(item.ITEM);
+                            let stack_item = itemManager.newItem(item.ITEM);
+                            if (item.STACK != undefined) {
+                                stack_item.stackCount = item.STACK;
+                            }
+                            items.push(stack_item);
                         }
-                        items.push(stack_item);
                     });
                 }
-
-                new_item = itemManager.newItem(pocket[pocket.STATE].ITEM, items);
+                if (itemManager != false) {
+                    new_item = itemManager.newItem(pocket[pocket.STATE].ITEM, items);
+                }
 
                 if (pocket[pocket.STATE].STACK != undefined) {
                     new_item.stackCount = pocket[pocket.STATE].STACK;
@@ -126,6 +135,18 @@ export default class HudPocket {
         return found;
     }
 
+    findItemKindInPockets(item_kind_slug) {
+        var found = false;
+        this.pockets.forEach(function (pocket, index) {
+            if (!found) {
+                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == item_kind_slug) {
+                    found = index;
+                }
+            }
+        });
+        return found;
+    }
+
     getHeldItems() {
         var heldItems = [];
         this.pockets.forEach(function (pocket, index) {
@@ -156,6 +177,26 @@ export default class HudPocket {
                 if (found) {
                     self.scene.manager.hud.refreshDisplay();
                 }
+            }
+        });
+        return found;
+    }
+
+
+    availableContainer(item, exclude = null) {
+        var found = false;
+        this.pockets.forEach(function (pocket, index) {
+            if (!found) {
+                if (exclude != index) {
+                    if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.contains.length > 0) {
+                        
+                        if (!found && pocket[pocket.STATE].replaceContents(item)) {
+                            found = true;
+                            self.scene.manager.hud.refreshDisplay();
+                        }
+                    }
+                }
+
             }
         });
         return found;
@@ -232,6 +273,7 @@ export default class HudPocket {
             var self = this;
             if (action_string == 'EAT' && this.scene.player.state.name != 'EAT') {
                 self.scene.player.setState('EAT');
+                /// TODO: Replace or remove timeout
                 setTimeout(() => {
                     self.scene.player.setState('IDLE');
                 }, 2000);
@@ -241,7 +283,7 @@ export default class HudPocket {
                 return false;
             }
             item_action.requires.forEach(function (requirement) {
-                if (requirement.type == 'ITEM') {
+                if (requirement.type == 'ITEM' || requirement.type == 'ITEM_KIND') {
                     if (requirement.result == 'TRANSFORMED') {
                         var transform_into = item_action.req_result_item;
                         self.setPocket(pocketIndex, 'EMPTY');
@@ -249,6 +291,12 @@ export default class HudPocket {
                     }
                     if (requirement.result == 'CONSUMED') {
                         self.setPocket(pocketIndex, 'EMPTY');
+                    }
+                    if (requirement.result == 'FILLED') {
+                        var fill_with = item_action.req_result_item;
+                        console.log("Fill this "+requirement[requirement.type]+" up with "+item_action.req_result_item);
+                        self.scene.manager.itemManager.newContentToPocket(pocketIndex,fill_with);
+                        
                     }
                 }  
             });

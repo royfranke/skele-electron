@@ -598,7 +598,7 @@ export default class HudPockets extends HudCommon {
 
 
                     if (state != 'EMPTY' && pocket[state].hasContents()) {
-                        this.slots[slot_y][slot_x].icon_contents = this.addIconContents(slot_x, slot_y, 'ITEMS', pocket[state].items[0].getStackIcon());
+                        this.slots[slot_y][slot_x].icon_contents = this.addIcon(slot_x, slot_y, 'ITEMS', pocket[state].items[0].getStackIcon());
                     }
                 }
 

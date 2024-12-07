@@ -52,7 +52,7 @@ import Room from "../object/room.js";
         this.buildRoom();
 
         this.ground = new Ground(this.groundLayer, this.edgeLayer);
-        this.scene.app.camera.setBounds(this.map.widthInPixels, this.map.heightInPixels);
+        //this.scene.app.camera.setBounds(this.map.widthInPixels, this.map.heightInPixels);
         
     }
 

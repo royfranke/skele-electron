@@ -21,27 +21,45 @@ export default class HudManager {
 
     constructor(scene) {
        this.scene = scene;
+       this.verbose = true;
        this.initialize();
     }
 
     initialize () {
+       console.log("Initializing base HUD");
        
        this.hudState = new HudState();
        this.state = this.getState();
-       
-       this.game = this.scene.manager;
-       this.hudThinking = new HudThinking(this.scene);
-       this.hudChest = new HudChest(this.scene);
-       this.hudPockets = new HudPockets(this.scene);
-       this.hudWatch = new HudWatch(this.scene);
-       this.hudNotebook = new HudNotebook(this.scene);
        this.hudDialog = new HudDialog(this.scene);
+       
+       this.hudPockets = new HudPockets(this.scene);
+       this.pocket = new HudPocket(this.scene);
        this.hudFocusHints = new HudFocusHints(this.scene);
        this.hudCoinpurse = new HudCoinpurse(this.scene);
-       
-       this.hudZener = new HudZener(this.scene);
-       
-       this.loadHud();
+       this.hudInput = new HudInput(this.scene);
+       this.hudSound = new HudSound(this.scene);
+    }
+
+    initializeGameHUD () {
+        /// Use this method to gather managers that are not needed for the tutorial/new game
+        console.log("Initializing game HUD");
+        this.hudThinking = new HudThinking(this.scene);
+        this.hudChest = new HudChest(this.scene);
+
+        this.hudWatch = new HudWatch(this.scene);
+        this.hudNotebook = new HudNotebook(this.scene);
+        
+        this.hudZener = new HudZener(this.scene);
+        
+        this.hudDisplay = new HudDisplay(this.scene);
+        
+        this.hudCoinpurse.addHiddenCoinPurse();
+        
+    }
+
+    startTutorial () {
+        this.hudDialog.tellDialogBox("...Hello? Are you there?");
+        this.hudDialog.tellReplyBox("I\'m here!\n?????");
     }
 
     getState () {
@@ -49,6 +67,7 @@ export default class HudManager {
     }
 
     setState (state_string) {
+        if (this.verbose) {console.log('Set Hud state: '+state_string);}
         return this.hudState.setState(state_string);
     }
 
@@ -57,15 +76,13 @@ export default class HudManager {
     }
 
     getView () {
-        return this.game.getView(); // View Object
+        return this.scene.manager.getView(); // View Object
     }
 
     update () {
         this.last_state = this.state;
         this.state = this.getState();
         
-        if (this.state.name == 'NOT_LOADED') { this.loadHud(); }
-
         if (this.last_state.name != this.state.name) {
             this.stateChanged();
         }
@@ -73,13 +90,15 @@ export default class HudManager {
         if (this.state.input) {
             for (const [key, value] of Object.entries(this.scene.app.input.INPUT)) {
                 if (this.scene.app.input.INPUT[key].TAP) {
-                    this.hudInput.input(key);
+                    console.log(key);
+                    this.hudInput.input(key); // Input refreshes display
                     //this.hudSound.play('UI_ARROW');
                 }
             }
         }
-
-        this.hudWatch.setWatch(this.scene.manager.time.getDigitalTime());
+        if (this.hudWatch != undefined) {
+            this.hudWatch.setWatch(this.scene.manager.time.getDigitalTime());
+        }
         
     }
 
@@ -89,7 +108,7 @@ export default class HudManager {
             var placed = this.scene.manager.hud.availablePocket(item);
                 
                 if (placed != false) {
-                    console.log("Placed! Refreshing");
+                    if (this.verbose) {console.log("Placed! Refreshing");}
                     this.hudChest.chest.items.shift();
                     this.refreshChest();
                 }
@@ -133,6 +152,10 @@ export default class HudManager {
 */
     availablePocket (item, specific_pocket = null) {
         return this.pocket.availablePocket(item, specific_pocket);
+    }
+
+    availableContainer (item) {
+        return this.pocket.availableContainer(item);
     }
 
     stateChanged () {
@@ -180,26 +203,6 @@ export default class HudManager {
     think (thought) {
         if (this.hudThinking != null) {
             this.hudThinking.think(thought);
-        }
-    }
-
-    loadHud () {
-        if (this.state.name == 'NOT_LOADED') {
-            this.hudInput = new HudInput(this.scene);
-            this.hudSound = new HudSound(this.scene);
-            this.setState('LOADING');
-            console.log('Loading HUD.');
-            this.pocket = new HudPocket(this.scene);
-            this.hudDisplay = new HudDisplay(this.scene);
-            this.hudCoinpurse.addHiddenCoinPurse();
-            this.hudCoinpurse.plungeCoinPurse();
-            /// After loading functions...
-            this.setState('LOADED');
-            console.log('Loaded HUD.');
-
-            //this.hudDialog.tellDialogBox('I got these-- these cards. I got one of each and I mix \'em and then you tell me which card is next. ... Got it?');
-            //this.hudDialog.tellReplyBox('Yep.\nHow do I know which one is next?\nSounds dumb.');
-            
         }
     }
 
