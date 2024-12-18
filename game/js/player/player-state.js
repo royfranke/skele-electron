@@ -2,7 +2,6 @@ import STATES from "../config/player-states.js";
 
 /* global Phaser */
 /*
- * Gets injected into game scene
  */
 
 export default class PlayerState {

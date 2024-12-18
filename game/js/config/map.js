@@ -3186,7 +3186,7 @@ const MAP_CONFIG = {
                 x: 224,
                 y: 460
             },
-            ground: "dirt",
+            ground: "grass",
             offset: {
                 n: 3,
                 e: 4,
@@ -3465,7 +3465,7 @@ const MAP_CONFIG = {
                 x: 223.5,
                 y: 500
             },
-            ground: "dirt",
+            ground: "grass",
             offset: {
                 n: 3,
                 e: 4,
@@ -3496,7 +3496,7 @@ const MAP_CONFIG = {
                 x: 288,
                 y: 500
             },
-            ground: "dirt",
+            ground: "cement",
             offset: {
                 n: 3,
                 e: 4,
@@ -9877,6 +9877,255 @@ const MAP_CONFIG = {
                 {
             lines: {
                 x: 42,
+                y: 0,
+                width: 14,
+                height: 34
+            },
+            block: {
+                x: 4,
+                y: 12
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "101",
+                street: "Sundown Street",
+            },
+            structure: {
+                type: "CORNER-STORE-RIGHT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "CHINESE_FOOD",
+name: "Chinese Food",
+listingName: "Lucky Dragon II",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "18:00"
+            }
+},
+rooms: {
+    }                            }
+        },
+                {
+            lines: {
+                x: 28,
+                y: 0,
+                width: 14,
+                height: 34
+            },
+            block: {
+                x: 4,
+                y: 12
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "103",
+                street: "Sundown Street",
+            },
+            structure: {
+                type: "STOREFRONT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "LOCKSMITH",
+name: "Locksmith",
+listingName: "Keys Made While You Wait",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "00:00",
+        close: "00:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "00:00",
+        close: "00:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "00:00",
+        close: "00:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "00:00",
+        close: "00:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "00:00",
+        close: "00:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "00:00",
+        close: "00:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "00:00",
+        close: "00:00"
+            }
+},
+rooms: {
+    }                            }
+        },
+                {
+            lines: {
+                x: 14,
+                y: 0,
+                width: 14,
+                height: 34
+            },
+            block: {
+                x: 4,
+                y: 12
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "105",
+                street: "Sundown Street",
+            },
+            structure: {
+                type: "STOREFRONT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "SEW_VACUUM",
+name: "Sew Good N’ Vacuums",
+listingName: "Sew Good N’ Vacuums",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "05:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "05:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "05:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "05:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "05:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+rooms: {
+    }                            }
+        },
+                {
+            lines: {
+                x: 0,
+                y: 0,
+                width: 14,
+                height: 34
+            },
+            block: {
+                x: 4,
+                y: 12
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "107",
+                street: "Sundown Street",
+            },
+            structure: {
+                type: "CORNER-STORE-LEFT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "PIZZA",
+name: "Pizza",
+listingName: "Pizza TBA",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "TRUE",    }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "21:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "21:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "21:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "22:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "14:00",
+        close: "18:00"
+            }
+},
+rooms: {
+    }                            }
+        },
+                {
+            lines: {
+                x: 42,
                 y: 7,
                 width: 13,
                 height: 24
@@ -9972,8 +10221,45 @@ const MAP_CONFIG = {
                 zoning: "COMMERCIAL",
             },
             listing: {
-                slug: "BONEDEGA"
-            }
+                slug: "BONEDEGA",
+name: "Bonedega",
+listingName: "Bonedega - Bodega Corner Store",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+rooms: {
+    }                            }
         },
             ]
     

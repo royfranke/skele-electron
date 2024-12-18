@@ -9,6 +9,7 @@ export default class PlayerCoinpurse {
     constructor() {
 
         this.coinRef = MONEY.COIN;
+        this.paperRef = MONEY.PAPER;
         this.total = 0;
     }
 
@@ -30,6 +31,23 @@ export default class PlayerCoinpurse {
             let coin = coinRef[el];
             if (available[coin] > 0) {
                 available[coin]--;
+            }
+            else {
+                valid = false;
+                break;
+            }
+          }
+        return valid;
+    }
+
+    availableDollars (dollar_amount_array) {
+        let available = { ...this.contents.PAPER };
+        const paperRef = this.paperRef;
+        let valid = true;
+        for (const el of dollar_amount_array) {
+            let paper = paperRef[el];
+            if (available[paper] > 0) {
+                available[paper]--;
             }
             else {
                 valid = false;
@@ -87,9 +105,25 @@ export default class PlayerCoinpurse {
         this.updateTotal();
     }
 
+    removeDollars (dollar_amount_array) {
+        let spent = 0;
+        dollar_amount_array.forEach(element => {
+            this.removeDollar(element);
+            spent = parseInt(element + spent);
+        });
+        let spent_formatted = this.formatMoney(spent);
+        this.updateTotal();
+    }
+
     removeCoin (coin_amount) {
         let coin = this.coinRef[coin_amount];
         this.contents.COIN[coin]--;
+        //this.updateTotal();
+    }
+
+    removeDollar (amount) {
+        let paper = this.paperRef[amount];
+        this.contents.PAPER[paper]--;
         //this.updateTotal();
     }
 
@@ -97,6 +131,12 @@ export default class PlayerCoinpurse {
         let coin = this.coinRef[coin_amount];
         this.contents.COIN[coin]++;
         let amount_string = coin_amount;
+        this.updateTotal();
+    }
+
+    addDollar (amount) {
+        let paper = this.paperRef[amount];
+        this.contents.PAPER[paper]++;
         this.updateTotal();
     }
 
@@ -125,6 +165,7 @@ export default class PlayerCoinpurse {
     getTally (contents=[{text: 1, icon: 1}]) {
         let tally = [];
         contents.forEach(coin => {
+            console.log(coin);
             if (coin.text > 0) {
                 tally.push({
                     text: coin.text, 

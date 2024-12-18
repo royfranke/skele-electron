@@ -10,6 +10,9 @@ export default class PlantManager {
         this.scene = scene;
         this.factory = new PlantFactory(this.scene);
         this.registry = new PlantRegistry();
+
+        this.locale = this.scene[this.scene.place];
+
     }
 
     update () {
@@ -60,7 +63,6 @@ export default class PlantManager {
     }
 
     putPlantInWorld (plant, _x, _y) {
-
         return this.registry.placePlant(plant,_x,_y);
     }
 

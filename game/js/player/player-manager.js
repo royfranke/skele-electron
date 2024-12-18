@@ -5,7 +5,6 @@ import PlayerAction from "./player-action.js";
 import PlayerCoinpurse from "./player-coinpurse.js";
 /* global Phaser */
 /*
- * Gets injected into the game scene
  */
 
 export default class PlayerManager {
@@ -84,6 +83,14 @@ export default class PlayerManager {
 
   setPositionTile(x_, y_) {
     this.playerSprite.sprite.setPosition(x_ * 16, y_ * 16);
+  }
+
+  getPositionTile() {
+    var pos = this.playerSprite.sprite.getCenter();
+    return {
+      x: Math.round(pos.x / 16),
+      y: Math.round(pos.y / 16)
+    };
   }
 
   create() {
@@ -252,6 +259,10 @@ export default class PlayerManager {
 
   addCoin(coin_amount) {
     this.coinpurse.addCoin(coin_amount);
+  }
+
+  addDollar(dollar_amount) {
+    this.coinpurse.addDollar(dollar_amount);
   }
 
 }

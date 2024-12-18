@@ -43,5 +43,9 @@ export default class HudCommon {
         makeIcon (_x,_y, textureName, frameName) {
             return this.factory.makeIcon(_x + 8,_y + 8, textureName, frameName);
         }
+
+        flutter (elements=[], delay=0) {
+            this.factory.flutter(elements, delay);
+        }
     
 }

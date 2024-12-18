@@ -32,6 +32,6 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "phaser": "^3.80.1"
+    "phaser": "^3.87.0"
   }
 }

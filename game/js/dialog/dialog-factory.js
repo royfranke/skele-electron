@@ -1,30 +1,27 @@
-import DIALOG from "../config/atlas/dialog.js";
-import Dialog from "./dialog.js";
-import RESPONSES from "../config/atlas/dialog-responses.js";
+import DIALOGS from "../config/atlas/dialog.js";
+
 /* Dialog Factory Class */
 
 export default class DialogFactory {
 
-    constructor(scene) {
-        this.scene = scene;
-        this.valid_dialog = DIALOG;
+    constructor() {
+        this.valid_dialog = DIALOGS;
     }
+    /// In the future I could add a logger for this that saves the dialog IDs that have already occurred
 
-
-    newDialog (slug,responses=[]) {
-        if (this.validDialog(slug)) {
-            var dialog = new Dialog(this.scene,this.valid_dialog[slug],responses);
-            return dialog; /// Returns a non-sprite obj
+    getDialog (id) {
+        if (this.validDialog(id)) {
+            return this.valid_dialog[id];
         }
         return false;
     }
 
-    validDialog (slug) {
-        if (this.valid_dialog.hasOwnProperty(slug)) {
+    validDialog (id) {
+        if (this.valid_dialog.hasOwnProperty(id)) {
             return true;
         }
         else {
-            console.warn("Nonvalid dialog slug passed in dialog factory: "+slug);
+            console.warn("Nonvalid dialog id passed in dialog factory: "+id);
         }
     }
 

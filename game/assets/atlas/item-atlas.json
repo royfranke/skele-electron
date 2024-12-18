@@ -1440,7 +1440,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_ONE",
+		"filename": "PAPER_1_",
 		"frame": {"x":320,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1448,7 +1448,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TWENTY",
+		"filename": "PAPER_20_",
 		"frame": {"x":336,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1464,7 +1464,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TWO",
+		"filename": "PAPER_2_",
 		"frame": {"x":368,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1472,7 +1472,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_FIFTY",
+		"filename": "PAPER_50_",
 		"frame": {"x":384,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1496,7 +1496,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_FIVE",
+		"filename": "PAPER_5_",
 		"frame": {"x":432,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1504,7 +1504,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_HUNDRED",
+		"filename": "PAPER_100_",
 		"frame": {"x":448,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1528,7 +1528,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TEN",
+		"filename": "PAPER_10_",
 		"frame": {"x":496,"y":80,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1536,7 +1536,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TWONTY",
+		"filename": "PAPER_2O_",
 		"frame": {"x":0,"y":96,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -1719,6 +1719,174 @@
 	}
     
                          
-                                  	
+      ,  { 
+		"filename": "POPSICLES_PRODUCT",
+		"frame": {"x":368,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+            ,  { 
+		"filename": "TV_DINNER_PRODUCT",
+		"frame": {"x":384,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_STICK",
+		"frame": {"x":400,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_GREEN_PAIR",
+		"frame": {"x":416,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_RED_PAIR",
+		"frame": {"x":432,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_PURPLE_PAIR",
+		"frame": {"x":448,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TV_DINNER_FOOD",
+		"frame": {"x":464,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_STICK_30",
+		"frame": {"x":480,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTING_GREEN_PAIR",
+		"frame": {"x":496,"y":96,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTING_RED_PAIR",
+		"frame": {"x":0,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTING_PURPLE_PAIR",
+		"frame": {"x":16,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TV_DINNER_TRASH",
+		"frame": {"x":32,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_STICK_31",
+		"frame": {"x":48,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTING_GREEN",
+		"frame": {"x":64,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTING_RED",
+		"frame": {"x":80,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTING_PURPLE",
+		"frame": {"x":96,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "LEAF_ASH",
+		"frame": {"x":112,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_STICK_32",
+		"frame": {"x":128,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTED_GREEN",
+		"frame": {"x":144,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTED_RED",
+		"frame": {"x":160,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "POPSICLE_MELTED_PURPLE",
+		"frame": {"x":176,"y":112,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+                                      	
 ]
 }

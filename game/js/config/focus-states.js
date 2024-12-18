@@ -23,6 +23,9 @@ const FOCUS_STATES = {
     MAP: {
         name: 'MAP'
     },
+    QUOTE: {
+        name: 'QUOTE'
+    },
     ZENER: {
         name: 'ZENER'
     }

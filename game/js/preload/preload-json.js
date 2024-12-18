@@ -28,12 +28,6 @@ const PRELOAD_JSON = [
         PATH: {
             JSON: 'data/config_input.json'
         }
-    },
-    {
-        NAME: 'ROOMS',
-        PATH: {
-            JSON: 'data/rooms.json'
-        }
     }
 ];
 

@@ -28,6 +28,9 @@ const PRELOAD_FONT = [
     },
     {
         NAME: 'SkeleNewsprint',
+    },
+    {
+        NAME: 'SkeleScrawl'
     }
 ];
 

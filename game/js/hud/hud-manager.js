@@ -58,8 +58,10 @@ export default class HudManager {
     }
 
     startTutorial () {
-        this.hudDialog.tellDialogBox("...Hello? Are you there?");
-        this.hudDialog.tellReplyBox("I\'m here!\n?????");
+        
+        this.scene.manager.dialog.triggerDialog(1);
+
+        
     }
 
     getState () {
@@ -171,7 +173,6 @@ export default class HudManager {
             if (this.state.name == 'POCKETS_FOCUSED') {
                 this.hudPockets.openPockets();
                 this.hudCoinpurse.openCoinpurse();
-            //this.hudSound.play('FOCUS_TIP_POCKETS');
             }
             if (this.last_state.name == 'POCKETS_FOCUSED' && this.state.name != 'POCKETS_FOCUSED') {
                 this.hudPockets.closePockets();
@@ -179,14 +180,22 @@ export default class HudManager {
             }
             if (this.last_state.name != 'NOTEBOOK_FOCUSED' && this.state.name == 'NOTEBOOK_FOCUSED') {
                 this.hudNotebook.openNotebook();
-
-                this.hudSound.play('FOCUS_TIP_NOTEBOOK');
             }
             /// Close Notebook
             if (this.state.name != 'NOTEBOOK_FOCUSED' && this.last_state.name == 'NOTEBOOK_FOCUSED') {
                 this.hudNotebook.closeNotebook();
             }
+
+            if (this.last_state.name != 'DIALOG_FOCUSED' && this.state.name == 'DIALOG_FOCUSED') {
+                this.hudDialog.focusDialog();
+            }
+            /// Close Dialog
+            if (this.state.name != 'DIALOG_FOCUSED' && this.last_state.name == 'DIALOG_FOCUSED') {
+                this.hudDialog.clearDialog();
+            }
+            
         }
+
 
         /// Open Card Game (Zener)
         if (this.state.name == 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name != 'ZENER_FOCUSED') {

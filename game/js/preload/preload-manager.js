@@ -14,15 +14,18 @@ export default class PreloadManager{
 
 
   initialize() {
-    var path = '../game/assets/';
-    var data_path = '../game/';
+    var path = '../assets/';
+    var sound_path = '../assets/';
+    var data_path = '../';
+    
 
+    this.initializeSoundAssets(sound_path);
     this.initializeImageAssets(path);
     this.initializeFontAssets(path);
     this.initializeAtlasAssets(path);
     this.initializeJsonAssets(data_path);
     this.preloadStateSprites(path);
-    //this.initializeSoundAssets(path);
+    
   }
 
   initializeImageAssets(path) {
@@ -41,7 +44,10 @@ export default class PreloadManager{
     let count = 0;
     if (this.verbose) console.log('Preloading sounds...');
     PRELOAD_SOUND.forEach(function (sound, index) {
-      self.load.audio(sound.NAME, [ path+sound.PATH ]);
+      self.load.audio(sound.NAME,  path+sound.PATH );
+      console.log('Loading sound: '+sound.NAME);
+      console.log('Path: '+path+sound.PATH);
+      
       count++;
     });
     if (this.verbose) console.log('Preloaded '+count+' sounds');

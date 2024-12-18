@@ -16,13 +16,15 @@ export default class GameScene extends Phaser.Scene {
 
     init (data) {
         this.slot = data.slot;
+        if (data.portal != undefined) {
+            this.used_portal = data.portal;
+        }
+        else {
+            this.used_portal = {x:0,y:0,facing:'down'};
+        }
     }
 
-    preload () {
-        this.preload = new PreloadManager(this); 
-        this.preload.initialize();
-        this.preload.initializeAnim();
-    }
+
 
     create() {
         if (this.slot.SAVE.HEADLINE == 'NEW') {
@@ -36,7 +38,8 @@ export default class GameScene extends Phaser.Scene {
         this.manager.initializeGame();
         this.events.on(Phaser.Scenes.Events.WAKE, function ()
         {
-            this.manager.wake();
+            this.manager.setState('NOT LOADED');
+
         }, this);
         this.exterior = new ExteriorManager(this);
         this.player = new PlayerManager(this);
@@ -44,6 +47,8 @@ export default class GameScene extends Phaser.Scene {
         
         this.exterior.create();
         this.player.create();
+        this.player.setPositionTile(this.used_portal.x,this.used_portal.y);
+        this.player.setFacing(this.used_portal.facing);
         this.npcs.create();
         //// Load the save!
         this.app.initializeSave();

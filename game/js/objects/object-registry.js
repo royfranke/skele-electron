@@ -68,6 +68,11 @@ export default class ObjectRegistry {
                 console.warn('Object does not have an info property');
                 console.warn(object);
             }
+            if (object.info.type == undefined) {
+                console.warn('Object does not have an info.type property');
+                console.warn(object);
+                return false;
+            }
             if (object.info.type == 'WINDOW_EXT_' || object.info.type == 'EXT_DOOR_' || object.info.type == 'STORE_WINDOW_EXT' || object.info.type == 'STORE_DOOR') {
                 this.glass_registry.push(object.glass);
             }

@@ -135,7 +135,7 @@ export default class PropertyLine {
         this.gates[0].sprite.setDepth(this.gates[0].sprite.depth + 1);
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'EXT_DOOR_STORE_BLACK');
         
-        this.front_door.setPortal({room_id: '1', x:3, y: 13, facing: 'n'});
+        this.front_door.setPortal({room_id: '1', x:3, y: 13, facing: 'N'});
 
         this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'EXT_WINDOW_STORE_4_CLAD');
         this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'ROLLING_GATE_WIDE'));
@@ -202,7 +202,7 @@ export default class PropertyLine {
             var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
         }
         else {
-            var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE'];
+            var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE','DARK_BLUE'];
             var wallKind = WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
         }
 
@@ -287,7 +287,7 @@ export default class PropertyLine {
         var roofLayer = this.block.roofLayer;
         /// Lower left is _x, _y
 
-        var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE'];
+        var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE','DARK_BLUE'];
         var wallKind = WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
 
         this.buildFacadeSection(_x, _y - 1, width, 3, wallKind);

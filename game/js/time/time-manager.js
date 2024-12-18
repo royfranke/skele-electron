@@ -13,7 +13,7 @@ export default class TimeManager {
         this.keyLightOrder = ['astronomicalDawn','nauticalDawn', 'civilDawn', 'sunrise', 'morning', 'solarNoon', 'afternoon', 'sunset', 'civilDusk', 'nauticalDusk', 'astronomicalDusk', 'night'];
 
         this.second_increment = .5;
-        this.time_passing = false;
+        this.time_passing = true;
 
         this.today = this.getDate();
         

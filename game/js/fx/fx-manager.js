@@ -30,9 +30,17 @@ export default class FXManager {
         return this.factory.newBounceFX(slug,_x,_y);
     }
 
+    newUncrumpleFX (slug,_x,_y) {
+        return this.factory.newUncrumpleFX(slug,_x,_y);
+    }
+
 
     coinUp(_x,_y,value=1) {
         this.newBounceFX('COIN_'+value+'_',_x+8,_y);
+    }
+
+    dollarUp(_x,_y,value=1) {
+        this.newUncrumpleFX('PAPER_'+value+'_',_x+8,_y);
     }
 
 }

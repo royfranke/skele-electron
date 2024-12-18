@@ -39,6 +39,7 @@ export default class SaveManager {
         this.scene.player.coinpurse.setContents(data.COINPURSE);
 
         this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
+        
     }
 
     saveNewGameData() {
@@ -60,6 +61,7 @@ export default class SaveManager {
         data.COINPURSE = this.scene.player.coinpurse.setSaveFromCoinpurse();
         data.NOTEBOOKS = this.scene.manager.hud.hudNotebook.manager.setSaveFromNotebook();
         data.POCKETS.SLOTS = this.scene.manager.hud.pocket.setSaveFromPockets();
+        data.POSITION = this.scene.player.getPositionTile();
         return data;
     }
 

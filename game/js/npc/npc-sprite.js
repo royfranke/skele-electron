@@ -1,7 +1,6 @@
 import SPRITE_DIR from "../config/sprite-dir.js";
 /* global Phaser */
 /*
- * Gets injected into game scene
  */
 
 export default class NpcSprite {

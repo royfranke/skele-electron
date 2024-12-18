@@ -14,6 +14,8 @@ export default class Object {
         this.state = null;
         this.portal = null;
         this.slotted = [];
+        this.shell = false;
+        this.shell_sprite = null;
         
         // Imbue this object with the config object info
         this.info = object;
@@ -46,6 +48,15 @@ export default class Object {
         this.last_state = null;
         if (this.info.states.length > 0) {
             this.state = this.info.states[0];
+            if (this.state.name == 'SHELL' && this.info.states.length > 1) {
+                this.state = this.info.states[1];
+            }
+            this.info.states.forEach(function (state) {
+                if (state.name == 'SHELL') {
+                    self.shell = true;
+                    self.shell_frame = state.frames[0];
+                }
+            });
         }
         this.chestFunctions(items);
     }
@@ -216,6 +227,10 @@ export default class Object {
         var frame = this.info.slug+'-'+this.variety;
 
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h));
+        
+        if (this.shell == true) {
+            this.shell_sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', this.shell_frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + 1);
+        }
 
         if (this.info.solid) {
             this.sprite.setSize(this.info.size.w, this.info.size.h);

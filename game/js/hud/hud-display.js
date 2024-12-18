@@ -2,7 +2,6 @@ import STATES from "../config/hud-states.js";
 import HudCommon from "./hud-common.js";
 /* global Phaser */
 /*
- * Gets injected into the game scene
  */
 
 export default class HudDisplay extends HudCommon {

@@ -1,5 +1,4 @@
 import DialogFactory from "./dialog-factory.js";
-import DialogRegistry from "./dialog-registry.js";
 
 /* Dialog Manager Class */
 
@@ -8,11 +7,19 @@ export default class DialogManager {
     constructor(scene) {
         this.scene = scene;
         this.factory = new DialogFactory(this.scene);
-        this.registry = new DialogRegistry();
     }
 
-    newDialog (slug,responses=[]) {
-        return this.factory.newDialog(slug,responses);
+    triggerDialog (id) {
+        var dialog = this.getDialog(id);
+        this.scene.manager.hud.hudDialog.tellDialogBox(dialog.text);
+        this.scene.manager.hud.hudDialog.tellReplyBox(dialog.responses);
     }
+
+    getDialog (id) {
+        return this.factory.getDialog(id);
+    }
+
+    
+
     
 }

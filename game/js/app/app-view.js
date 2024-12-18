@@ -33,8 +33,10 @@ export default class AppView {
 
     createSplash() {
         /// Splash HTML styled in index.html
-        this.scene.add.dom(this.view.left + this.view.width / 1.8, this.view.top + (this.view.height / 2), 'div', '', 'up and at em').setClassName('splash');
+        let dom = this.scene.add.dom(this.view.left + this.view.width / 1.8, this.view.top + (this.view.height / 2), 'div', '', '').setClassName('splash');
+        dom.setPosition((this.view.left + this.view.width / 1.8) - dom.displayWidth/2, this.view.top + (this.view.height / 2));
     }
+
 
     createMain() {
 
@@ -47,10 +49,29 @@ export default class AppView {
         this.addVersion();
     }
 
+    drawTip(tip) {
+        var width = (this.view.width/3) - (this.view.margin.left + this.view.margin.right);
+        var _x = this.view.left + this.view.margin.left;
+        var _y = this.view.bottom - (this.view.margin.bottom * 1.5);
+
+        var text_tip = this.scene.add.bitmapText(_x, _y, 'SkeleTalk',tip, 8).setOrigin(0).setScrollFactor(0).setDepth(1001).setMaxWidth(width - 16).setLineSpacing(10).setAlpha(0);
+        text_tip.setTintFill(0xFFFFFF);
+        var tween = this.scene.add.tween({
+            targets: [text_tip],
+            y: '-='+text_tip.displayHeight,
+            alpha: 1,
+            duration: 1000,
+            ease: 'Sine.easeInOut',
+            repeat: 0
+        });
+    }
+
     addVersion () {
         let version = this.scene.add.bitmapText(this.view.left + this.view.margin.left, this.view.bottom - this.view.margin.bottom, 'SkeleNotebook', 'v.'+this.version+' Skele\'s Summer Break', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
-        this.scene.add.nineslice(version.x - 8,version.y - 5, 'UI', 'BLOCK_MID_BROWN_BORDER', version.displayWidth + 16, version.displayHeight + 8, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+        let block = this.scene.add.nineslice(version.x - 8,version.y - 5, 'UI', 'BLOCK_MID_BROWN_BORDER', version.displayWidth + 16, version.displayHeight + 8, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+
+        this.display_version = {block: block, text: version};
     }
 
     createSettings() {
@@ -79,18 +100,59 @@ export default class AppView {
             var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
             var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_YELLOW_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
             
-            this.slots.push({slice: slot_slice, selector: slot_highlight});
+            
 
             if (SAVES.length > i) {
-                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
-                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top*2, 'SkeleMarquee', SAVES[i].SAVE.HEADLINE.toLowerCase().replace(/ /g,"_"), 16).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                var _x = left + this.view.margin.left;
+                var _y = top + this.view.margin.top*2;
+                
+                var slot_headline = this.revealMarquee(SAVES[i].SAVE.HEADLINE,_x,_y);
             }
             else {
-                this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day ???', 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
-                
+                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day ???', 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                var slot_headline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top*2, 'SkeleMarquee', 'new', 16).setOrigin(0).setScrollFactor(0).setDepth(1000);
             }
+
+            this.slots.push({slice: slot_slice, selector: slot_highlight,slot_byline: slot_byline, slot_headline: slot_headline});
         }
+    }
+
+    getMarqueeFill (length,blank=false) {
+        var headline_display = '';
+        for (var i=0;i<length;i++) {
+            if (blank) {var content = '_';}
+            var content = Phaser.Math.RND.pick(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','_','_']);
+            headline_display += content;
+        }
+        return headline_display;
+    }
+
+    revealMarquee (headline,_x,_y) {
+        var headline_text = headline.toLowerCase().replace(/ /g,"_");
+        var headline_display = this.getMarqueeFill(headline_text.length,true);
+        
+        var headline_object = this.scene.add.bitmapText(_x,_y, 'SkeleMarquee', headline_display, 16).setOrigin(0).setScrollFactor(0).setDepth(1000);
+        
+        var self = this;
+        var shuffle = this.scene.time.addEvent({
+            delay: 125,
+            repeat:6,
+            callback: ()=>{
+                headline_display = self.getMarqueeFill(headline_text.length);
+                headline_object.setText(headline_display);
+            }
+        });
+        var reveal = this.scene.time.addEvent({
+            delay: 1000,
+            repeat:0,
+            callback: ()=>{
+                headline_object.setText(headline_text);
+            }
+        });
+        
+        return headline_object;
     }
 
 
@@ -105,6 +167,54 @@ export default class AppView {
                 if (selected > 0) {
                     this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_CREAM_BORDER');
                     this.slots[selected - 1].selector.setVisible(true);
+                }
+            }
+        }
+    }
+
+    selectedLoad (selected,data) {
+        console.log("Selected slot "+selected); 
+        var self = this;
+        // Uses a tween to drop the slots not selected
+        this.scene.app.menu.disappearMenu();
+
+        for (var i=0;i<3;i++) {
+            if (i != selected - 1) {
+                this.slots[i].slice.setTexture('UI','BLOCK_MID_TWILIGHT_BORDER');
+                this.slots[i].selector.setVisible(false);
+
+                const tween = this.scene.add.tween({
+                    targets: [self.slots[i].slice, self.slots[i].selector,self.slots[i].slot_byline, self.slots[i].slot_headline],
+                    x: '+='+self.slots[i].slice.displayWidth,
+                    alpha: 0,
+                    duration: 1500,
+                    ease: 'Sine.easeIn',
+                    repeat: 0
+                });
+                let tip = '"Don\'t forget to look both ways before you cross."';
+                tween.on('complete', () => {
+                  self.drawTip(tip);
+                });
+            }
+            else {
+                if (selected > 0) {
+                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_YELLOW_BORDER');
+                    this.slots[selected - 1].selector.setVisible(true);
+
+                    this.slots[selected - 1].slot_headline.setText('loading...');
+                    const tween = this.scene.add.tween({
+                        targets: [self.slots[i].slice, self.slots[i].selector, self.slots[i].slot_byline, self.slots[i].slot_headline],
+                        x: '+=4',
+                        y: '-=1',
+                        duration: 750,
+                        yoyo: true,
+                        ease: 'Sine.easeInOut',
+                        repeat: 2
+                    });
+                    
+                    tween.on('complete', () => {
+                        self.scene.scene.start('Game Scene',{slot: data});
+                    });
                 }
             }
         }

@@ -51,6 +51,7 @@ export default class Block {
                 ////
                 let sidewalk_h = 3;
                 let sidewalk_w = 3;
+                /*
                 //// Add some dandelions
                 for (var i=sidewalk_w; i<block.width - (sidewalk_w*2); i++) {
                     for (var j=sidewalk_h; j<block.height - (sidewalk_h*2); j++) {
@@ -59,6 +60,7 @@ export default class Block {
                         }
                     }
                 }
+                    */
             }
         }
         

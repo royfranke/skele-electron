@@ -9,6 +9,5 @@ export default class SplashScene extends Phaser.Scene {
 
     create() {
         this.app = new AppManager(this,'SPLASH');
-        
     }
 }

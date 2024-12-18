@@ -404,6 +404,9 @@ export default class HudZener extends HudCommon {
             //this.board.score[i].object = this.scene.add.dom(this.board.score[i].x, this.board.score[i].y, 'div', '', this.board.score[i].displayName).setClassName(this.board.score[i].className).setOrigin(0).setDepth(100200).setScrollFactor(0);
 
             this.board.score[i].object = this.scene.add.bitmapText(this.board.score[i].x, this.board.score[i].y, 'SkeleTalk', this.board.score[i].displayName, 16).setOrigin(0).setScrollFactor(0).setDepth(100200);
+            if (i == 0) {
+                this.board.score[i].object.setFont('SkeleHype');
+            }
         }
 
         this.drawSelected(0);
@@ -412,14 +415,17 @@ export default class HudZener extends HudCommon {
     drawScore (score) {
         
         if (score.streak > 1) {
-            this.board.score[0].object.setText('Streak! - ' + score.streak);
+            this.board.score[0].object.setText('STREAK! X' + score.streak);
+            this.board.score[0].object.setTintFill(0xed931e);
         }
         else {
             if (score.streak_best > 1) {
-                this.board.score[0].object.setText('Best Streak: ' + score.streak_best);
+                this.board.score[0].object.setText('BEST: X' + score.streak_best);
+                this.board.score[0].object.setTintFill(0x645d9a);
             }
             else {
-                this.board.score[0].object.setText('No Streak');
+                this.board.score[0].object.setText('');
+                //this.board.score[0].object.setTintFill(0xcd6a3f);
             }
         }
 

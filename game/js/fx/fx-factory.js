@@ -8,6 +8,43 @@ export default class FXFactory {
         this.valid_fx = FXS;
     }
 
+    newUncrumpleFX (slug, _x, _y) {
+        
+            var self = this.scene;
+            var fx = this.scene.add.sprite(_x, _y, "FX", 0);
+            fx.setDepth(_y + fx.height);
+            fx.anims.play('UNCRUMPLE_DOLLAR', false).once('animationcomplete', () => {
+
+                var paper = self.add.sprite(_x, _y, "ITEMS", slug);
+                paper.setDepth(_y + 16);
+                fx.destroy();
+                var tween = self.add.tween({
+                    targets: paper,
+                    y: '-=16',
+                    duration: 450,
+                    yoyo: true,
+                    ease: 'Sine.easeOut',
+                    repeat: 1
+                });
+
+                var fadetween = self.add.tween({
+                    targets: paper,
+                    duration: 1500,
+                    alpha: 0,
+                    ease: 'Sine.easeIn',
+                });
+                
+                tween.on('complete', () => {
+                    paper.destroy();
+                    fadetween.destroy();
+                  });
+            
+            });
+
+            return fx;
+
+    }
+
     newBounceFX (slug, _x, _y) {
         if (this.validFX(slug)) {
             

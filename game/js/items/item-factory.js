@@ -24,7 +24,18 @@ export default class ItemFactory {
             var slug = item;
         }
         else {
-            var slug = item.ITEM;
+            if (item == undefined || item == null) {
+                console.warn("Item object is undefined.");
+                return false;
+            }
+            else if (item.hasOwnProperty('ITEM')) {
+                var slug = item.ITEM;
+            }
+            else {
+                console.warn("Item object is not identifiable.");
+                console.warn(item);
+                var slug = '';
+            }
         }
 
         if (this.validItem(slug)) {

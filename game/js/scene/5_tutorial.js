@@ -28,10 +28,7 @@ export default class TutorialScene extends Phaser.Scene {
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
         this.manager.initializeGame();
-        this.events.on(Phaser.Scenes.Events.WAKE, function ()
-        {
-            this.manager.wake();
-        }, this);
+
         this.interior = new InteriorManager(this);
         this.player = new PlayerManager(this);
         this.interior.create();
@@ -39,9 +36,17 @@ export default class TutorialScene extends Phaser.Scene {
         this.player.setPositionTile(this.used_portal.x,this.used_portal.y);
         this.player.setFacing(this.used_portal.facing);
          //// Load the save!
-        this.app.initializeTutorialSave();
-       
+         this.app.initializeTutorialSave();
 
+       // Set timeout before tutorial begins
+       this.time.addEvent({
+        delay: 1000,
+        callback: () => {
+            
+            this.manager.hud.startTutorial();
+        }
+    });
+    
     }
 
     update() {

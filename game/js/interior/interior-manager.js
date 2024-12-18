@@ -102,12 +102,16 @@ import Room from "../object/room.js";
         var _y = 5;
         for (let i = 0; i < this.room.config.roomData.featureList.length; i++) {
             let feature = this.room.config.roomData.featureList[i];
-            let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
-            if (obj != null && feature.params != undefined && feature.params.portal != undefined) {
-                obj.setPortal(feature.params.portal);
+            if (feature.slug != 'FRONTDOOR') {
+                let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
+                if (obj != null && feature.params != undefined && feature.params.portal != undefined) {
+                    obj.setPortal(feature.params.portal);
+                }
             }
-
-
+            else {
+                let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,'EXT_DOOR_WINDOWS_GRAY');
+                obj.setPortal({room_id: '-1', x: 16, y: 16, facing: 'S'});
+            }
         }
     }
 
@@ -139,9 +143,9 @@ import Room from "../object/room.js";
                     //this.wallLayer.weightedRandomize(WALLTILES.BORDER.SECTIONED_.TOP_RIGHT_, x, y, 1, 1);
                 }
                 if (this_tile_blank && !lower_tile_blank) {
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.DARK_GREEN_WORN_.LOWER_, x, y, 1, 1);
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.DARK_GREEN_WORN_.MID_, x, y-1, 1, 1);
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.DARK_GREEN_WORN_.TOP_, x, y-2, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.PINK_WORN_.LOWER_, x, y, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.PINK_WORN_.MID_, x, y-1, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.PINK_WORN_.TOP_, x, y-2, 1, 1);
 
                     ////
                     removeRoofTiles.push({x: x, y: y});

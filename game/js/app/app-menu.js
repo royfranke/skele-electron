@@ -78,6 +78,18 @@ export default class AppMenu {
         
     }
 
+    disappearMenu () {
+        this.selector.block.setVisible(false);
+        this.selector.text.setVisible(false);
+        this.selector.frame.setVisible(false);
+        this.menu_list.forEach(function (item) {
+            item.block.setVisible(false);
+            item.text.setVisible(false);
+        });
+        this.scene.app.appView.display_version.block.setVisible(false);
+        this.scene.app.appView.display_version.text.setVisible(false);
+    }
+
     input (key) {
         switch (key) {
             case 'UP': this.up();
@@ -123,7 +135,7 @@ export default class AppMenu {
             
             if (this.scene.cache.json.get(slot)) {
                 var load_data = this.scene.cache.json.get(slot);
-                this.scene.app.loadGame(load_data);
+                this.scene.app.preloadGame(load_data);
             }
         }
 

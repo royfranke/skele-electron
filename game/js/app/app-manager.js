@@ -33,8 +33,9 @@ export default class AppManager {
         }, this);
     }
 
-    loadGame (data) {
-        this.scene.scene.start('Game Scene',{slot: data});
+    preloadGame (data) {
+        this.appView.selectedLoad(this.menu.selected, data);
+
     }
 
     initializeMenu () {
@@ -87,7 +88,8 @@ export default class AppManager {
         if (this.saveManager != null && this.scene.slot != undefined) {
             this.saveManager.initializeTutorialSave();
         }
-        this.scene.manager.hud.startTutorial();
+        
+        
     }
 
     softSaveGameData () {
@@ -109,6 +111,7 @@ export default class AppManager {
                 }
             }
             if (this.state.name == 'LOAD' && this.menu.selected != this.menu.last_selected) {
+                this.menu.setSelected(this.menu.selected);
                 this.appView.selectLoad(this.menu.selected);
             }
         }

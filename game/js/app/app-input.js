@@ -12,7 +12,9 @@ export default class AppInput {
     this.initialized = false;
     this.available_initialized = false;
     this.configJSON = this.scene.cache.json.get('INPUTCONFIG');
+
   }
+  
 
   initializeAppKeys () {
     const { KeyCodes } = Phaser.Input.Keyboard;

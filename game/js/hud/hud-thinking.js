@@ -1,6 +1,6 @@
 import HudCommon from './hud-common.js';
 /*
- * Gets injected into the game scene
+
  */
 
 export default class HudThinking extends HudCommon {

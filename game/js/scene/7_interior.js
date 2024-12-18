@@ -49,9 +49,11 @@ export default class InteriorScene extends Phaser.Scene {
     }
 
     portalTo(portal) {
-        if (portal.room_id == -1) {
+        this.slot = this.app.softSaveGameData();
+        if (this.verbose) console.log(this.slot);
+        if (portal.room_id == '-1') {
             this.scene.stop('Interior Scene');
-            this.scene.switch('Exterior Scene');
+            this.scene.start('Game Scene',{portal: portal, slot: this.slot});
         }
         else {
             this.scene.stop('Interior Scene');

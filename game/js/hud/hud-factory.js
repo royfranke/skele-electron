@@ -121,4 +121,16 @@ export default class HudFactory {
         return this.scene.add.dom(_x, _y, 'div', '', '0').setClassName('stack-indicator').setOrigin(0).setDepth(this.depth.STACK).setScrollFactor(0);
     }
 
+    flutter (elements=[], delay) {
+        this.scene.add.tween({
+            targets: elements,
+            y: '-=4',
+            duration: 750,
+            yoyo: true,
+            delay: delay,
+            ease: 'Sine.easeOut',
+            repeat: -1
+        });
+    }
+
 }

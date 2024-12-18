@@ -1,4 +1,5 @@
 import TILES from "../config/atlas/tile-weights.js";
+import ROOMS from "../config/atlas/rooms.js";
 /* Room Class */
 
 export default class Room {
@@ -36,7 +37,7 @@ export default class Room {
 
     constructor(scene, room_id) {
         this.scene = scene;
-        this.roomsJSON = this.scene.cache.json.get('ROOMS');
+        this.roomsJSON = ROOMS;
         this.config = this.roomsJSON["room_"+room_id];
 
         this.config = this.convertToInteger(this.config);

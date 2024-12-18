@@ -6,14 +6,13 @@ import LoadGameScene from "./scene/4_load-game.js";
 import TutorialScene from "./scene/5_tutorial.js";
 import GameScene from "./scene/6_game.js";
 import InteriorScene from "./scene/7_interior.js";
-import CourtScene from "./scene/8_court.js";
 
 const config = {
   type: Phaser.WEBGL,
   width: 960,
   height: 540,
   seed: 14,
-  backgroundColor: "#3a3a50",
+  backgroundColor: "#4b424a",
   parent: "game-container",
   pixelArt: true,
   scene: [
@@ -24,14 +23,16 @@ const config = {
     LoadGameScene,
     TutorialScene,
     GameScene,
-    InteriorScene,
-    CourtScene
+    InteriorScene
   ],
   physics: {
     default: "arcade",
     arcade: {
       //debug: true,
       gravity: { y: 0 },
+    },
+    input: {
+      gamepad: true,
     },
   },
   dom: {

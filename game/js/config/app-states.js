@@ -2,9 +2,9 @@ const APP_STATES = {
     SPLASH: {
         name: 'SPLASH',
         super: 'Splash',
-        fadeIn: 250,
-        fadeOut: 250,
-        autoEnd: 1000,
+        fadeIn: 500,
+        fadeOut: 300,
+        autoEnd: 2000,
         next: 'MAIN',
         menu: false,
         input: false,

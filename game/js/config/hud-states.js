@@ -35,6 +35,11 @@ const HUD_STATES = {
         input: true,
         visible: true
     },
+    DIALOG_FOCUSED: {
+        name: 'DIALOG_FOCUSED',
+        input: true,
+        visible: true
+    },
     VISIBLE_UNFOCUSED: {
         name: 'VISIBLE_UNFOCUSED',
         input: false,

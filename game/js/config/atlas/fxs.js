@@ -41,6 +41,41 @@
                                       ],
                   repeat: 0
               },
+                          CHALK_ARROW_FX: {
+                  name: 'Chalk Arrow FX 1',
+                  slug: 'CHALK_ARROW_FX',
+                  frames: [
+                                          'CHALK_ARROW_FX-1',
+                                          'CHALK_ARROW_FX-2',
+                                          'CHALK_ARROW_FX-3',
+                                          'CHALK_ARROW_FX-4',
+                                          'CHALK_ARROW_FX-5',
+                                          'CHALK_ARROW_FX-6',
+                                          'CHALK_ARROW_FX-7',
+                                          'CHALK_ARROW_FX-8',
+                                          'CHALK_ARROW_FX-9',
+                                          'CHALK_ARROW_FX-10',
+                                          'CHALK_ARROW_FX-11',
+                                          'CHALK_ARROW_FX-12'
+                                      ],
+                  repeat: 0
+              },
+                          CHALK_ARROW_FX_2: {
+                  name: 'Chalk Arrow FX 2',
+                  slug: 'CHALK_ARROW_FX_2',
+                  frames: [
+                                          'CHALK_ARROW_FX_2-1',
+                                          'CHALK_ARROW_FX_2-2',
+                                          'CHALK_ARROW_FX_2-3',
+                                          'CHALK_ARROW_FX_2-4',
+                                          'CHALK_ARROW_FX_2-5',
+                                          'CHALK_ARROW_FX_2-6',
+                                          'CHALK_ARROW_FX_2-7',
+                                          'CHALK_ARROW_FX_2-8',
+                                          'CHALK_ARROW_FX_2-9'
+                                      ],
+                  repeat: 0
+              },
                           CLOUD_CHALK_: {
                   name: 'Chalk Cloud',
                   slug: 'CLOUD_CHALK_',

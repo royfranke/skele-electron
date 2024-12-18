@@ -284,6 +284,72 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          CARDBOARD_DOWN_ARROW: {
+        name: 'Cardboard Down Arrow Sign',
+        slug: 'CARDBOARD_DOWN_ARROW', 
+        type: 'CARDBOARD',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          CARDBOARD_FLOOR_MAT: {
+        name: 'Cardboard Floor Mat',
+        slug: 'CARDBOARD_FLOOR_MAT', 
+        type: 'CARDBOARD',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
           CEMENT_STAIR_RAIL_L_1_1_: {
         name: 'Cement Stair Rail L 1-1',
         slug: 'CEMENT_STAIR_RAIL_L_1_1_', 
@@ -1285,6 +1351,64 @@ const OBJECTS = {
               frames: ['SPECIAL_NEWS_BOX_-2', 'SPECIAL_NEWS_BOX_-3', 'SPECIAL_NEWS_BOX_-4', 'SPECIAL_NEWS_BOX_-5', 'SPECIAL_NEWS_BOX_-6', ]
               },
           ]    },
+          COMMERCIAL_FREEZER: {
+        name: 'Commercial Freezer',
+        slug: 'COMMERCIAL_FREEZER', 
+        type: 'COMMERCIAL_FREEZER',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:38, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:20
+        },
+        varieties: 6,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        states: [{
+              name: 'SHELL',
+              transition: 'false',
+              frames: ['COMMERCIAL_FREEZER-1',]},            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['COMMERCIAL_FREEZER-2',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['COMMERCIAL_FREEZER-2', 'COMMERCIAL_FREEZER-3', 'COMMERCIAL_FREEZER-4', 'COMMERCIAL_FREEZER-5', 'COMMERCIAL_FREEZER-6', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['COMMERCIAL_FREEZER-6',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['COMMERCIAL_FREEZER-6', 'COMMERCIAL_FREEZER-5', 'COMMERCIAL_FREEZER-4', 'COMMERCIAL_FREEZER-3', 'COMMERCIAL_FREEZER-2', ]
+              },
+          ]    },
           CONE_FALLEN: {
         name: 'Cone Fallen',
         slug: 'CONE_FALLEN', 
@@ -1351,52 +1475,19 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
-          COUNTERTOP_S_1_1: {
-        name: 'Countertop 1 S',
-        slug: 'COUNTERTOP_S_1_1', 
-        type: 'COUNTERTOP',
-        bounding: {
-          h:2, 
-          w:1
-        },
-        base: {
-          h:1, 
-          w:1,
-          x:0, 
-          y:1
-        },
-        sprite: {
-          h:32, 
-          w:16,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:0, 
-          w:0
-        },
-        offset: {
-          x:0, 
-          y:0
-        },
-        varieties: 1,
-        solid: 0,
-        portal: 0,
-        actions: [],
-        states: []    },
-          COUNTERTOP_SW_1_1: {
-        name: 'Countertop 1 SW',
-        slug: 'COUNTERTOP_SW_1_1', 
+          COUNTERTOP_CORNER_BEIGE: {
+        name: 'Countertop Corner Beige',
+        slug: 'COUNTERTOP_CORNER_BEIGE', 
         type: 'COUNTERTOP',
         bounding: {
           h:3, 
           w:2
         },
         base: {
-          h:1, 
-          w:1,
-          x:1, 
-          y:2
+          h:2, 
+          w:2,
+          x:0, 
+          y:0
         },
         sprite: {
           h:36, 
@@ -1417,9 +1508,141 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
-          COUNTERTOP_W_1_1: {
-        name: 'Countertop 1 W',
-        slug: 'COUNTERTOP_W_1_1', 
+          COUNTERTOP_CORNER_BROWN: {
+        name: 'Countertop Corner Brown',
+        slug: 'COUNTERTOP_CORNER_BROWN', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:36, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_CORNER_GREEN: {
+        name: 'Countertop Corner Green',
+        slug: 'COUNTERTOP_CORNER_GREEN', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:36, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_CORNER_PEACH: {
+        name: 'Countertop Corner Peach',
+        slug: 'COUNTERTOP_CORNER_PEACH', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:36, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_CORNER_PURPLE: {
+        name: 'Countertop Corner Purple',
+        slug: 'COUNTERTOP_CORNER_PURPLE', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:36, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_S_BEIGE: {
+        name: 'Countertop S Beige',
+        slug: 'COUNTERTOP_S_BEIGE', 
         type: 'COUNTERTOP',
         bounding: {
           h:2, 
@@ -1429,7 +1652,304 @@ const OBJECTS = {
           h:1, 
           w:1,
           x:0, 
-          y:1
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_S_BROWN: {
+        name: 'Countertop S Brown',
+        slug: 'COUNTERTOP_S_BROWN', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_S_GREEN: {
+        name: 'Countertop S Green',
+        slug: 'COUNTERTOP_S_GREEN', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_S_PEACH: {
+        name: 'Countertop S Peach',
+        slug: 'COUNTERTOP_S_PEACH', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_S_PURPLE: {
+        name: 'Countertop S Purple',
+        slug: 'COUNTERTOP_S_PURPLE', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_W_BEIGE: {
+        name: 'Countertop W Beige',
+        slug: 'COUNTERTOP_W_BEIGE', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_W_BROWN: {
+        name: 'Countertop W Brown',
+        slug: 'COUNTERTOP_W_BROWN', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_W_GREEN: {
+        name: 'Countertop W Green',
+        slug: 'COUNTERTOP_W_GREEN', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_W_PEACH: {
+        name: 'Countertop W Peach',
+        slug: 'COUNTERTOP_W_PEACH', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          COUNTERTOP_W_PURPLE: {
+        name: 'Countertop W Purple',
+        slug: 'COUNTERTOP_W_PURPLE', 
+        type: 'COUNTERTOP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
         },
         sprite: {
           h:32, 
@@ -2385,6 +2905,39 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          BUSH: {
+        name: 'Generic Bush',
+        slug: 'BUSH', 
+        type: 'BUSH',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:8
+        },
+        offset: {
+          x:12, 
+          y:22
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
           OBJ_FLYER_GRAY: {
         name: 'Gray Flyer',
         slug: 'OBJ_FLYER_GRAY', 
@@ -3176,8 +3729,6 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [ {
-          name: 'SAVE', stateTrigger: 'SAVING', validStates: ['CLOSED']
-        }, {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
@@ -3735,6 +4286,39 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          SOFA_PLAID_1: {
+        name: 'Plaid Sofa',
+        slug: 'SOFA_PLAID_1', 
+        type: 'SOFA',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:2, 
+          w:4,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:20, 
+          w:60
+        },
+        offset: {
+          x:0, 
+          y:22
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
           PORCH_ROOF_4x2_BROWN: {
         name: 'Porch Roof 4x2 Brown',
         slug: 'PORCH_ROOF_4x2_BROWN', 
@@ -4125,6 +4709,39 @@ const OBJECTS = {
           SHOP_SHELVES_BLUE: {
         name: 'Shop Shelves Blue',
         slug: 'SHOP_SHELVES_BLUE', 
+        type: 'SHOP_SHELVES',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:24
+        },
+        varieties: 2,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
+          SHOP_SHELVES_MOTTLED: {
+        name: 'Shop Shelves Mottled',
+        slug: 'SHOP_SHELVES_MOTTLED', 
         type: 'SHOP_SHELVES',
         bounding: {
           h:3, 
@@ -4928,9 +5545,9 @@ const OBJECTS = {
               name: 'RED',
               transition: 'false',
               frames: ['TRAFFIC_LIGHT_SOUTH-2',]},]    },
-          UNDERCOUNTER_CABINET_1_S: {
-        name: 'Undercounter Cabinet 1 S',
-        slug: 'UNDERCOUNTER_CABINET_1_S', 
+          UNDERCOUNTER_CABINET_S_DARK_WOOD: {
+        name: 'Undercounter Cabinet S Dark Wood',
+        slug: 'UNDERCOUNTER_CABINET_S_DARK_WOOD', 
         type: 'CABINET',
         bounding: {
           h:1, 
@@ -4949,12 +5566,12 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:6, 
+          h:12, 
           w:16
         },
         offset: {
           x:0, 
-          y:6
+          y:0
         },
         varieties: 4,
         solid: 1,
@@ -4969,36 +5586,240 @@ const OBJECTS = {
         states: [            {
               name: 'CLOSED',
               transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_1_S-1',]
+              frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-1',]
               }, {
               name: 'OPENING',
               transition: 'OPEN',
-              frames: ['UNDERCOUNTER_CABINET_1_S-2', 'UNDERCOUNTER_CABINET_1_S-3', 'UNDERCOUNTER_CABINET_1_S-4', ]
+              frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-1', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-4', ]
               },
                       {
               name: 'OPEN',
               transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_1_S-4',]
+              frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4',]
               }, {
               name: 'CLOSING',
               transition: 'CLOSED',
-              frames: ['UNDERCOUNTER_CABINET_1_S-3', 'UNDERCOUNTER_CABINET_1_S-2', 'UNDERCOUNTER_CABINET_1_S-1', ]
+              frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-1', ]
               },
                       {
               name: 'OPEN',
               transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_1_S-4',]
+              frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4',]
               }, {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
-              frames: []
+              frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4', ]
               },
           ],
-            slots: 4,
+            slots: 0,
             items: []    },
-          UNDERCOUNTER_CABINET_1_W: {
-        name: 'Undercounter Cabinet 1 W',
-        slug: 'UNDERCOUNTER_CABINET_1_W', 
+          UNDERCOUNTER_CABINET_S_LIGHT_WOOD: {
+        name: 'Undercounter Cabinet S Light Wood',
+        slug: 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD', 
+        type: 'CABINET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-1',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-1', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4', ]
+              },
+          ],
+            slots: 0,
+            items: []    },
+          UNDERCOUNTER_CABINET_S_PEELING_WOOD: {
+        name: 'Undercounter Cabinet S Peeling Wood',
+        slug: 'UNDERCOUNTER_CABINET_S_PEELING_WOOD', 
+        type: 'CABINET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-1',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-1', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4', ]
+              },
+          ],
+            slots: 0,
+            items: []    },
+          UNDERCOUNTER_CABINET_S_YELLOW: {
+        name: 'Undercounter Cabinet S Yellow',
+        slug: 'UNDERCOUNTER_CABINET_S_YELLOW', 
+        type: 'CABINET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_YELLOW-1',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_S_YELLOW-1', 'UNDERCOUNTER_CABINET_S_YELLOW-2', 'UNDERCOUNTER_CABINET_S_YELLOW-3', 'UNDERCOUNTER_CABINET_S_YELLOW-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4', 'UNDERCOUNTER_CABINET_S_YELLOW-3', 'UNDERCOUNTER_CABINET_S_YELLOW-2', 'UNDERCOUNTER_CABINET_S_YELLOW-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4', ]
+              },
+          ],
+            slots: 0,
+            items: []    },
+          UNDERCOUNTER_CABINET_W_DARK_WOOD: {
+        name: 'Undercounter Cabinet W Dark Wood',
+        slug: 'UNDERCOUNTER_CABINET_W_DARK_WOOD', 
         type: 'CABINET',
         bounding: {
           h:2, 
@@ -5017,12 +5838,12 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:20, 
-          w:8
+          h:16, 
+          w:12
         },
         offset: {
-          x:22, 
-          y:8
+          x:20, 
+          y:16
         },
         varieties: 4,
         solid: 1,
@@ -5037,32 +5858,236 @@ const OBJECTS = {
         states: [            {
               name: 'CLOSED',
               transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_1_W-4',]
+              frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-4',]
               }, {
               name: 'OPENING',
               transition: 'OPEN',
-              frames: ['UNDERCOUNTER_CABINET_1_W-3', 'UNDERCOUNTER_CABINET_1_W-2', 'UNDERCOUNTER_CABINET_1_W-1', ]
+              frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-4', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-1', ]
               },
                       {
               name: 'OPEN',
               transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_1_W-1',]
+              frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1',]
               }, {
               name: 'CLOSING',
               transition: 'CLOSED',
-              frames: ['UNDERCOUNTER_CABINET_1_W-2', 'UNDERCOUNTER_CABINET_1_W-3', 'UNDERCOUNTER_CABINET_1_W-4', ]
+              frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-4', ]
               },
                       {
               name: 'OPEN',
               transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_1_W-1',]
+              frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1',]
               }, {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
-              frames: []
+              frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1', ]
               },
           ],
-            slots: 4,
+            slots: 0,
+            items: []    },
+          UNDERCOUNTER_CABINET_W_LIGHT_WOOD: {
+        name: 'Undercounter Cabinet W Light Wood',
+        slug: 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:12
+        },
+        offset: {
+          x:20, 
+          y:16
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-4',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-4', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1', ]
+              },
+          ],
+            slots: 0,
+            items: []    },
+          UNDERCOUNTER_CABINET_W_PEELING_WOOD: {
+        name: 'Undercounter Cabinet W Peeling Wood',
+        slug: 'UNDERCOUNTER_CABINET_W_PEELING_WOOD', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:12
+        },
+        offset: {
+          x:20, 
+          y:16
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-4',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-4', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1', ]
+              },
+          ],
+            slots: 0,
+            items: []    },
+          UNDERCOUNTER_CABINET_W_YELLOW: {
+        name: 'Undercounter Cabinet W Yellow',
+        slug: 'UNDERCOUNTER_CABINET_W_YELLOW', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:12
+        },
+        offset: {
+          x:20, 
+          y:16
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_YELLOW-4',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_W_YELLOW-4', 'UNDERCOUNTER_CABINET_W_YELLOW-3', 'UNDERCOUNTER_CABINET_W_YELLOW-2', 'UNDERCOUNTER_CABINET_W_YELLOW-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1', 'UNDERCOUNTER_CABINET_W_YELLOW-2', 'UNDERCOUNTER_CABINET_W_YELLOW-3', 'UNDERCOUNTER_CABINET_W_YELLOW-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1', ]
+              },
+          ],
+            slots: 0,
             items: []    },
           WALK_SIGNAL_SE_: {
         name: 'Walk Signal SE',
