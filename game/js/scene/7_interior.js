@@ -12,6 +12,7 @@ export default class InteriorScene extends Phaser.Scene {
     }
 
     init (data) {
+        this.locale = 'interior';
         this.used_portal = data.portal;
         this.room_id = data.portal.room_id;
         this.slot = data.slot;

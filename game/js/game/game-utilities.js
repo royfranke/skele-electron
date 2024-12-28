@@ -48,6 +48,28 @@ export default class GameUtilities {
         }
     }
 
+    buildFacadeSection(_x, _y, width, height, material, layer) {
+        /// Lower left is _x, _y
+        layer.weightedRandomize(material.LOWER_LEFT_, _x, _y, 1, 1);
+        layer.weightedRandomize(material.LOWER_, _x + 1, _y, width - 2, 1);
+        layer.weightedRandomize(material.LOWER_RIGHT_, _x + width - 1, _y, 1, 1);
+
+        if (height > 2) {
+            // go up by the number of mid tiles (height-2)
+            _y = _y - (height - 2);
+            layer.weightedRandomize(material.MID_LEFT_, _x, _y, 1, height - 2);
+            layer.weightedRandomize(material.MID_, _x + 1, _y, width - 2, height - 2);
+            layer.weightedRandomize(material.MID_RIGHT_, _x + width - 1, _y, 1, height - 2);
+        }
+        if (height > 1) {
+            _y = _y - 1;
+            layer.weightedRandomize(material.TOP_LEFT_, _x, _y, 1, 1);
+            layer.weightedRandomize(material.TOP_, _x + 1, _y, width - 2, 1);
+            layer.weightedRandomize(material.TOP_RIGHT_, _x + width - 1, _y, 1, 1);
+        }
+
+    }
+
     placeTileType(_x, _y, layer, edgeLayer, tile_type, forceRedraw) {
 
         if (this.inBounds(_x, _y, layer)) {

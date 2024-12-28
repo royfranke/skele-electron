@@ -73,6 +73,12 @@ export default class GameManager {
         if (this.verbose) {
             console.log("Setting focus to: "+focus_string);
         }
+        if (this.getFocus().name == focus_string) {
+            if (this.verbose) {
+                console.log("Focus is already "+focus_string);
+            }
+            return;
+        }
         if (focus_string == 'PLAYER' || focus_string == 'MAP' || focus_string == 'PAUSE' || focus_string == 'CHEST') {
             this.hud.setState('VISIBLE_UNFOCUSED');
         }
@@ -84,6 +90,9 @@ export default class GameManager {
         }
         if (focus_string == 'NOTEBOOK') {
             this.hud.setState('NOTEBOOK_FOCUSED');
+        }
+        if (focus_string == 'SOCKS') {
+            this.hud.setState('SOCKS_FOCUSED');
         }
         if (focus_string == 'ZENER') {
             this.hud.setState('ZENER_FOCUSED');
@@ -151,6 +160,9 @@ export default class GameManager {
                 if (focus.name == 'ZENER') {
                     this.setFocus('PLAYER');  
                 }
+                if (focus.name == 'SOCKS') {
+                    this.setFocus('PLAYER');  
+                }
                 if (focus.name == 'DIALOG') {
                     this.setFocus('PLAYER');  
                 }
@@ -162,6 +174,9 @@ export default class GameManager {
                 if (focus.name == 'DIALOG') {
                     this.hud.hudDialog.arrowUp();
                 }
+                if (focus.name == 'SOCKS') {
+                    this.hud.hudSocks.arrowUp();
+                }
             }
             if (input.DOWN.TAP) {
                 if (focus.name == 'CHEST') {
@@ -169,6 +184,9 @@ export default class GameManager {
                 }
                 if (focus.name == 'DIALOG') {
                     this.hud.hudDialog.arrowDown();
+                }
+                if (focus.name == 'SOCKS') {
+                    this.hud.hudSocks.arrowDown();
                 }
             }
             if (input.RIGHT.TAP) {
@@ -192,6 +210,9 @@ export default class GameManager {
                 if (focus.name == 'CHEST') {
                     this.hud.chestHold();
                 }
+                if (focus.name == 'SOCKS') {
+                    this.hud.hudSocks.select();
+                }
                 if (focus.name == 'ZENER') {
                     this.hud.hudZener.select();
                 }
@@ -203,9 +224,9 @@ export default class GameManager {
         if (this.state.time && this.time != undefined &&  this.time.time_passing) {
             this.time.update();
             if (this.scene.exterior != null) {
-                this.scene.exterior.setKeyLight(this.getKeyLight());
-                this.objectManager.registry.updateLights(this.getKeyLight());
-                this.plantManager.registry.updateLights(this.getKeyLight());
+                // find whether keylight has changed; if so, update
+                this.handleKeylight();
+
             }
         }
         if (this.hud != null) {
@@ -240,6 +261,18 @@ export default class GameManager {
 
     getKeyLight () {
         return this.time.keylight;
+    }
+
+    handleKeylight () {
+        var keylight = this.getKeyLight();
+        if (keylight != null) {
+            
+            if (keylight != this.scene.exterior.lastKeyLight) {
+                this.scene.exterior.setKeyLight(keylight);
+                this.objectManager.registry.updateLights(keylight);
+                this.plantManager.registry.updateLights(keylight);
+            }
+        }
     }
 
 }

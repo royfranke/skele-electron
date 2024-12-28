@@ -45,9 +45,6 @@ export default class PreloadManager{
     if (this.verbose) console.log('Preloading sounds...');
     PRELOAD_SOUND.forEach(function (sound, index) {
       self.load.audio(sound.NAME,  path+sound.PATH );
-      console.log('Loading sound: '+sound.NAME);
-      console.log('Path: '+path+sound.PATH);
-      
       count++;
     });
     if (this.verbose) console.log('Preloaded '+count+' sounds');

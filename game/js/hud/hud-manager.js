@@ -12,6 +12,7 @@ import HudState from "./hud-state.js";
 import HudThinking from "./hud-thinking.js"; //Extends HudCommon
 import HudWatch from "./hud-watch.js"; //Extends HudCommon
 import HudZener from "./hud-zener.js"; //Extends HudCommon
+import HudSocks from "./hud-socks.js"; //Extends HudCommon
 
 /*
  * Manages HUD Elements and Classes
@@ -50,7 +51,7 @@ export default class HudManager {
         this.hudNotebook = new HudNotebook(this.scene);
         
         this.hudZener = new HudZener(this.scene);
-        
+        this.hudSocks = new HudSocks(this.scene);
         this.hudDisplay = new HudDisplay(this.scene);
         
         this.hudCoinpurse.addHiddenCoinPurse();
@@ -100,6 +101,10 @@ export default class HudManager {
         }
         if (this.hudWatch != undefined) {
             this.hudWatch.setWatch(this.scene.manager.time.getDigitalTime());
+        }
+
+        if (this.state.name == 'SOCKS_FOCUSED') {
+            this.hudSocks.update();
         }
         
     }
@@ -205,6 +210,16 @@ export default class HudManager {
         /// Close Card Game (Zener)
         if (this.state.name != 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name == 'ZENER_FOCUSED') {
             this.hudZener.closeZener();
+        }
+
+        /// Open Card Game (Socks)
+        if (this.state.name == 'SOCKS_FOCUSED' && this.last_state != null && this.last_state.name != 'SOCKS_FOCUSED') {
+            this.hudSocks.openSocks();
+        }
+
+        /// Close Card Game (Socks)
+        if (this.state.name != 'SOCKS_FOCUSED' && this.last_state != null && this.last_state.name == 'SOCKS_FOCUSED') {
+            this.hudSocks.closeSocks();
         }
         
     }

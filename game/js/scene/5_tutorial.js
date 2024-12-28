@@ -13,11 +13,11 @@ export default class TutorialScene extends Phaser.Scene {
 
     init (data) {
         this.slot = data.slot;
-        this.room_id = this.slot.POSITION.ROOM;
+        this.room_id = 3;
         this.used_portal = {
-            room_id: this.slot.POSITION.ROOM,
-            x:this.slot.POSITION.X,
-            y:this.slot.POSITION.Y,
+            room_id: 3,
+            x:8,
+            y:8,
             facing: 'S'
         }
         

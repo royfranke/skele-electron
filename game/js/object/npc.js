@@ -51,6 +51,7 @@ export default class Npc {
     if (this.greeting && this.following == null) {
       this.world_actions = [
         { action: 'TEST PSYCHIC ABILITIES', object: this },
+        { action: 'MATCH SOCKS', object: this },
         { action: 'FOLLOW ME', object: this },
         { action: 'FOLLOW ME AT A DISTANCE', object: this }
       ];
@@ -138,6 +139,12 @@ export default class Npc {
       this.clearDestinations();
       this.scene.manager.hud.think('Have an apple.');
       this.givePlayerItem('APPLE');
+    }
+
+    if (action == 'MATCH SOCKS') {
+      this.following = null;
+      this.clearDestinations();
+      this.scene.manager.setFocus('SOCKS');
     }
 
     if (action == 'TEST PSYCHIC ABILITIES') {

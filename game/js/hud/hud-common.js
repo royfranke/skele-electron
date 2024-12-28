@@ -47,5 +47,23 @@ export default class HudCommon {
         flutter (elements=[], delay=0) {
             this.factory.flutter(elements, delay);
         }
+
+        getNumberSymbol (number=0) {
+            // Utility that probably shouldn't live here, but here it is
+            // For use with SkeleScrawl font
+            var display_number = number;
+            if (number == 0) {
+                display_number = ' ';
+            }
+            if (number > 5 && number < 11) {
+                let helper = number - 5;
+                display_number = '5'+helper;
+            }
+            if (number > 10 && number < 21) {
+                let helper = number - 10;
+                display_number = '55'+helper;
+            }
+            return display_number;
+        }
     
 }

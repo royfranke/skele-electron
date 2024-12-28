@@ -102,12 +102,12 @@ export default class ZenerDeck {
 
             if (result.result) {
                 this.streak++;
-            }
-            else {
-                /// Streak is broken
                 if (this.streak > this.streak_best) {
                     this.streak_best = this.streak;
                 }
+            }
+            else {
+                /// Streak is broken
                 this.streak = 0;
             }
             this.recordGuess(result.guess);

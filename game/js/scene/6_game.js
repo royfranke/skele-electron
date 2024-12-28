@@ -12,6 +12,7 @@ export default class GameScene extends Phaser.Scene {
     constructor() {
         super("Game Scene");
         this.verbose = true;
+        this.locale = 'exterior';
     }
 
     init (data) {
@@ -20,7 +21,7 @@ export default class GameScene extends Phaser.Scene {
             this.used_portal = data.portal;
         }
         else {
-            this.used_portal = {x:0,y:0,facing:'down'};
+            this.used_portal = {x:0,y:0,facing:'S'};
         }
     }
 

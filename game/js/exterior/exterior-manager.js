@@ -22,6 +22,7 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     initialize () {
+        this.lastKeyLight = null;
         this.keylight = KEYLIGHT;
 
         this.nav = new Navigator(this.scene);
@@ -54,7 +55,7 @@ import KEYLIGHT from "../config/key-light.js";
         const blocks = new Array(MAP_CONFIG.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 
         MAP_CONFIG.blocks.forEach(function (block, index) {
-            blocks[block.y][block.x] = new Block(self.scene,self.groundLayer,self.wallLayer,self.roofLayer, block); /// Backwards on purpose to not require array flip
+            blocks[block.y][block.x] = new Block(self.scene, block); /// Backwards on purpose to not require array flip
             
         });
 
@@ -231,6 +232,7 @@ import KEYLIGHT from "../config/key-light.js";
     create () {
         self = this;
         MAP_CONFIG.blocks.forEach(function (block, index) {
+            self.blocks[block.y][block.x].setGround();
             self.blocks[block.y][block.x].buildProperties();
             self.blocks[block.y][block.x].buildObjects(); 
             self.setCorners(block);
@@ -251,6 +253,7 @@ import KEYLIGHT from "../config/key-light.js";
         this.edgeLayer.setTint(phase.ground_tint);
         this.wallLayer.setTint(phase.wall_tint);
         this.roofLayer.setTint(phase.roof_tint);
+        this.lastKeyLight = key_light_name;
     }
 
     createItems () {

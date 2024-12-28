@@ -19,7 +19,6 @@ export default class PlayerCoinpurse {
 
     setContents (contents) {
         this.contents = contents;
-
         this.updateTotal();
     }
 
@@ -146,6 +145,9 @@ export default class PlayerCoinpurse {
           for (const [key, value] of Object.entries(this.contents.COIN)) {
             this.total += value*this.coinRef[key];
           }
+          for (const [key, value] of Object.entries(this.contents.PAPER)) {
+            this.total += value*this.paperRef[key];
+          }
         return this.total;
     }
 
@@ -158,6 +160,9 @@ export default class PlayerCoinpurse {
         this.total = [];
           for (const [key, value] of Object.entries(this.contents.COIN)) {
             this.total.push({text: value, icon: this.coinRef[key]});
+          }
+          for (const [key, value] of Object.entries(this.contents.PAPER)) {
+            this.total.push({text: value, icon: this.paperRef[key]});
           }
         return this.total;
     }

@@ -1,4 +1,4 @@
-import STATES from "../config/app-states.js";
+import STATES from "./app-states.js";
 
 /*
  * Manages application state 

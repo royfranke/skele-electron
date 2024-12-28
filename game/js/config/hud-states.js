@@ -25,6 +25,11 @@ const HUD_STATES = {
         input: true,
         visible: true
     },
+    SOCKS_FOCUSED: {
+        name: 'SOCKS_FOCUSED',
+        input: true,
+        visible: true
+    },
     ZENER_FOCUSED: {
         name: 'ZENER_FOCUSED',
         input: true,

@@ -209,7 +209,7 @@ export default class HudPockets extends HudCommon {
                 var pos = this.getArrowPosition(slot_x);
                 var tween = this.scene.tweens.add({
                     targets: [arrow],
-                    y: pos.y + 4,
+                    y: '+= 4',
                     x: pos.x,
                     duration: 100,
                     ease: 'Sine.easeIn',

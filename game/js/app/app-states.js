@@ -14,6 +14,7 @@ const APP_STATES = {
         name: 'MAIN',
         super: 'Main Menu',
         fadeIn: 250,
+        irisIn: 1000,
         fadeOut: 250,
         autoEnd: 0,
         menu: true,
@@ -73,7 +74,8 @@ const APP_STATES = {
     GAME: {
         name: 'GAME',
         super: 'Game Scene',
-        fadeIn: 1000,
+        fadeIn: 0,
+        irisIn: 1000,
         fadeOut: 1000,
         autoEnd: 0,
         menu: false,

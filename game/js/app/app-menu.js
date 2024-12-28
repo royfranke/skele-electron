@@ -1,4 +1,4 @@
-import MENU from "../config/app-menus.js";
+import MENU from "./app-menus.js";
 /*
  * Manages application menus
  * MAIN | PAUSE | SETTINGS
@@ -27,6 +27,18 @@ export default class AppMenu {
 
             var block = self.scene.add.nineslice(view.left + view.margin.left + 24,(view.top + view.margin.top) + (28 * index), 'UI', 'BLOCK_MID_ORANGE', 96, 24, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
+            // Mouse/Touch Input
+            block.setInteractive(); 
+            block.on('pointerover', function (pointer) {
+                // This function will be called when the menu block is clicked or tapped
+                self.setSelected(index);
+            });
+            block.on('pointerdown', function (pointer) {
+                // This function will be called when the menu block is clicked or tapped
+                self.select();
+            });
+
+            
             var text = self.scene.add.bitmapText(block.x + 6,block.y + 8, 'SkeleTalk', menu_item.LABEL, 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
             if (menu_item.BUTTON_STICK) {

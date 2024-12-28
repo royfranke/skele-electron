@@ -167,6 +167,24 @@ const ITEMS = {
         interactions: {
         },
     },
+      SOCK_7: {
+        name: 'Black Sock',
+        slug: 'SOCK_7', 
+        use:  'HOLDS',
+        icon: 'SOCK_7',
+        type: 'SOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'SOCK_7_34',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
+        interactions: {
+        },
+    },
       CRAYON_BLUE: {
         name: 'Blue Crayon',
         slug: 'CRAYON_BLUE', 
@@ -177,6 +195,20 @@ const ITEMS = {
         contains: [],
         containedBy: [],
         stack: 5,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      LAUNDRY_BASKET_BLUE: {
+        name: 'Blue Laundry Basket',
+        slug: 'LAUNDRY_BASKET_BLUE', 
+        use:  'HOLDS',
+        icon: 'LAUNDRY_BASKET_BLUE',
+        type: 'LAUNDRY_BASKET',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -514,6 +546,20 @@ const ITEMS = {
             lessThan: 10,
             greaterThan: 1
           }        ],
+        interactions: {
+        },
+    },
+      BROOM: {
+        name: 'Broom',
+        slug: 'BROOM', 
+        use:  'HOLDS',
+        icon: 'BROOM',
+        type: 'TOOL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
         interactions: {
         },
     },
@@ -1520,6 +1566,42 @@ items: []    },
         interactions: {
         },
     },
+      SOCK_4: {
+        name: 'Gray Sock',
+        slug: 'SOCK_4', 
+        use:  'HOLDS',
+        icon: 'SOCK_4',
+        type: 'SOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'SOCK_4_39',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
+        interactions: {
+        },
+    },
+      SOCK_3: {
+        name: 'Gray Sock Blue Stripes',
+        slug: 'SOCK_3', 
+        use:  'HOLDS',
+        icon: 'SOCK_3',
+        type: 'SOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'SOCK_3_38',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
+        interactions: {
+        },
+    },
       LUNCH_BAG_GREASY: {
         name: 'Greasy Lunch Bag',
         slug: 'LUNCH_BAG_GREASY', 
@@ -1660,6 +1742,24 @@ items: []    },
         containedBy: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
+    },
+      SOCK_5: {
+        name: 'Green Sock',
+        slug: 'SOCK_5', 
+        use:  'HOLDS',
+        icon: 'SOCK_5',
+        type: 'SOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'SOCK_5_36',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
         interactions: {
         },
     },
@@ -2000,6 +2100,20 @@ items: []    },
         interactions: {
         },
     },
+      LAUNDRY_LIQUID: {
+        name: 'Liquid Laundry Detergent',
+        slug: 'LAUNDRY_LIQUID', 
+        use:  'HOLDS',
+        icon: 'LAUNDRY_LIQUID',
+        type: 'LAUNDRY_SOAP',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       LOTTO: {
         name: 'Lotto Ticket',
         slug: 'LOTTO', 
@@ -2127,6 +2241,20 @@ items: []    },
             lessThan: 26,
             greaterThan: 10
           }        ],
+        interactions: {
+        },
+    },
+      MOP: {
+        name: 'Mop',
+        slug: 'MOP', 
+        use:  'HOLDS',
+        icon: 'MOP',
+        type: 'TOOL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
         interactions: {
         },
     },
@@ -2394,6 +2522,20 @@ items: []    },
         interactions: {
         },
     },
+      LAUNDRY_BASKET_PINK: {
+        name: 'Pink Laundry Basket',
+        slug: 'LAUNDRY_BASKET_PINK', 
+        use:  'HOLDS',
+        icon: 'LAUNDRY_BASKET_PINK',
+        type: 'LAUNDRY_BASKET',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       PIZZA_BOX_USED: {
         name: 'Pizza Box',
         slug: 'PIZZA_BOX_USED', 
@@ -2587,6 +2729,20 @@ items: []    },
                                 ]
 
             }        },
+    },
+      LAUNDRY_POWDER: {
+        name: 'Powder Laundry Detergent',
+        slug: 'LAUNDRY_POWDER', 
+        use:  'HOLDS',
+        icon: 'LAUNDRY_POWDER',
+        type: 'LAUNDRY_SOAP',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
     },
       TV_DINNER_FOOD: {
         name: 'Prepared TV Dinner',
@@ -2837,6 +2993,24 @@ items: []    },
         containedBy: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
+    },
+      SOCK_6: {
+        name: 'Red Sock',
+        slug: 'SOCK_6', 
+        use:  'HOLDS',
+        icon: 'SOCK_6',
+        type: 'SOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'SOCK_6_35',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
         interactions: {
         },
     },
@@ -3558,6 +3732,42 @@ items: []    },
         containedBy: [],
         stack: 0,
         stacks: [        ],
+        interactions: {
+        },
+    },
+      SOCK_1: {
+        name: 'White Sock',
+        slug: 'SOCK_1', 
+        use:  'HOLDS',
+        icon: 'SOCK_1',
+        type: 'SOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'SOCK_1_40',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
+        interactions: {
+        },
+    },
+      SOCK_2: {
+        name: 'White Sock Blue Stripes',
+        slug: 'SOCK_2', 
+        use:  'HOLDS',
+        icon: 'SOCK_2',
+        type: 'SOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'SOCK_2_37',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
         interactions: {
         },
     },

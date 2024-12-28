@@ -29,19 +29,15 @@ export default class Block {
     },
     */
 
-    constructor(scene, groundLayer, wallLayer, roofLayer, block) {
+    constructor(scene, block) {
         this.scene = scene;
         this.block = block;
-        this.groundLayer = groundLayer;
-        this.wallLayer = wallLayer;
-        this.roofLayer = roofLayer;
         this.propertyLines = [];
-        this.setGround();
     }
 
     setGround () {
         const block = this.block;
-        const groundLayer = this.groundLayer;
+        let groundLayer = this.scene[this.scene.locale].groundLayer;
         if (block.ground.toUpperCase() == 'FOREST') {
             this.setForest();
         }
@@ -68,7 +64,7 @@ export default class Block {
 
     setForest () {
         const block = this.block;
-        const groundLayer = this.groundLayer;
+        const groundLayer = this.scene[this.scene.locale].groundLayer;
         const forestTypes = ['LEAVES', 'MULCH', 'DIRT', 'GRASS'];
         let slice_height = 4;
         let slice_width  = 8;
@@ -131,7 +127,7 @@ export default class Block {
         prop.lines.bottom = this.block.top + prop.lines.y + prop.lines.height;
         prop.lines.right = prop.lines.left + prop.lines.width;
 
-        let propertyLine = new PropertyLine(this.scene, this, prop);
+        let propertyLine = new PropertyLine(this.scene, prop);
         
         this.propertyLines.push(propertyLine);
     }
@@ -141,7 +137,7 @@ export default class Block {
             prop.buildIt();
         });
     }
-
+/*
     onProperty (_x, _y) {
         var property = false;
         this.propertyLines.forEach(function (prop, index) {
@@ -154,7 +150,7 @@ export default class Block {
         });
         return property;
     }
-
+*/
     getAdjoiningNodes (_x,_y) {
         var nodes = {NW:null, NE:null, SE:null, SW:null};
         nodes.NW = this.scene.exterior.getBlockNodeProperties(_x, _y);

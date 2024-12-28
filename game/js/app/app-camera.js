@@ -34,12 +34,19 @@ export default class AppCamera {
         this.view.height = this.view.bottom - this.view.top;
         this.view.windowHeight = this.view.height - this.view.margin.top - this.view.margin.bottom;
         this.view.width = this.view.right - this.view.left;
+        this.view.center = {
+            x: this.view.left + (this.view.width/2),
+            y: this.view.top + (this.view.height/2)
+        }
     }
 
     start () {
         this.camera.setBackgroundColor('#4b424a');
         if (this.state.fadeIn) {
             this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
+        }
+        if (this.state.irisIn != undefined) {
+            this.irisIn(this.state.irisIn);
         }
     }
 
@@ -68,7 +75,22 @@ export default class AppCamera {
         this.camera.setBounds(0, 0, width, height);
     }
     
+    irisIn (duration=0) {
+        // Add rectangle that covers the viewport
+        var rect = this.scene.add.rectangle(this.view.left, this.view.top, this.view.width, this.view.height, 0x4b424a, 1).setOrigin(0).setDepth(50000).setScrollFactor(0);
 
-    //create transition iris open and close effects for between scenes/rooms
+        var circle = this.scene.add.circle(this.view.center.x, this.view.center.y, 20, 0x4b424a).setOrigin(.5).setScrollFactor(0);
+        var mask = new Phaser.Display.Masks.BitmapMask(this.scene, circle);
+        mask.invertAlpha = true;
+        rect.setMask(mask);
+
+        const tween = this.scene.add.tween({
+            targets: [rect, circle],
+            scale: 16,
+            duration: 2000,
+            yoyo: false,
+            ease: 'Sine.easeIn'
+        });
+    }
 
 }

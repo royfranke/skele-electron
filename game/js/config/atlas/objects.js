@@ -1351,6 +1351,74 @@ const OBJECTS = {
               frames: ['SPECIAL_NEWS_BOX_-2', 'SPECIAL_NEWS_BOX_-3', 'SPECIAL_NEWS_BOX_-4', 'SPECIAL_NEWS_BOX_-5', 'SPECIAL_NEWS_BOX_-6', ]
               },
           ]    },
+          LAUNDRY_COMMERCIAL_DRYER: {
+        name: 'Commercial Clothes Dryer',
+        slug: 'LAUNDRY_COMMERCIAL_DRYER', 
+        type: 'DRYER',
+        bounding: {
+          h:4, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:55, 
+          w:38,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:55, 
+          w:38
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-1',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-1', 'LAUNDRY_COMMERCIAL_DRYER-2', 'LAUNDRY_COMMERCIAL_DRYER-3', 'LAUNDRY_COMMERCIAL_DRYER-4', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-4',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-4', 'LAUNDRY_COMMERCIAL_DRYER-3', 'LAUNDRY_COMMERCIAL_DRYER-2', 'LAUNDRY_COMMERCIAL_DRYER-1', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-4',]
+              }, {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-3', ]
+              },
+          ],
+            slots: 0,
+            items: []    },
           COMMERCIAL_FREEZER: {
         name: 'Commercial Freezer',
         slug: 'COMMERCIAL_FREEZER', 
@@ -2905,6 +2973,39 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          FURNACE: {
+        name: 'Furnace',
+        slug: 'FURNACE', 
+        type: 'HVAC',
+        bounding: {
+          h:4, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:64, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:15, 
+          w:16
+        },
+        offset: {
+          x:4, 
+          y:46
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
           BUSH: {
         name: 'Generic Bush',
         slug: 'BUSH', 
@@ -3353,6 +3454,39 @@ const OBJECTS = {
         },
         varieties: 1,
         solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          HOT_WATER_HEATER: {
+        name: 'Hot Water Heater',
+        slug: 'HOT_WATER_HEATER', 
+        type: 'HVAC',
+        bounding: {
+          h:4, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:64, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:15, 
+          w:16
+        },
+        offset: {
+          x:8, 
+          y:44
+        },
+        varieties: 1,
+        solid: 1,
         portal: 0,
         actions: [],
         states: []    },
@@ -4000,6 +4134,63 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          MILK_CRATE: {
+        name: 'Milk Crate',
+        slug: 'MILK_CRATE', 
+        type: 'CRATE',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:12
+        },
+        offset: {
+          x:2, 
+          y:5
+        },
+        varieties: 2,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'FLIP ONTO BOTTOM', stateTrigger: 'FLIPPING_ONTO_BOTTOM', validStates: ['FLIPPED_ONTO_TOP']
+          }, {
+            name: 'FLIP ONTO TOP', stateTrigger: 'FLIPPING_ONTO_TOP', validStates: ['FLIPPED_ONTO_BOTTOM']
+          }],
+        states: [            {
+              name: 'FLIPPED_ONTO_TOP',
+              transition: 'false',
+              frames: ['MILK_CRATE-2',]
+              }, {
+              name: 'FLIPPING_ONTO_BOTTOM',
+              transition: 'FLIPPED_ONTO_BOTTOM',
+              frames: ['MILK_CRATE-2', 'MILK_CRATE-1', ]
+              },
+                      {
+              name: 'FLIPPED_ONTO_BOTTOM',
+              transition: 'false',
+              frames: ['MILK_CRATE-1',]
+              }, {
+              name: 'FLIPPING_ONTO_TOP',
+              transition: 'FLIPPED_ONTO_TOP',
+              frames: ['MILK_CRATE-1', 'MILK_CRATE-2', ]
+              },
+          ],
+            slots: 3,
+            items: []    },
           OBJ_FLYER_MISSING: {
         name: 'Missing Person Flyer',
         slug: 'OBJ_FLYER_MISSING', 
@@ -4055,6 +4246,117 @@ const OBJECTS = {
               frames: ['OBJ_FLYER_MISSING-1', 'OBJ_FLYER_MISSING-2', 'OBJ_FLYER_MISSING-3', 'OBJ_FLYER_MISSING-4', 'OBJ_FLYER_MISSING-5', 'OBJ_FLYER_MISSING-6', 'OBJ_FLYER_MISSING-7', 'OBJ_FLYER_MISSING-8', ]
               },
           ]    },
+          NIGHT_LIGHT: {
+        name: 'Night Light',
+        slug: 'NIGHT_LIGHT', 
+        type: 'NIGHT_LIGHT',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:10, 
+          w:11,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'OFF',
+              transition: 'false',
+              frames: ['NIGHT_LIGHT-1',]},{
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: ['NIGHT_LIGHT-2','NIGHT_LIGHT-1',]},{
+              name: 'ON',
+              transition: 'false',
+              frames: ['NIGHT_LIGHT-2',]},{
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: ['NIGHT_LIGHT-1','NIGHT_LIGHT-2',]},]    },
+          OUTLET_DOUBLE: {
+        name: 'Outlet Double',
+        slug: 'OUTLET_DOUBLE', 
+        type: 'OUTLET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          OUTLET_SINGLE: {
+        name: 'Outlet Single',
+        slug: 'OUTLET_SINGLE', 
+        type: 'OUTLET',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
           OVEN_1: {
         name: 'Oven 1',
         slug: 'OVEN_1', 
@@ -4706,6 +5008,39 @@ const OBJECTS = {
               frames: []
               },
           ]    },
+          SOFA_SHLUBBY_1: {
+        name: 'Shlubby Sofa',
+        slug: 'SOFA_SHLUBBY_1', 
+        type: 'SOFA',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:2, 
+          w:4,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:20, 
+          w:60
+        },
+        offset: {
+          x:0, 
+          y:22
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
           SHOP_SHELVES_BLUE: {
         name: 'Shop Shelves Blue',
         slug: 'SHOP_SHELVES_BLUE', 
@@ -6179,6 +6514,72 @@ const OBJECTS = {
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
               frames: ['WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-2',]},]    },
+          WALL_SWITCH_DOUBLE: {
+        name: 'Wall Switch Double',
+        slug: 'WALL_SWITCH_DOUBLE', 
+        type: 'LIGHT_SWITCH',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          WALL_SWITCH_SINGLE: {
+        name: 'Wall Switch Single',
+        slug: 'WALL_SWITCH_SINGLE', 
+        type: 'LIGHT_SWITCH',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
           WICKET_NS: {
         name: 'Wicket Horizontal',
         slug: 'WICKET_NS', 

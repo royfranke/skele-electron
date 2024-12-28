@@ -26,6 +26,9 @@ const FOCUS_STATES = {
     QUOTE: {
         name: 'QUOTE'
     },
+    SOCKS: {
+        name: 'SOCKS'
+    },
     ZENER: {
         name: 'ZENER'
     }

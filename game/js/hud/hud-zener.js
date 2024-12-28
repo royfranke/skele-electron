@@ -27,7 +27,7 @@ export default class HudZener extends HudCommon {
             block: null,
         };
         this.results = {
-            positive: ['Yes!!','Uh-huh!','That’s it!','You got it!'],
+            positive: ['Yes!!','Uh-huh!','That\'s it!','You got it!'],
             negative: ['Uh-uh.','Nope!','Try Again!','No way.','Pfffff. No.']
         };
         this.deckAnimations = [
@@ -79,7 +79,7 @@ export default class HudZener extends HudCommon {
                 {
                     symbol: 'circle',
                     x: this.boardView.x + 40,
-                    y: this.boardView.y + 88,
+                    y: this.boardView.y + 96,
                     slot: {
                         frameName: 'ITEM_FOCUSED',
                         block: null,
@@ -93,7 +93,7 @@ export default class HudZener extends HudCommon {
                 {
                     symbol: 'plus',
                     x: this.boardView.x + 80,
-                    y: this.boardView.y + 88,
+                    y: this.boardView.y + 96,
                     slot: {
                         frameName: 'ITEM_UNFOCUSED',
                         block: null,
@@ -107,7 +107,7 @@ export default class HudZener extends HudCommon {
                 {
                     symbol: 'waves',
                     x: this.boardView.x + 120,
-                    y: this.boardView.y + 88,
+                    y: this.boardView.y + 96,
                     slot: {
                         frameName: 'ITEM_UNFOCUSED',
                         block: null,
@@ -121,7 +121,7 @@ export default class HudZener extends HudCommon {
                 {
                     symbol: 'square',
                     x: this.boardView.x + 160,
-                    y: this.boardView.y + 88,
+                    y: this.boardView.y + 96,
                     slot: {
                         frameName: 'ITEM_UNFOCUSED',
                         block: null,
@@ -135,7 +135,7 @@ export default class HudZener extends HudCommon {
                 {
                     symbol: 'star',
                     x: this.boardView.x + 200,
-                    y: this.boardView.y + 88,
+                    y: this.boardView.y + 96,
                     slot: {
                         frameName: 'ITEM_UNFOCUSED',
                         block: null,
@@ -152,34 +152,50 @@ export default class HudZener extends HudCommon {
                 {
                     name: 'streak',
                     displayName: '',
-                    className: 'score-streak',
-                    x: this.boardView.x + 112,
-                    y: this.boardView.y + 24,
+                    font: 'SkeleHype',
+                    fontSize: 24,
+                    width: this.boardView.width - 48,
+                    x: this.boardView.x + Math.round(this.boardView.width/2),
+                    y: this.boardView.y + this.boardView.height - 24,
                     object: null,
+                    blockFrame: '',
+                    block: null
                 },
                 {
                     name: 'hits',
                     displayName: '',
-                    className: 'score-label',
-                    x: this.boardView.x + 56,
-                    y: this.boardView.y + 136,
+                    font: 'SkeleScrawl',
+                    fontSize: 12,
+                    width: 48,
+                    x: this.boardView.x + (this.boardView.width-120),
+                    y: this.boardView.y + 32,
+                    blockFrame: 'BLOCK_MID_MOONSTONE',
                     object: null,
+                    block: null,
                 },
                 {
                     name: 'misses',
                     displayName: '',
-                    className: 'score-label',
-                    x: this.boardView.x + 160,
-                    y: this.boardView.y + 136,
+                    font: 'SkeleScrawl',
+                    fontSize: 12,
+                    width: 48,
+                    x: this.boardView.x + (this.boardView.width-48),
+                    y: this.boardView.y + 32,
+                    blockFrame: 'BLOCK_MID_MOONSTONE',
                     object: null,
+                    block: null,
                 },
                 {
                     name: 'instructions',
                     displayName: 'Which card is this?',
-                    className: 'game-instructions',
-                    x: this.boardView.x + 72,
-                    y: this.boardView.y + 64,
+                    font: 'SkeleTalk',
+                    fontSize: 16,
+                    width: this.boardView.width - 48,
+                    x: this.boardView.x + Math.round(this.boardView.width/2),
+                    y: this.boardView.y + 72,
                     object: null,
+                    block: null,
+                    blockFrame: 'BLOCK_SHALLOW_WHITE',
                 }
             ],
         };
@@ -207,6 +223,9 @@ export default class HudZener extends HudCommon {
             });
             this.board.score.forEach((score) => {
                 score.object.destroy();
+                if (score.block != null) {
+                    score.block.destroy();
+                }
             });
             this.manager.resetDeck();
             this.open = false;
@@ -341,7 +360,37 @@ export default class HudZener extends HudCommon {
     }
 
     tallyScore () {
+        this.board.score[0].object.setFont('SkeleTalk');
+        this.board.score[0].object.setFontSize(16);
+        this.scene.tweens.add({
+            targets: this.board.score[0].object,
+            y: '-=24',
+            duration: 2000,
+            ease: 'Sine.easeInOut'
+        });
 
+        let timeline = this.scene.add.timeline([
+            {
+                at: 500,
+                run: () => {
+                    this.setHype('BEST STREAK: '+this.reference_score.streak_best);
+                }
+            },
+            {
+                at: 1500,
+                run: () => {
+                    this.setHype('BEST STREAK: '+this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct);
+                }
+            },
+            {
+                at: 2500,
+                run: () => {
+                    this.setHype('BEST STREAK: '+this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct + '\nFINAL: ' +(this.reference_score.streak_best*this.reference_score.correct));
+                }
+            }
+        ]);
+
+        timeline.play();
     }
 
     lastCard () {
@@ -400,37 +449,52 @@ export default class HudZener extends HudCommon {
             this.board.choices[i].icon.icon = this.makeIcon(this.board.choices[i].x, this.board.choices[i].y, this.board.choices[i].icon.textureName, this.board.choices[i].icon.frameName);
         }
 
-        for (let i = 0; i < this.board.score.length; i++) {
-            //this.board.score[i].object = this.scene.add.dom(this.board.score[i].x, this.board.score[i].y, 'div', '', this.board.score[i].displayName).setClassName(this.board.score[i].className).setOrigin(0).setDepth(100200).setScrollFactor(0);
+        for (let i = 0; i < this.board.score.length; i++) {;
+            this.board.score[i].object = this.scene.add.bitmapText(this.board.score[i].x, this.board.score[i].y, 'SkeleTalk', this.board.score[i].displayName, 12).setOrigin(.5).setScrollFactor(0).setDepth(100200);
 
-            this.board.score[i].object = this.scene.add.bitmapText(this.board.score[i].x, this.board.score[i].y, 'SkeleTalk', this.board.score[i].displayName, 16).setOrigin(0).setScrollFactor(0).setDepth(100200);
-            if (i == 0) {
-                this.board.score[i].object.setFont('SkeleHype');
+            if (i > 0) {
+                this.board.score[i].object.setTintFill(0x465e62);
             }
-        }
 
+            this.board.score[i].object.setFont(this.board.score[i].font);
+            this.board.score[i].object.setFontSize(this.board.score[i].fontSize);
+            this.board.score[i].object.setMaxWidth(this.board.score[i].width);
+            this.board.score[i].object.setLineSpacing(2);
+            
+            if (this.board.score[i].blockFrame != '') {
+                this.board.score[i].block = this.makeBlock(this.board.score[i].x, this.board.score[i].y, this.board.score[i].width + 16, 32, this.board.score[i].blockFrame).setOrigin(.5).setScrollFactor(0).setDepth(100100);
+            }
+
+        }
+        this.setHits();
+        this.setMisses();
         this.drawSelected(0);
     }
 
+    setHits (hits='') {
+        this.board.score[1].object.setText('Hits\n' + this.getNumberSymbol(hits));
+    }
+
+    setMisses (misses='') {
+        this.board.score[2].object.setText('Misses\n' + this.getNumberSymbol(misses));
+    }
+
+    setHype (hype='') {
+        this.board.score[0].object.setText(hype);
+    }
+
     drawScore (score) {
-        
+        this.reference_score = score;
         if (score.streak > 1) {
-            this.board.score[0].object.setText('STREAK! X' + score.streak);
-            this.board.score[0].object.setTintFill(0xed931e);
+            this.setHype('STREAK! X' + score.streak);
+            
         }
         else {
-            if (score.streak_best > 1) {
-                this.board.score[0].object.setText('BEST: X' + score.streak_best);
-                this.board.score[0].object.setTintFill(0x645d9a);
-            }
-            else {
-                this.board.score[0].object.setText('');
-                //this.board.score[0].object.setTintFill(0xcd6a3f);
-            }
+            this.setHype();
         }
 
-        this.board.score[1].object.setText('Hits: ' + score.correct);
-        this.board.score[2].object.setText('Misses: ' + score.incorrect);
+        this.setHits(score.correct);
+        this.setMisses(score.incorrect);
     }
 
     resultMessage (result) {

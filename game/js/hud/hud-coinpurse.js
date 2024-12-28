@@ -132,9 +132,16 @@ export default class HudCoinpurse extends HudCommon {
             var line_height = 0;
             var new_content = [];
             content.forEach(coin => {
-                if (coin.text > 0) {
-                    coin.icon = this.scene.add.sprite(_x + 4, _y + line_height + 3, 'FX', 'COIN_' + coin.icon + '_-2').setOrigin(0).setScrollFactor(0).setDepth(100200);
+                if (coin.text > 0 && coin.icon < 100) {
+                    coin.icon = this.scene.add.sprite(_x + 4, _y + line_height + 5, 'FX', 'COIN_' + coin.icon + '_-2').setOrigin(0).setScrollFactor(0).setDepth(100200);
 
+                    line_height += coin_slot_height + coin_slot_spacing;
+                    coins.push(coin.icon);
+                    new_content.push(' x ' + coin.text);
+                }
+                if (coin.text > 0 && coin.icon >= 100) {
+                    coin.icon = coin.icon/100;
+                    coin.icon = this.scene.add.sprite(_x + 4, _y + line_height + 5, 'ITEMS', 'PAPER_' + coin.icon + '_').setOrigin(0).setScrollFactor(0).setDepth(100200);
                     line_height += coin_slot_height + coin_slot_spacing;
                     coins.push(coin.icon);
                     new_content.push(' x ' + coin.text);
@@ -142,11 +149,18 @@ export default class HudCoinpurse extends HudCommon {
             });
             content = new_content;
         }
-        let flag_text = this.scene.add.bitmapText(_x + 19, _y + 8, 'SkeleTalk', content, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        
+        if (content.length == 0) { 
+            content = [' - Empty'];
+            let icon = this.scene.add.sprite(_x + 4, _y + line_height + 5, 'UI', 'EMPTY_SYMBOL').setOrigin(0).setScrollFactor(0).setDepth(100200);
+            coins.push(icon);
+        }
+        let flag_text = this.scene.add.bitmapText(_x + 20, _y + 10, 'SkeleTalk', content, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
-        let flag_height = flag_text.getTextBounds().global.height + 16;
-        let flag_width = flag_text.getTextBounds().global.width + 24;
-        let flag = this.makeBlock(_x, _y, flag_width, flag_height, 'BLOCK_MID_CREAM_BORDER');
+        let flag_height = flag_text.getTextBounds().global.height + 20;
+        let flag_width = flag_text.getTextBounds().global.width + 28;
+        let flag = this.makeBlock(_x, _y, flag_width, flag_height, 'BLOCK_MID_LILAC');
+
 
         return { flag: flag, text: flag_text, coins: coins };
 

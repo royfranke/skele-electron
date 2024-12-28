@@ -1693,20 +1693,68 @@
 		"sourceSize": {"w":128,"h":144 }
 	},    
           {
-		"filename": "RIGHT_HAND",
+		"filename": "LAUNDRY_PINK_1",
 		"frame": {"x":128,"y":387,"w":16,"h":16 },
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
 		"sourceSize": {"w":16,"h":16 }
 	},    
       {
-		"filename": "SHOULDERS",
+		"filename": "LAUNDRY_PINK_2",
 		"frame": {"x":144,"y":387,"w":16,"h":16 },
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
 		"sourceSize": {"w":16,"h":16 }
 	},    
       {
+		"filename": "LAUNDRY_PINK_3",
+		"frame": {"x":160,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "LAUNDRY_PINK_4",
+		"frame": {"x":176,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "LAUNDRY_PINK_5",
+		"frame": {"x":192,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "LAUNDRY_PINK_BACK",
+		"frame": {"x":208,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "LAUNDRY_PINK_EMPTY",
+		"frame": {"x":224,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "LAUNDRY_PINK_FRONT",
+		"frame": {"x":240,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "RIGHT_HAND",
+		"frame": {"x":256,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "SHOULDERS",
+		"frame": {"x":272,"y":387,"w":16,"h":16 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
+		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
 		"filename": "STREET_SIGN",
-		"frame": {"x":160,"y":387,"w":64,"h":16 },
+		"frame": {"x":128,"y":403,"w":64,"h":16 },
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":16 },
 		"sourceSize": {"w":64,"h":16 }
 	}    
