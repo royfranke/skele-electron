@@ -149,8 +149,8 @@ const OBJECTS = {
               name: 'ON',
               transition: 'false',
               frames: ['LIT_SIGN_BONEDEGA-2',]},{
-              name: 'FLICKER',
-              transition: 'ON',
+              name: 'FLICKERING',
+              transition: 'false',
               frames: ['LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2',]},]    },
           BOXELDER: {
         name: 'Boxelder',
@@ -2676,6 +2676,61 @@ const OBJECTS = {
               frames: []
               },
           ]    },
+          EXT_DOOR_STORE_STOOP_1: {
+        name: 'Ext Stoor Door Stoop 1',
+        slug: 'EXT_DOOR_STORE_STOOP_1', 
+        type: 'STORE_DOOR_',
+        bounding: {
+          h:4, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:64, 
+          w:34,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:51, 
+          w:26
+        },
+        offset: {
+          x:8, 
+          y:7
+        },
+        varieties: 5,
+        solid: 0,
+        portal: 1,
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['EXT_DOOR_STORE_STOOP_1-1',]
+              }, {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['EXT_DOOR_STORE_STOOP_1-1', 'EXT_DOOR_STORE_STOOP_1-2', 'EXT_DOOR_STORE_STOOP_1-3', 'EXT_DOOR_STORE_STOOP_1-4', 'EXT_DOOR_STORE_STOOP_1-5', ]
+              },
+                      {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['EXT_DOOR_STORE_STOOP_1-5',]
+              }, {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['EXT_DOOR_STORE_STOOP_1-5', 'EXT_DOOR_STORE_STOOP_1-4', 'EXT_DOOR_STORE_STOOP_1-3', 'EXT_DOOR_STORE_STOOP_1-2', 'EXT_DOOR_STORE_STOOP_1-1', ]
+              },
+          ]    },
           EXT_DOOR_STORE_BLACK: {
         name: 'Ext Store Door Black',
         slug: 'EXT_DOOR_STORE_BLACK', 
@@ -4246,6 +4301,48 @@ const OBJECTS = {
               frames: ['OBJ_FLYER_MISSING-1', 'OBJ_FLYER_MISSING-2', 'OBJ_FLYER_MISSING-3', 'OBJ_FLYER_MISSING-4', 'OBJ_FLYER_MISSING-5', 'OBJ_FLYER_MISSING-6', 'OBJ_FLYER_MISSING-7', 'OBJ_FLYER_MISSING-8', ]
               },
           ]    },
+          NEON_LOTTO_SIGN: {
+        name: 'Neon Lotto Sign',
+        slug: 'NEON_LOTTO_SIGN', 
+        type: 'LIT_SIGN',
+        bounding: {
+          h:1, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:8, 
+          w:21,
+          x:0, 
+          y:4
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'OFF',
+              transition: 'false',
+              frames: ['NEON_LOTTO_SIGN-2',]},{
+              name: 'ON',
+              transition: 'false',
+              frames: ['NEON_LOTTO_SIGN-1',]},{
+              name: 'FLICKERING',
+              transition: 'false',
+              frames: ['NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-2','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-2',]},]    },
           NIGHT_LIGHT: {
         name: 'Night Light',
         slug: 'NIGHT_LIGHT', 
@@ -4852,6 +4949,148 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: []    },
+          PSYCHIC_STOREFRONT_SIGN: {
+        name: 'Psychic Storefront Sign',
+        slug: 'PSYCHIC_STOREFRONT_SIGN', 
+        type: 'STOREFRONT_FRAME_SIGN',
+        bounding: {
+          h:2, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:20, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          DINER_CHAIR_RED: {
+        name: 'Red Diner Chair',
+        slug: 'DINER_CHAIR_RED', 
+        type: 'CHAIR',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:12
+        },
+        offset: {
+          x:10, 
+          y:16
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'TURN EAST', stateTrigger: 'FACING_EAST', validStates: ['FACING_NORTH','FACING_SOUTH','FACING_WEST']
+          }, {
+            name: 'TURN WEST', stateTrigger: 'FACING_WEST', validStates: ['FACING_EAST','FACING_NORTH','FACING_SOUTH']
+          }, {
+            name: 'TURN NORTH', stateTrigger: 'FACING_NORTH', validStates: ['FACING_EAST','FACING_SOUTH','FACING_WEST']
+          }, {
+            name: 'TURN SOUTH', stateTrigger: 'FACING_SOUTH', validStates: ['FACING_EAST','FACING_NORTH','FACING_WEST']
+          }],
+        states: [            {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-4',]
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-2',]
+              }, {
+              name: 'FACING_WEST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-3',]
+              }, {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-1', ]
+              },
+                      {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-1',]
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-4',]
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-2',]
+              }, {
+              name: 'FACING_WEST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-3', ]
+              },
+                      {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-1',]
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-2',]
+              }, {
+              name: 'FACING_WEST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-3',]
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-4', ]
+              },
+                      {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-1',]
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-4',]
+              }, {
+              name: 'FACING_WEST',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-3',]
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: ['DINER_CHAIR_RED-2', ]
+              },
+          ]    },
           ROLLING_GATE_DOOR: {
         name: 'Rolling Security Door Gate',
         slug: 'ROLLING_GATE_DOOR', 
@@ -5145,8 +5384,8 @@ const OBJECTS = {
         slug: 'SODIUM', 
         type: 'STREETLAMP',
         bounding: {
-          h:1, 
-          w:1
+          h:2, 
+          w:3
         },
         base: {
           h:1, 
@@ -5155,20 +5394,20 @@ const OBJECTS = {
           y:0
         },
         sprite: {
-          h:16, 
-          w:16,
+          h:32, 
+          w:48,
           x:0, 
           y:0
         },
         size: {
-          h:16, 
-          w:16
+          h:4, 
+          w:8
         },
         offset: {
-          x:0, 
-          y:0
+          x:38, 
+          y:12
         },
-        varieties: 0,
+        varieties: 1,
         solid: 1,
         portal: 0,
         actions: [],
@@ -5464,6 +5703,336 @@ const OBJECTS = {
         offset: {
           x:0, 
           y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_WINDOW_COUNTER_3: {
+        name: 'Store Window Counter 3',
+        slug: 'STORE_WINDOW_COUNTER_3', 
+        type: 'STORE_COUNTER',
+        bounding: {
+          h:4, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:68, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:48
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_WINDOW_COUNTER_4: {
+        name: 'Store Window Counter 4',
+        slug: 'STORE_WINDOW_COUNTER_4', 
+        type: 'STORE_COUNTER',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:68, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:48
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_FRAME_1: {
+        name: 'Storefront Frame 1',
+        slug: 'STORE_FRONT_FRAME_1', 
+        type: 'STOREFRONT_FRAME',
+        bounding: {
+          h:5, 
+          w:6
+        },
+        base: {
+          h:1, 
+          w:6,
+          x:0, 
+          y:4
+        },
+        sprite: {
+          h:80, 
+          w:96,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_FRAME_2: {
+        name: 'Storefront Frame 2',
+        slug: 'STORE_FRONT_FRAME_2', 
+        type: 'STOREFRONT_FRAME',
+        bounding: {
+          h:5, 
+          w:6
+        },
+        base: {
+          h:1, 
+          w:6,
+          x:0, 
+          y:4
+        },
+        sprite: {
+          h:80, 
+          w:96,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_FRAME_3: {
+        name: 'Storefront Frame 3',
+        slug: 'STORE_FRONT_FRAME_3', 
+        type: 'STOREFRONT_FRAME',
+        bounding: {
+          h:5, 
+          w:6
+        },
+        base: {
+          h:1, 
+          w:6,
+          x:0, 
+          y:4
+        },
+        sprite: {
+          h:80, 
+          w:96,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_FRAME_4: {
+        name: 'Storefront Frame 4',
+        slug: 'STORE_FRONT_FRAME_4', 
+        type: 'STOREFRONT_FRAME',
+        bounding: {
+          h:5, 
+          w:6
+        },
+        base: {
+          h:1, 
+          w:6,
+          x:0, 
+          y:4
+        },
+        sprite: {
+          h:80, 
+          w:96,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_WINDOW_BLUE: {
+        name: 'Storefront Window Blue',
+        slug: 'STORE_FRONT_WINDOW_BLUE', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:51, 
+          w:57,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:34, 
+          w:47
+        },
+        offset: {
+          x:6, 
+          y:9
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_WINDOW_GREEN: {
+        name: 'Storefront Window Green',
+        slug: 'STORE_FRONT_WINDOW_GREEN', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:51, 
+          w:57,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:34, 
+          w:47
+        },
+        offset: {
+          x:6, 
+          y:9
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_WINDOW_RED: {
+        name: 'Storefront Window Red',
+        slug: 'STORE_FRONT_WINDOW_RED', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:51, 
+          w:57,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:34, 
+          w:47
+        },
+        offset: {
+          x:6, 
+          y:9
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: []    },
+          STORE_FRONT_WINDOW_YELLOW: {
+        name: 'Storefront Window Yellow',
+        slug: 'STORE_FRONT_WINDOW_YELLOW', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:3
+        },
+        sprite: {
+          h:51, 
+          w:57,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:34, 
+          w:47
+        },
+        offset: {
+          x:6, 
+          y:9
         },
         varieties: 1,
         solid: 0,

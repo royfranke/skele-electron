@@ -131,7 +131,7 @@ export default class GameManager {
         if (this.state.input) {
             const focus = this.getFocus();
             const input = this.scene.app.input.INPUT;
-            if (input.INVENTORY.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE') {
+            if (input.INVENTORY.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
                 if (focus.name == 'PLAYER' || focus.name == 'MAP' || focus.name == 'NOTEBOOK') {
                     this.setFocus('POCKETS');
                 }
@@ -140,7 +140,7 @@ export default class GameManager {
                     this.setFocus('PLAYER');  
                 }
             }
-            if (input.NOTEBOOK.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE') {
+            if (input.NOTEBOOK.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
                 if (focus.name != 'NOTEBOOK') {
                     this.closeChest();
                     this.setFocus('NOTEBOOK');
@@ -222,12 +222,20 @@ export default class GameManager {
             }
         }
         if (this.state.time && this.time != undefined &&  this.time.time_passing) {
+            
             this.time.update();
             if (this.scene.exterior != null) {
                 // find whether keylight has changed; if so, update
                 this.handleKeylight();
 
             }
+
+            this.last_hour = this.hour ? this.hour : 0;
+            this.hour = this.time.now.hour;
+            if (this.last_hour != this.hour) {
+                this.scene.events.emit('HOUR_CHANGE', this.time.now, this.time.today);
+            }
+
         }
         if (this.hud != null) {
             this.hud.update();

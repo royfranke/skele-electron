@@ -3,6 +3,7 @@
 export default class Item {
     constructor(scene, item) {
         this.scene = scene;
+        this.verbose = true;
         this.registered = false;
         this.tile_x = 0;
         this.tile_y = 0;
@@ -13,6 +14,7 @@ export default class Item {
         this.actions = ['PUT AWAY'];
         this.world_actions = [{ action: 'PICK UP', object: this }];
         this.initialize();
+
     }
 
     initialize () {
@@ -60,6 +62,7 @@ export default class Item {
     }
 
     updateStackAction () {
+        if (this.verbose) console.log('Updating stack action for stack count: '+this.stackCount);
         if (this.stackCount > 1) {
             if (!this.actions.includes('DROP ONE')) {
                 this.actions.push('DROP ONE');
@@ -174,6 +177,8 @@ export default class Item {
         if (refresh) {
             this.actions = this.refreshPocketActions();
         }
+        /////////
+        this.updateStackAction();
         return this.actions;
     }
 

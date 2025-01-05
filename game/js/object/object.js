@@ -99,12 +99,10 @@ export default class Object {
                     this.setState(transition);
                 });
             }
+            if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition == 'false') {
+                this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
+            }
         }
-        if (this.sprite != null && this.state != null && this.state.frames.length > 0) {
-            
-            
-        }
-
 
     }
 
@@ -130,10 +128,11 @@ export default class Object {
     setRegistration(registered, coord = null) {
         this.registered = registered;
         if (registered && coord != null) {
-            this.setTileLocation(coord.x, coord.y);
+            return this.setTileLocation(coord.x, coord.y);
         } else if (this.sprite != null) {
             this.destroySprite();
         }
+        return false;
     }
 
     setSlot(_x,_y,slotted_object,flip=false,behind=false) {
@@ -242,16 +241,16 @@ export default class Object {
         if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_' || this.info.type == 'STORE_DOOR_' || this.info.type == 'STORE_WINDOW_EXT') {
             this.createGlass();
         }
-
+        return this;
     }
 
     createGlass() {
         
         var x_pixels = (this.tile_x - this.info.base.x) * 16;
         var y_pixels = (this.tile_y - this.info.base.y) * 16;
-        this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xbad2e0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1);
+        this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xbad2e0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 6);
 
-        this.behind_glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 2);
+        this.behind_glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 8);
 
         //this.setGlass(0x89bcc6,.9);
 
@@ -263,16 +262,30 @@ export default class Object {
         }
     }
 
-    setBehindGlass (color) {
+    setBehindGlass (color, alpha=1) {
         if (this.behind_glass != null) {
-            this.behind_glass.setFillStyle(color, 1);
+            this.behind_glass.setFillStyle(color, alpha);
         }
     }
     
 
-    setState (state_name) {
+    setState (state_name, force=true) {
+        if (this.last_state == null) {
+            force = true;
+        }
         this.last_state = this.state;
-        this.state = this.info.states.find(state => state.name === state_name);
+        if (!force) { // TODO: Figure out why this didn't work to cycle the states
+            this.info.states.forEach(function (state) {
+                if (state.stateTrigger == state_name) {
+                    if (state.validStates.includes(this.state.name)) {
+                        this.state = state;
+                    }
+                }
+            });
+        }
+        else {
+            this.state = this.info.states.find(state => state.name === state_name);
+        }
     }
 
     destroySprite() {

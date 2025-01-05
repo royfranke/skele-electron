@@ -66,7 +66,7 @@ export default class HudFactory {
         return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(.5, 1).setDepth(this.scene.player.snappedStanding.y+2).setMaxWidth(width);
     }
 
-    makeWorldBlock (_x,_y, width=32, height=32, frameName='BUBBLE_THINKING') {
+    makeWorldBlock (_x,_y, width=32, height=32, frameName='SPEECH_BUBBLE_MID') {
 
         return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 8,8,8,8).setOrigin(.5,1).setDepth(this.scene.player.snappedStanding.y + 1);
  
@@ -118,7 +118,17 @@ export default class HudFactory {
     }
 
     makeStackIndicator (_x,_y) {
-        return this.scene.add.dom(_x, _y, 'div', '', '0').setClassName('stack-indicator').setOrigin(0).setDepth(this.depth.STACK).setScrollFactor(0);
+        let circle = this.makeBlock(_x,_y, 16, 16, 'CIRCLE_MID_LILAC');
+        circle.setOrigin(.5).setDepth(this.depth.STACK);
+
+        let stack = {
+            circle: circle,
+            text: this.scene.add.bitmapText(_x, _y, 'SkeleNotebook', '0', 8).setOrigin(.5).setDepth(this.depth.STACK + 1).setScrollFactor(0).setTintFill(0x465e62)
+        };
+        stack.circle.setVisible(false);
+        stack.text.setVisible(false);
+        return stack;
+        //return this.scene.add.dom(_x, _y, 'div', '', '0').setClassName('stack-indicator').setOrigin(0).setDepth(this.depth.STACK).setScrollFactor(0);
     }
 
     flutter (elements=[], delay) {

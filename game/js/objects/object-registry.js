@@ -52,8 +52,7 @@ export default class ObjectRegistry {
 
     placeObject (object, _x, _y) {
         var added = this.addObject(object, _x, _y);
-        object.setRegistration(added,{x: _x, y: _y});
-        return added;
+        return object.setRegistration(added,{x: _x, y: _y});
         /// Should be feedback for when an object cannot be placed (for now the only condition is that another object cannot already be on the tile)
     }
 

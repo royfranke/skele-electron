@@ -66,9 +66,11 @@ import Room from "../object/room.js";
             this.config = this.room.config;
             /// Start with the floor.
             var _x = 1;
-            var _y = 5;
+            
             var base_flooring = '';
             var wall_height = this.config.wallHeight ? this.config.wallHeight : 3;
+
+            var _y = wall_height + 1;
 
             if (this.config.floorSlug != undefined && this.config.floorSlug != '') {
                 base_flooring += this.config.floorSlug;
@@ -106,6 +108,7 @@ import Room from "../object/room.js";
         /// Start with the floor.
         var _x = 1;
         var _y = 5;
+        var has_front_door=false;
         for (let i = 0; i < this.room.config.roomData.featureList.length; i++) {
             let feature = this.room.config.roomData.featureList[i];
             if (feature.slug != 'FRONTDOOR') {
@@ -115,9 +118,33 @@ import Room from "../object/room.js";
                 }
             }
             else {
-                let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,'EXT_DOOR_WINDOWS_GRAY');
-                obj.setPortal({room_id: '-1', x: 16, y: 16, facing: 'S'});
+                if (!has_front_door) {
+                    has_front_door = true;
+                    this.front_door = {x: _x + feature.x,y: _y + feature.y};
+                    
+                }
             }
+        }
+    }
+
+    
+
+    setPortalFromSave (portal) {
+        if (portal != undefined) {
+            if (this.front_door != undefined) {
+                let x = this.front_door.x;
+                let y = this.front_door.y;
+                this.front_door = this.scene.manager.objectManager.newObjectToWorld(x, y,portal.SLUG)
+                this.front_door.setPortal({room_id: portal.ROOM, x: portal.X, y: portal.Y, facing: portal.FACING, return: portal.RETURN, slug: portal.SLUG});
+                this.front_door.setBehindGlass('0x000000', 0);
+                this.front_door.glass.setAlpha(0.25);
+            }
+            else {
+                console.log('No front door for room ' + this.room_id);
+            }
+        }
+        else {
+            console.log('No portal for room ' + this.room_id);
         }
     }
 

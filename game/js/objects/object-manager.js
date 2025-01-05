@@ -38,7 +38,7 @@ export default class ObjectManager {
             return false;
         }
         
-        return object;
+        return result;
     }
 
     putObjectInWorld (object, _x, _y) {

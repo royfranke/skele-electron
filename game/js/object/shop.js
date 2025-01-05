@@ -21,6 +21,15 @@ export default class Shop {
 
             settings.door = this.roll(OBJECT_TYPES.STORE_DOOR_);
         }
+        if (!settings.hasOwnProperty('windows')) {
+            settings.windows = this.roll(OBJECT_TYPES.STORE_WINDOW_EXT);
+        }
+        if (!settings.hasOwnProperty('upper_windows')) {
+            settings.upper_windows = this.roll(OBJECT_TYPES.WINDOW_EXT_);
+        }
+        if (!settings.hasOwnProperty('frame')) {
+            settings.frame = this.roll(OBJECT_TYPES.STOREFRONT_FRAME);
+        }
         if (!settings.hasOwnProperty('levels')) {
             settings.levels = [];
             settings.levels.push({ height: this.roll([4, 4, 4, 5]) });
@@ -40,7 +49,7 @@ export default class Shop {
         var facing = this.prop.address.facing;
 
         var building_width = width;
-        var colors = ['RED_COMMERCIAL', 'YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL', 'BLUE_COMMERCIAL', 'BLACK_COMMERCIAL']; // Weighting the array by repeating more desired colors
+        var colors = ['YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL', 'BLUE_COMMERCIAL']; // Weighting the array by repeating more desired colors
         var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
 
         var _x = left;
@@ -50,23 +59,42 @@ export default class Shop {
         if (this.prop.structure.type == 'CORNER-STORE-LEFT') {
             building_width = building_width - 1;
             _x = _x + 1;
+            this.settings.windows = 'EXT_WINDOW_STORE_4_CLAD';
         }
         if (this.prop.structure.type == 'CORNER-STORE-RIGHT') {
             building_width = building_width - 1;
         }
 
+        if (this.prop.structure.type == 'STOREFRONT' || this.prop.structure.type == 'TAKEOUT-WINDOW') {
+            
+            this.settings.levels[0].height = 5;
+            this.setFrontDoor(_x, _y);
+            this.addStoreWindows(_x+2, _y, building_width - 2);
+            if (building_width == 6) {
+                this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.frame);
+            }
+
+            if (this.prop.listing.slug == 'PSYCHIC') {
+                this.sign = this.scene.manager.objectManager.newObjectToWorld(_x+1, _y - 3, 'PSYCHIC_STOREFRONT_SIGN');
+                this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
+                this.scene.manager.objectManager.newObjectToWorld(_x+4, _y +1, 'DINER_CHAIR_RED');
+            }
+        }
+
+
+
+
         for (var i = 0; i < this.settings.levels.length; i++) {
             this.buildFacadeSection(_x, level_position, building_width, this.settings.levels[i].height, wallKind);
             level_position = level_position - this.settings.levels[i].height;
+            if (i > 0) {
+                this.addWindows(_x+1,level_position +  this.settings.levels[i].height, building_width - 2);
+            }
         }
 
         this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, (level_position - this.settings.roof.height) + 1, building_width, this.settings.roof.height);
 
-        if (this.prop.structure.type == 'STOREFRONT') {
-            this.addStoreWindows(_x, _y, 4);
-            this.setFrontDoor(_x + 4, _y);
-            this.addStoreWindows(_x + 6, _y, building_width - 6);
-        }
+        
 
         if (this.prop.structure.type == 'CORNER-STORE-LEFT') {
             this.setFrontDoor(_x, _y);
@@ -75,9 +103,14 @@ export default class Shop {
                 this.sign = this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y, 'LIT_SIGN_BONEDEGA');
                 this.sign.sprite.setDepth(this.sign.sprite.depth + 32);
 
-                this.scene.manager.objectManager.newObjectToWorld(_x + 6, _y + 1, 'PAYPHONE');
-                this.scene.manager.objectManager.newObjectToWorld(_x + 7, _y + 1, 'PAYPHONE');
+                let lotto_sign = this.scene.manager.objectManager.newObjectToWorld(_x + 2.25, _y, 'NEON_LOTTO_SIGN');
+                lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - .5);
+                lotto_sign.setState('FLICKERING');
+
+                this.scene.manager.objectManager.newObjectToWorld(_x + 10, _y + 1, 'PAYPHONE');
+                this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 1, 'PAYPHONE');
             }
+            
         }
         if (this.prop.structure.type == 'CORNER-STORE-RIGHT') {
             this.setFrontDoor(_x + building_width - 2, _y);
@@ -87,18 +120,35 @@ export default class Shop {
         if (this.prop.structure.type == 'TAKEOUT-WINDOW') {
             // Need to make takeout window
         }
-
-
-        /*this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'EXT_WINDOW_STORE_4_CLAD');
-        this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'ROLLING_GATE_WIDE'));
-        this.gates[1].sprite.setDepth(this.gates[1].sprite.depth + 1);
-
-        this.scene.manager.objectManager.newObjectToWorld(_x + 6, _y, 'EXT_WINDOW_STORE_4_CLAD');
-        this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + 6, _y, 'ROLLING_GATE_WIDE'));
-        this.gates[2].sprite.setDepth(this.gates[2].sprite.depth + 1);
-*/
-        this.setRollingGates('OPENING');
+        this.buildHours();
+        this.setRollingGatesFromHours();
     }
+
+    setRollingGatesFromHours() {
+        var self = this;
+        var callback = function(now, today) {
+            let schedule = self.prop.listing.schedule[today.weekday.toLowerCase()];
+            if (schedule.closed == 'TRUE') {
+                this.setRollingGates('CLOSING');
+                this.setSign('OFF');
+            }
+            else {
+                let open = parseInt(schedule.open);
+                let close = parseInt(schedule.close);
+                if (now.hour >= open && now.hour < close) {
+                    this.setRollingGates('OPENING');
+                    this.setSign('ON');
+                }
+                if (now.hour >= close) {
+                    this.setRollingGates('CLOSING');
+                    this.setSign('OFF');
+                }
+            }
+        }
+
+        this.scene.events.addListener('HOUR_CHANGE', callback, this)
+    }
+
 
     setRollingGate(gate_index, state_name)  {
         this.gates[gate_index].setState(state_name);
@@ -106,7 +156,13 @@ export default class Shop {
 
     setRollingGates(state_name) {
         for (var i = 0; i < this.gates.length; i++) {
-            this.gates[i].setState(state_name);
+            this.setRollingGate(i, state_name);
+        }
+    }
+
+    setSign(state_name) {
+        if (this.sign != undefined) {
+            this.sign.setState(state_name, true);
         }
     }
 
@@ -120,10 +176,19 @@ export default class Shop {
     }
 
     setFrontDoor(_x, _y) {
-        this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROLLING_GATE_DOOR'));
-        this.gates[0].sprite.setDepth(this.gates[0].sprite.depth + 1);
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.door);
-        this.front_door.setPortal({room_id: '1', x:3, y: 15, facing: 'N'});
+        this.front_door.sprite.setDepth(this.front_door.sprite.depth - 4);
+
+        if (this.prop.portal != undefined) {
+            let room_id = this.prop.portal.room_id;
+            let x = this.prop.portal.x;
+            let y = this.prop.portal.y;
+            
+            this.front_door.setPortal({room_id: room_id, x: x, y: y, facing: 'N', return: {ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door}});
+        }
+        let door_gate = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROLLING_GATE_DOOR');
+        this.gates.push(door_gate);
+        door_gate.sprite.setDepth(this.front_door.sprite.depth + 1);
     }
 
     addStoreWindows(_x, _y, width, index=0) {
@@ -132,12 +197,33 @@ export default class Shop {
             return;
         }
         
-        this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, 'EXT_WINDOW_STORE_4_CLAD');
+        this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, this.settings.windows);
+
         this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, 'ROLLING_GATE_WIDE'));
         this.gates[index].sprite.setDepth(this.gates[index].sprite.depth + 1);
 
         if (width - window_width >= window_width) {
             this.addStoreWindows(_x + (index*window_width), _y, width - window_width, index + 1);
+        }
+    }
+
+    addWindows(_x, _y, width, index=0) {
+        let window_width = 3;
+        if (width < window_width) {
+            return;
+        }
+        
+        this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, this.settings.upper_windows);
+
+        if (width - window_width >= window_width) {
+            this.addWindows(_x + (index*window_width), _y, width - window_width, index + 1);
+        }
+    }
+
+
+    buildHours() {
+        if (this.front_door != undefined) {
+            this.front_door.setAnnouncement(this.prop.listing,'SHOP_HOURS');
         }
     }
 }

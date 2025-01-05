@@ -361,11 +361,10 @@ export default class HudPockets extends HudCommon {
 
     addStackIndicator(slot_x, slot_y) {
         let slotMargin = {
-            x: 26 + (slot_x * 40),
-            y: 38 + (slot_y * 36),
+            x: 20 + (slot_x * 40),
+            y: 44 + (slot_y * 36),
         };
         let stack = this.makeStackIndicator((this.view.right - slotMargin.x), (this.view.top + slotMargin.y));
-        stack.setVisible(false);
         return stack;
     }
 
@@ -570,17 +569,19 @@ export default class HudPockets extends HudCommon {
                     var frameName = pocket[state].ICON;
 
                     if (this.slots[slot_y][slot_x].stack != undefined) {
-                        this.slots[slot_y][slot_x].stack.setVisible(false);
+                        this.slots[slot_y][slot_x].stack.circle.setVisible(false);
+                        this.slots[slot_y][slot_x].stack.text.setVisible(false);
                     }
                 }
                 else {
                     var frameName = pocket[state].getStackIcon();
 
                     if (this.slots[slot_y][slot_x].stack != undefined) {
-                        this.slots[slot_y][slot_x].stack.setVisible(pocket[state].stackCount > 1);
+                        this.slots[slot_y][slot_x].stack.text.setVisible(pocket[state].stackCount > 1);
+                        this.slots[slot_y][slot_x].stack.circle.setVisible(pocket[state].stackCount > 1);
 
                         if (pocket[state].stackCount > 1) {
-                            this.slots[slot_y][slot_x].stack.setText(pocket[state].stackCount);
+                            this.slots[slot_y][slot_x].stack.text.setText(pocket[state].stackCount);
                         }
                     }
                 }

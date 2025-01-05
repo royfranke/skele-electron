@@ -12,17 +12,12 @@ export default class GameScene extends Phaser.Scene {
     constructor() {
         super("Game Scene");
         this.verbose = true;
-        this.locale = 'exterior';
     }
 
     init (data) {
+        this.locale = 'exterior';
         this.slot = data.slot;
-        if (data.portal != undefined) {
-            this.used_portal = data.portal;
-        }
-        else {
-            this.used_portal = {x:0,y:0,facing:'S'};
-        }
+        this.room_id = -1;
     }
 
 
@@ -48,8 +43,6 @@ export default class GameScene extends Phaser.Scene {
         
         this.exterior.create();
         this.player.create();
-        this.player.setPositionTile(this.used_portal.x,this.used_portal.y);
-        this.player.setFacing(this.used_portal.facing);
         this.npcs.create();
         //// Load the save!
         this.app.initializeSave();
@@ -68,7 +61,13 @@ export default class GameScene extends Phaser.Scene {
         /// Before portal, save the game
         this.slot = this.app.softSaveGameData();
         if (this.verbose) console.log(this.slot);
-        this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
+        this.slot.POSITION.X = portal.x;
+        this.slot.POSITION.Y = portal.y;
+        this.slot.POSITION.FACING = portal.facing;
+        this.slot.POSITION.ROOM = portal.room_id;
+        this.slot.POSITION.RETURN = portal.return;
+        console.log(this.slot.POSITION + 'portal to ding ding');
+        this.scene.start('Interior Scene', {slot: this.slot});
     }
 
     newGame() {

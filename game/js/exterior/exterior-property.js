@@ -188,7 +188,6 @@ export default class PropertyLine {
                 this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y + 1, 'GUTTER_DOWNSPOUT_' + this.settings.levels[0].height + '_W');
             }
 
-
             this.buildPitchedRoof(_x, _y - (this.settings.levels[0].height) + 1, building_width, this.settings.roof.height, 'SHINGLES_');
             this.scene.manager.objectManager.newObjectToWorld(_x + building_width, _y - (this.settings.levels[0].height) + 1, 'GUTTER_SECTION_E_S_CAP');
 
@@ -255,7 +254,7 @@ export default class PropertyLine {
 
     }
 
-    buildPitchedRoof(_x, _y, width, height, material) {
+    buildPitchedRoof (_x, _y, width, height, material) {
         var w_material = ROOFTILES.PITCHED[material + 'WEST_'];
         var e_material = ROOFTILES.PITCHED[material + 'EAST_'];
         var roofLayer = this.scene[this.scene.locale].roofLayer;
@@ -396,7 +395,7 @@ export default class PropertyLine {
         if (this.settings.fence.prefix != 'CHAINLINK_S') {
             // Vertical Fence
             let height = 4
-            this.buildFence(_x + width + right_length, this.prop.lines.bottom - height, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
+            this.buildFence(_x + width + right_length - .25, this.prop.lines.bottom - height, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
         }
 
         if (right_length < 6) {
@@ -433,7 +432,10 @@ export default class PropertyLine {
             return;
         }
         let orientation = horizontal ? '' : 'VERTICAL_';
-        this.scene.manager.objectManager.newObjectToWorld(_x, _y, prefix + '_' + width + '_' + orientation + suffix);
+        let fence_panel = this.scene.manager.objectManager.newObjectToWorld(_x, _y, prefix + '_' + width + '_' + orientation + suffix);
+        if (!horizontal) {
+            fence_panel.sprite.setDepth(fence_panel.sprite.depth - 1);
+        }
     }
 
     buildMailbox(_x, _y) {
@@ -484,6 +486,19 @@ export default class PropertyLine {
         }
 
         this.buildYardBorder(_x, 2); // path width
+    }
+
+    setFrontDoor(_x, _y) {
+        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.door);
+        this.front_door.sprite.setDepth(this.front_door.sprite.depth - 4);
+
+        if (this.prop.portal != undefined) {
+            let room_id = this.prop.portal.room_id;
+            let x = this.prop.portal.x;
+            let y = this.prop.portal.y;
+            
+            this.front_door.setPortal({room_id: room_id, x: x, y: y, facing: 'N', return: {ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door}});
+        }
     }
 
     buildPorch(_x, _y) {

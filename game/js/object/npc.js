@@ -112,7 +112,7 @@ export default class Npc {
     this.scene.player.action.clearActions();
     if (action == 'GREET') {
       if (!this.greeting) {
-        //this.scene.manager.hud.think('Hello— have a sack lunch.');
+        this.scene.manager.hud.think('??');
         //this.greeting = this.givePlayerItem('LUNCH_BAG_USED', ['BANANA', 'APPLE']);
         //this.scene.manager.dialog.triggerDialog(8);
         this.greeting = true;
@@ -137,7 +137,7 @@ export default class Npc {
     if (action == 'STOP FOLLOWING ME') {
       this.following = null;
       this.clearDestinations();
-      this.scene.manager.hud.think('Have an apple.');
+      this.scene.manager.hud.think('?!');
       this.givePlayerItem('APPLE');
     }
 

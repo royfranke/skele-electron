@@ -107,7 +107,30 @@ export default class Announcer {
                     announced.push(sign);
                     
                 }
-                
+                else if (announcement.kind == 'SHOP_HOURS') {
+                    let announcement_string = announcement.announcement.name.toLowerCase() + '\n----------\n';
+                    for (const [key, value] of Object.entries(announcement.announcement.schedule)) {
+                        if (announcement.announcement.schedule[key].closed != 'TRUE') {
+                            announcement_string += key.substring(0,3) + '_' + this.formatTime(announcement.announcement.schedule[key].open) + '-' + this.formatTime(announcement.announcement.schedule[key].close) + '\n';
+                        }
+                        else {
+                            announcement_string += key.substring(0,3) + '_closed________\n';
+                        }
+                    }
+
+                    let announce = self.add.bitmapText(_x, _y + 1, 'SkeleMarquee', announcement_string, 8).setLineSpacing(0).setOrigin(.5).setMaxWidth(144);
+                    
+                    _x = _x + Math.round(announce.displayWidth/2) + 48;
+                    _y = _y + Math.round(announce.displayHeight/2) + 32;
+                    let depth = _y + announce.displayHeight + 128;
+                    announce.setPosition(_x,_y).setDepth(depth);
+
+
+                    announced.push(announce);
+
+                    let sign = self.add.nineslice(_x,_y, 'UI', 'BLOCK_MID_DARK_BORDER', announce.displayWidth + 12, announce.displayHeight + 12, 8,8,8,8).setOrigin(.5).setDepth(depth - 1);
+                    announced.push(sign);
+                }
             });
             this.announced = announced;
             //this.announce =  this.scene.add.dom(_x,_y, 'div', '', this.announcements[0].announcement).setClassName('announcer').setOrigin(0).setDepth(1500);
@@ -115,6 +138,20 @@ export default class Announcer {
             this.bounceAnnouncements();
             this.state = 'FORMED';
         }
+    }
+
+    formatTime (time='00:00') {
+        var hours = time.slice(0,2);
+        var minutes = time.slice(3,5);
+        var ampm = 'am';
+        if (hours >= 12) {
+            ampm = 'pm';
+            if (hours > 12) {
+                hours = hours - 12;
+            }
+        }
+        return hours + ':' + minutes + ampm;
+
     }
 
     formatAnnouncement (announcement, rule) {

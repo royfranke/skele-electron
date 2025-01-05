@@ -68,6 +68,7 @@ export default class PlayerManager {
   }
 
   setFacing(facing) {
+    if (facing == undefined) {facing = 's';}
     this.playerSprite.facing = facing.toLowerCase();
   }
 
@@ -82,14 +83,15 @@ export default class PlayerManager {
   }
 
   setPositionTile(x_, y_) {
+    console.log("Setting player position to tile: " + x_ + ", " + y_);
     this.playerSprite.sprite.setPosition(x_ * 16, y_ * 16);
   }
 
   getPositionTile() {
     var pos = this.playerSprite.sprite.getCenter();
     return {
-      x: Math.round(pos.x / 16),
-      y: Math.round(pos.y / 16)
+      X: Math.round(pos.x / 16),
+      Y: Math.round(pos.y / 16)
     };
   }
 
@@ -133,13 +135,14 @@ export default class PlayerManager {
       if (this.last_state.name != this.state.name) {
         this.stateChanged();
       }
-
+      this.action.update();
     }
     else { // If focus off player
       var last = this.getLastFocus();
       if (last.name == 'PLAYER') { //If focus was just changed off the player
         this.speed = 0;
         this.setState('IDLE');
+        this.action.closeActionMenu();
         //this.resetInputs();
         // TODO: Do an initial state set on switch from player
       }
@@ -147,7 +150,7 @@ export default class PlayerManager {
     }
 
     this.playerSprite.update();
-    this.action.update();
+    
   }
 
   loadPlayer() {

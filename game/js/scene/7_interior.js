@@ -9,13 +9,13 @@ import PlayerManager from "../player/player-manager.js";
 export default class InteriorScene extends Phaser.Scene {
     constructor() {
         super("Interior Scene");
+        this.verbose = true;
     }
 
     init (data) {
         this.locale = 'interior';
-        this.used_portal = data.portal;
-        this.room_id = data.portal.room_id;
         this.slot = data.slot;
+        this.room_id = data.slot.POSITION.ROOM;
     }
 
     preload () {
@@ -36,8 +36,6 @@ export default class InteriorScene extends Phaser.Scene {
         this.player = new PlayerManager(this);
         this.interior.create();
         this.player.create();
-        this.player.setPositionTile(this.used_portal.x,this.used_portal.y);
-        this.player.setFacing(this.used_portal.facing);
          //// Load the save!
          this.app.initializeRoomSave();
     }
@@ -52,13 +50,18 @@ export default class InteriorScene extends Phaser.Scene {
     portalTo(portal) {
         this.slot = this.app.softSaveGameData();
         if (this.verbose) console.log(this.slot);
+        this.slot.POSITION.X = portal.x;
+        this.slot.POSITION.Y = portal.y;
+        this.slot.POSITION.FACING = portal.facing;
+        this.slot.POSITION.ROOM = portal.room_id;
+        this.slot.POSITION.RETURN = portal.return;
         if (portal.room_id == '-1') {
             this.scene.stop('Interior Scene');
-            this.scene.start('Game Scene',{portal: portal, slot: this.slot});
+            this.scene.start('Game Scene',{slot: this.slot});
         }
         else {
             this.scene.stop('Interior Scene');
-            this.scene.start('Interior Scene', {portal: portal, slot: this.slot});
+            this.scene.start('Interior Scene', {slot: this.slot});
         }
         
     }

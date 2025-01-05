@@ -1,5 +1,5 @@
 import PRELOAD_IMAGE from "./preload-image.js";
-import PRELOAD_SOUND from "./preload-sound.js";
+import PRELOAD_SOUND from "../config/atlas/audio.js";
 import PRELOAD_ATLAS from "./preload-atlas.js";
 import PRELOAD_FONT from "./preload-font.js";
 import PRELOAD_JSON from "./preload-json.js";
@@ -15,7 +15,7 @@ export default class PreloadManager{
 
   initialize() {
     var path = '../assets/';
-    var sound_path = '../assets/';
+    var sound_path = '../assets/sound/';
     var data_path = '../';
     
 
@@ -44,8 +44,11 @@ export default class PreloadManager{
     let count = 0;
     if (this.verbose) console.log('Preloading sounds...');
     PRELOAD_SOUND.forEach(function (sound, index) {
-      self.load.audio(sound.NAME,  path+sound.PATH );
+      sound.FILES.forEach(function (file, index) {
+      self.load.audio(sound.NAME+'_'+index,  path+file );
       count++;
+      });
+      
     });
     if (this.verbose) console.log('Preloaded '+count+' sounds');
   }

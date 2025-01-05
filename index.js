@@ -3,9 +3,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
-
-
-const fs = require('fs');
+const fs = require('fs')
 
 function saveData(data) {
   console.log("Trying to save data... for slot "+data.slot);
@@ -66,6 +64,7 @@ ipcMain.handle('save-data', async (event, data) => {
 ipcMain.handle('save-settings', async (event, data) => {
   saveSettings(data); 
 });
+
 
 
 // Quit when all windows are closed, except on macOS. There, it's common

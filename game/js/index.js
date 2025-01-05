@@ -8,7 +8,6 @@ import GameScene from "./scene/6_game.js";
 import InteriorScene from "./scene/7_interior.js";
 
 const config = {
-  type: Phaser.WEBGL,
   width: 960,
   height: 540,
   seed: 14,

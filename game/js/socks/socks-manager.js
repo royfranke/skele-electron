@@ -68,6 +68,11 @@ export default class SocksManager {
     reveal (result) {
         this.scene.manager.hud.hudSocks.drawReveal(result);
         this.dryer.reveal(result);
+        this.drawScore();
+    }
+
+    drawScore () {
+        this.scene.manager.hud.hudSocks.drawScore(this.getScore());
     }
 
     startTurn () {

@@ -165,11 +165,12 @@ export default class Block {
 
         if (this.nodes.NW != null) {
             var stop = this.nodes.NW.streets.s.signal == 1 ? 'S' : null;
-            if (stop != null) {
-                this.buildStreetPole(this.block.left+1, this.block.top+1,{EW:this.block.bounds.n,NS:this.block.bounds.w, STOP:stop, CORNER: 'SE'});
-            }
+
             if (this.nodes.NW.streets.s.signal == 2) {
                 this.buildTrafficLight(this.block.left+1, this.block.top+1,'NW',{EW:this.block.bounds.n,NS:this.block.bounds.w});
+            }
+            else {
+                this.buildStreetPole(this.block.left+1, this.block.top+1,{EW:this.block.bounds.n,NS:this.block.bounds.w, STOP:stop, CORNER: 'SE'});
             }
         }
         if (this.nodes.NE != null) {
@@ -201,26 +202,13 @@ export default class Block {
                 this.buildTrafficLight(this.block.left+1, this.block.bottom-1,'SW',{EW:this.block.bounds.s,NS:this.block.bounds.w});
             }
             
-        }
-        /*
+        } 
+        if (this.block.offset.n > 0) {
+            this.scene.manager.objectManager.newObjectToWorld(this.block.left+9, this.block.top,'HYDRANT_CITY_');
+        }  
         if (this.block.offset.s > 0) {
-            //this.scene.manager.objectManager.newObjectToWorld(block.left+8, block.top+1,'WOOD_POLE');   
-            this.scene.manager.objectManager.newObjectToWorld(this.block.right-6, this.block.bottom-1,'HYDRANT_CITY_');
+            this.scene.manager.objectManager.newObjectToWorld(this.block.right-7, this.block.bottom-1,'HYDRANT_CITY_');
         }
-
-        if (this.block.offset.s > 0 && this.block.offset.e > 0) { // LOWER RIGHT
-            this.buildStreetPole(this.block.right-1, this.block.bottom-1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:'N'});
-
-        }
-
-        if (this.block.offset.n > 0 && this.block.offset.w > 0) { // UPPER LEFT
-            /// node here equals block x y
-            this.buildStreetPole(this.block.left+1, this.block.top+1,{NS:this.block.bounds.s,EW:this.block.bounds.e, STOP:'S'});
-
-        }
-
-*/
-    
     
     }
 

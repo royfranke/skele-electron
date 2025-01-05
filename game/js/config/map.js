@@ -179,7 +179,7 @@ const MAP_CONFIG = {
                 x: 30,
                 y: 58
             },
-            ground: "grass",
+            ground: "dirt",
             offset: {
                 n: 0,
                 e: 4,
@@ -1602,8 +1602,8 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 15,
@@ -1627,8 +1627,8 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 27,
@@ -1652,8 +1652,8 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 38,
@@ -1677,13 +1677,13 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
-                x: 31,
+                x: 38,
                 y: 3,
-                width: 12,
+                width: 6,
                 height: 26
             },
             block: {
@@ -1695,6 +1695,91 @@ const MAP_CONFIG = {
                 facing: "S",
                 dir: "W",
                 number: "101",
+                street: "Belly Button Street",
+            },
+            structure: {
+                type: "STOREFRONT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "PAWN SHOP",
+name: "Pawn Shop",
+listingName: "Break of Pawn - Pawn Shop",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "16:00"
+            }
+},
+front_room: 13,rooms: {
+        room_13: { 
+    id: 13,
+    name: "Pawn Shop",
+    floorWidth: 6,
+    floorHeight: 9,
+    wallHeight: 4,
+    overallHeight: 11,
+    overallWidth: 8,
+    floorSlug: "PLANK.BROWN_",
+    wallSlug: "PAINT.DARK_GREEN_WORN_",
+    roomData: { 
+                featureList: [{"x":"1","y":"-1","slug":"COUNTERTOP_CORNER_BROWN"},{"x":"0","y":"-1","slug":"COUNTERTOP_S_BROWN"},{"x":"0","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"1","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"2","y":"1","slug":"UNDERCOUNTER_CABINET_W_DARK_WOOD"},{"x":"0","y":"4","slug":"STORE_WINDOW_COUNTER_4"},{"x":"4","y":"4","slug":"INT_DOOR_GREEN_SIGN"},{"x":"0","y":"8","slug":"FRONTDOOR"}],
+                recipeList: [],
+                removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"3","y":"1"},{"x":"4","y":"1"},{"x":"5","y":"1"},{"x":"4","y":"2"},{"x":"5","y":"2"},{"x":"4","y":"3"},{"x":"5","y":"3"},{"x":"4","y":"4"},{"x":"5","y":"4"},{"x":"2","y":"8"},{"x":"3","y":"8"},{"x":"4","y":"8"},{"x":"5","y":"8"}]
+         }
+}
+
+    }                            },
+                                                                                                            portal: {
+                room_id: 13,
+                x: 1,
+                y: 11
+            }
+                    },
+                {
+            lines: {
+                x: 28,
+                y: 3,
+                width: 10,
+                height: 26
+            },
+            block: {
+                x: 2,
+                y: 2
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "103",
                 street: "Belly Button Street",
             },
             structure: {
@@ -1742,80 +1827,36 @@ schedule: {
         close: "21:00"
             }
 },
-rooms: {
-    }                            }
-        },
-                {
-            lines: {
-                x: 23,
-                y: 3,
-                width: 8,
-                height: 26
-            },
-            block: {
+front_room: 11,rooms: {
+        room_11: { 
+    id: 11,
+    name: "Coin Laundry",
+    floorWidth: 10,
+    floorHeight: 12,
+    wallHeight: 3,
+    overallHeight: 14,
+    overallWidth: 12,
+    floorSlug: "TILE.CHECKERED_GREEN_BLUE_PURPLE_BLACK_",
+    wallSlug: "GRAY_WORN_",
+    roomData: { 
+                featureList: [{"x":"3","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"7","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"5","slug":"TABLE_WOOD_FOLDING_JAMMED"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
+                recipeList: [],
+                removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"6","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"2","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"}]
+         }
+}
+
+    }                            },
+                                                                                                            portal: {
+                room_id: 11,
                 x: 2,
-                y: 2
-            },
-            address: {
-                name: "",
-                facing: "S",
-                dir: "W",
-                number: "103",
-                street: "Belly Button Street",
-            },
-            structure: {
-                type: "TAKEOUT-WINDOW",
-                zoning: "COMMERCIAL",
-            },
-            listing: {
-                slug: "LOCKSMITH",
-name: "Locksmith",
-listingName: "Keys Made While You Wait",
-schedule: {
-    monday: {
-        closed: "FALSE",
-        open: "00:00",
-        close: "00:00"
-            },
-    tuesday: {
-        closed: "FALSE",
-        open: "00:00",
-        close: "00:00"
-            }, 
-    wednesday: {
-        closed: "FALSE",
-        open: "00:00",
-        close: "00:00"
-            },
-    thursday: {
-        closed: "FALSE",
-        open: "00:00",
-        close: "00:00"
-            },
-    friday: {
-        closed: "FALSE",
-        open: "00:00",
-        close: "00:00"
-            },
-    saturday: {
-        closed: "FALSE",
-        open: "00:00",
-        close: "00:00"
-            },
-    sunday: {
-        closed: "FALSE",
-        open: "00:00",
-        close: "00:00"
+                y: 14
             }
-},
-rooms: {
-    }                            }
-        },
+                    },
                 {
             lines: {
-                x: 13,
+                x: 22,
                 y: 3,
-                width: 10,
+                width: 6,
                 height: 26
             },
             block: {
@@ -1834,9 +1875,9 @@ rooms: {
                 zoning: "COMMERCIAL",
             },
             listing: {
-                slug: "PAWN SHOP",
-name: "Pawn Shop",
-listingName: "Pawn Shop TBA",
+                slug: "LOCKSMITH",
+name: "Locksmith",
+listingName: "Keys Made While You Wait",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -1849,7 +1890,10 @@ schedule: {
         close: "19:00"
             }, 
     wednesday: {
-        closed: "TRUE",    },
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
     thursday: {
         closed: "FALSE",
         open: "10:00",
@@ -1858,22 +1902,101 @@ schedule: {
     friday: {
         closed: "FALSE",
         open: "10:00",
-        close: "20:00"
+        close: "18:00"
             },
     saturday: {
         closed: "FALSE",
         open: "10:00",
-        close: "20:00"
+        close: "14:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+front_room: 12,rooms: {
+        room_12: { 
+    id: 12,
+    name: "Locksmith",
+    floorWidth: 6,
+    floorHeight: 7,
+    wallHeight: 4,
+    overallHeight: 9,
+    overallWidth: 8,
+    floorSlug: "TILE.GREEN_CHECKERED_",
+    wallSlug: "PAINT.GREEN_PURPLE_",
+    roomData: { 
+                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
+                recipeList: [{"x":"3","y":"0","slug":"PLANK.BROWN_"},{"x":"4","y":"0","slug":"PLANK.BROWN_"},{"x":"5","y":"0","slug":"PLANK.BROWN_"},{"x":"3","y":"1","slug":"PLANK.BROWN_"},{"x":"4","y":"1","slug":"PLANK.BROWN_"},{"x":"5","y":"1","slug":"PLANK.BROWN_"},{"x":"3","y":"2","slug":"PLANK.BROWN_"},{"x":"4","y":"2","slug":"PLANK.BROWN_"},{"x":"5","y":"2","slug":"PLANK.BROWN_"},{"x":"3","y":"3","slug":"PLANK.BROWN_"},{"x":"4","y":"3","slug":"PLANK.BROWN_"},{"x":"5","y":"3","slug":"PLANK.BROWN_"}],
+                removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"0","y":"3"},{"x":"1","y":"3"},{"x":"2","y":"3"},{"x":"2","y":"6"},{"x":"3","y":"6"},{"x":"4","y":"6"},{"x":"5","y":"6"}]
+         }
+}
+
+    }                            },
+                                                                                                            portal: {
+                room_id: 12,
+                x: 1,
+                y: 9
+            }
+                    },
+                {
+            lines: {
+                x: 16,
+                y: 3,
+                width: 6,
+                height: 26
+            },
+            block: {
+                x: 2,
+                y: 2
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "107",
+                street: "Belly Button Street",
+            },
+            structure: {
+                type: "STOREFRONT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "PSYCHIC",
+name: "Past Present Future",
+listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "TRUE",    }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "13:00",
+        close: "21:00"
             },
     sunday: {
         closed: "FALSE",
-        open: "11:00",
-        close: "16:00"
+        open: "13:00",
+        close: "18:00"
             }
 },
 rooms: {
-    }                            }
-        },
+    }                            },
+                                                                                            },
                 {
             lines: {
                 x: 41,
@@ -1897,8 +2020,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 28,
@@ -1922,8 +2045,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 15,
@@ -1947,8 +2070,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 3,
@@ -1972,13 +2095,13 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 3,
                 y: 3,
-                width: 10,
+                width: 13,
                 height: 26
             },
             block: {
@@ -1988,7 +2111,7 @@ rooms: {
             address: {
                 name: "",
                 facing: "W",
-                dir: "W",
+                dir: "N",
                 number: "100",
                 street: "Brambleberry Street",
             },
@@ -2034,12 +2157,34 @@ schedule: {
     sunday: {
         closed: "TRUE",    }
 },
-rooms: {
-    }                            }
-        },
+front_room: 1,rooms: {
+        room_1: { 
+    id: 1,
+    name: "Bonedega",
+    floorWidth: 12,
+    floorHeight: 12,
+    wallHeight: 4,
+    overallHeight: 14,
+    overallWidth: 14,
+    floorSlug: "TILE.GREEN_CHECKERED_",
+    wallSlug: "PAINT.GREEN_PURPLE_",
+    roomData: { 
+                featureList: [{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN"},{"x":"7","y":"6","slug":"CONE_FALLEN"},{"x":"5","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"3","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"1","y":"9","slug":"CARDBOARD_FLOOR_MAT"},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW"},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
+                recipeList: [],
+                removalList: [{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"10","y":"0"},{"x":"11","y":"0"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"10","y":"1"},{"x":"11","y":"1"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"10","y":"2"},{"x":"11","y":"2"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"},{"x":"10","y":"3"},{"x":"11","y":"3"},{"x":"0","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"},{"x":"10","y":"11"},{"x":"11","y":"11"}]
+         }
+}
+
+    }                            },
+                                                                                                            portal: {
+                room_id: 1,
+                x: 2,
+                y: 14
+            }
+                    },
                 {
             lines: {
-                x: 43,
+                x: 44,
                 y: 3,
                 width: 8,
                 height: 26
@@ -2051,7 +2196,7 @@ rooms: {
             address: {
                 name: "",
                 facing: "E",
-                dir: "W",
+                dir: "N",
                 number: "101",
                 street: "Midline Ave",
             },
@@ -2061,7 +2206,7 @@ rooms: {
             },
             listing: {
                 slug: "CHINESE_FOOD",
-name: "Chinese Food",
+name: "Lucky Dragon II",
 listingName: "Lucky Dragon II",
 schedule: {
     monday: {
@@ -2098,8 +2243,8 @@ schedule: {
             }
 },
 rooms: {
-    }                            }
-        },
+    }                            },
+                                                                                            },
                 {
             lines: {
                 x: 44,
@@ -2158,8 +2303,8 @@ schedule: {
         closed: "TRUE",    }
 },
 rooms: {
-    }                            }
-        },
+    }                            },
+                                                                                            },
                 {
             lines: {
                 x: 33,
@@ -2183,8 +2328,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 22,
@@ -2208,8 +2353,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 11,
@@ -2233,8 +2378,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
                 {
             lines: {
                 x: 0,
@@ -2258,8 +2403,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            }
-        },
+                            },
+                                                                    },
             ]
     
 };
