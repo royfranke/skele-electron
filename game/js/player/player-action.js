@@ -249,36 +249,12 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             });
 
             this.displayActions = displayActions;
-            this.drawActions();
+            this.scene.manager.hud.hudAction.drawActions(displayActions, this.menu.x, this.menu.y);
             
         }
     }
     
 
-    drawActions () {
-
-        this.actionsGroup.clear(false, true);
-
-        var x = this.menu.x;
-        var y = this.menu.y;
-
-        const actionsGroup = this.actionsGroup;
-
-        const scene = this.scene;
-        this.displayActions.forEach(function (action, index) {
-            var slip_class = 'select-slip-not-selected';
-            if (index == 0) {
-                var slip_class = 'select-slip';
-            }
-            if (index == 1) {
-                var slip_class = 'more-slip';
-            }
-            const newAction = scene.add.dom(x, y + (index * 16), 'div', '', action.action).setClassName(slip_class).setOrigin(0);
-            //const newAction = scene.add.text(x, y + (index * 24), action.action, style).setDepth(101100);
-            actionsGroup.add(newAction);
-        });
-        this.actionsGroup = actionsGroup;
-    }
     
     
 }
