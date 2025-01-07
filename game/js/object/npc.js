@@ -65,12 +65,6 @@ export default class Npc {
     });
   }
 
-  setRegistration(registered, coord = null) {
-    this.registered = registered;
-    if (registered && coord != null) {
-      //this.setTileLocation(coord.x, coord.y);
-    }
-  }
 
   givePlayerItem(item_slug, items_slugs = []) {
     if (this.state.name != 'EXCHANGE') {

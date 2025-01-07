@@ -22,6 +22,9 @@ export default class PlayerSprite {
     if (this.scene.place == 'interior') {
       this.setInteriorCollider();
     }
+    if (this.scene.npcs != undefined) {
+      this.scene.physics.add.collider(this.scene.npcs.npcs, this.scene.npcs.npcs);
+    }
   }
 
   setInteriorCollider() {
@@ -38,6 +41,7 @@ export default class PlayerSprite {
     this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
     //this.sprite.setCollideWorldBounds(true);
     //this.setExteriorZones();
+    
   }
 
   setExteriorZones () {

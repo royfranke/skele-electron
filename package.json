@@ -1,6 +1,6 @@
 {
   "name": "skele-electron",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Skele Summer development build on Electron.",
   "main": "index.js",
   "scripts": {

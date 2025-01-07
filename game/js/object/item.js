@@ -195,8 +195,7 @@ export default class Item {
             var requirement_parts_met = 0;
             var requirement_parts = interactions[interaction].requires.length;
             interactions[interaction].requires.forEach(function (requirement, index) {
-                /// If the requirement is for this item or this item kind held in the hand, mark the requirement as met
-   
+                /// If the requirement is for this item or this item kind held in the hand, mark the requirement as met; otherwise check the pockets
                 if (requirement.type == 'ITEM'
                     && (requirement.ITEM == info.slug
                         || 
@@ -216,9 +215,19 @@ export default class Item {
                     || requirement.slot_type == 'IN_HAND_OR_ACTIVE')) {
                     requirement_parts_met++;
                 }
+                if (requirement.type == 'OBJ_KIND'
+                    && self.manager.objectManager.findOnActiveTile(requirement.OBJ_KIND,'kind')
+                    && (requirement.slot_type == 'ON_ACTIVE')) {
+                    requirement_parts_met++;
+                    console.log(''+requirement.OBJ_KIND+' found on active tile');
+                }
+                if (requirement.type == 'OBJ_TYPE'
+                    && self.manager.objectManager.findOnActiveTile(requirement.OBJ_TYPE,'type')
+                    && (requirement.slot_type == 'ON_ACTIVE')) {
+                    requirement_parts_met++;
+                    console.log(''+requirement.OBJ_TYPE+' found on active tile');
+                }
 
-                
-                
             });
             if (requirement_parts_met == requirement_parts) {
                 actions_simple.push(interactions[interaction].req_pocket_action);

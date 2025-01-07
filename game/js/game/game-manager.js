@@ -126,6 +126,7 @@ export default class GameManager {
     }
 
     update () {
+        
         this.state = this.getState();
         if (this.state.name == 'NOT_LOADED') { return this.loadGame(); }
         if (this.state.input) {

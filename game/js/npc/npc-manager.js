@@ -1,5 +1,4 @@
 import NpcFactory from "./npc-factory.js";
-import NpcRegistry from "./npc-registry.js";
 
 /* Npc Manager Class */
 
@@ -27,7 +26,6 @@ export default class NpcManager {
 
     initializeScene(scene) {
         this.factory = new NpcFactory(scene);
-        this.registry = new NpcRegistry();
         this.list = [];
         this.newColliderGroup();
     }

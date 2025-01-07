@@ -1,1 +1,125 @@
-{"BODY":{"ODOR":2,"HUNGER":3,"FATIGUE":2,"THIRST":2,"FILTH":2,"EASE":2,"WET":0},"COINPURSE":{"COIN":{"PENNY":0,"NICKEL":0,"DIME":0,"QUARTER":0},"STATUS":{"HAS":"FALSE","HAD":"FALSE","LOST":"FALSE"},"PAPER":{"ONE":0,"TWO":0,"FIVE":0,"TEN":0,"TWENTY":0,"FIFTY":0,"HUNDRED":0}},"KNOWLEDGE":{"CURSES":{},"NUMBERS":{},"ADDRESSES":{}},"NOTEBOOKS":{"STATUS":{"CURRENT":{"NOTEBOOK":1}},"NOTEBOOK1":{"PAGES":{},"SPECS":{"COLOR":"RED"},"EPHEMERA":{}}},"POCKETS":{"SLOT0":{"TYPE":"SHOULDERS","STATE":"EMPTY","HOLDS":"DISALLOWED","USES":"DISALLOWED","WEARS":""},"SLOT1":{"TYPE":"HAND","STATE":"EMPTY","HOLDS":"","USES":"","WEARS":"DISALLOWED"},"SLOT2":{"TYPE":"HAND","STATE":"EMPTY","HOLDS":"","USES":"","WEARS":"DISALLOWED"},"STATES":{"EMPTY":"EMPTY","HOLDS":"HOLDS","WEARS":"WEARS","USES":"USES"}},"POSITION":{"ROOM":-1,"X":12,"Y":12},"SAVE":{"HEADLINE":"NEW","SLOT":2},"SETTINGS":{"CONTENT":{"MOTHS":"TRUE","BUTTERFLIES":"TRUE","SMOKES":"TRUE","BOOZE":"TRUE"}},"TIME":{"SECOND":0,"MINUTE":0,"HOUR":7,"DAY":1}}
+{
+    "ACCOMPLISHMENTS": {
+        "MAILED": {
+            "LETTERS": 0,
+            "POSTCARDS": 0,
+            "PACKAGES": 0
+        }
+    },
+    "BODY": {
+        "ODOR": 2,
+        "HUNGER": 3,
+        "FATIGUE": 2,
+        "THIRST": 2,
+        "FILTH": 2,
+        "EASE": 2,
+        "WET": 0
+    },
+    "COINPURSE": {
+        "COIN": {
+            "PENNY": 0,
+            "NICKEL": 0,
+            "DIME": 0,
+            "QUARTER": 0
+        },
+        "STATUS": {
+            "HAS": "FALSE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
+        },
+        "PAPER": {
+            "ONE": 0,
+            "TWO": 0,
+            "FIVE": 0,
+            "TEN": 0,
+            "TWENTY": 0,
+            "FIFTY": 0,
+            "HUNDRED": 0
+        }
+    },
+    "KNOWLEDGE": {
+        "CURSES": {},
+        "NUMBERS": {},
+        "ADDRESSES": {},
+        "FIELDNOTES": {},
+        "HOMEWORK": {},
+        "DRAWINGS": {},
+        "RECIPES": {},
+        "MAIL": {},
+        "INTERSECTIONS": {}
+    },
+    "NOTEBOOKS": {
+        "STATUS": {
+            "CURRENT": {
+                "NOTEBOOK": 1
+            }
+        },
+        "NOTEBOOK1": {
+            "PAGES": {},
+            "SPECS": {
+                "COLOR": "RED"
+            },
+            "EPHEMERA": {}
+        }
+    },
+    "POCKETS": {
+        "STATES": {
+            "EMPTY": "EMPTY",
+            "HOLDS": "HOLDS",
+            "WEARS": "WEARS",
+            "USES": "USES"
+        },
+        "SLOTS": {
+            "SLOT0": {
+                "TYPE": "SHOULDERS",
+                "STATE": "EMPTY",
+                "HOLDS": "DISALLOWED",
+                "USES": "DISALLOWED",
+                "WEARS": ""
+            },
+            "SLOT1": {
+                "TYPE": "HAND",
+                "STATE": "EMPTY",
+                "HOLDS": "",
+                "USES": "",
+                "WEARS": "DISALLOWED"
+            },
+            "SLOT2": {
+                "TYPE": "HAND",
+                "STATE": "EMPTY",
+                "HOLDS": "",
+                "USES": "",
+                "WEARS": "DISALLOWED"
+            }
+        }
+    },
+    "POSITION": {
+        "ROOM": -1,
+        "X": 35,
+        "Y": 24,
+        "FACING": "N"
+    },
+    "SAVE": {
+        "HEADLINE": "NEW",
+        "SLOT": 0
+    },
+    "SETTINGS": {
+        "CONTENT": {
+            "MOTHS": "TRUE",
+            "BUTTERFLIES": "TRUE",
+            "SMOKES": "TRUE",
+            "BOOZE": "TRUE"
+        }
+    },
+    "TIME": {
+        "ALARM": {
+            "SET": "TRUE",
+            "HOUR": 4,
+            "MINUTE": 0
+        },
+        "SECOND": 0,
+        "MINUTE": 59,
+        "HOUR": 3,
+        "DAY": 1
+    }
+}

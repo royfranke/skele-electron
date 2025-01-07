@@ -44,6 +44,8 @@ export default class SaveManager {
 
         this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
         
+        this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
+        this.scene.player.setFacing(data.POSITION.FACING);
     }
 
     saveNewGameData() {

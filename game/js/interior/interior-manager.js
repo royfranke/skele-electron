@@ -72,6 +72,8 @@ import Room from "../object/room.js";
 
             var _y = wall_height + 1;
 
+            this.wall_height = wall_height;
+
             if (this.config.floorSlug != undefined && this.config.floorSlug != '') {
                 base_flooring += this.config.floorSlug;
             }
@@ -93,10 +95,12 @@ import Room from "../object/room.js";
                 let removal = this.config.roomData.removalList[i];
                 groundLayer.putTileAt(0, _x + removal.x, _y + removal.y);
             }
-            for (let i = 0; i < this.config.roomData.recipeList.length; i++) {
-                let recipe = this.config.roomData.recipeList[i];
-                var flooring = recipe.slug.split('.');
-                this.groundLayer.weightedRandomize(TILES[flooring[0]][flooring[1]], _x + recipe.x, _y + recipe.y, 1,1);
+            if (this.config.roomData.recipeList != undefined) {
+                for (let i = 0; i < this.config.roomData.recipeList.length; i++) {
+                    let recipe = this.config.roomData.recipeList[i];
+                    var flooring = recipe.slug.split('.');
+                    this.groundLayer.weightedRandomize(TILES[flooring[0]][flooring[1]], _x + recipe.x, _y + recipe.y, 1,1);
+                }
             }
             this.drawFloorCutAway();
             this.drawWallCutAway();
@@ -107,7 +111,7 @@ import Room from "../object/room.js";
     buildFeatureList () {
         /// Start with the floor.
         var _x = 1;
-        var _y = 5;
+        var _y = this.wall_height + 1;
         var has_front_door=false;
         for (let i = 0; i < this.room.config.roomData.featureList.length; i++) {
             let feature = this.room.config.roomData.featureList[i];

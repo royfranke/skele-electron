@@ -98,7 +98,23 @@ export default class HudWatch extends HudCommon {
     }
 
     getAlarmStatus () {
-        return this.scene.manager.time.getAlarmStatus();
+        let status = this.scene.manager.time.getAlarmStatus();
+        if (status == 'D') {
+            this.alarmBeep();
+        }
+        return status;
+    }
+
+    alarmBeep () {
+        let beep = this.scene.manager.hud.hudSound.play('WATCH_BEEP',3,200);
+
+        this.scene.time.addEvent({
+            delay: 3000,
+            callback: () => {
+                // Fade out
+                this.scene.manager.time.setAlarmStatus('TRUE');
+            }
+        })
     }
     
 }

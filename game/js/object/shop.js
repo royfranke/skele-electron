@@ -18,7 +18,6 @@ export default class Shop {
     setMaterials(settings = {}) {
 
         if (!settings.hasOwnProperty('door')) {
-
             settings.door = this.roll(OBJECT_TYPES.STORE_DOOR_);
         }
         if (!settings.hasOwnProperty('windows')) {
@@ -34,6 +33,11 @@ export default class Shop {
             settings.levels = [];
             settings.levels.push({ height: this.roll([4, 4, 4, 5]) });
             settings.levels.push({ height: this.roll([4, 4, 4, 5]) });
+        }
+        if (!settings.hasOwnProperty('roof')) {
+            settings.roof = {
+                height: 12
+            };
         }
 
         this.settings = settings;
@@ -77,7 +81,8 @@ export default class Shop {
             if (this.prop.listing.slug == 'PSYCHIC') {
                 this.sign = this.scene.manager.objectManager.newObjectToWorld(_x+1, _y - 3, 'PSYCHIC_STOREFRONT_SIGN');
                 this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
-                this.scene.manager.objectManager.newObjectToWorld(_x+4, _y +1, 'DINER_CHAIR_RED');
+                let chair = this.scene.manager.objectManager.newObjectToWorld(_x+4, _y +1, 'DINER_CHAIR_RED');
+                chair.setState('FACING_SOUTH');
             }
         }
 
@@ -104,9 +109,10 @@ export default class Shop {
                 this.sign.sprite.setDepth(this.sign.sprite.depth + 32);
 
                 let lotto_sign = this.scene.manager.objectManager.newObjectToWorld(_x + 2.25, _y, 'NEON_LOTTO_SIGN');
-                lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - .5);
+                lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 6);
                 lotto_sign.setState('FLICKERING');
 
+                this.scene.manager.objectManager.newObjectToWorld(_x + 9, _y + 1, 'MILK_CRATE');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 10, _y + 1, 'PAYPHONE');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 1, 'PAYPHONE');
             }
@@ -120,6 +126,13 @@ export default class Shop {
         if (this.prop.structure.type == 'TAKEOUT-WINDOW') {
             // Need to make takeout window
         }
+
+        if (this.prop.listing.slug == 'LOCKSMITH') {
+            let key_sign = this.scene.manager.objectManager.newObjectToWorld(_x + 3.5, _y - 1.75, 'NEON_KEY');
+            key_sign.sprite.setDepth(this.gates[0].sprite.depth - 18);
+            key_sign.setState('ON');
+        }
+
         this.buildHours();
         this.setRollingGatesFromHours();
     }

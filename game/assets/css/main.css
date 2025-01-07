@@ -105,13 +105,20 @@ body,
   background-position: center;
   background-repeat: no-repeat;
   padding: 16px;
-  font-size: 12px;
+  font-size: 10px;
   font-family: 'defaultFont';
   border: 1px dashed #88924f;
   background-color: #645d9a;
   width: 40px;
   height: 40px;
   border-radius: 4px;
+}
+
+.splash:after {
+  content: 'MERCY';
+  color:#88924f;
+  display: block;
+  margin-top:60px;
 }
 
 .loading {

@@ -14,7 +14,7 @@ export default class PropertyLine {
         this.prop = prop;
 
         this.utilities = new GameUtilities();
-        this.setMaterials();
+        
     }
 
     setMaterials(settings = {}) {
@@ -40,7 +40,7 @@ export default class PropertyLine {
 
         }
         if (!settings.hasOwnProperty('door')) {
-            settings.door = this.roll(OBJECT_TYPES.STORE_DOOR_);
+            settings.door = this.roll(OBJECT_TYPES.EXT_DOOR_);
         }
         if (!settings.hasOwnProperty('window')) {
             settings.window = this.roll(OBJECT_TYPES.WINDOW_EXT_);
@@ -107,12 +107,14 @@ export default class PropertyLine {
 
     buildIt() {
         /// roll for whether this continues as a house or becomes a shop
+
         if (this.prop.structure.zoning == 'COMMERCIAL') {
             //this.showIt();
             let shop = new Shop(this.scene, this.prop, this.settings);
             return;
         }
 
+        this.setMaterials();
         const top = this.prop.lines.top;
         const left = this.prop.lines.left;
         const bottom = this.prop.lines.bottom;
@@ -129,12 +131,7 @@ export default class PropertyLine {
 
         this.settings.roof.height = height - (this.settings.foundation.height + yard + 3);
 
-        //this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.FOUNDATION.BITMAP_, left+1, top + 1, width - 2, height - (yard + 1));
-        //this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, left+1, top + height - (yard + 1), width - 2,  yard);
-
-
         var _x = left + 1;
-        //var _y = top + height - yard;
         var _y = bottom - yard;
 
         var building_width = width - 2;

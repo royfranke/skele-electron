@@ -12,7 +12,7 @@ export default class HudSound {
 
     }
 
-    play (sound_slug) {
+    play (sound_slug, repeat=0, repeat_delay=0) {
         //var volume = this.scene.manager.settings.getSetting('volume_ui');
         var volume = 1;
         var self = this;
@@ -22,8 +22,25 @@ export default class HudSound {
                 let random = Phaser.Math.Between(0, available-1);
                 let sound_key = sound.NAME+'_'+random;
                 let new_sound = self.scene.sound.add(sound_key, {volume: volume});
-                new_sound.play();
+
+                if (repeat > 0) {
+                    let timeline = self.scene.add.timeline([
+
+                        {
+                    
+                            at: repeat_delay,
+                    
+                            run: () => { new_sound.play(); },
+                        },
+                    ]);
+                    timeline.repeat(repeat).play();
+                    return timeline;
+                }
+                else {
+                    new_sound.play();
+                }
                 return;
+                
             }
         });
        

@@ -13,14 +13,7 @@ export default class TutorialScene extends Phaser.Scene {
 
     init (data) {
         this.slot = data.slot;
-        this.room_id = 3;
-        this.used_portal = {
-            room_id: 3,
-            x:8,
-            y:8,
-            facing: 'S'
-        }
-        
+        this.room_id = 10;
     }
 
     create() {
@@ -33,8 +26,6 @@ export default class TutorialScene extends Phaser.Scene {
         this.player = new PlayerManager(this);
         this.interior.create();
         this.player.create();
-        this.player.setPositionTile(this.used_portal.x,this.used_portal.y);
-        this.player.setFacing(this.used_portal.facing);
          //// Load the save!
          this.app.initializeTutorialSave();
 

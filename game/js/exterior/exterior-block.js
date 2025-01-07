@@ -204,7 +204,8 @@ export default class Block {
             
         } 
         if (this.block.offset.n > 0) {
-            this.scene.manager.objectManager.newObjectToWorld(this.block.left+9, this.block.top,'HYDRANT_CITY_');
+            this.scene.manager.objectManager.newObjectToWorld(this.block.left+7, this.block.top,'POSTBOX_S');
+            this.scene.manager.objectManager.newObjectToWorld(this.block.left+12, this.block.top,'HYDRANT_CITY_');
         }  
         if (this.block.offset.s > 0) {
             this.scene.manager.objectManager.newObjectToWorld(this.block.right-7, this.block.bottom-1,'HYDRANT_CITY_');

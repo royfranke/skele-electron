@@ -452,8 +452,6 @@ export default class HudPockets extends HudCommon {
             button: button_block,
             button_text: button_text
         };
-        //return this.makeSlip(this.view.right - slotMargin.x, this.view.top + slotMargin.y, action);
-        //return this.scene.add.dom(right - slotMargin.x, this.view.top + (slotMargin.y), 'div', '', action).setClassName(selected == true ? 'select-slip' : 'select-slip-not-selected').setOrigin(0).setScrollFactor(0);
     }
 
     setSlipVisible(slot_x, visible) {

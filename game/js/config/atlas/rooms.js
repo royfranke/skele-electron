@@ -10,7 +10,7 @@
     floorSlug: "TILE.GREEN_CHECKERED_",
     wallSlug: "PAINT.GREEN_PURPLE_",
     roomData: { 
-                featureList: [{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN"},{"x":"7","y":"6","slug":"CONE_FALLEN"},{"x":"5","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"3","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"1","y":"9","slug":"CARDBOARD_FLOOR_MAT"},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW"},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
+                featureList: [{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN"},{"x":"1","y":"9","slug":"CARDBOARD_FLOOR_MAT"},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW"},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER"},{"x":"0","y":"8","slug":"BASKET_RACK"},{"x":"4","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"6","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"8","y":"7","slug":"MILK_CRATE"},{"x":"0","y":"10","slug":"CONE_UPRIGHT"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
                 recipeList: [],
                 removalList: [{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"10","y":"0"},{"x":"11","y":"0"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"10","y":"1"},{"x":"11","y":"1"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"10","y":"2"},{"x":"11","y":"2"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"},{"x":"10","y":"3"},{"x":"11","y":"3"},{"x":"0","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"},{"x":"10","y":"11"},{"x":"11","y":"11"}]
          }
@@ -89,7 +89,7 @@
     floorSlug: "TILE.GREEN_CHECKERED_",
     wallSlug: "PAINT.GREEN_PURPLE_",
     roomData: { 
-                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
+                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"3","y":"3","slug":"ADDING_MACHINE"},{"x":"2","y":"2","slug":"CORKBOARD"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
                 recipeList: [{"x":"3","y":"0","slug":"PLANK.BROWN_"},{"x":"4","y":"0","slug":"PLANK.BROWN_"},{"x":"5","y":"0","slug":"PLANK.BROWN_"},{"x":"3","y":"1","slug":"PLANK.BROWN_"},{"x":"4","y":"1","slug":"PLANK.BROWN_"},{"x":"5","y":"1","slug":"PLANK.BROWN_"},{"x":"3","y":"2","slug":"PLANK.BROWN_"},{"x":"4","y":"2","slug":"PLANK.BROWN_"},{"x":"5","y":"2","slug":"PLANK.BROWN_"},{"x":"3","y":"3","slug":"PLANK.BROWN_"},{"x":"4","y":"3","slug":"PLANK.BROWN_"},{"x":"5","y":"3","slug":"PLANK.BROWN_"}],
                 removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"0","y":"3"},{"x":"1","y":"3"},{"x":"2","y":"3"},{"x":"2","y":"6"},{"x":"3","y":"6"},{"x":"4","y":"6"},{"x":"5","y":"6"}]
          }

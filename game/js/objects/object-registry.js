@@ -34,6 +34,28 @@ export default class ObjectRegistry {
         return (_x+"_"+_y in this.registry);
     }
 
+
+
+    findOnActiveTile (slug, pick, _x, _y) {
+        let objects = this.getObjects(_x,_y);
+        if (objects == null) {return false;}
+        var result = false;
+        objects.forEach(object => {
+            if (pick == 'kind' && !result) {
+                if (object.info.slug == slug) {
+                    result = true;
+                }
+            }
+            if (pick == 'type' && !result) {
+                if (object.info.type == slug) {
+                    result = true;
+                }
+            }
+            
+        });
+        return result;
+    }
+
     getObjects (_x, _y) {
         if (!this.placeEmpty(_x,_y)) {
             return this.registry[_x+"_"+_y];

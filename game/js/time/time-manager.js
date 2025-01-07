@@ -14,7 +14,7 @@ export default class TimeManager {
 
         this.second_increment = .5;
         this.time_passing = true;
-
+        this.alarm_beeping = false;
         this.today = this.getDate();
         
     }
@@ -179,13 +179,25 @@ export default class TimeManager {
         this.setToday();
     }
 
+    setAlarmStatus (status) {
+        this.now.alarm.set = status;
+    }
+
     getAlarmStatus () {
-        if (this.now.alarm.set == 'TRUE') {
+        if (this.now.hour == this.now.alarm.hour && this.now.minute == this.now.alarm.minute && this.now.alarm.set == 'TRUE') {
+            return this.triggerAlarm();
+        }
+        else if (this.now.alarm.set == 'TRUE' && !this.alarm_beeping) {
             return 'C';
         }
         else {
             return 'B';
         }
+    }
+
+    triggerAlarm () {
+        this.setAlarmStatus('FALSE');
+        return 'D';
     }
 
 }

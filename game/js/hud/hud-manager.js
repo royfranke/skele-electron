@@ -1,3 +1,4 @@
+import HudAction from "./hud-action.js"; //Extends HudCommon
 import HudChest from "./hud-chest.js"; //Extends HudCommon
 import HudCoinpurse from "./hud-coinpurse.js"; //Extends HudCommon
 import HudDialog from "./hud-dialog.js";
@@ -49,7 +50,7 @@ export default class HudManager {
 
         this.hudWatch = new HudWatch(this.scene);
         this.hudNotebook = new HudNotebook(this.scene);
-        
+        this.hudAction = new HudAction(this.scene);
         this.hudZener = new HudZener(this.scene);
         this.hudSocks = new HudSocks(this.scene);
         this.hudDisplay = new HudDisplay(this.scene);

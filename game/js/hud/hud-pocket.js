@@ -292,6 +292,9 @@ export default class HudPocket {
                     if (requirement.result == 'CONSUMED') {
                         self.setPocket(pocketIndex, 'EMPTY');
                     }
+                    if (requirement.result == 'MAILED') {
+                        self.setPocket(pocketIndex, 'EMPTY');
+                    }
                     if (requirement.result == 'FILLED') {
                         var fill_with = item_action.req_result_item;
                         console.log("Fill this "+requirement[requirement.type]+" up with "+item_action.req_result_item);

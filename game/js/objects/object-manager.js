@@ -57,5 +57,12 @@ export default class ObjectManager {
         this.scene.manager.setFocus('CHEST');
         this.scene.manager.hud.hudChest.openChest(object);
     }
+
+    findOnActiveTile (slug,pick) {
+        let _x = this.scene.player.action.actionTile.x;
+        let _y = this.scene.player.action.actionTile.y;
+        console.log(_x+', '+_y);
+        return this.registry.findOnActiveTile(slug,pick,_x,_y);
+    }
     
 }

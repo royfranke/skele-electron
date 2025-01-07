@@ -128,7 +128,6 @@ export default class HudFactory {
         stack.circle.setVisible(false);
         stack.text.setVisible(false);
         return stack;
-        //return this.scene.add.dom(_x, _y, 'div', '', '0').setClassName('stack-indicator').setOrigin(0).setDepth(this.depth.STACK).setScrollFactor(0);
     }
 
     flutter (elements=[], delay) {

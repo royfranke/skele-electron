@@ -133,7 +133,6 @@ export default class Announcer {
                 }
             });
             this.announced = announced;
-            //this.announce =  this.scene.add.dom(_x,_y, 'div', '', this.announcements[0].announcement).setClassName('announcer').setOrigin(0).setDepth(1500);
             
             this.bounceAnnouncements();
             this.state = 'FORMED';

@@ -10,7 +10,7 @@ export default class AppView {
     constructor(scene, view, state_name) {
         this.scene = scene;
         this.view = view;
-        this.version = '1.0.4';
+        this.version = '1.0.5';
         this.create(state_name);
     }
 
