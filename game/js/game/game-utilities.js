@@ -199,6 +199,9 @@ export default class GameUtilities {
                 if (EDGETILES.EDGE['BITMAP_'+highest.name+'_'+edge+'_'] != undefined) {
                     edgeLayer.putTileAt(EDGETILES.EDGE['BITMAP_'+highest.name+'_'+edge+'_'][0].index[mapped_index],_x,_y);
                 }
+                else if (EDGETILES.EDGE['BITMAP_'+highest.name+'_SOFT_'] != undefined) {
+                    edgeLayer.putTileAt(EDGETILES.EDGE['BITMAP_'+highest.name+'_SOFT_'][0].index[mapped_index],_x,_y);
+                }
                 else {
                     console.log('BITMAP_'+highest.name+'_'+edge+'_');
                 }

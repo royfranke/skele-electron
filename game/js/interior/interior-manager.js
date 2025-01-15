@@ -117,6 +117,7 @@ import Room from "../object/room.js";
             let feature = this.room.config.roomData.featureList[i];
             if (feature.slug != 'FRONTDOOR') {
                 let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
+                
                 if (obj != null && feature.params != undefined && feature.params.portal != undefined) {
                     obj.setPortal(feature.params.portal);
                 }

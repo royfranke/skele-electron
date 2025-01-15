@@ -32,8 +32,8 @@ export default class HudFocusHints extends HudCommon {
     makeFocusHint (hint) {
         if (hint != null) {
             let keyTip = {
-                block: this.makeBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_SAPPHIRE'),
-                text: this.makeBitmapText(hint.x+5, hint.y+3, 16, 12, 'SkeleButton')
+                block: this.makeFocusBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_SAPPHIRE'),
+                text: this.makeFocusBitmapText(hint.x+5, hint.y+3, 16, 12, 'SkeleButton')
             };
             keyTip.text.setText(hint.char);
             return keyTip;
@@ -54,15 +54,18 @@ export default class HudFocusHints extends HudCommon {
             var hint = this.makeFocusHint(this.focusHints[i]);
             this.hints[this.focusHints[i].focus] = hint;
         }
-        //this.setFocusHintsVisible(false);
+    }
+
+    setFocusHintVisible (hint, visible) {
+        if (this.hints[hint] != null) {
+            this.hints[hint].block.setVisible(visible);
+            this.hints[hint].text.setVisible(visible);
+        }
     }
 
     setFocusHintsVisible (visible) {
         for (var key in this.hints) {
-            if (this.hints[key] != null) {
-                this.hints[key].block.setVisible(visible);
-                this.hints[key].text.setVisible(visible);
-            }
+            this.setFocusHintVisible(key, visible);
         }
     }
 

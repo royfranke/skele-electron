@@ -96,7 +96,7 @@ export default class HudNotebook extends HudCommon {
                 right: null
             }
         };
-
+        this.checkNotebook();
     }
 
     checkNotebook() {
@@ -266,6 +266,7 @@ export default class HudNotebook extends HudCommon {
     makeBitmapText(_x, _y, width, text, size) {
         let bitmap = this.factory.makeBitmapText(_x, _y, width, size);
         bitmap.setText(text);
+        bitmap.setTintFill(0x465e62);
         bitmap.setLineSpacing(8);
         return bitmap;
     }
@@ -324,5 +325,6 @@ export default class HudNotebook extends HudCommon {
             });
         }
     }
+    
 
 }

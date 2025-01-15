@@ -17,12 +17,13 @@ export default class HudDialog extends HudCommon {
         this.closure = null;
         this.last_selected = -1;
         this.selected = 0;
+        this.talking = null;
     }
 
     select () {
         if (this.currentReply != false) {
-            console.log(this.replyBox.dataset[this.selected]);
             let next = this.replyBox.dataset[this.selected].next;
+            console.log('----------'+next);
             this.clearDialog();
             if (next != 0) {
                 this.scene.manager.dialog.triggerDialog(next);
@@ -34,18 +35,29 @@ export default class HudDialog extends HudCommon {
         else {
             /// First change the frame of the button to indicate selection
             // then time out the close dialog
-            var selectors = this.replyBox.selectors;
-            
-            this.setSelectorSelected(selectors[this.selected]);
+            if (this.replyBox != null) {
+                var selectors = this.replyBox.selectors;
+                
+                this.setSelectorSelected(selectors[this.selected]);
 
-            this.scene.time.addEvent({
-                callback: () => {
+                this.scene.time.addEvent({
+                    callback: () => {
+                        this.closeDialog();
+                    },
+                    delay: 1000
+                });
+            }
+            else {
+                let next = this.dialogBox.dialog.next;
+                console.log('.....'+next);
+                this.clearDialog();
+                if (next != 0) {
+                    this.scene.manager.dialog.triggerDialog(next);
+                }
+                else {
                     this.closeDialog();
-                },
-                delay: 1000
-            });
-            
-            
+                }
+            }
         }
         return null;
     }
@@ -55,7 +67,7 @@ export default class HudDialog extends HudCommon {
     }
 
     arrowUp () {
-        this.setSelected(this.selected + 1);
+        this.setSelected(this.selected - 1);
     }
 
     makeBitmapText (_x,_y, width, text, size, font="SkeleTalk") {
@@ -85,18 +97,21 @@ export default class HudDialog extends HudCommon {
         console.log("Focusing dialog");
     }
 
-    tellDialogBox (content) {
+    tellDialogBox (content, next=0) {
         if (!this.currentDialog) {
             this.currentDialog = true;
             this.scene.manager.setFocus('DIALOG');
             this.dialogBox = this.makeDialogBox();
-
+            this.dialogBox.dialog.next = next;
+            // replace ’ with \'
+            content = content.replace('’', '\'');
             /// Break the dialog up by word
             let words = content.split(' ');
+            
             const length = words.length;
             let i = 0;
             let dialog = this.dialogBox.dialog;
-            this.scene.time.addEvent({
+            this.talking = this.scene.time.addEvent({
                 callback: () => {
                     // Check if the last character is a period
                     if (dialog.text != '') {
@@ -113,7 +128,7 @@ export default class HudDialog extends HudCommon {
                     ++i
                 },
                 repeat: length - 1,
-                delay: 125
+                delay: 75
             });
         
         }
@@ -186,13 +201,15 @@ export default class HudDialog extends HudCommon {
         }
         this.last_selected = this.selected;
         this.selected = selected;
-        var selectors = this.replyBox.selectors;
-        for (let i = 0; i < selectors.length; i++) {
-            if (i == selected) {
-                this.setSelectorVisible(selectors[i],true);
-            }
-            else {
-                this.setSelectorVisible(selectors[i],false);
+        if (this.replyBox != null) {
+            var selectors = this.replyBox.selectors;
+            for (let i = 0; i < selectors.length; i++) {
+                if (i == selected) {
+                    this.setSelectorVisible(selectors[i],true);
+                }
+                else {
+                    this.setSelectorVisible(selectors[i],false);
+                }
             }
         }
     }
@@ -222,6 +239,7 @@ export default class HudDialog extends HudCommon {
                     this.dialogBox.frame.destroy();
                 }
             }
+            this.talking.remove();
         }
     }
 
@@ -237,6 +255,7 @@ export default class HudDialog extends HudCommon {
             this.replyBox.selectors.forEach(selector => {
                 this.clearSelector(selector);
             });
+            this.replyBox = null;
         }
         else {
             if (this.closure != null) {

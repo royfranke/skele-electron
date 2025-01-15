@@ -5,6 +5,7 @@ import HudDialog from "./hud-dialog.js";
 import HudDisplay from "./hud-display.js";
 import HudFocusHints from "./hud-focus-hints.js";
 import HudInput from "./hud-input.js";
+import HudQuest from "./hud-quest.js"; //Extends HudCommon
 import HudNotebook from "./hud-notebook.js"; //Extends HudCommon
 import HudPocket from "./hud-pocket.js";
 import HudPockets from "./hud-pockets.js"; //Extends HudCommon
@@ -50,6 +51,7 @@ export default class HudManager {
 
         this.hudWatch = new HudWatch(this.scene);
         this.hudNotebook = new HudNotebook(this.scene);
+        this.hudQuest = new HudQuest(this.scene);
         this.hudAction = new HudAction(this.scene);
         this.hudZener = new HudZener(this.scene);
         this.hudSocks = new HudSocks(this.scene);

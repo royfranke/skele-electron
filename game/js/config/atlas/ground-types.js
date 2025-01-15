@@ -206,7 +206,7 @@ const GROUND_TYPE = {
     TYPE: "MULCH",
     SPEED: "SLOWED",
     BITMAP: true,
-    EDGE: "SOFT",
+    EDGE: "FEATHER",
     COLLIDES: false,
     USEMASK: true,
     ZINDEX: 3,

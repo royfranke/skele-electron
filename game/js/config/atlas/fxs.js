@@ -1,4 +1,24 @@
           const FXS = {
+                          BLOWN_FLYER_PINK: {
+                  name: 'Blown Pink Flyer',
+                  slug: 'BLOWN_FLYER_PINK',
+                  frames: [
+                                          'BLOWN_FLYER_PINK-1',
+                                          'BLOWN_FLYER_PINK-2',
+                                          'BLOWN_FLYER_PINK-3',
+                                          'BLOWN_FLYER_PINK-4',
+                                          'BLOWN_FLYER_PINK-5',
+                                          'BLOWN_FLYER_PINK-6',
+                                          'BLOWN_FLYER_PINK-7',
+                                          'BLOWN_FLYER_PINK-8',
+                                          'BLOWN_FLYER_PINK-9',
+                                          'BLOWN_FLYER_PINK-10',
+                                          'BLOWN_FLYER_PINK-11',
+                                          'BLOWN_FLYER_PINK-12',
+                                          'BLOWN_FLYER_PINK-13'
+                                      ],
+                  repeat: 3
+              },
                           CARD_DECK_RUFFLE_LOW: {
                   name: 'Card Deck Ruffle Low',
                   slug: 'CARD_DECK_RUFFLE_LOW',

@@ -11,7 +11,7 @@ const OBJECTS = {
           h:1, 
           w:2,
           x:0, 
-          y:0
+          y:1
         },
         sprite: {
           h:16, 
@@ -4453,6 +4453,43 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          LOCKSMITH_STOREFRONT_SIGN: {
+        name: 'Locksmith Storefront Sign',
+        slug: 'LOCKSMITH_STOREFRONT_SIGN', 
+        type: 'STOREFRONT_FRAME_SIGN',
+        bounding: {
+          h:2, 
+          w:6
+        },
+        base: {
+          h:1, 
+          w:6,
+          x:0, 
+          y:1
+        },
+        sprite: {
+          h:20, 
+          w:86,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           MAILBOX_SHINY: {
         name: 'Mailbox Shiny',
         slug: 'MAILBOX_SHINY', 
@@ -6655,9 +6692,194 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          EXT_WINDOW_STORE_4_CLAD_GREEN: {
+        name: 'Store Half Windows Green Clad',
+        slug: 'EXT_WINDOW_STORE_4_CLAD_GREEN', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_STORE_4_CLAD_RED: {
+        name: 'Store Half Windows Red Clad',
+        slug: 'EXT_WINDOW_STORE_4_CLAD_RED', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:24, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_STORE_4_CLAD_WEATHERED: {
+        name: 'Store Half Windows Weathered Clad',
+        slug: 'EXT_WINDOW_STORE_4_CLAD_WEATHERED', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_STORE_4_CLAD_WEATHERED_STAINED_GLASS: {
+        name: 'Store Half Windows Weathered Clad Stained Glass',
+        slug: 'EXT_WINDOW_STORE_4_CLAD_WEATHERED_STAINED_GLASS', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           EXT_WINDOW_STORE_4_CLAD: {
         name: 'Store Half Windows Wood Clad',
         slug: 'EXT_WINDOW_STORE_4_CLAD', 
+        type: 'STORE_WINDOW_EXT',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:64
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_STORE_4_CLAD_YELLOW: {
+        name: 'Store Half Windows Yellow Clad',
+        slug: 'EXT_WINDOW_STORE_4_CLAD_YELLOW', 
         type: 'STORE_WINDOW_EXT',
         bounding: {
           h:3, 

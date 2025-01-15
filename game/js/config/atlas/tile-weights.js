@@ -174,32 +174,32 @@ const TILE_WEIGHTS = {
         index: [474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489],
         weight: 1
       }
-    ],    NORTH_LEFT_ARROW_: [
+    ],    BOTTOM_EAST_ARROW_: [
       {
         index: [490, 491, 492, 493, 494, 495, 496, 497],
         weight: 1
       }
-    ],    RIGHT_NORTH_ARROW_: [
+    ],    TOP_EAST_ARROW_: [
       {
         index: [498, 499, 500, 501, 502, 503, 504, 505],
         weight: 1
       }
-    ],    SOUTH_LEFT_ARROW_: [
+    ],    NORTH_LEFT_ARROW_: [
       {
         index: [506, 507, 508, 509, 510, 511, 512, 513],
         weight: 1
       }
-    ],    SOUTH_RIGHT_ARROW_: [
+    ],    RIGHT_NORTH_ARROW_: [
       {
         index: [514, 515, 516, 517, 518, 519, 520, 521],
         weight: 1
       }
-    ],    BOTTOM_EAST_ARROW_: [
+    ],    SOUTH_LEFT_ARROW_: [
       {
         index: [522, 523, 524, 525, 526, 527, 528, 529],
         weight: 1
       }
-    ],    TOP_EAST_ARROW_: [
+    ],    SOUTH_RIGHT_ARROW_: [
       {
         index: [530, 531, 532, 533, 534, 535, 536, 537],
         weight: 1

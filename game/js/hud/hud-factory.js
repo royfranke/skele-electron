@@ -4,8 +4,11 @@ export default class HudFactory {
        this.scene = scene;
 
        this.depth = {
-            ARROW:100050,
+            FOCUS_HINT_SLOT: 80000,
+            FOCUS_HINT: 80050,
+            NOTE: 90000,
             SLOT:100000,
+            ARROW:100050,
             ICON:100100,
             STACK:100200,
             BUBBLE:100250,
@@ -55,10 +58,25 @@ export default class HudFactory {
         return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.SLOT).setScrollFactor(0);
     }
 
+    makeNote (_x,_y) {
+        return this.scene.add.image(_x,_y, 'UI','NOTE').setOrigin(0).setDepth(this.depth.NOTE).setScrollFactor(0);
+    }
+
     makeBlock (_x,_y, width=32, height=32, frameName='HAND_UNFOCUSED') {
 
         return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(this.depth.SLOT);
  
+    }
+
+    makeFocusBlock (_x,_y, width=32, height=32, frameName='HAND_UNFOCUSED') {
+
+        return this.makeBlock(_x,_y, width, height, frameName).setDepth(this.depth.FOCUS_HINT_SLOT);
+ 
+    }
+
+    makeFocusBitmapText (_x,_y, width, size=16, font='SkeleNotebook') {
+
+        return this.makeBitmapText(_x,_y, width, size, font).setDepth(this.depth.FOCUS_HINT).setScrollFactor(0);
     }
 
 

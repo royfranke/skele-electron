@@ -1,3 +1,4 @@
+import QuestFactory from './quest-factory.js';
 /**
  * 	Manages quest log
  *	
@@ -13,7 +14,18 @@
             complete: [],
             abandoned: []
         };
+        this.factory = new QuestFactory(this.scene);
     }
+
+    triggerQuest (id) {
+        var quest = this.getQuest(id);
+        this.scene.manager.hud.hudQuest.addQuest(quest.summary);
+    }
+
+    getQuest (id) {
+        return this.factory.getQuest(id);
+    }
+
 
     addQuest (quest) {
         this.questLog.current.push(quest);

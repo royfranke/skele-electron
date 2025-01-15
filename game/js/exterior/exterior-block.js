@@ -280,9 +280,13 @@ export default class Block {
         }
     }
 
-    buildStreetPole (_x,_y,signs={NS:null,EW:null,STOP:null,CORNER:''}) {
+    buildStreetPole (_x,_y,signs={NS:null,EW:null,STOP:null,CORNER:''}, light=true) {
 
         var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
+
+        if (light) {
+            this.scene.manager.objectManager.newObjectToWorld(_x, _y - 6,'SODIUM');
+        }
 
         if (signs.NS != null && signs.NS != '') {
             var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');

@@ -27,14 +27,14 @@ export default class GameScene extends Phaser.Scene {
             if (this.verbose) console.log("New Game");
             return this.newGame();
         }
-        
+
         this.place = 'exterior';
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
         this.manager.initializeGame();
         this.events.on(Phaser.Scenes.Events.WAKE, function ()
         {
-            this.manager.setState('NOT LOADED');
+            //this.manager.setState('NOT LOADED');
 
         }, this);
         this.exterior = new ExteriorManager(this);

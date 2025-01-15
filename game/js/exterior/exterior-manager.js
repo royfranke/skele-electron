@@ -51,6 +51,7 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     buildMap () {
+        console.log('Building map');
         const self = this;
         const blocks = new Array(MAP_CONFIG.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 

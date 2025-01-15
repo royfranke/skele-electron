@@ -10,7 +10,7 @@ import LootManager from "../loot/loot-manager.js";
 import TimeManager from "../time/time-manager.js";
 import KnowledgeManager from "../knowledge/knowledge-manager.js";
 import DialogManager from "../dialog/dialog-manager.js";
-
+import QuestManager from "../quest/quest-manager.js";
 /* global Phaser */
 /*
  * Game level manager
@@ -33,7 +33,7 @@ export default class GameManager {
         this.hud = new HudManager(this.scene);
         this.fx = new FXManager(this.scene);
         this.dialog = new DialogManager(this.scene);
-        
+        this.quest = new QuestManager(this.scene);
     }
 
     initializeGame () {

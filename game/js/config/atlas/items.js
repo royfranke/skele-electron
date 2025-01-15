@@ -145,7 +145,7 @@ const ITEMS = {
         use:  'HOLDS',
         icon: 'MUFFIN_BERRY',
         type: 'FOOD',
-        description: '',
+        description: 'This muffin is made with the science of food preservation. The glazed outer layer solidifies would-be crumbs and encapsulates dye bursts of putative berries.',
         contains: [],
         containedBy: [],
         stack: 0,
@@ -543,8 +543,16 @@ const ITEMS = {
         stack: 0,
         stacks: [ {
             icon: 'STORE_BREAD_28',
-            lessThan: 10,
-            greaterThan: 1
+            lessThan: 2,
+            greaterThan: 0
+          }, {
+            icon: 'STORE_BREAD_41',
+            lessThan: 5,
+            greaterThan: 2
+          }, {
+            icon: 'STORE_BREAD_42',
+            lessThan: 9,
+            greaterThan: 4
           }        ],
         interactions: {
         },
@@ -645,7 +653,28 @@ const ITEMS = {
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_12: {
+                req_group_name: 'Drink Cane Soda',
+                req_pocket_action: 'DRINK',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'SODA_RED_TRASH',
+                req_result_data_key: 'THIRST',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'SODA_RED'
+                    }
+                                ]
+
+            }        },
     },
       BACKPACK_CANVAS: {
         name: 'Canvas Backpack',
@@ -1091,6 +1120,48 @@ items: []    },
         interactions: {
         },
     },
+      CLAY_COIL: {
+        name: 'Clay Coil',
+        slug: 'CLAY_COIL', 
+        use:  'HOLDS',
+        icon: 'CLAY_COIL',
+        type: 'CRAFT',
+        description: 'It’s a snake; it’s a jump rope; it’s... an irregular clay coil.',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      CLAY_MARBLES: {
+        name: 'Clay Marbles',
+        slug: 'CLAY_MARBLES', 
+        use:  'HOLDS',
+        icon: 'CLAY_MARBLES',
+        type: 'CRAFT',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      CLAY_PINCH_POT: {
+        name: 'Clay Pinch Pot',
+        slug: 'CLAY_PINCH_POT', 
+        use:  'HOLDS',
+        icon: 'CLAY_PINCH_POT',
+        type: 'CRAFT',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       LUNCH_BAG_CLEAN: {
         name: 'Clean Lunch Bag',
         slug: 'LUNCH_BAG_CLEAN', 
@@ -1294,6 +1365,48 @@ items: []    },
         slug: 'SODA_RED_TRASH', 
         use:  'HOLDS',
         icon: 'SODA_RED_TRASH',
+        type: 'TRASH',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 0,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      BEER_TRASH: {
+        name: 'Empty Driver’s Brew Can',
+        slug: 'BEER_TRASH', 
+        use:  'HOLDS',
+        icon: 'BEER_TRASH',
+        type: 'TRASH',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      SODA_GREEN_TRASH: {
+        name: 'Empty Fresco Soda Can',
+        slug: 'SODA_GREEN_TRASH', 
+        use:  'HOLDS',
+        icon: 'SODA_GREEN_TRASH',
+        type: 'TRASH',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      SODA_BLUE_TRASH: {
+        name: 'Empty SHQUINK-Ahhhh Soda Can',
+        slug: 'SODA_BLUE_TRASH', 
+        use:  'HOLDS',
+        icon: 'SODA_BLUE_TRASH',
         type: 'TRASH',
         description: '',
         contains: [],
@@ -1510,7 +1623,28 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_13: {
+                req_group_name: 'Drink Fresco Soda',
+                req_pocket_action: 'DRINK',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'SODA_GREEN_TRASH',
+                req_result_data_key: 'THIRST',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'SODA_GREEN'
+                    }
+                                ]
+
+            }        },
     },
       PIZZA_BOX_CLEAN: {
         name: 'Fresh Pizza Box',
@@ -2142,6 +2276,20 @@ items: []    },
         interactions: {
         },
     },
+      CLAY_LUMP: {
+        name: 'Lump of Clay',
+        slug: 'CLAY_LUMP', 
+        use:  'HOLDS',
+        icon: 'CLAY_LUMP',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 3,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       CIGARETTE_MENTHOL: {
         name: 'Menthol Frost',
         slug: 'CIGARETTE_MENTHOL', 
@@ -2436,6 +2584,20 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 4,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      LEAF_OAK: {
+        name: 'Oak Leaf',
+        slug: 'LEAF_OAK', 
+        use:  'HOLDS',
+        icon: 'LEAF_OAK',
+        type: 'LEAF',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 10,
         stacks: [        ],
         interactions: {
         },
@@ -3165,7 +3327,28 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_14: {
+                req_group_name: 'Drink Shquink Soda',
+                req_pocket_action: 'DRINK',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'SODA_BLUE_TRASH',
+                req_result_data_key: 'THIRST',
+                req_result_data_set: '',
+                req_result_data_modify: '2',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'SODA_BLUE'
+                    }
+                                ]
+
+            }        },
     },
       SIDEWALK_CHALK_BLUE_: {
         name: 'Sidewalk Chalk (Blue)',

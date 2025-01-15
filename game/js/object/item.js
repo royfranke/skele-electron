@@ -263,6 +263,36 @@ export default class Item {
     isContainer () {
         return false;
     }
+
+    blow () {
+        if (this.info.type == 'FLYER') {
+            
+            let flyer = this.scene.manager.fx.handleFX('BLOWN_'+this.info.slug,this.tile_x * 16,this.tile_y * 16);
+            
+            let tween = this.scene.tweens.add({
+                targets: [flyer],
+                y: '-=64',
+                x: '+=128',
+                duration: 1000,
+                ease: 'Sine.easeOut',
+            });
+            tween.on('complete', () => {
+                let tween2 = this.scene.tweens.add({
+                    targets: [flyer],
+                    y: '+=32',
+                    x: '+=256',
+                    duration: 2500,
+                    ease: 'Sine.easeIn',
+                });
+                tween2.on('complete', () => {
+                    flyer.destroy();
+                });
+            });
+
+
+            this.setRegistration(false);
+        }
+    }
 }
 
 

@@ -32,6 +32,14 @@ export default class HudCommon {
             return this.factory.makeBlock(_x, _y, width, height, frameName);
         }
 
+        makeFocusBlock(_x, _y, width = 32, height = 32, frameName = 'BLOCK_DEEP_SAPPHIRE') {
+            return this.factory.makeFocusBlock(_x, _y, width, height, frameName);
+        }
+
+        makeFocusBitmapText(_x, _y, width, size = 24, font = 'SkeleButton') {
+            return this.factory.makeFocusBitmapText(_x, _y, width, size, font);
+        }
+
         makeWorldBlock(_x, _y, width = 32, height = 32, frameName = 'BUBBLE_THINKING') {
             return this.factory.makeWorldBlock(_x, _y, width, height, frameName);
         }

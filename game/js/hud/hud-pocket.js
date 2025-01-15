@@ -252,6 +252,15 @@ export default class HudPocket {
             if (placed) {
                 item.updateStackCount(-1);
             }
+
+            this.scene.time.addEvent({
+                delay: 1000,
+                loop: false,
+                callback: () => {
+                    placed.blow();
+                }
+            })
+            
         }
         else if (action_string == 'PUT AWAY' && pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];

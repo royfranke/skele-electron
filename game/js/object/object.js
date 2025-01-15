@@ -216,6 +216,23 @@ export default class Object {
         }
     }
 
+    setLamp (status) {
+        if (this.info.type == 'STREETLAMP') {
+            if (status == 'ON') {
+                //console.log("Setting lamp on");
+                var x_pixels = (this.tile_x - this.info.base.x) * 16;
+                var y_pixels = (this.tile_y - this.info.base.y) * 16;
+
+                this.light = this.scene.add.ellipse(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y + (16*6), 48,24, 0xf47832, .5).setDepth(y_pixels + (this.info.sprite.h) + (16*4)).setBlendMode(Phaser.BlendModes.SCREEN);
+
+                //this.light = this.scene.lights.addPointLight(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, 0xf47832, 4, 1,.1).setDepth(y_pixels + (this.info.sprite.h) + 1);
+            }
+            else {
+                ///
+            }
+        }
+    }
+
     setTileLocation(_x, _y) {
         this.tile_x = _x;
         this.tile_y = _y;
@@ -241,11 +258,12 @@ export default class Object {
         if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_' || this.info.type == 'STORE_DOOR_' || this.info.type == 'STORE_WINDOW_EXT') {
             this.createGlass();
         }
+        // Temporary for testing
+        this.setLamp('ON');
         return this;
     }
 
     createGlass() {
-        
         var x_pixels = (this.tile_x - this.info.base.x) * 16;
         var y_pixels = (this.tile_y - this.info.base.y) * 16;
         this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xbad2e0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 6);
