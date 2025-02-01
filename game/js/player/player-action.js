@@ -250,7 +250,10 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
             this.displayActions = displayActions;
             this.scene.manager.hud.hudAction.drawActions(displayActions, this.menu.x, this.menu.y);
-            
+            if (displayActions.length == 0) {
+                this.actionsGroup.clear(false, true);
+                this.showMarker(false);
+            }
         }
     }
     

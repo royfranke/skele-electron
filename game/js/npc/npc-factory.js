@@ -1,5 +1,5 @@
 import Npc from "../object/npc.js";
-import NPCS from "../config/atlas/npcs.js";
+import NPCS from "../config/atlas/people.js";
 /* Npc Factory Class */
 
 export default class NpcFactory {

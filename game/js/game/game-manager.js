@@ -225,11 +225,7 @@ export default class GameManager {
         if (this.state.time && this.time != undefined &&  this.time.time_passing) {
             
             this.time.update();
-            if (this.scene.exterior != null) {
-                // find whether keylight has changed; if so, update
-                this.handleKeylight();
-
-            }
+            this.handleKeylight();
 
             this.last_hour = this.hour ? this.hour : 0;
             this.hour = this.time.now.hour;
@@ -276,8 +272,8 @@ export default class GameManager {
         var keylight = this.getKeyLight();
         if (keylight != null) {
             
-            if (keylight != this.scene.exterior.lastKeyLight) {
-                this.scene.exterior.setKeyLight(keylight);
+            if (keylight != this.scene[this.scene.locale].lastKeyLight) {
+                this.scene[this.scene.locale].setKeyLight(keylight);
                 this.objectManager.registry.updateLights(keylight);
                 this.plantManager.registry.updateLights(keylight);
             }

@@ -64,7 +64,7 @@ export default class SettingsMenu {
             if (selected == i) {
                 this.arrow.setY(this.menu_list[i].y + 12);
             }
-            this.menu_list[i].setClassName(selected == i ? 'menu-item menu-item-selected' : 'menu-item');
+            //this.menu_list[i].setClassName(selected == i ? 'menu-item menu-item-selected' : 'menu-item');
         }
         
     }

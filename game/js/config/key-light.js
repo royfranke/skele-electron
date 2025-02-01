@@ -3,10 +3,10 @@ const KEYLIGHTS = {
         degree: 'afternoon',
         glass_opacity: '0.75',
         reflection_color: '0x89bcc6',
-        ground_tint: '0xe2f2f3',
+        ground_tint: '0xffffff',
         wall_tint: '0xf8f8f8',
         roof_tint: '0xd8dde1',
-        skeles_tint: '0xc3d7e3',
+        skeles_tint: '0xecf0e7',
         objects_tint: '0xc3d7e3'
 
     },
@@ -50,8 +50,8 @@ const KEYLIGHTS = {
         ground_tint: '0x9c99b5',
         wall_tint: '0xeea160',
         roof_tint: '0xb89b5d',
-        skeles_tint: '0xd8d0e0',
-        objects_tint: '0xd8d0e0'
+        skeles_tint: '0xebe5ca',
+        objects_tint: '0xdad4de'
 
     },
     morning: {
@@ -68,18 +68,18 @@ const KEYLIGHTS = {
     nauticalDawn: {
         degree: 'nauticalDawn',
         glass_opacity: '0.5',
-        reflection_color: '0x416095',
-        ground_tint: '0x416095',
+        reflection_color: '0x585995',
+        ground_tint: '0x5f6095',
         wall_tint: '0x4c4e8f',
         roof_tint: '0x54467f',
-        skeles_tint: '0x645d9a',
+        skeles_tint: '0x64689a',
         objects_tint: '0x645d9a'
 
     },
     nauticalDusk: {
         degree: 'nauticalDusk',
         glass_opacity: '0.3',
-        reflection_color: '0x76689e',
+        reflection_color: '0x84739a',
         ground_tint: '0x645d9a',
         wall_tint: '0x6ca1bc',
         roof_tint: '0x9c99b5',
@@ -116,7 +116,7 @@ const KEYLIGHTS = {
         ground_tint: '0xbf7958',
         wall_tint: '0xb89b5d',
         roof_tint: '0xbda766',
-        skeles_tint: '0xbda766',
+        skeles_tint: '0xeae4b9',
         objects_tint: '0xd0cea0'
 
     },

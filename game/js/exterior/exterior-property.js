@@ -341,6 +341,16 @@ export default class PropertyLine {
 
     buildLawn(_x, _y, width, height) {
         this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.GRASS.FILL_, _x, _y, width, height);
+        for (var i = 0; i < width; i++) {
+            for (var j = 0; j < height; j++) {
+                var exists = this.roll([0,0,0,0,1]);
+                if (exists == 1) {
+                    var sedge = this.scene.manager.objectManager.newObjectToWorld(_x + i, _y + j, 'CREEK_SEDGE');
+                    sedge.setState('HARVESTABLE');
+                }
+            }
+        }
+        
     }
 
     buildFoundation(_x, _y, width, height, material) {
@@ -455,12 +465,12 @@ export default class PropertyLine {
 
         // Separate from front walk later
         var left_lawn_width = _x - this.prop.lines.left; // lawn width
-        var left_lawn_height = this.prop.lines.bottom - _y + 1; // lawn height
-        this.buildLawn(this.prop.lines.left, _y, left_lawn_width, left_lawn_height);
+        var lawn_height = this.prop.lines.bottom - _y; // lawn height
+        this.buildLawn(this.prop.lines.left, _y, left_lawn_width, lawn_height);
 
         var right_lawn_width = this.prop.lines.right - _x - width; // lawn width
 
-        this.buildLawn(this.prop.lines.left + left_lawn_width + width, _y, right_lawn_width, left_lawn_height);
+        this.buildLawn(this.prop.lines.left + left_lawn_width + width, _y, right_lawn_width, lawn_height);
     }
 
     buildEntry(_x, _y) {

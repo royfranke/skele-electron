@@ -4,6 +4,7 @@ import WALLTILES from "../config/atlas/wall-tile-weights.js";
 import Ground from "../handler/ground.js";
 import ObjectManager from "../objects/object-manager.js";
 import Room from "../object/room.js";
+import KEYLIGHT from "../config/key-light.js";
 
 /**
  * 	Manage Interiors (Non-overworld tile scenes)
@@ -25,7 +26,20 @@ import Room from "../object/room.js";
 
     create () {
         this.buildFeatureList();
+        this.lastKeyLight = null;
+        this.keylight = KEYLIGHT;
+
     }
+
+    setKeyLight (key_light_name) {
+        var phase = this.keylight[key_light_name];
+        this.groundLayer.setTint(phase.ground_tint);
+        this.edgeLayer.setTint(phase.wall_tint); /// note roof tint for edge in interior
+        this.wallLayer.setTint(phase.wall_tint);
+        this.roofLayer.setTint(phase.wall_tint);
+        this.lastKeyLight = key_light_name;
+    }
+
 
     update () {
 
@@ -121,6 +135,11 @@ import Room from "../object/room.js";
                 if (obj != null && feature.params != undefined && feature.params.portal != undefined) {
                     obj.setPortal(feature.params.portal);
                 }
+                
+                if (obj.info.type == 'STORE_COUNTER') {
+                    obj.setServices(this.room.config.listing.services);
+                }
+
             }
             else {
                 if (!has_front_door) {
@@ -161,6 +180,17 @@ import Room from "../object/room.js";
     }
 
     drawWallCutAway () {
+        var base_wall = '';
+        if (this.config.wallSlug != undefined && this.config.wallSlug != '') {
+            base_wall += this.config.wallSlug;
+        }
+        else {
+            base_wall += 'PAINT.PINK_WORN_';
+        }
+
+        // Now break apart the wall string to access the tileset
+        var wall = base_wall.split('.');
+        
         // Loop through the tiles in this map and put a new tile where the tile index is 0 and the tile y-1 from it is 0 and the tile x+1 from it is not 0.
         var removeRoofTiles = [];
         for (let y = 0; y < this.map.height; y++) {
@@ -181,9 +211,9 @@ import Room from "../object/room.js";
                     //this.wallLayer.weightedRandomize(WALLTILES.BORDER.SECTIONED_.TOP_RIGHT_, x, y, 1, 1);
                 }
                 if (this_tile_blank && !lower_tile_blank) {
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.PINK_WORN_.LOWER_, x, y, 1, 1);
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.PINK_WORN_.MID_, x, y-1, 1, 1);
-                    this.wallLayer.weightedRandomize(WALLTILES.PAINT.PINK_WORN_.TOP_, x, y-2, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES[wall[0]][wall[1]].LOWER_, x, y, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES[wall[0]][wall[1]].MID_, x, y-1, 1, 1);
+                    this.wallLayer.weightedRandomize(WALLTILES[wall[0]][wall[1]].TOP_, x, y-2, 1, 1);
 
                     ////
                     removeRoofTiles.push({x: x, y: y});

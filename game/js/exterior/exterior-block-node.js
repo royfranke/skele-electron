@@ -3,10 +3,16 @@ import TILES from "../config/atlas/tile-weights.js";
 
 export default class ExteriorBlockNode {
 
-    constructor(groundLayer, node) {
+    constructor(scene, node) {
+        this.scene = scene;
         this.node = node;
         this.node['name'] = this.getIntersectionName();
-        this.groundLayer = groundLayer;
+        this.drawBox();
+    }
+
+    drawBox () {
+        var node = this.node;
+        var groundLayer = this.scene[this.scene.locale].groundLayer;
         groundLayer.weightedRandomize(TILES.ASPHALT.FILL_, node.left, node.top, node.width, node.height);
         groundLayer.weightedRandomize(TILES.CURB.NORTH_, node.left, node.top, node.width, 1);
         groundLayer.weightedRandomize(TILES.CURB.SOUTH_, node.left, node.bottom, node.width, 1);
@@ -18,7 +24,6 @@ export default class ExteriorBlockNode {
 
         groundLayer.weightedRandomize(TILES.CURB.SOUTHWEST_INSET_, node.left, node.bottom,1, 1);
         groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_INSET_, node.right, node.bottom ,1, 1);
-
     }
 
     getIntersectionName () {

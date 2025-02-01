@@ -65,7 +65,10 @@ export default class HudManager {
         
         this.scene.manager.dialog.triggerDialog(1);
 
-        
+        let _x = this.scene.player.standingTile.x;
+        let _y = this.scene.player.standingTile.y + 4;
+        //console.log("Tutorial start at: "+_x+","+_y);
+        //this.scene.manager.fx.playFX('CHALK_ARROW_FX',_x*16,_y*16,2000);
     }
 
     getState () {

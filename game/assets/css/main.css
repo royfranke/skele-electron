@@ -6,16 +6,6 @@
 }
 
 @font-face {
-  font-family: 'menuFont';
-  src: url('../fonts/NicoPaint-Regular.otf');
-  font-weight: 400;
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-
-@font-face {
   font-family: 'menuFontItalic';
   src: url('../fonts/Kaph-Italic.ttf');
   font-weight: 400;
@@ -71,34 +61,6 @@ body,
   }
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInFadeOut {
-  0% {
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 0;
-  }
-
-  70% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
 .splash {
   background-image: url('../images/splash.gif');
   text-align: center;
@@ -115,25 +77,10 @@ body,
 }
 
 .splash:after {
-  content: 'MERCY';
+  content: 'Ah, sweet mystery of life!';
   color:#88924f;
   display: block;
   margin-top:60px;
-}
-
-.loading {
-  background-image: url('../images/splash.gif');
-  text-align: center;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 16px;
-  font-size: 12px;
-  font-family: 'defaultFont';
-  border: 1px dashed #88924f;
-  background-color: #645d9a;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
 }
 
 .footer {
@@ -145,17 +92,6 @@ body,
   color: #d8dde1;
   border-radius: 4px;
   margin-left: 8px;
-}
-
-.menu-item-selected:before {
-  content: 'X';
-  color:#fff59a;
-  margin-left: -29px;
-  margin-right: 17px;
-  position: relative;
-  border-radius: 24px;
-  padding: 2px 2px 1px 3px;
-  font-size: 10px;
 }
 
 .title-card {
@@ -176,97 +112,3 @@ body,
 }
 
 
-
-.select-slip-not-selected {
-  border: 1px solid;
-  padding: 0 4px;
-  border-radius: 4px;
-  font-family: 'defaultFont';
-  font-size: 12px;
-  background-color: #ccc890;
-  color: #465e62;
-}
-
-.more-slip {
-  border: 1px solid;
-  padding: 0 4px 0 0;
-  border-radius: 4px;
-  font-family: 'defaultFont';
-  font-size: 12px;
-  background-color: #ccc890;
-  color: #465e62;
-  margin-left: -16px;
-}
-
-.more-slip:before {
-  content: 'C';
-  border-right: 1px solid #465e62;
-  padding: .5px 3px;
-  border-radius: 3px 0 0 3px;
-  font-family: 'defaultFont';
-  font-size: 12px;
-  text-align: center;
-  margin-right: 4px;
-  background-color: #bda766;
-  color: #e2f2f3;
-}
-
-.select-slip {
-  border: 1px solid;
-  padding: 0 4px 0 0;
-  border-radius: 4px;
-  font-family: 'defaultFont';
-  font-size: 12px;
-  background-color: #fff59a;
-  color: #465e62;
-  margin-left: -16px;
-}
-
-.select-slip:before {
-  content: 'X';
-  border-right: 1px solid #465e62;
-  padding: .5px 3px;
-  border-radius: 3px 0 0 3px;
-  font-family: 'defaultFont';
-  font-size: 12px;
-  text-align: center;
-  margin-right: 4px;
-  background-color: #bda766;
-  color: #e2f2f3;
-}
-
-.stack-indicator {
-  border: 1px solid #465e62;
-  padding: 0 4px;
-  border-radius: 24px;
-  font-family: 'defaultFont';
-  font-size: 10px;
-  background-color: #4c4e8f;
-  color: #f8f8f8;
-}
-
-.button-tap:before {
-  text-shadow: 0;
-  background-color: #2d4275;
-  color: #4280dd;
-}
-
-.chest-textblock {
-  font-family: 'defaultFont';
-  font-size: 10px;
-  line-height: 1em;
-  color: #4b424a;
-  text-align: left;
-}
-
-.pocket-textblock {
-  border: 1px solid #465e62;
-  border-radius: 4px;
-  font-family: 'defaultFont';
-  font-size: 10px;
-  line-height: 1em;
-  background-color: #bad2e0;
-  color: #4b424a;
-  text-align: left;
-  padding: 4px 6px;
-}

@@ -112,7 +112,8 @@ export default class Shop {
                 lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 6);
                 lotto_sign.setState('FLICKERING');
 
-                this.scene.manager.objectManager.newObjectToWorld(_x + 9, _y + 1, 'MILK_CRATE');
+                this.scene.manager.objectManager.newObjectToWorld(_x + 9, _y + 1, 'TRASH_DRUM');
+                this.scene.manager.fx.playFX('FLY_8',(_x + 9)*16, (_y)*16);
                 this.scene.manager.objectManager.newObjectToWorld(_x + 10, _y + 1, 'PAYPHONE');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 1, 'PAYPHONE');
             }
@@ -145,19 +146,35 @@ export default class Shop {
         var callback = function(now, today) {
             let schedule = self.prop.listing.schedule[today.weekday.toLowerCase()];
             if (schedule.closed == 'TRUE') {
-                this.setRollingGates('CLOSING');
+                this.setRollingGates('CLOSED');
                 this.setSign('OFF');
             }
             else {
                 let open = parseInt(schedule.open);
                 let close = parseInt(schedule.close);
-                if (now.hour >= open && now.hour < close) {
-                    this.setRollingGates('OPENING');
+                if (now.hour > open && now.hour < close) {
+                    this.setRollingGates('OPEN');
                     this.setSign('ON');
                 }
-                if (now.hour >= close) {
-                    this.setRollingGates('CLOSING');
+                if (now.hour == open && now.minute < 5) {
+                    this.setRollingGates('OPENING');
+                    this.setSign('FLICKERING');
+                }
+                if (now.hour == open && now.minute >= 5) {
+                    this.setRollingGates('OPEN');
+                    this.setSign('ON');
+                }
+                if (now.hour > close || now.hour < open) {
+                    this.setRollingGates('CLOSED');
                     this.setSign('OFF');
+                }
+                if (now.hour == close && now.minute >= 5) {
+                    this.setRollingGates('CLOSED');
+                    this.setSign('OFF');
+                }
+                if (now.hour == close && now.minute < 5) {
+                    this.setRollingGates('CLOSING');
+                    this.setSign('FLICKERING');
                 }
             }
         }
@@ -167,12 +184,29 @@ export default class Shop {
 
 
     setRollingGate(gate_index, state_name)  {
+        var gate = this.gates[gate_index].state;
+        if (gate.name == 'OPEN' && state_name == 'OPENING') {
+            return;
+        }
+        if (gate.name == 'CLOSED' && state_name == 'CLOSING') {
+            return;
+        }
         this.gates[gate_index].setState(state_name);
     }
 
     setRollingGates(state_name) {
+        var shop_closing_delay = this.roll([500, 1000, 1500, 2000]);
         for (var i = 0; i < this.gates.length; i++) {
-            this.setRollingGate(i, state_name);
+            var delay = shop_closing_delay + (500 * i);
+            if (state_name == 'OPEN' || state_name == 'CLOSED') {
+                delay = 0;
+            }
+            this.scene.time.addEvent({
+                delay: delay, // ms
+                callback: this.setRollingGate,
+                args: [i, state_name],
+                callbackScope: this
+            });
         }
     }
 

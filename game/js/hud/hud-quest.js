@@ -18,7 +18,6 @@ export default class HudQuest extends HudCommon {
                 }
             }
         };
-        //this.addQuest('Cross Myrtle street and buy cereal at the Bodega on the corner.');
     }
  
     addQuest (quest) {

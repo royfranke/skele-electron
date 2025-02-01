@@ -78,7 +78,7 @@
                                           'CHALK_ARROW_FX-11',
                                           'CHALK_ARROW_FX-12'
                                       ],
-                  repeat: 0
+                  repeat: -1
               },
                           CHALK_ARROW_FX_2: {
                   name: 'Chalk Arrow FX 2',
@@ -94,7 +94,7 @@
                                           'CHALK_ARROW_FX_2-8',
                                           'CHALK_ARROW_FX_2-9'
                                       ],
-                  repeat: 0
+                  repeat: 4
               },
                           CLOUD_CHALK_: {
                   name: 'Chalk Cloud',
@@ -164,6 +164,28 @@
                                           'CLOUD_DUST_-5'
                                       ],
                   repeat: 0
+              },
+                          FLY_8: {
+                  name: 'Fly Figure Eight',
+                  slug: 'FLY_8',
+                  frames: [
+                                          'FLY_8-1',
+                                          'FLY_8-2',
+                                          'FLY_8-3',
+                                          'FLY_8-4',
+                                          'FLY_8-5',
+                                          'FLY_8-6',
+                                          'FLY_8-7',
+                                          'FLY_8-8',
+                                          'FLY_8-9',
+                                          'FLY_8-10',
+                                          'FLY_8-11',
+                                          'FLY_8-12',
+                                          'FLY_8-13',
+                                          'FLY_8-14',
+                                          'FLY_8-15'
+                                      ],
+                  repeat: -1
               },
                           SELECTOR_INVALID_: {
                   name: 'Invalid Selector',
@@ -408,6 +430,14 @@
                                           'STEAM_START_-4'
                                       ],
                   repeat: 0
+              },
+                          STREET_LIGHT_CONE: {
+                  name: 'Street Light Cone',
+                  slug: 'STREET_LIGHT_CONE',
+                  frames: [
+                                          'STREET_LIGHT_CONE-1'
+                                      ],
+                  repeat: -1
               },
                           TURN_CARD_FROM_CIRCLE: {
                   name: 'Turn Card From Circle',

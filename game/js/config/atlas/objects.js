@@ -11,8 +11,9 @@ const OBJECTS = {
           h:1, 
           w:2,
           x:0, 
-          y:1
+          y:0
         },
+        depth: 17,
         sprite: {
           h:16, 
           w:32,
@@ -42,43 +43,6 @@ const OBJECTS = {
           interactions: {
                                   },
     },
-          APPLE_TREE: {
-        name: 'Apple Tree',
-        slug: 'APPLE_TREE', 
-        type: 'TREE',
-        bounding: {
-          h:1, 
-          w:1
-        },
-        base: {
-          h:1, 
-          w:1,
-          x:0, 
-          y:0
-        },
-        sprite: {
-          h:16, 
-          w:16,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:16, 
-          w:16
-        },
-        offset: {
-          x:0, 
-          y:0
-        },
-        varieties: 0,
-        solid: 1,
-        portal: 0,
-        actions: [],
-        states: [],
-
-          interactions: {
-                                  },
-    },
           BASKET_RACK: {
         name: 'Basket Rack',
         slug: 'BASKET_RACK', 
@@ -93,6 +57,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:25, 
           w:16,
@@ -131,6 +96,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:32,
@@ -180,6 +146,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:80,
@@ -217,6 +184,7 @@ const OBJECTS = {
           x:2, 
           y:6
         },
+        depth: 0,
         sprite: {
           h:56, 
           w:48,
@@ -263,6 +231,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -300,6 +269,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -337,6 +307,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -374,6 +345,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -411,6 +383,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -448,6 +421,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: -32,
         sprite: {
           h:32, 
           w:32,
@@ -485,6 +459,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:16,
@@ -522,6 +497,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -559,6 +535,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -596,6 +573,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -633,6 +611,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -670,6 +649,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -707,6 +687,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -744,6 +725,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -781,6 +763,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -818,6 +801,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:16,
@@ -855,6 +839,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -892,6 +877,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -929,6 +915,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -966,6 +953,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -1003,6 +991,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -1040,6 +1029,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -1077,6 +1067,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -1114,6 +1105,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -1151,6 +1143,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:16,
@@ -1188,6 +1181,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:16,
@@ -1225,6 +1219,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -1262,6 +1257,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -1299,6 +1295,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -1336,6 +1333,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -1373,6 +1371,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -1410,6 +1409,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:80,
@@ -1447,6 +1447,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:96,
@@ -1484,6 +1485,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:96,
@@ -1507,6 +1509,44 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          CINDERBLOCK: {
+        name: 'Cinderblock',
+        slug: 'CINDERBLOCK', 
+        type: 'BLOCK',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 5,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           HYDRANT_CITY_: {
         name: 'City Hydrant',
         slug: 'HYDRANT_CITY_', 
@@ -1521,6 +1561,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -1558,6 +1599,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -1606,6 +1648,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:55, 
           w:38,
@@ -1677,6 +1720,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: -10,
         sprite: {
           h:38, 
           w:32,
@@ -1739,6 +1783,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -1776,6 +1821,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -1813,6 +1859,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:26, 
           w:15,
@@ -1850,6 +1897,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:36, 
           w:32,
@@ -1887,6 +1935,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:36, 
           w:32,
@@ -1924,6 +1973,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:36, 
           w:32,
@@ -1961,6 +2011,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:36, 
           w:32,
@@ -1998,6 +2049,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:36, 
           w:32,
@@ -2035,6 +2087,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2072,6 +2125,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2109,6 +2163,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2146,6 +2201,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2183,6 +2239,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2220,6 +2277,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2257,6 +2315,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2294,6 +2353,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2331,6 +2391,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2368,6 +2429,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -2391,6 +2453,64 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          CREEK_SEDGE: {
+        name: 'Creek Sedge',
+        slug: 'CREEK_SEDGE', 
+        type: 'SIMPLE_PLANT',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: -4,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:12
+        },
+        offset: {
+          x:2, 
+          y:16
+        },
+        varieties: 5,
+        solid: 0,
+        portal: 0,
+        actions: [ {
+            name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['HARVESTABLE']
+          }],
+        states: [{
+              name: 'HARVESTED',
+              transition: 'false',
+              frames: ['CREEK_SEDGE-5',]},{
+              name: 'HARVEST',
+              transition: 'HARVESTED',
+              frames: ['CREEK_SEDGE-4','CREEK_SEDGE-5',]},{
+              name: 'HARVESTABLE',
+              transition: 'false',
+              frames: ['CREEK_SEDGE-1','CREEK_SEDGE-2','CREEK_SEDGE-3','CREEK_SEDGE-4',]},            {
+              name: 'HARVESTABLE',
+              transition: 'false',
+              frames: ['CREEK_SEDGE-1','CREEK_SEDGE-2','CREEK_SEDGE-3','CREEK_SEDGE-4',]
+              }, {
+              name: 'HARVEST',
+              transition: 'HARVESTED',
+              frames: ['CREEK_SEDGE-4', 'CREEK_SEDGE-5', ]
+              },
+          ],
+
+          interactions: {
+                                  },
+    },
           DOOR_WINDOWS_SMALL_: {
         name: 'Door with Small Windows',
         slug: 'DOOR_WINDOWS_SMALL_', 
@@ -2405,6 +2525,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -2475,6 +2596,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:32,
@@ -2523,6 +2645,7 @@ const OBJECTS = {
           x:0, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:73, 
           w:16,
@@ -2560,6 +2683,7 @@ const OBJECTS = {
           x:0, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:73, 
           w:16,
@@ -2597,6 +2721,7 @@ const OBJECTS = {
           x:0, 
           y:5
         },
+        depth: 0,
         sprite: {
           h:89, 
           w:16,
@@ -2634,6 +2759,7 @@ const OBJECTS = {
           x:0, 
           y:5
         },
+        depth: 0,
         sprite: {
           h:89, 
           w:16,
@@ -2671,6 +2797,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -2741,6 +2868,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -2811,6 +2939,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -2881,6 +3010,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -2951,6 +3081,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -3021,6 +3152,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -3091,6 +3223,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:34,
@@ -3150,6 +3283,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:56, 
           w:32,
@@ -3209,6 +3343,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:56, 
           w:32,
@@ -3268,6 +3403,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:56, 
           w:32,
@@ -3327,6 +3463,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -3364,6 +3501,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -3401,6 +3539,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -3438,6 +3577,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -3475,6 +3615,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:32,
@@ -3512,6 +3653,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -3549,6 +3691,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -3608,6 +3751,7 @@ const OBJECTS = {
           x:0, 
           y:6
         },
+        depth: 0,
         sprite: {
           h:105, 
           w:16,
@@ -3645,6 +3789,7 @@ const OBJECTS = {
           x:0, 
           y:6
         },
+        depth: 0,
         sprite: {
           h:105, 
           w:16,
@@ -3682,6 +3827,7 @@ const OBJECTS = {
           x:0, 
           y:7
         },
+        depth: 0,
         sprite: {
           h:121, 
           w:16,
@@ -3719,6 +3865,7 @@ const OBJECTS = {
           x:0, 
           y:7
         },
+        depth: 0,
         sprite: {
           h:121, 
           w:16,
@@ -3756,6 +3903,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:52, 
           w:16,
@@ -3793,6 +3941,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:52, 
           w:16,
@@ -3830,6 +3979,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:52, 
           w:16,
@@ -3867,6 +4017,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:52, 
           w:16,
@@ -3904,6 +4055,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:52, 
           w:16,
@@ -3941,6 +4093,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:52, 
           w:16,
@@ -3978,6 +4131,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:52, 
           w:16,
@@ -4015,6 +4169,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:32,
@@ -4052,6 +4207,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -4111,6 +4267,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -4170,6 +4327,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -4229,6 +4387,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -4288,6 +4447,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -4347,6 +4507,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: -2,
         sprite: {
           h:48, 
           w:32,
@@ -4354,7 +4515,7 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
+          h:20, 
           w:18
         },
         offset: {
@@ -4384,6 +4545,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: -2,
         sprite: {
           h:48, 
           w:32,
@@ -4391,7 +4553,7 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
+          h:20, 
           w:18
         },
         offset: {
@@ -4421,6 +4583,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:21, 
           w:16,
@@ -4467,6 +4630,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:20, 
           w:86,
@@ -4504,6 +4668,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -4575,6 +4740,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -4646,6 +4812,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -4717,6 +4884,7 @@ const OBJECTS = {
           x:2, 
           y:6
         },
+        depth: 0,
         sprite: {
           h:112, 
           w:80,
@@ -4754,6 +4922,7 @@ const OBJECTS = {
           x:3, 
           y:6
         },
+        depth: 0,
         sprite: {
           h:112, 
           w:112,
@@ -4791,6 +4960,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -4904,6 +5074,7 @@ const OBJECTS = {
           x:0, 
           y:6
         },
+        depth: 0,
         sprite: {
           h:112, 
           w:16,
@@ -4941,6 +5112,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -4948,12 +5120,12 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:8, 
+          h:6, 
           w:12
         },
         offset: {
           x:2, 
-          y:5
+          y:7
         },
         varieties: 2,
         solid: 1,
@@ -5001,6 +5173,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -5030,7 +5203,7 @@ const OBJECTS = {
               }, {
               name: 'READING',
               transition: 'DEFAULT',
-              frames: []
+              frames: ['OBJ_FLYER_MISSING-1', ]
               },
                       {
               name: 'DEFAULT',
@@ -5060,6 +5233,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:8, 
           w:21,
@@ -5106,6 +5280,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:10, 
           w:11,
@@ -5182,6 +5357,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: -6,
         sprite: {
           h:16, 
           w:16,
@@ -5246,6 +5422,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: -6,
         sprite: {
           h:16, 
           w:16,
@@ -5310,6 +5487,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -5391,6 +5569,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:16,
@@ -5461,6 +5640,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -5506,43 +5686,6 @@ const OBJECTS = {
           interactions: {
                                   },
     },
-          PLACEHOLDER: {
-        name: 'PLACEHOLDER',
-        slug: 'PLACEHOLDER', 
-        type: 'TREE',
-        bounding: {
-          h:7, 
-          w:7
-        },
-        base: {
-          h:1, 
-          w:1,
-          x:0, 
-          y:0
-        },
-        sprite: {
-          h:112, 
-          w:112,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:16, 
-          w:16
-        },
-        offset: {
-          x:48, 
-          y:80
-        },
-        varieties: 0,
-        solid: 1,
-        portal: 0,
-        actions: [],
-        states: [],
-
-          interactions: {
-                                  },
-    },
           SOFA_PLAID_1: {
         name: 'Plaid Sofa',
         slug: 'SOFA_PLAID_1', 
@@ -5557,6 +5700,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -5594,6 +5738,7 @@ const OBJECTS = {
           x:1, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:55, 
           w:81,
@@ -5631,6 +5776,7 @@ const OBJECTS = {
           x:1, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:55, 
           w:81,
@@ -5668,6 +5814,7 @@ const OBJECTS = {
           x:1, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:55, 
           w:81,
@@ -5705,6 +5852,7 @@ const OBJECTS = {
           x:1, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:55, 
           w:81,
@@ -5742,6 +5890,7 @@ const OBJECTS = {
           x:2, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:68, 
           w:64,
@@ -5779,6 +5928,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -5843,6 +5993,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -5907,6 +6058,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:20, 
           w:64,
@@ -5944,6 +6096,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -6057,6 +6210,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:58, 
           w:32,
@@ -6106,6 +6260,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:58, 
           w:64,
@@ -6155,6 +6310,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -6225,6 +6381,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -6262,6 +6419,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -6299,6 +6457,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: -12,
         sprite: {
           h:48, 
           w:32,
@@ -6336,6 +6495,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: -2,
         sprite: {
           h:48, 
           w:32,
@@ -6343,7 +6503,7 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
+          h:20, 
           w:18
         },
         offset: {
@@ -6373,6 +6533,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:48,
@@ -6384,11 +6545,11 @@ const OBJECTS = {
           w:8
         },
         offset: {
-          x:38, 
-          y:12
+          x:40, 
+          y:16
         },
         varieties: 1,
-        solid: 1,
+        solid: 0,
         portal: 0,
         actions: [],
         states: [],
@@ -6410,6 +6571,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:32,
@@ -6447,6 +6609,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -6484,6 +6647,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:32,
@@ -6521,6 +6685,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -6558,6 +6723,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:32,
@@ -6595,6 +6761,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -6632,6 +6799,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:32,
@@ -6669,6 +6837,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -6706,6 +6875,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -6743,6 +6913,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -6780,6 +6951,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -6817,6 +6989,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -6854,6 +7027,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -6891,6 +7065,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -6928,6 +7103,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:68, 
           w:48,
@@ -6965,6 +7141,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:68, 
           w:64,
@@ -7002,6 +7179,7 @@ const OBJECTS = {
           x:0, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:96,
@@ -7039,6 +7217,7 @@ const OBJECTS = {
           x:0, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:96,
@@ -7076,6 +7255,7 @@ const OBJECTS = {
           x:0, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:96,
@@ -7113,6 +7293,7 @@ const OBJECTS = {
           x:0, 
           y:4
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:96,
@@ -7150,6 +7331,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:51, 
           w:57,
@@ -7187,6 +7369,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:51, 
           w:57,
@@ -7224,6 +7407,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:51, 
           w:57,
@@ -7261,6 +7445,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
+        depth: 0,
         sprite: {
           h:51, 
           w:57,
@@ -7298,6 +7483,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:32,
@@ -7335,6 +7521,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -7372,6 +7559,7 @@ const OBJECTS = {
           x:1, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:48,
@@ -7409,6 +7597,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -7479,6 +7668,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -7527,6 +7717,7 @@ const OBJECTS = {
           x:0, 
           y:5
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:32,
@@ -7564,6 +7755,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:80,
@@ -7601,6 +7793,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -7650,6 +7843,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:16,
@@ -7699,6 +7893,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -7734,6 +7929,71 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          TRASH_DRUM: {
+        name: 'Trash Drum',
+        slug: 'TRASH_DRUM', 
+        type: 'TRASH_CAN',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:14, 
+          w:12
+        },
+        offset: {
+          x:2, 
+          y:14
+        },
+        varieties: 7,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                                group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }                      },
+    },
           UNDERCOUNTER_CABINET_S_DARK_WOOD: {
         name: 'Undercounter Cabinet S Dark Wood',
         slug: 'UNDERCOUNTER_CABINET_S_DARK_WOOD', 
@@ -7748,6 +8008,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -7819,6 +8080,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -7890,6 +8152,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -7961,6 +8224,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -8032,6 +8296,7 @@ const OBJECTS = {
           x:1, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -8103,6 +8368,7 @@ const OBJECTS = {
           x:1, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -8174,6 +8440,7 @@ const OBJECTS = {
           x:1, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -8245,6 +8512,7 @@ const OBJECTS = {
           x:1, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:32,
@@ -8316,6 +8584,7 @@ const OBJECTS = {
           x:1, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:48,
@@ -8365,6 +8634,7 @@ const OBJECTS = {
           x:1, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:48,
@@ -8400,6 +8670,53 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          WALL_CALENDAR: {
+        name: 'Wall Calendar',
+        slug: 'WALL_CALENDAR', 
+        type: 'CALENDAR',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:23, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 3,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'JUNE',
+              transition: 'false',
+              frames: ['WALL_CALENDAR-1',]},{
+              name: 'JULY',
+              transition: 'false',
+              frames: ['WALL_CALENDAR-2',]},{
+              name: 'AUGUST',
+              transition: 'false',
+              frames: ['WALL_CALENDAR-3',]},],
+
+          interactions: {
+                                  },
+    },
           WALL_SWITCH_DOUBLE: {
         name: 'Wall Switch Double',
         slug: 'WALL_SWITCH_DOUBLE', 
@@ -8414,6 +8731,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -8451,6 +8769,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -8488,6 +8807,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -8525,6 +8845,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -8562,6 +8883,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -8599,6 +8921,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -8636,6 +8959,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -8673,6 +8997,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -8710,6 +9035,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -8747,6 +9073,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -8784,6 +9111,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:64, 
           w:16,
@@ -8821,6 +9149,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -8858,6 +9187,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -8895,6 +9225,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -8932,6 +9263,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -8969,6 +9301,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -9006,6 +9339,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -9043,6 +9377,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -9080,6 +9415,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:48,
@@ -9117,6 +9453,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:80, 
           w:16,
@@ -9154,6 +9491,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -9191,6 +9529,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -9228,6 +9567,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -9265,6 +9605,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -9302,6 +9643,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -9339,6 +9681,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -9376,6 +9719,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -9413,6 +9757,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -9450,6 +9795,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:96, 
           w:16,
@@ -9487,6 +9833,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:80,
@@ -9524,6 +9871,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:80,
@@ -9561,6 +9909,7 @@ const OBJECTS = {
           x:0, 
           y:2
         },
+        depth: 0,
         sprite: {
           h:48, 
           w:80,
@@ -9598,6 +9947,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
+        depth: 0,
         sprite: {
           h:32, 
           w:16,
@@ -9669,6 +10019,7 @@ const OBJECTS = {
           x:0, 
           y:6
         },
+        depth: 0,
         sprite: {
           h:112, 
           w:16,
@@ -9706,6 +10057,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -9745,6 +10097,66 @@ const OBJECTS = {
               name: 'GUSTING',
               transition: 'DEFAULT',
               frames: ['OBJ_FLYER_YELLOW-1', 'OBJ_FLYER_YELLOW-2', 'OBJ_FLYER_YELLOW-3', 'OBJ_FLYER_YELLOW-4', 'OBJ_FLYER_YELLOW-5', 'OBJ_FLYER_YELLOW-6', 'OBJ_FLYER_YELLOW-7', 'OBJ_FLYER_YELLOW-8', ]
+              },
+          ],
+
+          interactions: {
+                                  },
+    },
+          LAMP_YELLOW_TABLE: {
+        name: 'Yellow Table Lamp',
+        slug: 'LAMP_YELLOW_TABLE', 
+        type: 'LAMP',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 8,
+        sprite: {
+          h:18, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:4, 
+          w:6
+        },
+        offset: {
+          x:4, 
+          y:10
+        },
+        varieties: 5,
+        solid: 1,
+        portal: 0,
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }],
+        states: [            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['LAMP_YELLOW_TABLE-5',]
+              }, {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: ['LAMP_YELLOW_TABLE-5', 'LAMP_YELLOW_TABLE-4', ]
+              },
+                      {
+              name: 'ON',
+              transition: 'false',
+              frames: ['LAMP_YELLOW_TABLE-4',]
+              }, {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: ['LAMP_YELLOW_TABLE-4', 'LAMP_YELLOW_TABLE-5', ]
               },
           ],
 

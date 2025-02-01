@@ -20,10 +20,16 @@
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-zip": "^7.6.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
-    "browser-sync": "^2.27.5",
+    "browser-sync": "^3.0.3",
     "electron": "^28.0.0",
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^6.3.0",
     "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "@electron-forge/maker-deb": "^7.6.0",
+    "@electron-forge/maker-rpm": "^7.6.0",
+    "@electron-forge/maker-squirrel": "^7.6.0"
   }
 }

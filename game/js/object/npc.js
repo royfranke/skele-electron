@@ -83,7 +83,7 @@ export default class Npc {
           var result = item_manager.newItemToPockets(item_slug, items);
           if (result != false) {
             this.scene.manager.hud.think('You got a new ' + item_slug + '.');
-
+            this.scene.manager.hud.hudSound.play('GIFTED_ITEM');
             
             this.greeting = true;
           }
@@ -144,7 +144,8 @@ export default class Npc {
     if (action == 'TEST PSYCHIC ABILITIES') {
       this.following = null;
       this.clearDestinations();
-      this.scene.manager.setFocus('ZENER');
+      //this.scene.manager.setFocus('ZENER');
+      this.scene.manager.dialog.triggerDialog(8);
     }
   }
 

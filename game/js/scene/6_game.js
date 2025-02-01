@@ -38,6 +38,7 @@ export default class GameScene extends Phaser.Scene {
 
         }, this);
         this.exterior = new ExteriorManager(this);
+        this.exterior.initialize();
         this.player = new PlayerManager(this);
         this.npcs = new NpcManager(this);
         

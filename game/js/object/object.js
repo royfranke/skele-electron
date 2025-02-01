@@ -13,6 +13,7 @@ export default class Object {
         this.sprite = null;
         this.state = null;
         this.portal = null;
+        this.services = null;
         this.slotted = [];
         this.shell = false;
         this.shell_sprite = null;
@@ -116,7 +117,29 @@ export default class Object {
                 }
             });
             this.addChestActions();
+            
         }
+        
+    }
+
+    setServices (services) {
+        this.services = services;
+        console.log(services);
+        this.addServiceActions();
+    }
+
+    addServiceActions() {
+        console.log('Adding service actions');
+        if (this.services == null) {
+            console.log('No services to add');
+             return; }
+        var player_action = this.scene.player.action;
+        var self = this;
+        console.log(this.services);
+        this.services.forEach(function (service) {
+            console.log(service);
+            player_action.addAction({ action: service.name, object: self, ground: '', fx: '' });
+        });
         
     }
 
@@ -148,7 +171,7 @@ export default class Object {
         var x_pixels = Math.floor((slot_x - base.x) * 16);
         var y_pixels = Math.floor((slot_y - base.y) * 16);
 
-        var y_depth = Math.floor((this.tile_y - this.info.base.y) * 16);
+        var y_depth = Math.floor((this.tile_y - this.info.base.y) * 16 );
 
         var depth = behind ? y_depth + (this.info.sprite.h - _y) : (this.tile_y * 16) + (this.info.sprite.h + _y);
 
@@ -168,13 +191,7 @@ export default class Object {
         }
         
         this.slotted.push(sprite);
-/* 
-        if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_') {
-            this.glass = this.scene.add.sprite(x_pixels, y_pixels, 'OBJECTS', this.info.slug+'-'+this.variety, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 1).setTint(0xed931e);
-        }
 
-        this.sprite.body.setOffset(this.info.offset.x + (this.info.sprite.w/2), this.info.offset.y + (this.info.sprite.h/2));
-        */
     }
 
     doAction(action) {
@@ -211,7 +228,10 @@ export default class Object {
             for (var i = 0; i < this.slotted.length; i++) {
                 this.slotted[i].setTint(keylight.objects_tint);
             }
-            
+            if (this.info.type == 'LAMP' && this.state.name == 'ON') {
+                this.sprite.setTint(0xFFFFFF);
+
+            }
             this.setGlass(keylight.reflection_color, keylight.glass_opacity);
         }
     }
@@ -222,15 +242,14 @@ export default class Object {
                 //console.log("Setting lamp on");
                 var x_pixels = (this.tile_x - this.info.base.x) * 16;
                 var y_pixels = (this.tile_y - this.info.base.y) * 16;
+                this.light_cone = this.scene.manager.fx.handleFX('STREET_LIGHT_CONE', x_pixels + this.info.offset.x, y_pixels + this.info.offset.y);
+                this.light_cone.setOrigin(.5,0).setDepth(y_pixels + (this.info.sprite.h) + (16*5)).setAlpha(.5).setBlendMode(Phaser.BlendModes.SCREEN);
 
-                this.light = this.scene.add.ellipse(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y + (16*6), 48,24, 0xf47832, .5).setDepth(y_pixels + (this.info.sprite.h) + (16*4)).setBlendMode(Phaser.BlendModes.SCREEN);
-
+                this.light = this.scene.add.ellipse(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y + (16*5.6), 48,22, 0xf47832, .5).setDepth(y_pixels + (this.info.sprite.h) + (16*4)).setBlendMode(Phaser.BlendModes.SCREEN);
                 //this.light = this.scene.lights.addPointLight(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, 0xf47832, 4, 1,.1).setDepth(y_pixels + (this.info.sprite.h) + 1);
             }
-            else {
-                ///
-            }
         }
+
     }
 
     setTileLocation(_x, _y) {
@@ -242,10 +261,10 @@ export default class Object {
         var y_pixels = (_y - base.y) * 16 + this.info.sprite.y;
         var frame = this.info.slug+'-'+this.variety;
 
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h));
+        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + this.info.depth);
         
         if (this.shell == true) {
-            this.shell_sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', this.shell_frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + 1);
+            this.shell_sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', this.shell_frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + 1 + this.info.depth);
         }
 
         if (this.info.solid) {
@@ -266,9 +285,9 @@ export default class Object {
     createGlass() {
         var x_pixels = (this.tile_x - this.info.base.x) * 16;
         var y_pixels = (this.tile_y - this.info.base.y) * 16;
-        this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xbad2e0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 6);
+        this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xbad2e0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + this.info.depth - 6);
 
-        this.behind_glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) - 8);
+        this.behind_glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + this.info.depth - 8);
 
         //this.setGlass(0x89bcc6,.9);
 

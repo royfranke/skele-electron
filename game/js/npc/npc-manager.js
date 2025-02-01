@@ -14,8 +14,8 @@ export default class NpcManager {
         let number = "101";
         let street = "Belly Button Street";
         let npc_cords = this.scene.exterior.getMailboxTilesFromAddress(dir, number, street);
-      this.newNpcToWorld(npc_cords.x,npc_cords.y,'CAROL');
-      this.newNpcToWorld(npc_cords.x + 2,npc_cords.y,'CAROL');
+      this.newNpcToWorld(npc_cords.x,npc_cords.y,'PATRICE');
+      this.newNpcToWorld(npc_cords.x + 2,npc_cords.y,'SKELE_AUNTIE');
     }
 
     update () {

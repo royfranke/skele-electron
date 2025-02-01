@@ -2,7 +2,7 @@
     LATCHKEY_KID: {
       slug: "LATCHKEY_KID",
       name: "Latchkey Kid",
-      summary: "Make a copy of Auntie’s house key. The locksmith is just beyond the Bonedega and the psychic."},
+      summary: "Make a copy of Auntie’s house key. The locksmith is just beyond the Bonedega and the psychic.",
       givers: [
                       {slug: 'SKELE_AUNTIE'}
                 ],
@@ -34,7 +34,7 @@
                     }
                                 ]
 
-            }      }
+            }      }}
         };
   export default QUESTS;
 

@@ -58,7 +58,34 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       LEAF_ASH: {
         name: 'Ash Leaf',
@@ -137,7 +164,34 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       MUFFIN_BERRY: {
         name: 'Berry Muffin',
@@ -182,6 +236,20 @@ const ITEMS = {
             lessThan: 3,
             greaterThan: 1
           }        ],
+        interactions: {
+        },
+    },
+      COMBO_LOCK_BLUE: {
+        name: 'Blue Combo Lock',
+        slug: 'COMBO_LOCK_BLUE', 
+        use:  'HOLDS',
+        icon: 'COMBO_LOCK_BLUE',
+        type: 'LOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
         interactions: {
         },
     },
@@ -1372,7 +1440,34 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       BEER_TRASH: {
         name: 'Empty Driver’s Brew Can',
@@ -1386,7 +1481,34 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       SODA_GREEN_TRASH: {
         name: 'Empty Fresco Soda Can',
@@ -1400,7 +1522,34 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       SODA_BLUE_TRASH: {
         name: 'Empty SHQUINK-Ahhhh Soda Can',
@@ -1414,7 +1563,34 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       SPRAY_PAINT_EMPTY: {
         name: 'Empty Spray Paint',
@@ -1428,7 +1604,34 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       ENVELOPE_BACK_1: {
         name: 'Envelope (Back)',
@@ -2032,10 +2235,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_10: {
         name: 'Key 10',
@@ -2046,10 +2276,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_11: {
         name: 'Key 11',
@@ -2060,10 +2317,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_12: {
         name: 'Key 12',
@@ -2074,10 +2358,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_2: {
         name: 'Key 2',
@@ -2088,10 +2399,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_3: {
         name: 'Key 3',
@@ -2102,10 +2440,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_4: {
         name: 'Key 4',
@@ -2116,10 +2481,58 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_16: {
+                req_group_name: 'Copied Auntie’s Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'DEPLETED',
+                    ITEM: 'KEY_4'
+                    }
+                                ]
+
+            },           group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_5: {
         name: 'Key 5',
@@ -2130,10 +2543,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_6: {
         name: 'Key 6',
@@ -2144,10 +2584,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_7: {
         name: 'Key 7',
@@ -2158,10 +2625,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_8: {
         name: 'Key 8',
@@ -2172,10 +2666,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       KEY_9: {
         name: 'Key 9',
@@ -2186,10 +2707,37 @@ items: []    },
         description: '',
         contains: [],
         containedBy: [],
-        stack: 1,
+        stack: 5,
         stacks: [        ],
         interactions: {
-        },
+            group_15: {
+                req_group_name: 'Copy Key',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'DUPLICATED',
+                    ITEM_KIND: 'KEY',
+                    },
+                  {
+                    slot_type: 'IN_COINPURSE',
+                    type: 'MONEY',
+                    result: 'CONSUMED',
+                    MONEY: ''
+                    }
+                                ]
+
+            }        },
     },
       BACKPACK_BROWN: {
         name: 'Leather Rucksack',
@@ -2644,6 +3192,20 @@ items: []    },
         interactions: {
         },
     },
+      PADLOCK: {
+        name: 'Padlock',
+        slug: 'PADLOCK', 
+        use:  'HOLDS',
+        icon: 'PADLOCK',
+        type: 'LOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       CUPCAKE_PINK: {
         name: 'Pink Cupcake',
         slug: 'CUPCAKE_PINK', 
@@ -2807,6 +3369,20 @@ items: []    },
             lessThan: 9,
             greaterThan: 3
           }        ],
+        interactions: {
+        },
+    },
+      RADIO_PORTABLE: {
+        name: 'Portable Radio',
+        slug: 'RADIO_PORTABLE', 
+        use:  'HOLDS',
+        icon: 'RADIO_PORTABLE',
+        type: 'RADIO',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
         interactions: {
         },
     },
@@ -3053,6 +3629,20 @@ items: []    },
         icon: 'CIGARETTE_STRONG',
         type: 'SMOKES',
         description: 'A pack of unfiltered, lung blackening Red Cigarettes. Manufactured by the Reaper Company.',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      COMBO_LOCK_RED: {
+        name: 'Red Combo Lock',
+        slug: 'COMBO_LOCK_RED', 
+        use:  'HOLDS',
+        icon: 'COMBO_LOCK_RED',
+        type: 'LOCK',
+        description: '',
         contains: [],
         containedBy: [],
         stack: 1,
@@ -3718,7 +4308,34 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+            group_17: {
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            }        },
     },
       BREAKFAST_TART_PINK: {
         name: 'Twap Tart',

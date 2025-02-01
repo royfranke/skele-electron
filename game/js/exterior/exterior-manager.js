@@ -18,7 +18,6 @@ import KEYLIGHT from "../config/key-light.js";
 
     constructor(scene) {
         this.scene = scene;
-        this.initialize();
     }
 
     initialize () {
@@ -70,7 +69,7 @@ import KEYLIGHT from "../config/key-light.js";
         
         
         MAP_CONFIG.nodes.forEach(function (node, index) {
-            nodes[node.y][node.x] = new BlockNode(self.groundLayer, node); /// Backwards on purpose to not require array flip
+            nodes[node.y][node.x] = new BlockNode(self.scene, node); /// Backwards on purpose to not require array flip
             
             if (node.streets.n.found != 0) {
                 /// Get north street coords

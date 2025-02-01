@@ -49,13 +49,21 @@ export default class HudDialog extends HudCommon {
             }
             else {
                 let next = this.dialogBox.dialog.next;
-                console.log('.....'+next);
+                let trigger = this.dialogBox.dialog.trigger;
+                var court = null;
+                if (trigger == 'COURT') {
+                    court = this.dialogBox.dialog.court;
+                }
                 this.clearDialog();
                 if (next != 0) {
                     this.scene.manager.dialog.triggerDialog(next);
                 }
                 else {
+                            
                     this.closeDialog();
+                    if (court != null) {
+                        this.scene.manager.setFocus(court);
+                    }
                 }
             }
         }
@@ -97,12 +105,14 @@ export default class HudDialog extends HudCommon {
         console.log("Focusing dialog");
     }
 
-    tellDialogBox (content, next=0) {
+    tellDialogBox (content, next=0, trigger=null, court=null) {
         if (!this.currentDialog) {
             this.currentDialog = true;
             this.scene.manager.setFocus('DIALOG');
             this.dialogBox = this.makeDialogBox();
             this.dialogBox.dialog.next = next;
+            this.dialogBox.dialog.trigger = trigger;
+            this.dialogBox.dialog.court = court;
             // replace ’ with \'
             content = content.replace('’', '\'');
             /// Break the dialog up by word
@@ -193,15 +203,16 @@ export default class HudDialog extends HudCommon {
     }
 
     setSelected (selected=0) {
-        if (selected >= this.replyBox.replies.length) {
-            selected = 0;
-        }
-        if (selected < 0) {
-            selected = this.replyBox.replies.length - 1;
-        }
-        this.last_selected = this.selected;
-        this.selected = selected;
         if (this.replyBox != null) {
+            if (selected >= this.replyBox.replies.length) {
+                selected = 0;
+            }
+            if (selected < 0) {
+                selected = this.replyBox.replies.length - 1;
+            }
+            this.last_selected = this.selected;
+            this.selected = selected;
+        
             var selectors = this.replyBox.selectors;
             for (let i = 0; i < selectors.length; i++) {
                 if (i == selected) {
@@ -228,7 +239,7 @@ export default class HudDialog extends HudCommon {
     clearDialogBox () {
         if (this.currentDialog) {
             this.currentDialog = false;
-            if (this.dialogBox != undefined) {
+            if (this.dialogBox != null) {
                 if (this.dialogBox.block != undefined) {
                     this.dialogBox.block.destroy();
                 }
@@ -238,6 +249,7 @@ export default class HudDialog extends HudCommon {
                 if (this.dialogBox.frame != undefined) {
                     this.dialogBox.frame.destroy();
                 }
+                this.dialogBox = null;
             }
             this.talking.remove();
         }
@@ -261,6 +273,7 @@ export default class HudDialog extends HudCommon {
             if (this.closure != null) {
                 this.closure.block.destroy();
                 this.closure.button.destroy();
+                this.closure = null;
             }
         }
     }

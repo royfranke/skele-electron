@@ -15,6 +15,7 @@ export default class PreloadAnim {
     const faces = SPRITE_DIR.FACES;
 
     const objects = OBJECTS;
+    var used_keys = [];
     for (const [key, object] of Object.entries(objects)) {
       for (const [key, state] of Object.entries(object.states)) {
         if (state.frames.length > 0) {
@@ -22,12 +23,16 @@ export default class PreloadAnim {
           state.frames.forEach(function (frame) {
             state_frames.push({ key: 'OBJECTS', frame: frame });
           });
-          anims.create({
-            key: object.slug + "-" + state.name,
-            frames: state_frames,
-            frameRate: 8,
-            repeat: 0,
-          });
+          var keyname = object.slug + "-" + state.name;
+          if (!used_keys.includes(keyname)) {
+            anims.create({
+              key: keyname,
+              frames: state_frames,
+              frameRate: 8,
+              repeat: 0,
+            });
+            used_keys.push(keyname);
+          }
         }
       }
     }

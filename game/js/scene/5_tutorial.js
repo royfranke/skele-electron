@@ -12,6 +12,7 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     init (data) {
+        this.locale = 'interior';
         this.slot = data.slot;
         this.room_id = 10;
     }
