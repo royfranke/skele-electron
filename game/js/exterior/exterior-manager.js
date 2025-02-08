@@ -92,6 +92,7 @@ import KEYLIGHT from "../config/key-light.js";
                     for (var i=0;i<3; i++) {
                         // Increments y position for start of tile recipe by height and y of previous recipe
                         var recipe_name =  'STREET_'+ways+'WAY_'+node.streets.n.lanes+'LANE_'+node.streets.n.dir.toUpperCase()+'_';
+                        console.log(recipe_name);
                         var recipe = self.cook(recipe_name);
                         recipe_y = recipe_y - recipe.HEIGHT;
                         self.cookRecipe(recipe_x, recipe_y, recipe);

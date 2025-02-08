@@ -347,6 +347,59 @@ buys: [
                 removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"3","y":"1"},{"x":"4","y":"1"},{"x":"5","y":"1"},{"x":"4","y":"2"},{"x":"5","y":"2"},{"x":"4","y":"3"},{"x":"5","y":"3"},{"x":"4","y":"4"},{"x":"5","y":"4"},{"x":"2","y":"8"},{"x":"3","y":"8"},{"x":"4","y":"8"},{"x":"5","y":"8"}]
          }
 }
+, room_14: { 
+    id: 14,
+    name: "Psychic",
+    floorWidth: 6,
+    floorHeight: 4,
+    wallHeight: 3,
+    overallHeight: 6,
+    overallWidth: 8,
+    floorSlug: "PLANK.BROWN_",
+    wallSlug: "PAINT.DARK_GREEN_WORN_",
+        listing: { slug: "PSYCHIC",
+name: "Past Present Future",
+listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "TRUE",    }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "13:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "13:00",
+        close: "18:00"
+            }
+},
+services: [
+    ],
+ },
+        roomData: { 
+                featureList: [{"x":"4","y":"2","slug":"DINER_CHAIR_MAROON"},{"x":"0","y":"3","slug":"FRONTDOOR"}],
+                recipeList: [],
+                removalList: [{"x":"2","y":"3"},{"x":"3","y":"3"},{"x":"4","y":"3"},{"x":"5","y":"3"}]
+         }
+}
   };
   export default ROOMS;
 

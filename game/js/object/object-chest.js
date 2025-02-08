@@ -87,10 +87,7 @@ export default class ObjectChest extends Object {
                 }
             });
         }
-        if (action == 'SAVE') {
-            console.log("Saving game");
-            return this.scene.app.saveManager.saveGameData();
-        }
+
     }
 
     addChestActions() {

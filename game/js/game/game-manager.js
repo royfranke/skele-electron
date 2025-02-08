@@ -3,6 +3,7 @@ import GameFocus from "./game-focus.js";
 import FXManager from "../fx/fx-manager.js";
 import GameUtilities from "./game-utilities.js";
 import HudManager from "../hud/hud-manager.js";
+import DataManager from "../data/data-manager.js";
 import ItemManager from "../items/item-manager.js";
 import ObjectManager from "../objects/object-manager.js";
 import PlantManager from "../plants/plant-manager.js";
@@ -30,6 +31,7 @@ export default class GameManager {
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
         this.plantManager = new PlantManager(this.scene);
+        this.dataManager = new DataManager(this.scene);
         this.hud = new HudManager(this.scene);
         this.fx = new FXManager(this.scene);
         this.dialog = new DialogManager(this.scene);

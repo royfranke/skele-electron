@@ -77,7 +77,7 @@ body,
 }
 
 .splash:after {
-  content: 'Ah, sweet mystery of life!';
+  content: 'Ah, sweet mystery of life';
   color:#88924f;
   display: block;
   margin-top:60px;

@@ -13,12 +13,12 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 17,
+        depth: 8,
         sprite: {
           h:16, 
           w:32,
           x:0, 
-          y:0
+          y:-4
         },
         size: {
           h:0, 
@@ -31,14 +31,25 @@ const OBJECTS = {
         varieties: 6,
         solid: 0,
         portal: 0,
-        actions: [],
+        actions: [ {
+            name: 'CHECK OUT', stateTrigger: 'PRINTING_RECEIPT', validStates: ['DEFAULT']
+          }],
         states: [{
               name: 'DEFAULT',
               transition: 'false',
               frames: ['ADDING_MACHINE-1',]},{
-              name: 'PRINTING',
+              name: 'PRINTING_RECEIPT',
               transition: 'DEFAULT',
-              frames: ['ADDING_MACHINE-1','ADDING_MACHINE-2','ADDING_MACHINE-3','ADDING_MACHINE-4','ADDING_MACHINE-5','ADDING_MACHINE-6',]},],
+              frames: ['ADDING_MACHINE-1','ADDING_MACHINE-2','ADDING_MACHINE-3','ADDING_MACHINE-4','ADDING_MACHINE-5','ADDING_MACHINE-6',]},            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['ADDING_MACHINE-1',]
+              }, {
+              name: 'PRINTING_RECEIPT',
+              transition: 'DEFAULT',
+              frames: ['ADDING_MACHINE-1', 'ADDING_MACHINE-2', 'ADDING_MACHINE-3', 'ADDING_MACHINE-4', 'ADDING_MACHINE-5', 'ADDING_MACHINE-6', ]
+              },
+          ],
 
           interactions: {
                                   },
@@ -5298,7 +5309,11 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
-        actions: [],
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }],
         states: [{
               name: 'OFF',
               transition: 'false',
@@ -5311,7 +5326,25 @@ const OBJECTS = {
               frames: ['NIGHT_LIGHT-2',]},{
               name: 'TURNING_ON',
               transition: 'ON',
-              frames: ['NIGHT_LIGHT-1','NIGHT_LIGHT-2',]},],
+              frames: ['NIGHT_LIGHT-1','NIGHT_LIGHT-2',]},            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['NIGHT_LIGHT-1',]
+              }, {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: ['NIGHT_LIGHT-1', 'NIGHT_LIGHT-2', ]
+              },
+                      {
+              name: 'ON',
+              transition: 'false',
+              frames: ['NIGHT_LIGHT-2',]
+              }, {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: ['NIGHT_LIGHT-2', 'NIGHT_LIGHT-1', ]
+              },
+          ],
 
           interactions: {
                                                 group_11: {
@@ -5555,6 +5588,44 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          BOLLARD_PARKING: {
+        name: 'Parking Bollard',
+        slug: 'BOLLARD_PARKING', 
+        type: 'BOLLARD',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: -4,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:6, 
+          w:4
+        },
+        offset: {
+          x:6, 
+          y:22
+        },
+        varieties: 2,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           PAYPHONE: {
         name: 'Payphone',
         slug: 'PAYPHONE', 
@@ -5718,8 +5789,30 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
-        actions: [],
-        states: [],
+        actions: [ {
+            name: 'SLEEP', stateTrigger: 'SLEEPING', validStates: ['CURLED_UP']
+          }, {
+            name: 'CURL UP ON', stateTrigger: 'CURLED_UP', validStates: ['DEFAULT']
+          }],
+        states: [            {
+              name: 'CURLED_UP',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'SLEEPING',
+              transition: 'false',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CURLED_UP',
+              transition: 'false',
+              frames: []
+              },
+          ],
 
           interactions: {
                                   },
@@ -6399,8 +6492,30 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
-        actions: [],
-        states: [],
+        actions: [ {
+            name: 'SLEEP', stateTrigger: 'SLEEPING', validStates: ['CURLED_UP']
+          }, {
+            name: 'CURL UP ON', stateTrigger: 'CURLED_UP', validStates: ['DEFAULT']
+          }],
+        states: [            {
+              name: 'CURLED_UP',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'SLEEPING',
+              transition: 'false',
+              frames: []
+              },
+                      {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CURLED_UP',
+              transition: 'false',
+              frames: []
+              },
+          ],
 
           interactions: {
                                   },
@@ -8615,7 +8730,7 @@ const OBJECTS = {
               frames: ['WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-2',]},{
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
-              frames: ['WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-2',]},],
+              frames: ['WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-1',]},],
 
           interactions: {
                                   },

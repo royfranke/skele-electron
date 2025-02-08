@@ -343,10 +343,14 @@ export default class PropertyLine {
         this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.GRASS.FILL_, _x, _y, width, height);
         for (var i = 0; i < width; i++) {
             for (var j = 0; j < height; j++) {
-                var exists = this.roll([0,0,0,0,1]);
+                var exists = this.roll([0,0,0,0,1,2]);
                 if (exists == 1) {
                     var sedge = this.scene.manager.objectManager.newObjectToWorld(_x + i, _y + j, 'CREEK_SEDGE');
                     sedge.setState('HARVESTABLE');
+                    
+                }
+                else if (exists == 2) {
+                    this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'DANDELION',Phaser.Math.RND.between(1,44));
                 }
             }
         }

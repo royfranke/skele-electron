@@ -19,6 +19,10 @@ export default class TimeManager {
         
     }
 
+    freezeTime (freeze=true) {
+        this.time_passing = !freeze;
+    }
+
     setSaveFromTime () {
         return {
             HOUR: this.now.hour,

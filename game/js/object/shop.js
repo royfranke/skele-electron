@@ -83,6 +83,10 @@ export default class Shop {
                 this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
                 let chair = this.scene.manager.objectManager.newObjectToWorld(_x+4, _y +1, 'DINER_CHAIR_RED');
                 chair.setState('FACING_SOUTH');
+
+                this.scene.manager.objectManager.newObjectToWorld(_x + 1, _y + 3, 'BOLLARD_PARKING');
+                this.scene.manager.objectManager.newObjectToWorld(_x + 3, _y + 3, 'BOLLARD_PARKING');
+                this.scene.manager.objectManager.newObjectToWorld(_x + 5, _y + 3, 'BOLLARD_PARKING');
             }
         }
 
@@ -112,10 +116,13 @@ export default class Shop {
                 lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 6);
                 lotto_sign.setState('FLICKERING');
 
-                this.scene.manager.objectManager.newObjectToWorld(_x + 9, _y + 1, 'TRASH_DRUM');
-                this.scene.manager.fx.playFX('FLY_8',(_x + 9)*16, (_y)*16);
+                this.scene.manager.objectManager.newObjectToWorld(_x - 4, _y + 1, 'TRASH_DRUM');
+                this.scene.manager.fx.playFX('FLY_8',(_x - 4)*16, (_y)*16);
+                this.scene.manager.objectManager.newObjectToWorld(_x + 9, _y + 1, 'DAILY_NEWS_BOX_');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 10, _y + 1, 'PAYPHONE');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 1, 'PAYPHONE');
+
+                this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 3, 'BOLLARD_PARKING');
             }
             
         }

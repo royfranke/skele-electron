@@ -215,6 +215,16 @@ export default class Object {
                 console.log("No portal set for this object");
             }
         }
+        if (action == 'SAVE') {
+            console.log("Saving game");
+            return this.scene.app.saveManager.saveGameData();
+        }
+
+        if (action == 'SLEEP') {
+            console.log("Sleeping - Saving game");
+            return this.scene.player.goToSleep();
+        }
+
         console.log("Doing action: "+action);
     }
 
@@ -243,9 +253,9 @@ export default class Object {
                 var x_pixels = (this.tile_x - this.info.base.x) * 16;
                 var y_pixels = (this.tile_y - this.info.base.y) * 16;
                 this.light_cone = this.scene.manager.fx.handleFX('STREET_LIGHT_CONE', x_pixels + this.info.offset.x, y_pixels + this.info.offset.y);
-                this.light_cone.setOrigin(.5,0).setDepth(y_pixels + (this.info.sprite.h) + (16*5)).setAlpha(.5).setBlendMode(Phaser.BlendModes.SCREEN);
+                this.light_cone.setOrigin(.5,0).setDepth(y_pixels + (this.info.sprite.h) + (16*5)).setAlpha(.45).setBlendMode(Phaser.BlendModes.SCREEN);
 
-                this.light = this.scene.add.ellipse(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y + (16*5.6), 48,22, 0xf47832, .5).setDepth(y_pixels + (this.info.sprite.h) + (16*4)).setBlendMode(Phaser.BlendModes.SCREEN);
+                this.light = this.scene.add.ellipse(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y + (16*5.6), 48,22, 0xf47832, .15).setDepth(y_pixels + (this.info.sprite.h) + (16*4)).setBlendMode(Phaser.BlendModes.LIGHTER);
                 //this.light = this.scene.lights.addPointLight(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, 0xf47832, 4, 1,.1).setDepth(y_pixels + (this.info.sprite.h) + 1);
             }
         }

@@ -65,4 +65,21 @@ export default class InteriorScene extends Phaser.Scene {
         }
         
     }
+
+    saveGameData(data,slot) {
+        // Replace `data` and `slot` with the actual data and slot you want to save
+        if (this.verbose) console.log("I'm going to call save-data for slot "+slot);
+        if (this.verbose) console.log(data);
+        let save_data = {data:data,slot:slot};
+        const manager = this.manager;
+        window.api.invoke('save-data', save_data)
+            .then(function(res) {
+                manager.hud.pocket.setPocketsFromSave();
+                return true;
+            })
+            .catch(function(err) {
+                console.error(err);
+                return false;
+            });
+      }
 }

@@ -7,6 +7,8 @@ const OBJECT_TYPES = {
       'BEADED_CURTAIN_BODEGA'    ],
       BLOCK: [
       'CINDERBLOCK'    ],
+      BOLLARD: [
+      'BOLLARD_PARKING'    ],
       BUS_SIGN: [
       'BUS_STOP_A_','BUS_STOP_B_','BUS_STOP_C_'    ],
       BUSH: [
@@ -19,6 +21,8 @@ const OBJECT_TYPES = {
       'CARDBOARD_DOWN_ARROW','CARDBOARD_FLOOR_MAT'    ],
       CHAIR: [
       'DINER_CHAIR_MAROON','DINER_CHAIR_RED'    ],
+      COMMERCIAL_EXT_LIGHT: [
+          ],
       COMMERCIAL_FREEZER: [
       'COMMERCIAL_FREEZER'    ],
       CORKBOARD: [

@@ -706,7 +706,7 @@ const MAP_CONFIG = {
                 x: 96.5,
                 y: 100
             },
-            ground: "dirt",
+            ground: "grass",
             offset: {
                 n: 4,
                 e: 3,
@@ -1602,7 +1602,8 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -1627,7 +1628,8 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -1652,7 +1654,8 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -1677,7 +1680,8 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -1739,7 +1743,15 @@ schedule: {
         close: "16:00"
             }
 },
-front_room: 13,rooms: {
+sells: [
+            "POCKET_KNIFE", 
+                        "BACKPACK_BROWN", 
+                "DIGITAL_WATCH"
+        ],
+buys: [
+                    "POCKET_KNIFE", 
+                        ],
+                front_room: 13,rooms: {
         room_13: { 
     id: 13,
     name: "Pawn Shop",
@@ -1750,14 +1762,62 @@ front_room: 13,rooms: {
     overallWidth: 8,
     floorSlug: "PLANK.BROWN_",
     wallSlug: "PAINT.DARK_GREEN_WORN_",
-    roomData: { 
-                featureList: [{"x":"1","y":"-1","slug":"COUNTERTOP_CORNER_BROWN"},{"x":"0","y":"-1","slug":"COUNTERTOP_S_BROWN"},{"x":"0","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"1","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"2","y":"1","slug":"UNDERCOUNTER_CABINET_W_DARK_WOOD"},{"x":"0","y":"4","slug":"STORE_WINDOW_COUNTER_4"},{"x":"4","y":"4","slug":"INT_DOOR_GREEN_SIGN"},{"x":"0","y":"8","slug":"FRONTDOOR"}],
+        listing: { slug: "PAWN SHOP",
+name: "Pawn Shop",
+listingName: "Break of Pawn - Pawn Shop",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "16:00"
+            }
+},
+sells: [
+            "POCKET_KNIFE", 
+                        "BACKPACK_BROWN", 
+                "DIGITAL_WATCH"
+        ],
+buys: [
+                    "POCKET_KNIFE", 
+                        ],
+ },
+        roomData: { 
+                featureList: [{"x":"1","y":"-1","slug":"COUNTERTOP_CORNER_BROWN"},{"x":"0","y":"-1","slug":"COUNTERTOP_S_BROWN"},{"x":"0","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"1","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"2","y":"1","slug":"UNDERCOUNTER_CABINET_W_DARK_WOOD"},{"x":"0","y":"4","slug":"STORE_WINDOW_COUNTER_4"},{"x":"4","y":"4","slug":"INT_DOOR_GREEN_SIGN"},{"x":"1","y":"4","slug":"ADDING_MACHINE"},{"x":"0","y":"8","slug":"FRONTDOOR"}],
                 recipeList: [],
                 removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"3","y":"1"},{"x":"4","y":"1"},{"x":"5","y":"1"},{"x":"4","y":"2"},{"x":"5","y":"2"},{"x":"4","y":"3"},{"x":"5","y":"3"},{"x":"4","y":"4"},{"x":"5","y":"4"},{"x":"2","y":"8"},{"x":"3","y":"8"},{"x":"4","y":"8"},{"x":"5","y":"8"}]
          }
 }
 
-    }                            },
+    }
+                
+            },
                                                                                                             portal: {
                 room_id: 13,
                 x: 1,
@@ -1827,7 +1887,17 @@ schedule: {
         close: "21:00"
             }
 },
-front_room: 11,rooms: {
+services: [
+    ],
+sells: [
+            "LAUNDRY_POWDER", 
+                "LAUNDRY_LIQUID", 
+                "LAUNDRY_BASKET_PINK", 
+                "LAUNDRY_BASKET_BLUE", 
+                "SODA_RED", 
+                "SODA_GREEN"
+        ],
+                front_room: 11,rooms: {
         room_11: { 
     id: 11,
     name: "Coin Laundry",
@@ -1837,15 +1907,68 @@ front_room: 11,rooms: {
     overallHeight: 14,
     overallWidth: 12,
     floorSlug: "TILE.CHECKERED_GREEN_BLUE_PURPLE_BLACK_",
-    wallSlug: "GRAY_WORN_",
-    roomData: { 
+    wallSlug: "PAINT.GRAY_WORN_",
+        listing: { slug: "LAUNDROMAT",
+name: "Coin Wash",
+listingName: "Coin Wash Laundry Laundromat",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            }
+},
+services: [
+    ],
+sells: [
+            "LAUNDRY_POWDER", 
+                "LAUNDRY_LIQUID", 
+                "LAUNDRY_BASKET_PINK", 
+                "LAUNDRY_BASKET_BLUE", 
+                "SODA_RED", 
+                "SODA_GREEN"
+        ],
+ },
+        roomData: { 
                 featureList: [{"x":"3","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"7","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"5","slug":"TABLE_WOOD_FOLDING_JAMMED"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
                 recipeList: [],
                 removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"6","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"2","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"}]
          }
 }
 
-    }                            },
+    }
+                
+            },
                                                                                                             portal: {
                 room_id: 11,
                 x: 2,
@@ -1877,7 +2000,7 @@ front_room: 11,rooms: {
             listing: {
                 slug: "LOCKSMITH",
 name: "Locksmith",
-listingName: "Keys Made While You Wait",
+listingName: "Keys Cut Locks Opened",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -1912,7 +2035,49 @@ schedule: {
     sunday: {
         closed: "TRUE",    }
 },
-front_room: 12,rooms: {
+services: [
+        {
+        slug: "COPY_KEY",
+        name: "Copy key",
+        requirements: 
+        {
+            
+req_group_name: 'Copy Key',
+req_pocket_action: '',
+req_world_action: '',
+req_state: '',
+req_result_item: '',
+req_result_data_key: '',
+req_result_data_set: '',
+req_result_data_modify: '',
+req_result_texture: '',
+req_result_fx: '',
+req_result_ground: '',
+requires: [
+  {
+    slot_type: 'IN_HAND',
+    type: 'ITEM_KIND',
+    result: 'DUPLICATED',
+    ITEM_KIND: 'KEY',
+    },
+  {
+    slot_type: 'IN_COINPURSE',
+    type: 'MONEY',
+    result: 'CONSUMED',
+    MONEY: '200'
+    }
+]
+          },
+        
+    }    
+        
+    ],
+sells: [
+            "COMBO_LOCK_RED", 
+                "COMBO_LOCK_BLUE", 
+                "PADLOCK"
+        ],
+                front_room: 12,rooms: {
         room_12: { 
     id: 12,
     name: "Locksmith",
@@ -1923,14 +2088,96 @@ front_room: 12,rooms: {
     overallWidth: 8,
     floorSlug: "TILE.GREEN_CHECKERED_",
     wallSlug: "PAINT.GREEN_PURPLE_",
-    roomData: { 
-                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
+        listing: { slug: "LOCKSMITH",
+name: "Locksmith",
+listingName: "Keys Cut Locks Opened",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "14:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+services: [
+        {
+        slug: "COPY_KEY",
+        name: "Copy key",
+        requirements: 
+        {
+            
+req_group_name: 'Copy Key',
+req_pocket_action: '',
+req_world_action: '',
+req_state: '',
+req_result_item: '',
+req_result_data_key: '',
+req_result_data_set: '',
+req_result_data_modify: '',
+req_result_texture: '',
+req_result_fx: '',
+req_result_ground: '',
+requires: [
+  {
+    slot_type: 'IN_HAND',
+    type: 'ITEM_KIND',
+    result: 'DUPLICATED',
+    ITEM_KIND: 'KEY',
+    },
+  {
+    slot_type: 'IN_COINPURSE',
+    type: 'MONEY',
+    result: 'CONSUMED',
+    MONEY: '200'
+    }
+]
+          },
+        
+    }    
+        
+    ],
+sells: [
+            "COMBO_LOCK_RED", 
+                "COMBO_LOCK_BLUE", 
+                "PADLOCK"
+        ],
+ },
+        roomData: { 
+                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"2","y":"2","slug":"WALL_CALENDAR"},{"x":"4","y":"3","slug":"ADDING_MACHINE"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
                 recipeList: [{"x":"3","y":"0","slug":"PLANK.BROWN_"},{"x":"4","y":"0","slug":"PLANK.BROWN_"},{"x":"5","y":"0","slug":"PLANK.BROWN_"},{"x":"3","y":"1","slug":"PLANK.BROWN_"},{"x":"4","y":"1","slug":"PLANK.BROWN_"},{"x":"5","y":"1","slug":"PLANK.BROWN_"},{"x":"3","y":"2","slug":"PLANK.BROWN_"},{"x":"4","y":"2","slug":"PLANK.BROWN_"},{"x":"5","y":"2","slug":"PLANK.BROWN_"},{"x":"3","y":"3","slug":"PLANK.BROWN_"},{"x":"4","y":"3","slug":"PLANK.BROWN_"},{"x":"5","y":"3","slug":"PLANK.BROWN_"}],
                 removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"0","y":"3"},{"x":"1","y":"3"},{"x":"2","y":"3"},{"x":"2","y":"6"},{"x":"3","y":"6"},{"x":"4","y":"6"},{"x":"5","y":"6"}]
          }
 }
 
-    }                            },
+    }
+                
+            },
                                                                                                             portal: {
                 room_id: 12,
                 x: 1,
@@ -1994,9 +2241,72 @@ schedule: {
         close: "18:00"
             }
 },
-rooms: {
-    }                            },
-                                                                                            },
+services: [
+    ],
+                front_room: 14,rooms: {
+        room_14: { 
+    id: 14,
+    name: "Psychic",
+    floorWidth: 6,
+    floorHeight: 4,
+    wallHeight: 3,
+    overallHeight: 6,
+    overallWidth: 8,
+    floorSlug: "PLANK.BROWN_",
+    wallSlug: "PAINT.DARK_GREEN_WORN_",
+        listing: { slug: "PSYCHIC",
+name: "Past Present Future",
+listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "TRUE",    }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "13:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "13:00",
+        close: "18:00"
+            }
+},
+services: [
+    ],
+ },
+        roomData: { 
+                featureList: [{"x":"4","y":"2","slug":"DINER_CHAIR_MAROON"},{"x":"0","y":"3","slug":"FRONTDOOR"}],
+                recipeList: [],
+                removalList: [{"x":"2","y":"3"},{"x":"3","y":"3"},{"x":"4","y":"3"},{"x":"5","y":"3"}]
+         }
+}
+
+    }
+                
+            },
+                                                                                                            portal: {
+                room_id: 14,
+                x: 1,
+                y: 6
+            }
+                    },
                 {
             lines: {
                 x: 41,
@@ -2020,7 +2330,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -2045,7 +2356,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -2070,7 +2382,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -2095,7 +2408,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -2157,7 +2471,29 @@ schedule: {
     sunday: {
         closed: "TRUE",    }
 },
-front_room: 1,rooms: {
+sells: [
+            "SODA_RED", 
+                "SODA_BLUE", 
+                "BANANA_BRUISED", 
+                "BEER", 
+                "CIGARETTE_SLIM", 
+                "MUFFIN_BERRY", 
+                "INSTANT_NOODLES_RED", 
+                "INSTANT_NOODLES_ORANGE", 
+                "CIGARETTE_MENTHOL", 
+                "BREAKFAST_TART_PINK", 
+                "LOTTO", 
+                "BUS_TICKET", 
+                "MILK_BODEGA", 
+                "CEREAL_BOX_2", 
+                "CEREAL_BOX_3", 
+                "LIGHTER", 
+                "SARDINES_PRODUCT", 
+                                "JELLY_RASPBERRY"
+        ],
+delivers: [
+                                                                                                                                                                    ],
+                front_room: 1,rooms: {
         room_1: { 
     id: 1,
     name: "Bonedega",
@@ -2168,14 +2504,76 @@ front_room: 1,rooms: {
     overallWidth: 14,
     floorSlug: "TILE.GREEN_CHECKERED_",
     wallSlug: "PAINT.GREEN_PURPLE_",
-    roomData: { 
-                featureList: [{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN"},{"x":"7","y":"6","slug":"CONE_FALLEN"},{"x":"5","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"3","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"1","y":"9","slug":"CARDBOARD_FLOOR_MAT"},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW"},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
+        listing: { slug: "BONEDEGA",
+name: "Bonedega",
+listingName: "Bonedega - Bodega Corner Store",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+sells: [
+            "SODA_RED", 
+                "SODA_BLUE", 
+                "BANANA_BRUISED", 
+                "BEER", 
+                "CIGARETTE_SLIM", 
+                "MUFFIN_BERRY", 
+                "INSTANT_NOODLES_RED", 
+                "INSTANT_NOODLES_ORANGE", 
+                "CIGARETTE_MENTHOL", 
+                "BREAKFAST_TART_PINK", 
+                "LOTTO", 
+                "BUS_TICKET", 
+                "MILK_BODEGA", 
+                "CEREAL_BOX_2", 
+                "CEREAL_BOX_3", 
+                "LIGHTER", 
+                "SARDINES_PRODUCT", 
+                                "JELLY_RASPBERRY"
+        ],
+delivers: [
+                                                                                                                                                                    ],
+ },
+        roomData: { 
+                featureList: [{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN"},{"x":"1","y":"9","slug":"CARDBOARD_FLOOR_MAT"},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW"},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER"},{"x":"0","y":"8","slug":"BASKET_RACK"},{"x":"4","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"6","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"8","y":"7","slug":"MILK_CRATE"},{"x":"0","y":"10","slug":"CONE_UPRIGHT"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
                 recipeList: [],
                 removalList: [{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"10","y":"0"},{"x":"11","y":"0"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"10","y":"1"},{"x":"11","y":"1"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"10","y":"2"},{"x":"11","y":"2"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"},{"x":"10","y":"3"},{"x":"11","y":"3"},{"x":"0","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"},{"x":"10","y":"11"},{"x":"11","y":"11"}]
          }
 }
 
-    }                            },
+    }
+                
+            },
                                                                                                             portal: {
                 room_id: 1,
                 x: 2,
@@ -2242,8 +2640,24 @@ schedule: {
         close: "18:00"
             }
 },
-rooms: {
-    }                            },
+sells: [
+            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL", 
+                                                        ],
+serves: [
+                                                                                    ],
+delivers: [
+                                                            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL"
+        ],
+                rooms: {
+    }
+                
+            },
                                                                                             },
                 {
             lines: {
@@ -2302,8 +2716,17 @@ schedule: {
     sunday: {
         closed: "TRUE",    }
 },
-rooms: {
-    }                            },
+sells: [
+            "TOOTHBRUSH_RED", 
+                "TOOTHPASTE", 
+                "TOOTHBRUSH_BLUE"
+        ],
+delivers: [
+                            ],
+                rooms: {
+    }
+                
+            },
                                                                                             },
                 {
             lines: {
@@ -2328,7 +2751,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -2353,7 +2777,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -2378,7 +2803,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
                 {
             lines: {
@@ -2403,7 +2829,8 @@ rooms: {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                            },
+                
+            },
                                                                     },
             ]
     

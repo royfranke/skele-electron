@@ -90,6 +90,7 @@ export default class PlayerManager {
   getPositionTile() {
     var pos = this.playerSprite.sprite.getCenter();
     return {
+      ROOM: parseInt(this.scene.room_id),
       X: Math.round(pos.x / 16),
       Y: Math.round(pos.y / 16)
     };
@@ -266,6 +267,15 @@ export default class PlayerManager {
 
   addDollar(dollar_amount) {
     this.coinpurse.addDollar(dollar_amount);
+  }
+
+  goToSleep () {
+    this.scene.app.camera.end();
+    var tip = "Another dawn begins.";
+    this.scene.app.appView.drawTip(tip);
+    console.log("Saving game");
+
+    return this.scene.app.saveManager.saveGameData();
   }
 
 }

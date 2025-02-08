@@ -14,9 +14,9 @@ export default class PreloadManager{
 
 
   initialize() {
-    var path = '../assets/';
-    var sound_path = '../assets/sound/';
-    var data_path = '../';
+    var path = './assets/';
+    var sound_path = './assets/sound/';
+    var data_path = './';
     
 
     this.initializeSoundAssets(sound_path);

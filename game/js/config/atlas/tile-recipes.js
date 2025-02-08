@@ -2,7 +2,7 @@ import TILES from "./tile-weights.js";
 // Our custom tile mapping with:
 // - Array of weights for weightedRandomize
 // - Array or 2D array for putTilesAt
-const TILE_RECIPES = {
+const GROUND_RECIPES = {
 CROSSWALK_1WAY_1LANE_E_: {
   WIDTH: 4,
   HEIGHT: 6,
@@ -130,4 +130,4 @@ STREET_2WAY_2LANE_NS_: {
 }
 };
 
-export default TILE_RECIPES;
+export default GROUND_RECIPES;

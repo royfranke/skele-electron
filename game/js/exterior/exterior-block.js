@@ -47,16 +47,18 @@ export default class Block {
                 ////
                 let sidewalk_h = 3;
                 let sidewalk_w = 3;
-                /*
+                
                 //// Add some dandelions
+                /*
                 for (var i=sidewalk_w; i<block.width - (sidewalk_w*2); i++) {
                     for (var j=sidewalk_h; j<block.height - (sidewalk_h*2); j++) {
-                        if (Phaser.Math.RND.between(0,10) == 1) {
+                        if (Phaser.Math.RND.between(0,16) == 1) {
                             this.scene.manager.plantManager.newPlantToWorld(i + block.left, j + block.top, 'DANDELION',Phaser.Math.RND.between(1,44));
                         }
                     }
                 }
-                    */
+                */
+                    
             }
         }
         
@@ -208,7 +210,14 @@ export default class Block {
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+12, this.block.top,'HYDRANT_CITY_');
         }  
         if (this.block.offset.s > 0) {
+            this.buildStreetPole(this.block.left+10, this.block.bottom-1,{},true);
             this.scene.manager.objectManager.newObjectToWorld(this.block.right-7, this.block.bottom-1,'HYDRANT_CITY_');
+        }
+        if (this.block.offset.e > 0) {
+            this.buildStreetPole(this.block.right-1, this.block.bottom-7,{TELEPHONE:true},false);
+
+            this.buildStreetPole(this.block.right-1, this.block.top+7,{TELEPHONE:true},false);
+
         }
     
     }
@@ -258,8 +267,13 @@ export default class Block {
                 var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_SOUTH');
                 pole.setSlot(4,6,arm,true);
 
-                var light = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_SOUTH');
-                pole.setSlot(4,7,light,false);
+                //var light = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_SOUTH');
+                //////-------
+                //pole.setSlot(4,7,light,false);
+
+                var traffic_light = this.scene.manager.objectManager.newObjectToWorld(_x - 4, _y - 7,'TRAFFIC_LIGHT_SOUTH');
+                traffic_light.sprite.setDepth(pole.sprite.depth+7);
+                traffic_light.setState('GREEN');
             break;
         }
         var slotted = this.scene.manager.objectManager.objectInfo('WALK_SIGNAL_'+facing+'_');
@@ -280,12 +294,14 @@ export default class Block {
         }
     }
 
-    buildStreetPole (_x,_y,signs={NS:null,EW:null,STOP:null,CORNER:''}, light=true) {
+    buildStreetPole (_x,_y,signs={NS:null,EW:null,STOP:null,CORNER:'',TELEPHONE:false}, light=true) {
 
         var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
 
         if (light) {
-            this.scene.manager.objectManager.newObjectToWorld(_x, _y - 6,'SODIUM');
+            let sodium = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 6,'SODIUM');
+            sodium.sprite.setDepth(pole.sprite.depth+1);
+            
         }
 
         if (signs.NS != null && signs.NS != '') {
@@ -308,6 +324,11 @@ export default class Block {
                 var slotted = this.scene.manager.objectManager.objectInfo('OBJ_FLYER_YELLOW');
                 pole.setSlot(0,2,slotted, false);
             }*/
+        }
+
+        if (signs.TELEPHONE) {
+            var slotted = this.scene.manager.objectManager.objectInfo('TELEPHONE_POLE_TOP');
+            pole.setSlot(0,5,slotted);
         }
     }
 

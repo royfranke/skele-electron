@@ -293,6 +293,15 @@ export default class HudPocket {
             }
             item_action.requires.forEach(function (requirement) {
                 if (requirement.type == 'ITEM' || requirement.type == 'ITEM_KIND') {
+                    if (item_action.req_result_data_key != null) {
+                        var req_data_key = item_action.req_result_data_key;
+                        if (item_action.req_result_data_set != '') {
+                            self.scene.manager.dataManager.setData(req_data_key, item_action.req_result_data_set);
+                        }
+                        if (item_action.req_result_data_modify != '') {
+                            self.scene.manager.dataManager.modifyData(req_data_key, item_action.req_result_data_modify);
+                        }
+                    }
                     if (requirement.result == 'TRANSFORMED') {
                         var transform_into = item_action.req_result_item;
                         self.setPocket(pocketIndex, 'EMPTY');
@@ -300,6 +309,11 @@ export default class HudPocket {
                     }
                     if (requirement.result == 'CONSUMED') {
                         self.setPocket(pocketIndex, 'EMPTY');
+
+                    }
+                    if (requirement.result == 'DUPLICATED') {
+                        var dupe = self.getPocket(pocketIndex);
+                        dupe.updateStackCount(dupe.stackCount + 1);
                     }
                     if (requirement.result == 'MAILED') {
                         self.setPocket(pocketIndex, 'EMPTY');

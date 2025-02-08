@@ -67,8 +67,9 @@ export default class AppCamera {
 
     follow (followMe) {
         /// TODO: return to make a smoother follow
-        this.camera.startFollow(followMe,true, 1, 1, -32, -32);
-        this.camera.setDeadzone(96,16);
+        this.camera.startFollow(followMe,true, 1, 1, -32, -16);
+        
+        this.camera.setDeadzone(80,16);
     }
 
     setBounds (width, height) {
