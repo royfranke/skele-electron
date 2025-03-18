@@ -1,5 +1,6 @@
 
 import SettingsManager from "../settings/settings-manager.js";
+import CourtsManager from "../courts/courts-manager.js";
 /*
  * Manages application view
  * SPLASH | MAIN | SETTINGS | NEW | LOAD | GAME | TUTORIAL
@@ -10,7 +11,7 @@ export default class AppView {
     constructor(scene, view, state_name) {
         this.scene = scene;
         this.view = view;
-        this.version = '1.0.5';
+        this.version = '1.0.6';
         this.create(state_name);
     }
 
@@ -28,6 +29,10 @@ export default class AppView {
         if (state_name === 'LOAD') {
             this.createLoad();
         }
+        if (state_name === 'COURTS') {
+            this.createCourts();
+        }
+        
         this.state_name = state_name;
     }
 
@@ -74,8 +79,22 @@ export default class AppView {
         this.display_version = {block: block, text: version};
     }
 
+    createCourts () {
+        this.scene.add.nineslice(this.view.left,this.view.top, 'UI', 'BLOCK_MID_DARK_BORDER', this.view.width, this.view.height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(800);
+        this.addVersion();
+        this.courtManager = new CourtsManager(this.scene);
+    }
+
     createSettings() {
         this.settingsManager = new SettingsManager(this.scene);
+
+        
+        var height = this.view.bottom - (this.view.top + this.view.margin.top + (this.view.margin.bottom*2));
+        var _x  = this.view.left + (this.view.margin.left*2) + 120;
+        var _y = this.view.top + this.view.margin.top;
+        var width = this.view.right - _x - this.view.margin.right;
+
+        this.settingsManager.setView(_x,_y, width, height);
 
         this.addVersion();
        //this.settingsManager.saveSettings('input');

@@ -25,7 +25,9 @@ export default class Shop {
         }
         if (!settings.hasOwnProperty('upper_windows')) {
             settings.upper_windows = this.roll(OBJECT_TYPES.WINDOW_EXT_);
+            
         }
+
         if (!settings.hasOwnProperty('frame')) {
             settings.frame = this.roll(OBJECT_TYPES.STOREFRONT_FRAME);
         }
@@ -52,6 +54,17 @@ export default class Shop {
         var height = this.prop.lines.height;
         var facing = this.prop.address.facing;
 
+        if (this.prop.structure.type == 'PARKING-LOT') {
+
+            this.drawAsphaltBox(left, top, width, height);
+
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.ASPHALT.FILL_, left + 2, top-6, 5, 7);
+
+            this.drawParkingLot(left + 1, bottom - 5, width - 2, 'SOUTH');
+            
+            return;
+        }
+
         var building_width = width;
         var colors = ['YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL', 'BLUE_COMMERCIAL']; // Weighting the array by repeating more desired colors
         var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
@@ -59,6 +72,8 @@ export default class Shop {
         var _x = left;
         var _y = bottom - 1;
         var level_position = _y;
+
+        
 
         if (this.prop.structure.type == 'CORNER-STORE-LEFT') {
             building_width = building_width - 1;
@@ -91,15 +106,18 @@ export default class Shop {
         }
 
 
-
-
         for (var i = 0; i < this.settings.levels.length; i++) {
             this.buildFacadeSection(_x, level_position, building_width, this.settings.levels[i].height, wallKind);
             level_position = level_position - this.settings.levels[i].height;
             if (i > 0) {
-                this.addWindows(_x+1,level_position +  this.settings.levels[i].height, building_width - 2);
+                this.addWindows(_x+1,level_position +  this.settings.levels[i].height, building_width - 1);
+                if (this.settings.upper_windows.includes('SINGLE')) {
+                    this.addWindows(_x+3,level_position +  this.settings.levels[i].height, building_width - 1);
+                }
             }
         }
+
+
 
         this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, (level_position - this.settings.roof.height) + 1, building_width, this.settings.roof.height);
 
@@ -117,7 +135,10 @@ export default class Shop {
                 lotto_sign.setState('FLICKERING');
 
                 this.scene.manager.objectManager.newObjectToWorld(_x - 4, _y + 1, 'TRASH_DRUM');
+                this.scene.manager.objectManager.newObjectToWorld(_x - 3, _y + 1, 'POOP');
+                this.scene.manager.fx.playFX('STINK_REPEAT',(_x - 4)*16, (_y)*16);
                 this.scene.manager.fx.playFX('FLY_8',(_x - 4)*16, (_y)*16);
+                
                 this.scene.manager.objectManager.newObjectToWorld(_x + 9, _y + 1, 'DAILY_NEWS_BOX_');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 10, _y + 1, 'PAYPHONE');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 1, 'PAYPHONE');
@@ -151,6 +172,9 @@ export default class Shop {
     setRollingGatesFromHours() {
         var self = this;
         var callback = function(now, today) {
+            if (self.prop.listing.schedule == undefined) {
+                return;
+            }
             let schedule = self.prop.listing.schedule[today.weekday.toLowerCase()];
             if (schedule.closed == 'TRUE') {
                 this.setRollingGates('CLOSED');
@@ -248,7 +272,7 @@ export default class Shop {
         door_gate.sprite.setDepth(this.front_door.sprite.depth + 1);
     }
 
-    addStoreWindows(_x, _y, width, index=0) {
+    addStoreWindows(_x, _y, width, index=0, gate=true) {
         let window_width = 4;
         if (width < window_width) {
             return;
@@ -256,8 +280,11 @@ export default class Shop {
         
         this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, this.settings.windows);
 
-        this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, 'ROLLING_GATE_WIDE'));
-        this.gates[index].sprite.setDepth(this.gates[index].sprite.depth + 1);
+        if (gate) {
+            this.gates.push(this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, 'ROLLING_GATE_WIDE'));
+            this.gates[index].sprite.setDepth(this.gates[index].sprite.depth + 1);
+        }
+        
 
         if (width - window_width >= window_width) {
             this.addStoreWindows(_x + (index*window_width), _y, width - window_width, index + 1);
@@ -266,14 +293,21 @@ export default class Shop {
 
     addWindows(_x, _y, width, index=0) {
         let window_width = 3;
+        console.log('Add window '+index+' at '+_x+','+_y+' with width '+width);
         if (width < window_width) {
             return;
         }
         
         this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, this.settings.upper_windows);
-
+        if (this.settings.upper_windows.includes('SINGLE') && this.roll([0,1]) == 1) {
+            let window_unit = this.scene.manager.objectManager.newObjectToWorld(_x + (index*(window_width/2)), _y - .5, 'AC_WINDOW_UNIT');
+            window_unit.sprite.setDepth(window_unit.sprite.depth + 16);
+            window_unit.sprite.setOrigin(.5,1);
+            window_unit.setState('ON');
+        }
+        
         if (width - window_width >= window_width) {
-            this.addWindows(_x + (index*window_width), _y, width - window_width, index + 1);
+           //this.addWindows(_x + ((index+1)*window_width), _y, width - window_width, index + 1);
         }
     }
 
@@ -283,4 +317,34 @@ export default class Shop {
             this.front_door.setAnnouncement(this.prop.listing,'SHOP_HOURS');
         }
     }
+
+    drawParkingLot(_x, _y, width, facing) {
+        
+        let spaces = width / 4;
+
+        for (var i = 0; i < spaces; i++) {
+            this.drawParkingSpace(_x + (i*4), _y, facing);
+        }
+    }
+
+    drawParkingSpace(_x, _y, facing) {
+        var groundLayer = this.scene[this.scene.locale].groundLayer;
+        groundLayer.weightedRandomize(TILES.STREET.NORTHSOUTH_SOLIDWHITE_,_x, _y, 1, 5);
+    }
+
+    drawAsphaltBox(_x, _y, width, height) {
+            var groundLayer = this.scene[this.scene.locale].groundLayer;
+            groundLayer.weightedRandomize(TILES.ASPHALT.FILL_,_x, _y, width, height);
+            groundLayer.weightedRandomize(TILES.CURB.NORTH_, _x, _y, width, 1);
+            groundLayer.weightedRandomize(TILES.CURB.SOUTH_, _x,_y + height, width, 1);
+            groundLayer.weightedRandomize(TILES.CURB.EAST_, _x + width, _y,1, height);
+            groundLayer.weightedRandomize(TILES.CURB.WEST_, _x, _y,1, height);
+            
+            groundLayer.weightedRandomize(TILES.CURB.INSET_NORTHWEST_, _x, _y,1, 1);
+            groundLayer.weightedRandomize(TILES.CURB.NORTHEAST_INSET_, _x + width, _y,1, 1);
+    
+            groundLayer.weightedRandomize(TILES.CURB.SOUTHWEST_INSET_, _x, _y + height,1, 1);
+            groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_INSET_, _x + width,  _y + height,1,1);
+        }
+        
 }

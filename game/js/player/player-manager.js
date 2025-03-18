@@ -28,6 +28,7 @@ export default class PlayerManager {
     this.app.camera.follow(this.playerSprite.sprite);
     this.locale = this.scene[this.scene.place];
     this.underfoot = null;
+    this.player_focus = false;
   }
 
 
@@ -104,7 +105,7 @@ export default class PlayerManager {
   update() {
     var focus = this.getFocus();
     if (focus.name == 'PLAYER') {
-
+      this.player_focus = true;
       this.last_state = this.getLastState();
       this.state = this.getState();
 
@@ -140,10 +141,11 @@ export default class PlayerManager {
     }
     else { // If focus off player
       var last = this.getLastFocus();
-      if (last.name == 'PLAYER') { //If focus was just changed off the player
+      if (last.name == 'PLAYER' && this.player_focus) { //If focus was just changed off the player
         this.speed = 0;
         this.setState('IDLE');
-        this.action.closeActionMenu();
+        this.action.clearActions();
+        this.player_focus = false;
         //this.resetInputs();
         // TODO: Do an initial state set on switch from player
       }
@@ -152,10 +154,6 @@ export default class PlayerManager {
 
     this.playerSprite.update();
     
-  }
-
-  loadPlayer() {
-
   }
 
   getSpeed() {

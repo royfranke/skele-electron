@@ -32,11 +32,10 @@ export default class ZenerManager {
 
     resetDeck () {
         this.deck.setState('NOT LOADED');
-        this.startTurn();
-    }
 
-    gameOver () {
-        //this.scene.manager.setFocus('PLAYER');
+        this.destroyListeners();
+
+        this.startTurn();
     }
 
     select () {
@@ -51,6 +50,8 @@ export default class ZenerManager {
     back () {
         //this.deck.setState('GAME OVER');
        //this.gameOver();
+       this.scene.manager.hud.hudZener.closeZener();
+       this.scene.manager.setFocus('PLAYER');  
     }
 
     makeGuess () {
@@ -79,6 +80,32 @@ export default class ZenerManager {
 
     getScore () {
        return this.deck.score();
+   }
+
+   listen () {
+        var callback_left = function () {
+            this.selectPrevious();
+        }
+        var callback_right = function () {
+            this.selectNext();
+        }
+        var callback_select = function () {
+            this.select();
+        }
+        var callback_back = function () {
+            this.back();
+        }
+        this.scene.events.addListener('INPUT_LEFT_ZENER', callback_left, this);
+        this.scene.events.addListener('INPUT_RIGHT_ZENER', callback_right, this);
+        this.scene.events.addListener('INPUT_SELECT_ZENER', callback_select, this);
+        this.scene.events.addListener('INPUT_BACK_ZENER', callback_back, this);
+   }
+
+   destroyListeners () {
+        this.scene.events.off('INPUT_LEFT_ZENER');
+        this.scene.events.off('INPUT_RIGHT_ZENER');
+        this.scene.events.off('INPUT_SELECT_ZENER');
+        this.scene.events.off('INPUT_BACK_ZENER');
    }
 
 }

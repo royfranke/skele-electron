@@ -213,7 +213,6 @@ export default class Announcer {
     } 
 
     hideAnnouncements () {
-        var _y = this.object.sprite.y - 16;
         var last = this.announced.length - 1;
         this.announced.forEach((announce,index) => {
             var tween = this.scene.add.tween({

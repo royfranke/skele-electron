@@ -9,6 +9,7 @@ import ObjectManager from "../objects/object-manager.js";
 import PlantManager from "../plants/plant-manager.js";
 import LootManager from "../loot/loot-manager.js";
 import TimeManager from "../time/time-manager.js";
+import TreeManager from "../trees/tree-manager.js";
 import KnowledgeManager from "../knowledge/knowledge-manager.js";
 import DialogManager from "../dialog/dialog-manager.js";
 import QuestManager from "../quest/quest-manager.js";
@@ -31,6 +32,7 @@ export default class GameManager {
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
         this.plantManager = new PlantManager(this.scene);
+        this.treeManager = new TreeManager(this.scene);
         this.dataManager = new DataManager(this.scene);
         this.hud = new HudManager(this.scene);
         this.fx = new FXManager(this.scene);
@@ -41,7 +43,7 @@ export default class GameManager {
     initializeGame () {
         /// Use this method to gather managers that are not needed for the tutorial/new game
         this.time = new TimeManager();
-
+        this.verbose = false;
         
         this.loot = new LootManager(this.scene);
         this.knowledge = new KnowledgeManager(this.scene);
@@ -131,14 +133,15 @@ export default class GameManager {
         
         this.state = this.getState();
         if (this.state.name == 'NOT_LOADED') { return this.loadGame(); }
+
         if (this.state.input) {
-            const focus = this.getFocus();
+            var focus = this.getFocus();
             const input = this.scene.app.input.INPUT;
             if (input.INVENTORY.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
                 if (focus.name == 'PLAYER' || focus.name == 'MAP' || focus.name == 'NOTEBOOK') {
                     this.setFocus('POCKETS');
                 }
-                else if (focus.name == 'POCKETS' || focus.name == 'CHEST') {
+                else if (focus.name == 'POCKETS') {
                     this.closeChest();
                     this.setFocus('PLAYER');  
                 }
@@ -153,17 +156,11 @@ export default class GameManager {
                 }
             }
             if (input.BACK.TAP) {
-                if (focus.name == 'POCKETS' || focus.name == 'CHEST') {
-                    this.closeChest();
-                    this.setFocus('PLAYER');  
+                this.scene.events.emit('INPUT_BACK_'+focus.name);
+                if (focus.name == 'POCKETS') {
+                    this.setFocus('PLAYER');   
                 }
                 if (focus.name == 'NOTEBOOK') {
-                    this.setFocus('PLAYER');  
-                }
-                if (focus.name == 'ZENER') {
-                    this.setFocus('PLAYER');  
-                }
-                if (focus.name == 'SOCKS') {
                     this.setFocus('PLAYER');  
                 }
                 if (focus.name == 'DIALOG') {
@@ -173,55 +170,21 @@ export default class GameManager {
                     this.setFocus('QUOTE');  
                 }
             }
+
             if (input.UP.TAP) {
-                if (focus.name == 'DIALOG') {
-                    this.hud.hudDialog.arrowUp();
-                }
-                if (focus.name == 'SOCKS') {
-                    this.hud.hudSocks.arrowUp();
-                }
+                this.scene.events.emit('INPUT_UP_'+focus.name);
             }
             if (input.DOWN.TAP) {
-                if (focus.name == 'CHEST') {
-                    this.hud.chestArrowDown();
-                }
-                if (focus.name == 'DIALOG') {
-                    this.hud.hudDialog.arrowDown();
-                }
-                if (focus.name == 'SOCKS') {
-                    this.hud.hudSocks.arrowDown();
-                }
+                this.scene.events.emit('INPUT_DOWN_'+focus.name);
             }
             if (input.RIGHT.TAP) {
-                if (focus.name == 'ZENER') {
-                    this.hud.hudZener.arrowRight();
-                }
-                if (focus.name == 'NOTEBOOK') {
-                    this.hud.hudNotebook.arrowRight();
-                }
-
+                this.scene.events.emit('INPUT_RIGHT_'+focus.name);
             }
             if (input.LEFT.TAP) {
-                if (focus.name == 'ZENER') {
-                    this.hud.hudZener.arrowLeft();
-                }
-                if (focus.name == 'NOTEBOOK') {
-                    this.hud.hudNotebook.arrowLeft();
-                }
+                this.scene.events.emit('INPUT_LEFT_'+focus.name);
             }
             if (input.SELECT.TAP) {
-                if (focus.name == 'CHEST') {
-                    this.hud.chestHold();
-                }
-                if (focus.name == 'SOCKS') {
-                    this.hud.hudSocks.select();
-                }
-                if (focus.name == 'ZENER') {
-                    this.hud.hudZener.select();
-                }
-                if (focus.name == 'DIALOG') {
-                    this.hud.hudDialog.select();
-                }
+                this.scene.events.emit('INPUT_SELECT_'+focus.name);
             }
         }
         if (this.state.time && this.time != undefined &&  this.time.time_passing) {
@@ -278,6 +241,7 @@ export default class GameManager {
                 this.scene[this.scene.locale].setKeyLight(keylight);
                 this.objectManager.registry.updateLights(keylight);
                 this.plantManager.registry.updateLights(keylight);
+                this.treeManager.registry.updateLights(keylight);
             }
         }
     }

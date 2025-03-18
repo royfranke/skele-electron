@@ -24,7 +24,7 @@ export default class HudManager {
 
     constructor(scene) {
        this.scene = scene;
-       this.verbose = true;
+       this.verbose = false;
        this.initialize();
     }
 
@@ -115,27 +115,6 @@ export default class HudManager {
         
     }
 
-    chestHold () {
-        if (this.hudChest.chest != null && this.hudChest.chest.items.length > 0) {
-            let item = this.hudChest.chest.items[0];
-            var placed = this.scene.manager.hud.availablePocket(item);
-                
-                if (placed != false) {
-                    if (this.verbose) {console.log("Placed! Refreshing");}
-                    this.hudChest.chest.items.shift();
-                    this.refreshChest();
-                }
-                else {
-                    var sound_var = Phaser.Math.RND.between(1,3);
-                    this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var);
-                    //this.scene.manager.hud.newPocketTip('My hands are full...',3000);
-                }
-        }
-    }
-
-    chestArrowDown () {
-        this.hudChest.chestArrowDown();
-    }
 
     arrowDown (slot_x) {
         this.hudPockets.arrowDown(slot_x);
@@ -211,11 +190,6 @@ export default class HudManager {
         /// Open Card Game (Zener)
         if (this.state.name == 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name != 'ZENER_FOCUSED') {
             this.hudZener.openZener();
-        }
-
-        /// Close Card Game (Zener)
-        if (this.state.name != 'ZENER_FOCUSED' && this.last_state != null && this.last_state.name == 'ZENER_FOCUSED') {
-            this.hudZener.closeZener();
         }
 
         /// Open Card Game (Socks)

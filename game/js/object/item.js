@@ -3,7 +3,7 @@
 export default class Item {
     constructor(scene, item) {
         this.scene = scene;
-        this.verbose = true;
+        this.verbose = false;
         this.registered = false;
         this.tile_x = 0;
         this.tile_y = 0;

@@ -17,8 +17,8 @@ export default class HudSocks extends HudCommon {
         this.open = false;
         this.manager = new SocksManager(this.scene);
         this.boardView = {
-            x: this.view.left+88,
-            y: this.view.top+56,
+            x: this.view.left + 88,
+            y: this.view.top + 56,
             width: 272,
             height: 176,
             frameName: 'BLOCK_MID_BLUE_BORDER',
@@ -64,7 +64,7 @@ export default class HudSocks extends HudCommon {
                 },
                 icon: {
                     textureName: 'UI',
-                    frameName: 'LAUNDRY_BLUE_EMPTY', // Should be dryer
+                    frameName: 'LAUNDRY_BLUE_EMPTY',
                     icon: null,
                 }
             },
@@ -88,7 +88,7 @@ export default class HudSocks extends HudCommon {
                     font: 'SkeleHype',
                     fontSize: 24,
                     width: this.boardView.width - 48,
-                    x: this.boardView.x + Math.round(this.boardView.width/2),
+                    x: this.boardView.x + Math.round(this.boardView.width / 2),
                     y: this.boardView.y + this.boardView.height - 24,
                     object: null,
                     blockFrame: '',
@@ -136,11 +136,11 @@ export default class HudSocks extends HudCommon {
         this.board.arrow_up = {
             x: this.board.in_hand.x - 8,
             y: this.board.in_hand.y - 48,
-                slot: {
-                    frameName: 'BAG_ARROW_FOCUSED',
-                    block: null,
-                },
-                icon: null
+            slot: {
+                frameName: 'BAG_ARROW_FOCUSED',
+                block: null,
+            },
+            icon: null
         };
 
         this.board.arrow_down = {
@@ -178,13 +178,13 @@ export default class HudSocks extends HudCommon {
         ];
     }
 
-    update () {
+    update() {
         if (this.open) {
             this.manager.update();
         }
     }
 
-    openSocks () {
+    openSocks() {
         if (!this.open) {
             this.open = true;
             this.setupBoard();
@@ -192,37 +192,49 @@ export default class HudSocks extends HudCommon {
         }
     }
 
-    closeSocks () {
+    closeSocks() {
         if (this.open) {
             this.boardView.block.destroy();
             this.boardView.frame.block.destroy();
             var self = this;
             for (const [key, value] of Object.entries(self.board)) {
-                if (self.board[key].slot.block != null) {
-                    self.board[key].slot.block.destroy();
-                }
-                if (self.board[key].icon != null && self.board[key].icon.icon != null) {
-                    self.board[key].icon.icon.destroy();
+                if (self.board[key].slot != null) {
+                    if (self.board[key].slot.block != null) {
+                        self.board[key].slot.block.destroy();
+                    }
+                    if (self.board[key].icon != null && self.board[key].icon.icon != null) {
+                        self.board[key].icon.icon.destroy();
+                    }
                 }
             }
-
+            for (let i = 0; i < this.board.score.length; i++) {
+                if (self.board.score[i].block != null) {
+                    self.board.score[i].block.destroy();
+                }
+                if (self.board.score[i].object != null) {
+                    self.board.score[i].object.destroy();
+                }
+            }
+            if (this.sock_in_play != null) {
+                this.sock_in_play.destroy();
+            }
+            if (this.board.in_hand.icon.icon != null) {
+                this.board.in_hand.icon.icon.destroy();
+            }
             this.manager.resetDryer();
+            this.manager.destroyListeners();
             this.open = false;
         }
     }
 
 
-    select () {
+    select() {
         this.manager.select();
     }
 
-    back () {
-        this.manager.back();
-    }
-
-    arrowDown () {
+    arrowDown() {
         this.manager.selectNext();
-        
+
         this.scene.tweens.add({
             targets: [this.board.arrow_down.slot.block],
             y: '+= 4',
@@ -231,10 +243,10 @@ export default class HudSocks extends HudCommon {
             loop: 0,
             yoyo: true,
         });
-    
+
     }
 
-    arrowUp () {
+    arrowUp() {
         this.manager.selectPrevious();
 
         this.scene.tweens.add({
@@ -247,7 +259,7 @@ export default class HudSocks extends HudCommon {
         });
     }
 
-    gameOver () {
+    gameOver() {
         var targets = [];
         /// For each object in this.board draw a slot and icon
         var self = this;
@@ -256,14 +268,14 @@ export default class HudSocks extends HudCommon {
                 targets.push(self.board[key].slot.block);
             }
             if (self.board[key].icon != null) {
-                self.board[key].icon.icon 
+                self.board[key].icon.icon
                 targets.push(self.board[key].icon.icon);
             }
-            
+
         }
         var tween = this.scene.tweens.add({
             targets: targets,
-            y:1200,
+            y: 1200,
             yoyo: false,
             duration: 500,
             ease: 'Sine.easeInOut',
@@ -272,15 +284,15 @@ export default class HudSocks extends HudCommon {
         });
 
         tween.on('complete', () => {
-           targets.forEach((target) => {
-               target.destroy();
-           });
-          });
+            targets.forEach((target) => {
+                target.destroy();
+            });
+        });
 
         this.tallyScore();
     }
 
-    tallyScore () {
+    tallyScore() {
         this.board.score[0].object.setFont('SkeleTalk');
         this.board.score[0].object.setFontSize(16);
         this.scene.tweens.add({
@@ -294,19 +306,19 @@ export default class HudSocks extends HudCommon {
             {
                 at: 500,
                 run: () => {
-                    this.setHype('BEST STREAK: '+this.reference_score.streak_best);
+                    this.setHype('BEST STREAK: ' + this.reference_score.streak_best);
                 }
             },
             {
                 at: 1500,
                 run: () => {
-                    this.setHype('BEST STREAK: '+this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct);
+                    this.setHype('BEST STREAK: ' + this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct);
                 }
             },
             {
                 at: 2500,
                 run: () => {
-                    this.setHype('BEST STREAK: '+this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct + '\nFINAL: ' +(this.reference_score.streak_best*this.reference_score.correct));
+                    this.setHype('BEST STREAK: ' + this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct + '\nFINAL: ' + (this.reference_score.streak_best * this.reference_score.correct));
                 }
             }
         ]);
@@ -315,13 +327,15 @@ export default class HudSocks extends HudCommon {
     }
 
 
-    lastSock () {
+    lastSock() {
         /// Destroy the dryer
     }
 
-    drawSelected (slug) {
+    drawSelected(slug) {
         // draw the selected sock
-        this.board.in_hand.icon.icon.destroy();
+        if (this.board.in_hand.icon.icon != null) {
+            this.board.in_hand.icon.icon.destroy();
+        }
         this.board.in_hand.icon.icon = this.makeIcon(this.board.in_hand.x, this.board.in_hand.y, 'ITEMS', slug);
         this.scene.tweens.add({
             targets: [this.board.in_hand.icon.icon],
@@ -333,13 +347,16 @@ export default class HudSocks extends HudCommon {
         });
     }
 
-    ejectSock (slug) {
+    ejectSock(slug) {
+        if (this.sock_in_play != null) {
+            this.sock_in_play.destroy();
+        }
         this.sock_in_play = this.makeIcon(this.board.dryer.x, this.board.dryer.y, 'ITEMS', slug);
         this.sock_in_play_slug = slug;
     }
 
 
-    drawReveal (result) {
+    drawReveal(result) {
         if (result.result) {
             // draw valid indicator or fx and have the socks become one rolled sock and fall into the laundry basket match pile
             let self = this;
@@ -358,15 +375,17 @@ export default class HudSocks extends HudCommon {
             });
             tween.on('complete', () => {
                 bundled_icon.destroy();
-                self.board.match_pile.icon.icon.destroy();
-                self.board.match_pile.icon.icon =  self.getStackIcon('match_pile', self.reference_score.correct);
+                if (self.board.match_pile.icon.icon != null) {
+                    self.board.match_pile.icon.icon.destroy();
+                }
+                self.board.match_pile.icon.icon = self.getStackIcon('match_pile', self.reference_score.correct);
             });
 
         } else {
             //draw invalid indicator and have the socks bounce off each other and fall in the mismatch pile
             let doomed_sock = this.makeIcon(this.sock_in_play.x, this.sock_in_play.y, 'ITEMS', this.sock_in_play_slug);
             this.sock_in_play.destroy();
-            
+
             let doomed_other_sock = this.makeIcon(this.board.in_hand.icon.icon.x, this.board.in_hand.icon.icon.y, 'ITEMS', this.board.in_hand.icon.icon.frame.name);
             this.board.in_hand.icon.icon.destroy();
 
@@ -387,15 +406,11 @@ export default class HudSocks extends HudCommon {
 
     }
 
-    getStackIcon (pile, count) {
+    getStackIcon(pile, count) {
         let icon = null;
         for (let i = 0; i < this.match_pile_icon.length; i++) {
-            console.log('----------------');
-            console.log(count);
-            console.log(this.match_pile_icon[i]);
             if (count > this.match_pile_icon[i].greaterThan && count < this.match_pile_icon[i].lessThan) {
                 icon = this.match_pile_icon[i].slug;
-                
             }
         }
 
@@ -405,7 +420,7 @@ export default class HudSocks extends HudCommon {
 
         return this.makeIcon(this.board[pile].x, this.board[pile].y, 'UI', icon);
     }
-    
+
 
     setupBoard() {
         this.dryerCount = null;
@@ -416,21 +431,25 @@ export default class HudSocks extends HudCommon {
 
         /// For each object in this.board draw a slot and icon
         for (const [key, value] of Object.entries(this.board)) {
-            if (key == 'score') {continue;}
+            if (key == 'score') { continue; }
             this.board[key].slot.block = this.makeBlock(this.board[key].x, this.board[key].y, 32, 32, this.board[key].slot.frameName);
 
             if (this.board[key].icon != null) {
+                if (this.board[key].icon.icon != null) {
+                    this.board[key].icon.icon.destroy();
+                }
                 this.board[key].icon.icon = this.makeIcon(this.board[key].x, this.board[key].y, this.board[key].icon.textureName, this.board[key].icon.frameName);
             }
-            
-          }
-          this.board.arrow_up.slot.block.destroy();
-          this.board.arrow_up.slot.block = this.makeIcon(this.board.arrow_up.x, this.board.arrow_up.y, 'UI', this.board.arrow_up.slot.frameName);
-          this.board.arrow_up.slot.block.flipY = true;
+
+        }
+        if (this.board.arrow_up.slot.block != null) {
+            this.board.arrow_up.slot.block.destroy();
+        }
+        this.board.arrow_up.slot.block = this.makeIcon(this.board.arrow_up.x, this.board.arrow_up.y, 'UI', this.board.arrow_up.slot.frameName);
+        this.board.arrow_up.slot.block.flipY = true;
 
 
-
-          for (let i = 0; i < this.board.score.length; i++) {;
+        for (let i = 0; i < this.board.score.length; i++) {
             this.board.score[i].object = this.scene.add.bitmapText(this.board.score[i].x, this.board.score[i].y, 'SkeleTalk', this.board.score[i].displayName, 12).setOrigin(.5).setScrollFactor(0).setDepth(100200);
 
             if (i > 0) {
@@ -441,7 +460,7 @@ export default class HudSocks extends HudCommon {
             this.board.score[i].object.setFontSize(this.board.score[i].fontSize);
             this.board.score[i].object.setMaxWidth(this.board.score[i].width);
             this.board.score[i].object.setLineSpacing(2);
-            
+
             if (this.board.score[i].blockFrame != '') {
                 this.board.score[i].block = this.makeBlock(this.board.score[i].x, this.board.score[i].y, this.board.score[i].width + 16, 32, this.board.score[i].blockFrame).setOrigin(.5).setScrollFactor(0).setDepth(100100);
             }
@@ -450,25 +469,26 @@ export default class HudSocks extends HudCommon {
         this.setHits();
         this.setMisses();
 
-    } 
+        this.manager.listen();
+    }
 
-    setHits (hits='') {
+    setHits(hits = '') {
         this.board.score[1].object.setText(this.getNumberSymbol(hits));
     }
 
-    setMisses (misses='') {
+    setMisses(misses = '') {
         this.board.score[2].object.setText(this.getNumberSymbol(misses));
     }
 
-    setHype (hype='') {
+    setHype(hype = '') {
         this.board.score[0].object.setText(hype);
     }
 
-    drawScore (score) {
+    drawScore(score) {
         this.reference_score = score;
         if (score.streak > 1) {
             this.setHype('STREAK! X' + score.streak);
-            
+
         }
         else {
             this.setHype();

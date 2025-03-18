@@ -8,7 +8,6 @@ export default class HudState {
         this.state='NOT_LOADED';
         this.last_state='NOT_LOADED';
         this.valid_states = STATES;
-
     }
 
     getState () {

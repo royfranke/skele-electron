@@ -42,6 +42,7 @@ export default class ObjectFactory {
         }
         else {
             console.warn("Nonvalid object slug passed in object factory: "+slug);
+            return false;
         }
     }
 

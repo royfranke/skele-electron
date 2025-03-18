@@ -51,13 +51,21 @@ export default class HudQuest extends HudCommon {
 
     closeQuest () {
         if (this.quest != null) {
-            this.scene.tweens.add({
+            var tween = this.scene.tweens.add({
                 targets: [this.quest.note, this.quest.text],
-                y: '+=64',
-                duration: 500,
+                y: '+=240',
+                duration: 1000,
                 ease: 'Sine.easeOut',
                 loop: 0,
             });
+
+            tween.on('complete', function () {
+                this.quest.note.destroy();
+                this.quest.text.destroy();
+                this.quest = null;
+            }
+            , this);
+            
         }
     }
 

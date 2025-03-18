@@ -29,7 +29,7 @@ export default class HudFactory {
         return {block: quote_block, text: quote_text};
     }
 
-    makeSlip(_x, _y, text = 'HOLD') {
+    makeSlip(_x, _y, text = 'HOLD', button='X') {
         
 
         let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
@@ -39,7 +39,7 @@ export default class HudFactory {
 
         let button_block = this.makeBlock(block.x - block.width, block.y, 12, 16, 'BLOCK_MID_ORANGE_LEFT');
         button_block.setOrigin(1,0);
-        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', button, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         return {
             block: block,
@@ -81,12 +81,12 @@ export default class HudFactory {
 
 
     makeWorldBitmapText (_x,_y, width, size=8, font='SkeleNotebook') {
-        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(.5, 1).setDepth(this.scene.player.snappedStanding.y+2).setMaxWidth(width);
+        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(.5, 1).setDepth(this.scene.player.snappedStanding.y+17).setMaxWidth(width).setTintFill(0x8b8bab);
     }
 
-    makeWorldBlock (_x,_y, width=32, height=32, frameName='SPEECH_BUBBLE_MID') {
+    makeWorldBlock (_x,_y, width=32, height=32, frameName='THOUGHT_CLOUD') {
 
-        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 8,8,8,8).setOrigin(.5,1).setDepth(this.scene.player.snappedStanding.y + 1);
+        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 16,16,16,16).setOrigin(.5,1).setDepth(this.scene.player.snappedStanding.y + 16);
  
     }
 

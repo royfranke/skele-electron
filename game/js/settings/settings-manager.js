@@ -1,6 +1,5 @@
 import SettingsFactory from "./settings-factory.js";
 import SettingsState from "./settings-state.js";
-import SettingsMenu from "./settings-menu.js";
 
 /* Settings Manager Class */
 
@@ -11,10 +10,6 @@ export default class SettingsManager {
         this.settingsState = new SettingsState();
         this.factory = new SettingsFactory(scene);
         
-    }
-
-    loadSettings () {
-        this.menu = new SettingsMenu(this.scene);
     }
 
     getState () {
@@ -50,6 +45,11 @@ export default class SettingsManager {
 
     resetSettings (type) {
         this.factory.resetSettings(type);
+    }
+
+    setView (_x, _y, width, height) {
+        var slot_slice = this.scene.add.nineslice(_x,_y, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
+        var slot_highlight = this.scene.add.nineslice(_x,_y, 'UI', 'BLOCK_SHALLOW_DARK_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(true);
     }
 
 }

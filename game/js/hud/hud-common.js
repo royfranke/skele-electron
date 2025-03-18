@@ -40,7 +40,7 @@ export default class HudCommon {
             return this.factory.makeFocusBitmapText(_x, _y, width, size, font);
         }
 
-        makeWorldBlock(_x, _y, width = 32, height = 32, frameName = 'BUBBLE_THINKING') {
+        makeWorldBlock(_x, _y, width = 32, height = 32, frameName = 'THOUGHT_CLOUD') {
             return this.factory.makeWorldBlock(_x, _y, width, height, frameName);
         }
 

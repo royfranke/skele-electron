@@ -11,11 +11,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
     }
 
-    closeActionMenu() {
-        this.actionsGroup.clear(false, true);
-        this.displayActions = null;
-    }
-
     initialize() {
         if (this.debug) {this.debugActionTile = this.scene.add.rectangle(0, 0, 16, 16, 0x6666ff).setOrigin(0);}
         this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
@@ -30,6 +25,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.availableActions = [];
         this.actionsMap = new Map;
         this.menu = {x: 0, y: 0};
+        this.scene.manager.hud.hudAction.clearActions();
     }
 
     showActions (showing) {

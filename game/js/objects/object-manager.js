@@ -42,10 +42,13 @@ export default class ObjectManager {
     }
 
     putObjectInWorld (object, _x, _y) {
-
+        if (object == false) {
+            return false;
+        }
         var result = this.registry.placeObject(object,_x,_y);
         if (!result) {
             console.log('Could not put this object in the world from object manager...');
+            return false;
         }
         if (object.info.solid == 1) {
             this.scene.physics.add.collider(this.scene.player.playerSprite.sprite, object.sprite);

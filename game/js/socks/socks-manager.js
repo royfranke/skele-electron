@@ -55,8 +55,8 @@ export default class SocksManager {
     }
 
     back () {
-        //this.dryer.setState('GAME OVER');
-       //this.gameOver();
+        this.scene.manager.hud.hudSocks.closeSocks();
+        this.scene.manager.setFocus('PLAYER');  
     }
 
     makeMatch () {
@@ -87,6 +87,33 @@ export default class SocksManager {
     getScore () {
        return this.dryer.score();
    }
+
+
+   listen () {
+    var callback_up = function () {
+        this.scene.manager.hud.hudSocks.arrowUp();
+    }
+    var callback_down = function () {
+        this.scene.manager.hud.hudSocks.arrowDown();
+    }
+    var callback_select = function () {
+        this.scene.manager.hud.hudSocks.select();
+    }
+    var callback_back = function () {
+        this.back();
+    }
+    this.scene.events.addListener('INPUT_UP_SOCKS', callback_up, this);
+    this.scene.events.addListener('INPUT_DOWN_SOCKS', callback_down, this);
+    this.scene.events.addListener('INPUT_SELECT_SOCKS', callback_select, this);
+    this.scene.events.addListener('INPUT_BACK_SOCKS', callback_back, this);
+    }
+
+destroyListeners () {
+    this.scene.events.off('INPUT_UP_SOCKS');
+    this.scene.events.off('INPUT_DOWN_SOCKS');
+    this.scene.events.off('INPUT_SELECT_SOCKS');
+    this.scene.events.off('INPUT_BACK_SOCKS');
+}
 
 }
     

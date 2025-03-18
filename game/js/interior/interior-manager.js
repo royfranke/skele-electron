@@ -88,13 +88,13 @@ import KEYLIGHT from "../config/key-light.js";
 
             this.wall_height = wall_height;
 
-            if (this.config.floorSlug != undefined && this.config.floorSlug != '') {
+            if (this.config.floorSlug != undefined && this.config.floorSlug != '' && this.config.floorSlug != null) {
                 base_flooring += this.config.floorSlug;
             }
             else {
                 base_flooring += 'TILE.CHECKERED_WHITE_BROWN_';
             }
-
+            console.log(base_flooring);
             // Now break apart the flooring string to access the tileset
             var flooring = base_flooring.split('.');
  
@@ -109,11 +109,13 @@ import KEYLIGHT from "../config/key-light.js";
                 let removal = this.config.roomData.removalList[i];
                 groundLayer.putTileAt(0, _x + removal.x, _y + removal.y);
             }
-            if (this.config.roomData.recipeList != undefined) {
+            if (this.config.roomData.recipeList != undefined && this.config.roomData.recipeList != '' && this.config.roomData.recipeList != null) {
                 for (let i = 0; i < this.config.roomData.recipeList.length; i++) {
                     let recipe = this.config.roomData.recipeList[i];
-                    var flooring = recipe.slug.split('.');
-                    this.groundLayer.weightedRandomize(TILES[flooring[0]][flooring[1]], _x + recipe.x, _y + recipe.y, 1,1);
+                    if (recipe != null && recipe.slug != null) {
+                        var flooring = recipe.slug.split('.');
+                        this.groundLayer.weightedRandomize(TILES[flooring[0]][flooring[1]], _x + recipe.x, _y + recipe.y, 1,1);
+                    }
                 }
             }
             this.drawFloorCutAway();

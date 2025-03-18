@@ -15,12 +15,13 @@ export default class HudPockets extends HudCommon {
         this.pocket_textblock = null;
         this.pocket_actions = null;
         this.state = null;
+        this.verbose = false;
     }
 
     setPocketsState(state) {
         /// OPEN, CLOSED
         this.state = state;
-        console.log("Setting pockets state to: " + state);
+        if (this.verbose) (console.log("Setting pockets state to: " + state))
     }
 
     makeBitmapText(_x, _y, width, text, size, font = "SkeleTalk") {
@@ -627,10 +628,7 @@ export default class HudPockets extends HudCommon {
 
         let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleTalk');
 
-        let block = this.makeBlock(text.x - 8, text.y - 12, display_width, 32, 'BLOCK_MID_CREAM_BORDER');
-        block.setVisible(false);
-
-        return { block: block, text: text };
+        return { text: text };
     }
 
     setPocketTextBlock(description) {
@@ -643,11 +641,14 @@ export default class HudPockets extends HudCommon {
 
             let text_height = this.pocket_textblock.text.getTextBounds().local.height;
 
-            let text_width = this.pocket_textblock.text.getTextBounds().local.width;
+            //let text_width = this.pocket_textblock.text.getTextBounds().local.width;
+            let display_width = 144;
 
-            this.pocket_textblock.block.destroy();
-            this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, text_width + 16, text_height + 24, 'BLOCK_MID_WHITE_BORDER');
+            
+            this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, display_width, text_height + 24, 'BLOCK_MID_BEIGE_BORDER');
 
+            this.pocket_textblock.frame = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, display_width, text_height + 24, 'BLOCK_SHALLOW_ORANGE_EDGE_FRAME');
+            
             this.pocket_textblock.text.setVisible(true);
         }
     }
@@ -656,6 +657,7 @@ export default class HudPockets extends HudCommon {
         if (this.pocket_textblock != null) {
             this.pocket_textblock.block.destroy();
             this.pocket_textblock.text.destroy();
+            this.pocket_textblock.frame.destroy();
             this.pocket_textblock = null;
         }
     }

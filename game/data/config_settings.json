@@ -1,0 +1,102 @@
+{
+    "AUDIO": {
+        "DEFAULT": {
+            "FX": 8,
+            "MUSIC": 6,
+            "NOISE": 4
+        },
+        "CUSTOM": {
+            "FX": 8,
+            "MUSIC": 6,
+            "NOISE": 4
+        }
+    },
+    "CONTENT": {
+        "DEFAULT": {
+            "BOOZE": true,
+            "SMOKES": true,
+            "ADULT MAGAZINES": true,
+            "KIDNAPPING": true,
+            "CURSING": true,
+            "MOTHS": true,
+            "BUTTERFLIES": true,
+            "FLIES": true
+        },
+        "CUSTOM": {
+            "BOOZE": true,
+            "SMOKES": true,
+            "ADULT MAGAZINES": true,
+            "KIDNAPPING": true,
+            "CURSING": true,
+            "MOTHS": true,
+            "BUTTERFLIES": true,
+            "FLIES": true
+        }
+    },
+    "INPUT": {
+        "AVAILABLE": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I",
+            "J": "J",
+            "K": "K",
+            "L": "L",
+            "M": "M",
+            "N": "N",
+            "O": "O",
+            "P": "P",
+            "Q": "Q",
+            "R": "R",
+            "S": "S",
+            "T": "T",
+            "U": "U",
+            "V": "V",
+            "W": "W",
+            "X": "X",
+            "Y": "Y",
+            "Z": "Z",
+            "UP": "UP",
+            "DOWN": "DOWN",
+            "LEFT": "LEFT",
+            "RIGHT": "RIGHT",
+            "ENTER": "ENTER",
+            "BACKSPACE": "BACKSPACE",
+            "SPACE": "SPACE",
+            "SHIFT": "SHIFT"
+        },
+        "DEFAULT": {
+            "UP": "UP",
+            "DOWN": "DOWN",
+            "LEFT": "LEFT",
+            "RIGHT": "RIGHT",
+            "SELECT": "X",
+            "BACK": "Z",
+            "MORE": "C",
+            "PAUSE": "SPACE",
+            "RUN": "SHIFT",
+            "MAP": "M",
+            "NOTEBOOK": "N",
+            "INVENTORY": "I"
+        },
+        "CUSTOM": {
+            "UP": "UP",
+            "DOWN": "DOWN",
+            "LEFT": "LEFT",
+            "RIGHT": "RIGHT",
+            "SELECT": "X",
+            "BACK": "Z",
+            "MORE": "C",
+            "PAUSE": "SPACE",
+            "RUN": "SHIFT",
+            "MAP": "M",
+            "NOTEBOOK": "N",
+            "INVENTORY": "I"
+        }
+    }
+}

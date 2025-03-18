@@ -47,18 +47,13 @@ export default class HudWatch extends HudCommon {
         this.addHiddenWatch();
     }
 
-    addHiddenWatch() {
-        let conditions = 'with_coinpurse';
-        
-        //this.watch.display = this.scene.add.bitmapText(this.position[conditions].unfocused.x+8,this.position[conditions].unfocused.y + 11, 'SkeleWatch', "00:00MB", 16).setScrollFactor(0).setOrigin(0).setDepth(15000);
+    addHiddenWatch(conditions='with_coinpurse') {
         this.watch.display = this.makeBitmapText(this.position[conditions].unfocused.x+8,this.position[conditions].unfocused.y + 11, 64, 16, 'SkeleWatch')
         this.watch.display.setText("00:00BM");
         this.watch.slice = this.makeBlock(this.position[conditions].unfocused.x, this.position[conditions].unfocused.y, this.watch.display.displayWidth + 4, 32, 'HUD_DIGITAL_WATCH_FACE');
-
     }
 
-    plungeWatch() {
-        let conditions = 'with_coinpurse';
+    plungeWatch(conditions='with_coinpurse') {
         if (this.watch.slice != null) {
             this.scene.tweens.add({
                 targets: this.watch.slice,
@@ -82,15 +77,10 @@ export default class HudWatch extends HudCommon {
         }
     }
 
-    addWatch () {
-        let conditions = 'with_coinpurse';
-        /// Get whether we have a coinpurse to get the position
-
+    addWatch (conditions='with_coinpurse') {
         this.watch.display = this.makeBitmapText(this.position[conditions].focused.x+8,this.position[conditions].focused.y + 11, 64, 16, 'SkeleWatch')
         this.watch.display.setText("00:00BM");
         this.watch.slice = this.makeBlock(this.position[conditions].focused.x, this.position[conditions].focused.y, this.watch.display.displayWidth + 4, 32, 'HUD_DIGITAL_WATCH_FACE');
-
-        
     }
 
     setWatch (time) {

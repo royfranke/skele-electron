@@ -6,6 +6,7 @@ import LoadGameScene from "./scene/4_load-game.js";
 import TutorialScene from "./scene/5_tutorial.js";
 import GameScene from "./scene/6_game.js";
 import InteriorScene from "./scene/7_interior.js";
+import CourtsScene from "./scene/8_courts.js";
 
 const config = {
   width: 960,
@@ -22,7 +23,8 @@ const config = {
     LoadGameScene,
     TutorialScene,
     GameScene,
-    InteriorScene
+    InteriorScene,
+    CourtsScene
   ],
   physics: {
     default: "arcade",

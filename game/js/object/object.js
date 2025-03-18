@@ -225,6 +225,10 @@ export default class Object {
             return this.scene.player.goToSleep();
         }
 
+        if (action == 'RING') {
+            this.scene.manager.hud.hudSound.play('DING_DING');
+        }
+
         console.log("Doing action: "+action);
     }
 
@@ -246,18 +250,30 @@ export default class Object {
         }
     }
 
-    setLamp (status) {
+    setLamp () {
         if (this.info.type == 'STREETLAMP') {
-            if (status == 'ON') {
-                //console.log("Setting lamp on");
-                var x_pixels = (this.tile_x - this.info.base.x) * 16;
-                var y_pixels = (this.tile_y - this.info.base.y) * 16;
-                this.light_cone = this.scene.manager.fx.handleFX('STREET_LIGHT_CONE', x_pixels + this.info.offset.x, y_pixels + this.info.offset.y);
-                this.light_cone.setOrigin(.5,0).setDepth(y_pixels + (this.info.sprite.h) + (16*5)).setAlpha(.45).setBlendMode(Phaser.BlendModes.SCREEN);
+            var self = this;
+            var callback = function(now, today) {
+                if (now.hour >= 18 || now.hour < 6) {
+                    if (self.light_cone == null) {
+                        var x_pixels = (self.tile_x - self.info.base.x) * 16;
+                        var y_pixels = (self.tile_y - self.info.base.y) * 16;
+                        self.light_cone = self.scene.manager.fx.handleFX('STREET_LIGHT_CONE', x_pixels + self.info.offset.x, y_pixels + self.info.offset.y);
+                        self.light_cone.setOrigin(.5,0).setDepth(y_pixels + (self.info.sprite.h) + (16*5)).setAlpha(.45).setBlendMode(Phaser.BlendModes.SCREEN);
 
-                this.light = this.scene.add.ellipse(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y + (16*5.6), 48,22, 0xf47832, .15).setDepth(y_pixels + (this.info.sprite.h) + (16*4)).setBlendMode(Phaser.BlendModes.LIGHTER);
-                //this.light = this.scene.lights.addPointLight(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, 0xf47832, 4, 1,.1).setDepth(y_pixels + (this.info.sprite.h) + 1);
-            }
+                        self.light = self.scene.add.ellipse(x_pixels + self.info.offset.x, y_pixels + self.info.offset.y + (16*5.6), 48,22, 0xf47832, .15).setDepth(y_pixels + (self.info.sprite.h) + (16*4)).setBlendMode(Phaser.BlendModes.LIGHTER);
+                    }
+                }
+                else {
+                    if (self.light_cone != null) {
+                        self.light_cone.destroy();
+                        self.light.destroy();
+                        self.light_cone = null;
+                        self.light = null;
+                    }
+                }
+            };
+            this.scene.events.addListener('HOUR_CHANGE', callback, this);
         }
 
     }
@@ -288,7 +304,7 @@ export default class Object {
             this.createGlass();
         }
         // Temporary for testing
-        this.setLamp('ON');
+        this.setLamp();
         return this;
     }
 

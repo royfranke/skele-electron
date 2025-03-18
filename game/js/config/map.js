@@ -1635,7 +1635,7 @@ const MAP_CONFIG = {
             lines: {
                 x: 27,
                 y: 3,
-                width: 11,
+                width: 12,
                 height: 27
             },
             block: {
@@ -1659,7 +1659,7 @@ const MAP_CONFIG = {
                                                                     },
                 {
             lines: {
-                x: 38,
+                x: 39,
                 y: 3,
                 width: 12,
                 height: 27
@@ -1683,6 +1683,68 @@ const MAP_CONFIG = {
                 
             },
                                                                     },
+                {
+            lines: {
+                x: 3,
+                y: 3,
+                width: 20,
+                height: 11
+            },
+            block: {
+                x: 2,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "N",
+                dir: "W",
+                number: "100",
+                street: "Belly Button Street",
+            },
+            structure: {
+                type: "CORNER-STORE-LEFT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "CORPORATION",
+name: "Ossifcorp",
+listingName: "Ossifcorp Industries",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "17:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "17:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "17:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "17:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "17:00"
+            },
+    saturday: {
+        closed: "TRUE",    },
+    sunday: {
+        closed: "TRUE",    }
+},
+                rooms: {
+    }
+                
+            },
+                                                                                            },
                 {
             lines: {
                 x: 38,
@@ -2169,7 +2231,7 @@ sells: [
         ],
  },
         roomData: { 
-                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"2","y":"2","slug":"WALL_CALENDAR"},{"x":"4","y":"3","slug":"ADDING_MACHINE"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
+                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"2","y":"2","slug":"WALL_CALENDAR"},{"x":"4","y":"3","slug":"ADDING_MACHINE"},{"x":"3","y":"3","slug":"COUNTER_BELL"},{"x":"2","y":"1","slug":"NO_SMOKING_PAPER"},{"x":"3","y":"2","slug":"PAPER_SIGN_ARROW"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
                 recipeList: [{"x":"3","y":"0","slug":"PLANK.BROWN_"},{"x":"4","y":"0","slug":"PLANK.BROWN_"},{"x":"5","y":"0","slug":"PLANK.BROWN_"},{"x":"3","y":"1","slug":"PLANK.BROWN_"},{"x":"4","y":"1","slug":"PLANK.BROWN_"},{"x":"5","y":"1","slug":"PLANK.BROWN_"},{"x":"3","y":"2","slug":"PLANK.BROWN_"},{"x":"4","y":"2","slug":"PLANK.BROWN_"},{"x":"5","y":"2","slug":"PLANK.BROWN_"},{"x":"3","y":"3","slug":"PLANK.BROWN_"},{"x":"4","y":"3","slug":"PLANK.BROWN_"},{"x":"5","y":"3","slug":"PLANK.BROWN_"}],
                 removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"0","y":"3"},{"x":"1","y":"3"},{"x":"2","y":"3"},{"x":"2","y":"6"},{"x":"3","y":"6"},{"x":"4","y":"6"},{"x":"5","y":"6"}]
          }
@@ -2309,9 +2371,9 @@ services: [
                     },
                 {
             lines: {
-                x: 41,
+                x: 42,
                 y: 3,
-                width: 13,
+                width: 12,
                 height: 26
             },
             block: {
@@ -2335,9 +2397,9 @@ services: [
                                                                     },
                 {
             lines: {
-                x: 28,
+                x: 29,
                 y: 3,
-                width: 13,
+                width: 12,
                 height: 26
             },
             block: {
@@ -2361,9 +2423,9 @@ services: [
                                                                     },
                 {
             lines: {
-                x: 15,
+                x: 16,
                 y: 3,
-                width: 13,
+                width: 12,
                 height: 26
             },
             block: {
@@ -2582,6 +2644,387 @@ delivers: [
                     },
                 {
             lines: {
+                x: 3,
+                y: 0,
+                width: 11,
+                height: 33
+            },
+            block: {
+                x: 3,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "E",
+                number: "101",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "DUPLEX-LEFT",
+                zoning: "RESIDENTIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
+                {
+            lines: {
+                x: 14,
+                y: 0,
+                width: 11,
+                height: 33
+            },
+            block: {
+                x: 3,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "E",
+                number: "103",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "DUPLEX-RIGHT",
+                zoning: "RESIDENTIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
+                {
+            lines: {
+                x: 25,
+                y: 0,
+                width: 12,
+                height: 33
+            },
+            block: {
+                x: 3,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "E",
+                number: "105",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "DUPLEX-LEFT",
+                zoning: "RESIDENTIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
+                {
+            lines: {
+                x: 37,
+                y: 0,
+                width: 12,
+                height: 33
+            },
+            block: {
+                x: 3,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "E",
+                number: "107",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "DUPLEX-RIGHT",
+                zoning: "RESIDENTIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
+                {
+            lines: {
+                x: 33,
+                y: 14,
+                width: 21,
+                height: 15
+            },
+            block: {
+                x: 2,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "101",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "CORNER-STORE-LEFT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "HARDWARE",
+name: "Bits and Nuts Hardware Store",
+listingName: "Bits &amp; Nuts Hardware Store",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "17:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "14:00"
+            }
+},
+sells: [
+            "STAPLE_GUN", 
+                "STAPLES", 
+                "SIDEWALK_CHALK_", 
+                "SPADE", 
+                "SPRAY_PAINT", 
+                "RAKE", 
+                "SHOVEL", 
+                "WATERING_CAN", 
+                "HEDGE_TRIMMERS", 
+                "SCISSORS", 
+                "SACK_GRASS_SEED", 
+                "SACK_MULCH", 
+                "BIRD_SEED_BAG", 
+                "BROOM", 
+                "MOP", 
+                "COMBO_LOCK_RED"
+        ],
+                rooms: {
+    }
+                
+            },
+                                                                                            },
+                {
+            lines: {
+                x: 23,
+                y: 14,
+                width: 10,
+                height: 15
+            },
+            block: {
+                x: 2,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "103",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "STOREFRONT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "BUTCHER",
+name: "Butcher",
+listingName: "Flesh and Bone Butcher",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "16:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+                rooms: {
+    }
+                
+            },
+                                                                                            },
+                {
+            lines: {
+                x: 13,
+                y: 14,
+                width: 10,
+                height: 15
+            },
+            block: {
+                x: 2,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "105",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "STOREFRONT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "BARBER",
+name: "Barber",
+listingName: "Barber TBA",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+services: [
+    ],
+                rooms: {
+    }
+                
+            },
+                                                                                            },
+                {
+            lines: {
+                x: 3,
+                y: 14,
+                width: 10,
+                height: 15
+            },
+            block: {
+                x: 2,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "107",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "CORNER-STORE-LEFT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "BAR",
+name: "Pour Yorick",
+listingName: "Pour Yorick",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "23:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+serves: [
+            "BEER"
+        ],
+                rooms: {
+    }
+                
+            },
+                                                                                            },
+                {
+            lines: {
                 x: 44,
                 y: 3,
                 width: 8,
@@ -2654,11 +3097,111 @@ delivers: [
                 "SOUP_CONTAINER_LARGE", 
                 "SOUP_CONTAINER_SMALL"
         ],
-                rooms: {
+                front_room: 17,rooms: {
+        room_17: { 
+    id: 17,
+    name: "Diner Test",
+    floorWidth: 10,
+    floorHeight: 12,
+    wallHeight: 3,
+    overallHeight: 14,
+    overallWidth: 12,
+    floorSlug: "TILE.CHECKERED_WHITE_BROWN_",
+    wallSlug: "",
+        listing: { slug: "CHINESE_FOOD",
+name: "Lucky Dragon II",
+listingName: "Lucky Dragon II",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "18:00"
+            }
+},
+sells: [
+            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL", 
+                                                        ],
+serves: [
+                                                                                    ],
+delivers: [
+                                                            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL"
+        ],
+ },
+        roomData: { 
+                featureList: [{"x":"0","y":"2","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"3","slug":"DINER_TABLE"},{"x":"0","y":"5","slug":"DINER_BOOTH_GREEN_N"},{"x":"0","y":"5","slug":"DINER_BOOTH_RED_S"},{"x":"0","y":"6","slug":"DINER_TABLE"},{"x":"0","y":"8","slug":"DINER_BOOTH_RED_N"},{"x":"0","y":"8","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"9","slug":"DINER_TABLE"},{"x":"0","y":"11","slug":"DINER_BOOTH_GREEN_N"},{"x":"5","y":"5","slug":"DINER_TABLE"},{"x":"4","y":"5","slug":"DINER_CHAIR_MAROON"},{"x":"8","y":"11","slug":"FRONTDOOR"}],
+                recipeList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"3","y":"1"}],
+                removalList: []
+         }
+}
+
     }
                 
             },
-                                                                                            },
+                                                                                                            portal: {
+                room_id: 17,
+                x: 9,
+                y: 14
+            }
+                    },
+                {
+            lines: {
+                x: 26,
+                y: 3,
+                width: 28,
+                height: 11
+            },
+            block: {
+                x: 2,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "E",
+                dir: "S",
+                number: "101",
+                street: "Midline Ave",
+            },
+            structure: {
+                type: "PARKING-LOT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
                 {
             lines: {
                 x: 44,
@@ -2822,6 +3365,226 @@ delivers: [
                 facing: "S",
                 dir: "W",
                 number: "109",
+                street: "Sundown Lane",
+            },
+            structure: {
+                type: "BUNGALOW",
+                zoning: "RESIDENTIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
+                {
+            lines: {
+                x: 48,
+                y: 3,
+                width: 10,
+                height: 26
+            },
+            block: {
+                x: 1,
+                y: 1
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "201",
+                street: "Sundown Lane",
+            },
+            structure: {
+                type: "CORNER-STORE-RIGHT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "BAKERY",
+name: "Bakery",
+listingName: "Bakery TBA",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "13:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+sells: [
+            "PRETZEL", 
+                "MUFFIN", 
+                "CUPCAKE_PINK", 
+                "CUPCAKE_YELLOW", 
+                "CUPCAKE_WHITE", 
+                "CUPCAKE_CHOCOLATE", 
+                "COOKIE", 
+                "MUFFIN_BERRY", 
+                "STORE_BREAD"
+        ],
+serves: [
+                                                                            ],
+                rooms: {
+    }
+                
+            },
+                                                                                            },
+                {
+            lines: {
+                x: 38,
+                y: 3,
+                width: 10,
+                height: 26
+            },
+            block: {
+                x: 1,
+                y: 1
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "203",
+                street: "Sundown Lane",
+            },
+            structure: {
+                type: "STOREFRONT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
+                slug: "FLORIST",
+name: "Florist",
+listingName: "Florist TBA",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "TRUE",    }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "17:00"
+            }
+},
+sells: [
+    ],
+                rooms: {
+    }
+                
+            },
+                                                                                            },
+                {
+            lines: {
+                x: 24,
+                y: 3,
+                width: 12,
+                height: 26
+            },
+            block: {
+                x: 1,
+                y: 1
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "205",
+                street: "Sundown Lane",
+            },
+            structure: {
+                type: "BUNGALOW",
+                zoning: "RESIDENTIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
+                {
+            lines: {
+                x: 12,
+                y: 3,
+                width: 12,
+                height: 26
+            },
+            block: {
+                x: 1,
+                y: 1
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "207",
+                street: "Sundown Lane",
+            },
+            structure: {
+                type: "BUNGALOW",
+                zoning: "RESIDENTIAL",
+            },
+            listing: {
+                
+            },
+                                                                    },
+                {
+            lines: {
+                x: 0,
+                y: 3,
+                width: 12,
+                height: 26
+            },
+            block: {
+                x: 1,
+                y: 1
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "209",
                 street: "Sundown Lane",
             },
             structure: {

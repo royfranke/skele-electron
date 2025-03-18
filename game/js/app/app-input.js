@@ -11,7 +11,8 @@ export default class AppInput {
     this.available = {};
     this.initialized = false;
     this.available_initialized = false;
-    this.configJSON = this.scene.cache.json.get('INPUTCONFIG');
+    var config = this.scene.cache.json.get('SETTINGSCONFIG');
+    this.configJSON = config.INPUT;
 
   }
   

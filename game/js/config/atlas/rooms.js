@@ -280,7 +280,7 @@ sells: [
         ],
  },
         roomData: { 
-                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"2","y":"2","slug":"WALL_CALENDAR"},{"x":"4","y":"3","slug":"ADDING_MACHINE"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
+                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"2","y":"2","slug":"WALL_CALENDAR"},{"x":"4","y":"3","slug":"ADDING_MACHINE"},{"x":"3","y":"3","slug":"COUNTER_BELL"},{"x":"2","y":"1","slug":"NO_SMOKING_PAPER"},{"x":"3","y":"2","slug":"PAPER_SIGN_ARROW"},{"x":"0","y":"6","slug":"FRONTDOOR"}],
                 recipeList: [{"x":"3","y":"0","slug":"PLANK.BROWN_"},{"x":"4","y":"0","slug":"PLANK.BROWN_"},{"x":"5","y":"0","slug":"PLANK.BROWN_"},{"x":"3","y":"1","slug":"PLANK.BROWN_"},{"x":"4","y":"1","slug":"PLANK.BROWN_"},{"x":"5","y":"1","slug":"PLANK.BROWN_"},{"x":"3","y":"2","slug":"PLANK.BROWN_"},{"x":"4","y":"2","slug":"PLANK.BROWN_"},{"x":"5","y":"2","slug":"PLANK.BROWN_"},{"x":"3","y":"3","slug":"PLANK.BROWN_"},{"x":"4","y":"3","slug":"PLANK.BROWN_"},{"x":"5","y":"3","slug":"PLANK.BROWN_"}],
                 removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"0","y":"3"},{"x":"1","y":"3"},{"x":"2","y":"3"},{"x":"2","y":"6"},{"x":"3","y":"6"},{"x":"4","y":"6"},{"x":"5","y":"6"}]
          }
@@ -398,6 +398,106 @@ services: [
                 featureList: [{"x":"4","y":"2","slug":"DINER_CHAIR_MAROON"},{"x":"0","y":"3","slug":"FRONTDOOR"}],
                 recipeList: [],
                 removalList: [{"x":"2","y":"3"},{"x":"3","y":"3"},{"x":"4","y":"3"},{"x":"5","y":"3"}]
+         }
+}
+, room_15: { 
+    id: 15,
+    name: "Auntie Room 2",
+    floorWidth: 5,
+    floorHeight: 6,
+    wallHeight: 3,
+    overallHeight: 8,
+    overallWidth: 7,
+    floorSlug: "CARPET.WHITE_",
+    wallSlug: "PAINT.PURPLE_WORN_LIGHT_",
+        roomData: { 
+                featureList: [{"x":"1","y":"5","slug":"FRONTDOOR"}],
+                recipeList: [],
+                removalList: []
+         }
+}
+, room_16: { 
+    id: 16,
+    name: "Auntie Room 3",
+    floorWidth: 5,
+    floorHeight: 3,
+    wallHeight: 3,
+    overallHeight: 5,
+    overallWidth: 7,
+    floorSlug: "TILE.GREEN_CHECKERED_",
+    wallSlug: "PAINT.PURPLE_WORN_LIGHT_",
+        roomData: { 
+                featureList: [{"x":"4","y":"1","slug":"FRONTDOOR"}],
+                recipeList: [],
+                removalList: []
+         }
+}
+, room_17: { 
+    id: 17,
+    name: "Diner Test",
+    floorWidth: 7,
+    floorHeight: 12,
+    wallHeight: 3,
+    overallHeight: 14,
+    overallWidth: 9,
+    floorSlug: "TILE.CHECKERED_WHITE_BROWN_",
+    wallSlug: "",
+        listing: { slug: "CHINESE_FOOD",
+name: "Lucky Dragon II",
+listingName: "Lucky Dragon II",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "18:00"
+            }
+},
+sells: [
+            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL", 
+                                                        ],
+serves: [
+                                                                                    ],
+delivers: [
+                                                            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL"
+        ],
+ },
+        roomData: { 
+                featureList: [{"x":"0","y":"2","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"3","slug":"DINER_TABLE"},{"x":"0","y":"5","slug":"DINER_BOOTH_GREEN_N"},{"x":"0","y":"5","slug":"DINER_BOOTH_RED_S"},{"x":"0","y":"6","slug":"DINER_TABLE"},{"x":"0","y":"8","slug":"DINER_BOOTH_RED_N"},{"x":"0","y":"8","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"9","slug":"DINER_TABLE"},{"x":"0","y":"11","slug":"DINER_BOOTH_GREEN_N"},{"x":"4","y":"1","slug":"STORE_WINDOW_COUNTER_3"},{"x":"5","y":"11","slug":"FRONTDOOR"}],
+                recipeList: [{"x":"4","y":"5","slug":"TILE.CHECKERED_BLUE_WHITE_"},{"x":"5","y":"9","slug":"TILE.CHECKERED_BLUE_WHITE_"}],
+                removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"3","y":"1"}]
          }
 }
   };

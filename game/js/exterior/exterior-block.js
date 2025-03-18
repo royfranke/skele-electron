@@ -208,10 +208,23 @@ export default class Block {
         if (this.block.offset.n > 0) {
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+7, this.block.top,'POSTBOX_S');
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+12, this.block.top,'HYDRANT_CITY_');
+
         }  
         if (this.block.offset.s > 0) {
             this.buildStreetPole(this.block.left+10, this.block.bottom-1,{},true);
             this.scene.manager.objectManager.newObjectToWorld(this.block.right-7, this.block.bottom-1,'HYDRANT_CITY_');
+
+
+            this.scene.manager.treeManager.newTreeToWorld(this.block.left+8.25, this.block.bottom - .25, 'ASH');
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+8, this.block.bottom - 1, 2, 1);
+
+            this.scene.manager.treeManager.newTreeToWorld(this.block.left+27.25, this.block.bottom - .25, 'ASH');
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+27, this.block.bottom - 1, 2, 1);
+
+            this.scene.manager.treeManager.newTreeToWorld(this.block.left+36.25, this.block.bottom - .25, 'ASH');
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+36, this.block.bottom - 1, 2, 1);
+
+
         }
         if (this.block.offset.e > 0) {
             this.buildStreetPole(this.block.right-1, this.block.bottom-7,{TELEPHONE:true},false);

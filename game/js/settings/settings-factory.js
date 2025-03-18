@@ -3,9 +3,7 @@ export default class SettingsFactory {
 
     constructor(scene) {
         this.scene = scene;
-        this.config = {
-            INPUT: this.scene.cache.json.get('INPUTCONFIG')
-        };
+        this.config = this.scene.cache.json.get('SETTINGSCONFIG');
     }
 
     getSettingsData (type="input") {

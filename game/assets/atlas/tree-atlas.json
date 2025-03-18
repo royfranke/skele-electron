@@ -1,0 +1,54 @@
+{
+  "frames": [
+  
+    {
+		"filename": "ASH_TRUNK-1",
+		"frame": {"x":144,"y":0,"w":32,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
+		"sourceSize": {"w":32,"h":64 }
+	},
+        {
+		"filename": "ASH_TRUNK-2",
+		"frame": {"x":176,"y":0,"w":32,"h":80 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":80 },
+		"sourceSize": {"w":32,"h":80 }
+	},
+        {
+		"filename": "ASH_TRUNK-3",
+		"frame": {"x":208,"y":0,"w":32,"h":80 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":80 },
+		"sourceSize": {"w":32,"h":80 }
+	},
+    
+      {
+		"filename": "ASH_BRANCH-1",
+		"frame": {"x":0,"y":0,"w":32,"h":32 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32 },
+		"sourceSize": {"w":32,"h":32 }
+	},
+        {
+		"filename": "ASH_BRANCH-2",
+		"frame": {"x":32,"y":0,"w":32,"h":32 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32 },
+		"sourceSize": {"w":32,"h":32 }
+	},
+        {
+		"filename": "ASH_BRANCH-3",
+		"frame": {"x":64,"y":0,"w":32,"h":48 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":48 },
+		"sourceSize": {"w":32,"h":48 }
+	},
+        {
+		"filename": "ASH_BRANCH-4",
+		"frame": {"x":96,"y":0,"w":16,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":64 },
+		"sourceSize": {"w":16,"h":64 }
+	},
+        {
+		"filename": "ASH_BRANCH-5",
+		"frame": {"x":112,"y":0,"w":32,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":64 },
+		"sourceSize": {"w":32,"h":64 }
+	}
+      ]
+}

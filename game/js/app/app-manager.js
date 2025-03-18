@@ -142,7 +142,7 @@ export default class AppManager {
         this.scene.time.addEvent({
             delay: state.fadeOut,
             callback: ()=>{
-                if (verbose) { console.log("Ending/Switching Scene: "+state.name);}
+                if (verbose) { console.log("Ending/Switching Scene: "+state.name+", switch to "+ switchToKey);}
                 this.switchTo(switchToKey);
             }
         });

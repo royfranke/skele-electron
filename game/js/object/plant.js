@@ -87,7 +87,7 @@ export default class Plant {
 
             var y_depth = Math.floor((this.tile_y - this.info.base.y) * 16);
 
-            var depth = behind ? y_depth + (this.info.sprite.h) : (this.tile_y * 16) + this.info.sprite.h + 1;
+            var depth = behind ? (this.sprite.depth - 1) : (this.sprite.depth + 1);
 
             var sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'PLANTS', frame, 0).setOrigin(.5, 1).setDepth(depth + 1);
 
@@ -163,9 +163,9 @@ export default class Plant {
 
     setLight(keylight) {
         if (this.sprite != null) {
-            this.sprite.setTint(keylight.plants_tint);
+            this.sprite.setTint(keylight.objects_tint);
             for (var i = 0; i < this.flowers.length; i++) {
-                this.flowers[i].setTint(keylight.plants_tint);
+                this.flowers[i].setTint(keylight.objects_tint);
             }
 
         }
@@ -179,7 +179,7 @@ export default class Plant {
         var x_pixels = (_x - base.x) * 16 + this.info.sprite.x;
         var y_pixels = (_y - base.y) * 16 + this.info.sprite.y;
         var frame = this.getStageFrame();
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'PLANTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h));
+        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'PLANTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h/2));
         this.setFlower(false, false);
 
     }

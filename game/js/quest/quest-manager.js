@@ -49,19 +49,29 @@ import QuestFactory from './quest-factory.js';
 
 
     addQuest (quest,hud=true) {
+        console.log(quest);
+        var quest_items = this.grantQuestItems(quest,hud);
+        if (quest_items == false) { return 'CLEAR_SPACE'; }
         this.questLog.current.push(quest.slug);
-        this.grantQuestItems(quest,hud);
+        
         this.scene.manager.hud.hudSound.play('NEW_QUEST');
         if (hud) {
             this.scene.manager.hud.hudQuest.addQuest(quest.summary);
         }
+        
+        var value = 0;
+        for (var key in quest.completion){
+            console.log(quest.completion[key]);
+            value = quest.completion[key].req_group;
+        }
+        this.listen(value);
         return true;
     }
 
     grantQuestItems (quest,hud=true) {
         var item_manager = this.scene.manager.itemManager;
         var items = [];
-        console.log(quest);
+        var item_space = true;
         quest.giver_items.forEach(item => {
             if (item.items != undefined) {
 
@@ -71,32 +81,18 @@ import QuestFactory from './quest-factory.js';
                 });
             }
             var result = item_manager.newItemToPockets(item.slug, items);
+            if (!result) {
+                console.log("QuestManager.grantQuestItems: Could not add item to pockets.");
+                item_space = false;
+            }
 
             if (hud) {
                 /// Item effect
             }
         });
+
+        return item_space;
     }
-
-
-    /*
-
-          items_slugs.forEach(function (enclosed_item_slug) {
-            var enclosed_item = item_manager.newItem(enclosed_item_slug);
-            items.push(enclosed_item);
-          });
-          var result = item_manager.newItemToPockets(item_slug, items);
-          if (result != false) {
-            this.scene.manager.hud.think('You got a new ' + item_slug + '.');
-
-            
-            this.greeting = true;
-          }
-          else {
-            this.scene.manager.hud.think('Your pockets are too full.');
-            return false;
-          }
-    */
 
     getCurrentQuest (place=0) {
         if (this.questLog.current.length >= place + 1) {
@@ -115,10 +111,13 @@ import QuestFactory from './quest-factory.js';
         if (this.questLog.current.length >= place + 1) {
             var quest = this.questLog.current.splice(place,1);
             this.questLog.complete.push(quest);
+            console.log("Quest complete");
+            this.scene.manager.hud.hudQuest.closeQuest();
         }
         else {
             console.warn("QuestService.completeQuest: current quest log does not contain a quest at the requested position ("+place+")");
         }
+
     }
 
     discardQuest (place=0) {
@@ -139,6 +138,16 @@ import QuestFactory from './quest-factory.js';
             console.warn("QuestService.abandonQuest: current quest log does not contain a quest at the requested position ("+place+")");
         }
     }
+
+    listen (req_id) {
+        var callback = function () {
+            this.completeQuest();
+            console.log('REQ_' + req_id + '_MET!');
+        }
+        console.log('REQ_' + req_id + '_MET SET');
+        this.scene.events.addListener('REQ_' + req_id + '_MET', callback, this, true);
+   }
+
 
 
     

@@ -78,7 +78,7 @@
                                           'CHALK_ARROW_FX-11',
                                           'CHALK_ARROW_FX-12'
                                       ],
-                  repeat: -1
+                  repeat: 0
               },
                           CHALK_ARROW_FX_2: {
                   name: 'Chalk Arrow FX 2',
@@ -94,7 +94,7 @@
                                           'CHALK_ARROW_FX_2-8',
                                           'CHALK_ARROW_FX_2-9'
                                       ],
-                  repeat: 4
+                  repeat: 0
               },
                           CLOUD_CHALK_: {
                   name: 'Chalk Cloud',
@@ -150,6 +150,22 @@
                                           'COIN_10_-6',
                                           'COIN_10_-7',
                                           'COIN_10_-8'
+                                      ],
+                  repeat: -1
+              },
+                          DRIP_SINGLE: {
+                  name: 'Drip Single',
+                  slug: 'DRIP_SINGLE',
+                  frames: [
+                                          'DRIP_SINGLE-1',
+                                          'DRIP_SINGLE-2',
+                                          'DRIP_SINGLE-3',
+                                          'DRIP_SINGLE-4',
+                                          'DRIP_SINGLE-5',
+                                          'DRIP_SINGLE-6',
+                                          'DRIP_SINGLE-7',
+                                          'DRIP_SINGLE-8',
+                                          'DRIP_SINGLE-9'
                                       ],
                   repeat: -1
               },
@@ -428,6 +444,57 @@
                                           'STEAM_START_-2',
                                           'STEAM_START_-3',
                                           'STEAM_START_-4'
+                                      ],
+                  repeat: 0
+              },
+                          STINK_END: {
+                  name: 'Stink End',
+                  slug: 'STINK_END',
+                  frames: [
+                                          'STINK_END-1',
+                                          'STINK_END-2',
+                                          'STINK_END-3',
+                                          'STINK_END-4',
+                                          'STINK_END-5',
+                                          'STINK_END-6',
+                                          'STINK_END-7'
+                                      ],
+                  repeat: 0
+              },
+                          STINK_REPEAT: {
+                  name: 'Stink Repeat',
+                  slug: 'STINK_REPEAT',
+                  frames: [
+                                          'STINK_REPEAT-1',
+                                          'STINK_REPEAT-2',
+                                          'STINK_REPEAT-3',
+                                          'STINK_REPEAT-4',
+                                          'STINK_REPEAT-5',
+                                          'STINK_REPEAT-6',
+                                          'STINK_REPEAT-7',
+                                          'STINK_REPEAT-8'
+                                      ],
+                  repeat: -1
+              },
+                          STINK_START: {
+                  name: 'Stink Start',
+                  slug: 'STINK_START',
+                  frames: [
+                                          'STINK_START-1',
+                                          'STINK_START-2',
+                                          'STINK_START-3',
+                                          'STINK_START-4',
+                                          'STINK_START-5',
+                                          'STINK_START-6',
+                                          'STINK_START-7',
+                                          'STINK_START-8',
+                                          'STINK_START-9',
+                                          'STINK_START-10',
+                                          'STINK_START-11',
+                                          'STINK_START-12',
+                                          'STINK_START-13',
+                                          'STINK_START-14',
+                                          'STINK_START-15'
                                       ],
                   repeat: 0
               },

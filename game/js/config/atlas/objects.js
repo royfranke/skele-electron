@@ -68,7 +68,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
-        depth: 0,
+        depth: -4,
         sprite: {
           h:25, 
           w:16,
@@ -87,7 +87,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        states: [],            slots: 5,
+        states: [],            slots: 0,
             items: [],
 
           interactions: {
@@ -1894,6 +1894,58 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          COUNTER_BELL: {
+        name: 'Counter Bell',
+        slug: 'COUNTER_BELL', 
+        type: 'COUNTER_BELL',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 8,
+        sprite: {
+          h:9, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:4, 
+          w:6
+        },
+        offset: {
+          x:8, 
+          y:2
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        actions: [ {
+            name: 'RING', stateTrigger: 'RINGING', validStates: ['DEFAULT']
+          }],
+        states: [{
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['COUNTER_BELL-1',]},            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['COUNTER_BELL-1',]
+              }, {
+              name: 'RINGING',
+              transition: 'DEFAULT',
+              frames: ['COUNTER_BELL-2', 'COUNTER_BELL-2', 'COUNTER_BELL-1', ]
+              },
+          ],
+
+          interactions: {
+                                  },
+    },
           COUNTERTOP_CORNER_BEIGE: {
         name: 'Countertop Corner Beige',
         slug: 'COUNTERTOP_CORNER_BEIGE', 
@@ -2522,6 +2574,44 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          DINER_TABLE: {
+        name: 'Diner Table',
+        slug: 'DINER_TABLE', 
+        type: 'TABLE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: -16,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:24, 
+          w:28
+        },
+        offset: {
+          x:2, 
+          y:12
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           DOOR_WINDOWS_SMALL_: {
         name: 'Door with Small Windows',
         slug: 'DOOR_WINDOWS_SMALL_', 
@@ -2607,7 +2697,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: -12,
         sprite: {
           h:16, 
           w:32,
@@ -2636,6 +2726,104 @@ const OBJECTS = {
               name: 'LOOKING_UNDER',
               transition: 'DEFAULT',
               frames: ['DOORMAT_1-1', 'DOORMAT_1-2', 'DOORMAT_1-3', 'DOORMAT_1-2', 'DOORMAT_1-1', ]
+              },
+          ],
+
+          interactions: {
+                                  },
+    },
+          DOORMAT_2: {
+        name: 'Doormat 2',
+        slug: 'DOORMAT_2', 
+        type: 'DOORMAT',
+        bounding: {
+          h:1, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        depth: -12,
+        sprite: {
+          h:16, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:24
+        },
+        offset: {
+          x:4, 
+          y:4
+        },
+        varieties: 3,
+        solid: 0,
+        portal: 0,
+        actions: [ {
+            name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
+          }],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['DOORMAT_2-1',]
+              }, {
+              name: 'LOOKING_UNDER',
+              transition: 'DEFAULT',
+              frames: ['DOORMAT_2-1', 'DOORMAT_2-2', 'DOORMAT_2-3', 'DOORMAT_2-3', 'DOORMAT_2-2', 'DOORMAT_2-1', ]
+              },
+          ],
+
+          interactions: {
+                                  },
+    },
+          DOORMAT_3: {
+        name: 'Doormat 3',
+        slug: 'DOORMAT_3', 
+        type: 'DOORMAT',
+        bounding: {
+          h:1, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:0
+        },
+        depth: -12,
+        sprite: {
+          h:16, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:24
+        },
+        offset: {
+          x:4, 
+          y:4
+        },
+        varieties: 3,
+        solid: 0,
+        portal: 0,
+        actions: [ {
+            name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
+          }],
+        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['DOORMAT_3-1',]
+              }, {
+              name: 'LOOKING_UNDER',
+              transition: 'DEFAULT',
+              frames: ['DOORMAT_3-1', 'DOORMAT_3-2', 'DOORMAT_3-3', 'DOORMAT_3-3', 'DOORMAT_3-2', 'DOORMAT_3-1', ]
               },
           ],
 
@@ -3498,6 +3686,120 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          EXT_WINDOW_2_GRAND_GREEN: {
+        name: 'Ext Window 2 Grand Green',
+        slug: 'EXT_WINDOW_2_GRAND_GREEN', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:28, 
+          w:26
+        },
+        offset: {
+          x:3, 
+          y:10
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_GRAND_WHITE: {
+        name: 'Ext Window 2 Grand White',
+        slug: 'EXT_WINDOW_2_GRAND_WHITE', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:28, 
+          w:26
+        },
+        offset: {
+          x:3, 
+          y:10
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_GRAND_WOOD: {
+        name: 'Ext Window 2 Grand Wood',
+        slug: 'EXT_WINDOW_2_GRAND_WOOD', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:28, 
+          w:26
+        },
+        offset: {
+          x:3, 
+          y:10
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           EXT_WINDOW_2_GRAY_BRICK_T_: {
         name: 'Ext Window 2 Gray Brick Topped',
         slug: 'EXT_WINDOW_2_GRAY_BRICK_T_', 
@@ -3574,6 +3876,272 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          EXT_WINDOW_2_SINGLE_BLUE: {
+        name: 'Ext Window 2 Single Blue',
+        slug: 'EXT_WINDOW_2_SINGLE_BLUE', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:39, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:22, 
+          w:17
+        },
+        offset: {
+          x:8, 
+          y:15
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_SINGLE_BROWN: {
+        name: 'Ext Window 2 Single Brown',
+        slug: 'EXT_WINDOW_2_SINGLE_BROWN', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:39, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:22, 
+          w:17
+        },
+        offset: {
+          x:8, 
+          y:15
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_SINGLE_CREAM: {
+        name: 'Ext Window 2 Single Cream',
+        slug: 'EXT_WINDOW_2_SINGLE_CREAM', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:39, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:22, 
+          w:17
+        },
+        offset: {
+          x:8, 
+          y:15
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_SINGLE_GREEN: {
+        name: 'Ext Window 2 Single Green',
+        slug: 'EXT_WINDOW_2_SINGLE_GREEN', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:39, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:22, 
+          w:17
+        },
+        offset: {
+          x:8, 
+          y:15
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_SINGLE_RED: {
+        name: 'Ext Window 2 Single Red',
+        slug: 'EXT_WINDOW_2_SINGLE_RED', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:39, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:22, 
+          w:17
+        },
+        offset: {
+          x:8, 
+          y:15
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_SINGLE_WEATHERED: {
+        name: 'Ext Window 2 Single Weathered',
+        slug: 'EXT_WINDOW_2_SINGLE_WEATHERED', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:39, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:22, 
+          w:17
+        },
+        offset: {
+          x:8, 
+          y:15
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_WINDOW_2_SINGLE_YELLOW: {
+        name: 'Ext Window 2 Single Yellow',
+        slug: 'EXT_WINDOW_2_SINGLE_YELLOW', 
+        type: 'WINDOW_EXT_',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:39, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:22, 
+          w:17
+        },
+        offset: {
+          x:8, 
+          y:15
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           EXT_WINDOW_2_YELLOW_BRICK_T_: {
         name: 'Ext Window 2 Yellow Brick Topped',
         slug: 'EXT_WINDOW_2_YELLOW_BRICK_T_', 
@@ -3604,6 +4172,44 @@ const OBJECTS = {
           y:6
         },
         varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          EXT_STORE_WALL_LIGHT: {
+        name: 'Exterior Store Wall Light',
+        slug: 'EXT_STORE_WALL_LIGHT', 
+        type: 'EXT_STORE_LIGHT',
+        bounding: {
+          h:1, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:17, 
+          w:23,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:4, 
+          w:4
+        },
+        offset: {
+          x:4, 
+          y:10
+        },
+        varieties: 2,
         solid: 0,
         portal: 0,
         actions: [],
@@ -3744,6 +4350,82 @@ const OBJECTS = {
               frames: ['OBJ_FLYER_GRAY-1', 'OBJ_FLYER_GRAY-2', 'OBJ_FLYER_GRAY-3', 'OBJ_FLYER_GRAY-4', 'OBJ_FLYER_GRAY-5', 'OBJ_FLYER_GRAY-6', 'OBJ_FLYER_GRAY-7', 'OBJ_FLYER_GRAY-8', ]
               },
           ],
+
+          interactions: {
+                                  },
+    },
+          DINER_BOOTH_GREEN_N: {
+        name: 'Green Diner Booth North',
+        slug: 'DINER_BOOTH_GREEN_N', 
+        type: 'BOOTH_SEAT',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:2, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:30
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          DINER_BOOTH_GREEN_S: {
+        name: 'Green Diner Booth South',
+        slug: 'DINER_BOOTH_GREEN_S', 
+        type: 'BOOTH_SEAT',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:2, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:8
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
 
           interactions: {
                                   },
@@ -4619,10 +5301,10 @@ const OBJECTS = {
               frames: ['NEON_KEY-1',]},{
               name: 'ON',
               transition: 'false',
-              frames: ['NEON_KEY-2','NEON_KEY-3','NEON_KEY-4','NEON_KEY-5','NEON_KEY-6','NEON_KEY-2','NEON_KEY-6','NEON_KEY-2','NEON_KEY-6',]},{
+              frames: ['NEON_KEY-2','NEON_KEY-2','NEON_KEY-2','NEON_KEY-2','NEON_KEY-3','NEON_KEY-3','NEON_KEY-3','NEON_KEY-4','NEON_KEY-4','NEON_KEY-4','NEON_KEY-5','NEON_KEY-5','NEON_KEY-5','NEON_KEY-6','NEON_KEY-6','NEON_KEY-6',]},{
               name: 'FLICKERING',
               transition: 'false',
-              frames: ['NEON_KEY-2','NEON_KEY-3','NEON_KEY-4','NEON_KEY-5','NEON_KEY-1','NEON_KEY-1','NEON_KEY-6','NEON_KEY-2','NEON_KEY-6',]},],
+              frames: ['NEON_KEY-2','NEON_KEY-2','NEON_KEY-1','NEON_KEY-2','NEON_KEY-3','NEON_KEY-3','NEON_KEY-1','NEON_KEY-1','NEON_KEY-4','NEON_KEY-4','NEON_KEY-5','NEON_KEY-5','NEON_KEY-5','NEON_KEY-6','NEON_KEY-1','NEON_KEY-6',]},],
 
           interactions: {
                                   },
@@ -4971,7 +5653,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
-        depth: 0,
+        depth: -8,
         sprite: {
           h:32, 
           w:32,
@@ -5347,7 +6029,8 @@ const OBJECTS = {
           ],
 
           interactions: {
-                                                group_11: {
+                                            group_11: {
+                req_group: 11,
                 req_group_name: 'Night light',
                 req_pocket_action: '',
                 req_world_action: 'TURN ON',
@@ -5374,7 +6057,83 @@ const OBJECTS = {
                     }
                                 ]
 
-            }                      },
+            },                      },
+    },
+          NO_SMOKING_PAPER: {
+        name: 'No Smoking Paper Sign',
+        slug: 'NO_SMOKING_PAPER', 
+        type: 'PAPER_SIGN',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:14, 
+          w:14,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:14, 
+          w:14
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          FAN_OSCILLATING: {
+        name: 'Oscillating Fan',
+        slug: 'FAN_OSCILLATING', 
+        type: 'FAN',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:20
+        },
+        varieties: 8,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
     },
           OUTLET_DOUBLE: {
         name: 'Outlet Double',
@@ -5412,7 +6171,8 @@ const OBJECTS = {
         states: [],
 
           interactions: {
-                                                group_11: {
+                                            group_11: {
+                req_group: 11,
                 req_group_name: 'Night light',
                 req_pocket_action: '',
                 req_world_action: 'TURN ON',
@@ -5439,7 +6199,7 @@ const OBJECTS = {
                     }
                                 ]
 
-            }                      },
+            },                      },
     },
           OUTLET_SINGLE: {
         name: 'Outlet Single',
@@ -5477,7 +6237,8 @@ const OBJECTS = {
         states: [],
 
           interactions: {
-                                                group_11: {
+                                            group_11: {
+                req_group: 11,
                 req_group_name: 'Night light',
                 req_pocket_action: '',
                 req_world_action: 'TURN ON',
@@ -5504,7 +6265,7 @@ const OBJECTS = {
                     }
                                 ]
 
-            }                      },
+            },                      },
     },
           OVEN_1: {
         name: 'Oven 1',
@@ -5584,6 +6345,82 @@ const OBJECTS = {
               frames: ['OVEN_1-3', 'OVEN_1-2', 'OVEN_1-1', ]
               },
           ],
+
+          interactions: {
+                                  },
+    },
+          PAPER_SIGN_POSTED: {
+        name: 'Paper Posted Sign',
+        slug: 'PAPER_SIGN_POSTED', 
+        type: 'PAPER_SIGN',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 32,
+        sprite: {
+          h:16, 
+          w:13,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:13
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          PAPER_SIGN_ARROW: {
+        name: 'Paper Sign Arrow',
+        slug: 'PAPER_SIGN_ARROW', 
+        type: 'PAPER_SIGN',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 18,
+        sprite: {
+          h:14, 
+          w:11,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:14, 
+          w:11
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
 
           interactions: {
                                   },
@@ -5757,6 +6594,82 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          PITCHED_ROOF_BROWN_E_5_2: {
+        name: 'Pitched Roof Brown E 5w-2s',
+        slug: 'PITCHED_ROOF_BROWN_E_5_2', 
+        type: 'PITCHED_ROOF',
+        bounding: {
+          h:8, 
+          w:6
+        },
+        base: {
+          h:5, 
+          w:5,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:121, 
+          w:96,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          PITCHED_ROOF_BROWN_W_5_2: {
+        name: 'Pitched Roof Brown W 5w-2s',
+        slug: 'PITCHED_ROOF_BROWN_W_5_2', 
+        type: 'PITCHED_ROOF',
+        bounding: {
+          h:8, 
+          w:6
+        },
+        base: {
+          h:5, 
+          w:5,
+          x:1, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:121, 
+          w:96,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           SOFA_PLAID_1: {
         name: 'Plaid Sofa',
         slug: 'SOFA_PLAID_1', 
@@ -5813,6 +6726,53 @@ const OBJECTS = {
               frames: []
               },
           ],
+
+          interactions: {
+                                  },
+    },
+          POOP: {
+        name: 'Poop',
+        slug: 'POOP', 
+        type: 'POOP',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: -8,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:4
+        },
+        varieties: 3,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['POOP-1',]},{
+              name: 'TRAMPLED',
+              transition: 'false',
+              frames: ['POOP-2',]},{
+              name: 'DESICCATED',
+              transition: 'false',
+              frames: ['POOP-3',]},],
 
           interactions: {
                                   },
@@ -6043,13 +7003,14 @@ const OBJECTS = {
         states: [],
 
           interactions: {
-                                                group_2: {
+                                            group_2: {
+                req_group: 2,
                 req_group_name: 'Mail Letter',
                 req_pocket_action: 'MAIL',
                 req_world_action: 'MAIL',
                 req_state: '',
                 req_result_item: '',
-                req_result_data_key: 'LETTERS',
+                req_result_data_key: 'MAILED_LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
                 req_result_texture: '',
@@ -6070,7 +7031,7 @@ const OBJECTS = {
                     }
                                 ]
 
-            }                      },
+            },                      },
     },
           POSTBOX_S: {
         name: 'Postbox South',
@@ -6108,13 +7069,14 @@ const OBJECTS = {
         states: [],
 
           interactions: {
-                                                group_2: {
+                                            group_2: {
+                req_group: 2,
                 req_group_name: 'Mail Letter',
                 req_pocket_action: 'MAIL',
                 req_world_action: 'MAIL',
                 req_state: '',
                 req_result_item: '',
-                req_result_data_key: 'LETTERS',
+                req_result_data_key: 'MAILED_LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
                 req_result_texture: '',
@@ -6135,7 +7097,7 @@ const OBJECTS = {
                     }
                                 ]
 
-            }                      },
+            },                      },
     },
           PSYCHIC_STOREFRONT_SIGN: {
         name: 'Psychic Storefront Sign',
@@ -6175,6 +7137,82 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          DINER_BOOTH_RED_N: {
+        name: 'Red Diner Booth North',
+        slug: 'DINER_BOOTH_RED_N', 
+        type: 'BOOTH_SEAT',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:2, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:30
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          DINER_BOOTH_RED_S: {
+        name: 'Red Diner Booth South',
+        slug: 'DINER_BOOTH_RED_S', 
+        type: 'BOOTH_SEAT',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: -14,
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:2, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:8
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           DINER_CHAIR_RED: {
         name: 'Red Diner Chair',
         slug: 'DINER_CHAIR_RED', 
@@ -6189,7 +7227,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
-        depth: 0,
+        depth: -8,
         sprite: {
           h:32, 
           w:32,
@@ -7218,7 +8256,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
-        depth: 0,
+        depth: -4,
         sprite: {
           h:68, 
           w:48,
@@ -7226,7 +8264,7 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
+          h:12, 
           w:48
         },
         offset: {
@@ -7256,7 +8294,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
-        depth: 0,
+        depth: -4,
         sprite: {
           h:68, 
           w:64,
@@ -7736,20 +8774,25 @@ const OBJECTS = {
             name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
           }, {
             name: 'TOAST', stateTrigger: 'TOASTING', validStates: ['ON']
+          }, {
+            name: 'GRAB TOAST', stateTrigger: 'RETRIEVING_TOAST', validStates: ['EJECTING_TOAST','TOAST_BURNING','TOASTED','TOASTED_DARK']
           }],
-        states: [            {
+        states: [{
+              name: 'TOAST_BURNING',
+              transition: 'false',
+              frames: ['TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12',]},            {
               name: 'OFF',
               transition: 'false',
               frames: ['TOASTER-1',]
               }, {
               name: 'TURNING_ON',
               transition: 'ON',
-              frames: []
+              frames: ['TOASTER-1', 'TOASTER-13', 'TOASTER-13', 'TOASTER-5', ]
               },
                       {
               name: 'ON',
               transition: 'false',
-              frames: []
+              frames: ['TOASTER-5',]
               }, {
               name: 'TURNING_OFF',
               transition: 'OFF',
@@ -7758,11 +8801,32 @@ const OBJECTS = {
                       {
               name: 'ON',
               transition: 'false',
-              frames: []
+              frames: ['TOASTER-5',]
               }, {
               name: 'TOASTING',
               transition: 'EJECTING_TOAST',
-              frames: []
+              frames: ['TOASTER-2', 'TOASTER-2', 'TOASTER-3', 'TOASTER-3', 'TOASTER-3', 'TOASTER-4', 'TOASTER-4', 'TOASTER-4', 'TOASTER-5', 'TOASTER-5', 'TOASTER-5', 'TOASTER-5', ]
+              },
+                      {
+              name: 'EJECTING_TOAST',
+              transition: 'TOASTED',
+              frames: ['TOASTER-5','TOASTER-6','TOASTER-7','TOASTER-8','TOASTER-9','TOASTER-10',]
+              }, {
+              name: 'TOAST_BURNING',
+              transition: 'false',
+              frames: ['TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12',]
+              }, {
+              name: 'TOASTED',
+              transition: 'TOASTED_DARK',
+              frames: ['TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10',]
+              }, {
+              name: 'TOASTED_DARK',
+              transition: 'TOAST_BURNING',
+              frames: ['TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11',]
+              }, {
+              name: 'RETRIEVING_TOAST',
+              transition: 'OFF',
+              frames: ['TOASTER-9', 'TOASTER-13', 'TOASTER-13', 'TOASTER-13', 'TOASTER-1', ]
               },
           ],
 
@@ -8080,7 +9144,8 @@ const OBJECTS = {
         states: [],
 
           interactions: {
-                                                group_17: {
+                                            group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -8107,7 +9172,7 @@ const OBJECTS = {
                     }
                                 ]
 
-            }                      },
+            },                      },
     },
           UNDERCOUNTER_CABINET_S_DARK_WOOD: {
         name: 'Undercounter Cabinet S Dark Wood',
@@ -9018,6 +10083,50 @@ const OBJECTS = {
         portal: 0,
         actions: [],
         states: [],
+
+          interactions: {
+                                  },
+    },
+          AC_WINDOW_UNIT: {
+        name: 'Window Unit',
+        slug: 'AC_WINDOW_UNIT', 
+        type: 'AC_UNIT',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:16, 
+          y:16
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'OFF',
+              transition: 'false',
+              frames: ['AC_WINDOW_UNIT-1',]},{
+              name: 'ON',
+              transition: 'false',
+              frames: ['AC_WINDOW_UNIT-1','AC_WINDOW_UNIT-2',]},],
 
           interactions: {
                                   },

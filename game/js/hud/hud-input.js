@@ -152,7 +152,7 @@ export default class HudInput {
                 else {
                     var sound_var = Phaser.Math.RND.between(1, 3);
                     this.scene.manager.hud.hudSound.play('SKELE_INVALID_' + sound_var);
-                    ///this.scene.manager.hud.newPocketTip('My hands are full...',3000);
+                    this.scene.manager.hud.hudThinking.tellBrain('My hands are full...');
                     //put the thing back in the bag
                     // TODO -- hands full ui feedback
                     pocket[state].bagItem(item);

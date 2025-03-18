@@ -24,9 +24,9 @@ const PRELOAD_JSON = [
         }
     },
     {
-        NAME: 'INPUTCONFIG',
+        NAME: 'SETTINGSCONFIG',
         PATH: {
-            JSON: 'data/config_input.json'
+            JSON: 'data/config_settings.json'
         }
     }
 ];

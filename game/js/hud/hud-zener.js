@@ -228,25 +228,10 @@ export default class HudZener extends HudCommon {
                 }
             });
             this.manager.resetDeck();
+            this.manager.destroyListeners();
             this.open = false;
+            
         }
-    }
-
-
-    select () {
-        this.manager.select();
-    }
-
-    back () {
-        this.manager.back();
-    }
-
-    arrowRight () {
-        this.manager.selectNext();
-    }
-
-    arrowLeft () {
-        this.manager.selectPrevious();
     }
 
     drawShuffle () {
@@ -469,6 +454,8 @@ export default class HudZener extends HudCommon {
         this.setHits();
         this.setMisses();
         this.drawSelected(0);
+
+        this.manager.listen();
     }
 
     setHits (hits='') {

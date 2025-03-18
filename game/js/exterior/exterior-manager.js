@@ -1,8 +1,5 @@
 import TILES from "../config/atlas/tile-weights.js";
-import EDGETILES from "../config/atlas/edge-tile-weights.js";
 import COOK from "../config/atlas/tile-recipes.js";
-import WALLTILES from "../config/atlas/wall-tile-weights.js";
-import ROOFTILES from "../config/atlas/roof-tile-weights.js";
 import MAP_CONFIG from "../config/map.js";
 import Ground from "../handler/ground.js";
 import Block from "./exterior-block.js";
@@ -92,7 +89,7 @@ import KEYLIGHT from "../config/key-light.js";
                     for (var i=0;i<3; i++) {
                         // Increments y position for start of tile recipe by height and y of previous recipe
                         var recipe_name =  'STREET_'+ways+'WAY_'+node.streets.n.lanes+'LANE_'+node.streets.n.dir.toUpperCase()+'_';
-                        console.log(recipe_name);
+                    
                         var recipe = self.cook(recipe_name);
                         recipe_y = recipe_y - recipe.HEIGHT;
                         self.cookRecipe(recipe_x, recipe_y, recipe);
@@ -234,9 +231,10 @@ import KEYLIGHT from "../config/key-light.js";
         self = this;
         MAP_CONFIG.blocks.forEach(function (block, index) {
             self.blocks[block.y][block.x].setGround();
+            self.setCorners(block);
             self.blocks[block.y][block.x].buildProperties();
             self.blocks[block.y][block.x].buildObjects(); 
-            self.setCorners(block);
+            
             
         });
         const objectManager = this.scene.manager.objectManager;
@@ -273,7 +271,7 @@ import KEYLIGHT from "../config/key-light.js";
             this.lastBlock = thisBlock;
             this.block = this.getBlock(thisBlock.x, thisBlock.y);
 
-            //this.updateDirections();
+            //this.updateDirections(1,1,3,3);
         }
 /*
         if (this.lastTile.x != x || this.lastTile.y != y) {
@@ -295,9 +293,9 @@ import KEYLIGHT from "../config/key-light.js";
         
     }
 
-    updateDirections () {
+    updateDirections (route_a_x, route_a_y, route_b_x, route_b_y) {
         
-            var plot = this.nav.plotRoutes(4,4,5,9,'intersection');
+            var plot = this.nav.plotRoutes(route_a_x,route_a_y,route_b_x,route_b_y,'intersection');
             var directions = plot.join(" ");
             this.scene.manager.hud.hudDisplay.drawDirections(directions);
 
@@ -489,7 +487,7 @@ import KEYLIGHT from "../config/key-light.js";
         var recipe_index = 0;
         for (var h=0;h<height;h++) {
             for (var w=0;w<width;w++) {
-                //console.log( parseInt(_x + w)+" - "+parseInt(_y + h));
+
                 this.groundLayer.weightedRandomize(tile[recipe_index],parseInt( _x + w),parseInt(_y + h), 1, 1);
                 recipe_index++;
 

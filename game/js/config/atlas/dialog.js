@@ -151,6 +151,15 @@ const DIALOGS = {
         next: 0,
                 responses: [
               ]
+    },
+      16: {
+        id: 16,
+        text: 'Ah, dear-- mail this letter for me. The postboxes around here are usually on the south side of the street.',
+        next: 0,
+                                trigger: 'QUEST',
+                        quest: 'LETTER_CARRIER',
+                                        responses: [
+              ]
     }
   };
 export default DIALOGS;

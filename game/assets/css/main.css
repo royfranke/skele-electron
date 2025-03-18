@@ -1,9 +1,4 @@
-@font-face {
-  font-family: 'defaultFont';
-  src: url('../fonts/NicoPups-Regular.ttf');
-  font-weight: 400;
-  font-weight: normal;
-}
+
 
 @font-face {
   font-family: 'menuFontItalic';
@@ -19,7 +14,6 @@ body,
   background: #4b424a;
   margin: 0;
   padding: 0;
-  font-family: 'defaultFont';
   image-rendering: optimizeSpeed;
   /* Older versions of FF */
   image-rendering: -moz-crisp-edges;
@@ -33,10 +27,6 @@ body,
   -ms-interpolation-mode: nearest-neighbor;
   /* IE (non standard naming) */
   image-rendering: pixelated;
-}
-
-.game-preload {
-  font-family: 'defaultFont';
 }
 
 #game-container {
@@ -68,7 +58,7 @@ body,
   background-repeat: no-repeat;
   padding: 16px;
   font-size: 10px;
-  font-family: 'defaultFont';
+  font-family: 'courier';
   border: 1px dashed #88924f;
   background-color: #645d9a;
   width: 40px;
@@ -77,7 +67,7 @@ body,
 }
 
 .splash:after {
-  content: 'Ah, sweet mystery of life';
+  content: 'glory';
   color:#88924f;
   display: block;
   margin-top:60px;
@@ -88,7 +78,6 @@ body,
   background: #3f3c35;
   padding: 8px;
   font-size: 10px;
-  font-family: 'defaultFont';
   color: #d8dde1;
   border-radius: 4px;
   margin-left: 8px;

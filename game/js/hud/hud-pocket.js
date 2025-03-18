@@ -324,8 +324,12 @@ export default class HudPocket {
                         self.scene.manager.itemManager.newContentToPocket(pocketIndex,fill_with);
                         
                     }
+                    
+                    
+                    
                 }  
             });
+            this.scene.events.emit('REQ_'+item_action.req_group+'_MET');
 
         }
         return action_result;

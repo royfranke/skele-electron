@@ -29,10 +29,12 @@ export default class NotebookManager {
 
     selectNext() {
         this.setSelected(this.selected + 1);
+        this.scene.manager.hud.hudNotebook.arrowRight();
     }
 
     selectPrevious() {
         this.setSelected(this.selected - 1);
+        this.scene.manager.hud.hudNotebook.arrowLeft();
     }
 
     setSelected(selected = 0) {
@@ -48,5 +50,21 @@ export default class NotebookManager {
 
         this.scene.manager.hud.hudNotebook.drawPage(this.selected);
     }
+
+    listen () {
+        var callback_left = function () {
+            this.selectPrevious();
+        }
+        var callback_right = function () {
+            this.selectNext();
+        }
+        this.scene.events.addListener('INPUT_LEFT_NOTEBOOK', callback_left, this);
+        this.scene.events.addListener('INPUT_RIGHT_NOTEBOOK', callback_right, this);
+   }
+
+   destroyListeners () {
+        this.scene.events.off('INPUT_LEFT_NOTEBOOK');
+        this.scene.events.off('INPUT_RIGHT_NOTEBOOK');
+   }
 
 }

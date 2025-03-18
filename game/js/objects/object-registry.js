@@ -74,6 +74,9 @@ export default class ObjectRegistry {
 
     placeObject (object, _x, _y) {
         var added = this.addObject(object, _x, _y);
+        if (!added) {
+            return false;
+        }
         return object.setRegistration(added,{x: _x, y: _y});
         /// Should be feedback for when an object cannot be placed (for now the only condition is that another object cannot already be on the tile)
     }
@@ -88,6 +91,7 @@ export default class ObjectRegistry {
             if (object.info == undefined) {
                 console.warn('Object does not have an info property');
                 console.warn(object);
+                return false;
             }
             if (object.info.type == undefined) {
                 console.warn('Object does not have an info.type property');

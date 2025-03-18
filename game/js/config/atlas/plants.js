@@ -220,6 +220,282 @@ DANDELION: {
     }
       ]
 },                                                   }
+},
+      
+FOXTAIL: {
+  name: 'Foxtail',
+  scientific_name: 'Setaria',
+  slug: 'FOXTAIL',
+  bounding: {
+    h:1, 
+    w:1
+  },
+  base: {
+    h:1, 
+    w:1,
+    x:0, 
+    y:0
+  },
+  sprite: {
+    h:16, 
+    w:16,
+    x:0, 
+    y:0
+  },
+  size: {
+    h:16, 
+    w:16
+  },
+  offset: {
+    x:0, 
+    y:0
+  },
+  stages: {
+    
+                                      
+            stage_24:{
+  stage_id: 24,
+  start: 0,
+  end: 7,
+  next_stage_id: 25,
+  name: 'germination',
+  day_length: 7,
+  frames: [
+        {
+      id: 1138,
+      filename: 'FOXTAIL_24_1138',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},            
+                                                
+            stage_25:{
+  stage_id: 25,
+  start: 8,
+  end: 11,
+  next_stage_id: 26,
+  name: 'emergence',
+  day_length: 3,
+  frames: [
+        {
+      id: 1139,
+      filename: 'FOXTAIL_25_1139',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_26:{
+  stage_id: 26,
+  start: 12,
+  end: 14,
+  next_stage_id: 27,
+  name: 'first leaf',
+  day_length: 2,
+  frames: [
+        {
+      id: 1140,
+      filename: 'FOXTAIL_26_1140',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_27:{
+  stage_id: 27,
+  start: 15,
+  end: 18,
+  next_stage_id: 28,
+  name: 'second leaf',
+  day_length: 3,
+  frames: [
+        {
+      id: 1141,
+      filename: 'FOXTAIL_27_1141',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_28:{
+  stage_id: 28,
+  start: 19,
+  end: 21,
+  next_stage_id: 29,
+  name: 'third leaf',
+  day_length: 2,
+  frames: [
+        {
+      id: 1142,
+      filename: 'FOXTAIL_28_1142',
+      width: 16,
+      height: 16,
+      tags: []
+    },
+        {
+      id: 1145,
+      filename: 'FOXTAIL_28_1145',
+      width: 8,
+      height: 14,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_29:{
+  stage_id: 29,
+  start: 22,
+  end: 24,
+  next_stage_id: 30,
+  name: 'initial tillering',
+  day_length: 2,
+  frames: [
+        {
+      id: 1143,
+      filename: 'FOXTAIL_29_1143',
+      width: 16,
+      height: 16,
+      tags: []
+    },
+        {
+      id: 1146,
+      filename: 'FOXTAIL_29_1146',
+      width: 8,
+      height: 14,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_30:{
+  stage_id: 30,
+  start: 25,
+  end: 28,
+  next_stage_id: 0,
+  name: 'fourth leaf',
+  day_length: 3,
+  frames: [
+        {
+      id: 1144,
+      filename: 'FOXTAIL_30_1144',
+      width: 16,
+      height: 16,
+      tags: []
+    },
+        {
+      id: 1147,
+      filename: 'FOXTAIL_30_1147',
+      width: 8,
+      height: 14,
+      tags: ["flower"]
+    }
+      ]
+},                                                   }
+},
+      
+WOOD_SORREL: {
+  name: 'Wood Sorrel',
+  scientific_name: 'Oxalis',
+  slug: 'WOOD_SORREL',
+  bounding: {
+    h:1, 
+    w:1
+  },
+  base: {
+    h:1, 
+    w:1,
+    x:0, 
+    y:0
+  },
+  sprite: {
+    h:16, 
+    w:16,
+    x:0, 
+    y:0
+  },
+  size: {
+    h:8, 
+    w:8
+  },
+  offset: {
+    x:4, 
+    y:4
+  },
+  stages: {
+    
+                                      
+            stage_20:{
+  stage_id: 20,
+  start: 0,
+  end: 7,
+  next_stage_id: 21,
+  name: 'germination',
+  day_length: 7,
+  frames: [
+        {
+      id: 997,
+      filename: 'WOOD_SORREL_20_997',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},            
+                                                
+            stage_21:{
+  stage_id: 21,
+  start: 8,
+  end: 22,
+  next_stage_id: 22,
+  name: 'sprouts',
+  day_length: 14,
+  frames: [
+        {
+      id: 998,
+      filename: 'WOOD_SORREL_21_998',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_22:{
+  stage_id: 22,
+  start: 23,
+  end: 37,
+  next_stage_id: 23,
+  name: 'mature flowers',
+  day_length: 14,
+  frames: [
+        {
+      id: 999,
+      filename: 'WOOD_SORREL_22_999',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_23:{
+  stage_id: 23,
+  start: 38,
+  end: 66,
+  next_stage_id: 0,
+  name: 'mature',
+  day_length: 28,
+  frames: [
+        {
+      id: 1000,
+      filename: 'WOOD_SORREL_23_1000',
+      width: 16,
+      height: 16,
+      tags: []
+    }
+      ]
+},                                                   }
 }
   };
 export default PLANTS;

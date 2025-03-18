@@ -28,6 +28,10 @@ const PRELOAD_SOUND = [
         FILES: ['coin-clink-1.wav']
     },
       {
+        NAME: 'DING_DING',
+        FILES: ['ding-ding.wav']
+    },
+      {
         NAME: 'GIFTED_ITEM',
         FILES: ['gifted-item.wav']
     },

@@ -181,9 +181,12 @@ export default class HudNotebook extends HudCommon {
 
         this.notebook.arrow.left.setVisible(true);
         this.notebook.arrow.right.setVisible(true);
+
+        this.manager.listen();
     }
 
     closeNotebook() {
+        this.manager.destroyListeners();
         this.checkNotebook();
         this.notebook.arrow.left.setVisible(false);
         this.notebook.arrow.right.setVisible(false);

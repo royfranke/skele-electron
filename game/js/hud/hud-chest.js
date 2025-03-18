@@ -25,6 +25,10 @@ export default class HudChest extends HudCommon {
                     height: 128 - this.view.margin.top,
                 }
             },
+            back_button: {
+                x: this.view.right - 136,
+                y: this.view.bottom - 32
+            },
             slip: {
                 x: this.view.right - this.view.margin.right,
                 y: this.view.top + 108,
@@ -120,6 +124,7 @@ export default class HudChest extends HudCommon {
             icon: null,
             container: null,
             text: null,
+            back_button: null,
             items: item.items
         };
         this.chest.container = this.makeBlock(this.position.container.x, this.position.container.y, this.position.container.width, this.position.container.height, 'BLOCK_MID_CREAM_BORDER');
@@ -127,6 +132,7 @@ export default class HudChest extends HudCommon {
         this.chest.text = this.addChestTextBlock();
         this.chest.slot = this.makeBlock(this.position.x, this.position.y, 32, 32, 'BAG_SELECTED');
         this.chest.arrow = this.factory.makeArrow(this.chest.slot.x, this.chest.slot.y + 36);
+        
 
         this.refreshChest();
     }
@@ -135,6 +141,11 @@ export default class HudChest extends HudCommon {
     makeSlip(_x, _y, text = 'TAKE') {
         this.destroySlip();
         return this.factory.makeSlip(_x, _y, text);
+    }
+
+    makeBackButton(_x, _y, text = 'CLOSE') {
+        let close_button = 'Z';
+        return this.factory.makeSlip(_x, _y, text, close_button);
     }
 
 
@@ -157,13 +168,13 @@ export default class HudChest extends HudCommon {
                 }
                 this.chest.text.setText(this.chest.items[0].name + ": " + description);
                 this.chest.slip = this.makeSlip(this.position.slip.x, this.position.slip.y, this.slipCommand());
-                ;
                 this.chest.text.setVisible(true);
             }
             else {
                 this.destroySlip();
                 this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'UI', 'EMPTY_SYMBOL');
             }
+            this.chest.back_button = this.makeBackButton(this.position.back_button.x, this.position.back_button.y);
         }
     }
 
@@ -171,6 +182,21 @@ export default class HudChest extends HudCommon {
     openChest(object) {
         object.setState('OPEN');
         this.closeChest(); // Use to clean up any existing open chest
+        var self = this;
+        var callback_down = function () {
+            self.chestArrowDown();
+        };
+
+        var callback_select = function () {
+            self.chestHold();
+        };
+
+        var callback_back = function () {
+            self.closeChest();
+        };
+        this.scene.events.addListener('INPUT_DOWN_CHEST', callback_down, this);
+        this.scene.events.addListener('INPUT_SELECT_CHEST', callback_select, this);
+        this.scene.events.addListener('INPUT_BACK_CHEST', callback_back, this);
         this.chest = {
             item: object,
             slip: null,
@@ -179,6 +205,7 @@ export default class HudChest extends HudCommon {
             icon: null,
             container: null,
             text: null,
+            back_button: null,
             items: object.items
         };
         this.chest.container = this.makeBlock(this.position.container.x, this.position.container.y, this.position.container.width, this.position.container.height, 'BLOCK_MID_CREAM_BORDER');
@@ -199,8 +226,14 @@ export default class HudChest extends HudCommon {
             this.chest.arrow.destroy();
             this.chest.container.destroy();
             this.chest.text.destroy();
+            this.destroyBackButton();
             this.destroySlip();
             this.chest = null;
+            /// Clean up event listeners
+            this.scene.events.off('INPUT_DOWN_CHEST');
+            this.scene.events.off('INPUT_SELECT_CHEST');
+            this.scene.events.off('INPUT_BACK_CHEST');
+            this.scene.manager.setFocus('PLAYER');  
         }
     }
 
@@ -211,6 +244,35 @@ export default class HudChest extends HudCommon {
             this.chest.slip.button.destroy();
             this.chest.slip.button_text.destroy();
             this.chest.slip = null;
+        }
+    }
+
+    destroyBackButton() {
+        if (this.chest.back_button != null) {
+            this.chest.back_button.block.destroy();
+            this.chest.back_button.text.destroy();
+            this.chest.back_button.button.destroy();
+            this.chest.back_button.button_text.destroy();
+            this.chest.back_button = null;
+        }
+    }
+
+
+    chestHold () {
+        if (this.chest != null && this.chest.items.length > 0) {
+            let item = this.chest.items[0];
+            var placed = this.scene.manager.hud.availablePocket(item);
+                
+                if (placed != false) {
+                    if (this.verbose) {console.log("Placed! Refreshing");}
+                    this.chest.items.shift();
+                    this.refreshChest();
+                }
+                else {
+                    var sound_var = Phaser.Math.RND.between(1,3);
+                    this.scene.manager.hud.hudSound.play('SKELE_INVALID_'+sound_var);
+                    this.scene.manager.hud.hudThinking.tellBrain('My hands are full...');
+                }
         }
     }
 

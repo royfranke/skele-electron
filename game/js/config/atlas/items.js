@@ -1,4 +1,32 @@
 const ITEMS = {
+      ADULT_MAGAZINE_1: {
+        name: 'Adult Magazine 1',
+        slug: 'ADULT_MAGAZINE_1', 
+        use:  'HOLDS',
+        icon: 'ADULT_MAGAZINE_1',
+        type: 'ADULT_MAGAZINE',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      ADULT_MAGAZINE_2: {
+        name: 'Adult Magazine 2',
+        slug: 'ADULT_MAGAZINE_2', 
+        use:  'HOLDS',
+        icon: 'ADULT_MAGAZINE_2',
+        type: 'ADULT_MAGAZINE',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       APPLE: {
         name: 'Apple',
         slug: 'APPLE', 
@@ -23,7 +51,8 @@ const ITEMS = {
             greaterThan: 0
           }        ],
         interactions: {
-            group_8: {
+        group_8: {
+                req_group: 8,
                 req_group_name: 'Eat Apple',
                 req_pocket_action: 'EAT',
                 req_world_action: '',
@@ -44,7 +73,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       APPLE_TRASH: {
         name: 'Apple Core',
@@ -58,7 +87,8 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -85,7 +115,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       LEAF_ASH: {
         name: 'Ash Leaf',
@@ -129,7 +159,8 @@ const ITEMS = {
             greaterThan: 0
           }        ],
         interactions: {
-            group_10: {
+        group_10: {
+                req_group: 10,
                 req_group_name: 'Eat Banana',
                 req_pocket_action: 'EAT',
                 req_world_action: '',
@@ -150,7 +181,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       BANANA_TRASH: {
         name: 'Banana Peel',
@@ -164,7 +195,8 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -191,7 +223,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       MUFFIN_BERRY: {
         name: 'Berry Muffin',
@@ -321,7 +353,8 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_3: {
+        group_3: {
+                req_group: 3,
                 req_group_name: 'Pour milk into bowl',
                 req_pocket_action: 'POUR MILK INTO BOWL',
                 req_world_action: 'POUR MILK INTO BOWL',
@@ -348,7 +381,8 @@ const ITEMS = {
                     }
                                 ]
 
-            },            group_4: {
+            },        group_4: {
+                req_group: 4,
                 req_group_name: 'Pour bowl of milk and Champs cereal',
                 req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
                 req_world_action: 'POUR BOWL OF MILK AND CEREAL',
@@ -381,7 +415,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       BOOK_1: {
         name: 'Book Title',
@@ -409,7 +443,8 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_3: {
+        group_3: {
+                req_group: 3,
                 req_group_name: 'Pour milk into bowl',
                 req_pocket_action: 'POUR MILK INTO BOWL',
                 req_world_action: 'POUR MILK INTO BOWL',
@@ -436,7 +471,8 @@ const ITEMS = {
                     }
                                 ]
 
-            },            group_4: {
+            },        group_4: {
+                req_group: 4,
                 req_group_name: 'Pour bowl of milk and Champs cereal',
                 req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
                 req_world_action: 'POUR BOWL OF MILK AND CEREAL',
@@ -469,7 +505,8 @@ const ITEMS = {
                     }
                                 ]
 
-            },            group_5: {
+            },        group_5: {
+                req_group: 5,
                 req_group_name: 'Pour Champs cereal into bowl',
                 req_pocket_action: 'POUR CEREAL INTO BOWL',
                 req_world_action: 'POUR CEREAL INTO BOWL',
@@ -496,7 +533,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       BOWL_5: {
         name: 'Bowl 5',
@@ -510,7 +547,8 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_3: {
+        group_3: {
+                req_group: 3,
                 req_group_name: 'Pour milk into bowl',
                 req_pocket_action: 'POUR MILK INTO BOWL',
                 req_world_action: 'POUR MILK INTO BOWL',
@@ -537,7 +575,8 @@ const ITEMS = {
                     }
                                 ]
 
-            },            group_4: {
+            },        group_4: {
+                req_group: 4,
                 req_group_name: 'Pour bowl of milk and Champs cereal',
                 req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
                 req_world_action: 'POUR BOWL OF MILK AND CEREAL',
@@ -570,7 +609,8 @@ const ITEMS = {
                     }
                                 ]
 
-            },            group_5: {
+            },        group_5: {
+                req_group: 5,
                 req_group_name: 'Pour Champs cereal into bowl',
                 req_pocket_action: 'POUR CEREAL INTO BOWL',
                 req_world_action: 'POUR CEREAL INTO BOWL',
@@ -597,7 +637,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       STORE_BREAD: {
         name: 'Bread',
@@ -649,6 +689,34 @@ const ITEMS = {
         contains: [],
         containedBy: [],
         stack: 5,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      GLASS_HEART: {
+        name: 'Brown Glass Heart',
+        slug: 'GLASS_HEART', 
+        use:  'HOLDS',
+        icon: 'GLASS_HEART',
+        type: 'CHARM',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      GLASS_TRIANGLE: {
+        name: 'Brown Glass Triangle',
+        slug: 'GLASS_TRIANGLE', 
+        use:  'HOLDS',
+        icon: 'GLASS_TRIANGLE',
+        type: 'CHARM',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -721,7 +789,8 @@ const ITEMS = {
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_12: {
+        group_12: {
+                req_group: 12,
                 req_group_name: 'Drink Cane Soda',
                 req_pocket_action: 'DRINK',
                 req_world_action: '',
@@ -742,7 +811,7 @@ const ITEMS = {
                     }
                                 ]
 
-            }        },
+            },        },
     },
       BACKPACK_CANVAS: {
         name: 'Canvas Backpack',
@@ -1001,7 +1070,8 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_4: {
+        group_4: {
+                req_group: 4,
                 req_group_name: 'Pour bowl of milk and Champs cereal',
                 req_pocket_action: 'POUR BOWL OF MILK AND CEREAL',
                 req_world_action: 'POUR BOWL OF MILK AND CEREAL',
@@ -1034,7 +1104,8 @@ items: []    },
                     }
                                 ]
 
-            },            group_5: {
+            },        group_5: {
+                req_group: 5,
                 req_group_name: 'Pour Champs cereal into bowl',
                 req_pocket_action: 'POUR CEREAL INTO BOWL',
                 req_world_action: 'POUR CEREAL INTO BOWL',
@@ -1061,7 +1132,8 @@ items: []    },
                     }
                                 ]
 
-            },            group_6: {
+            },        group_6: {
+                req_group: 6,
                 req_group_name: 'Pour Champs cereal into bowl of milk',
                 req_pocket_action: 'POUR CEREAL INTO BOWL',
                 req_world_action: 'POUR CEREAL INTO BOWL',
@@ -1088,7 +1160,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       CEREAL_1: {
         name: 'Champs Cereal',
@@ -1222,6 +1294,34 @@ items: []    },
         use:  'HOLDS',
         icon: 'CLAY_PINCH_POT',
         type: 'CRAFT',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      GLASS_BOTTLE_0: {
+        name: 'Clean Glass Bottle',
+        slug: 'GLASS_BOTTLE_0', 
+        use:  'HOLDS',
+        icon: 'GLASS_BOTTLE_0',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      GREEN_GLASS_BOTTLE_0: {
+        name: 'Clean Green Glass Bottle',
+        slug: 'GREEN_GLASS_BOTTLE_0', 
+        use:  'HOLDS',
+        icon: 'GREEN_GLASS_BOTTLE_0',
+        type: 'MATERIAL',
         description: '',
         contains: [],
         containedBy: [],
@@ -1440,7 +1540,8 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -1467,7 +1568,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       BEER_TRASH: {
         name: 'Empty Driver’s Brew Can',
@@ -1481,7 +1582,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -1508,7 +1610,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       SODA_GREEN_TRASH: {
         name: 'Empty Fresco Soda Can',
@@ -1522,7 +1624,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -1549,7 +1652,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       SODA_BLUE_TRASH: {
         name: 'Empty SHQUINK-Ahhhh Soda Can',
@@ -1563,7 +1666,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -1590,7 +1694,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       SPRAY_PAINT_EMPTY: {
         name: 'Empty Spray Paint',
@@ -1604,7 +1708,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -1631,7 +1736,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       ENVELOPE_BACK_1: {
         name: 'Envelope (Back)',
@@ -1645,13 +1750,14 @@ items: []    },
         stack: 3,
         stacks: [        ],
         interactions: {
-            group_2: {
+        group_2: {
+                req_group: 2,
                 req_group_name: 'Mail Letter',
                 req_pocket_action: 'MAIL',
                 req_world_action: 'MAIL',
                 req_state: '',
                 req_result_item: '',
-                req_result_data_key: 'LETTERS',
+                req_result_data_key: 'MAILED_LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
                 req_result_texture: '',
@@ -1672,7 +1778,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       ENVELOPE_FRONT_1: {
         name: 'Envelope (Front)',
@@ -1686,13 +1792,14 @@ items: []    },
         stack: 3,
         stacks: [        ],
         interactions: {
-            group_2: {
+        group_2: {
+                req_group: 2,
                 req_group_name: 'Mail Letter',
                 req_pocket_action: 'MAIL',
                 req_world_action: 'MAIL',
                 req_state: '',
                 req_result_item: '',
-                req_result_data_key: 'LETTERS',
+                req_result_data_key: 'MAILED_LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
                 req_result_texture: '',
@@ -1713,7 +1820,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       FANNY_PACK: {
         name: 'Fanny Pack',
@@ -1826,7 +1933,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_13: {
+        group_13: {
+                req_group: 13,
                 req_group_name: 'Drink Fresco Soda',
                 req_pocket_action: 'DRINK',
                 req_world_action: '',
@@ -1847,7 +1955,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       PIZZA_BOX_CLEAN: {
         name: 'Fresh Pizza Box',
@@ -1876,6 +1984,48 @@ items: []    },
         stacks: [        ],
         interactions: {
         },
+    },
+      GARBAGE: {
+        name: 'Garbage',
+        slug: 'GARBAGE', 
+        use:  'HOLDS',
+        icon: 'GARBAGE',
+        type: 'TRASH',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
     },
       FLYER_GRAY: {
         name: 'Gray Flyer',
@@ -2008,6 +2158,34 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 5,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      GREEN_GLASS_HEART: {
+        name: 'Green Glass Heart',
+        slug: 'GREEN_GLASS_HEART', 
+        use:  'HOLDS',
+        icon: 'GREEN_GLASS_HEART',
+        type: 'CHARM',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      GREEN_GLASS_TRIANGLE: {
+        name: 'Green Glass Triangle',
+        slug: 'GREEN_GLASS_TRIANGLE', 
+        use:  'HOLDS',
+        icon: 'GREEN_GLASS_TRIANGLE',
+        type: 'CHARM',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -2238,7 +2416,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2265,7 +2444,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_10: {
         name: 'Key 10',
@@ -2279,7 +2458,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2306,7 +2486,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_11: {
         name: 'Key 11',
@@ -2320,7 +2500,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2347,7 +2528,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_12: {
         name: 'Key 12',
@@ -2361,7 +2542,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2388,7 +2570,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_2: {
         name: 'Key 2',
@@ -2402,7 +2584,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2429,7 +2612,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_3: {
         name: 'Key 3',
@@ -2443,7 +2626,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2470,7 +2654,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_4: {
         name: 'Key 4',
@@ -2484,7 +2668,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_16: {
+        group_16: {
+                req_group: 16,
                 req_group_name: 'Copied Auntie’s Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2505,7 +2690,8 @@ items: []    },
                     }
                                 ]
 
-            },           group_15: {
+            },        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2532,7 +2718,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_5: {
         name: 'Key 5',
@@ -2546,7 +2732,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2573,7 +2760,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_6: {
         name: 'Key 6',
@@ -2587,7 +2774,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2614,7 +2802,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_7: {
         name: 'Key 7',
@@ -2628,7 +2816,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2655,7 +2844,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_8: {
         name: 'Key 8',
@@ -2669,7 +2858,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2696,7 +2886,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       KEY_9: {
         name: 'Key 9',
@@ -2710,7 +2900,8 @@ items: []    },
         stack: 5,
         stacks: [        ],
         interactions: {
-            group_15: {
+        group_15: {
+                req_group: 15,
                 req_group_name: 'Copy Key',
                 req_pocket_action: '',
                 req_world_action: '',
@@ -2737,7 +2928,57 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
+    },
+      GLASS_BOTTLE_4: {
+        name: 'Label-Peeled Glass Bottle',
+        slug: 'GLASS_BOTTLE_4', 
+        use:  'HOLDS',
+        icon: 'GLASS_BOTTLE_4',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_18: {
+                req_group: 18,
+                req_group_name: 'Peel Label-Peeled Bottle Label',
+                req_pocket_action: 'PEEL',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'GLASS_BOTTLE_3',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'GLASS_BOTTLE_4'
+                    }
+                                ]
+
+            },        },
+    },
+      GREEN_GLASS_BOTTLE_4: {
+        name: 'Label-Peeled Green Glass Bottle',
+        slug: 'GREEN_GLASS_BOTTLE_4', 
+        use:  'HOLDS',
+        icon: 'GREEN_GLASS_BOTTLE_4',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
     },
       BACKPACK_BROWN: {
         name: 'Leather Rucksack',
@@ -2864,7 +3105,8 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-            group_6: {
+        group_6: {
+                req_group: 6,
                 req_group_name: 'Pour Champs cereal into bowl of milk',
                 req_pocket_action: 'POUR CEREAL INTO BOWL',
                 req_world_action: 'POUR CEREAL INTO BOWL',
@@ -2891,7 +3133,8 @@ items: []    },
                     }
                                 ]
 
-            },            group_7: {
+            },        group_7: {
+                req_group: 7,
                 req_group_name: 'Drink bowl of milk',
                 req_pocket_action: 'DRINK',
                 req_world_action: 'DRINK',
@@ -2912,7 +3155,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       FLYER_MISSING: {
         name: 'Missing Person Flyer',
@@ -3122,6 +3365,56 @@ items: []    },
         interactions: {
         },
     },
+      GLASS_BOTTLE_1: {
+        name: 'Nearly Clean Glass Bottle',
+        slug: 'GLASS_BOTTLE_1', 
+        use:  'HOLDS',
+        icon: 'GLASS_BOTTLE_1',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_21: {
+                req_group: 21,
+                req_group_name: 'Peel Nearly Clean Bottle',
+                req_pocket_action: 'PEEL',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'GLASS_BOTTLE_0',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'GLASS_BOTTLE_1'
+                    }
+                                ]
+
+            },        },
+    },
+      GREEN_GLASS_BOTTLE_1: {
+        name: 'Nearly Clean Green Glass Bottle',
+        slug: 'GREEN_GLASS_BOTTLE_1', 
+        use:  'HOLDS',
+        icon: 'GREEN_GLASS_BOTTLE_1',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       NEWSPAPER: {
         name: 'Newspaper',
         slug: 'NEWSPAPER', 
@@ -3132,6 +3425,20 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 4,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      NIGHT_LIGHT: {
+        name: 'Night Light',
+        slug: 'NIGHT_LIGHT', 
+        use:  'HOLDS',
+        icon: 'NIGHT_LIGHT',
+        type: 'NIGHT_LIGHT',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -3198,6 +3505,20 @@ items: []    },
         use:  'HOLDS',
         icon: 'PADLOCK',
         type: 'LOCK',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      HOT_SAUCE: {
+        name: 'Pilot Light Hot Sauce',
+        slug: 'HOT_SAUCE', 
+        use:  'HOLDS',
+        icon: 'HOT_SAUCE',
+        type: 'PRODUCT',
         description: '',
         contains: [],
         containedBy: [],
@@ -3398,13 +3719,14 @@ items: []    },
         stack: 3,
         stacks: [        ],
         interactions: {
-            group_2: {
+        group_2: {
+                req_group: 2,
                 req_group_name: 'Mail Letter',
                 req_pocket_action: 'MAIL',
                 req_world_action: 'MAIL',
                 req_state: '',
                 req_result_item: '',
-                req_result_data_key: 'LETTERS',
+                req_result_data_key: 'MAILED_LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
                 req_result_texture: '',
@@ -3425,7 +3747,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       POSTCARD_FRONT_1: {
         name: 'Postcard (Front)',
@@ -3439,13 +3761,14 @@ items: []    },
         stack: 3,
         stacks: [        ],
         interactions: {
-            group_2: {
+        group_2: {
+                req_group: 2,
                 req_group_name: 'Mail Letter',
                 req_pocket_action: 'MAIL',
                 req_world_action: 'MAIL',
                 req_state: '',
                 req_result_item: '',
-                req_result_data_key: 'LETTERS',
+                req_result_data_key: 'MAILED_LETTERS',
                 req_result_data_set: '',
                 req_result_data_modify: '1',
                 req_result_texture: '',
@@ -3466,7 +3789,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       LAUNDRY_POWDER: {
         name: 'Powder Laundry Detergent',
@@ -3837,6 +4160,106 @@ items: []    },
         interactions: {
         },
     },
+      GLASS_BOTTLE_2: {
+        name: 'Scraped Glass Bottle',
+        slug: 'GLASS_BOTTLE_2', 
+        use:  'HOLDS',
+        icon: 'GLASS_BOTTLE_2',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_20: {
+                req_group: 20,
+                req_group_name: 'Peel Scraped Bottle Label',
+                req_pocket_action: 'PEEL',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'GLASS_BOTTLE_1',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'GLASS_BOTTLE_2'
+                    }
+                                ]
+
+            },        },
+    },
+      GREEN_GLASS_BOTTLE_2: {
+        name: 'Scraped Green Glass Bottle',
+        slug: 'GREEN_GLASS_BOTTLE_2', 
+        use:  'HOLDS',
+        icon: 'GREEN_GLASS_BOTTLE_2',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      GLASS_BOTTLE_3: {
+        name: 'Scratched Glass Bottle',
+        slug: 'GLASS_BOTTLE_3', 
+        use:  'HOLDS',
+        icon: 'GLASS_BOTTLE_3',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_19: {
+                req_group: 19,
+                req_group_name: 'Peel Scratched Bottle Label',
+                req_pocket_action: 'PEEL',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'GLASS_BOTTLE_2',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'GLASS_BOTTLE_3'
+                    }
+                                ]
+
+            },        },
+    },
+      GREEN_GLASS_BOTTLE_3: {
+        name: 'Scratched Green Glass Bottle',
+        slug: 'GREEN_GLASS_BOTTLE_3', 
+        use:  'HOLDS',
+        icon: 'GREEN_GLASS_BOTTLE_3',
+        type: 'MATERIAL',
+        description: '',
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       SARDINES_PRODUCT: {
         name: 'Sealed Pigeon of the Sea Sardines',
         slug: 'SARDINES_PRODUCT', 
@@ -3917,7 +4340,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_14: {
+        group_14: {
+                req_group: 14,
                 req_group_name: 'Drink Shquink Soda',
                 req_pocket_action: 'DRINK',
                 req_world_action: '',
@@ -3938,7 +4362,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       SIDEWALK_CHALK_BLUE_: {
         name: 'Sidewalk Chalk (Blue)',
@@ -3952,7 +4376,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_1: {
+        group_1: {
+                req_group: 1,
                 req_group_name: 'Draw Heart with Chalk on Cement',
                 req_pocket_action: 'DRAW',
                 req_world_action: 'DRAW',
@@ -3979,7 +4404,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       SIDEWALK_CHALK_PINK_: {
         name: 'Sidewalk Chalk (Pink)',
@@ -3993,7 +4418,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_1: {
+        group_1: {
+                req_group: 1,
                 req_group_name: 'Draw Heart with Chalk on Cement',
                 req_pocket_action: 'DRAW',
                 req_world_action: 'DRAW',
@@ -4020,7 +4446,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       SIDEWALK_CHALK_YELLOW_: {
         name: 'Sidewalk Chalk (Yellow)',
@@ -4034,7 +4460,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_1: {
+        group_1: {
+                req_group: 1,
                 req_group_name: 'Draw Heart with Chalk on Cement',
                 req_pocket_action: 'DRAW',
                 req_world_action: 'DRAW',
@@ -4061,7 +4488,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       SIDEWALK_CHALK_: {
         name: 'Sidewalk Chalk Discount Pack',
@@ -4308,7 +4735,8 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-            group_17: {
+        group_17: {
+                req_group: 17,
                 req_group_name: 'Throw Away Trash',
                 req_pocket_action: 'THROW AWAY',
                 req_world_action: 'THROW AWAY',
@@ -4335,7 +4763,7 @@ items: []    },
                     }
                                 ]
 
-            }        },
+            },        },
     },
       BREAKFAST_TART_PINK: {
         name: 'Twap Tart',

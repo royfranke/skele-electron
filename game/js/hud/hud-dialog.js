@@ -228,6 +228,7 @@ export default class HudDialog extends HudCommon {
     clearDialog () {
         this.clearDialogBox();
         this.clearReplyBox();
+        this.scene.manager.dialog.destroyListeners();
     }
 
     clearSelector (selector) {
