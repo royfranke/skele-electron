@@ -1,10 +1,23 @@
 {
     "ACCOMPLISHMENTS": {
         "MAILED": {
-            "LETTERS": 0,
-            "POSTCARDS": 0,
-            "PACKAGES": 0
+            "MAILED_LETTERS": 0,
+            "MAILED_POSTCARDS": 0,
+            "MAILED_PACKAGES": 0
+        },
+        "HOLES": {
+            "HOLES_DUG": 0,
+            "HOLES_FILLED": 0
+        },
+        "CHALKED": {
+            "CHALKED_DRAWINGS": 0
         }
+    },
+    "BANK": {
+        "HAS_SAVINGS": "FALSE",
+        "HAS_AMOUNT": 0,
+        "SAVINGS_IN": 0,
+        "SAVINGS_OUT": 0
     },
     "BODY": {
         "ODOR": 2,
@@ -94,10 +107,10 @@
         }
     },
     "POSITION": {
-        "ROOM": -1,
-        "X": 12,
-        "Y": 12,
-        "FACING": "N"
+        "ROOM": 10,
+        "X": 20,
+        "Y": 20,
+        "FACING": "S"
     },
     "SAVE": {
         "HEADLINE": "NEW",
@@ -118,8 +131,8 @@
             "MINUTE": 0
         },
         "SECOND": 0,
-        "MINUTE": 59,
-        "HOUR": 3,
+        "MINUTE": 0,
+        "HOUR": 4,
         "DAY": 1
     }
 }

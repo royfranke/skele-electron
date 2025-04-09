@@ -45,6 +45,9 @@ export default class PropertyLine {
         if (!settings.hasOwnProperty('window')) {
             settings.window = this.roll(OBJECT_TYPES.WINDOW_EXT_);
         }
+        if (!settings.hasOwnProperty('stair_rail')) {
+            settings.stair_rail = this.roll(['PORCH_STAIR_RAIL_LEFT','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_DARK','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_GREEN','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WHITE','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WOOD']);
+        }
 
         if (!settings.hasOwnProperty('foundation')) {
             settings.foundation = {
@@ -594,7 +597,7 @@ export default class PropertyLine {
 
         var landing_material = this.settings.stoop.landing.material;
         var steps_material = this.settings.stoop.steps.material;
-
+        var porch_rail = this.settings.stair_rail;
         // Lay landing tiles
         this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES[landing_material.MATERIAL][landing_material.VARIETY[0]], _x, _y, stoop.width, stoop.height);
 
@@ -608,9 +611,9 @@ export default class PropertyLine {
         this.scene[this.scene.locale].wallLayer.removeTileAt(_x + 1 + stairs.x, _y + stoop.height);
 
         // Lay stair rail objects
-        this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x, _y + stoop.height, 'PORCH_STAIR_RAIL_LEFT');
+        this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x, _y + stoop.height, porch_rail);
 
-        let porch_right = this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x + 2, _y + stoop.height, 'PORCH_STAIR_RAIL_LEFT');
+        let porch_right = this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x + 2, _y + stoop.height, porch_rail);
 
         porch_right.sprite.setFlipX(true);
         porch_right.sprite.setOffset(76, 44)

@@ -232,6 +232,18 @@ export default class Object {
         console.log("Doing action: "+action);
     }
 
+    setCollider () {
+        //this.scene.physics.add.overlap(this.scene.player.playerSprite.sprite, this.sprite,this.collision,null, this);
+    }
+
+    collision () {
+
+            if (this.info.type == 'POOP') {
+                console.log(this.info.slug+" trampled!");
+                this.setState('TRAMPLED', true);
+            }
+    }
+
     setPortal (portal) {
         this.portal = portal;
     }
@@ -288,6 +300,8 @@ export default class Object {
         var frame = this.info.slug+'-'+this.variety;
 
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + this.info.depth);
+
+        this.setCollider();
         
         if (this.shell == true) {
             this.shell_sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', this.shell_frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + 1 + this.info.depth);

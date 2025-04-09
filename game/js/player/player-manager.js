@@ -49,7 +49,12 @@ export default class PlayerManager {
     return this.playerState.getState();
   }
 
-  setState(state_string) {
+  setState(state_string='IDLE') {
+    if (this.state.name == state_string) {
+      return;
+    }
+    console.log('PLAYER_STATE_CHANGE_'+state_string.toUpperCase());
+    this.scene.events.emit('PLAYER_STATE_CHANGE_'+state_string.toUpperCase());
     return this.playerState.setState(state_string);
   }
 

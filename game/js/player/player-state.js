@@ -28,7 +28,7 @@ export default class PlayerState {
     }
 
     setState (state) {
-        if (this.validState(state)) {
+        if (this.validState(state) && this.state.name != state) {
             this.last_state = this.state;
             this.state = this.valid_states[state];
         }

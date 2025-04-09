@@ -1685,68 +1685,6 @@ const MAP_CONFIG = {
                                                                     },
                 {
             lines: {
-                x: 3,
-                y: 3,
-                width: 20,
-                height: 11
-            },
-            block: {
-                x: 2,
-                y: 3
-            },
-            address: {
-                name: "",
-                facing: "N",
-                dir: "W",
-                number: "100",
-                street: "Belly Button Street",
-            },
-            structure: {
-                type: "CORNER-STORE-LEFT",
-                zoning: "COMMERCIAL",
-            },
-            listing: {
-                slug: "CORPORATION",
-name: "Ossifcorp",
-listingName: "Ossifcorp Industries",
-schedule: {
-    monday: {
-        closed: "FALSE",
-        open: "09:00",
-        close: "17:00"
-            },
-    tuesday: {
-        closed: "FALSE",
-        open: "09:00",
-        close: "17:00"
-            }, 
-    wednesday: {
-        closed: "FALSE",
-        open: "09:00",
-        close: "17:00"
-            },
-    thursday: {
-        closed: "FALSE",
-        open: "09:00",
-        close: "17:00"
-            },
-    friday: {
-        closed: "FALSE",
-        open: "09:00",
-        close: "17:00"
-            },
-    saturday: {
-        closed: "TRUE",    },
-    sunday: {
-        closed: "TRUE",    }
-},
-                rooms: {
-    }
-                
-            },
-                                                                                            },
-                {
-            lines: {
                 x: 38,
                 y: 3,
                 width: 6,
@@ -1771,6 +1709,7 @@ schedule: {
                 slug: "PAWN SHOP",
 name: "Pawn Shop",
 listingName: "Break of Pawn - Pawn Shop",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -1827,6 +1766,7 @@ buys: [
         listing: { slug: "PAWN SHOP",
 name: "Pawn Shop",
 listingName: "Break of Pawn - Pawn Shop",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -1912,6 +1852,7 @@ buys: [
                 slug: "LAUNDROMAT",
 name: "Coin Wash",
 listingName: "Coin Wash Laundry Laundromat",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -1973,6 +1914,7 @@ sells: [
         listing: { slug: "LAUNDROMAT",
 name: "Coin Wash",
 listingName: "Coin Wash Laundry Laundromat",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -2063,26 +2005,27 @@ sells: [
                 slug: "LOCKSMITH",
 name: "Locksmith",
 listingName: "Keys Cut Locks Opened",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     tuesday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             }, 
     wednesday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     thursday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     friday: {
         closed: "FALSE",
@@ -2153,26 +2096,27 @@ sells: [
         listing: { slug: "LOCKSMITH",
 name: "Locksmith",
 listingName: "Keys Cut Locks Opened",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     tuesday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             }, 
     wednesday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     thursday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     friday: {
         closed: "FALSE",
@@ -2272,6 +2216,7 @@ sells: [
                 slug: "PSYCHIC",
 name: "Past Present Future",
 listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "TRUE",    },
@@ -2319,6 +2264,7 @@ services: [
         listing: { slug: "PSYCHIC",
 name: "Past Present Future",
 listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "TRUE",    },
@@ -2499,6 +2445,7 @@ services: [
                 slug: "BONEDEGA",
 name: "Bonedega",
 listingName: "Bonedega - Bodega Corner Store",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -2540,9 +2487,7 @@ sells: [
                 "BEER", 
                 "CIGARETTE_SLIM", 
                 "MUFFIN_BERRY", 
-                "INSTANT_NOODLES_RED", 
-                "INSTANT_NOODLES_ORANGE", 
-                "CIGARETTE_MENTHOL", 
+                                "CIGARETTE_MENTHOL", 
                 "BREAKFAST_TART_PINK", 
                 "LOTTO", 
                 "BUS_TICKET", 
@@ -2551,10 +2496,13 @@ sells: [
                 "CEREAL_BOX_3", 
                 "LIGHTER", 
                 "SARDINES_PRODUCT", 
-                                "JELLY_RASPBERRY"
+                                "JELLY_RASPBERRY", 
+                "STORE_BREAD", 
+                "INSTANT_NOODLES_SEAL_RED", 
+                        "INSTANT_NOODLES_SEAL_ORANGE"
         ],
 delivers: [
-                                                                                                                                                                    ],
+                                                                                                                                                                                                    ],
                 front_room: 1,rooms: {
         room_1: { 
     id: 1,
@@ -2569,6 +2517,7 @@ delivers: [
         listing: { slug: "BONEDEGA",
 name: "Bonedega",
 listingName: "Bonedega - Bodega Corner Store",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -2610,9 +2559,7 @@ sells: [
                 "BEER", 
                 "CIGARETTE_SLIM", 
                 "MUFFIN_BERRY", 
-                "INSTANT_NOODLES_RED", 
-                "INSTANT_NOODLES_ORANGE", 
-                "CIGARETTE_MENTHOL", 
+                                "CIGARETTE_MENTHOL", 
                 "BREAKFAST_TART_PINK", 
                 "LOTTO", 
                 "BUS_TICKET", 
@@ -2621,10 +2568,13 @@ sells: [
                 "CEREAL_BOX_3", 
                 "LIGHTER", 
                 "SARDINES_PRODUCT", 
-                                "JELLY_RASPBERRY"
+                                "JELLY_RASPBERRY", 
+                "STORE_BREAD", 
+                "INSTANT_NOODLES_SEAL_RED", 
+                        "INSTANT_NOODLES_SEAL_ORANGE"
         ],
 delivers: [
-                                                                                                                                                                    ],
+                                                                                                                                                                                                    ],
  },
         roomData: { 
                 featureList: [{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN"},{"x":"1","y":"9","slug":"CARDBOARD_FLOOR_MAT"},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW"},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER"},{"x":"0","y":"8","slug":"BASKET_RACK"},{"x":"4","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"6","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"8","y":"7","slug":"MILK_CRATE"},{"x":"0","y":"10","slug":"CONE_UPRIGHT"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
@@ -2772,6 +2722,7 @@ delivers: [
                 slug: "HARDWARE",
 name: "Bits and Nuts Hardware Store",
 listingName: "Bits &amp; Nuts Hardware Store",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -2855,6 +2806,7 @@ sells: [
                 slug: "BUTCHER",
 name: "Butcher",
 listingName: "Flesh and Bone Butcher",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -2894,9 +2846,9 @@ schedule: {
                 {
             lines: {
                 x: 13,
-                y: 14,
+                y: 9,
                 width: 10,
-                height: 15
+                height: 20
             },
             block: {
                 x: 2,
@@ -2914,9 +2866,80 @@ schedule: {
                 zoning: "COMMERCIAL",
             },
             listing: {
+                slug: "BAR",
+name: "Pour Yorick",
+listingName: "Pour Yorick",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    tuesday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "23:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+serves: [
+            "BEER", 
+                "ALE"
+        ],
+                rooms: {
+    }
+                
+            },
+                                                                                            },
+                {
+            lines: {
+                x: 3,
+                y: 9,
+                width: 10,
+                height: 20
+            },
+            block: {
+                x: 2,
+                y: 3
+            },
+            address: {
+                name: "",
+                facing: "S",
+                dir: "W",
+                number: "107",
+                street: "Lower Field Street",
+            },
+            structure: {
+                type: "CORNER-STORE-LEFT",
+                zoning: "COMMERCIAL",
+            },
+            listing: {
                 slug: "BARBER",
 name: "Barber",
 listingName: "Barber TBA",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -2957,74 +2980,6 @@ services: [
                                                                                             },
                 {
             lines: {
-                x: 3,
-                y: 14,
-                width: 10,
-                height: 15
-            },
-            block: {
-                x: 2,
-                y: 3
-            },
-            address: {
-                name: "",
-                facing: "S",
-                dir: "W",
-                number: "107",
-                street: "Lower Field Street",
-            },
-            structure: {
-                type: "CORNER-STORE-LEFT",
-                zoning: "COMMERCIAL",
-            },
-            listing: {
-                slug: "BAR",
-name: "Pour Yorick",
-listingName: "Pour Yorick",
-schedule: {
-    monday: {
-        closed: "FALSE",
-        open: "17:00",
-        close: "22:00"
-            },
-    tuesday: {
-        closed: "FALSE",
-        open: "17:00",
-        close: "22:00"
-            }, 
-    wednesday: {
-        closed: "FALSE",
-        open: "17:00",
-        close: "22:00"
-            },
-    thursday: {
-        closed: "FALSE",
-        open: "17:00",
-        close: "22:00"
-            },
-    friday: {
-        closed: "FALSE",
-        open: "17:00",
-        close: "22:00"
-            },
-    saturday: {
-        closed: "FALSE",
-        open: "17:00",
-        close: "23:00"
-            },
-    sunday: {
-        closed: "TRUE",    }
-},
-serves: [
-            "BEER"
-        ],
-                rooms: {
-    }
-                
-            },
-                                                                                            },
-                {
-            lines: {
                 x: 44,
                 y: 3,
                 width: 8,
@@ -3049,6 +3004,7 @@ serves: [
                 slug: "CHINESE_FOOD",
 name: "Lucky Dragon II",
 listingName: "Lucky Dragon II",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "TRUE",    },
@@ -3101,16 +3057,17 @@ delivers: [
         room_17: { 
     id: 17,
     name: "Diner Test",
-    floorWidth: 10,
+    floorWidth: 7,
     floorHeight: 12,
     wallHeight: 3,
     overallHeight: 14,
-    overallWidth: 12,
+    overallWidth: 9,
     floorSlug: "TILE.CHECKERED_WHITE_BROWN_",
     wallSlug: "",
         listing: { slug: "CHINESE_FOOD",
 name: "Lucky Dragon II",
 listingName: "Lucky Dragon II",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "TRUE",    },
@@ -3161,9 +3118,9 @@ delivers: [
         ],
  },
         roomData: { 
-                featureList: [{"x":"0","y":"2","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"3","slug":"DINER_TABLE"},{"x":"0","y":"5","slug":"DINER_BOOTH_GREEN_N"},{"x":"0","y":"5","slug":"DINER_BOOTH_RED_S"},{"x":"0","y":"6","slug":"DINER_TABLE"},{"x":"0","y":"8","slug":"DINER_BOOTH_RED_N"},{"x":"0","y":"8","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"9","slug":"DINER_TABLE"},{"x":"0","y":"11","slug":"DINER_BOOTH_GREEN_N"},{"x":"5","y":"5","slug":"DINER_TABLE"},{"x":"4","y":"5","slug":"DINER_CHAIR_MAROON"},{"x":"8","y":"11","slug":"FRONTDOOR"}],
-                recipeList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"3","y":"1"}],
-                removalList: []
+                featureList: [{"x":"0","y":"2","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"3","slug":"DINER_TABLE"},{"x":"0","y":"5","slug":"DINER_BOOTH_GREEN_N"},{"x":"0","y":"5","slug":"DINER_BOOTH_RED_S"},{"x":"0","y":"6","slug":"DINER_TABLE"},{"x":"0","y":"8","slug":"DINER_BOOTH_RED_N"},{"x":"0","y":"8","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"9","slug":"DINER_TABLE"},{"x":"0","y":"11","slug":"DINER_BOOTH_GREEN_N"},{"x":"4","y":"1","slug":"STORE_WINDOW_COUNTER_3"},{"x":"5","y":"11","slug":"FRONTDOOR"}],
+                recipeList: [{"x":"4","y":"5","slug":"TILE.CHECKERED_BLUE_WHITE_"},{"x":"5","y":"9","slug":"TILE.CHECKERED_BLUE_WHITE_"}],
+                removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"3","y":"1"}]
          }
 }
 
@@ -3172,7 +3129,7 @@ delivers: [
             },
                                                                                                             portal: {
                 room_id: 17,
-                x: 9,
+                x: 6,
                 y: 14
             }
                     },
@@ -3228,6 +3185,7 @@ delivers: [
                 slug: "PHARMACY",
 name: "Pharmacy",
 listingName: "Pharmacy TBA",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -3401,6 +3359,7 @@ delivers: [
                 slug: "BAKERY",
 name: "Bakery",
 listingName: "Bakery TBA",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -3455,9 +3414,9 @@ serves: [
                                                                                             },
                 {
             lines: {
-                x: 38,
+                x: 40,
                 y: 3,
-                width: 10,
+                width: 8,
                 height: 26
             },
             block: {
@@ -3479,6 +3438,7 @@ serves: [
                 slug: "FLORIST",
 name: "Florist",
 listingName: "Florist TBA",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "TRUE",    },
@@ -3519,7 +3479,7 @@ sells: [
                                                                                             },
                 {
             lines: {
-                x: 24,
+                x: 27,
                 y: 3,
                 width: 12,
                 height: 26
@@ -3545,7 +3505,7 @@ sells: [
                                                                     },
                 {
             lines: {
-                x: 12,
+                x: 15,
                 y: 3,
                 width: 12,
                 height: 26
@@ -3571,7 +3531,7 @@ sells: [
                                                                     },
                 {
             lines: {
-                x: 0,
+                x: 3,
                 y: 3,
                 width: 12,
                 height: 26

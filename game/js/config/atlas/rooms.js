@@ -12,6 +12,7 @@
         listing: { slug: "BONEDEGA",
 name: "Bonedega",
 listingName: "Bonedega - Bodega Corner Store",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -53,9 +54,7 @@ sells: [
                 "BEER", 
                 "CIGARETTE_SLIM", 
                 "MUFFIN_BERRY", 
-                "INSTANT_NOODLES_RED", 
-                "INSTANT_NOODLES_ORANGE", 
-                "CIGARETTE_MENTHOL", 
+                                "CIGARETTE_MENTHOL", 
                 "BREAKFAST_TART_PINK", 
                 "LOTTO", 
                 "BUS_TICKET", 
@@ -64,10 +63,13 @@ sells: [
                 "CEREAL_BOX_3", 
                 "LIGHTER", 
                 "SARDINES_PRODUCT", 
-                                "JELLY_RASPBERRY"
+                                "JELLY_RASPBERRY", 
+                "STORE_BREAD", 
+                "INSTANT_NOODLES_SEAL_RED", 
+                        "INSTANT_NOODLES_SEAL_ORANGE"
         ],
 delivers: [
-                                                                                                                                                                    ],
+                                                                                                                                                                                                    ],
  },
         roomData: { 
                 featureList: [{"x":"0","y":"3","slug":"BODEGA_STORE_COUNTER"},{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA"},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN"},{"x":"1","y":"9","slug":"CARDBOARD_FLOOR_MAT"},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW"},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER"},{"x":"0","y":"8","slug":"BASKET_RACK"},{"x":"4","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"6","y":"7","slug":"SHOP_SHELVES_MOTTLED"},{"x":"8","y":"7","slug":"MILK_CRATE"},{"x":"0","y":"10","slug":"CONE_UPRIGHT"},{"x":"1","y":"11","slug":"FRONTDOOR"}],
@@ -110,15 +112,16 @@ delivers: [
 , room_10: { 
     id: 10,
     name: "Tutorial",
-    floorWidth: 72,
-    floorHeight: 72,
+    floorWidth: 48,
+    floorHeight: 48,
     wallHeight: 0,
-    overallHeight: 74,
-    overallWidth: 74,
+    overallHeight: 50,
+    overallWidth: 50,
     floorSlug: "VOID.FILL_",
     wallSlug: "",
         roomData: { 
-                featureList: [],
+                featureList: [{"x":"17","y":"17","slug":"SODIUM"},{"x":"17","y":"23","slug":"WOOD_POLE"},{"x":"16","y":"24","slug":"CREEK_SEDGE"},{"x":"18","y":"22","slug":"CREEK_SEDGE"},{"x":"28","y":"27","slug":"CREEK_SEDGE"},{"x":"29","y":"26","slug":"CREEK_SEDGE"},{"x":"26","y":"27","slug":"CREEK_SEDGE"},{"x":"0","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"6","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"12","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"18","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"24","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"30","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"36","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"42","y":"9","slug":"CHAINLINK_S_6_OPEN"},{"x":"0","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"6","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"12","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"18","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"24","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"30","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"36","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"42","y":"35","slug":"CHAINLINK_S_6_OPEN"},{"x":"9","y":"19","slug":"WOOD_FENCE_3_BROWN"},{"x":"8","y":"19","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"8","y":"21","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"8","y":"23","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"8","y":"25","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"8","y":"27","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"8","y":"29","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"8","y":"31","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"12","y":"11","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"12","y":"14","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"12","y":"17","slug":"WOOD_FENCE_2_VERTICAL_WEATHERED"},{"x":"12","y":"19","slug":"WOOD_POLE"},{"x":"21","y":"19","slug":"FRONTDOOR"}],
+                recipeList: [],
                 removalList: []
          }
 }
@@ -135,6 +138,7 @@ delivers: [
         listing: { slug: "LAUNDROMAT",
 name: "Coin Wash",
 listingName: "Coin Wash Laundry Laundromat",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -202,26 +206,27 @@ sells: [
         listing: { slug: "LOCKSMITH",
 name: "Locksmith",
 listingName: "Keys Cut Locks Opened",
+rollingGate: "TRUE",
 schedule: {
     monday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     tuesday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             }, 
     wednesday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     thursday: {
         closed: "FALSE",
         open: "10:00",
-        close: "19:00"
+        close: "18:00"
             },
     friday: {
         closed: "FALSE",
@@ -298,6 +303,7 @@ sells: [
         listing: { slug: "PAWN SHOP",
 name: "Pawn Shop",
 listingName: "Break of Pawn - Pawn Shop",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "FALSE",
@@ -360,6 +366,7 @@ buys: [
         listing: { slug: "PSYCHIC",
 name: "Past Present Future",
 listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "TRUE",    },
@@ -445,6 +452,7 @@ services: [
         listing: { slug: "CHINESE_FOOD",
 name: "Lucky Dragon II",
 listingName: "Lucky Dragon II",
+rollingGate: "FALSE",
 schedule: {
     monday: {
         closed: "TRUE",    },

@@ -1,4 +1,5 @@
 import MENU from "./app-menus.js";
+import PRELOAD_SOUND from "../config/atlas/audio.js";
 /*
  * Manages application menus
  * MAIN | PAUSE | SETTINGS
@@ -87,7 +88,6 @@ export default class AppMenu {
             }
             this.menu_list[i].block.setFrame(selected == i ? 'BLOCK_MID_MOONSTONE_RIGHT' : 'BLOCK_MID_DARK_BLUE');
         }
-        
     }
 
     disappearMenu () {
@@ -131,15 +131,23 @@ export default class AppMenu {
 
     down () {
         this.setSelected(this.selected + 1);
+        this.playMenuSound('MENU_INPUT');
     }
 
     up () {
         this.setSelected(this.selected - 1);
+        this.playMenuSound('MENU_INPUT');
     }
 
     select () {
+        this.playMenuSound('MENU_SELECT');
         if (this.menu[this.selected].TYPE == 'SCENE') {
-            this.scene.app.endScene(this.menu[this.selected].LOADER);
+            /// Delay scene change until after sound completes
+            this.scene.time.delayedCall(250, () => {
+                this.scene.app.endScene(this.menu[this.selected].LOADER);
+            }
+            , [], this);
+            //
         }
 
         if (this.menu[this.selected].TYPE == 'LOADSAVE') {
@@ -154,6 +162,43 @@ export default class AppMenu {
         if (this.menu[this.selected].TYPE == 'FUNCTION') {
             /// TODO: if the menu item is a function, do that function
         }
+
+        if (this.menu[this.selected].TYPE == 'LOADSETTINGS') {
+            
+
+        }
+    }
+
+    playMenuSound (sound_slug, repeat=0, repeat_delay=0) {
+        var volume = 1;
+        var self = this;
+        PRELOAD_SOUND.forEach(function (sound, index) {
+            if (sound.NAME === sound_slug) {
+                let available = sound.FILES.length;
+                let random = Phaser.Math.Between(0, available-1);
+                let sound_key = sound.NAME+'_'+random;
+                let new_sound = self.scene.sound.add(sound_key, {volume: volume});
+
+                if (repeat > 0) {
+                    let timeline = self.scene.add.timeline([
+
+                        {
+                    
+                            at: repeat_delay,
+                    
+                            run: () => { new_sound.play(); },
+                        },
+                    ]);
+                    timeline.repeat(repeat).play();
+                    return timeline;
+                }
+                else {
+                    new_sound.play();
+                    return;
+                }
+                
+            }
+        });
     }
 
 

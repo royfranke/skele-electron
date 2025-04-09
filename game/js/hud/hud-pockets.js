@@ -279,7 +279,8 @@ export default class HudPockets extends HudCommon {
 
         this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', true);
         this.setPocketsState('OPEN');
-
+        this.scene.manager.hud.hudInput.setSelectedPocket(0);
+        this.refreshDisplay();
     }
 
     closePockets() {
@@ -369,9 +370,6 @@ export default class HudPockets extends HudCommon {
         return stack;
     }
 
-    makeStackIndicator(_x, _y) {
-        return this.factory.makeStackIndicator(_x, _y);
-    }
 
     addSlip(slot_x, text = 'HOLD') {
         const slotMargin = {

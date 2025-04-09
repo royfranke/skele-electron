@@ -160,6 +160,34 @@ const DIALOGS = {
                         quest: 'LETTER_CARRIER',
                                         responses: [
               ]
+    },
+      17: {
+        id: 17,
+        text: 'Let me get a look at you. How about a little to the left?',
+        next: 0,
+                responses: [
+              ]
+    },
+      18: {
+        id: 18,
+        text: 'How about to the right?',
+        next: 0,
+                responses: [
+              ]
+    },
+      19: {
+        id: 19,
+        text: 'Fine, fine. Could you give us a little sprint? Hold shift while you move about.',
+        next: 0,
+                responses: [
+              ]
+    },
+      20: {
+        id: 20,
+        text: 'That’s the stuff! Now then, run from the pit, yeah?',
+        next: 0,
+                responses: [
+              ]
     }
   };
 export default DIALOGS;

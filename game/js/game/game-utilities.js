@@ -357,10 +357,11 @@ export default class GameUtilities {
         if (ground != undefined) {
           if (ground.USEMASK) {
               _y = _y - ground.ZINDEX;
-          }
+
+                obj.footMask.setPosition(obj.sprite.x, _y);
+                obj.footMask.setDepth(obj.sprite.depth + 1);
+            }
         }
-        obj.footMask.setPosition(obj.sprite.x, _y);
-        obj.footMask.setDepth(obj.sprite.depth + 1);
         return;
       }
     

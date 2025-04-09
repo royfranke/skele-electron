@@ -44,6 +44,14 @@ const PRELOAD_SOUND = [
         FILES: ['item-put-away-1.wav','item-put-away-2.wav','item-put-away-3.wav']
     },
       {
+        NAME: 'MENU_INPUT',
+        FILES: ['click-rummage-2.wav']
+    },
+      {
+        NAME: 'MENU_SELECT',
+        FILES: ['click-rummage.wav']
+    },
+      {
         NAME: 'NEW_INFO',
         FILES: ['new-info.wav']
     },

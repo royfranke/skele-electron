@@ -1,1 +1,138 @@
-{"BODY":{"ODOR":2,"HUNGER":3,"FATIGUE":2,"THIRST":2,"FILTH":2,"EASE":2,"WET":0},"COINPURSE":{"COIN":{"PENNY":0,"NICKEL":0,"DIME":0,"QUARTER":0},"STATUS":{"HAS":"FALSE","HAD":"FALSE","LOST":"FALSE"},"PAPER":{"ONE":0,"TWO":0,"FIVE":0,"TEN":0,"TWENTY":0,"FIFTY":0,"HUNDRED":0}},"KNOWLEDGE":{"CURSES":{},"NUMBERS":{},"ADDRESSES":{},"INTERSECTIONS":{}},"NOTEBOOKS":{"STATUS":{"CURRENT":{"NOTEBOOK":1}},"NOTEBOOK1":{"PAGES":[{"title":"Phone Numbers","content":""},{"title":"INTERSECTIONS","content":""}],"SPECS":{"COLOR":"RED"},"EPHEMERA":{}}},"POCKETS":{"SLOTS":{"SLOT0":{"TYPE":"SHOULDERS","STATE":"EMPTY","EMPTY":{"NAME":"shoulders","ICON":"SHOULDERS"},"HOLDS":"DISALLOWED","USES":"DISALLOWED","WEARS":null},"SLOT1":{"TYPE":"HAND","STATE":"EMPTY","EMPTY":{"NAME":"right","ICON":"RIGHT_HAND"},"HOLDS":null,"USES":null,"WEARS":"DISALLOWED"},"SLOT2":{"TYPE":"HAND","STATE":"EMPTY","EMPTY":{"NAME":"left","ICON":"LEFT_HAND"},"HOLDS":null,"USES":null,"WEARS":"DISALLOWED"}},"STATES":{"EMPTY":"EMPTY","HOLDS":"HOLDS","WEARS":"WEARS","USES":"USES"}},"POSITION":{"ROOM":10,"X":24,"Y":24},"SAVE":{"HEADLINE":"NEW","SLOT":1},"SETTINGS":{"CONTENT":{"MOTHS":"TRUE","BUTTERFLIES":"TRUE","SMOKES":"TRUE","BOOZE":"TRUE"}},"TIME":{"HOUR":12,"MINUTE":13,"SECOND":44,"DAY":3,"ALARM":{"SET":"TRUE","HOUR":4, "MINUTE": 0}}}
+{
+    "ACCOMPLISHMENTS": {
+        "MAILED": {
+            "MAILED_LETTERS": 0,
+            "MAILED_POSTCARDS": 0,
+            "MAILED_PACKAGES": 0
+        },
+        "HOLES": {
+            "HOLES_DUG": 0,
+            "HOLES_FILLED": 0
+        },
+        "CHALKED": {
+            "CHALKED_DRAWINGS": 0
+        }
+    },
+    "BANK": {
+        "HAS_SAVINGS": "FALSE",
+        "HAS_AMOUNT": 0,
+        "SAVINGS_IN": 0,
+        "SAVINGS_OUT": 0
+    },
+    "BODY": {
+        "ODOR": 2,
+        "HUNGER": 3,
+        "FATIGUE": 2,
+        "THIRST": 2,
+        "FILTH": 2,
+        "EASE": 2,
+        "WET": 0
+    },
+    "COINPURSE": {
+        "COIN": {
+            "PENNY": 0,
+            "NICKEL": 0,
+            "DIME": 0,
+            "QUARTER": 0
+        },
+        "STATUS": {
+            "HAS": "FALSE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
+        },
+        "PAPER": {
+            "ONE": 0,
+            "TWO": 0,
+            "FIVE": 0,
+            "TEN": 0,
+            "TWENTY": 0,
+            "FIFTY": 0,
+            "HUNDRED": 0
+        }
+    },
+    "KNOWLEDGE": {
+        "CURSES": {},
+        "NUMBERS": {},
+        "ADDRESSES": {},
+        "FIELDNOTES": {},
+        "HOMEWORK": {},
+        "DRAWINGS": {},
+        "RECIPES": {},
+        "MAIL": {},
+        "INTERSECTIONS": {}
+    },
+    "NOTEBOOKS": {
+        "STATUS": {
+            "CURRENT": {
+                "NOTEBOOK": 1
+            }
+        },
+        "NOTEBOOK1": {
+            "PAGES": [],
+            "SPECS": {
+                "COLOR": "RED"
+            },
+            "EPHEMERA": {}
+        }
+    },
+    "POCKETS": {
+        "STATES": {
+            "EMPTY": "EMPTY",
+            "HOLDS": "HOLDS",
+            "WEARS": "WEARS",
+            "USES": "USES"
+        },
+        "SLOTS": {
+            "SLOT0": {
+                "TYPE": "SHOULDERS",
+                "STATE": "EMPTY",
+                "HOLDS": "DISALLOWED",
+                "USES": "DISALLOWED",
+                "WEARS": ""
+            },
+            "SLOT1": {
+                "TYPE": "HAND",
+                "STATE": "EMPTY",
+                "HOLDS": "",
+                "USES": "",
+                "WEARS": "DISALLOWED"
+            },
+            "SLOT2": {
+                "TYPE": "HAND",
+                "STATE": "EMPTY",
+                "HOLDS": "",
+                "USES": "",
+                "WEARS": "DISALLOWED"
+            }
+        }
+    },
+    "POSITION": {
+        "ROOM": -1,
+        "X": 20,
+        "Y": 20,
+        "FACING": "S"
+    },
+    "SAVE": {
+        "HEADLINE": "NEW",
+        "SLOT": 0
+    },
+    "SETTINGS": {
+        "CONTENT": {
+            "MOTHS": "TRUE",
+            "BUTTERFLIES": "TRUE",
+            "SMOKES": "TRUE",
+            "BOOZE": "TRUE"
+        }
+    },
+    "TIME": {
+        "ALARM": {
+            "SET": "TRUE",
+            "HOUR": 4,
+            "MINUTE": 0
+        },
+        "SECOND": 0,
+        "MINUTE": 0,
+        "HOUR": 21,
+        "DAY": 1
+    }
+}

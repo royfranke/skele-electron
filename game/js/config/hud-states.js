@@ -35,6 +35,11 @@ const HUD_STATES = {
         input: true,
         visible: true
     },
+   MAP_FOCUSED: {
+        name: 'MAP_FOCUSED',
+        input: true,
+        visible: true
+    },
     NOTEBOOK_FOCUSED: {
         name: 'NOTEBOOK_FOCUSED',
         input: true,

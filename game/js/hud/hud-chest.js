@@ -139,15 +139,9 @@ export default class HudChest extends HudCommon {
 
 
     makeSlip(_x, _y, text = 'TAKE') {
-        this.destroySlip();
+        this.destroySlip(this.chest.slip);
         return this.factory.makeSlip(_x, _y, text);
     }
-
-    makeBackButton(_x, _y, text = 'CLOSE') {
-        let close_button = 'Z';
-        return this.factory.makeSlip(_x, _y, text, close_button);
-    }
-
 
     refreshChest() {
         this.chest.text.setVisible(false);
@@ -171,7 +165,7 @@ export default class HudChest extends HudCommon {
                 this.chest.text.setVisible(true);
             }
             else {
-                this.destroySlip();
+                this.destroySlip(this.chest.slip);
                 this.chest.icon = this.makeIcon(this.chest.slot.x, this.chest.slot.y, 'UI', 'EMPTY_SYMBOL');
             }
             this.chest.back_button = this.makeBackButton(this.position.back_button.x, this.position.back_button.y);
@@ -227,7 +221,7 @@ export default class HudChest extends HudCommon {
             this.chest.container.destroy();
             this.chest.text.destroy();
             this.destroyBackButton();
-            this.destroySlip();
+            this.destroySlip(this.chest.slip);
             this.chest = null;
             /// Clean up event listeners
             this.scene.events.off('INPUT_DOWN_CHEST');
@@ -237,15 +231,7 @@ export default class HudChest extends HudCommon {
         }
     }
 
-    destroySlip() {
-        if (this.chest.slip != null) {
-            this.chest.slip.block.destroy();
-            this.chest.slip.text.destroy();
-            this.chest.slip.button.destroy();
-            this.chest.slip.button_text.destroy();
-            this.chest.slip = null;
-        }
-    }
+    
 
     destroyBackButton() {
         if (this.chest.back_button != null) {

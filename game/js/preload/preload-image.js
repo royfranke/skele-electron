@@ -18,7 +18,7 @@ const PRELOAD_IMAGE = [
     {
         NAME: 'floor',
         PATH: 'tilesets/interior-atlas.png'
-    },
+    }
 ];
 
 export default PRELOAD_IMAGE;

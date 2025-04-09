@@ -24,7 +24,6 @@ export default class AppView {
         }
         if (state_name === 'SETTINGS') {
             this.createSettings();
-            //this.settings = new SettingsManager(this.scene);
         }
         if (state_name === 'LOAD') {
             this.createLoad();
@@ -95,7 +94,6 @@ export default class AppView {
         var width = this.view.right - _x - this.view.margin.right;
 
         this.settingsManager.setView(_x,_y, width, height);
-
         this.addVersion();
        //this.settingsManager.saveSettings('input');
     }

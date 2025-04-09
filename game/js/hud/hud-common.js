@@ -18,7 +18,22 @@ export default class HudCommon {
         initialize () {
             
         }
-        
+
+        destroySlip(slip) {
+            if (slip != null) {
+                slip.block.destroy();
+                slip.text.destroy();
+                slip.button.destroy();
+                slip.button_text.destroy();
+                slip = null;
+                return slip;
+            }
+        }
+
+        makeBackButton(_x, _y, text = 'CLOSE') {
+            let close_button = 'Z';
+            return this.factory.makeSlip(_x, _y, text, close_button);
+        }
     
         makeBitmapText (_x,_y, width, size=24, font='SkeleButton') {
             return this.factory.makeBitmapText(_x, _y, width, size, font);
@@ -44,8 +59,21 @@ export default class HudCommon {
             return this.factory.makeWorldBlock(_x, _y, width, height, frameName);
         }
 
+        makeHUDRightArrow(_x, _y, color = 'YELLOW') {
+            return this.factory.makeHUDRightArrow(_x, _y, color);
+        }
+
+        makeHUDDownArrow(_x, _y, color = 'YELLOW') {
+            return this.factory.makeHUDDownArrow(_x, _y, color);
+        }
+
         makeFX (fx_slug, _x, _y, delay=0) {
             this.factory.makeHudFX(fx_slug, _x, _y, delay);
+        }
+
+
+        makeStackIndicator(_x, _y) {
+            return this.factory.makeStackIndicator(_x, _y);
         }
 
         makeIcon (_x,_y, textureName, frameName) {
@@ -54,6 +82,10 @@ export default class HudCommon {
 
         flutter (elements=[], delay=0) {
             this.factory.flutter(elements, delay);
+        }
+
+        plunge (elements=[],_y) {
+            this.factory.plunge(elements,_y);
         }
 
         getNumberSymbol (number=0) {

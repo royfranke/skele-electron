@@ -44,9 +44,14 @@ export default class DialogManager {
         var callback_select = function () {
             this.scene.manager.hud.hudDialog.select();
         }
+        var callback_right = function () {
+            this.scene.manager.hud.hudDialog.arrowRight();
+        }
+        
         this.scene.events.addListener('INPUT_UP_DIALOG', callback_up, this);
         this.scene.events.addListener('INPUT_DOWN_DIALOG', callback_down, this);
         this.scene.events.addListener('INPUT_SELECT_DIALOG', callback_select, this);
+        this.scene.events.addListener('INPUT_RIGHT_DIALOG', callback_right, this);
         
    }
 

@@ -143,7 +143,7 @@ export default class Item {
             let locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
             let ground = locale.ground.getGround(this.tile_x, this.tile_y);
             // utilities
-            locale.ground.util.updateFooting(ground,this);
+            //locale.ground.util.updateFooting(ground,this);
         /// put footmask here - item has landed
 
         });
@@ -151,11 +151,11 @@ export default class Item {
     }
     
     createFooting() {
-        this.footShadow = this.scene.add.ellipse(0, 0, 12, 6, 0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY);
-        this.footShadow.setAlpha(.5);
-        this.footMask = this.scene.add.circle(0, 0, 16, 0x6666ff);
-        this.footMask.setVisible(false);
-        this.sprite.setMask(new Phaser.Display.Masks.BitmapMask(this.scene, this.footMask));
+        //this.footShadow = this.scene.add.ellipse(0, 0, 12, 6, 0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY);
+        //this.footShadow.setAlpha(.5);
+        //this.footMask = this.scene.add.circle(0, 0, 16, 0x6666ff);
+        //this.footMask.setVisible(false);
+        //this.sprite.setMask(new Phaser.Display.Masks.BitmapMask(this.scene, this.footMask));
         //this.shadow = this.scene.add.sprite(0,0, "player-IDLE", 0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
       }
       
@@ -247,8 +247,8 @@ export default class Item {
 
     destroySprite() {
         this.sprite.destroy();
-        this.footMask.destroy();
-        this.footShadow.destroy();
+        //this.footMask.destroy();
+        //this.footShadow.destroy();
         this.sprite = null;
     }
 

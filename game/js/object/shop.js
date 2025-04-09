@@ -60,7 +60,7 @@ export default class Shop {
 
             this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.ASPHALT.FILL_, left + 2, top-6, 5, 7);
 
-            this.drawParkingLot(left + 1, bottom - 5, width - 2, 'SOUTH');
+            this.drawParkingLot(left + 7, top+1, width - 4, 'SOUTH');
             
             return;
         }
@@ -93,6 +93,11 @@ export default class Shop {
                 this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.frame);
             }
 
+            if (this.prop.listing.slug == 'PAWN SHOP') {
+                this.sign = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 3, 'PAWN_STOREFRONT_SIGN');
+                this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
+            }
+
             if (this.prop.listing.slug == 'PSYCHIC') {
                 this.sign = this.scene.manager.objectManager.newObjectToWorld(_x+1, _y - 3, 'PSYCHIC_STOREFRONT_SIGN');
                 this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
@@ -102,6 +107,13 @@ export default class Shop {
                 this.scene.manager.objectManager.newObjectToWorld(_x + 1, _y + 3, 'BOLLARD_PARKING');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 3, _y + 3, 'BOLLARD_PARKING');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 5, _y + 3, 'BOLLARD_PARKING');
+            }
+
+            if (this.prop.listing.slug == 'LAUNDROMAT') {
+                let sign_background = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 4, 'SIGN_BACK_'+this.roll(['BLUE','GREEN','RED'])+'_10');
+                sign_background.sprite.setDepth(sign_background.sprite.depth + 130);
+                this.sign = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 4, 'COIN_WASH_SIGN');
+                this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
             }
         }
 
@@ -135,7 +147,7 @@ export default class Shop {
                 lotto_sign.setState('FLICKERING');
 
                 this.scene.manager.objectManager.newObjectToWorld(_x - 4, _y + 1, 'TRASH_DRUM');
-                this.scene.manager.objectManager.newObjectToWorld(_x - 3, _y + 1, 'POOP');
+                this.scene.manager.objectManager.newObjectToWorld(_x - 3, _y -12, 'POOP');
                 this.scene.manager.fx.playFX('STINK_REPEAT',(_x - 4)*16, (_y)*16);
                 this.scene.manager.fx.playFX('FLY_8',(_x - 4)*16, (_y)*16);
                 
@@ -144,6 +156,11 @@ export default class Shop {
                 this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 1, 'PAYPHONE');
 
                 this.scene.manager.objectManager.newObjectToWorld(_x + 11, _y + 3, 'BOLLARD_PARKING');
+            }
+
+            if (this.prop.listing.slug == 'BARBER') {
+                this.sign = this.scene.manager.objectManager.newObjectToWorld(_x-1.5, _y, 'BARBER_POLE');
+                this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
             }
             
         }
@@ -164,6 +181,8 @@ export default class Shop {
             key_sign.sprite.setDepth(this.gates[0].sprite.depth - 18);
             key_sign.setState('ON');
         }
+
+
 
         this.buildHours();
         this.setRollingGatesFromHours();
@@ -287,7 +306,7 @@ export default class Shop {
         
 
         if (width - window_width >= window_width) {
-            this.addStoreWindows(_x + (index*window_width), _y, width - window_width, index + 1);
+            //this.addStoreWindows(_x + (index*window_width), _y, width - window_width, index + 1);
         }
     }
 
@@ -329,7 +348,8 @@ export default class Shop {
 
     drawParkingSpace(_x, _y, facing) {
         var groundLayer = this.scene[this.scene.locale].groundLayer;
-        groundLayer.weightedRandomize(TILES.STREET.NORTHSOUTH_SOLIDWHITE_,_x, _y, 1, 5);
+        groundLayer.weightedRandomize(TILES.STREET.EAST_NORTHSOUTH_SOLIDWHITE_,_x, _y, 1, 5);
+        this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y -2, 'BOLLARD_PARKING');
     }
 
     drawAsphaltBox(_x, _y, width, height) {

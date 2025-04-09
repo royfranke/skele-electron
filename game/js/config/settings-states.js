@@ -20,8 +20,8 @@ const SETTINGS_STATES = {
         name: 'DISPLAY',
         display: 'Display'
     },
-    GAME_CONTENT: {
-        name: 'GAME_CONTENT',
+    CONTENT: {
+        name: 'CONTENT',
         display: 'Game Content'
     },
 };

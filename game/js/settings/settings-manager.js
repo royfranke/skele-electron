@@ -1,6 +1,7 @@
 import SettingsFactory from "./settings-factory.js";
 import SettingsState from "./settings-state.js";
 
+
 /* Settings Manager Class */
 
 export default class SettingsManager {
@@ -9,7 +10,18 @@ export default class SettingsManager {
         this.scene = scene;
         this.settingsState = new SettingsState();
         this.factory = new SettingsFactory(scene);
-        
+        this.config = {
+            "INPUT": this.factory.getSettingsData("input"),
+            "AUDIO": this.factory.getSettingsData("audio"),
+            "DISPLAY": this.factory.getSettingsData("display"),
+            "CONTENT": this.factory.getSettingsData("content")
+        };
+
+        this.display = {
+            "INPUT": {
+                "FRAME": "BLOCK_MID_LILAC_BORDER"
+            },
+        }
     }
 
     getState () {

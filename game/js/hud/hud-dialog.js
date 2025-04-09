@@ -20,10 +20,22 @@ export default class HudDialog extends HudCommon {
         this.talking = null;
     }
 
+    arrowRight () {
+        if (this.currentReply != false) {
+            let next = this.replyBox.dataset[this.selected].next;
+            this.clearDialog();
+            if (next != 0) {
+                this.scene.manager.dialog.triggerDialog(next);
+            }
+            else {
+                this.closeDialog();
+            }
+        }
+    }
+
     select () {
         if (this.currentReply != false) {
             let next = this.replyBox.dataset[this.selected].next;
-            console.log('----------'+next);
             this.clearDialog();
             if (next != 0) {
                 this.scene.manager.dialog.triggerDialog(next);
@@ -48,13 +60,21 @@ export default class HudDialog extends HudCommon {
                 });
             }
             else {
-                let next = this.dialogBox.dialog.next;
-                let trigger = this.dialogBox.dialog.trigger;
+                var next = 0;
+                var trigger = null;
                 var court = null;
-                if (trigger == 'COURT') {
-                    court = this.dialogBox.dialog.court;
+
+                if (this.dialogBox != null) {
+                    next = this.dialogBox.dialog.next;
+                    trigger = this.dialogBox.dialog.trigger;
+                    if (trigger == 'COURT') {
+                        court = this.dialogBox.dialog.court;
+                    }
+                    
                 }
+
                 this.clearDialog();
+
                 if (next != 0) {
                     this.scene.manager.dialog.triggerDialog(next);
                 }
@@ -71,12 +91,75 @@ export default class HudDialog extends HudCommon {
     }
 
     arrowDown () {
-        this.setSelected(this.selected + 1);
+        this.setSelected(1);
     }
 
     arrowUp () {
-        this.setSelected(this.selected - 1);
+        this.setSelected(-1);
     }
+
+    setSelected (selected) {
+        if (this.currentReply != false) {
+            if (this.content != null) {
+
+
+                if (selected == 1) {
+                    this.content = this.moveFirstToBack(this.content);
+                    this.shiftReplies();
+                    this.plunge([this.selector.down_arrow], this.reply_y + 18);
+                }
+                else if (selected == -1) {
+                    this.content = this.moveLastToFront(this.content);
+                    this.shiftReplies('+=8');
+                    this.plunge([this.selector.down_arrow], this.reply_y + 18);
+                }
+
+                
+            }
+        }
+    }
+
+    shiftReplies (shift = '-=4') {
+        if (this.replyBox != null) {
+            let tween = this.scene.add.tween({
+                targets: this.replyBox.replies,
+                y: shift,
+                duration: 500,
+                ease: 'Sine.easeOut',
+                repeat: 0
+            });
+            tween.on('complete', () => {
+                if (this.replyBox != null) {
+                    var drawn = this.drawReplies();
+                    var replies = drawn.replies;
+                    var dataset = drawn.dataset;
+                    this.replyBox.replies = replies;
+                    this.replyBox.dataset = dataset;
+                }
+            });
+
+        }
+    }
+                
+
+    moveFirstToBack(arr) {
+        if (arr.length === 0) {
+            return arr;
+        }
+        const firstItem = arr.shift();
+        arr.push(firstItem);
+        return arr;
+      }
+
+    moveLastToFront(arr) {
+        if (arr.length === 0) {
+          return arr;
+        }
+        const lastItem = arr.pop();
+        arr.unshift(lastItem);
+        return arr;
+      }
+    
 
     makeBitmapText (_x,_y, width, text, size, font="SkeleTalk") {
         let bitmap = this.factory.makeBitmapText(_x,_y, width, size, font);
@@ -92,10 +175,13 @@ export default class HudDialog extends HudCommon {
         }
         else {
             /// Place an X in the corner of the dialog to indicate close
-            let _x = this.view.left + 304;
-            let _y = this.view.bottom - (32 + this.view.margin.bottom);
-            var close_block = this.makeBlock(_x , _y, 24, 24, 'BLOCK_DEEP_ORANGE');
-            var close_button = this.makeBitmapText(_x + 8,_y + 4, 32, 'X', 16,'SkeleButton');
+            let _x = this.view.left + 308;
+            let _y = this.view.bottom - (24 + this.view.margin.bottom);
+
+            var close_block = this.makeHUDDownArrow(_x , _y, 'YELLOW');
+            
+            var close_button = this.makeBitmapText(_x + 5,_y - 6, 32, 'X',8,'SkeleNotebook');
+            close_button.setTintFill(0x465e62);
             this.closure = {block:close_block,button:close_button};
             this.flutter([close_block,close_button], 1000);
         }
@@ -146,6 +232,7 @@ export default class HudDialog extends HudCommon {
 
     closeDialog () {
         this.clearDialog();
+        this.scene.events.emit('DIALOG_CLOSE');
         this.scene.manager.setFocus('PLAYER');
     }
 
@@ -159,70 +246,50 @@ export default class HudDialog extends HudCommon {
     }
 
     makeReplyBox (content=[{'text': 'Yes', 'next': 0},{'text': 'No', 'next': 0}]) {
-        let _x = this.view.left + 352;
+        let _x = this.view.right - (132 + this.view.margin.right);
         let _y = this.view.bottom - (104 + this.view.margin.bottom);
-        //let block = this.makeBlock(_x,_y, 120, 96, 'BLOCK_MID_YELLOW_BORDER');
+       let container = this.makeBlock(_x,_y, 136, 96, 'BLOCK_MID_LILAC_FAT_BORDER');
+
+        let blocks = [container];
+
+        var next_y = _y + 12;
+
+        var selector_arrow = this.makeHUDRightArrow(_x,next_y - 4, 'YELLOW');
+        var down_arrow = this.makeHUDDownArrow(_x, next_y + 18, 'SHADOW');  
+        this.flutter([down_arrow], 1000);
+        this.selector = {selector_arrow, down_arrow};
+        this.reply_y = next_y;
+        this.content = content;
+        var drawn = this.drawReplies();
+        
+        var replies = drawn.replies;
+        var dataset = drawn.dataset;
+        return {blocks: blocks, replies: replies, dataset: dataset};
+    }
+
+    drawReplies () {
+        this.clearReplies();
+        let _x = this.view.right - (132 + this.view.margin.right);
+        let _y = this.reply_y;
         let replies = [];
-        let blocks = [];
-        let selectors = [];
         let dataset = [];
+        let content = this.content;
+        
         content.forEach((answer, index) => {
-            let reply = this.makeBitmapText(_x + 16,_y + 8 + (index * 32), 88, answer.text, 8);
+            let reply = this.makeBitmapText(_x + 20,_y, 88, answer.text, 8);
+            let reply_height = reply.displayHeight + 16;
+            
             dataset.push(answer);
             replies.push(reply);
-            blocks.push(this.makeBlock(_x,_y + (index * 32), 120, reply.displayHeight + 16, 'BLOCK_MID_DARK_BLUE'));
-            var selector_block = this.makeBlock(_x - 24,_y + (index * 32), 24, reply.displayHeight + 16, 'BLOCK_DEEP_ORANGE_LEFT');
-            var selector_button = this.makeBitmapText(_x - 16,_y + 4 + (index * 32), 32, 'X', 16,'SkeleButton');
-            var selector_frame = this.makeBlock(_x,_y + (index * 32), 120, reply.displayHeight + 16, 'BLOCK_MID_MOONSTONE_RIGHT');
-            
-            
-            var selector = {selector_block, selector_button, selector_frame};
-
-            if (index > 0) {
-                this.setSelectorVisible(selector,false);
-            }
-
-            selectors.push(selector);
-
-
+            _y += reply_height;
         });
-        return {blocks: blocks, replies: replies, selectors: selectors, dataset: dataset};
+        return {replies, dataset};
     }
 
-    setSelectorVisible (selector, visible) {
-        selector.selector_block.setVisible(visible);
-        selector.selector_button.setVisible(visible);
-        selector.selector_frame.setVisible(visible);
-    }
-
-    setSelectorSelected (selector) {
-        //selector.selector_block.setTexture('UI', 'BLOCK_MID_LILAC');
-        let visible = false;
-        selector.selector_button.setVisible(visible);
-        selector.selector_frame.setVisible(visible);
-    }
-
-    setSelected (selected=0) {
-        if (this.replyBox != null) {
-            if (selected >= this.replyBox.replies.length) {
-                selected = 0;
-            }
-            if (selected < 0) {
-                selected = this.replyBox.replies.length - 1;
-            }
-            this.last_selected = this.selected;
-            this.selected = selected;
-        
-            var selectors = this.replyBox.selectors;
-            for (let i = 0; i < selectors.length; i++) {
-                if (i == selected) {
-                    this.setSelectorVisible(selectors[i],true);
-                }
-                else {
-                    this.setSelectorVisible(selectors[i],false);
-                }
-            }
-        }
+    addButtonIndicator(_x,_y, button="X") {
+        let stack = this.makeStackIndicator(_x,_y);
+        stack.text.setText(button);
+        return stack;
     }
 
     clearDialog () {
@@ -231,10 +298,10 @@ export default class HudDialog extends HudCommon {
         this.scene.manager.dialog.destroyListeners();
     }
 
-    clearSelector (selector) {
-        selector.selector_block.destroy();
-        selector.selector_button.destroy();
-        selector.selector_frame.destroy();
+    clearSelector () {
+       this.selector.selector_arrow.destroy();
+       this.selector.down_arrow.destroy();
+       this.selector = null;
     }
 
     clearDialogBox () {
@@ -256,6 +323,14 @@ export default class HudDialog extends HudCommon {
         }
     }
 
+    clearReplies () {
+        if (this.replyBox != null) {
+            this.replyBox.replies.forEach(reply => {
+                reply.destroy();
+            });
+        }
+    }
+
     clearReplyBox () {
         if (this.currentReply) {
             this.currentReply = false;
@@ -265,9 +340,7 @@ export default class HudDialog extends HudCommon {
             this.replyBox.replies.forEach(reply => {
                 reply.destroy();
             });
-            this.replyBox.selectors.forEach(selector => {
-                this.clearSelector(selector);
-            });
+            this.clearSelector();
             this.replyBox = null;
         }
         else {

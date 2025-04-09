@@ -54,6 +54,53 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          BARBER_POLE: {
+        name: 'Barber Pole Sign',
+        slug: 'BARBER_POLE', 
+        type: 'LIT_SIGN',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:4
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:24,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 16,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'OFF',
+              transition: 'false',
+              frames: ['BARBER_POLE-16',]},{
+              name: 'ON',
+              transition: 'false',
+              frames: ['BARBER_POLE-1','BARBER_POLE-2','BARBER_POLE-3','BARBER_POLE-4','BARBER_POLE-5','BARBER_POLE-6','BARBER_POLE-7','BARBER_POLE-8','BARBER_POLE-9','BARBER_POLE-10','BARBER_POLE-11','BARBER_POLE-12','BARBER_POLE-13','BARBER_POLE-14','BARBER_POLE-15','BARBER_POLE-16',]},{
+              name: 'FLICKERING',
+              transition: 'false',
+              frames: ['BARBER_POLE-1','BARBER_POLE-2','BARBER_POLE-3','BARBER_POLE-4','BARBER_POLE-5','BARBER_POLE-6','BARBER_POLE-7','BARBER_POLE-8','BARBER_POLE-9','BARBER_POLE-10','BARBER_POLE-11','BARBER_POLE-12','BARBER_POLE-13','BARBER_POLE-14','BARBER_POLE-15','BARBER_POLE-16',]},],
+
+          interactions: {
+                                  },
+    },
           BASKET_RACK: {
         name: 'Basket Rack',
         slug: 'BASKET_RACK', 
@@ -87,8 +134,51 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        states: [],            slots: 0,
-            items: [],
+        states: [{
+              name: 'FULL',
+              transition: 'false',
+              frames: ['BASKET_RACK-6',]},{
+              name: 'EMPTY',
+              transition: 'false',
+              frames: ['BASKET_RACK-1',]},],
+
+          interactions: {
+                                  },
+    },
+          SIGN_BACK_BLUE_10: {
+        name: 'Blue Storefront Sign Background',
+        slug: 'SIGN_BACK_BLUE_10', 
+        type: 'STOREFRONT_SIGN_BACKGROUND',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:2, 
+          w:10,
+          x:0, 
+          y:0
+        },
+        depth: -1,
+        sprite: {
+          h:27, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:27, 
+          w:160
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
 
           interactions: {
                                   },
@@ -1641,6 +1731,44 @@ const OBJECTS = {
               frames: ['SPECIAL_NEWS_BOX_-2', 'SPECIAL_NEWS_BOX_-3', 'SPECIAL_NEWS_BOX_-4', 'SPECIAL_NEWS_BOX_-5', 'SPECIAL_NEWS_BOX_-6', ]
               },
           ],
+
+          interactions: {
+                                  },
+    },
+          COIN_WASH_SIGN: {
+        name: 'Coin Wash',
+        slug: 'COIN_WASH_SIGN', 
+        type: 'STOREFRONT_FRAME_SIGN',
+        bounding: {
+          h:2, 
+          w:9
+        },
+        base: {
+          h:2, 
+          w:9,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:26, 
+          w:139,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:26, 
+          w:139
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
 
           interactions: {
                                   },
@@ -4430,6 +4558,44 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          SIGN_BACK_GREEN_10: {
+        name: 'Green Storefront Sign Background',
+        slug: 'SIGN_BACK_GREEN_10', 
+        type: 'STOREFRONT_SIGN_BACKGROUND',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:2, 
+          w:10,
+          x:0, 
+          y:0
+        },
+        depth: -1,
+        sprite: {
+          h:27, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:27, 
+          w:160
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           GUTTER_DOWNSPOUT_4_E: {
         name: 'Gutter and Downspout 4 E',
         slug: 'GUTTER_DOWNSPOUT_4_E', 
@@ -5959,6 +6125,53 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          NEON_OPEN_SIGN: {
+        name: 'Neon Open Sign',
+        slug: 'NEON_OPEN_SIGN', 
+        type: 'LIT_SIGN',
+        bounding: {
+          h:1, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:8, 
+          w:21,
+          x:0, 
+          y:4
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [{
+              name: 'OFF',
+              transition: 'false',
+              frames: ['NEON_OPEN_SIGN-2',]},{
+              name: 'ON',
+              transition: 'false',
+              frames: ['NEON_OPEN_SIGN-1',]},{
+              name: 'FLICKERING',
+              transition: 'false',
+              frames: ['NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-2','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-2','NEON_OPEN_SIGN-1',]},],
+
+          interactions: {
+                                  },
+    },
           NIGHT_LIGHT: {
         name: 'Night Light',
         slug: 'NIGHT_LIGHT', 
@@ -6463,6 +6676,44 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          PAWN_STOREFRONT_SIGN: {
+        name: 'Pawn Storefront Sign',
+        slug: 'PAWN_STOREFRONT_SIGN', 
+        type: 'STOREFRONT_FRAME_SIGN',
+        bounding: {
+          h:2, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:5,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:20, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
           PAYPHONE: {
         name: 'Payphone',
         slug: 'PAYPHONE', 
@@ -6744,7 +6995,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: -8,
+        depth: 0,
         sprite: {
           h:16, 
           w:16,
@@ -6932,6 +7183,158 @@ const OBJECTS = {
           PORCH_STAIR_RAIL_LEFT: {
         name: 'Porch Stair Rail Left',
         slug: 'PORCH_STAIR_RAIL_LEFT', 
+        type: 'STAIR_RAIL',
+        bounding: {
+          h:5, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:3
+        },
+        depth: 0,
+        sprite: {
+          h:68, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:4
+        },
+        offset: {
+          x:15, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_DARK: {
+        name: 'Porch Stair Rail Left Ornamental Dark',
+        slug: 'PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_DARK', 
+        type: 'STAIR_RAIL',
+        bounding: {
+          h:5, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:3
+        },
+        depth: 0,
+        sprite: {
+          h:68, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:4
+        },
+        offset: {
+          x:15, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_GREEN: {
+        name: 'Porch Stair Rail Left Ornamental Green',
+        slug: 'PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_GREEN', 
+        type: 'STAIR_RAIL',
+        bounding: {
+          h:5, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:3
+        },
+        depth: 0,
+        sprite: {
+          h:68, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:4
+        },
+        offset: {
+          x:15, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WHITE: {
+        name: 'Porch Stair Rail Left Ornamental White',
+        slug: 'PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WHITE', 
+        type: 'STAIR_RAIL',
+        bounding: {
+          h:5, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:3
+        },
+        depth: 0,
+        sprite: {
+          h:68, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:4
+        },
+        offset: {
+          x:15, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        states: [],
+
+          interactions: {
+                                  },
+    },
+          PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WOOD: {
+        name: 'Porch Stair Rail Left Ornamental Wood',
+        slug: 'PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WOOD', 
         type: 'STAIR_RAIL',
         bounding: {
           h:5, 
@@ -7323,6 +7726,44 @@ const OBJECTS = {
               frames: ['DINER_CHAIR_RED-2', ]
               },
           ],
+
+          interactions: {
+                                  },
+    },
+          SIGN_BACK_RED_10: {
+        name: 'Red Storefront Sign Background',
+        slug: 'SIGN_BACK_RED_10', 
+        type: 'STOREFRONT_SIGN_BACKGROUND',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:2, 
+          w:10,
+          x:0, 
+          y:0
+        },
+        depth: -1,
+        sprite: {
+          h:27, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:27, 
+          w:160
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        actions: [],
+        states: [],
 
           interactions: {
                                   },

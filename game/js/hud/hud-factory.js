@@ -53,6 +53,14 @@ export default class HudFactory {
         return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0).setDepth(this.depth.TEXT).setScrollFactor(0).setMaxWidth(width);
     }
 
+    makeHUDRightArrow (_x,_y,color='YELLOW') {
+        return this.scene.add.image(_x,_y, 'UI','HUD_ARROW_'+color+'_RIGHT').setOrigin(0).setDepth(this.depth.ARROW).setScrollFactor(0);
+    }
+
+    makeHUDDownArrow (_x,_y,color='SHADOW') {
+        return this.scene.add.image(_x,_y, 'UI','HUD_ARROW_'+color+'_DOWN').setOrigin(0).setDepth(this.depth.ARROW).setScrollFactor(0);
+    }
+
 
     makeNotebook (_x,_y) {
         return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.SLOT).setScrollFactor(0);
@@ -157,6 +165,18 @@ export default class HudFactory {
             delay: delay,
             ease: 'Sine.easeOut',
             repeat: -1
+        });
+    }
+
+    plunge (elements=[], _y) {
+        return this.scene.tweens.add({
+            targets: elements,
+            y: _y,  
+            duration: 750,
+            repeat: 0,
+            hold: 500,
+            repeatDelay: 500,
+            ease: 'bounce.out'
         });
     }
 

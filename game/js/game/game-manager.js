@@ -83,7 +83,7 @@ export default class GameManager {
             }
             return;
         }
-        if (focus_string == 'PLAYER' || focus_string == 'MAP' || focus_string == 'PAUSE' || focus_string == 'CHEST') {
+        if (focus_string == 'PLAYER' || focus_string == 'PAUSE' || focus_string == 'CHEST') {
             this.hud.setState('VISIBLE_UNFOCUSED');
         }
         if (focus_string == 'DIALOG') {
@@ -91,6 +91,9 @@ export default class GameManager {
         }
         if (focus_string == 'POCKETS') {
             this.hud.setState('POCKETS_FOCUSED');
+        }
+        if (focus_string == 'MAP') {
+            this.hud.setState('MAP_FOCUSED');
         }
         if (focus_string == 'NOTEBOOK') {
             this.hud.setState('NOTEBOOK_FOCUSED');
@@ -155,12 +158,24 @@ export default class GameManager {
                     this.setFocus('PLAYER');  
                 }
             }
+            if (input.MAP.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
+                if (focus.name != 'MAP') {
+                    this.closeChest();
+                    this.setFocus('MAP');
+                }
+                else {
+                    this.setFocus('PLAYER');  
+                }
+            }
             if (input.BACK.TAP) {
                 this.scene.events.emit('INPUT_BACK_'+focus.name);
                 if (focus.name == 'POCKETS') {
                     this.setFocus('PLAYER');   
                 }
                 if (focus.name == 'NOTEBOOK') {
+                    this.setFocus('PLAYER');  
+                }
+                if (focus.name == 'MAP') {
                     this.setFocus('PLAYER');  
                 }
                 if (focus.name == 'DIALOG') {

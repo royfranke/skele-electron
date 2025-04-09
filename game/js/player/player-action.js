@@ -122,8 +122,9 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         if (this.scene.player.underAction != null) {
             this.getGroundActions(this.scene.player.underAction);
         }
+        /// Get objects on the action tile
         
-
+        
         this.updateMarker();
     }
 
