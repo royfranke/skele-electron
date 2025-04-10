@@ -123,9 +123,6 @@ export default class Shop {
             level_position = level_position - this.settings.levels[i].height;
             if (i > 0) {
                 this.addWindows(_x+1,level_position +  this.settings.levels[i].height, building_width - 1);
-                if (this.settings.upper_windows.includes('SINGLE')) {
-                    this.addWindows(_x+3,level_position +  this.settings.levels[i].height, building_width - 1);
-                }
             }
         }
 
@@ -306,7 +303,8 @@ export default class Shop {
         
 
         if (width - window_width >= window_width) {
-            //this.addStoreWindows(_x + (index*window_width), _y, width - window_width, index + 1);
+            index++;
+            this.addStoreWindows(_x, _y, width - window_width, index);
         }
     }
 
@@ -324,9 +322,11 @@ export default class Shop {
             window_unit.sprite.setOrigin(.5,1);
             window_unit.setState('ON');
         }
-        
-        if (width - window_width >= window_width) {
-           //this.addWindows(_x + ((index+1)*window_width), _y, width - window_width, index + 1);
+
+        var remaining_width = parseInt(width - window_width);
+        if (remaining_width >= window_width) {
+            index++;
+           this.addWindows(_x, _y, remaining_width, index);
         }
     }
 

@@ -33,6 +33,7 @@ export default class Block {
         this.scene = scene;
         this.block = block;
         this.propertyLines = [];
+        this.setGround();
     }
 
     setGround () {

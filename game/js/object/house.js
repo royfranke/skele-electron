@@ -90,8 +90,10 @@ export default class House {
         
         this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, this.settings.upper_windows);
 
-        if (width - window_width >= window_width) {
-            this.addWindows(_x + (index*window_width), _y, width - window_width, index + 1);
+        var remaining_width = parseInt(width - window_width);
+        if (remaining_width >= window_width) {
+            index++;
+           this.addWindows(_x, _y, remaining_width, index);
         }
     }
 

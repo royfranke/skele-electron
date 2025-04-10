@@ -48,6 +48,7 @@ import KEYLIGHT from "../config/key-light.js";
 
     buildMap () {
         console.log('Building map');
+        this.ground = new Ground(this.groundLayer, this.edgeLayer);
         const self = this;
         const blocks = new Array(MAP_CONFIG.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 
@@ -223,19 +224,16 @@ import KEYLIGHT from "../config/key-light.js";
 
         this.blocks = blocks;
         this.block = null;
-        this.ground = new Ground(this.groundLayer, this.edgeLayer);
+
         
     }
 
     create () {
         self = this;
         MAP_CONFIG.blocks.forEach(function (block, index) {
-            self.blocks[block.y][block.x].setGround();
             self.setCorners(block);
             self.blocks[block.y][block.x].buildProperties();
             self.blocks[block.y][block.x].buildObjects(); 
-            
-            
         });
         const objectManager = this.scene.manager.objectManager;
 
