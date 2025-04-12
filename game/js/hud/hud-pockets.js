@@ -605,6 +605,7 @@ export default class HudPockets extends HudCommon {
         if (this.state != 'OPEN') {
             this.closePockets();
         }
+        this.refreshPocketActions(selected.pocket);
     }
 
     refreshPocketActions(slot_x) {

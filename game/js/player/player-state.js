@@ -31,6 +31,7 @@ export default class PlayerState {
         if (this.validState(state) && this.state.name != state) {
             this.last_state = this.state;
             this.state = this.valid_states[state];
+            return this.state;
         }
     }
 

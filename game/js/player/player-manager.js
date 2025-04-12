@@ -53,7 +53,6 @@ export default class PlayerManager {
     if (this.state.name == state_string) {
       return;
     }
-    console.log('PLAYER_STATE_CHANGE_'+state_string.toUpperCase());
     this.scene.events.emit('PLAYER_STATE_CHANGE_'+state_string.toUpperCase());
     return this.playerState.setState(state_string);
   }

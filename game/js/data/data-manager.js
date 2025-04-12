@@ -17,6 +17,20 @@ export default class DataManager {
 
     modifyData (key, value) {
         console.log("Modifying data: "+key+" + "+value);
+
+        this.scene.slot.BODY[key] = parseInt(this.scene.slot.BODY[key] + value);
+        console.log(this.scene.slot.BODY);
+
+        let modifier = "+";
+        if (value < 0) {
+            modifier = "-";
+        }
+        value = Math.abs(value);
+        this.scene.manager.hud.hudThinking.tellBrain( key+" "+modifier+" "+value);
+
+
+        
     }
+    
 
 }

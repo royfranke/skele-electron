@@ -85,7 +85,7 @@
                     "ICON": "RIGHT_HAND"
                 },
                 "HOLDS": {
-                    "ITEM": "KEY_4",
+                    "ITEM": "PUDDING_CHOCOLATE_SEAL",
                     "STACK": 1,
                     "ITEMS": []
                 },

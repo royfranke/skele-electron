@@ -310,7 +310,6 @@ export default class Shop {
 
     addWindows(_x, _y, width, index=0) {
         let window_width = 3;
-        console.log('Add window '+index+' at '+_x+','+_y+' with width '+width);
         if (width < window_width) {
             return;
         }

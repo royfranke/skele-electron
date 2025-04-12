@@ -163,8 +163,6 @@ export default class Item {
         var interactions = this.info.interactions;
         var pocket_action = false;
         Object.keys(interactions).forEach(function (interaction, index) {
-            console.log(action_string);
-            console.log(interactions[interaction].req_pocket_action);
             if (interactions[interaction].req_pocket_action.toUpperCase() == action_string.toUpperCase()) {
                 pocket_action = interactions[interaction];
             }

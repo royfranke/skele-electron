@@ -186,7 +186,6 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         let action = this.availableActions[0];
         if (this.scene.player.state.name == 'IDLE') {
             this.scene.player.setState(action.action.toUpperCase());
-            //this.scene.player.setState("DIG");
             if (action.fx != undefined && action.fx != '') {
                 this.scene.manager.fx.playFX(action.fx,this.scene.player.snappedStanding.x+8,this.scene.player.snappedStanding.y+8,500);
             }

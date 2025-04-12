@@ -282,10 +282,16 @@ export default class HudPocket {
             var self = this;
             if (action_string == 'EAT' && this.scene.player.state.name != 'EAT') {
                 self.scene.player.setState('EAT');
-                /// TODO: Replace or remove timeout
-                setTimeout(() => {
-                    self.scene.player.setState('IDLE');
-                }, 2000);
+
+                this.scene.time.addEvent({
+                    delay: 1000,
+                    loop: false,
+                    callback: () => {
+                        // Fade out
+                        this.scene.player.setState('IDLE');
+                    }
+                })
+                
             }
             var item_action = item.findInPocketActions(action_string);
             if (item_action == false) {
@@ -324,8 +330,6 @@ export default class HudPocket {
                         self.scene.manager.itemManager.newContentToPocket(pocketIndex,fill_with);
                         
                     }
-                    
-                    
                     
                 }  
             });
