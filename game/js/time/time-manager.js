@@ -37,6 +37,16 @@ export default class TimeManager {
         }
     }
 
+    setTimeFromSleep () {
+        var alarm = this.getAlarmTime();
+        if (this.now.hour > alarm.hour || (this.now.hour == alarm.hour && this.now.minute > alarm.minute)) {
+            this.incrementDay(1);
+            this.now.hour = alarm.hour;
+            this.now.minute = alarm.minute - 1;
+            this.now.second = 0;
+        }
+    }
+
     setTimeFromSave (time) {
         this.now = {
             hour: time.HOUR,
@@ -185,6 +195,22 @@ export default class TimeManager {
 
     setAlarmStatus (status) {
         this.now.alarm.set = status;
+    }
+
+    setAlarmTime (hour, minute) {
+        this.now.alarm.hour = hour;
+        this.now.alarm.minute = minute;
+    }
+
+    getAlarmTime () {
+        return {
+            hour: this.now.alarm.hour,
+            minute: this.now.alarm.minute
+        }
+    }
+
+    isAlarmSet () {
+        return this.now.alarm.set == 'TRUE';
     }
 
     getAlarmStatus () {

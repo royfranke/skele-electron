@@ -142,6 +142,24 @@ export default class HudManager {
         }
         if (step == 5) {
             this.scene.manager.dialog.triggerDialog(20);
+            var self = this;
+
+            var run_callback = function () {
+
+                self.scene.events.off('PLAYER_STATE_CHANGE_RUN', run_callback, this);
+                var event = self.scene.time.addEvent({
+                    delay: 2000,
+                    repeat: 0,
+                    callback: () => {
+                        self.stepTutorial(6);
+                    }
+                });
+
+            }
+            this.scene.events.addListener('PLAYER_STATE_CHANGE_RUN', run_callback, this, true); /// true should be = once
+        }
+        if (step == 6) {
+            this.scene.beginGame();
         }
 
     }

@@ -276,8 +276,10 @@ export default class PlayerManager {
     var tip = "Another dawn begins.";
     this.scene.app.appView.drawTip(tip);
     console.log("Saving game");
-
-    return this.scene.app.saveManager.saveGameData();
+    this.scene.manager.time.setTimeFromSleep();
+    this.scene.app.saveManager.saveGameData();
+    this.scene.app.camera.wake();
+    return;
   }
 
 }

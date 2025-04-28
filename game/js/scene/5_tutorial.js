@@ -47,4 +47,19 @@ export default class TutorialScene extends Phaser.Scene {
         this.player.update();
         this.interior.update();
     }
+
+
+    beginGame() {
+        this.manager.time.setTimeFromSleep();
+        this.slot = this.app.softSaveGameData();
+        if (this.verbose) console.log(this.slot);
+        this.slot.POSITION.X = 9 + 1;
+        this.slot.POSITION.Y = 6 + 3;
+        this.slot.POSITION.FACING = 'S';
+        this.slot.POSITION.ROOM = 3;
+
+        this.scene.stop('Tutorial Scene');
+        this.scene.start('Interior Scene', {slot: this.slot});
+        
+    }
 }

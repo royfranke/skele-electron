@@ -438,7 +438,7 @@ export default class PropertyLine {
         }
 
 
-        if (this.settings.fence.prefix != 'CHAINLINK_S' && this.prop.structure.type != 'DUPLEX-RIGHT') {
+        if (this.prop.structure.type != 'DUPLEX-RIGHT') {
             // Vertical Fence
             let height = 4
             this.buildFence(this.prop.lines.left - .5, this.prop.lines.bottom - height, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
@@ -527,11 +527,9 @@ export default class PropertyLine {
     }
 
     buildEntry(_x, _y) {
-
-        this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.door);
-
         /// Get the portal from the property object, whenever that gets built out... Until then, hardcode it.
-        this.front_door.setPortal({ room_id: '6', x: 3, y: 9, facing: 'N' });
+        //this.front_door.setPortal({ room_id: '6', x: 3, y: 9, facing: 'N' });
+        this.setFrontDoor(_x, _y);
         let hasDoormat = this.roll([0,1,2,3]);
         if (hasDoormat > 0) {
             this.doormat = this.scene.manager.objectManager.newObjectToWorld(_x, _y + 1, 'DOORMAT_'+hasDoormat);
@@ -559,7 +557,7 @@ export default class PropertyLine {
             let x = this.prop.portal.x;
             let y = this.prop.portal.y;
 
-            this.front_door.setPortal({ room_id: room_id, x: x, y: y, facing: 'N', return: { ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door } });
+            this.front_door.setPortal({ room_id: room_id, x: x, y: y, facing: 'N', return: { ROOM: -1, X: _x + 1, Y: _y + 3, FACING: 'S', SLUG: this.settings.door } });
         }
     }
 

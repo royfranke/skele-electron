@@ -93,7 +93,7 @@ export default class AppView {
         var _y = this.view.top + this.view.margin.top;
         var width = this.view.right - _x - this.view.margin.right;
 
-        this.settingsManager.setView(_x,_y, width, height);
+        this.settingsManager.setView(_x,_y, width, height, 'content');
         this.addVersion();
        //this.settingsManager.saveSettings('input');
     }
@@ -115,7 +115,7 @@ export default class AppView {
         for (var i=0;i<3;i++) {
             var top = this.view.top + this.view.margin.top + ((height + 4) *i);
             var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
-            var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_BROWN_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
+            var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_ORANGE_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
             
             
 
@@ -177,12 +177,12 @@ export default class AppView {
         /// Highlights save slot on load menu
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
-                this.slots[i].slice.setTexture('UI','BLOCK_MID_LILAC_BORDER');
+                this.slots[i].slice.setTexture('UI','BLOCK_MID_LILAC_FAT_BORDER');
                 this.slots[i].selector.setVisible(false);
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_CREAM_BORDER');
+                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_BEIGE_FAT_BORDER');
                     this.slots[selected - 1].selector.setVisible(true);
                 }
             }
@@ -215,7 +215,7 @@ export default class AppView {
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_YELLOW_BORDER');
+                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_WHITE_FAT_BORDER');
                     this.slots[selected - 1].selector.setVisible(true);
 
                     this.slots[selected - 1].slot_headline.setText('loading...');

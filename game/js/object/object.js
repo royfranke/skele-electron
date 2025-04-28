@@ -93,18 +93,22 @@ export default class Object {
     update () {
         
         if (this.state != this.last_state) { // State change
-            if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition != 'false') {
-                this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
-                var transition = this.state.transition;
-                this.sprite.once('animationcomplete', () => {
-                    this.setState(transition);
-                });
-            }
-            if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition == 'false') {
-                this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
-            }
+            this.playAnimation();
         }
 
+    }
+
+    playAnimation () {
+        if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition != 'false') {
+            this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
+            var transition = this.state.transition;
+            this.sprite.once('animationcomplete', () => {
+                this.setState(transition);
+            });
+        }
+        if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition == 'false') {
+            this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
+        }
     }
 
     addActions() { //Add actions to world
@@ -258,7 +262,6 @@ export default class Object {
                 this.sprite.setTint(0xFFFFFF);
 
             }
-            this.setGlass(keylight.reflection_color, keylight.glass_opacity);
         }
     }
 
@@ -314,37 +317,14 @@ export default class Object {
 //this.sprite.setTint(0xe88dad, 0xb2977e, 0x787b69, 0x465e62)
         //this.setShadow(x_pixels, y_pixels, frame);
 
-        if (this.info.type == 'WINDOW_EXT_' || this.info.type == 'EXT_DOOR_' || this.info.type == 'STORE_DOOR_' || this.info.type == 'STORE_WINDOW_EXT') {
-            this.createGlass();
-        }
+        this.runSpecial();
         // Temporary for testing
         this.setLamp();
         return this;
     }
 
-    createGlass() {
-        var x_pixels = (this.tile_x - this.info.base.x) * 16;
-        var y_pixels = (this.tile_y - this.info.base.y) * 16;
-        this.glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0xbad2e0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + this.info.depth - 6);
-
-        this.behind_glass = this.scene.add.rectangle(x_pixels + this.info.offset.x, y_pixels + this.info.offset.y, this.info.size.w, this.info.size.h, 0x4b424a).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h) + this.info.depth - 8);
-
-        //this.setGlass(0x89bcc6,.9);
-
+    runSpecial() {
     }
-
-    setGlass (color, alpha) {
-        if (this.glass != null) {
-            this.glass.setFillStyle(color, alpha);
-        }
-    }
-
-    setBehindGlass (color, alpha=1) {
-        if (this.behind_glass != null) {
-            this.behind_glass.setFillStyle(color, alpha);
-        }
-    }
-    
 
     setState (state_name, force=true) {
         if (this.last_state == null) {

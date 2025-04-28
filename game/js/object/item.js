@@ -225,6 +225,10 @@ export default class Item {
                     requirement_parts_met++;
                     console.log(''+requirement.OBJ_TYPE+' found on active tile');
                 }
+                if (requirement.type == 'IN_COINPURSE') {
+                    
+                   
+                }
 
             });
             if (requirement_parts_met == requirement_parts) {
