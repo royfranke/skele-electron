@@ -48,7 +48,7 @@ export default class Object {
         this.world_actions = actions;
         this.last_state = null;
         if (this.info.states.length > 0) {
-            this.state = this.info.states[0];
+            this.setState(this.info.default_state, true);
             if (this.state.name == 'SHELL' && this.info.states.length > 1) {
                 this.state = this.info.states[1];
             }
@@ -92,21 +92,21 @@ export default class Object {
 
     update () {
         
-        if (this.state != this.last_state) { // State change
+        if (this.state != this.last_state || this.state == null) { // State change
             this.playAnimation();
         }
 
     }
 
     playAnimation () {
-        if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition != 'false') {
+        if (this.sprite != null && this.state != null && this.state.frames != null && this.state.frames.length > 0 && this.state.transition != 'false') {
             this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
             var transition = this.state.transition;
             this.sprite.once('animationcomplete', () => {
                 this.setState(transition);
             });
         }
-        if (this.sprite != null && this.state != null && this.state.frames.length > 0 && this.state.transition == 'false') {
+        if (this.sprite != null && this.state != null && this.state.frames != null && this.state.frames.length > 0 && this.state.transition == 'false') {
             this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
         }
     }
@@ -219,6 +219,8 @@ export default class Object {
                 console.log("No portal set for this object");
             }
         }
+
+        
         if (action == 'SAVE') {
             console.log("Saving game");
             return this.scene.app.saveManager.saveGameData();
@@ -233,7 +235,6 @@ export default class Object {
             this.scene.manager.hud.hudSound.play('DING_DING');
         }
 
-        console.log("Doing action: "+action);
     }
 
     setCollider () {
@@ -342,6 +343,9 @@ export default class Object {
         }
         else {
             this.state = this.info.states.find(state => state.name === state_name);
+            if (this.state == null) {
+                this.state = this.info.states[0];
+            }
         }
     }
 

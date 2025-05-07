@@ -18,7 +18,7 @@ export default class DataManager {
     modifyData (key, value) {
         console.log("Modifying data: "+key+" + "+value);
 
-        this.scene.slot.BODY[key] = parseInt(this.scene.slot.BODY[key] + value);
+        this.scene.slot.BODY[key] = parseInt(this.scene.slot.BODY[key] + parseInt(value));
         console.log(this.scene.slot.BODY);
 
         let modifier = "+";

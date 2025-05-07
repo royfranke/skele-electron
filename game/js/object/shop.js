@@ -102,7 +102,7 @@ export default class Shop {
                 this.sign = this.scene.manager.objectManager.newObjectToWorld(_x+1, _y - 3, 'PSYCHIC_STOREFRONT_SIGN');
                 this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
                 let chair = this.scene.manager.objectManager.newObjectToWorld(_x+4, _y +1, 'DINER_CHAIR_RED');
-                chair.setState('FACING_SOUTH');
+
 
                 this.scene.manager.objectManager.newObjectToWorld(_x + 1, _y + 3, 'BOLLARD_PARKING');
                 this.scene.manager.objectManager.newObjectToWorld(_x + 3, _y + 3, 'BOLLARD_PARKING');
@@ -176,7 +176,6 @@ export default class Shop {
 
             let key_sign = this.scene.manager.objectManager.newObjectToWorld(_x + 3.5, _y - 1.75, 'NEON_KEY');
             key_sign.sprite.setDepth(this.gates[0].sprite.depth - 18);
-            key_sign.setState('ON');
         }
 
 

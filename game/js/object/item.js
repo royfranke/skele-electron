@@ -107,7 +107,7 @@ export default class Item {
     }
 
     getStackIcon(icon=this.info.icon) {
-        if (this.stackCount > 1 && this.info.stacks.length > 0) {
+        if (this.stackCount > 0 && this.info.stacks.length > 0) {
             /// An alternative icon may exist in relation to the stack size...
             for (var i=0;i<this.info.stacks.length;i++) {
                 var stack = this.info.stacks[i];

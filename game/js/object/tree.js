@@ -42,6 +42,7 @@ export default class Tree {
         this.setBranch(0,-(this.sprite.displayHeight - 40), false, false);
         this.setBranch(4,-(this.sprite.displayHeight - 41), true, true);
         this.setBranch(0,-(this.sprite.displayHeight - 16), false, false);
+        this.setBranch(4,-(this.sprite.displayHeight - 12), true, true);
     }
 
     setBranch(x_offset=0, y_offset=0,flip = false, behind = false) {

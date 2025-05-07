@@ -276,6 +276,9 @@ export default class HudNotebook extends HudCommon {
 
     drawPage(page) {
         var draw = this.manager.notebook.getPage(page);
+        if (draw == null) {
+            return;
+        }
         this.notebook.page.setText(draw.title + '\n' + draw.content);
     }
 

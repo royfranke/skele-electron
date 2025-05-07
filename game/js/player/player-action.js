@@ -182,6 +182,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         }
     }
 
+
     doAction () {
         let action = this.availableActions[0];
         if (this.scene.player.state.name == 'IDLE') {

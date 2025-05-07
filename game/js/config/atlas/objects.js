@@ -34,23 +34,13 @@ const OBJECTS = {
         actions: [ {
             name: 'CHECK OUT', stateTrigger: 'PRINTING_RECEIPT', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'DEFAULT',        states: [                {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['ADDING_MACHINE-1',]},{
+              frames: ['ADDING_MACHINE-1',]},                {
               name: 'PRINTING_RECEIPT',
               transition: 'DEFAULT',
-              frames: ['ADDING_MACHINE-1','ADDING_MACHINE-2','ADDING_MACHINE-3','ADDING_MACHINE-4','ADDING_MACHINE-5','ADDING_MACHINE-6',]},            {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: ['ADDING_MACHINE-1',]
-              }, {
-              name: 'PRINTING_RECEIPT',
-              transition: 'DEFAULT',
-              frames: ['ADDING_MACHINE-1', 'ADDING_MACHINE-2', 'ADDING_MACHINE-3', 'ADDING_MACHINE-4', 'ADDING_MACHINE-5', 'ADDING_MACHINE-6', ]
-              },
-          ],
+              frames: ['ADDING_MACHINE-1','ADDING_MACHINE-2','ADDING_MACHINE-3','ADDING_MACHINE-4','ADDING_MACHINE-5','ADDING_MACHINE-6',]},                           ],
 
           interactions: {
                                   },
@@ -69,7 +59,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: 17,
         sprite: {
           h:16, 
           w:16,
@@ -88,11 +78,10 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'DEFAULT',        states: [                {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['ANSWERING_MACHINE-1',]},{
+              frames: ['ANSWERING_MACHINE-1',]},                {
               name: 'NEW_MESSAGES',
               transition: 'false',
               frames: ['ANSWERING_MACHINE-2','ANSWERING_MACHINE-2','ANSWERING_MACHINE-2','ANSWERING_MACHINE-1','ANSWERING_MACHINE-1','ANSWERING_MACHINE-2','ANSWERING_MACHINE-2','ANSWERING_MACHINE-2','ANSWERING_MACHINE-1','ANSWERING_MACHINE-1',]},],
@@ -133,14 +122,13 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'ON',
-        states: [{
+        default_state: 'ON',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['BARBER_POLE-16',]},{
+              frames: ['BARBER_POLE-16',]},                {
               name: 'ON',
               transition: 'false',
-              frames: ['BARBER_POLE-1','BARBER_POLE-2','BARBER_POLE-3','BARBER_POLE-4','BARBER_POLE-5','BARBER_POLE-6','BARBER_POLE-7','BARBER_POLE-8','BARBER_POLE-9','BARBER_POLE-10','BARBER_POLE-11','BARBER_POLE-12','BARBER_POLE-13','BARBER_POLE-14','BARBER_POLE-15','BARBER_POLE-16',]},{
+              frames: ['BARBER_POLE-1','BARBER_POLE-2','BARBER_POLE-3','BARBER_POLE-4','BARBER_POLE-5','BARBER_POLE-6','BARBER_POLE-7','BARBER_POLE-8','BARBER_POLE-9','BARBER_POLE-10','BARBER_POLE-11','BARBER_POLE-12','BARBER_POLE-13','BARBER_POLE-14','BARBER_POLE-15','BARBER_POLE-16',]},                {
               name: 'FLICKERING',
               transition: 'false',
               frames: ['BARBER_POLE-1','BARBER_POLE-2','BARBER_POLE-3','BARBER_POLE-4','BARBER_POLE-5','BARBER_POLE-6','BARBER_POLE-7','BARBER_POLE-8','BARBER_POLE-9','BARBER_POLE-10','BARBER_POLE-11','BARBER_POLE-12','BARBER_POLE-13','BARBER_POLE-14','BARBER_POLE-15','BARBER_POLE-16',]},],
@@ -181,8 +169,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -220,11 +207,10 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'FULL',
-        states: [{
+        default_state: 'FULL',        states: [                {
               name: 'FULL',
               transition: 'false',
-              frames: ['BASKET_RACK-6',]},{
+              frames: ['BASKET_RACK-6',]},                {
               name: 'EMPTY',
               transition: 'false',
               frames: ['BASKET_RACK-1',]},],
@@ -265,8 +251,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -304,17 +289,16 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'STILL',
-        states: [{
+        default_state: 'STILL',        states: [                {
               name: 'SWAYING',
               transition: 'false',
-              frames: ['BEADED_CURTAIN_BODEGA-1','BEADED_CURTAIN_BODEGA-2','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-5','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-2',]},{
+              frames: ['BEADED_CURTAIN_BODEGA-1','BEADED_CURTAIN_BODEGA-2','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-5','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-2',]},                {
               name: 'BISECTED',
               transition: 'false',
-              frames: ['BEADED_CURTAIN_BODEGA-6','BEADED_CURTAIN_BODEGA-7','BEADED_CURTAIN_BODEGA-8',]},{
+              frames: ['BEADED_CURTAIN_BODEGA-6','BEADED_CURTAIN_BODEGA-7','BEADED_CURTAIN_BODEGA-8',]},                {
               name: 'CLOSE_BISECT',
               transition: 'false',
-              frames: ['BEADED_CURTAIN_BODEGA-7','BEADED_CURTAIN_BODEGA-8','BEADED_CURTAIN_BODEGA-9','BEADED_CURTAIN_BODEGA-7','BEADED_CURTAIN_BODEGA-6','BEADED_CURTAIN_BODEGA-5',]},{
+              frames: ['BEADED_CURTAIN_BODEGA-7','BEADED_CURTAIN_BODEGA-8','BEADED_CURTAIN_BODEGA-9','BEADED_CURTAIN_BODEGA-7','BEADED_CURTAIN_BODEGA-6','BEADED_CURTAIN_BODEGA-5',]},                {
               name: 'STILL',
               transition: 'false',
               frames: ['BEADED_CURTAIN_BODEGA-1',]},],
@@ -355,8 +339,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -394,14 +377,13 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'ON',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['LIT_SIGN_BONEDEGA-1',]},{
+              frames: ['LIT_SIGN_BONEDEGA-1',]},                {
               name: 'ON',
               transition: 'false',
-              frames: ['LIT_SIGN_BONEDEGA-2',]},{
+              frames: ['LIT_SIGN_BONEDEGA-2',]},                {
               name: 'FLICKERING',
               transition: 'false',
               frames: ['LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2',]},],
@@ -442,8 +424,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -481,8 +462,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -520,8 +500,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -559,8 +538,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -598,8 +576,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -637,8 +614,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -676,8 +652,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -715,8 +690,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -754,8 +728,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -793,8 +766,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -832,8 +804,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -871,8 +842,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -910,8 +880,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -949,8 +918,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -988,8 +956,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1027,8 +994,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1066,8 +1032,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1105,8 +1070,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1144,8 +1108,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1183,8 +1146,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1222,8 +1184,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1261,8 +1222,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1300,8 +1260,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1339,8 +1298,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1378,8 +1336,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1417,8 +1374,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1456,8 +1412,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1495,8 +1450,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1534,8 +1488,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1573,8 +1526,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1612,8 +1564,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1651,8 +1602,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1690,8 +1640,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1729,8 +1678,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1768,8 +1716,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1807,8 +1754,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1846,8 +1792,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -1887,20 +1832,18 @@ const OBJECTS = {
         actions: [ {
             name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
           }],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'COIN_LOCKED',        states: [                {
               name: 'COIN_RETRACTING',
               transition: 'COIN_LOCKED',
               frames: ['SPECIAL_NEWS_BOX_-6','SPECIAL_NEWS_BOX_-5','SPECIAL_NEWS_BOX_-4','SPECIAL_NEWS_BOX_-3','SPECIAL_NEWS_BOX_-2','SPECIAL_NEWS_BOX_-1',]},            {
               name: 'COIN_LOCKED',
               transition: 'false',
               frames: ['SPECIAL_NEWS_BOX_-1',]
-              }, {
+              },               {
               name: 'COIN_DISPENSING',
               transition: 'COIN_RETRACTING',
               frames: ['SPECIAL_NEWS_BOX_-2', 'SPECIAL_NEWS_BOX_-3', 'SPECIAL_NEWS_BOX_-4', 'SPECIAL_NEWS_BOX_-5', 'SPECIAL_NEWS_BOX_-6', ]
-              },
-          ],
+              },],
 
           interactions: {
                                             group_29: {
@@ -1966,8 +1909,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2011,35 +1953,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['LAUNDRY_COMMERCIAL_DRYER-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['LAUNDRY_COMMERCIAL_DRYER-1', 'LAUNDRY_COMMERCIAL_DRYER-2', 'LAUNDRY_COMMERCIAL_DRYER-3', 'LAUNDRY_COMMERCIAL_DRYER-4', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['LAUNDRY_COMMERCIAL_DRYER-4',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['LAUNDRY_COMMERCIAL_DRYER-4', 'LAUNDRY_COMMERCIAL_DRYER-3', 'LAUNDRY_COMMERCIAL_DRYER-2', 'LAUNDRY_COMMERCIAL_DRYER-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['LAUNDRY_COMMERCIAL_DRYER-4',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['LAUNDRY_COMMERCIAL_DRYER-3', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -2082,29 +2016,26 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'CLOSED',        states: [                {
               name: 'SHELL',
               transition: 'false',
               frames: ['COMMERCIAL_FREEZER-1',]},            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['COMMERCIAL_FREEZER-2',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['COMMERCIAL_FREEZER-2', 'COMMERCIAL_FREEZER-3', 'COMMERCIAL_FREEZER-4', 'COMMERCIAL_FREEZER-5', 'COMMERCIAL_FREEZER-6', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['COMMERCIAL_FREEZER-6',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['COMMERCIAL_FREEZER-6', 'COMMERCIAL_FREEZER-5', 'COMMERCIAL_FREEZER-4', 'COMMERCIAL_FREEZER-3', 'COMMERCIAL_FREEZER-2', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -2142,8 +2073,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2181,8 +2111,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2220,8 +2149,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2261,20 +2189,14 @@ const OBJECTS = {
         actions: [ {
             name: 'RING', stateTrigger: 'RINGING', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'DEFAULT',        states: [                {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['COUNTER_BELL-1',]},            {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: ['COUNTER_BELL-1',]
-              }, {
+              frames: ['COUNTER_BELL-1',]},                           {
               name: 'RINGING',
               transition: 'DEFAULT',
               frames: ['COUNTER_BELL-2', 'COUNTER_BELL-2', 'COUNTER_BELL-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -2312,8 +2234,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2351,8 +2272,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2390,8 +2310,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2429,8 +2348,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2468,8 +2386,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2507,8 +2424,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2546,8 +2462,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2585,8 +2500,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2624,8 +2538,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2663,8 +2576,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2702,8 +2614,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2741,8 +2652,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2780,8 +2690,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2819,8 +2728,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2858,8 +2766,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -2899,26 +2806,16 @@ const OBJECTS = {
         actions: [ {
             name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['HARVESTABLE']
           }],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'HARVESTABLE',        states: [                {
               name: 'HARVESTED',
               transition: 'false',
-              frames: ['CREEK_SEDGE-5',]},{
+              frames: ['CREEK_SEDGE-5',]},                {
               name: 'HARVEST',
               transition: 'HARVESTED',
-              frames: ['CREEK_SEDGE-4','CREEK_SEDGE-5',]},{
+              frames: ['CREEK_SEDGE-4','CREEK_SEDGE-5',]},                {
               name: 'HARVESTABLE',
               transition: 'false',
-              frames: ['CREEK_SEDGE-1','CREEK_SEDGE-2','CREEK_SEDGE-3','CREEK_SEDGE-4',]},            {
-              name: 'HARVESTABLE',
-              transition: 'false',
-              frames: ['CREEK_SEDGE-1','CREEK_SEDGE-2','CREEK_SEDGE-3','CREEK_SEDGE-4',]
-              }, {
-              name: 'HARVEST',
-              transition: 'HARVESTED',
-              frames: ['CREEK_SEDGE-4', 'CREEK_SEDGE-5', ]
-              },
-          ],
+              frames: ['CREEK_SEDGE-1','CREEK_SEDGE-2','CREEK_SEDGE-3','CREEK_SEDGE-4',]},                           ],
 
           interactions: {
                                   },
@@ -2956,80 +2853,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
-
-          interactions: {
-                                  },
-    },
-          DOOR_WINDOWS_SMALL_: {
-        name: 'Door with Small Windows',
-        slug: 'DOOR_WINDOWS_SMALL_', 
-        type: 'EXT_DOOR_',
-        bounding: {
-          h:3, 
-          w:2
-        },
-        base: {
-          h:1, 
-          w:2,
-          x:0, 
-          y:2
-        },
-        depth: 0,
-        sprite: {
-          h:48, 
-          w:32,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:36, 
-          w:18
-        },
-        offset: {
-          x:7, 
-          y:13
-        },
-        varieties: 0,
-        solid: 0,
-        portal: 1,
-        actions: [ {
-            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
-          }, {
-            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
-          }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
-          }],
-        default_state: 'DEFAULT',
-        states: [            {
-              name: 'CLOSED',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'OPENING',
-              transition: 'OPEN',
-              frames: []
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'CLOSING',
-              transition: 'CLOSED',
-              frames: []
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'KNOCKING',
-              transition: 'WAITING',
-              frames: []
-              },
-          ],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -3069,17 +2893,15 @@ const OBJECTS = {
         actions: [ {
             name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
               transition: 'false',
               frames: ['DOORMAT_1-1',]
-              }, {
+              },               {
               name: 'LOOKING_UNDER',
               transition: 'DEFAULT',
               frames: ['DOORMAT_1-1', 'DOORMAT_1-2', 'DOORMAT_1-3', 'DOORMAT_1-2', 'DOORMAT_1-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3119,17 +2941,15 @@ const OBJECTS = {
         actions: [ {
             name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
               transition: 'false',
               frames: ['DOORMAT_2-1',]
-              }, {
+              },               {
               name: 'LOOKING_UNDER',
               transition: 'DEFAULT',
               frames: ['DOORMAT_2-1', 'DOORMAT_2-2', 'DOORMAT_2-3', 'DOORMAT_2-3', 'DOORMAT_2-2', 'DOORMAT_2-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3169,17 +2989,15 @@ const OBJECTS = {
         actions: [ {
             name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
               transition: 'false',
               frames: ['DOORMAT_3-1',]
-              }, {
+              },               {
               name: 'LOOKING_UNDER',
               transition: 'DEFAULT',
               frames: ['DOORMAT_3-1', 'DOORMAT_3-2', 'DOORMAT_3-3', 'DOORMAT_3-3', 'DOORMAT_3-2', 'DOORMAT_3-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3217,8 +3035,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -3256,8 +3073,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -3295,8 +3111,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -3334,8 +3149,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -3377,37 +3191,29 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['CLOSED']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_GRAY-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_WINDOWS_GRAY-2', 'EXT_DOOR_WINDOWS_GRAY-3', 'EXT_DOOR_WINDOWS_GRAY-4', 'EXT_DOOR_WINDOWS_GRAY-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_GRAY-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_WINDOWS_GRAY-4', 'EXT_DOOR_WINDOWS_GRAY-3', 'EXT_DOOR_WINDOWS_GRAY-2', 'EXT_DOOR_WINDOWS_GRAY-1', ]
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
+              },                           {
               name: 'KNOCKING',
-              transition: 'WAITING',
+              transition: 'CLOSED',
               frames: []
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3449,181 +3255,29 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['CLOSED']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_GREEN-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_WINDOWS_GREEN-2', 'EXT_DOOR_WINDOWS_GREEN-3', 'EXT_DOOR_WINDOWS_GREEN-4', 'EXT_DOOR_WINDOWS_GREEN-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_GREEN-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_WINDOWS_GREEN-4', 'EXT_DOOR_WINDOWS_GREEN-3', 'EXT_DOOR_WINDOWS_GREEN-2', 'EXT_DOOR_WINDOWS_GREEN-1', ]
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
+              },                           {
               name: 'KNOCKING',
-              transition: 'WAITING',
-              frames: []
-              },
-          ],
-
-          interactions: {
-                                  },
-    },
-          EXT_DOOR_WINDOWS_ORANGE: {
-        name: 'Ext Door Windows Orange',
-        slug: 'EXT_DOOR_WINDOWS_ORANGE', 
-        type: 'EXT_DOOR_',
-        bounding: {
-          h:3, 
-          w:2
-        },
-        base: {
-          h:1, 
-          w:2,
-          x:0, 
-          y:2
-        },
-        depth: 0,
-        sprite: {
-          h:48, 
-          w:32,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:36, 
-          w:18
-        },
-        offset: {
-          x:7, 
-          y:12
-        },
-        varieties: 0,
-        solid: 0,
-        portal: 1,
-        actions: [ {
-            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
-          }, {
-            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
-          }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
-          }],
-        default_state: 'DEFAULT',
-        states: [            {
-              name: 'CLOSED',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'OPENING',
-              transition: 'OPEN',
-              frames: []
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'CLOSING',
               transition: 'CLOSED',
               frames: []
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'KNOCKING',
-              transition: 'WAITING',
-              frames: []
-              },
-          ],
-
-          interactions: {
-                                  },
-    },
-          EXT_DOOR_WINDOWS_PURPLE: {
-        name: 'Ext Door Windows Purple',
-        slug: 'EXT_DOOR_WINDOWS_PURPLE', 
-        type: 'EXT_DOOR_',
-        bounding: {
-          h:3, 
-          w:2
-        },
-        base: {
-          h:1, 
-          w:2,
-          x:0, 
-          y:2
-        },
-        depth: 0,
-        sprite: {
-          h:48, 
-          w:32,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:36, 
-          w:18
-        },
-        offset: {
-          x:7, 
-          y:12
-        },
-        varieties: 0,
-        solid: 0,
-        portal: 1,
-        actions: [ {
-            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
-          }, {
-            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
-          }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
-          }],
-        default_state: 'DEFAULT',
-        states: [            {
-              name: 'CLOSED',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'OPENING',
-              transition: 'OPEN',
-              frames: []
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'CLOSING',
-              transition: 'CLOSED',
-              frames: []
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'KNOCKING',
-              transition: 'WAITING',
-              frames: []
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3665,37 +3319,29 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['CLOSED']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_WHITE-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_WINDOWS_WHITE-2', 'EXT_DOOR_WINDOWS_WHITE-3', 'EXT_DOOR_WINDOWS_WHITE-4', 'EXT_DOOR_WINDOWS_WHITE-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_WHITE-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_WINDOWS_WHITE-4', 'EXT_DOOR_WINDOWS_WHITE-3', 'EXT_DOOR_WINDOWS_WHITE-2', 'EXT_DOOR_WINDOWS_WHITE-1', ]
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
+              },                           {
               name: 'KNOCKING',
-              transition: 'WAITING',
+              transition: 'CLOSED',
               frames: []
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3737,37 +3383,29 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
+            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['CLOSED']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_YELLOW-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_WINDOWS_YELLOW-2', 'EXT_DOOR_WINDOWS_YELLOW-3', 'EXT_DOOR_WINDOWS_YELLOW-4', 'EXT_DOOR_WINDOWS_YELLOW-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_WINDOWS_YELLOW-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_WINDOWS_YELLOW-4', 'EXT_DOOR_WINDOWS_YELLOW-3', 'EXT_DOOR_WINDOWS_YELLOW-2', 'EXT_DOOR_WINDOWS_YELLOW-1', ]
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
+              },                           {
               name: 'KNOCKING',
-              transition: 'WAITING',
+              transition: 'CLOSED',
               frames: []
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3809,26 +3447,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_STOOP_1-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_STORE_STOOP_1-1', 'EXT_DOOR_STORE_STOOP_1-2', 'EXT_DOOR_STORE_STOOP_1-3', 'EXT_DOOR_STORE_STOOP_1-4', 'EXT_DOOR_STORE_STOOP_1-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_STOOP_1-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_STORE_STOOP_1-5', 'EXT_DOOR_STORE_STOOP_1-4', 'EXT_DOOR_STORE_STOOP_1-3', 'EXT_DOOR_STORE_STOOP_1-2', 'EXT_DOOR_STORE_STOOP_1-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3870,26 +3505,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_BLACK-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_STORE_BLACK-2', 'EXT_DOOR_STORE_BLACK-3', 'EXT_DOOR_STORE_BLACK-4', 'EXT_DOOR_STORE_BLACK-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_BLACK-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_STORE_BLACK-4', 'EXT_DOOR_STORE_BLACK-3', 'EXT_DOOR_STORE_BLACK-2', 'EXT_DOOR_STORE_BLACK-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3931,26 +3563,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_METAL-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_STORE_METAL-2', 'EXT_DOOR_STORE_METAL-3', 'EXT_DOOR_STORE_METAL-4', 'EXT_DOOR_STORE_METAL-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_METAL-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_STORE_METAL-4', 'EXT_DOOR_STORE_METAL-3', 'EXT_DOOR_STORE_METAL-2', 'EXT_DOOR_STORE_METAL-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -3992,26 +3621,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_WHITE-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['EXT_DOOR_STORE_WHITE-2', 'EXT_DOOR_STORE_WHITE-3', 'EXT_DOOR_STORE_WHITE-4', 'EXT_DOOR_STORE_WHITE-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['EXT_DOOR_STORE_WHITE-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['EXT_DOOR_STORE_WHITE-4', 'EXT_DOOR_STORE_WHITE-3', 'EXT_DOOR_STORE_WHITE-2', 'EXT_DOOR_STORE_WHITE-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -4049,8 +3675,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4088,8 +3713,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4127,8 +3751,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4166,8 +3789,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4205,8 +3827,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4244,8 +3865,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4283,8 +3903,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4322,8 +3941,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4361,8 +3979,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4400,8 +4017,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4439,8 +4055,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4478,8 +4093,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4517,8 +4131,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4556,8 +4169,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4595,8 +4207,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4634,8 +4245,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4673,8 +4283,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4716,26 +4325,19 @@ const OBJECTS = {
           }, {
             name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
               transition: 'false',
               frames: ['OBJ_FLYER_GRAY-1',]
-              }, {
+              },               {
               name: 'READING',
               transition: 'DEFAULT',
               frames: []
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: ['OBJ_FLYER_GRAY-1',]
-              }, {
+              },                           {
               name: 'GUSTING',
               transition: 'DEFAULT',
               frames: ['OBJ_FLYER_GRAY-1', 'OBJ_FLYER_GRAY-2', 'OBJ_FLYER_GRAY-3', 'OBJ_FLYER_GRAY-4', 'OBJ_FLYER_GRAY-5', 'OBJ_FLYER_GRAY-6', 'OBJ_FLYER_GRAY-7', 'OBJ_FLYER_GRAY-8', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -4773,8 +4375,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4812,8 +4413,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4851,8 +4451,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4890,8 +4489,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4929,8 +4527,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -4968,8 +4565,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5007,8 +4603,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5046,8 +4641,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5085,8 +4679,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5124,8 +4717,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5163,8 +4755,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5202,8 +4793,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5241,8 +4831,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5280,8 +4869,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5319,8 +4907,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5362,26 +4949,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['INT_DOOR_GREEN-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['INT_DOOR_GREEN-2', 'INT_DOOR_GREEN-3', 'INT_DOOR_GREEN-4', 'INT_DOOR_GREEN-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['INT_DOOR_GREEN-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['INT_DOOR_GREEN-4', 'INT_DOOR_GREEN-3', 'INT_DOOR_GREEN-2', 'INT_DOOR_GREEN-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -5423,26 +5007,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['INT_DOOR_GREEN_SIGN-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['INT_DOOR_GREEN_SIGN-2', 'INT_DOOR_GREEN_SIGN-3', 'INT_DOOR_GREEN_SIGN-4', 'INT_DOOR_GREEN_SIGN-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['INT_DOOR_GREEN_SIGN-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['INT_DOOR_GREEN_SIGN-4', 'INT_DOOR_GREEN_SIGN-3', 'INT_DOOR_GREEN_SIGN-2', 'INT_DOOR_GREEN_SIGN-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -5484,26 +5065,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['INT_DOOR_RED_BROWN-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['INT_DOOR_RED_BROWN-2', 'INT_DOOR_RED_BROWN-3', 'INT_DOOR_RED_BROWN-4', 'INT_DOOR_RED_BROWN-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['INT_DOOR_RED_BROWN-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['INT_DOOR_RED_BROWN-4', 'INT_DOOR_RED_BROWN-3', 'INT_DOOR_RED_BROWN-2', 'INT_DOOR_RED_BROWN-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -5545,26 +5123,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['INT_DOOR_RED_BROWN_SIGN-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['INT_DOOR_RED_BROWN_SIGN-2', 'INT_DOOR_RED_BROWN_SIGN-3', 'INT_DOOR_RED_BROWN_SIGN-4', 'INT_DOOR_RED_BROWN_SIGN-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['INT_DOOR_RED_BROWN_SIGN-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['INT_DOOR_RED_BROWN_SIGN-4', 'INT_DOOR_RED_BROWN_SIGN-3', 'INT_DOOR_RED_BROWN_SIGN-2', 'INT_DOOR_RED_BROWN_SIGN-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -5606,26 +5181,23 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['INT_DOOR_WHITE-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['INT_DOOR_WHITE-2', 'INT_DOOR_WHITE-3', 'INT_DOOR_WHITE-4', 'INT_DOOR_WHITE-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['INT_DOOR_WHITE-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['INT_DOOR_WHITE-4', 'INT_DOOR_WHITE-3', 'INT_DOOR_WHITE-2', 'INT_DOOR_WHITE-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -5663,8 +5235,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5702,8 +5273,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5741,14 +5311,13 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'ON',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['NEON_KEY-1',]},{
+              frames: ['NEON_KEY-1',]},                {
               name: 'ON',
               transition: 'false',
-              frames: ['NEON_KEY-2','NEON_KEY-2','NEON_KEY-2','NEON_KEY-2','NEON_KEY-3','NEON_KEY-3','NEON_KEY-3','NEON_KEY-4','NEON_KEY-4','NEON_KEY-4','NEON_KEY-5','NEON_KEY-5','NEON_KEY-5','NEON_KEY-6','NEON_KEY-6','NEON_KEY-6',]},{
+              frames: ['NEON_KEY-2','NEON_KEY-2','NEON_KEY-2','NEON_KEY-2','NEON_KEY-3','NEON_KEY-3','NEON_KEY-3','NEON_KEY-4','NEON_KEY-4','NEON_KEY-4','NEON_KEY-5','NEON_KEY-5','NEON_KEY-5','NEON_KEY-6','NEON_KEY-6','NEON_KEY-6',]},                {
               name: 'FLICKERING',
               transition: 'false',
               frames: ['NEON_KEY-2','NEON_KEY-2','NEON_KEY-1','NEON_KEY-2','NEON_KEY-3','NEON_KEY-3','NEON_KEY-1','NEON_KEY-1','NEON_KEY-4','NEON_KEY-4','NEON_KEY-5','NEON_KEY-5','NEON_KEY-5','NEON_KEY-6','NEON_KEY-1','NEON_KEY-6',]},],
@@ -5789,8 +5358,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5834,35 +5402,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['MAILBOX_SHINY-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['MAILBOX_SHINY-1', 'MAILBOX_SHINY-2', 'MAILBOX_SHINY-3', 'MAILBOX_SHINY-4', 'MAILBOX_SHINY-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['MAILBOX_SHINY-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['MAILBOX_SHINY-5', 'MAILBOX_SHINY-4', 'MAILBOX_SHINY-3', 'MAILBOX_SHINY-2', 'MAILBOX_SHINY-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['MAILBOX_SHINY-5',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['MAILBOX_SHINY-5', ]
-              },
-          ],            slots: 4,
+              },],            slots: 4,
             items: [],
 
           interactions: {
@@ -5907,35 +5467,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['MAILBOX_SLEEK-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['MAILBOX_SLEEK-1', 'MAILBOX_SLEEK-2', 'MAILBOX_SLEEK-3', 'MAILBOX_SLEEK-4', 'MAILBOX_SLEEK-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['MAILBOX_SLEEK-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['MAILBOX_SLEEK-5', 'MAILBOX_SLEEK-4', 'MAILBOX_SLEEK-3', 'MAILBOX_SLEEK-2', 'MAILBOX_SLEEK-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['MAILBOX_SLEEK-5',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['MAILBOX_SLEEK-5', ]
-              },
-          ],            slots: 4,
+              },],            slots: 4,
             items: [],
 
           interactions: {
@@ -5980,35 +5532,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['MAILBOX_WEATHERED-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['MAILBOX_WEATHERED-1', 'MAILBOX_WEATHERED-2', 'MAILBOX_WEATHERED-3', 'MAILBOX_WEATHERED-4', 'MAILBOX_WEATHERED-5', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['MAILBOX_WEATHERED-5',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['MAILBOX_WEATHERED-5', 'MAILBOX_WEATHERED-4', 'MAILBOX_WEATHERED-3', 'MAILBOX_WEATHERED-2', 'MAILBOX_WEATHERED-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['MAILBOX_WEATHERED-5',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['MAILBOX_WEATHERED-5', ]
-              },
-          ],            slots: 4,
+              },],            slots: 4,
             items: [],
 
           interactions: {
@@ -6047,8 +5591,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -6086,8 +5629,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -6133,8 +5675,7 @@ const OBJECTS = {
           }, {
             name: 'TURN SOUTH', stateTrigger: 'FACING_SOUTH', validStates: ['FACING_EAST','FACING_NORTH','FACING_WEST']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'FACING_SOUTH',        states: [            {
               name: 'FACING_NORTH',
               transition: 'false',
               frames: ['DINER_CHAIR_MAROON-4',]
@@ -6146,63 +5687,11 @@ const OBJECTS = {
               name: 'FACING_WEST',
               transition: 'false',
               frames: ['DINER_CHAIR_MAROON-3',]
-              }, {
+              },               {
               name: 'FACING_EAST',
               transition: 'false',
               frames: ['DINER_CHAIR_MAROON-1', ]
-              },
-                      {
-              name: 'FACING_EAST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-1',]
-              }, {
-              name: 'FACING_NORTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-4',]
-              }, {
-              name: 'FACING_SOUTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-2',]
-              }, {
-              name: 'FACING_WEST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-3', ]
-              },
-                      {
-              name: 'FACING_EAST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-1',]
-              }, {
-              name: 'FACING_SOUTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-2',]
-              }, {
-              name: 'FACING_WEST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-3',]
-              }, {
-              name: 'FACING_NORTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-4', ]
-              },
-                      {
-              name: 'FACING_EAST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-1',]
-              }, {
-              name: 'FACING_NORTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-4',]
-              }, {
-              name: 'FACING_WEST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-3',]
-              }, {
-              name: 'FACING_SOUTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-2', ]
-              },
-          ],
+              },                                                                                       ],
 
           interactions: {
                                   },
@@ -6240,8 +5729,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -6283,26 +5771,23 @@ const OBJECTS = {
           }, {
             name: 'FLIP ONTO TOP', stateTrigger: 'FLIPPING_ONTO_TOP', validStates: ['FLIPPED_ONTO_BOTTOM']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'FLIPPED_ONTO_BOTTOM',        states: [            {
               name: 'FLIPPED_ONTO_TOP',
               transition: 'false',
               frames: ['MILK_CRATE-2',]
-              }, {
+              },               {
               name: 'FLIPPING_ONTO_BOTTOM',
               transition: 'FLIPPED_ONTO_BOTTOM',
               frames: ['MILK_CRATE-2', 'MILK_CRATE-1', ]
-              },
-                      {
+              },            {
               name: 'FLIPPED_ONTO_BOTTOM',
               transition: 'false',
               frames: ['MILK_CRATE-1',]
-              }, {
+              },               {
               name: 'FLIPPING_ONTO_TOP',
               transition: 'FLIPPED_ONTO_TOP',
               frames: ['MILK_CRATE-1', 'MILK_CRATE-2', ]
-              },
-          ],            slots: 3,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -6345,26 +5830,19 @@ const OBJECTS = {
           }, {
             name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
               transition: 'false',
               frames: ['OBJ_FLYER_MISSING-8',]
-              }, {
+              },               {
               name: 'READING',
               transition: 'DEFAULT',
               frames: ['OBJ_FLYER_MISSING-1', ]
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: ['OBJ_FLYER_MISSING-8',]
-              }, {
+              },                           {
               name: 'GUSTING',
               transition: 'DEFAULT',
               frames: ['OBJ_FLYER_MISSING-1', 'OBJ_FLYER_MISSING-2', 'OBJ_FLYER_MISSING-3', 'OBJ_FLYER_MISSING-4', 'OBJ_FLYER_MISSING-5', 'OBJ_FLYER_MISSING-6', 'OBJ_FLYER_MISSING-7', 'OBJ_FLYER_MISSING-8', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -6402,14 +5880,13 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'FLICKERING',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['NEON_LOTTO_SIGN-2',]},{
+              frames: ['NEON_LOTTO_SIGN-2',]},                {
               name: 'ON',
               transition: 'false',
-              frames: ['NEON_LOTTO_SIGN-1',]},{
+              frames: ['NEON_LOTTO_SIGN-1',]},                {
               name: 'FLICKERING',
               transition: 'false',
               frames: ['NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-2','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-1','NEON_LOTTO_SIGN-2',]},],
@@ -6450,14 +5927,13 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'ON',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['NEON_OPEN_SIGN-2',]},{
+              frames: ['NEON_OPEN_SIGN-2',]},                {
               name: 'ON',
               transition: 'false',
-              frames: ['NEON_OPEN_SIGN-1',]},{
+              frames: ['NEON_OPEN_SIGN-1',]},                {
               name: 'FLICKERING',
               transition: 'false',
               frames: ['NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-2','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-1','NEON_OPEN_SIGN-2','NEON_OPEN_SIGN-1',]},],
@@ -6502,38 +5978,19 @@ const OBJECTS = {
           }, {
             name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
           }],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'ON',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['NIGHT_LIGHT-1',]},{
+              frames: ['NIGHT_LIGHT-1',]},                {
               name: 'TURNING_OFF',
               transition: 'OFF',
-              frames: ['NIGHT_LIGHT-2','NIGHT_LIGHT-1',]},{
+              frames: ['NIGHT_LIGHT-2','NIGHT_LIGHT-1',]},                {
               name: 'ON',
               transition: 'false',
-              frames: ['NIGHT_LIGHT-2',]},{
+              frames: ['NIGHT_LIGHT-2',]},                {
               name: 'TURNING_ON',
               transition: 'ON',
-              frames: ['NIGHT_LIGHT-1','NIGHT_LIGHT-2',]},            {
-              name: 'OFF',
-              transition: 'false',
-              frames: ['NIGHT_LIGHT-1',]
-              }, {
-              name: 'TURNING_ON',
-              transition: 'ON',
-              frames: ['NIGHT_LIGHT-1', 'NIGHT_LIGHT-2', ]
-              },
-                      {
-              name: 'ON',
-              transition: 'false',
-              frames: ['NIGHT_LIGHT-2',]
-              }, {
-              name: 'TURNING_OFF',
-              transition: 'OFF',
-              frames: ['NIGHT_LIGHT-2', 'NIGHT_LIGHT-1', ]
-              },
-          ],
+              frames: ['NIGHT_LIGHT-1','NIGHT_LIGHT-2',]},                                                      ],
 
           interactions: {
                                             group_11: {
@@ -6599,8 +6056,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -6638,8 +6094,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -6677,8 +6132,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                             group_11: {
@@ -6744,8 +6198,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                             group_11: {
@@ -6819,44 +6272,39 @@ const OBJECTS = {
           }, {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'OFF',        states: [            {
               name: 'OFF',
               transition: 'false',
               frames: ['OVEN_1-1',]
-              }, {
+              },               {
               name: 'TURNING_ON',
               transition: 'ON',
               frames: []
-              },
-                      {
+              },            {
               name: 'ON',
               transition: 'false',
               frames: ['OVEN_1-5',]
-              }, {
+              },               {
               name: 'TURNING_OFF',
               transition: 'OFF',
               frames: []
-              },
-                      {
+              },            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['OVEN_1-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['OVEN_1-2', 'OVEN_1-3', 'OVEN_1-4', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['OVEN_1-4',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['OVEN_1-3', 'OVEN_1-2', 'OVEN_1-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -6894,8 +6342,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -6933,8 +6380,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -6972,8 +6418,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7011,8 +6456,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7050,41 +6494,55 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [ {
-            name: 'CALL', stateTrigger: 'CALLING', validStates: ['DEFAULT']
-          }, {
             name: 'ANSWER', stateTrigger: 'ANSWERING', validStates: ['RINGING']
           }, {
-            name: 'HANG UP', stateTrigger: 'HANGING_UP', validStates: ['ON_PHONE']
+            name: 'HANG UP', stateTrigger: 'HANGING_UP', validStates: ['AWAITING_DIAL','AWAITING_PAYMENT','CALLING','DIALING','ON_PHONE']
+          }, {
+            name: 'CHECK COIN RETURN', stateTrigger: 'CHECKING_COIN_RETURN', validStates: ['DEFAULT']
+          }, {
+            name: 'LIFT RECEIVER', stateTrigger: 'AWAITING_PAYMENT', validStates: ['DEFAULT']
+          }, {
+            name: 'DIAL', stateTrigger: 'DIALING', validStates: ['AWAITING_DIAL']
+          }, {
+            name: 'INSERT COIN INTO PAYPHONE', stateTrigger: 'AWAITING_DIAL', validStates: ['AWAITING_PAYMENT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
-              name: 'DEFAULT',
+        default_state: 'DEFAULT',        states: [                {
+              name: 'CHECKING_COIN_RETURN',
+              transition: 'DEFAULT',
+              frames: ['PAYPHONE-1',]},                {
+              name: 'AWAITING_DIAL',
               transition: 'false',
-              frames: ['PAYPHONE-1',]
-              }, {
-              name: 'CALLING',
-              transition: 'ON_PHONE',
-              frames: ['PAYPHONE-4', ]
-              },
-                      {
+              frames: ['PAYPHONE-4',]},                {
+              name: 'DIALING',
+              transition: 'CALLING',
+              frames: ['PAYPHONE-4',]},                {
+              name: 'AWAITING_PAYMENT',
+              transition: 'false',
+              frames: ['PAYPHONE-4',]},            {
               name: 'RINGING',
               transition: 'DEFAULT',
               frames: ['PAYPHONE-1','PAYPHONE-2',]
-              }, {
+              },               {
               name: 'ANSWERING',
               transition: 'DEFAULT',
               frames: ['PAYPHONE-4', ]
-              },
-                      {
+              },              {
+              name: 'CALLING',
+              transition: 'false',
+              frames: ['PAYPHONE-4',]
+              },  {
               name: 'ON_PHONE',
               transition: 'false',
               frames: ['PAYPHONE-4',]
-              }, {
+              },               {
               name: 'HANGING_UP',
               transition: 'DEFAULT',
               frames: ['PAYPHONE-4', 'PAYPHONE-2', 'PAYPHONE-1', ]
-              },
-          ],
+              },            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['PAYPHONE-1',]
+              },                                                                                                ],
 
           interactions: {
                                   },
@@ -7126,26 +6584,19 @@ const OBJECTS = {
           }, {
             name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
               transition: 'false',
               frames: ['OBJ_FLYER_PINK-8',]
-              }, {
+              },               {
               name: 'READING',
               transition: 'DEFAULT',
               frames: []
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: ['OBJ_FLYER_PINK-8',]
-              }, {
+              },                           {
               name: 'GUSTING',
               transition: 'DEFAULT',
               frames: ['OBJ_FLYER_PINK-1', 'OBJ_FLYER_PINK-2', 'OBJ_FLYER_PINK-3', 'OBJ_FLYER_PINK-4', 'OBJ_FLYER_PINK-5', 'OBJ_FLYER_PINK-6', 'OBJ_FLYER_PINK-7', 'OBJ_FLYER_PINK-8', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -7183,8 +6634,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7222,8 +6672,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7242,7 +6691,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
-        depth: 0,
+        depth: -16,
         sprite: {
           h:48, 
           w:64,
@@ -7265,26 +6714,19 @@ const OBJECTS = {
           }, {
             name: 'CURL UP ON', stateTrigger: 'CURLED_UP', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'CURLED_UP',
               transition: 'false',
               frames: []
-              }, {
+              },               {
               name: 'SLEEPING',
               transition: 'false',
               frames: []
-              },
-                      {
+              },            {
               name: 'DEFAULT',
               transition: 'false',
               frames: []
-              }, {
-              name: 'CURLED_UP',
-              transition: 'false',
-              frames: []
-              },
-          ],
+              },               ],
 
           interactions: {
                                   },
@@ -7322,14 +6764,13 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'DEFAULT',        states: [                {
               name: 'DEFAULT',
               transition: 'false',
-              frames: ['POOP-1',]},{
+              frames: ['POOP-1',]},                {
               name: 'TRAMPLED',
               transition: 'false',
-              frames: ['POOP-2',]},{
+              frames: ['POOP-2',]},                {
               name: 'DESICCATED',
               transition: 'false',
               frames: ['POOP-3',]},],
@@ -7370,8 +6811,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7409,8 +6849,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7448,8 +6887,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7487,8 +6925,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7526,8 +6963,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7565,8 +7001,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7604,8 +7039,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7643,8 +7077,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7682,8 +7115,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7721,8 +7153,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                             group_2: {
@@ -7788,8 +7219,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                             group_2: {
@@ -7855,8 +7285,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7894,8 +7323,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7933,8 +7361,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7980,8 +7407,7 @@ const OBJECTS = {
           }, {
             name: 'TURN SOUTH', stateTrigger: 'FACING_SOUTH', validStates: ['FACING_EAST','FACING_NORTH','FACING_WEST']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'FACING_WEST',        states: [            {
               name: 'FACING_NORTH',
               transition: 'false',
               frames: ['DINER_CHAIR_RED-4',]
@@ -7993,63 +7419,11 @@ const OBJECTS = {
               name: 'FACING_WEST',
               transition: 'false',
               frames: ['DINER_CHAIR_RED-3',]
-              }, {
+              },               {
               name: 'FACING_EAST',
               transition: 'false',
               frames: ['DINER_CHAIR_RED-1', ]
-              },
-                      {
-              name: 'FACING_EAST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-1',]
-              }, {
-              name: 'FACING_NORTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-4',]
-              }, {
-              name: 'FACING_SOUTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-2',]
-              }, {
-              name: 'FACING_WEST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-3', ]
-              },
-                      {
-              name: 'FACING_EAST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-1',]
-              }, {
-              name: 'FACING_SOUTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-2',]
-              }, {
-              name: 'FACING_WEST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-3',]
-              }, {
-              name: 'FACING_NORTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-4', ]
-              },
-                      {
-              name: 'FACING_EAST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-1',]
-              }, {
-              name: 'FACING_NORTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-4',]
-              }, {
-              name: 'FACING_WEST',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-3',]
-              }, {
-              name: 'FACING_SOUTH',
-              transition: 'false',
-              frames: ['DINER_CHAIR_RED-2', ]
-              },
-          ],
+              },                                                                                       ],
 
           interactions: {
                                   },
@@ -8087,8 +7461,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8126,8 +7499,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8165,17 +7537,16 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'CLOSED',        states: [                {
               name: 'OPEN',
               transition: 'false',
-              frames: ['ROLLING_GATE_DOOR-16',]},{
+              frames: ['ROLLING_GATE_DOOR-16',]},                {
               name: 'CLOSED',
               transition: 'false',
-              frames: ['ROLLING_GATE_DOOR-1',]},{
+              frames: ['ROLLING_GATE_DOOR-1',]},                {
               name: 'OPENING',
               transition: 'OPEN',
-              frames: ['ROLLING_GATE_DOOR-2','ROLLING_GATE_DOOR-3','ROLLING_GATE_DOOR-4','ROLLING_GATE_DOOR-5','ROLLING_GATE_DOOR-6','ROLLING_GATE_DOOR-7','ROLLING_GATE_DOOR-8','ROLLING_GATE_DOOR-9','ROLLING_GATE_DOOR-10','ROLLING_GATE_DOOR-11','ROLLING_GATE_DOOR-12','ROLLING_GATE_DOOR-13','ROLLING_GATE_DOOR-14','ROLLING_GATE_DOOR-15','ROLLING_GATE_DOOR-16',]},{
+              frames: ['ROLLING_GATE_DOOR-2','ROLLING_GATE_DOOR-3','ROLLING_GATE_DOOR-4','ROLLING_GATE_DOOR-5','ROLLING_GATE_DOOR-6','ROLLING_GATE_DOOR-7','ROLLING_GATE_DOOR-8','ROLLING_GATE_DOOR-9','ROLLING_GATE_DOOR-10','ROLLING_GATE_DOOR-11','ROLLING_GATE_DOOR-12','ROLLING_GATE_DOOR-13','ROLLING_GATE_DOOR-14','ROLLING_GATE_DOOR-15','ROLLING_GATE_DOOR-16',]},                {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['ROLLING_GATE_DOOR-15','ROLLING_GATE_DOOR-14','ROLLING_GATE_DOOR-13','ROLLING_GATE_DOOR-12','ROLLING_GATE_DOOR-11','ROLLING_GATE_DOOR-10','ROLLING_GATE_DOOR-9','ROLLING_GATE_DOOR-8','ROLLING_GATE_DOOR-7','ROLLING_GATE_DOOR-6','ROLLING_GATE_DOOR-5','ROLLING_GATE_DOOR-4','ROLLING_GATE_DOOR-3','ROLLING_GATE_DOOR-2','ROLLING_GATE_DOOR-1',]},],
@@ -8216,92 +7587,19 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'CLOSED',        states: [                {
               name: 'OPEN',
               transition: 'false',
-              frames: ['ROLLING_GATE_WIDE-16',]},{
+              frames: ['ROLLING_GATE_WIDE-16',]},                {
               name: 'CLOSED',
               transition: 'false',
-              frames: ['ROLLING_GATE_WIDE-1',]},{
+              frames: ['ROLLING_GATE_WIDE-1',]},                {
               name: 'OPENING',
               transition: 'OPEN',
-              frames: ['ROLLING_GATE_WIDE-2','ROLLING_GATE_WIDE-3','ROLLING_GATE_WIDE-4','ROLLING_GATE_WIDE-5','ROLLING_GATE_WIDE-6','ROLLING_GATE_WIDE-7','ROLLING_GATE_WIDE-8','ROLLING_GATE_WIDE-9','ROLLING_GATE_WIDE-10','ROLLING_GATE_WIDE-11','ROLLING_GATE_WIDE-12','ROLLING_GATE_WIDE-13','ROLLING_GATE_WIDE-14','ROLLING_GATE_WIDE-15','ROLLING_GATE_WIDE-16',]},{
+              frames: ['ROLLING_GATE_WIDE-2','ROLLING_GATE_WIDE-3','ROLLING_GATE_WIDE-4','ROLLING_GATE_WIDE-5','ROLLING_GATE_WIDE-6','ROLLING_GATE_WIDE-7','ROLLING_GATE_WIDE-8','ROLLING_GATE_WIDE-9','ROLLING_GATE_WIDE-10','ROLLING_GATE_WIDE-11','ROLLING_GATE_WIDE-12','ROLLING_GATE_WIDE-13','ROLLING_GATE_WIDE-14','ROLLING_GATE_WIDE-15','ROLLING_GATE_WIDE-16',]},                {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['ROLLING_GATE_WIDE-15','ROLLING_GATE_WIDE-14','ROLLING_GATE_WIDE-13','ROLLING_GATE_WIDE-12','ROLLING_GATE_WIDE-11','ROLLING_GATE_WIDE-10','ROLLING_GATE_WIDE-9','ROLLING_GATE_WIDE-8','ROLLING_GATE_WIDE-7','ROLLING_GATE_WIDE-6','ROLLING_GATE_WIDE-5','ROLLING_GATE_WIDE-4','ROLLING_GATE_WIDE-3','ROLLING_GATE_WIDE-2','ROLLING_GATE_WIDE-1',]},],
-
-          interactions: {
-                                  },
-    },
-          SCREEN_DOOR_: {
-        name: 'Screen Door',
-        slug: 'SCREEN_DOOR_', 
-        type: 'EXT_DOOR_',
-        bounding: {
-          h:3, 
-          w:2
-        },
-        base: {
-          h:1, 
-          w:2,
-          x:0, 
-          y:2
-        },
-        depth: 0,
-        sprite: {
-          h:48, 
-          w:32,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:48, 
-          w:32
-        },
-        offset: {
-          x:0, 
-          y:0
-        },
-        varieties: 0,
-        solid: 0,
-        portal: 1,
-        actions: [ {
-            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
-          }, {
-            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
-          }, {
-            name: 'KNOCK', stateTrigger: 'KNOCKING', validStates: ['DEFAULT']
-          }],
-        default_state: 'DEFAULT',
-        states: [            {
-              name: 'CLOSED',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'OPENING',
-              transition: 'OPEN',
-              frames: []
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'CLOSING',
-              transition: 'CLOSED',
-              frames: []
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: []
-              }, {
-              name: 'KNOCKING',
-              transition: 'WAITING',
-              frames: []
-              },
-          ],
 
           interactions: {
                                   },
@@ -8320,7 +7618,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
-        depth: 0,
+        depth: -16,
         sprite: {
           h:48, 
           w:64,
@@ -8343,26 +7641,19 @@ const OBJECTS = {
           }, {
             name: 'CURL UP ON', stateTrigger: 'CURLED_UP', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'CURLED_UP',
               transition: 'false',
               frames: []
-              }, {
+              },               {
               name: 'SLEEPING',
               transition: 'false',
               frames: []
-              },
-                      {
+              },            {
               name: 'DEFAULT',
               transition: 'false',
               frames: []
-              }, {
-              name: 'CURLED_UP',
-              transition: 'false',
-              frames: []
-              },
-          ],
+              },               ],
 
           interactions: {
                                   },
@@ -8400,8 +7691,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8439,8 +7729,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8478,8 +7767,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8517,8 +7805,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8556,8 +7843,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8595,8 +7881,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8634,8 +7919,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8673,8 +7957,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8712,8 +7995,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8751,8 +8033,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8790,8 +8071,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8829,8 +8109,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8868,8 +8147,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8907,8 +8185,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8946,8 +8223,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -8985,8 +8261,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9024,8 +8299,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9063,8 +8337,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9102,8 +8375,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9141,8 +8413,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9180,8 +8451,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9219,8 +8489,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9258,8 +8527,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9297,8 +8565,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9336,8 +8603,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9375,8 +8641,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9414,8 +8679,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9453,8 +8717,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9492,8 +8755,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9531,8 +8793,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9570,8 +8831,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9609,8 +8869,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9648,8 +8907,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9687,8 +8945,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9726,8 +8983,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9765,8 +9021,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9804,8 +9059,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9843,8 +9097,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9882,8 +9135,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9921,8 +9173,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9968,46 +9219,34 @@ const OBJECTS = {
           }, {
             name: 'GRAB TOAST', stateTrigger: 'RETRIEVING_TOAST', validStates: ['EJECTING_TOAST','TOAST_BURNING','TOASTED','TOASTED_DARK']
           }],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'OFF',        states: [                {
               name: 'TOAST_BURNING',
               transition: 'false',
               frames: ['TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12',]},            {
               name: 'OFF',
               transition: 'false',
               frames: ['TOASTER-1',]
-              }, {
+              },               {
               name: 'TURNING_ON',
               transition: 'ON',
               frames: ['TOASTER-1', 'TOASTER-13', 'TOASTER-13', 'TOASTER-5', ]
-              },
-                      {
+              },            {
               name: 'ON',
               transition: 'false',
               frames: ['TOASTER-5',]
-              }, {
+              },               {
               name: 'TURNING_OFF',
               transition: 'OFF',
               frames: []
-              },
-                      {
-              name: 'ON',
-              transition: 'false',
-              frames: ['TOASTER-5',]
-              }, {
+              },                           {
               name: 'TOASTING',
               transition: 'EJECTING_TOAST',
               frames: ['TOASTER-2', 'TOASTER-2', 'TOASTER-3', 'TOASTER-3', 'TOASTER-3', 'TOASTER-4', 'TOASTER-4', 'TOASTER-4', 'TOASTER-5', 'TOASTER-5', 'TOASTER-5', 'TOASTER-5', ]
-              },
-                      {
+              },            {
               name: 'EJECTING_TOAST',
               transition: 'TOASTED',
               frames: ['TOASTER-5','TOASTER-6','TOASTER-7','TOASTER-8','TOASTER-9','TOASTER-10',]
-              }, {
-              name: 'TOAST_BURNING',
-              transition: 'false',
-              frames: ['TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12','TOASTER-12',]
-              }, {
+              },  {
               name: 'TOASTED',
               transition: 'TOASTED_DARK',
               frames: ['TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10','TOASTER-10',]
@@ -10015,12 +9254,11 @@ const OBJECTS = {
               name: 'TOASTED_DARK',
               transition: 'TOAST_BURNING',
               frames: ['TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11','TOASTER-11',]
-              }, {
+              },               {
               name: 'RETRIEVING_TOAST',
               transition: 'OFF',
               frames: ['TOASTER-9', 'TOASTER-13', 'TOASTER-13', 'TOASTER-13', 'TOASTER-1', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -10060,20 +9298,18 @@ const OBJECTS = {
         actions: [ {
             name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
           }],
-        default_state: 'COIN_LOCKED',
-        states: [{
+        default_state: 'COIN_LOCKED',        states: [                {
               name: 'COIN_RETRACTING',
               transition: 'COIN_LOCKED',
               frames: ['DAILY_NEWS_BOX_-6','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-2',]},            {
               name: 'COIN_LOCKED',
               transition: 'false',
               frames: ['DAILY_NEWS_BOX_-1',]
-              }, {
+              },               {
               name: 'COIN_DISPENSING',
               transition: 'COIN_RETRACTING',
               frames: ['DAILY_NEWS_BOX_-2', 'DAILY_NEWS_BOX_-3', 'DAILY_NEWS_BOX_-4', 'DAILY_NEWS_BOX_-5', 'DAILY_NEWS_BOX_-6', ]
-              },
-          ],
+              },],
 
           interactions: {
                                             group_29: {
@@ -10139,8 +9375,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -10178,8 +9413,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -10217,17 +9451,16 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'RED',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_EAST-1',]},{
+              frames: ['TRAFFIC_LIGHT_EAST-1',]},                {
               name: 'GREEN',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_EAST-4',]},{
+              frames: ['TRAFFIC_LIGHT_EAST-4',]},                {
               name: 'YELLOW',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_EAST-3',]},{
+              frames: ['TRAFFIC_LIGHT_EAST-3',]},                {
               name: 'RED',
               transition: 'false',
               frames: ['TRAFFIC_LIGHT_EAST-2',]},],
@@ -10268,17 +9501,16 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'GREEN',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: []},{
+              frames: []},                {
               name: 'GREEN',
               transition: 'false',
-              frames: []},{
+              frames: []},                {
               name: 'YELLOW',
               transition: 'false',
-              frames: []},{
+              frames: []},                {
               name: 'RED',
               transition: 'false',
               frames: []},],
@@ -10319,17 +9551,16 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'GREEN',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_SOUTH-1',]},{
+              frames: ['TRAFFIC_LIGHT_SOUTH-1',]},                {
               name: 'GREEN',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_SOUTH-4',]},{
+              frames: ['TRAFFIC_LIGHT_SOUTH-4',]},                {
               name: 'YELLOW',
               transition: 'false',
-              frames: ['TRAFFIC_LIGHT_SOUTH-3',]},{
+              frames: ['TRAFFIC_LIGHT_SOUTH-3',]},                {
               name: 'RED',
               transition: 'false',
               frames: ['TRAFFIC_LIGHT_SOUTH-2',]},],
@@ -10370,8 +9601,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                             group_17: {
@@ -10443,35 +9673,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-1', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-4', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_S_DARK_WOOD-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -10516,35 +9738,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-1', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_S_LIGHT_WOOD-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -10589,35 +9803,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-1', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-4', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_S_PEELING_WOOD-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_PEELING_WOOD-4', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -10662,35 +9868,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_YELLOW-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_YELLOW-1', 'UNDERCOUNTER_CABINET_S_YELLOW-2', 'UNDERCOUNTER_CABINET_S_YELLOW-3', 'UNDERCOUNTER_CABINET_S_YELLOW-4', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4', 'UNDERCOUNTER_CABINET_S_YELLOW-3', 'UNDERCOUNTER_CABINET_S_YELLOW-2', 'UNDERCOUNTER_CABINET_S_YELLOW-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -10735,35 +9933,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-4',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-4', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-1', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-2', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-3', 'UNDERCOUNTER_CABINET_W_DARK_WOOD-4', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -10808,35 +9998,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-4',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-4', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-2', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-3', 'UNDERCOUNTER_CABINET_W_LIGHT_WOOD-4', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -10881,35 +10063,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-4',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-4', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-1', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-2', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-3', 'UNDERCOUNTER_CABINET_W_PEELING_WOOD-4', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -10954,35 +10128,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_YELLOW-4',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_YELLOW-4', 'UNDERCOUNTER_CABINET_W_YELLOW-3', 'UNDERCOUNTER_CABINET_W_YELLOW-2', 'UNDERCOUNTER_CABINET_W_YELLOW-1', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1', 'UNDERCOUNTER_CABINET_W_YELLOW-2', 'UNDERCOUNTER_CABINET_W_YELLOW-3', 'UNDERCOUNTER_CABINET_W_YELLOW-4', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1', ]
-              },
-          ],            slots: 0,
+              },],            slots: 0,
             items: [],
 
           interactions: {
@@ -11021,17 +10187,16 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'SIGNAL_HAND_WALK',        states: [                {
               name: 'SIGNAL_WALK_HAND',
               transition: 'false',
-              frames: ['WALK_SIGNAL_SE_-5',]},{
+              frames: ['WALK_SIGNAL_SE_-5',]},                {
               name: 'SIGNAL_HAND_WALK',
               transition: 'false',
-              frames: ['WALK_SIGNAL_SE_-3',]},{
+              frames: ['WALK_SIGNAL_SE_-3',]},                {
               name: 'SIGNAL_WARNING_HAND',
               transition: 'false',
-              frames: ['WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-2',]},{
+              frames: ['WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-2',]},                {
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
               frames: ['WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-1',]},],
@@ -11072,17 +10237,16 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'SIGNAL_WARNING_HAND',        states: [                {
               name: 'SIGNAL_WALK_HAND',
               transition: 'false',
-              frames: ['WALK_SIGNAL_W_-2',]},{
+              frames: ['WALK_SIGNAL_W_-2',]},                {
               name: 'SIGNAL_HAND_WALK',
               transition: 'false',
-              frames: ['WALK_SIGNAL_W_-3',]},{
+              frames: ['WALK_SIGNAL_W_-3',]},                {
               name: 'SIGNAL_WARNING_HAND',
               transition: 'false',
-              frames: ['WALK_SIGNAL_W_-2',]},{
+              frames: ['WALK_SIGNAL_W_-2',]},                {
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
               frames: ['WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-2',]},],
@@ -11123,14 +10287,13 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'JUNE',        states: [                {
               name: 'JUNE',
               transition: 'false',
-              frames: ['WALL_CALENDAR-1',]},{
+              frames: ['WALL_CALENDAR-1',]},                {
               name: 'JULY',
               transition: 'false',
-              frames: ['WALL_CALENDAR-2',]},{
+              frames: ['WALL_CALENDAR-2',]},                {
               name: 'AUGUST',
               transition: 'false',
               frames: ['WALL_CALENDAR-3',]},],
@@ -11171,8 +10334,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11210,8 +10372,7 @@ const OBJECTS = {
         solid: 0,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11249,8 +10410,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11288,8 +10448,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11327,8 +10486,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11366,11 +10524,10 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [{
+        default_state: 'ON',        states: [                {
               name: 'OFF',
               transition: 'false',
-              frames: ['AC_WINDOW_UNIT-1',]},{
+              frames: ['AC_WINDOW_UNIT-1',]},                {
               name: 'ON',
               transition: 'false',
               frames: ['AC_WINDOW_UNIT-1','AC_WINDOW_UNIT-2',]},],
@@ -11411,8 +10568,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11450,8 +10606,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11489,8 +10644,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11528,8 +10682,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11567,8 +10720,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11606,8 +10758,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11645,8 +10796,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11684,8 +10834,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11723,8 +10872,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11762,8 +10910,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11801,8 +10948,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11840,8 +10986,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11879,8 +11024,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11918,8 +11062,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11957,8 +11100,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11996,8 +11138,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12035,8 +11176,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12074,8 +11214,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12113,8 +11252,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12152,8 +11290,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12191,8 +11328,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12230,8 +11366,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12269,8 +11404,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12308,8 +11442,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12347,8 +11480,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12386,8 +11518,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12425,8 +11556,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12470,35 +11600,27 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'CLOSED',
-        states: [            {
+        default_state: 'CLOSED',        states: [            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['WOOD_SIDE_TABLE-1',]
-              }, {
+              },               {
               name: 'OPENING',
               transition: 'OPEN',
               frames: ['WOOD_SIDE_TABLE-4', 'WOOD_SIDE_TABLE-3', 'WOOD_SIDE_TABLE-2', ]
-              },
-                      {
+              },            {
               name: 'OPEN',
               transition: 'false',
               frames: ['WOOD_SIDE_TABLE-2',]
-              }, {
+              },               {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['WOOD_SIDE_TABLE-3', 'WOOD_SIDE_TABLE-4', 'WOOD_SIDE_TABLE-1', ]
-              },
-                      {
-              name: 'OPEN',
-              transition: 'false',
-              frames: ['WOOD_SIDE_TABLE-2',]
-              }, {
+              },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: []
-              },
-          ],            slots: 4,
+              },],            slots: 4,
             items: [],
 
           interactions: {
@@ -12537,8 +11659,7 @@ const OBJECTS = {
         solid: 1,
         portal: 0,
         actions: [],
-        default_state: 'DEFAULT',
-        states: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -12580,26 +11701,19 @@ const OBJECTS = {
           }, {
             name: 'GUST', stateTrigger: 'GUSTING', validStates: ['DEFAULT']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
               transition: 'false',
               frames: ['OBJ_FLYER_YELLOW-8',]
-              }, {
+              },               {
               name: 'READING',
               transition: 'DEFAULT',
               frames: []
-              },
-                      {
-              name: 'DEFAULT',
-              transition: 'false',
-              frames: ['OBJ_FLYER_YELLOW-8',]
-              }, {
+              },                           {
               name: 'GUSTING',
               transition: 'DEFAULT',
               frames: ['OBJ_FLYER_YELLOW-1', 'OBJ_FLYER_YELLOW-2', 'OBJ_FLYER_YELLOW-3', 'OBJ_FLYER_YELLOW-4', 'OBJ_FLYER_YELLOW-5', 'OBJ_FLYER_YELLOW-6', 'OBJ_FLYER_YELLOW-7', 'OBJ_FLYER_YELLOW-8', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },
@@ -12641,26 +11755,23 @@ const OBJECTS = {
           }, {
             name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
           }],
-        default_state: 'DEFAULT',
-        states: [            {
+        default_state: 'ON',        states: [            {
               name: 'OFF',
               transition: 'false',
               frames: ['LAMP_YELLOW_TABLE-5',]
-              }, {
+              },               {
               name: 'TURNING_ON',
               transition: 'ON',
               frames: ['LAMP_YELLOW_TABLE-5', 'LAMP_YELLOW_TABLE-4', ]
-              },
-                      {
+              },            {
               name: 'ON',
               transition: 'false',
               frames: ['LAMP_YELLOW_TABLE-4',]
-              }, {
+              },               {
               name: 'TURNING_OFF',
               transition: 'OFF',
               frames: ['LAMP_YELLOW_TABLE-4', 'LAMP_YELLOW_TABLE-5', ]
-              },
-          ],
+              },],
 
           interactions: {
                                   },

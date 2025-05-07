@@ -170,6 +170,9 @@ export default class HudDialog extends HudCommon {
 
     tellReplyBox (content=[{'text': 'Yes', 'next': 0},{'text': 'No', 'next': 0}]) {
         if (!this.currentReply && content.length > 0) {
+            content.forEach((reply, index) => {
+                reply.text = reply.text.replace('’', '\'');
+            });
             this.replyBox = this.makeReplyBox(content);
             this.currentReply = true;
         }

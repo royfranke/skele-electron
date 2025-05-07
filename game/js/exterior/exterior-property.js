@@ -209,7 +209,6 @@ export default class PropertyLine {
             let window_unit = this.scene.manager.objectManager.newObjectToWorld(window_x, window_y - .5, 'AC_WINDOW_UNIT');
             window_unit.sprite.setDepth(window_unit.sprite.depth + 16);
             window_unit.sprite.setOrigin(.5,1);
-            window_unit.setState('ON');
         }
 
         this.buildEntry(entry_x, entry_y);

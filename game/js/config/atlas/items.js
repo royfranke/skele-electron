@@ -1,4 +1,21 @@
 const ITEMS = {
+      ADDRESS_BOOK: {
+        name: 'Address Book',
+        slug: 'ADDRESS_BOOK', 
+        use:  'HOLDS',
+        icon: 'ADDRESS_BOOK',
+        type: 'PHONE_DIRECTORY',
+        description: '',
+        price: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       APPLE: {
         name: 'Apple',
         slug: 'APPLE', 
@@ -14,14 +31,17 @@ const ITEMS = {
         stack: 3,
         stacks: [ {
             icon: 'APPLE_15',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'APPLE_16',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }, {
             icon: 'APPLE_17',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -103,13 +123,14 @@ const ITEMS = {
         type: 'LEAF',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn near ash tree'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
         stack: 10,
         stacks: [ {
             icon: 'LEAF_ASH_33',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -131,14 +152,17 @@ const ITEMS = {
         stack: 3,
         stacks: [ {
             icon: 'BANANA_13',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'BANANA_14',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }, {
             icon: 'BANANA_29',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -261,6 +285,7 @@ const ITEMS = {
         stack: 2,
         stacks: [ {
             icon: 'SOCK_7_34',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }        ],
@@ -456,7 +481,7 @@ const ITEMS = {
         type: 'ADULT_MAGAZINE',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
@@ -779,14 +804,17 @@ const ITEMS = {
         stack: 0,
         stacks: [ {
             icon: 'STORE_BREAD_28',
+            type: 'asset',
             lessThan: 2,
             greaterThan: 0
           }, {
             icon: 'STORE_BREAD_41',
+            type: 'asset',
             lessThan: 5,
             greaterThan: 2
           }, {
             icon: 'STORE_BREAD_42',
+            type: 'asset',
             lessThan: 9,
             greaterThan: 4
           }        ],
@@ -944,18 +972,22 @@ const ITEMS = {
         stack: 4,
         stacks: [ {
             icon: 'SODA_RED_43',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }, {
             icon: 'SODA_RED_44',
+            type: 'asset',
             lessThan: 5,
             greaterThan: 3
           }, {
             icon: 'SODA_RED_45',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'SODA_RED_46',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }        ],
@@ -1017,22 +1049,27 @@ items: []    },
         stack: 9,
         stacks: [ {
             icon: 'CASSEROLE_BROWNIE_21',
+            type: 'asset',
             lessThan: 2,
             greaterThan: 0
           }, {
             icon: 'CASSEROLE_BROWNIE_22',
+            type: 'asset',
             lessThan: 5,
             greaterThan: 1
           }, {
             icon: 'CASSEROLE_BROWNIE_23',
+            type: 'asset',
             lessThan: 7,
             greaterThan: 4
           }, {
             icon: 'CASSEROLE_BROWNIE_24',
+            type: 'asset',
             lessThan: 9,
             greaterThan: 6
           }, {
             icon: 'CASSEROLE_BROWNIE_25',
+            type: 'asset',
             lessThan: 10,
             greaterThan: 8
           }        ],
@@ -1836,18 +1873,22 @@ items: []    },
         stack: 4,
         stacks: [ {
             icon: 'BEER_56',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }, {
             icon: 'BEER_57',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'BEER_58',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }, {
             icon: 'BEER_59',
+            type: 'asset',
             lessThan: 5,
             greaterThan: 3
           }        ],
@@ -2072,6 +2113,7 @@ items: []    },
         stack: 1,
         stacks: [ {
             icon: 'EMPTY_NOODLE_CUP_60',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -2114,13 +2156,14 @@ items: []    },
         type: 'TRASH',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
         stack: 1,
         stacks: [ {
             icon: 'EMPTY_PUDDING_CUP_61',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -2515,18 +2558,22 @@ items: []    },
         stack: 4,
         stacks: [ {
             icon: 'SODA_GREEN_48',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'SODA_GREEN_49',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }, {
             icon: 'SODA_GREEN_50',
+            type: 'asset',
             lessThan: 5,
             greaterThan: 3
           }, {
             icon: 'SODA_GREEN_51',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -2580,7 +2627,7 @@ items: []    },
         type: 'PAN',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Product Display', tag: 'shelf stable'}, {category:'Product Display', tag: 'garage sale'}, {category:'Product Display', tag: 'table display'}, {category:'Product Display', tag: 'shop window'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
@@ -2659,21 +2706,24 @@ items: []    },
         type: 'FLYER',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn on utility pole'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_GRAY_10',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 1
           }, {
             icon: 'FLYER_GRAY_11',
+            type: 'asset',
             lessThan: 11,
             greaterThan: 3
           }, {
             icon: 'FLYER_GRAY_12',
+            type: 'asset',
             lessThan: 26,
             greaterThan: 10
           }        ],
@@ -2695,6 +2745,7 @@ items: []    },
         stack: 2,
         stacks: [ {
             icon: 'SOCK_4_39',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }        ],
@@ -2716,6 +2767,7 @@ items: []    },
         stack: 2,
         stacks: [ {
             icon: 'SOCK_3_38',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }        ],
@@ -2988,6 +3040,7 @@ items: []    },
         stack: 2,
         stacks: [ {
             icon: 'SOCK_5_36',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }        ],
@@ -3070,7 +3123,7 @@ items: []    },
         type: 'ADULT_MAGAZINE',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
@@ -3305,7 +3358,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3350,7 +3403,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3395,7 +3448,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3440,7 +3493,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3485,7 +3538,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3530,7 +3583,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3597,7 +3650,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3642,7 +3695,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3687,7 +3740,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3732,7 +3785,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3777,7 +3830,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3822,7 +3875,7 @@ items: []    },
                     slot_type: 'IN_COINPURSE',
                     type: 'MONEY',
                     result: 'CONSUMED',
-                    MONEY: ''
+                    MONEY: '200'
                     }
                                 ]
 
@@ -3983,6 +4036,23 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 5,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      WISHBONE_LUCKY: {
+        name: 'Lucky Wishbone',
+        slug: 'WISHBONE_LUCKY', 
+        use:  'HOLDS',
+        icon: 'WISHBONE_LUCKY',
+        type: 'CHARM',
+        description: '',
+        price: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -4232,21 +4302,24 @@ items: []    },
         type: 'FLYER',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn on utility pole'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_MISSING_7',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 1
           }, {
             icon: 'FLYER_MISSING_8',
+            type: 'asset',
             lessThan: 11,
             greaterThan: 3
           }, {
             icon: 'FLYER_MISSING_9',
+            type: 'asset',
             lessThan: 26,
             greaterThan: 10
           }        ],
@@ -4912,21 +4985,24 @@ items: []    },
         type: 'FLYER',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn on utility pole'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_PINK_1',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 1
           }, {
             icon: 'FLYER_PINK_2',
+            type: 'asset',
             lessThan: 11,
             greaterThan: 3
           }, {
             icon: 'FLYER_PINK_3',
+            type: 'asset',
             lessThan: 26,
             greaterThan: 10
           }        ],
@@ -5069,14 +5145,17 @@ items: []    },
         stack: 8,
         stacks: [ {
             icon: 'POPSICLE_STICK_30',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'POPSICLE_STICK_31',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }, {
             icon: 'POPSICLE_STICK_32',
+            type: 'asset',
             lessThan: 9,
             greaterThan: 3
           }        ],
@@ -5579,6 +5658,7 @@ items: []    },
         stack: 2,
         stacks: [ {
             icon: 'SOCK_6_35',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }        ],
@@ -5849,14 +5929,17 @@ items: []    },
         stack: 3,
         stacks: [ {
             icon: 'BASKET_RED_18',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'BASKET_RED_19',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }, {
             icon: 'BASKET_RED_20',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -5895,18 +5978,22 @@ items: []    },
         stack: 4,
         stacks: [ {
             icon: 'SODA_BLUE_52',
+            type: 'world',
             lessThan: 2,
             greaterThan: 0
           }, {
             icon: 'SODA_BLUE_53',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }, {
             icon: 'SODA_BLUE_54',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 2
           }, {
             icon: 'SODA_BLUE_55',
+            type: 'asset',
             lessThan: 5,
             greaterThan: 3
           }        ],
@@ -6375,6 +6462,7 @@ items: []    },
         stack: 8,
         stacks: [ {
             icon: 'STICK_1_26',
+            type: 'carry',
             lessThan: 2,
             greaterThan: 0
           }        ],
@@ -6464,6 +6552,7 @@ items: []    },
         stack: 4,
         stacks: [ {
             icon: 'TOAST_27',
+            type: 'asset',
             lessThan: 10,
             greaterThan: 1
           }        ],
@@ -6630,6 +6719,23 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 25,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      WISHBONE_UNLUCKY: {
+        name: 'Unlucky Wishbone',
+        slug: 'WISHBONE_UNLUCKY', 
+        use:  'HOLDS',
+        icon: 'WISHBONE_UNLUCKY',
+        type: 'CHARM',
+        description: '',
+        price: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -6867,6 +6973,23 @@ items: []    },
         interactions: {
         },
     },
+      WHITE_PAGES: {
+        name: 'White Pages',
+        slug: 'WHITE_PAGES', 
+        use:  'HOLDS',
+        icon: 'WHITE_PAGES',
+        type: 'PHONE_DIRECTORY',
+        description: '',
+        price: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       SOCK_1: {
         name: 'White Sock',
         slug: 'SOCK_1', 
@@ -6882,6 +7005,7 @@ items: []    },
         stack: 2,
         stacks: [ {
             icon: 'SOCK_1_40',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }        ],
@@ -6903,6 +7027,7 @@ items: []    },
         stack: 2,
         stacks: [ {
             icon: 'SOCK_2_37',
+            type: 'asset',
             lessThan: 3,
             greaterThan: 1
           }        ],
@@ -6935,6 +7060,65 @@ items: []    },
         description: '',
         price: 0,
         tags: [{category:'Product Display', tag: 'shelf stable'}, {category:'Product Display', tag: 'refridgerator'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      WILLOW_SWITCH: {
+        name: 'Willow Switch',
+        slug: 'WILLOW_SWITCH', 
+        use:  'HOLDS',
+        icon: 'WILLOW_SWITCH',
+        type: 'MATERIAL',
+        description: '',
+        price: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn near willow'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 6,
+        stacks: [ {
+            icon: 'WILLOW_SWITCH_62',
+            type: 'asset',
+            lessThan: 3,
+            greaterThan: 1
+          }, {
+            icon: 'WILLOW_SWITCH_63',
+            type: 'asset',
+            lessThan: 4,
+            greaterThan: 2
+          }, {
+            icon: 'WILLOW_SWITCH_64',
+            type: 'asset',
+            lessThan: 5,
+            greaterThan: 3
+          }, {
+            icon: 'WILLOW_SWITCH_65',
+            type: 'asset',
+            lessThan: 6,
+            greaterThan: 4
+          }, {
+            icon: 'WILLOW_SWITCH_66',
+            type: 'asset',
+            lessThan: 7,
+            greaterThan: 5
+          }        ],
+        interactions: {
+        },
+    },
+      WISHBONE: {
+        name: 'Wishbone',
+        slug: 'WISHBONE', 
+        use:  'HOLDS',
+        icon: 'WISHBONE',
+        type: 'MATERIAL',
+        description: 'A grease curled, forked furcula bone, probably from a chicken. Find a friend with whom you can break it. In the 1600s the wishbone was called a "merrythought."',
+        price: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
@@ -6985,24 +7169,44 @@ items: []    },
         type: 'FLYER',
         description: '',
         price: 0,
-        tags: [],
+        tags: [{category:'Spawn Points', tag: 'spawn on utility pole'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
         stack: 25,
         stacks: [ {
             icon: 'FLYER_YELLOW_4',
+            type: 'asset',
             lessThan: 4,
             greaterThan: 1
           }, {
             icon: 'FLYER_YELLOW_5',
+            type: 'asset',
             lessThan: 11,
             greaterThan: 3
           }, {
             icon: 'FLYER_YELLOW_6',
+            type: 'asset',
             lessThan: 26,
             greaterThan: 10
           }        ],
+        interactions: {
+        },
+    },
+      YELLOW_PAGES: {
+        name: 'Yellow Pages',
+        slug: 'YELLOW_PAGES', 
+        use:  'HOLDS',
+        icon: 'YELLOW_PAGES',
+        type: 'PHONE_DIRECTORY',
+        description: '',
+        price: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
         interactions: {
         },
     },

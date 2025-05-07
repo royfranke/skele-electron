@@ -978,7 +978,7 @@
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":48 },
 		"sourceSize": {"w":32,"h":48 }
 	},    
-        {
+      {
 		"filename": "DOORMAT_1-1",
 		"frame": {"x":672,"y":16,"w":32,"h":16},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":16 },
@@ -1116,7 +1116,7 @@
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":48 },
 		"sourceSize": {"w":32,"h":48 }
 	},    
-          {
+      {
 		"filename": "EXT_DOOR_WINDOWS_WHITE-1",
 		"frame": {"x":784,"y":225,"w":32,"h":48},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":48 },
@@ -2628,7 +2628,7 @@
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
-        {
+      {
 		"filename": "SOFA_SHLUBBY_1-1",
 		"frame": {"x":880,"y":369,"w":64,"h":48},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":48 },
@@ -3971,6 +3971,6 @@
 		"frame": {"x":270,"y":32,"w":16,"h":18},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":18 },
 		"sourceSize": {"w":16,"h":18 }
-	} 
+	}  
     ]
 }
