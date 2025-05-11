@@ -40,7 +40,7 @@ export default class Block {
         const block = this.block;
         let groundLayer = this.scene[this.scene.locale].groundLayer;
         if (block.ground.toUpperCase() == 'FOREST') {
-            this.setForest();
+            //this.setForest();
         }
         else {
             groundLayer.weightedRandomize(TILES[block.ground.toUpperCase()].FILL_, block.left, block.top, block.width, block.height);
@@ -69,57 +69,36 @@ export default class Block {
         const block = this.block;
         const groundLayer = this.scene[this.scene.locale].groundLayer;
         const forestTypes = ['LEAVES', 'MULCH', 'DIRT', 'GRASS'];
-        let slice_height = 4;
-        let slice_width  = 8;
-        let segment_height = Math.floor(block.height/slice_height);
-        let segment_width = Math.floor(block.width/slice_width);
 
-        groundLayer.weightedRandomize(TILES.MULCH.FILL_, block.left, block.top, block.width, block.height);
-        var tile_type_left = null;
-        for (var s_h=0;s_h<slice_height; s_h++) {
-            for (var s_w=0;s_w<slice_width; s_w++) {
-                var left = parseInt(block.left + (s_w * segment_width));
-                var top = parseInt(block.top + (s_h * segment_height));
-                var tile_choice = Phaser.Math.RND.between(0,3);
-                var tile_type = forestTypes[tile_choice];
-                groundLayer.weightedRandomize(TILES[tile_type].FILL_, left, top, segment_width, segment_height);
-                var last_border_choice = 0;
-                if (left > 0) {
-                    if (tile_type_left != tile_type) {
-                        for (var i=0; i<segment_height; i++) {
-                            var border_choice = Phaser.Math.RND.between(0,3);
-                            if (border_choice > 0) {
-                                if (last_border_choice == 3) {
-                                    border_choice = Phaser.Math.RND.between(2,4);
-                                }
-                                if (last_border_choice == 2) {
-                                    border_choice = Phaser.Math.RND.between(1,3);
-                                }
-                                groundLayer.weightedRandomize(TILES[tile_type].FILL_, left - border_choice, top + i, border_choice, 1);
-                                last_border_choice = border_choice;
-                            }
-                        }
-                    }
+
+        groundLayer.weightedRandomize(TILES.DIRT.FILL_, block.left, block.top, block.width, block.height);
+        var last_tile = null;
+
+        for (let h = 0; h < block.height - (block.offset.n + block.offset.s); h++) {
+            for (let w = 0; w < block.width - (block.offset.w + block.offset.e); w++) {
+                var tile = Phaser.Math.RND.between(0, 128);
+
+                switch (tile) {
+                    case 0:
+                        var x = block.left+w+block.offset.w;
+                        var y = block.top+h+block.offset.n;
+                        this.scene.manager.treeManager.newTreeToWorld(x, y + .5, 'ASH');
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x-2, y-2, 5, 5);
+                        groundLayer.weightedRandomize(TILES.LEAVES.FILL_, x-1, y-1, 3, 3);
+
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x-1, y-1, 1, 1);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x+1, y-1, 1, 1);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x-1, y+1, 1, 1);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x+1, y+1, 1, 1);
+                    break;
+                    case 12:
+                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION',Phaser.Math.RND.between(1,44));
+                    break;
                 }
-                if (top > 0) {
-                    for (var i=0; i<segment_width; i++) {
-                        var border_choice = Phaser.Math.RND.between(0,3);
-                        if (border_choice > 0) {
-                            if (last_border_choice == 3) {
-                                border_choice = Phaser.Math.RND.between(2,4);
-                            }
-                            if (last_border_choice == 2) {
-                                border_choice = Phaser.Math.RND.between(1,3);
-                            }
-                            groundLayer.weightedRandomize(TILES[tile_type].FILL_, left + i, top - border_choice,1, border_choice );
-                            last_border_choice = border_choice;
-                        }
-                        
-                    }
-                }
-                tile_type_left = tile_type;
             }
         }
+
         
     }
 
@@ -222,8 +201,8 @@ export default class Block {
             //this.scene.manager.treeManager.newTreeToWorld(this.block.left+27.25, this.block.bottom - .25, 'ASH');
             this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+27, this.block.bottom - 1, 2, 1);
 
-            //this.scene.manager.treeManager.newTreeToWorld(this.block.left+36.25, this.block.bottom - .25, 'ASH');
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+36, this.block.bottom - 1, 2, 1);
+            this.scene.manager.treeManager.newTreeToWorld(this.block.left+36.25, this.block.bottom - .25, 'ASH');
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MULCH.FILL_, this.block.left+36, this.block.bottom - 1, 2, 1);
 
 
         }

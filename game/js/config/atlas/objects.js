@@ -1607,6 +1607,44 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          CHAINLINK_S_5_OPEN: {
+        name: 'Chainlink 5 Open',
+        slug: 'CHAINLINK_S_5_OPEN', 
+        type: 'FENCE',
+        bounding: {
+          h:3, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:5,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:80
+        },
+        offset: {
+          x:0, 
+          y:40
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           CHAINLINK_S_6_COMPLETE: {
         name: 'Chainlink 6',
         slug: 'CHAINLINK_S_6_COMPLETE', 
@@ -10370,6 +10408,44 @@ const OBJECTS = {
         },
         varieties: 2,
         solid: 0,
+        portal: 0,
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          WATTLE_FENCE: {
+        name: 'Wattle Fence',
+        slug: 'WATTLE_FENCE', 
+        type: 'FENCE',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:6, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:10
+        },
+        varieties: 2,
+        solid: 1,
         portal: 0,
         actions: [],
         default_state: 'DEFAULT',        states: [],

@@ -10,6 +10,7 @@ export default class Tree {
         this.sprite = null;
         this.state = null;
         this.branches = [];
+        this.leaves = [];
         // Imbue this tree with the config tree info
         this.info = tree;
         this.name = this.info.name;
@@ -40,33 +41,54 @@ export default class Tree {
 
     setBranches(count=2) {
         this.setBranch(0,-(this.sprite.displayHeight - 40), false, false);
-        this.setBranch(4,-(this.sprite.displayHeight - 41), true, true);
+        this.setBranch(4,-(this.sprite.displayHeight - 38), true, true);
         this.setBranch(0,-(this.sprite.displayHeight - 16), false, false);
         this.setBranch(4,-(this.sprite.displayHeight - 12), true, true);
+        this.setBranch(0,-(this.sprite.displayHeight - 8),true, false);
     }
 
     setBranch(x_offset=0, y_offset=0,flip = false, behind = false) {
 
         var branch = Phaser.Math.RND.between(1, this.info.branches);
+        var branch_alt = Phaser.Math.RND.between(-1, 1);
+        branch = branch + branch_alt;
+        if (branch < 1) {
+            branch = 1;
+        }
+        if (branch > this.info.branches) {
+            branch = this.info.branches;
+        }
 
             var _x = ((this.tile_x + 1)*16)+ x_offset;
             var _y = (this.tile_y*16) + y_offset;
 
-            //var x_pixels = (_x - this.info.base.x) * 16 + this.info.sprite.x + (this.info.sprite.w / 2);
-            //var y_pixels = (_y - this.info.base.y) * 16 + this.info.sprite.y + (this.info.sprite.h / 2);
-
-            var y_depth = this.tile_y * 16;
-
-            var depth = behind ? this.sprite.depth - 1 : this.sprite.depth + 1;
+            var depth = !behind ? this.sprite.depth - y_offset : this.sprite.depth + y_offset;
 
             var sprite = this.scene.physics.add.staticSprite(_x, _y, 'TREES', this.info.slug+'_BRANCH-'+branch, 0).setOrigin(0, 1).setDepth(depth);
 
+
+            if (behind) {
+                var dir = 'BACK';
+                var leaves = Phaser.Math.RND.between(1, this.info.leaves_back);
+                depth = depth - 1;
+            }
+            else {
+                var dir = 'FRONT';
+                var leaves = Phaser.Math.RND.between(1, this.info.leaves_front);
+                depth = depth + 32;
+            }
+            
+        
+            var leaves_sprite = this.scene.physics.add.staticSprite(_x, _y - 8, 'TREES', this.info.slug+'_LEAVES-'+dir+'-'+leaves, 0).setOrigin(0, 1).setDepth(depth);
+
             if (flip) {
                 sprite.setOrigin(1, 1).setFlipX(true);
+                leaves_sprite.setOrigin(1, 1).setFlipX(true);
             }
 
             this.branches.push(sprite);
-        
+            this.leaves.push(leaves_sprite);
+
         this.hasBranch = true;
         this.tweenBranch();
     }
@@ -78,12 +100,14 @@ export default class Tree {
             return;
         }
         for (var i = 0; i < this.branches.length; i++) {
+            var leaves = this.leaves[i];
+            
             var branch = this.branches[i];
             branch.setAngle(Phaser.Math.RND.between(-5, 2));
             var tween = this.scene.tweens.add({
-                targets: branch,
+                targets: [branch, leaves],
                 angle: Phaser.Math.RND.between(5,10),
-                duration: Phaser.Math.RND.between(5000,6000),
+                duration: Phaser.Math.RND.between(6000,8000),
                 yoyo: true,
                 ease: 'Ease.easeInOut',
                 repeat: -1
@@ -103,6 +127,7 @@ export default class Tree {
             this.sprite.setTint(keylight.wall_tint);
             for (var i = 0; i < this.branches.length; i++) {
                 this.branches[i].setTint(keylight.wall_tint);
+                this.leaves[i].setTint(keylight.roof_tint);
             }
         }
     }
@@ -117,7 +142,6 @@ export default class Tree {
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'TREES', this.info.slug+'_TRUNK-'+trunk_variant, 0).setOrigin(0,1).setDepth(y_pixels);
 
         this.setBranches();
-
 
     }
 

@@ -9,16 +9,56 @@
 	},
         {
 		"filename": "ASH_TRUNK-2",
-		"frame": {"x":176,"y":0,"w":32,"h":80 },
+		"frame": {"x":48,"y":64,"w":32,"h":80 },
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":80 },
 		"sourceSize": {"w":32,"h":80 }
 	},
         {
 		"filename": "ASH_TRUNK-3",
-		"frame": {"x":208,"y":0,"w":32,"h":80 },
+		"frame": {"x":80,"y":64,"w":32,"h":80 },
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":80 },
 		"sourceSize": {"w":32,"h":80 }
 	},
+    
+
+    {
+		"filename": "ASH_LEAVES-FRONT-1",
+		"frame": {"x":176,"y":0,"w":48,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":48,"h":64 },
+		"sourceSize": {"w":48,"h":64 }
+	},
+        {
+		"filename": "ASH_LEAVES-FRONT-2",
+		"frame": {"x":272,"y":0,"w":48,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":48,"h":64 },
+		"sourceSize": {"w":48,"h":64 }
+	},
+        {
+		"filename": "ASH_LEAVES-FRONT-3",
+		"frame": {"x":368,"y":0,"w":48,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":48,"h":64 },
+		"sourceSize": {"w":48,"h":64 }
+	},
+      
+
+    {
+    "filename": "ASH_LEAVES-BACK-1",
+    "frame": {"x":224,"y":0,"w":48,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":48,"h":64 },
+    "sourceSize": {"w":48,"h":64 }
+  },
+        {
+    "filename": "ASH_LEAVES-BACK-2",
+    "frame": {"x":320,"y":0,"w":48,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":48,"h":64 },
+    "sourceSize": {"w":48,"h":64 }
+  },
+        {
+    "filename": "ASH_LEAVES-BACK-3",
+    "frame": {"x":0,"y":64,"w":48,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":48,"h":64 },
+    "sourceSize": {"w":48,"h":64 }
+  },
     
       {
 		"filename": "ASH_BRANCH-1",
