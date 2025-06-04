@@ -12,7 +12,7 @@ export default class HudQuest extends HudCommon {
         this.position = {
             unfocused: {
                 note: {
-                    x: this.view.left + this.view.margin.left + 40,
+                    x: this.view.left + this.view.margin.left + 64,
                     y: this.view.bottom - (this.view.margin.bottom + 32),
                     width: 96,
                 }
@@ -23,8 +23,11 @@ export default class HudQuest extends HudCommon {
     addQuest (quest) {
         if (this.quest == null) {
             this.quest = {note: null, text: null};
-            this.quest.note = this.factory.makeNote(this.position.unfocused.note.x, this.position.unfocused.note.y);
+            
             this.quest.text = this.makeBitmapText(this.position.unfocused.note.x + 8, this.position.unfocused.note.y + 16, this.position.unfocused.note.width,8, 'SkeleNotebook');
+
+            this.quest.note = this.factory.makeNote(this.position.unfocused.note.x, this.position.unfocused.note.y);
+
             this.quest.text.setTintFill(0x465e62);
             this.quest.text.setAlpha(0.8);
             this.quest.text.setLineSpacing(11);
@@ -33,6 +36,7 @@ export default class HudQuest extends HudCommon {
             // replace ’ with \'
             quest = quest.replace('’', '\'');
             this.quest.text.setText(quest);
+            this.quest.note.setSize(this.quest.text.displayWidth + 16, this.quest.text.displayHeight + 32);
             this.openQuest();
         }
     }

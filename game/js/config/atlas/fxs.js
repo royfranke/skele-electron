@@ -19,6 +19,22 @@
                                       ],
                   repeat: 3
               },
+                          CARBONATION: {
+                  name: 'Carbonation',
+                  slug: 'CARBONATION',
+                  frames: [
+                                          'CARBONATION-1',
+                                          'CARBONATION-2',
+                                          'CARBONATION-3',
+                                          'CARBONATION-4',
+                                          'CARBONATION-5',
+                                          'CARBONATION-6',
+                                          'CARBONATION-7',
+                                          'CARBONATION-8',
+                                          'CARBONATION-9'
+                                      ],
+                  repeat: -1
+              },
                           CARD_DECK_RUFFLE_LOW: {
                   name: 'Card Deck Ruffle Low',
                   slug: 'CARD_DECK_RUFFLE_LOW',
@@ -116,6 +132,31 @@
                                       ],
                   repeat: 0
               },
+                          COOTIE_CATCHER_1: {
+                  name: 'Cootie Catcher Open 1',
+                  slug: 'COOTIE_CATCHER_1',
+                  frames: [
+                                          'COOTIE_CATCHER_1-1',
+                                          'COOTIE_CATCHER_1-2',
+                                          'COOTIE_CATCHER_1-3',
+                                          'COOTIE_CATCHER_1-4',
+                                          'COOTIE_CATCHER_1-5',
+                                          'COOTIE_CATCHER_1-6'
+                                      ],
+                  repeat: 1
+              },
+                          COOTIE_CATCHER_2: {
+                  name: 'Cootie Catcher Open 2',
+                  slug: 'COOTIE_CATCHER_2',
+                  frames: [
+                                          'COOTIE_CATCHER_2-1',
+                                          'COOTIE_CATCHER_2-2',
+                                          'COOTIE_CATCHER_2-3',
+                                          'COOTIE_CATCHER_2-4',
+                                          'COOTIE_CATCHER_2-5'
+                                      ],
+                  repeat: 1
+              },
                           DANDELION_CLOUD: {
                   name: 'Dandelion Cloud',
                   slug: 'DANDELION_CLOUD',
@@ -203,6 +244,34 @@
                                       ],
                   repeat: -1
               },
+                          HEART_FULL_TO_HALF: {
+                  name: 'Heart Full to Half',
+                  slug: 'HEART_FULL_TO_HALF',
+                  frames: [
+                                          'HEART_FULL_TO_HALF-1',
+                                          'HEART_FULL_TO_HALF-2',
+                                          'HEART_FULL_TO_HALF-3',
+                                          'HEART_FULL_TO_HALF-4',
+                                          'HEART_FULL_TO_HALF-5'
+                                      ],
+                  repeat: 0
+              },
+                          HEART_HALF_TO_EMPTY: {
+                  name: 'Heart Half to Empty',
+                  slug: 'HEART_HALF_TO_EMPTY',
+                  frames: [
+                                          'HEART_HALF_TO_EMPTY-1',
+                                          'HEART_HALF_TO_EMPTY-2',
+                                          'HEART_HALF_TO_EMPTY-3',
+                                          'HEART_HALF_TO_EMPTY-4',
+                                          'HEART_HALF_TO_EMPTY-5',
+                                          'HEART_HALF_TO_EMPTY-6',
+                                          'HEART_HALF_TO_EMPTY-7',
+                                          'HEART_HALF_TO_EMPTY-8',
+                                          'HEART_HALF_TO_EMPTY-9'
+                                      ],
+                  repeat: 0
+              },
                           SELECTOR_INVALID_: {
                   name: 'Invalid Selector',
                   slug: 'SELECTOR_INVALID_',
@@ -213,6 +282,18 @@
                                           'SELECTOR_INVALID_-4'
                                       ],
                   repeat: -1
+              },
+                          MAP_ICON: {
+                  name: 'Map Icon',
+                  slug: 'MAP_ICON',
+                  frames: [
+                                          'MAP_ICON-1',
+                                          'MAP_ICON-2',
+                                          'MAP_ICON-3',
+                                          'MAP_ICON-4',
+                                          'MAP_ICON-5'
+                                      ],
+                  repeat: 0
               },
                           COIN_5_: {
                   name: 'Nickel',

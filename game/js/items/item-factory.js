@@ -2,6 +2,7 @@ import Item from "../object/item.js";
 import ItemBag from "../object/item-bag.js";
 import ItemContainer from "../object/item-container.js";
 import ITEMS from "../config/atlas/items.js";
+import STATUSES from "../config/atlas/statuses.js";
 /* Item Factory Class */
 
 export default class ItemFactory {
@@ -9,6 +10,17 @@ export default class ItemFactory {
     constructor(scene) {
         this.scene = scene;
         this.valid_items = ITEMS;
+        this.statuses = STATUSES;
+    }
+
+    statusInfo (slug) {
+        if (this.statuses.hasOwnProperty(slug)) {
+            return this.statuses[slug]; 
+        }
+        else {
+            console.warn("Nonvalid status slug passed in item factory: "+slug);
+            return false;
+        }
     }
 
     itemInfo (slug) {
@@ -47,6 +59,14 @@ export default class ItemFactory {
                 var item = new ItemContainer(this.scene,this.valid_items[slug],items);
             }
             else {
+
+                if (this.valid_items[slug].default_status != '') {
+                    var status = this.statusInfo(this.valid_items[slug].default_status);
+                    if (status) {
+                        this.valid_items[slug].status = status;
+                    }
+                }
+
                 var item = new Item(this.scene,this.valid_items[slug]);
             }
             

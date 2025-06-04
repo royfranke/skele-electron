@@ -396,6 +396,176 @@ FOXTAIL: {
 },                                                   }
 },
       
+GIANT_CANE: {
+  name: 'Giant Cane',
+  scientific_name: 'Arundo donax',
+  slug: 'GIANT_CANE',
+  bounding: {
+    h:3, 
+    w:2
+  },
+  base: {
+    h:1, 
+    w:2,
+    x:0, 
+    y:2
+  },
+  sprite: {
+    h:48, 
+    w:32,
+    x:0, 
+    y:0
+  },
+  size: {
+    h:8, 
+    w:12
+  },
+  offset: {
+    x:8, 
+    y:20
+  },
+  stages: {
+    
+                                      
+            stage_31:{
+  stage_id: 31,
+  start: 0,
+  end: 12,
+  next_stage_id: 32,
+  name: 'Vegetative Growth 1',
+  day_length: 12,
+  frames: [
+        {
+      id: 1244,
+      filename: 'GIANT_CANE_31_1244',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},            
+                                                
+            stage_32:{
+  stage_id: 32,
+  start: 13,
+  end: 25,
+  next_stage_id: 33,
+  name: 'Vegetative Growth 2',
+  day_length: 12,
+  frames: [
+        {
+      id: 1245,
+      filename: 'GIANT_CANE_32_1245',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_33:{
+  stage_id: 33,
+  start: 26,
+  end: 38,
+  next_stage_id: 34,
+  name: 'Vegetative Growth 3',
+  day_length: 12,
+  frames: [
+        {
+      id: 1246,
+      filename: 'GIANT_CANE_33_1246',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_34:{
+  stage_id: 34,
+  start: 39,
+  end: 51,
+  next_stage_id: 35,
+  name: 'Vegetative Growth 4',
+  day_length: 12,
+  frames: [
+        {
+      id: 1247,
+      filename: 'GIANT_CANE_34_1247',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_35:{
+  stage_id: 35,
+  start: 52,
+  end: 142,
+  next_stage_id: 36,
+  name: 'Vegetative Growth 5',
+  day_length: 90,
+  frames: [
+        {
+      id: 1248,
+      filename: 'GIANT_CANE_35_1248',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_36:{
+  stage_id: 36,
+  start: 143,
+  end: 155,
+  next_stage_id: 37,
+  name: 'Reproductive Growth',
+  day_length: 12,
+  frames: [
+        {
+      id: 1249,
+      filename: 'GIANT_CANE_36_1249',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_37:{
+  stage_id: 37,
+  start: 156,
+  end: 276,
+  next_stage_id: 38,
+  name: 'Dormancy',
+  day_length: 120,
+  frames: [
+        {
+      id: 1250,
+      filename: 'GIANT_CANE_37_1250',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_38:{
+  stage_id: 38,
+  start: 277,
+  end: 301,
+  next_stage_id: 34,
+  name: 'Vegetative Growth Year 2',
+  day_length: 24,
+  frames: [
+        {
+      id: 1251,
+      filename: 'GIANT_CANE_38_1251',
+      width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                   }
+},
+      
 WOOD_SORREL: {
   name: 'Wood Sorrel',
   scientific_name: 'Oxalis',

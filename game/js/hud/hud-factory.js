@@ -13,6 +13,7 @@ export default class HudFactory {
             STACK:100200,
             BUBBLE:100250,
             FX:100300,
+            NOTEBOOK:100350,
             TEXT:100400,
        };
     }
@@ -63,11 +64,13 @@ export default class HudFactory {
 
 
     makeNotebook (_x,_y) {
-        return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.SLOT).setScrollFactor(0);
+        return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.NOTEBOOK).setScrollFactor(0);
     }
 
     makeNote (_x,_y) {
-        return this.scene.add.image(_x,_y, 'UI','NOTE').setOrigin(0).setDepth(this.depth.NOTE).setScrollFactor(0);
+        let note_block = this.makeBlock(_x,_y, 32, 32, 'NOTE_NINESLICE');
+        note_block.setDepth(this.depth.NOTE);
+        return note_block;
     }
 
     makeBlock (_x,_y, width=32, height=32, frameName='HAND_UNFOCUSED') {

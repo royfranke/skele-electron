@@ -20,15 +20,23 @@ export default class HudMap extends HudCommon {
         this.selected = 0;
         this.position = {
             unfocused: {
+                slot: {
+                    x: (this.view.left + this.view.margin.left),
+                    y: this.view.bottom - (this.view.margin.bottom + 72)
+                },
+                icon: {
+                    x: (this.view.left + this.view.margin.left) + 8,
+                    y: this.view.bottom - (this.view.margin.bottom + 72) + 8
+                },
                 keytip: {
                     x: (this.view.left + this.view.margin.left),
-                    y: this.view.bottom - (this.view.margin.bottom + 80)
+                    y: this.view.bottom - (this.view.margin.bottom + 120)
                 },
                 board: {
                     x: this.view.right - (this.view.margin.right*10),
                     y: this.view.top + (this.view.margin.top*3.5),
                     width: 144,
-                    height: this.view.height - (this.view.margin.top*3.5 + this.view.margin.bottom)
+                    height: this.view.height - (this.view.margin.top*3.5 + this.view.margin.bottom + 40)
                 },
                 map: {
                     x: this.view.left + (this.view.margin.left*7.5),
@@ -52,8 +60,16 @@ export default class HudMap extends HudCommon {
                 y: this.position.unfocused.keytip.y
             }
         };
+        this.addMap();
 
     }
+
+    addMap () {
+        this.side = {};
+        this.side.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, 'BAG_UNFOCUSED');
+        this.side.icon = this.scene.manager.fx.handleHudFX('MAP_ICON', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
+    }
+
 
     setMapState(state) {
         /// FOCUSED, UNFOCUSED
@@ -67,6 +83,10 @@ export default class HudMap extends HudCommon {
         this.board = this.makeBlock(this.position.unfocused.board.x, this.position.unfocused.board.y,this.position.unfocused.board.width, this.position.unfocused.board.height,'BLOCK_MID_CREAM');
         this.frame = this.makeBlock(this.position.unfocused.board.x, this.position.unfocused.board.y,this.position.unfocused.board.width, this.position.unfocused.board.height,'BLOCK_SHALLOW_GREEN_FRAME');
 
+        this.side.icon.destroy();
+        this.side.icon = this.scene.manager.fx.handleHudFX('MAP_ICON', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
+        this.side.block.setFrame('BAG_FOCUSED');
+
         this.drawMap();
         this.drawMapMenu();
         this.manager.listen();
@@ -77,6 +97,7 @@ export default class HudMap extends HudCommon {
         this.manager.destroyListeners();
         this.board.destroy();
         this.frame.destroy();
+        this.side.block.setFrame('BAG_UNFOCUSED');
         this.setMapState('UNFOCUSED');
         this.scene.manager.hud.hudFocusHints.setKeyTip('MAP', false);
     }

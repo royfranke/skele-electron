@@ -140,7 +140,48 @@ export default class HudPockets extends HudCommon {
             y: 16 + (slot_y * 36),
         };
         let slot = this.makeBlock((this.view.right - slotMargin.x), (this.view.top + slotMargin.y));
+        this.addSlotInteraction(slot_x, slot_y, slot);
         return slot;
+    }
+
+    addSlotInteraction(slot_x, slot_y, block) {
+
+            // Mouse/Touch Input
+            block.setInteractive(); 
+            var self = this;
+            block.on('pointerover', function (pointer) {
+                // This function will be called when the coinpurse block is clicked or tapped
+                
+            });
+            block.on('pointerdown', function (pointer) {
+                // This function will be called when the slot is clicked or tapped
+                if (self.scene.manager.getFocus().name != 'POCKETS') {
+                    //self.scene.manager.closeChest();
+                    self.scene.manager.setFocus('POCKETS');
+                    /// Set a brief timeout to allow focus to be set 
+                    self.scene.time.addEvent({
+                        delay:50,
+                        callback: () => {
+                            self.scene.manager.hud.hudInput.setSelectedPocket(slot_x);
+                            self.scene.manager.hud.hudInput.setSelectedContents(slot_y);
+                            self.refreshDisplay();
+                        }
+                    });
+                    
+
+                }
+                else {
+                    /// If slot_x is already selected, close pockets instead of selecting contents
+                    if (self.scene.manager.hud.hudInput.selected.pocket == slot_x && self.scene.manager.hud.hudInput.selected.contents == slot_y) {
+                        self.scene.manager.setFocus('PLAYER');
+                        return;
+                    }
+                    self.scene.manager.hud.hudInput.setSelectedPocket(slot_x);
+                            self.scene.manager.hud.hudInput.setSelectedContents(slot_y);
+                            self.refreshDisplay();
+                }
+            });
+        
     }
 
     addArrow(slot_x, slot_y) {
@@ -279,7 +320,6 @@ export default class HudPockets extends HudCommon {
 
         this.scene.manager.hud.hudFocusHints.setKeyTip('POCKETS', true);
         this.setPocketsState('OPEN');
-        this.scene.manager.hud.hudInput.setSelectedPocket(0);
         this.refreshDisplay();
     }
 
@@ -486,6 +526,10 @@ export default class HudPockets extends HudCommon {
     clearPocketDisplay() {
         this.clearActions();
         this.destroyPocketTextBlock();
+        if (this.pocket_icon_tween != null) {
+            this.pocket_icon_tween.stop();
+            this.pocket_icon_tween = null;
+        }
     }
 
 
@@ -588,6 +632,17 @@ export default class HudPockets extends HudCommon {
                     this.slots[slot_y][slot_x].icon.destroy();
                     this.slots[slot_y][slot_x].icon = this.addIcon(slot_x, slot_y, state, frameName);
 
+                    if (selected.pocket == r && selected.contents == i && this.state == 'OPEN') {
+                    /// Get the icon for this slot and bobble it
+                        this.pocket_icon_tween = this.scene.tweens.add({
+                            targets: [this.slots[slot_y][slot_x].icon],
+                            y: '-=3',
+                            duration: 400,
+                            ease: 'Sine.easeIn',
+                            loop: -1,
+                            yoyo: true
+                        });
+                    }
 
                     if (this.slots[slot_y][slot_x].icon_contents != null) {
                         this.slots[slot_y][slot_x].icon_contents.destroy();

@@ -17,13 +17,13 @@ export default class Object {
         this.slotted = [];
         this.shell = false;
         this.shell_sprite = null;
+        this.loots = [];
         
         // Imbue this object with the config object info
         this.info = object;
         this.announcer = null;
         this.announcements = [];
         this.name = this.info.name;
-
         // If there are varieties, randomize variety
         // this is also where variety vs. animation frames should be set
         if (this.info.states.length > 0) {
@@ -44,6 +44,9 @@ export default class Object {
                 validStates: action.validStates,
                 object: self
             });
+        });
+        this.info.loot.forEach(function (loot) {
+            self.loots.push(loot);
         });
         this.world_actions = actions;
         this.last_state = null;
@@ -235,6 +238,14 @@ export default class Object {
             this.scene.manager.hud.hudSound.play('DING_DING');
         }
 
+
+        if (this.loots.length > 0) {
+            this.loots.forEach(loot => {
+                if (action == loot.actionTrigger.toUpperCase()) {
+                    self.scene.manager.loot.processLootOdds(loot, self.tile_x, self.tile_y);
+                }
+            });
+        }
     }
 
     setCollider () {

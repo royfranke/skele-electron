@@ -4,6 +4,7 @@ import HudCoinpurse from "./hud-coinpurse.js"; //Extends HudCommon
 import HudDialog from "./hud-dialog.js";
 import HudDisplay from "./hud-display.js";
 import HudFocusHints from "./hud-focus-hints.js";
+import HudHealth from "./hud-health.js";    //Extends HudCommon
 import HudInput from "./hud-input.js";
 import HudKeyboard from "./hud-keyboard.js"; //Extends HudCommon
 import HudQuest from "./hud-quest.js"; //Extends HudCommon
@@ -51,7 +52,7 @@ export default class HudManager {
         console.log("Initializing game HUD");
         this.hudThinking = new HudThinking(this.scene);
         this.hudChest = new HudChest(this.scene);
-
+        this.hudHealth = new HudHealth(this.scene);
         this.hudWatch = new HudWatch(this.scene);
         this.hudNotebook = new HudNotebook(this.scene);
         this.hudMap = new HudMap(this.scene);

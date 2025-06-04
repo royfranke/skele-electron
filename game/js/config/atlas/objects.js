@@ -31,6 +31,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'CHECK OUT', stateTrigger: 'PRINTING_RECEIPT', validStates: ['DEFAULT']
           }],
@@ -77,6 +79,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [                {
               name: 'DEFAULT',
@@ -121,6 +125,8 @@ const OBJECTS = {
         varieties: 16,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'ON',        states: [                {
               name: 'OFF',
@@ -168,6 +174,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -206,6 +214,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'FULL',        states: [                {
               name: 'FULL',
@@ -250,6 +260,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -288,6 +300,8 @@ const OBJECTS = {
         varieties: 9,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'STILL',        states: [                {
               name: 'SWAYING',
@@ -338,6 +352,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -376,6 +392,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'ON',        states: [                {
               name: 'OFF',
@@ -423,6 +441,8 @@ const OBJECTS = {
         varieties: 7,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -461,6 +481,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -499,6 +521,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -537,6 +561,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -575,6 +601,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -613,6 +641,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -651,6 +681,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -689,6 +721,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -727,6 +761,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -765,6 +801,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -803,6 +841,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -841,6 +881,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -879,6 +921,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -917,6 +961,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -955,6 +1001,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -993,6 +1041,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1031,6 +1081,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1069,6 +1121,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1107,6 +1161,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1145,6 +1201,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1183,6 +1241,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1221,6 +1281,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1259,6 +1321,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1297,6 +1361,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1335,6 +1401,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1373,6 +1441,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1411,6 +1481,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1449,6 +1521,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1487,6 +1561,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1525,6 +1601,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1563,6 +1641,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1601,6 +1681,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1639,6 +1721,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1677,6 +1761,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1715,6 +1801,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1753,6 +1841,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1791,6 +1881,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1829,6 +1921,8 @@ const OBJECTS = {
         varieties: 12,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1867,6 +1961,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
           }],
@@ -1946,6 +2042,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -1984,6 +2082,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -2049,6 +2149,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -2110,6 +2212,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2148,6 +2252,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2186,6 +2292,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2224,6 +2332,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'RING', stateTrigger: 'RINGING', validStates: ['DEFAULT']
           }],
@@ -2271,6 +2381,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2309,6 +2421,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2347,6 +2461,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2385,6 +2501,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2423,6 +2541,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2461,6 +2581,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2499,6 +2621,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2537,6 +2661,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2575,6 +2701,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2613,6 +2741,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2651,6 +2781,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2689,6 +2821,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2727,6 +2861,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2765,6 +2901,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2803,6 +2941,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2841,6 +2981,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['HARVESTABLE']
           }],
@@ -2890,6 +3032,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -2928,6 +3072,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
           }],
@@ -2976,6 +3122,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
           }],
@@ -3024,6 +3172,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'LOOK UNDER', stateTrigger: 'LOOKING_UNDER', validStates: ['DEFAULT']
           }],
@@ -3072,6 +3222,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3110,6 +3262,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3148,6 +3302,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3186,6 +3342,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3224,6 +3382,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3288,6 +3448,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3352,6 +3514,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3416,6 +3580,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3480,6 +3646,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3538,6 +3706,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3596,6 +3766,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3654,6 +3826,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -3712,6 +3886,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3750,6 +3926,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3788,6 +3966,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3826,6 +4006,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3864,6 +4046,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3902,6 +4086,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3940,6 +4126,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -3978,6 +4166,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4016,6 +4206,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4054,6 +4246,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4092,6 +4286,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4130,6 +4326,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4168,6 +4366,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4206,6 +4406,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4244,6 +4446,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4282,6 +4486,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4320,6 +4526,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4358,6 +4566,8 @@ const OBJECTS = {
         varieties: 8,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT']
           }, {
@@ -4412,6 +4622,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4450,6 +4662,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4488,6 +4702,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4526,6 +4742,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4564,6 +4782,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4602,6 +4822,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4640,6 +4862,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4678,6 +4902,8 @@ const OBJECTS = {
         varieties: 0,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4716,6 +4942,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4754,6 +4982,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4792,6 +5022,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4830,6 +5062,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4868,6 +5102,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4906,6 +5142,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4944,6 +5182,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -4982,6 +5222,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5040,6 +5282,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5098,6 +5342,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5156,6 +5402,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5214,6 +5462,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 1,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5272,6 +5522,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -5310,6 +5562,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -5348,6 +5602,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'ON',        states: [                {
               name: 'OFF',
@@ -5395,6 +5651,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -5433,6 +5691,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5498,6 +5758,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5563,6 +5825,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -5628,6 +5892,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -5666,6 +5932,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -5704,6 +5972,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'TURN EAST', stateTrigger: 'FACING_EAST', validStates: ['FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
@@ -5766,6 +6036,8 @@ const OBJECTS = {
         varieties: 16,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -5804,6 +6076,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'FLIP ONTO BOTTOM', stateTrigger: 'FLIPPING_ONTO_BOTTOM', validStates: ['FLIPPED_ONTO_TOP']
           }, {
@@ -5863,6 +6137,8 @@ const OBJECTS = {
         varieties: 8,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT']
           }, {
@@ -5917,6 +6193,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'FLICKERING',        states: [                {
               name: 'OFF',
@@ -5964,6 +6242,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'ON',        states: [                {
               name: 'OFF',
@@ -6011,6 +6291,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
           }, {
@@ -6093,6 +6375,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6131,6 +6415,8 @@ const OBJECTS = {
         varieties: 8,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6169,6 +6455,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6235,6 +6523,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6301,6 +6591,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
           }, {
@@ -6379,6 +6671,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6417,6 +6711,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6455,6 +6751,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6493,6 +6791,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6531,6 +6831,20 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                    {
+            id: 1,
+            name: 'Payphone Coin Return',
+            slug: 'PAYPHONE_RETURN',
+            odds: 0.25,
+            money: 25,
+            actionTrigger: 'check coin return',
+            items: [],
+            occurrences: 1,
+            occurrencePeriod: 'HOUR',
+            occurrencePer: 'OBJ_INSTANCE'
+          }
+                  ],
         actions: [ {
             name: 'ANSWER', stateTrigger: 'ANSWERING', validStates: ['RINGING']
           }, {
@@ -6617,6 +6931,8 @@ const OBJECTS = {
         varieties: 8,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT']
           }, {
@@ -6671,6 +6987,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6709,6 +7027,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6747,6 +7067,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'SLEEP', stateTrigger: 'SLEEPING', validStates: ['CURLED_UP']
           }, {
@@ -6801,6 +7123,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [                {
               name: 'DEFAULT',
@@ -6848,6 +7172,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6886,6 +7212,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6924,6 +7252,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -6962,6 +7292,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7000,6 +7332,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7038,6 +7372,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7076,6 +7412,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7114,6 +7452,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7152,6 +7492,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7190,6 +7532,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7256,6 +7600,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7322,6 +7668,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7360,6 +7708,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7398,6 +7748,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7436,6 +7788,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'TURN EAST', stateTrigger: 'FACING_EAST', validStates: ['FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
@@ -7498,6 +7852,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7536,6 +7892,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7574,6 +7932,8 @@ const OBJECTS = {
         varieties: 16,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'CLOSED',        states: [                {
               name: 'OPEN',
@@ -7624,6 +7984,8 @@ const OBJECTS = {
         varieties: 16,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'CLOSED',        states: [                {
               name: 'OPEN',
@@ -7674,6 +8036,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'SLEEP', stateTrigger: 'SLEEPING', validStates: ['CURLED_UP']
           }, {
@@ -7728,6 +8092,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7766,6 +8132,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7804,6 +8172,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7842,6 +8212,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7880,6 +8252,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7918,6 +8292,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7956,6 +8332,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -7994,6 +8372,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8032,6 +8412,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8070,6 +8452,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8108,6 +8492,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8146,6 +8532,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8184,6 +8572,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8222,6 +8612,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8260,6 +8652,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8298,6 +8692,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8336,6 +8732,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8374,6 +8772,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8412,6 +8812,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8450,6 +8852,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8488,6 +8892,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8526,6 +8932,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8564,6 +8972,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8602,6 +9012,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8640,6 +9052,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8678,6 +9092,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8716,6 +9132,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8754,6 +9172,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8792,6 +9212,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8830,6 +9252,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8868,6 +9292,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8906,6 +9332,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8944,6 +9372,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -8982,6 +9412,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9020,6 +9452,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9058,6 +9492,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9096,6 +9532,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9134,6 +9572,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9172,6 +9612,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9210,6 +9652,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9248,6 +9692,8 @@ const OBJECTS = {
         varieties: 13,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
           }, {
@@ -9333,6 +9779,8 @@ const OBJECTS = {
         varieties: 6,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
           }],
@@ -9412,6 +9860,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9450,6 +9900,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -9488,6 +9940,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'RED',        states: [                {
               name: 'OFF',
@@ -9538,6 +9992,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'GREEN',        states: [                {
               name: 'OFF',
@@ -9588,6 +10044,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'GREEN',        states: [                {
               name: 'OFF',
@@ -9638,8 +10096,41 @@ const OBJECTS = {
         varieties: 7,
         solid: 1,
         portal: 0,
-        actions: [],
-        default_state: 'DEFAULT',        states: [],
+        loot: [
+                    {
+            id: 2,
+            name: 'Rummage in Trash Drum',
+            slug: 'RUMMAGE_TRASH_DRUM',
+            odds: 0.5,
+            money: 0,
+            actionTrigger: 'rummage',
+            items: ['APPLE_TRASH','BANANA_TRASH','PLASTIC_BAG_1','PLASTIC_BAG_2','SODA_RED_TRASH','BUS_TICKET_PUNCH','PAPER_2O_','SPRAY_PAINT_EMPTY','POPSICLE_STICK','SODA_GREEN_TRASH','SODA_BLUE_TRASH','BEER_TRASH','GLASS_BOTTLE_3','GREEN_GLASS_BOTTLE_3','GLASS_TRIANGLE','GREEN_GLASS_TRIANGLE','GREEN_GLASS_HEART','EMPTY_SODA_F_CUP','EMPTY_PUDDING_CUP','EMPTY_NOODLE_CUP','WISHBONE'],
+            occurrences: 3,
+            occurrencePeriod: 'HOUR',
+            occurrencePer: 'OBJ_INSTANCE'
+          }
+                  ],
+        actions: [ {
+            name: 'RUMMAGE', stateTrigger: 'RUMMAGING', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [                {
+              name: 'MISSING_TRASH_BAG',
+              transition: 'false',
+              frames: ['TRASH_DRUM-1',]},                {
+              name: 'TRASH_BAG_EMPTY',
+              transition: 'false',
+              frames: ['TRASH_DRUM-2',]},                {
+              name: 'TRASH_BAG_FULL',
+              transition: 'false',
+              frames: ['TRASH_DRUM-6',]},            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['TRASH_DRUM-5',]
+              },               {
+              name: 'RUMMAGING',
+              transition: 'DEFAULT',
+              frames: ['TRASH_DRUM-5', 'TRASH_DRUM-6', 'TRASH_DRUM-7', 'TRASH_DRUM-6', ]
+              },],
 
           interactions: {
                                             group_17: {
@@ -9704,6 +10195,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -9769,6 +10262,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -9834,6 +10329,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -9899,6 +10396,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -9964,6 +10463,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -10029,6 +10530,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -10094,6 +10597,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -10159,6 +10664,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -10224,6 +10731,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'SIGNAL_HAND_WALK',        states: [                {
               name: 'SIGNAL_WALK_HAND',
@@ -10274,6 +10783,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'SIGNAL_WARNING_HAND',        states: [                {
               name: 'SIGNAL_WALK_HAND',
@@ -10324,6 +10835,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'JUNE',        states: [                {
               name: 'JUNE',
@@ -10371,6 +10884,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10409,6 +10924,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10447,6 +10964,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10485,6 +11004,8 @@ const OBJECTS = {
         varieties: 3,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10523,6 +11044,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10561,6 +11084,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10599,6 +11124,8 @@ const OBJECTS = {
         varieties: 2,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'ON',        states: [                {
               name: 'OFF',
@@ -10643,6 +11170,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10681,6 +11210,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10719,6 +11250,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10757,6 +11290,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10795,6 +11330,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10833,6 +11370,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10871,6 +11410,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10909,6 +11450,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10947,6 +11490,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -10985,6 +11530,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11023,6 +11570,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11061,6 +11610,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11099,6 +11650,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11137,6 +11690,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11175,6 +11730,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11213,6 +11770,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11251,6 +11810,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11289,6 +11850,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11327,6 +11890,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11365,6 +11930,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11403,6 +11970,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11441,6 +12010,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11479,6 +12050,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11517,6 +12090,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11555,6 +12130,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11593,6 +12170,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11631,6 +12210,8 @@ const OBJECTS = {
         varieties: 1,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11669,6 +12250,8 @@ const OBJECTS = {
         varieties: 4,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
           }, {
@@ -11734,6 +12317,8 @@ const OBJECTS = {
         varieties: 20,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
 
@@ -11772,6 +12357,8 @@ const OBJECTS = {
         varieties: 8,
         solid: 0,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'READ', stateTrigger: 'READING', validStates: ['DEFAULT']
           }, {
@@ -11826,6 +12413,8 @@ const OBJECTS = {
         varieties: 5,
         solid: 1,
         portal: 0,
+        loot: [
+                  ],
         actions: [ {
             name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
           }, {

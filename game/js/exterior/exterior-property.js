@@ -380,7 +380,7 @@ export default class PropertyLine {
 
                 }
                 else if (exists == 2) {
-                    //this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'DANDELION', Phaser.Math.RND.between(1, 44));
+                    this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'DANDELION', Phaser.Math.RND.between(1, 44));
                 }
                 else if (exists == 3) {
                     //this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'WOOD_SORREL', Phaser.Math.RND.between(1, 44));

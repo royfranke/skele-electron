@@ -20,14 +20,14 @@ export default class HudFocusHints extends HudCommon {
             {
                 char: 'N',
                 focus: 'NOTEBOOK',
-                x: (this.view.left + this.view.margin.left),
-                y: this.view.bottom - (this.view.margin.bottom + 56)
+                x: (this.view.left + this.view.margin.left) + 40,
+                y: this.view.bottom - (this.view.margin.bottom + 18)
             },
             {
                 char: 'M',
                 focus: 'MAP',
-                x: (this.view.left + this.view.margin.left),
-                y: this.view.bottom - (this.view.margin.bottom + 80)
+                x: (this.view.left + this.view.margin.left) + 40,
+                y: this.view.bottom - (this.view.margin.bottom + 58)
             },
         ];
 

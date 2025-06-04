@@ -67,12 +67,14 @@ export default class HudCoinpurse extends HudCommon {
 
     addCoinPurse() {
         this.coinPurse.block = this.makeBlock(this.position.focused.x, this.position.focused.y, 32, 32, 'BAG_UNFOCUSED');
-        this.coinPurse.icon = this.makeIcon(this.position.focused.x, this.position.focused.y, 'UI', 'COINPURSE_CLOSED');
+        this.coinPurse.icon = this.makeIcon(this.position.focused.x, this.position.focused.y, 'UI', 'COINPURSE_CLOSED'); 
+        this.setupCoinpurseInteraction();
     }
 
     addHiddenCoinPurse() {
         this.coinPurse.block = this.makeBlock(this.position.unfocused.x, this.position.unfocused.y, 32, 32, 'BAG_UNFOCUSED');
         this.coinPurse.icon = this.makeIcon(this.position.unfocused.x, this.position.unfocused.y, 'UI', 'COINPURSE_CLOSED');
+        this.setupCoinpurseInteraction();
     }
 
     plungeCoinPurse() {
@@ -99,7 +101,25 @@ export default class HudCoinpurse extends HudCommon {
         }
     }
 
-
+    setupCoinpurseInteraction() {
+        // Mouse/Touch Input
+        this.coinPurse.block.setInteractive(); 
+        var self = this;
+        this.coinPurse.block.on('pointerover', function (pointer) {
+            // This function will be called when the coinpurse block is clicked or tapped
+            
+        });
+        this.coinPurse.block.on('pointerdown', function (pointer) {
+            // This function will be called when the menu block is clicked or tapped
+            if (self.scene.manager.getFocus().name != 'POCKETS') {
+                self.scene.manager.closeChest();
+                self.scene.manager.setFocus('POCKETS');
+            }
+            else {
+                self.scene.manager.setFocus('PLAYER');  
+            }
+        });
+    }
 
     closeCoinpurse() {
         this.clearCoinpurseTell();
@@ -160,7 +180,6 @@ export default class HudCoinpurse extends HudCommon {
         let flag_height = flag_text.getTextBounds().global.height + 20;
         let flag_width = flag_text.getTextBounds().global.width + 28;
         let flag = this.makeBlock(_x, _y, flag_width, flag_height, 'BLOCK_MID_LILAC');
-
 
         return { flag: flag, text: flag_text, coins: coins };
 

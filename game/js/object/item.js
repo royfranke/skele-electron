@@ -7,9 +7,18 @@ export default class Item {
         this.registered = false;
         this.tile_x = 0;
         this.tile_y = 0;
+        this.onSurface = false;
+        this.active_fx = null;
+        this.hasFX = false;
         this.sprite = null;
         this.stackCount = 1;
         this.info = item;
+        if (this.info.status != undefined && this.info.status != null) {
+            // TODO: Make this check for fx_start, fx, and fx_end
+            if (this.info.status.fx_start != '' || this.info.status.fx != '' || this.info.status.fx_end != '') {
+                this.hasFX = true;
+            }
+        }
         this.name = this.info.name;
         this.actions = ['PUT AWAY'];
         this.world_actions = [{ action: 'PICK UP', object: this }];
@@ -85,6 +94,19 @@ export default class Item {
                     delay: 500,
                     callback: ()=>{
                         this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
+                        if (this.hasFX) {
+                            if (this.info.status.fx_end != '') {
+                                this.active_fx.destroy();
+                                this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx_end, this.tile_x * 16, this.tile_y * 16);
+
+                                this.active_fx.once('animationcomplete', () => {
+                                    this.active_fx.destroy();
+                                });
+                            }
+                            else {
+                                this.active_fx.destroy();
+                            }
+                        }
                     }
                 });
 
@@ -142,6 +164,22 @@ export default class Item {
             this.createFooting();
             let locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
             let ground = locale.ground.getGround(this.tile_x, this.tile_y);
+            if (this.hasFX) {
+                if (this.info.status.fx_start != '') {
+                    this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx_start, x_pixels, y_pixels);
+
+                    this.active_fx.once('animationcomplete', () => {
+                        this.active_fx.destroy();
+                        if (this.info.status.fx != '') {
+                        this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx, x_pixels, y_pixels);
+                        }
+                    });
+                }
+                else {
+                    this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx, x_pixels, y_pixels);
+                }
+                
+            }
             // utilities
             //locale.ground.util.updateFooting(ground,this);
         /// put footmask here - item has landed

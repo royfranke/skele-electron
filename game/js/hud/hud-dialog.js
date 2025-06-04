@@ -178,8 +178,8 @@ export default class HudDialog extends HudCommon {
         }
         else {
             /// Place an X in the corner of the dialog to indicate close
-            let _x = this.view.left + 308;
-            let _y = this.view.bottom - (24 + this.view.margin.bottom);
+            let _x = this.dialogBox.block.x + this.dialogBox.block.displayWidth - 32;
+            let _y = this.dialogBox.block.y + this.dialogBox.block.displayHeight - 24;
 
             var close_block = this.makeHUDDownArrow(_x , _y, 'YELLOW');
             
@@ -240,12 +240,13 @@ export default class HudDialog extends HudCommon {
     }
 
     makeDialogBox () {
-        let _x = this.view.left + 112;
+        let _x = this.view.left + this.view.margin.left + 88;
         let _y = this.view.bottom - (96 + this.view.margin.bottom);
         let block = this.makeBlock(_x,_y, 224, 96, 'BLOCK_MID_BEIGE');
+        let portrait_block = this.makeBlock(_x - 40,_y, 32, 32, 'BLOCK_MID_YELLOW_FAT_BORDER');
         let frame = this.makeBlock(_x,_y, 224, 96, 'BLOCK_SHALLOW_YELLOW_FRAME');
         let dialog = this.makeBitmapText(_x + 16,_y + 16, 194, '', 8);
-        return {block: block, dialog: dialog, frame: frame};
+        return {block: block, dialog: dialog, frame: frame, portrait_block: portrait_block};
     }
 
     makeReplyBox (content=[{'text': 'Yes', 'next': 0},{'text': 'No', 'next': 0}]) {
@@ -313,6 +314,9 @@ export default class HudDialog extends HudCommon {
             if (this.dialogBox != null) {
                 if (this.dialogBox.block != undefined) {
                     this.dialogBox.block.destroy();
+                }
+                if (this.dialogBox.portrait_block != undefined) {
+                    this.dialogBox.portrait_block.destroy();
                 }
                 if (this.dialogBox.dialog != undefined) {
                     this.dialogBox.dialog.destroy();

@@ -35,7 +35,7 @@ export default class HudThinking extends HudCommon {
     makeThinkingBubble(text, _x, _y) {
         let thought = this.makeWorldBitmapText(_x + 1, _y - 10, 112, 8, 'SkeleNotebook');
         thought.setText(text);
-        let bubble = this.makeWorldBlock(_x, _y, thought.displayWidth + 20, thought.displayHeight + 20, 'TRANSMISSION_BUBBLE');
+        let bubble = this.makeWorldBlock(_x, _y, thought.displayWidth + 20, thought.displayHeight + 20, 'SPEECH_BUBBLE_ROUND');
 
 
         return { bubble: bubble, thought: thought};
