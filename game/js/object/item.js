@@ -8,13 +8,13 @@ export default class Item {
         this.tile_x = 0;
         this.tile_y = 0;
         this.onSurface = false;
+        this.owner = null;
         this.active_fx = null;
         this.hasFX = false;
         this.sprite = null;
         this.stackCount = 1;
         this.info = item;
         if (this.info.status != undefined && this.info.status != null) {
-            // TODO: Make this check for fx_start, fx, and fx_end
             if (this.info.status.fx_start != '' || this.info.status.fx != '' || this.info.status.fx_end != '') {
                 this.hasFX = true;
             }
@@ -28,6 +28,21 @@ export default class Item {
 
     initialize () {
 
+    }
+
+
+    setOwner(owner) {
+        this.owner = owner;
+        if (this.verbose) console.log('Item '+this.info.slug+' set owner to '+owner);
+        if (owner != null && owner != 'noone' && owner != 'SKELE') {
+            /// Look for the action in World actions called "PICK UP"
+            var action = this.world_actions.find(a => a.action === 'PICK UP');
+            if (action) {
+                action.action = 'BROWSE';
+            } else {
+                console.warn('No "PICK UP" action found in world actions.');
+            }
+        }
     }
 
     setName (name) {
@@ -56,6 +71,9 @@ export default class Item {
         if (action == 'PICK UP') {
             this.pickupItem();
         }
+        if (action == 'BROWSE') {
+            this.scene.manager.setFocus('STORE');
+        }
     }
 
     isStackable(amount=0) {
@@ -64,6 +82,14 @@ export default class Item {
 
     updateStackCount (amount) {
         this.stackCount += amount;
+        this.updateStackAction();
+        if (this.sprite != null) {
+            this.sprite.setTexture('ITEMS', this.getStackIcon());
+        }
+    }
+
+    setStackCount (count) {
+        this.stackCount = count;
         this.updateStackAction();
         if (this.sprite != null) {
             this.sprite.setTexture('ITEMS', this.getStackIcon());

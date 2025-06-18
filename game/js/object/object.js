@@ -223,6 +223,10 @@ export default class Object {
             }
         }
 
+        if (action == 'CHECK OUT' || action == 'CHECKOUT') {
+            this.scene.manager.hud.hudStore.checkout();
+        }
+
         
         if (action == 'SAVE') {
             console.log("Saving game");

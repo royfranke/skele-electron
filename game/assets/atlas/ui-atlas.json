@@ -1952,7 +1952,7 @@
 	},    
       {
 		"filename": "NOTE",
-		"frame": {"x":32,"y":208,"w":112,"h":112 },
+		"frame": {"x":64,"y":208,"w":112,"h":112 },
     "spriteSourceSize": {"x":0,"y":0,"w":112,"h":112 },
 		"sourceSize": {"w":112,"h":112 }
 	},    
@@ -2162,13 +2162,13 @@
 	},    
       {
 		"filename": "NOTEBOOK_CLOSED_RED",
-		"frame": {"x":272,"y":208,"w":128,"h":144 },
+		"frame": {"x":304,"y":208,"w":128,"h":144 },
     "spriteSourceSize": {"x":0,"y":0,"w":128,"h":144 },
 		"sourceSize": {"w":128,"h":144 }
 	},    
       {
 		"filename": "NOTEBOOK_OPEN",
-		"frame": {"x":144,"y":208,"w":128,"h":144 },
+		"frame": {"x":176,"y":208,"w":128,"h":144 },
     "spriteSourceSize": {"x":0,"y":0,"w":128,"h":144 },
 		"sourceSize": {"w":128,"h":144 }
 	},    
@@ -2255,6 +2255,12 @@
 		"frame": {"x":80,"y":144,"w":16,"h":16 },
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16 },
 		"sourceSize": {"w":16,"h":16 }
+	},    
+      {
+		"filename": "SPEECH_BUBBLE_UPPER_RIGHT",
+		"frame": {"x":32,"y":208,"w":32,"h":32 },
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32 },
+		"sourceSize": {"w":32,"h":32 }
 	},    
       {
 		"filename": "STREET_SIGN",

@@ -62,12 +62,15 @@
         }
         else if (yielded[0] == 0) {
             this.scene.manager.hud.hudThinking.tellBrain('There\'s nothing here.');
+            this.scene.manager.hud.hudHealth.modifyHealth(-0.5);
         }
         else { /// It's an item
             /// Try to add item to pockets
             var result = this.scene.manager.itemManager.newItemToPockets(yielded[0]);
             if (!result) {
                 this.scene.manager.hud.hudThinking.tellBrain('My pockets are full.');
+                ///Temporary for testing Hearts/HP
+                this.scene.manager.hud.hudHealth.modifyHealth(0.5);
             }
         }
     }

@@ -188,6 +188,7 @@ import KEYLIGHT from "../config/key-light.js";
                     var new_item = this.scene.manager.itemManager.newItemToWorld(pos_x, pos_y, product_info.slug);
                     new_item.sprite.setDepth(((_y + .5) * 16) + 1);
                     new_item.updateStackCount(product_info.stack - 1);
+                    new_item.setOwner(this.config.listing.slug);
 
                     switch (slots) {
                         case 3: new_item.sprite.y = new_item.sprite.y + 4;

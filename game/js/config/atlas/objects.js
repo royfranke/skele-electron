@@ -303,7 +303,7 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [],
-        default_state: 'STILL',        states: [                {
+        default_state: 'SWAYING',        states: [                {
               name: 'SWAYING',
               transition: 'false',
               frames: ['BEADED_CURTAIN_BODEGA-1','BEADED_CURTAIN_BODEGA-2','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-5','BEADED_CURTAIN_BODEGA-3','BEADED_CURTAIN_BODEGA-4','BEADED_CURTAIN_BODEGA-2',]},                {

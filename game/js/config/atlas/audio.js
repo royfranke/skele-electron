@@ -8,8 +8,24 @@ const PRELOAD_SOUND = [
         FILES: ['arrow-single-select.wav']
     },
       {
+        NAME: 'BACK_BUTTON',
+        FILES: ['ZBack.wav']
+    },
+      {
         NAME: 'BAG_RUMMAGE',
         FILES: ['bag-rummage-1.wav','bag-rummage-2.wav','bag-rummage-3.wav']
+    },
+      {
+        NAME: 'BUY_ADD',
+        FILES: ['BuyAdd.wav']
+    },
+      {
+        NAME: 'BUY_ARROW',
+        FILES: ['BuyArrow.wav']
+    },
+      {
+        NAME: 'BUY_DECREASE',
+        FILES: ['BuyDecrease.wav']
     },
       {
         NAME: 'CARD_CLICK',

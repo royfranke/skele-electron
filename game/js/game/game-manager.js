@@ -43,7 +43,7 @@ export default class GameManager {
     initializeGame () {
         /// Use this method to gather managers that are not needed for the tutorial/new game
         this.time = new TimeManager();
-        this.verbose = false;
+        this.verbose = true;
         
         this.loot = new LootManager(this.scene);
         this.knowledge = new KnowledgeManager(this.scene);
@@ -98,8 +98,14 @@ export default class GameManager {
         if (focus_string == 'NOTEBOOK') {
             this.hud.setState('NOTEBOOK_FOCUSED');
         }
+        if (focus_string == 'PAYMENT') {
+            this.hud.setState('PAYMENT_FOCUSED');
+        }
         if (focus_string == 'SOCKS') {
             this.hud.setState('SOCKS_FOCUSED');
+        }
+        if (focus_string == 'STORE') {
+            this.hud.setState('STORE_FOCUSED');
         }
         if (focus_string == 'ZENER') {
             this.hud.setState('ZENER_FOCUSED');
@@ -167,7 +173,7 @@ export default class GameManager {
                     this.setFocus('PLAYER');  
                 }
             }
-            if (input.BACK.TAP) {
+            if (input.BACK.TAP && focus.name != 'PLAYER') {
                 this.scene.events.emit('INPUT_BACK_'+focus.name);
                 if (focus.name == 'POCKETS') {
                     this.setFocus('PLAYER');   
@@ -178,12 +184,20 @@ export default class GameManager {
                 if (focus.name == 'MAP') {
                     this.setFocus('PLAYER');  
                 }
+                if (focus.name == 'PAYMENT') {
+                    this.setFocus('PLAYER');  
+                }
                 if (focus.name == 'DIALOG') {
+                    this.setFocus('PLAYER');  
+                }
+                if (focus.name == 'STORE') {
                     this.setFocus('PLAYER');  
                 }
                 if (focus.name == 'QUOTE') {
                     this.setFocus('QUOTE');  
                 }
+
+                this.hud.hudSound.play('BACK_BUTTON');
             }
 
             if (input.UP.TAP) {

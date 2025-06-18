@@ -10,6 +10,7 @@ import HudKeyboard from "./hud-keyboard.js"; //Extends HudCommon
 import HudQuest from "./hud-quest.js"; //Extends HudCommon
 import HudMap from "./hud-map.js"; //Extends HudCommon
 import HudNotebook from "./hud-notebook.js"; //Extends HudCommon
+import HudPayment from "./hud-payment.js"; //Extends HudCommon
 import HudPocket from "./hud-pocket.js";
 import HudPockets from "./hud-pockets.js"; //Extends HudCommon
 import HudSound from "./hud-sound.js";
@@ -17,6 +18,7 @@ import HudState from "./hud-state.js";
 import HudThinking from "./hud-thinking.js"; //Extends HudCommon
 import HudWatch from "./hud-watch.js"; //Extends HudCommon
 import HudZener from "./hud-zener.js"; //Extends HudCommon
+import HudStore from "./hud-store.js"; //Extends HudCommon
 import HudSocks from "./hud-socks.js"; //Extends HudCommon
 
 /*
@@ -60,6 +62,8 @@ export default class HudManager {
         this.hudAction = new HudAction(this.scene);
         this.hudZener = new HudZener(this.scene);
         this.hudSocks = new HudSocks(this.scene);
+        this.hudStore = new HudStore(this.scene);
+        this.hudPayment = new HudPayment(this.scene);
         this.hudDisplay = new HudDisplay(this.scene);
 
         this.hudCoinpurse.addHiddenCoinPurse();
@@ -285,6 +289,27 @@ export default class HudManager {
             /// Close Dialog
             if (this.state.name != 'DIALOG_FOCUSED' && this.last_state.name == 'DIALOG_FOCUSED') {
                 this.hudDialog.clearDialog();
+            }
+
+            /// Open Store Interface
+            if (this.state.name == 'STORE_FOCUSED' && this.last_state != null && this.last_state.name != 'STORE_FOCUSED') {
+                this.hudStore.openStore();
+            }
+
+            /// Close Store Interface
+            if (this.state.name != 'STORE_FOCUSED' && this.last_state != null && this.last_state.name == 'STORE_FOCUSED') {
+                this.hudStore.closeStore();
+            }
+
+
+            /// Open Payment Interface
+            if (this.state.name == 'PAYMENT_FOCUSED' && this.last_state != null && this.last_state.name != 'PAYMENT_FOCUSED') {
+                this.hudPayment.openInterface();
+            }
+
+            /// Close Payment Interface
+            if (this.state.name != 'PAYMENT_FOCUSED' && this.last_state != null && this.last_state.name == 'PAYMENT_FOCUSED') {
+                this.hudPayment.closeInterface();
             }
 
         }

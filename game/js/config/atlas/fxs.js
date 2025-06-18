@@ -293,7 +293,7 @@
                                           'MAP_ICON-4',
                                           'MAP_ICON-5'
                                       ],
-                  repeat: 0
+                  repeat: 2
               },
                           COIN_5_: {
                   name: 'Nickel',
@@ -488,6 +488,21 @@
                                           'SPARKLE_-6',
                                           'SPARKLE_-7',
                                           'SPARKLE_-8'
+                                      ],
+                  repeat: 0
+              },
+                          SPARKLE_SINGLE_BRIGHT: {
+                  name: 'Sparkle Single Bright',
+                  slug: 'SPARKLE_SINGLE_BRIGHT',
+                  frames: [
+                                          'SPARKLE_SINGLE_BRIGHT-1',
+                                          'SPARKLE_SINGLE_BRIGHT-2',
+                                          'SPARKLE_SINGLE_BRIGHT-3',
+                                          'SPARKLE_SINGLE_BRIGHT-4',
+                                          'SPARKLE_SINGLE_BRIGHT-5',
+                                          'SPARKLE_SINGLE_BRIGHT-6',
+                                          'SPARKLE_SINGLE_BRIGHT-7',
+                                          'SPARKLE_SINGLE_BRIGHT-8'
                                       ],
                   repeat: 0
               },

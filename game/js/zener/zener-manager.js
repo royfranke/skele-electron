@@ -43,6 +43,7 @@ export default class ZenerManager {
             /// TODO: Handle Sound variation in hudsound
             var sound_var = Phaser.Math.RND.between(1, 3);
             this.scene.manager.hud.hudSound.play('CARD_CLICK_' + sound_var);
+            this.scene.manager.hud.hudZener.bobbleArrow();
             this.makeGuess();
         }
     }
@@ -98,6 +99,7 @@ export default class ZenerManager {
         this.scene.events.addListener('INPUT_LEFT_ZENER', callback_left, this);
         this.scene.events.addListener('INPUT_RIGHT_ZENER', callback_right, this);
         this.scene.events.addListener('INPUT_SELECT_ZENER', callback_select, this);
+        this.scene.events.addListener('INPUT_UP_ZENER', callback_select, this);
         this.scene.events.addListener('INPUT_BACK_ZENER', callback_back, this);
    }
 

@@ -20,6 +20,11 @@ const HUD_STATES = {
         input: false,
         visible: true
     },
+    PAYMENT_FOCUSED: {
+        name: 'PAYMENT_FOCUSED',
+        input: true,
+        visible: true
+    },
     POCKETS_FOCUSED: {
         name: 'POCKETS_FOCUSED',
         input: true,
@@ -27,6 +32,11 @@ const HUD_STATES = {
     },
     SOCKS_FOCUSED: {
         name: 'SOCKS_FOCUSED',
+        input: true,
+        visible: true
+    },
+    STORE_FOCUSED: {
+        name: 'STORE_FOCUSED',
         input: true,
         visible: true
     },

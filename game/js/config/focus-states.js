@@ -23,11 +23,17 @@ const FOCUS_STATES = {
     MAP: {
         name: 'MAP'
     },
+    PAYMENT: {
+        name: 'PAYMENT'
+    },
     QUOTE: {
         name: 'QUOTE'
     },
     SOCKS: {
         name: 'SOCKS'
+    },
+    STORE: {
+        name: 'STORE'
     },
     ZENER: {
         name: 'ZENER'

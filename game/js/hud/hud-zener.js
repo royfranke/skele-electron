@@ -20,11 +20,13 @@ export default class HudZener extends HudCommon {
             y: this.view.top+56,
             width: 272,
             height: 176,
-            frameName: 'BLOCK_MID_LILAC_BORDER',
+            frameName: 'BLOCK_MID_LILAC_FAT_BORDER',
             frame: {
-                frameName: 'BLOCK_SHALLOW_SAPPHIRE_FRAME'
+                frameName: 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME'
             },
             block: null,
+            arrow_left: null,
+            arrow_right: null
         };
         this.results = {
             positive: ['Yes!!','Uh-huh!','That\'s it!','You got it!'],
@@ -49,7 +51,7 @@ export default class HudZener extends HudCommon {
         ];
         this.board = {
             deck: {
-                x: this.boardView.x + 16,
+                x: this.boardView.x + 12,
                 y: this.boardView.y + 16,
                 slot: {
                     frameName: 'BAG_FOCUSED',
@@ -63,7 +65,7 @@ export default class HudZener extends HudCommon {
             },
 
             draw: {
-                x: this.boardView.x + 56,
+                x: this.boardView.x + 48,
                 y: this.boardView.y + 16,
                 slot: {
                     frameName: 'BAG_SELECTED',
@@ -156,7 +158,7 @@ export default class HudZener extends HudCommon {
                     fontSize: 24,
                     width: this.boardView.width - 48,
                     x: this.boardView.x + Math.round(this.boardView.width/2),
-                    y: this.boardView.y + this.boardView.height - 24,
+                    y: this.boardView.y + this.boardView.height - 20,
                     object: null,
                     blockFrame: '',
                     block: null
@@ -167,7 +169,7 @@ export default class HudZener extends HudCommon {
                     font: 'SkeleScrawl',
                     fontSize: 12,
                     width: 48,
-                    x: this.boardView.x + (this.boardView.width-120),
+                    x: this.boardView.x + (this.boardView.width-152),
                     y: this.boardView.y + 32,
                     blockFrame: 'BLOCK_MID_MOONSTONE',
                     object: null,
@@ -179,7 +181,7 @@ export default class HudZener extends HudCommon {
                     font: 'SkeleScrawl',
                     fontSize: 12,
                     width: 48,
-                    x: this.boardView.x + (this.boardView.width-48),
+                    x: this.boardView.x + (this.boardView.width-84),
                     y: this.boardView.y + 32,
                     blockFrame: 'BLOCK_MID_MOONSTONE',
                     object: null,
@@ -192,11 +194,23 @@ export default class HudZener extends HudCommon {
                     fontSize: 16,
                     width: this.boardView.width - 48,
                     x: this.boardView.x + Math.round(this.boardView.width/2),
-                    y: this.boardView.y + 72,
+                    y: this.boardView.y + 70,
                     object: null,
                     block: null,
-                    blockFrame: 'BLOCK_SHALLOW_WHITE',
-                }
+                    blockFrame: 'SPEECH_BUBBLE_UPPER_RIGHT',
+                },
+                {
+                    name: 'speaker',
+                    displayName: '',
+                    font: 'SkeleScrawl',
+                    fontSize: 12,
+                    width: 16,
+                    x: this.boardView.x + (this.boardView.width-28),
+                    y: this.boardView.y + 32,
+                    blockFrame: 'BLOCK_MID_YELLOW_FAT_BORDER',
+                    object: null,
+                    block: null,
+                },
             ],
         };
     }
@@ -220,6 +234,7 @@ export default class HudZener extends HudCommon {
             this.board.choices.forEach((choice) => {
                 choice.slot.block.destroy();
                 choice.icon.icon.destroy();
+                choice.arrow.destroy();
             });
             this.board.score.forEach((score) => {
                 score.object.destroy();
@@ -227,6 +242,9 @@ export default class HudZener extends HudCommon {
                     score.block.destroy();
                 }
             });
+            this.boardView.arrow_left.destroy();
+            this.boardView.arrow_right.destroy();
+            this.destroySlip(this.back_button);
             this.manager.resetDeck();
             this.manager.destroyListeners();
             this.open = false;
@@ -270,17 +288,34 @@ export default class HudZener extends HudCommon {
                 if (index == selected) {
                     this.bobbleChoice(choice);
                     choice.slot.block.setFrame('ITEM_SELECTED');
+                    choice.arrow.setVisible(true);
                 } else {
                     choice.slot.block.setFrame('ITEM_FOCUSED');
+                    choice.arrow.setVisible(false);
                 }
             });
         }
         else {
             this.board.choices.forEach((choice, index) => {
-                choice.slot.block.setFrame('ITEM_UNFOCUSED');
+                if (choice.slot.block != null) {
+                    choice.slot.block.setFrame('ITEM_UNFOCUSED');
+                }
             });
         }
         
+    }
+
+    bobbleArrow () {
+        this.board.choices.forEach((choice, index) => {
+            var tween = this.scene.add.tween({
+                targets: choice.arrow,
+                y: choice.arrow.y - 4,
+                duration: 450,
+                yoyo: true,
+                ease: 'Bounce.inOut',
+                repeat: 1
+            });
+        });
     }
 
     bobbleChoice (choice) {
@@ -322,8 +357,11 @@ export default class HudZener extends HudCommon {
         var targets = [];
         this.board.choices.forEach((choice) => {
             choice.icon.icon.destroy();
+            choice.arrow.destroy();
             targets.push(choice.slot.block);
         });
+        this.boardView.arrow_left.setVisible(false);
+        this.boardView.arrow_right.setVisible(false);
 
         var tween = this.scene.tweens.add({
             targets: targets,
@@ -345,7 +383,8 @@ export default class HudZener extends HudCommon {
     }
 
     tallyScore () {
-        this.board.score[0].object.setFont('SkeleTalk');
+        this.board.score[0].object.setFont('SkeleHype');
+        this.board.score[0].object.setRightAlign();
         this.board.score[0].object.setFontSize(16);
         this.scene.tweens.add({
             targets: this.board.score[0].object,
@@ -358,19 +397,19 @@ export default class HudZener extends HudCommon {
             {
                 at: 500,
                 run: () => {
-                    this.setHype('BEST STREAK: '+this.reference_score.streak_best);
+                    this.setHype('BEST . . . '+this.reference_score.streak_best);
                 }
             },
             {
                 at: 1500,
                 run: () => {
-                    this.setHype('BEST STREAK: '+this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct);
+                    this.setHype('BEST . . . '+this.reference_score.streak_best + '\nHITS . . . ' + this.reference_score.correct);
                 }
             },
             {
                 at: 2500,
                 run: () => {
-                    this.setHype('BEST STREAK: '+this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct + '\nFINAL: ' +(this.reference_score.streak_best*this.reference_score.correct));
+                    this.setHype('BEST . . . '+this.reference_score.streak_best + '\nHITS . . . ' + this.reference_score.correct + '\nFINAL . . . ' +(this.reference_score.streak_best*this.reference_score.correct));
                 }
             }
         ]);
@@ -403,14 +442,17 @@ export default class HudZener extends HudCommon {
                 this.setInstructions(this.resultMessage(result.result));
                 
                 this.scene.time.delayedCall(500, () => {
-                    this.board.draw.icon.icon.anims.play('TURN_CARD_FROM_'+result.card.toUpperCase(), false);
-                    this.board.draw.icon.icon.once('animationcomplete', () => {
-                        var anim = this.board.draw.icon.icon.anims.play('TURN_CARD_TO_BACK', false);
-                        anim.once('animationcomplete', () => {
-                            anim.setFrame('TURN_CARD_TO_FACE-1');
-                            this.drawShuffle();
+                    if (this.board.draw.icon.icon != undefined) {
+                        this.board.draw.icon.icon.anims.play('TURN_CARD_FROM_'+result.card.toUpperCase(), false);
+                        this.board.draw.icon.icon.once('animationcomplete', () => {
+                            var anim = this.board.draw.icon.icon.anims.play('TURN_CARD_TO_BACK', false);
+                            anim.once('animationcomplete', () => {
+                                anim.setFrame('TURN_CARD_TO_FACE-1');
+                                this.drawShuffle();
+                            });
                         });
-                    });
+                    }
+                    
                 });
 
             });
@@ -423,6 +465,9 @@ export default class HudZener extends HudCommon {
 
         this.boardView.frame.block = this.makeBlock(this.boardView.x, this.boardView.y, this.boardView.width, this.boardView.height, this.boardView.frame.frameName);
 
+        this.boardView.arrow_left = this.makeHUDLeftArrow(this.boardView.x + 16, this.board.choices[0].y + 8, 'SHADOW');
+        this.boardView.arrow_right = this.makeHUDRightArrow(this.boardView.x + this.boardView.width - 32, this.board.choices[0].y + 8, 'SHADOW');
+
         this.board.deck.slot.block = this.makeBlock(this.board.deck.x, this.board.deck.y, 32, 32, this.board.deck.slot.frameName);
         this.board.deck.icon.icon = this.makeIcon(this.board.deck.x, this.board.deck.y - 16, this.board.deck.icon.textureName, this.board.deck.icon.frameName);
 
@@ -432,6 +477,9 @@ export default class HudZener extends HudCommon {
         for (let i = 0; i < 5; i++) {
             this.board.choices[i].slot.block = this.makeBlock(this.board.choices[i].x, this.board.choices[i].y, 32, 32, this.board.choices[i].slot.frameName);
             this.board.choices[i].icon.icon = this.makeIcon(this.board.choices[i].x, this.board.choices[i].y, this.board.choices[i].icon.textureName, this.board.choices[i].icon.frameName);
+
+            this.board.choices[i].arrow = this.makeHUDUpArrow(this.board.choices[i].x + 8, this.board.choices[i].y + 34, 'SHADOW');
+            this.board.choices[i].arrow.setVisible(false);
         }
 
         for (let i = 0; i < this.board.score.length; i++) {;
@@ -447,7 +495,13 @@ export default class HudZener extends HudCommon {
             this.board.score[i].object.setLineSpacing(2);
             
             if (this.board.score[i].blockFrame != '') {
-                this.board.score[i].block = this.makeBlock(this.board.score[i].x, this.board.score[i].y, this.board.score[i].width + 16, 32, this.board.score[i].blockFrame).setOrigin(.5).setScrollFactor(0).setDepth(100100);
+                if (this.board.score[i].blockFrame != 'SPEECH_BUBBLE_UPPER_RIGHT') {
+                    this.board.score[i].block = this.makeBlock(this.board.score[i].x, this.board.score[i].y, this.board.score[i].width + 16, 32, this.board.score[i].blockFrame).setOrigin(.5).setScrollFactor(0).setDepth(100100);
+                }
+                else {
+                    this.board.score[i].block = this.makeWorldBlock(this.board.score[i].x, this.board.score[i].y - 4, this.board.score[i].width + 16, 32, 'SPEECH_BUBBLE_UPPER_RIGHT');
+                    this.board.score[i].block.setOrigin(.5).setScrollFactor(0).setDepth(100100);
+                }
             }
 
         }
@@ -455,6 +509,8 @@ export default class HudZener extends HudCommon {
         this.setMisses();
         this.drawSelected(0);
 
+        this.back_button = this.makeBackButton(this.boardView.x - 8, this.boardView.y, 'CLOSE');
+        
         this.manager.listen();
     }
 

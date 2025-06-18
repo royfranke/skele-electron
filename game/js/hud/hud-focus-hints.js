@@ -14,7 +14,7 @@ export default class HudFocusHints extends HudCommon {
             {
                 char: 'I',
                 focus: 'POCKETS',
-                x: (this.view.right - 160),
+                x: (this.view.right - 156),
                 y: this.view.top + 24
             },
             {

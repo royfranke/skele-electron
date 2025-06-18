@@ -22,6 +22,12 @@ export default class PlayerCoinpurse {
         this.updateTotal();
     }
 
+    replaceContents (contents) {
+        this.contents.PAPER = contents.PAPER;
+        this.contents.COIN = contents.COIN;
+        this.updateTotal();
+    }
+
     availableCoins (coin_amount_array) {
         let available = { ...this.contents.COIN };
         const coinRef = this.coinRef;

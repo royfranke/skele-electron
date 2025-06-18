@@ -12,10 +12,10 @@ export default class HudChest extends HudCommon {
     initialize() {
         this.position = {
             x: this.view.right - 168,
-            y: this.view.top + 128,
+            y: this.view.top + 88,
             container: {
                 x: this.view.right - 128,
-                y: this.view.top + 128,
+                y: this.view.top + 88,
                 width: 112,
                 height: 128,
                 text: {
@@ -31,7 +31,7 @@ export default class HudChest extends HudCommon {
             },
             slip: {
                 x: this.view.right - this.view.margin.right,
-                y: this.view.top + 108,
+                y: this.view.top + 64,
             }
         };
         this.chest = null;

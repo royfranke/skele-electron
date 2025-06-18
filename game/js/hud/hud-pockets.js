@@ -203,7 +203,7 @@ export default class HudPockets extends HudCommon {
         return { x: this.view.right - (slot.displayWidth) - (slotMargin.x), y: this.view.top + (slotMargin.y) };
     }
 
-    setContentsIcon(slot_x, new_icon) {
+    setContentsIcon(slot_x, new_icon={info: null}) {
         if (this.slots[1][slot_x].icon != null) {
             this.slots[1][slot_x].icon.destroy();
             if (this.slots[1][slot_x].icon_contents != null) {
@@ -229,7 +229,7 @@ export default class HudPockets extends HudCommon {
             type = (pocket[state].info.type == 'BAG') ? 'BAG' : 'ITEM';
         }
         if (slot_y < 2) {
-            this.slots[slot_y][slot_x].slot.setFrame(type + '_' + status);
+            this.slots[slot_y][slot_x].slot.setTexture('UI',type + '_' + status);
         }
         else {
             this.setArrowColor(slot_x, status);
@@ -300,7 +300,7 @@ export default class HudPockets extends HudCommon {
 
     setArrowColor(slot_x, status) {
         let arrow = this.getArrow(slot_x);
-        arrow.setFrame('BAG_ARROW_' + status);
+        arrow.setTexture('UI','BAG_ARROW_' + status);
     }
 
     setSlotVisible(slot_x, slot_y, visible) {
@@ -386,7 +386,7 @@ export default class HudPockets extends HudCommon {
                 this.slots[0][i].drop.button_text.setVisible(false);
             }
             else {
-                this.slots[0][i].drop.block.setFrame(selected == true ? 'BLOCK_MID_BEIGE_RIGHT' : 'BLOCK_MID_LILAC');
+                this.slots[0][i].drop.block.setTexture('UI',selected == true ? 'BLOCK_MID_BEIGE_RIGHT' : 'BLOCK_MID_LILAC');
                 if (selected) {
                     this.slots[0][i].drop.button.setVisible(true);
                     this.slots[0][i].drop.button_text.setVisible(true);

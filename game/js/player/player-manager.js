@@ -180,6 +180,7 @@ export default class PlayerManager {
       return 60;
     }
     /// TODO: Separate curb/hop handling from getspeed
+    /*
     if (this.underfoot != undefined && this.underfoot.TYPE == 'CURB' && this.state.name != 'HOP') {
       this.setState('HOP');
       
@@ -188,6 +189,7 @@ export default class PlayerManager {
       }, 500);
       return 80;
     }
+      */
     if (this.underfoot == undefined) {
       return 60;
     }

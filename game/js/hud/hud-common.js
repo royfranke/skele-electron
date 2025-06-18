@@ -34,6 +34,10 @@ export default class HudCommon {
             let close_button = 'Z';
             return this.factory.makeSlip(_x, _y, text, close_button);
         }
+
+        makeSlip(_x,_y,text,button) {
+            return this.factory.makeSlip(_x, _y, text, button);
+        }
     
         makeBitmapText (_x,_y, width, size=24, font='SkeleButton') {
             return this.factory.makeBitmapText(_x, _y, width, size, font);
@@ -63,8 +67,20 @@ export default class HudCommon {
             return this.factory.makeHUDRightArrow(_x, _y, color);
         }
 
+        makeHUDLeftArrow(_x, _y, color = 'YELLOW') {
+            let arrow = this.factory.makeHUDRightArrow(_x, _y, color);
+            arrow.setFlipX(true);
+            return arrow;
+        }
+
         makeHUDDownArrow(_x, _y, color = 'YELLOW') {
             return this.factory.makeHUDDownArrow(_x, _y, color);
+        }
+
+        makeHUDUpArrow(_x, _y, color = 'YELLOW') {
+            let arrow = this.factory.makeHUDDownArrow(_x, _y, color);
+            arrow.setFlipY(true);
+            return arrow;
         }
 
         makeFX (fx_slug, _x, _y, delay=0) {
