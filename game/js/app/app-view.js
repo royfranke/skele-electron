@@ -11,7 +11,8 @@ export default class AppView {
     constructor(scene, view, state_name) {
         this.scene = scene;
         this.view = view;
-        this.version = '1.0.6';
+        this.tip = null;
+        this.version = '1.0.7';
         this.create(state_name);
     }
 
@@ -54,6 +55,9 @@ export default class AppView {
     }
 
     drawTip(tip) {
+        if (this.tip) {
+            this.tip.destroy();
+        }
         var width = (this.view.width/3) - (this.view.margin.left + this.view.margin.right);
         var _x = this.view.left + this.view.margin.left;
         var _y = this.view.bottom - (this.view.margin.bottom * 1.5);
@@ -62,12 +66,14 @@ export default class AppView {
         text_tip.setTintFill(0xFFFFFF);
         var tween = this.scene.add.tween({
             targets: [text_tip],
-            y: '-='+text_tip.displayHeight,
+            y: '-='+(text_tip.displayHeight + 16),
             alpha: 1,
             duration: 1000,
             ease: 'Sine.easeInOut',
             repeat: 0
         });
+
+        this.tip = text_tip;
     }
 
     addVersion () {
@@ -100,6 +106,13 @@ export default class AppView {
 
     createLoad() {
         this.addVersion();
+        var tip_message = [
+            '"Don\'t forget about your pile of homework."',
+            '"Keep good company."',
+            '"Keep your cool."'
+
+        ];
+        var tip = this.drawTip(Phaser.Math.RND.pick(tip_message));
         var total_height = this.view.bottom - (this.view.top + this.view.margin.top + (this.view.margin.bottom*2));
         var height = total_height/3;
         var left  = this.view.left + (this.view.margin.left*2) + 120;

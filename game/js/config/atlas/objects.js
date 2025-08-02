@@ -13,7 +13,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 8,
+        depth: 16,
         sprite: {
           h:16, 
           w:32,
@@ -334,7 +334,7 @@ const OBJECTS = {
           x:0, 
           y:3
         },
-        depth: 0,
+        depth: -4,
         sprite: {
           h:64, 
           w:80,
@@ -405,6 +405,86 @@ const OBJECTS = {
               name: 'FLICKERING',
               transition: 'false',
               frames: ['LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-2','LIT_SIGN_BONEDEGA-1','LIT_SIGN_BONEDEGA-2',]},],
+
+          interactions: {
+                                  },
+    },
+          STORE_COUNTER_BONEDEGA_1: {
+        name: 'Bonedega Store Counter 1',
+        slug: 'STORE_COUNTER_BONEDEGA_1', 
+        type: 'STORE_COUNTER',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:3
+        },
+        depth: -8,
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:48
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          STORE_COUNTER_BONEDEGA_3: {
+        name: 'Bonedega Store Counter 3',
+        slug: 'STORE_COUNTER_BONEDEGA_3', 
+        type: 'STORE_COUNTER',
+        bounding: {
+          h:4, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:3
+        },
+        depth: -8,
+        sprite: {
+          h:64, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:48
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -5700,7 +5780,13 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'CLOSED',        states: [            {
+        default_state: 'CLOSED',        states: [                {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []},                {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['MAILBOX_SHINY-5',]},            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['MAILBOX_SHINY-1',]
@@ -5716,11 +5802,7 @@ const OBJECTS = {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['MAILBOX_SHINY-5', 'MAILBOX_SHINY-4', 'MAILBOX_SHINY-3', 'MAILBOX_SHINY-2', 'MAILBOX_SHINY-1', ]
-              },                           {
-              name: 'LOOKING_INSIDE',
-              transition: 'OPEN',
-              frames: ['MAILBOX_SHINY-5', ]
-              },],            slots: 4,
+              },                           ],            slots: 4,
             items: [],
 
           interactions: {
@@ -5767,7 +5849,13 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'CLOSED',        states: [            {
+        default_state: 'CLOSED',        states: [                {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []},                {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['MAILBOX_SLEEK-5',]},            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['MAILBOX_SLEEK-1',]
@@ -5783,11 +5871,7 @@ const OBJECTS = {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['MAILBOX_SLEEK-5', 'MAILBOX_SLEEK-4', 'MAILBOX_SLEEK-3', 'MAILBOX_SLEEK-2', 'MAILBOX_SLEEK-1', ]
-              },                           {
-              name: 'LOOKING_INSIDE',
-              transition: 'OPEN',
-              frames: ['MAILBOX_SLEEK-5', ]
-              },],            slots: 4,
+              },                           ],            slots: 4,
             items: [],
 
           interactions: {
@@ -5834,7 +5918,13 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'CLOSED',        states: [            {
+        default_state: 'CLOSED',        states: [                {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []},                {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['MAILBOX_WEATHERED-5',]},            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['MAILBOX_WEATHERED-1',]
@@ -5850,11 +5940,7 @@ const OBJECTS = {
               name: 'CLOSING',
               transition: 'CLOSED',
               frames: ['MAILBOX_WEATHERED-5', 'MAILBOX_WEATHERED-4', 'MAILBOX_WEATHERED-3', 'MAILBOX_WEATHERED-2', 'MAILBOX_WEATHERED-1', ]
-              },                           {
-              name: 'LOOKING_INSIDE',
-              transition: 'OPEN',
-              frames: ['MAILBOX_WEATHERED-5', ]
-              },],            slots: 4,
+              },                           ],            slots: 4,
             items: [],
 
           interactions: {
@@ -7636,6 +7722,46 @@ const OBJECTS = {
 
             },                      },
     },
+          SIGN_POUR_YORICK: {
+        name: 'Pour Yorick Sign',
+        slug: 'SIGN_POUR_YORICK', 
+        type: 'STOREFRONT_FRAME_SIGN',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:1, 
+          w:10,
+          x:0, 
+          y:1
+        },
+        depth: -32,
+        sprite: {
+          h:32, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           PSYCHIC_STOREFRONT_SIGN: {
         name: 'Psychic Storefront Sign',
         slug: 'PSYCHIC_STOREFRONT_SIGN', 
@@ -8576,6 +8702,55 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          STAFFED_COUNTER_BONEDEGA: {
+        name: 'Staffed Bonedega Counter',
+        slug: 'STAFFED_COUNTER_BONEDEGA', 
+        type: 'STAFFED_COUNTER',
+        bounding: {
+          h:4, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:3
+        },
+        depth: -8,
+        sprite: {
+          h:64, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:48
+        },
+        varieties: 23,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'CHECK OUT', stateTrigger: 'PRINTING_RECEIPT', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [                {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['STAFFED_COUNTER_BONEDEGA-11','STAFFED_COUNTER_BONEDEGA-12','STAFFED_COUNTER_BONEDEGA-13','STAFFED_COUNTER_BONEDEGA-14','STAFFED_COUNTER_BONEDEGA-15','STAFFED_COUNTER_BONEDEGA-16','STAFFED_COUNTER_BONEDEGA-16','STAFFED_COUNTER_BONEDEGA-15','STAFFED_COUNTER_BONEDEGA-14','STAFFED_COUNTER_BONEDEGA-15','STAFFED_COUNTER_BONEDEGA-16','STAFFED_COUNTER_BONEDEGA-15','STAFFED_COUNTER_BONEDEGA-14','STAFFED_COUNTER_BONEDEGA-15','STAFFED_COUNTER_BONEDEGA-16','STAFFED_COUNTER_BONEDEGA-17','STAFFED_COUNTER_BONEDEGA-18','STAFFED_COUNTER_BONEDEGA-19',]},                           {
+              name: 'PRINTING_RECEIPT',
+              transition: 'DEFAULT',
+              frames: ['STAFFED_COUNTER_BONEDEGA-17', 'STAFFED_COUNTER_BONEDEGA-18', 'STAFFED_COUNTER_BONEDEGA-19', 'STAFFED_COUNTER_BONEDEGA-20', 'STAFFED_COUNTER_BONEDEGA-21', 'STAFFED_COUNTER_BONEDEGA-22', 'STAFFED_COUNTER_BONEDEGA-23', 'STAFFED_COUNTER_BONEDEGA-22', 'STAFFED_COUNTER_BONEDEGA-21', 'STAFFED_COUNTER_BONEDEGA-20', 'STAFFED_COUNTER_BONEDEGA-21', 'STAFFED_COUNTER_BONEDEGA-22', 'STAFFED_COUNTER_BONEDEGA-23', 'STAFFED_COUNTER_BONEDEGA-22', 'STAFFED_COUNTER_BONEDEGA-21', 'STAFFED_COUNTER_BONEDEGA-20', 'STAFFED_COUNTER_BONEDEGA-21', 'STAFFED_COUNTER_BONEDEGA-22', 'STAFFED_COUNTER_BONEDEGA-23', 'STAFFED_COUNTER_BONEDEGA-22', 'STAFFED_COUNTER_BONEDEGA-21', 'STAFFED_COUNTER_BONEDEGA-20', 'STAFFED_COUNTER_BONEDEGA-19', ]
+              },],
 
           interactions: {
                                   },

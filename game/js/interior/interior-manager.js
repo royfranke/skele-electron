@@ -129,6 +129,7 @@ import KEYLIGHT from "../config/key-light.js";
         var _x = 1;
         var _y = this.wall_height + 1;
         var has_front_door=false;
+        var shelf_count = 0;
         for (let i = 0; i < this.room.config.roomData.featureList.length; i++) {
             let feature = this.room.config.roomData.featureList[i];
             if (feature.slug != 'FRONTDOOR') {
@@ -143,7 +144,8 @@ import KEYLIGHT from "../config/key-light.js";
                 }
 
                 if (obj.info.type == 'SHOP_SHELVES') {
-                    this.setShelfProducts(_x + feature.x, _y + feature.y);
+                    obj.setShelfProducts(_x + feature.x, _y + feature.y, this.room.config.listing.sells, this.config.listing.slug, shelf_count*4);
+                    shelf_count++;
                 }
 
             }
@@ -157,53 +159,7 @@ import KEYLIGHT from "../config/key-light.js";
         }
     }
 
-    setShelfProducts (_x, _y) {
-        var slots = 4;
-        if (this.config.on_shelf == undefined) {
-            this.config.on_shelf = [];
-        }
 
-        this.config.listing.sells.forEach(product => {
-            var product_info = this.scene.manager.itemManager.itemInfo(product);
-            if (product_info == null) {
-                console.log('Product not found: ' + product);
-                return;
-            }
-            product_info.tags.forEach(tag => {
-                if (tag.category == 'Product Display' && tag.tag == 'shelf stable' && slots > 0 && this.config.on_shelf.indexOf(product_info.slug) == -1) {
-                    var pos_x = _x;
-                    var pos_y = _y;
-                    switch (slots) {
-                        case 1: pos_y = pos_y - 2;
-                        break;
-                        case 2: pos_x = pos_x + 1;
-                                pos_y = pos_y - 2;
-                        break;
-                        case 3: pos_y = pos_y - 1;
-                        break;
-                        case 4: pos_x = pos_x + 1;
-                                pos_y = pos_y - 1;
-                        break;
-                    }
-                    var new_item = this.scene.manager.itemManager.newItemToWorld(pos_x, pos_y, product_info.slug);
-                    new_item.sprite.setDepth(((_y + .5) * 16) + 1);
-                    new_item.updateStackCount(product_info.stack - 1);
-                    new_item.setOwner(this.config.listing.slug);
-
-                    switch (slots) {
-                        case 3: new_item.sprite.y = new_item.sprite.y + 4;
-                        break;
-                        case 4: new_item.sprite.y = new_item.sprite.y + 4;
-                        break;
-                    }
-
-                    this.config.on_shelf.push(product_info.slug);
-                    slots--;
-                }
-            });
-        });
-    }
-    
 
     setPortalFromSave (portal) {
         if (portal != undefined) {

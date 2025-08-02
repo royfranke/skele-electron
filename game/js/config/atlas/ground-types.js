@@ -20,6 +20,11 @@ const GROUND_TYPE = {
        ACTION: "pour out",
        FX: "CLOUD_DUST_",
        GROUND: "MULCH"
+      } ,
+         { ITEM: "SHOVEL",
+       ACTION: "dig",
+       FX: "CLOUD_DUST_",
+       GROUND: "MUD"
       } 
         ]
   },
@@ -83,7 +88,7 @@ const GROUND_TYPE = {
     TYPE: "GRASS",
     SPEED: "SLOWED",
     BITMAP: false,
-    EDGE: "FEATHER",
+    EDGE: "SOFT",
     COLLIDES: false,
     USEMASK: true,
     ZINDEX: 5,
@@ -373,6 +378,25 @@ const GROUND_TYPE = {
     CHILDPREF: 0,
     ANIMALPREF: 0,
     ACTIONS: [
+        ]
+  },
+  MUD: {
+    TYPE: "MUD",
+    SPEED: "SLOG",
+    BITMAP: true,
+    EDGE: "FEATHER",
+    COLLIDES: false,
+    USEMASK: false,
+    ZINDEX: 0,
+    ADULTPREF: 7,
+    CHILDPREF: 1,
+    ANIMALPREF: 1,
+    ACTIONS: [
+         { ITEM: "SHOVEL",
+       ACTION: "fill hole",
+       FX: "CLOUD_DUST_",
+       GROUND: "DIRT"
+      } 
         ]
   }
 };

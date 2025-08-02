@@ -126,6 +126,9 @@ export default class GameUtilities {
                             if (neighbor_tile_type == tile_type) {
                                 position_index = parseInt(position_index + this.BITMAP_CODE[place]);
                             }
+                            else if (tile_attr.FRIENDS != undefined && tile_attr.FRIENDS.includes(neighbor_tile_type)) {
+                                position_index = parseInt(position_index + this.BITMAP_CODE[place]);
+                            }
                             else {
                                 border_votes.push(neighbor_tile_type);
                             }

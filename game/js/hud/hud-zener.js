@@ -523,6 +523,17 @@ export default class HudZener extends HudCommon {
     }
 
     setHype (hype='') {
+        if (hype != '') {
+            /// Add FX sparkles in proximity to Hype
+            //this.makeFX('SPARKLE_SINGLE_BRIGHT', this.board.score[0].object.x, this.board.score[0].object.y,1000);
+            /// Set a random number for quantity of sparkles
+            var sparkle_count = this.reference_score.streak_best * Phaser.Math.Between(3, 8);
+            /// Set their positions in proximity to this.board.score[0].object with random offsets
+            for (let i=0; i<sparkle_count;i++) {
+                this.makeFX('SPARKLE_SINGLE_BRIGHT', this.board.score[0].object.x + Phaser.Math.Between(-64, 64), this.board.score[0].object.y + Phaser.Math.Between(-32, 32), 250*i);
+            }
+
+        }
         this.board.score[0].object.setText(hype);
     }
 

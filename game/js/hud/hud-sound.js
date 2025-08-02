@@ -39,7 +39,7 @@ export default class HudSound {
                 else {
                     new_sound.play();
                 }
-                return;
+                return new_sound;
                 
             }
         });

@@ -110,10 +110,17 @@ export default class Shop {
             }
 
             if (this.prop.listing.slug == 'LAUNDROMAT') {
-                let sign_background = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 4, 'SIGN_BACK_'+this.roll(['BLUE','GREEN','RED'])+'_10');
+                let sign_background = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 4, 'SIGN_BACK_GREEN_10');
                 sign_background.sprite.setDepth(sign_background.sprite.depth + 130);
                 this.sign = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 4, 'COIN_WASH_SIGN');
                 this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
+            }
+
+            if (this.prop.listing.slug == 'BAR') {
+                let sign_background = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 4, 'SIGN_BACK_BLUE_10');
+                sign_background.sprite.setDepth(sign_background.sprite.depth + 130);
+                this.sign = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 3, 'SIGN_POUR_YORICK');
+                this.sign.sprite.setDepth(sign_background.sprite.depth + 32);
             }
         }
 
@@ -339,7 +346,7 @@ export default class Shop {
         
         let spaces = width / 4;
 
-        for (var i = 0; i < spaces; i++) {
+        for (var i = 0; i < spaces - 1; i++) {
             this.drawParkingSpace(_x + (i*4), _y, facing);
         }
     }

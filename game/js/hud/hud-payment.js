@@ -16,6 +16,7 @@ export default class HudPayment extends HudCommon {
         this.manager = new PaymentManager(this.scene);
         this.state = 'UNFOCUSED';
         this.selected = 0;
+        this.payWith = [];
 
         this.position = {
             unfocused: {
@@ -183,15 +184,32 @@ export default class HudPayment extends HudCommon {
     }
 
     inputRight() {
-
     }
 
     inputDown() {
-
+        var content = this.scene.player.coinpurse.getTalliedTotal();
+        if (content.length > 0) {
+            this.selected++;
+            if (this.selected >= content.length) {
+                this.selected = 0;
+            }
+        }
+        else {
+            this.selected = 0;
+        }
     }
 
     inputUp() {
-
+        var content = this.scene.player.coinpurse.getTalliedTotal();
+        if (content.length > 0) {
+            this.selected--;
+            if (this.selected < 0) {
+                this.selected = content.length - 1;
+            }
+        }
+        else {
+            this.selected = 0;
+        }
     }
 
 
@@ -236,6 +254,13 @@ export default class HudPayment extends HudCommon {
 
         let flag_text = this.scene.add.bitmapText(_x + 20, _y + 10, 'SkeleTalk', content, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
         this.payment_components.push(flag_text);
+
+        let row_arrow_left = this.makeHUDLeftArrow(_x + 32, _y + 4, 'SHADOW');
+
+        let row_arrow_right = this.makeHUDRightArrow(_x + 72, _y + 4, 'SHADOW');
+        this.payment_components.push(row_arrow_left);
+        this.payment_components.push(row_arrow_right);
+        
     }
 
 

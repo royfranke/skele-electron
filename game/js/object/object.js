@@ -65,6 +65,58 @@ export default class Object {
         this.chestFunctions(items);
     }
 
+    setShelfProducts (_x, _y, items, owner, start_at=0) {
+        var slots = 4;
+        if (this.on_shelf == undefined) {
+            this.on_shelf = [];
+        }
+
+        items.forEach(product => {
+            var product_info = this.scene.manager.itemManager.itemInfo(product);
+            if (product_info == null) {
+                console.log('Product not found: ' + product);
+                return;
+            }
+            product_info.tags.forEach(tag => {
+                if (tag.category == 'Product Display' && tag.tag == 'shelf stable' && slots > 0 && this.on_shelf.indexOf(product_info.slug) == -1) {
+                    if (start_at > 0) {
+                        start_at--;
+                        return;
+                    }
+                    var pos_x = _x;
+                    var pos_y = _y;
+                    switch (slots) {
+                        case 1: pos_y = pos_y - 2;
+                        break;
+                        case 2: pos_x = pos_x + 1;
+                                pos_y = pos_y - 2;
+                        break;
+                        case 3: pos_y = pos_y - 1;
+                        break;
+                        case 4: pos_x = pos_x + 1;
+                                pos_y = pos_y - 1;
+                        break;
+                    }
+                    var new_item = this.scene.manager.itemManager.newItemToWorld(pos_x, pos_y, product_info.slug);
+                    new_item.sprite.setDepth(((_y + .5) * 16) + 1);
+                    new_item.updateStackCount(product_info.stack - 1);
+                    new_item.setOwner(owner);
+
+                    switch (slots) {
+                        case 3: new_item.sprite.y = new_item.sprite.y + 4;
+                        break;
+                        case 4: new_item.sprite.y = new_item.sprite.y + 4;
+                        break;
+                    }
+
+                    this.on_shelf.push(product_info.slug);
+                    slots--;
+                }
+            });
+        });
+    }
+    
+
     setShadow (_x,_y,frame) {
         this.shadow = this.scene.add.sprite(_x,_y, "OBJECTS", frame).setOrigin(.5,0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
         this.shadow.setFlipX(true).setDepth(this.sprite.depth - 1);

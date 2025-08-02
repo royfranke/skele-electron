@@ -1,5 +1,9 @@
 const PRELOAD_SOUND = [
       {
+        NAME: 'ANTICIPATION',
+        FILES: ['Anticipation.wav']
+    },
+      {
         NAME: 'ARROW_BOBBLE_SELECT',
         FILES: ['arrow-bobble-select.wav']
     },
@@ -76,6 +80,10 @@ const PRELOAD_SOUND = [
         FILES: ['new-quest.wav']
     },
       {
+        NAME: 'ANSWER_RIGHT',
+        FILES: ['right-answer-1.wav','right-answer-2.wav','right-answer-3.wav','right-answer-4.wav']
+    },
+      {
         NAME: 'RINGING_HOME_PHONE',
         FILES: ['ringing-phone.wav']
     },
@@ -90,6 +98,10 @@ const PRELOAD_SOUND = [
       {
         NAME: 'WATCH_BEEP',
         FILES: ['watch-beep.wav']
+    },
+      {
+        NAME: 'ANSWER_WRONG',
+        FILES: ['wrong-answer-1.wav','wrong-answer-2.wav','wrong-answer-3.wav','wrong-answer-4.wav']
     }
   
 ];

@@ -305,7 +305,7 @@ export default class HudPocket {
                             self.scene.manager.dataManager.setData(req_data_key, item_action.req_result_data_set);
                         }
                         if (item_action.req_result_data_modify != '') {
-                            self.scene.manager.dataManager.modifyData(req_data_key, item_action.req_result_data_modify);
+                            self.scene.manager.dataManager.modifyData('BODY',req_data_key, item_action.req_result_data_modify);
                         }
                     }
                     if (requirement.result == 'TRANSFORMED') {

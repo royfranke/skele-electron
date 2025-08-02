@@ -56,11 +56,22 @@ export default class ZenerManager {
     }
 
     makeGuess () {
+        this.scene.manager.hud.hudSound.play('ANTICIPATION');
         var result = this.guess(this.choices[this.selected]);
         this.reveal(result);
     }
 
     reveal (result) {
+        /// set a timeout to wait for the anticipation sound to finish
+        this.scene.time.delayedCall(750, () => {
+            if (result.result) {
+                this.scene.manager.hud.hudSound.play('ANSWER_RIGHT');
+            }
+            else {
+                this.scene.manager.hud.hudSound.play('ANSWER_WRONG');
+            }
+        });
+        
         this.scene.manager.hud.hudZener.drawReveal(result);
         this.deck.reveal(result);
         this.drawScore();

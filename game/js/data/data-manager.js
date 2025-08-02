@@ -15,11 +15,11 @@ export default class DataManager {
         console.log("Getting data: "+key);
     }
 
-    modifyData (key, value) {
+    modifyData (group, key, value) {
         console.log("Modifying data: "+key+" + "+value);
 
-        this.scene.slot.BODY[key] = parseInt(this.scene.slot.BODY[key] + parseInt(value));
-        console.log(this.scene.slot.BODY);
+        this.scene.slot[group][key] = parseInt(this.scene.slot[group][key] + parseInt(value));
+        console.log(this.scene.slot[group]);
 
         let modifier = "+";
         if (value < 0) {
