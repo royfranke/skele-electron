@@ -2263,7 +2263,7 @@ const OBJECTS = {
           CONE_FALLEN: {
         name: 'Cone Fallen',
         slug: 'CONE_FALLEN', 
-        type: 'CONE',
+        type: 'TRAFFIC_BARRIER',
         bounding: {
           h:1, 
           w:1
@@ -2303,7 +2303,7 @@ const OBJECTS = {
           CONE_UPRIGHT: {
         name: 'Cone Upright',
         slug: 'CONE_UPRIGHT', 
-        type: 'CONE',
+        type: 'TRAFFIC_BARRIER',
         bounding: {
           h:2, 
           w:1
@@ -8266,6 +8266,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          TRAFFIC_BARRIER_SMALL: {
+        name: 'Small Traffic Barrier',
+        slug: 'TRAFFIC_BARRIER_SMALL', 
+        type: 'TRAFFIC_BARRIER',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           SODIUM: {
         name: 'Sodium Light',
         slug: 'SODIUM', 
@@ -10918,10 +10958,10 @@ const OBJECTS = {
               frames: ['WALK_SIGNAL_SE_-3',]},                {
               name: 'SIGNAL_WARNING_HAND',
               transition: 'false',
-              frames: ['WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-2',]},                {
+              frames: ['WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-4','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2',]},                {
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
-              frames: ['WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-1',]},],
+              frames: ['WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-1','WALK_SIGNAL_SE_-2','WALK_SIGNAL_SE_-2',]},],
 
           interactions: {
                                   },
@@ -10973,7 +11013,7 @@ const OBJECTS = {
               frames: ['WALK_SIGNAL_W_-2',]},                {
               name: 'SIGNAL_HAND_WARNING',
               transition: 'false',
-              frames: ['WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-2',]},],
+              frames: ['WALK_SIGNAL_W_-2','WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-1','WALK_SIGNAL_W_-2','WALK_SIGNAL_W_-2',]},],
 
           interactions: {
                                   },

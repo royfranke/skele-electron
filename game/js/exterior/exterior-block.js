@@ -143,48 +143,7 @@ export default class Block {
     }
 
     buildObjects () {
-        this.nodes = this.getAdjoiningNodes(this.block.x, this.block.y);
 
-        if (this.nodes.NW != null) {
-            var stop = this.nodes.NW.streets.s.signal == 1 ? 'S' : null;
-
-            if (this.nodes.NW.streets.s.signal == 2) {
-                this.buildTrafficLight(this.block.left+1, this.block.top+1,'NW',{EW:this.block.bounds.n,NS:this.block.bounds.w});
-            }
-            else {
-                this.buildStreetPole(this.block.left+1, this.block.top+1,{EW:this.block.bounds.n,NS:this.block.bounds.w, STOP:stop, CORNER: 'SE'});
-            }
-        }
-        if (this.nodes.NE != null) {
-            var stop = this.nodes.NE.streets.w.signal == 1 ? 'W' : null;
-            if (stop != null) {
-                this.buildStreetPole(this.block.right-1, this.block.top+1,{EW:this.block.bounds.n,NS:this.block.bounds.e, STOP:stop, CORNER: 'SW'});
-            }
-            if (this.nodes.NE.streets.s.signal == 2) {
-                this.buildTrafficLight(this.block.right-1, this.block.top+1,'NE',{EW:this.block.bounds.n,NS:this.block.bounds.e});
-            }
-        }
-
-        if (this.nodes.SE != null) {
-            var stop = this.nodes.SE.streets.n.signal == 1 ? 'N' : null;
-            if (stop != null) {
-                this.buildStreetPole(this.block.right-1, this.block.bottom-1,{EW:this.block.bounds.s,NS:this.block.bounds.e, STOP:stop, CORNER: 'NW'});
-            }
-            if (this.nodes.SE.streets.e.signal == 2) {
-                this.buildTrafficLight(this.block.right-1, this.block.bottom-1,'SE',{EW:this.block.bounds.s,NS:this.block.bounds.e});
-            }
-        }
-
-        if (this.nodes.SW != null) {
-            var stop = this.nodes.SW.streets.e.signal == 1 ? 'E' : null;
-            if (stop != null) {
-                this.buildStreetPole(this.block.left+1, this.block.bottom-1,{EW:this.block.bounds.s,NS:this.block.bounds.w, STOP:stop, CORNER: 'NE'});
-            }
-            if (this.nodes.SW.streets.e.signal == 2) {
-                this.buildTrafficLight(this.block.left+1, this.block.bottom-1,'SW',{EW:this.block.bounds.s,NS:this.block.bounds.w});
-            }
-            
-        } 
         if (this.block.offset.n > 0) {
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+7, this.block.top,'POSTBOX_S');
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+12, this.block.top,'HYDRANT_CITY_');
@@ -215,77 +174,7 @@ export default class Block {
     
     }
 
-    buildTrafficLight (_x,_y,block_corner,signs={NS:null,EW:null}) {
-        var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'METAL_POLE');
-        var facing = '';
-        var flip = false;
-        var corner = '';
-        switch (block_corner) {
-            case 'NE':
-                /// SW intersection corner
-                corner = 'SW';
-                flip = true;
-                facing = 'W';
-                
-                var light = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_NORTH');
-                pole.setSlot(-4,7,light,false,true);
-                var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_SOUTH');
-                pole.setSlot(0,6,arm,false);
-            break;
-            case 'NW':
-                corner = 'SE';
-                facing = 'W';
-                // SE intersection corner
 
-                var light = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_EAST');
-                pole.setSlot(1.75,10.5,light,true);
-                var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_EAST');
-                pole.setSlot(1,5.5,arm,true);
-                
-            break;
-            case 'SE':
-                corner = 'NW';
-                facing = 'SE';
-                //  NW intersection corner 
-                var light = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_EAST');
-                pole.setSlot(.25,7.5,light,false);
-            break;
-            case 'SW':
-                corner = 'NE';
-                flip = true;
-                facing = 'SE';
-
-                // NE intersection corner
-
-                var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_SOUTH');
-                pole.setSlot(4,6,arm,true);
-
-                //var light = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_SOUTH');
-                //////-------
-                //pole.setSlot(4,7,light,false);
-
-                var traffic_light = this.scene.manager.objectManager.newObjectToWorld(_x - 4, _y - 7,'TRAFFIC_LIGHT_SOUTH');
-                traffic_light.sprite.setDepth(pole.sprite.depth+7);
-                traffic_light.setState('GREEN');
-            break;
-        }
-        var slotted = this.scene.manager.objectManager.objectInfo('WALK_SIGNAL_'+facing+'_');
-        pole.setSlot(0,2,slotted,flip);
-
-        
-
-        if (signs.NS != null && signs.NS != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');
-            pole.setSlot(.5,4.25,slotted);
-            pole.setAnnouncement(signs.NS, 'STREET_SIGN_NS_'+corner);
-        }
-        
-        if (signs.EW != null && signs.EW != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
-            pole.setSlot(.5,3.75,slotted);
-            pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_'+corner);
-        }
-    }
 
     buildStreetPole (_x,_y,signs={NS:null,EW:null,STOP:null,CORNER:'',TELEPHONE:false}, light=true) {
 

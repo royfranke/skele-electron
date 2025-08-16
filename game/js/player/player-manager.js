@@ -28,6 +28,7 @@ export default class PlayerManager {
     this.app.camera.follow(this.playerSprite.sprite);
     this.locale = this.scene[this.scene.place];
     this.underfoot = null;
+    this.hopping = false;
     this.player_focus = false;
   }
 
@@ -70,6 +71,23 @@ export default class PlayerManager {
     //var last = this.getLastState();
     //var now = this.getState();
 
+  }
+
+  hop() {
+    if (this.hopping) {
+      return;
+    }
+    console.log("Hopping");
+    this.hopping = true;
+    this.setState('HOP');
+    this.scene.time.addEvent({
+        delay: 500,
+        loop: false,
+        callback: () => {
+            this.hopping = false;
+            this.setState('IDLE');
+        }
+    });
   }
 
   setFacing(facing) {
@@ -118,7 +136,7 @@ export default class PlayerManager {
         this.updateActiveTile();
         this.playerInput.update();
 
-        if (this.state.name != 'HOP' || this.state.name != 'PICKUP' || this.state.name != 'EXCHANGE') {
+        if (this.state.name != 'HOP' && this.state.name != 'PICKUP' && this.state.name != 'EXCHANGE') {
           if (this.playerInput.held) {
             if (this.playerInput.run) {
               this.setState('RUN');
@@ -177,19 +195,15 @@ export default class PlayerManager {
       return -20;
     }
     if (this.state.name == 'HOP') {
-      return 60;
+      return 35;
     }
     /// TODO: Separate curb/hop handling from getspeed
-    /*
-    if (this.underfoot != undefined && this.underfoot.TYPE == 'CURB' && this.state.name != 'HOP') {
-      this.setState('HOP');
-      
-      setTimeout(() => {
-        this.setState('WALK');
-      }, 500);
-      return 80;
+    
+    if (this.underfoot != undefined && (this.underfoot.TYPE == 'CURB' || this.underfoot.TYPE == 'STAIRS') && this.state.name != 'HOP') {
+      this.hop();
+
     }
-      */
+  
     if (this.underfoot == undefined) {
       return 60;
     }
