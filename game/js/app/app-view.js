@@ -18,7 +18,7 @@ export default class AppView {
 
     create(state_name) {
         if (state_name === 'SPLASH') {
-            this.createSplash();
+            //this.createSplash();
         }
         if (state_name === 'MAIN') {
             this.createMain();
@@ -77,7 +77,7 @@ export default class AppView {
     }
 
     addVersion () {
-        let version = this.scene.add.bitmapText(this.view.left + this.view.margin.left, this.view.bottom - this.view.margin.bottom, 'SkeleNotebook', 'v.'+this.version+' Skele\'s Summer Break', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
+        let version = this.scene.add.bitmapText(this.view.left + this.view.margin.left, this.view.bottom - this.view.margin.bottom, 'SkeleTalk', 'v.'+this.version+' Skele\'s Summer Break', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
         let block = this.scene.add.nineslice(version.x - 8,version.y - 5, 'UI', 'BLOCK_MID_BROWN_BORDER', version.displayWidth + 16, version.displayHeight + 8, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 

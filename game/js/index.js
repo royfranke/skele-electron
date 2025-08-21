@@ -1,3 +1,4 @@
+import BootScene from "./scene/0_boot.js";
 import SplashScene from "./scene/0_splash.js";
 import MainMenuScene from "./scene/1_main-menu.js";
 import SystemSettingsScene from "./scene/2_settings.js";
@@ -16,6 +17,7 @@ const config = {
   parent: "game-container",
   pixelArt: true,
   scene: [
+    BootScene,
     SplashScene,
     MainMenuScene,
     SystemSettingsScene,

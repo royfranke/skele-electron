@@ -1,36 +1,42 @@
 const PRELOAD_FONT = [
     {
-        NAME: 'SkeleNotebook',
-    },
-    {
-        NAME: 'SkeleTalk',
-    },
-    {
-        NAME: 'SkeleMarquee',
+        NAME: 'SkeleButton',
     },
     {
         NAME: 'SkeleDino',
     },
     {
-        NAME: 'SkeleStreetSigns',
-    },
-    {
-        NAME: 'SkeleReceipt',
-    },
-    {
-        NAME: 'SkeleWatch',
-    },
-    {
         NAME: 'SkeleHype',
     },
     {
-        NAME: 'SkeleButton',
+        NAME: 'SkeleMarquee',
     },
     {
         NAME: 'SkeleNewsprint',
     },
     {
-        NAME: 'SkeleScrawl'
+        NAME: 'SkeleNotebook',
+    },
+    {
+        NAME: 'SkelePuff',
+    },
+    {
+        NAME: 'SkeleReceipt',
+    },
+    {
+        NAME: 'SkeleScrawl',
+    },
+    {
+        NAME: 'SkeleScript',
+    },
+    {
+        NAME: 'SkeleStreetSigns',
+    },
+    {
+        NAME: 'SkeleTalk',
+    },
+    {
+        NAME: 'SkeleWatch',
     }
 ];
 

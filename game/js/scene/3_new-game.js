@@ -1,5 +1,4 @@
 import AppManager from "../app/app-manager.js";
-import PreloadManager from "../preload/preload-manager.js";
 
 /**
  * New Game
@@ -7,10 +6,6 @@ import PreloadManager from "../preload/preload-manager.js";
 export default class NewGameScene extends Phaser.Scene {
     constructor() {
         super("New Game");
-    }
-
-    preload () {
-
     }
 
     create() {

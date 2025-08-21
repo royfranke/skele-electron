@@ -1,7 +1,6 @@
 import AppManager from "../app/app-manager.js";
 import GameManager from "../game/game-manager.js";
 import ExteriorManager from "../exterior/exterior-manager.js";
-import PreloadManager from "../preload/preload-manager.js";
 import PlayerManager from "../player/player-manager.js";
 import NpcManager from "../npc/npc-manager.js";
 

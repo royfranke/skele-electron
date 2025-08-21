@@ -84,7 +84,7 @@ export default class HudCommon {
         }
 
         makeFX (fx_slug, _x, _y, delay=0) {
-            this.factory.makeHudFX(fx_slug, _x, _y, delay);
+            return this.factory.makeHudFX(fx_slug, _x, _y, delay);
         }
 
 

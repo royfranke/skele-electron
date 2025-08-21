@@ -4,7 +4,7 @@ const APP_STATES = {
         super: 'Splash',
         fadeIn: 500,
         fadeOut: 300,
-        autoEnd: 2000,
+        autoEnd: 5000,
         next: 'MAIN',
         menu: false,
         input: false,

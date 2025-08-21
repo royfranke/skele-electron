@@ -18,11 +18,6 @@ export default class InteriorScene extends Phaser.Scene {
         this.room_id = data.slot.POSITION.ROOM;
     }
 
-    preload () {
-        //this.preload = new PreloadManager(this);
-        
-    }
-
     create() {
         this.place = 'interior';
         this.app = new AppManager(this,'GAME');
