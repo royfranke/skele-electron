@@ -18,10 +18,10 @@ export default class AppView {
 
     create(state_name) {
         if (state_name === 'SPLASH') {
-            //this.createSplash();
+
         }
         if (state_name === 'MAIN') {
-            this.createMain();
+            //this.createMain();
         }
         if (state_name === 'SETTINGS') {
             this.createSettings();
@@ -35,13 +35,6 @@ export default class AppView {
         
         this.state_name = state_name;
     }
-
-    createSplash() {
-        /// Splash HTML styled in index.html
-        let dom = this.scene.add.dom(this.view.left + this.view.width / 1.8, this.view.top + (this.view.height / 2), 'div', '', '').setClassName('splash');
-        dom.setPosition((this.view.left + this.view.width / 1.8) - dom.displayWidth/2, this.view.top + (this.view.height / 2));
-    }
-
 
     createMain() {
 
