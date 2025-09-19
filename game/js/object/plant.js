@@ -22,7 +22,18 @@ export default class Plant {
 
     getStageFrame() {
         if (this.stage != null) {
-            return this.stage.frames[0].filename;
+            let stage = this.stage;
+            for (var i = 0; i < stage.frames.length; i++) {
+                var flower = false;
+                stage.frames[i].tags.forEach(function (tag) {
+                    if (tag == "flower") {
+                        flower = true;
+                    }
+                });
+                if (!flower) {
+                    return stage.frames[i].filename;
+                }
+            }
         }
     }
 
@@ -179,6 +190,15 @@ export default class Plant {
         var x_pixels = (_x - base.x) * 16 + this.info.sprite.x;
         var y_pixels = (_y - base.y) * 16 + this.info.sprite.y;
         var frame = this.getStageFrame();
+
+        var position_variance = 4;
+        x_pixels += Phaser.Math.RND.between(-position_variance, position_variance);
+        y_pixels += Phaser.Math.RND.between(-position_variance, position_variance);
+
+        if (this.sprite != null) {
+            this.destroySprite();
+        }
+
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'PLANTS', frame, 0).setOrigin(0).setDepth(y_pixels + (this.info.sprite.h/2));
         this.setFlower(false, false);
 

@@ -33,9 +33,6 @@ export default class NpcFactory {
         }
     }
 
-    discardNpc (npc) {
-        npc.destroy();
-    }
 
     
 }

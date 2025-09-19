@@ -14,7 +14,6 @@ const APP_STATES = {
         name: 'MAIN',
         super: 'Main Menu',
         fadeIn: 250,
-        irisIn: 0,
         fadeOut: 250,
         autoEnd: 0,
         menu: false,
@@ -62,7 +61,8 @@ const APP_STATES = {
     TUTORIAL: {
         name: 'TUTORIAL',
         super: 'Tutorial',
-        fadeIn: 1000,
+        fadeIn: 0,
+        irisIn: 1000,
         fadeOut: 1000,
         autoEnd: 0,
         menu: false,

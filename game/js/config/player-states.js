@@ -37,6 +37,10 @@ const PLAYER_STATES = {
         name: 'EXCHANGE',
         speed: 0
     },
+    TRIP: {
+        name: 'TRIP',
+        speed: 0
+    },
     PUSH: {
         name: 'PUSH',
         input: true,

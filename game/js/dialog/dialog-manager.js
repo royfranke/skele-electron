@@ -11,7 +11,7 @@ export default class DialogManager {
 
     triggerDialog (id) {
         var dialog = this.getDialog(id);
-        this.scene.manager.hud.hudDialog.tellDialogBox(dialog.text, dialog.next, dialog.trigger, dialog.court);
+        this.scene.manager.hud.hudDialog.tellDialogBox(dialog.text, dialog.next, dialog.trigger, dialog.court, id);
         this.scene.manager.hud.hudDialog.tellReplyBox(dialog.responses);
 
         if (dialog.trigger == 'QUEST') {
@@ -58,6 +58,7 @@ export default class DialogManager {
    destroyListeners () {
         this.scene.events.off('INPUT_UP_DIALOG');
         this.scene.events.off('INPUT_DOWN_DIALOG');
+        this.scene.events.off('INPUT_RIGHT_DIALOG');
         this.scene.events.off('INPUT_SELECT_DIALOG');
    }
 

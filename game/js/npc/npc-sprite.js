@@ -1,4 +1,5 @@
 import SPRITE_DIR from "../config/sprite-dir.js";
+import KEYLIGHTS from "../config/key-light.js";
 /* global Phaser */
 /*
  */
@@ -15,12 +16,22 @@ export default class NpcSprite {
   }
 
   setCollider () {
-    this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);
-    this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
-    this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
-    this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
-    this.sprite.setCollideWorldBounds(true);
-    this.scene.npcs.npcs.add(this.sprite);
+    if (this.scene.slot.POSITION.ROOM == -1) {
+      this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);
+      this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
+      this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
+      this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
+      this.sprite.setCollideWorldBounds(true);
+      this.scene.npcs.npcs.add(this.sprite);
+    }
+    else {
+      this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);
+      this.scene.physics.add.collider(this.sprite, this.scene.interior.groundLayer);
+      //this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
+      this.scene.interior.wallLayer.setCollisionByExclusion([-1]);
+      this.sprite.setCollideWorldBounds(true);
+      this.scene.npcs.npcs.add(this.sprite);
+    }
   }
 
   createFooting() {
@@ -45,7 +56,7 @@ export default class NpcSprite {
 
     this.updateFlip();
     this.updateFooting();
-
+    this.updateKeyLight();
     /*
     this.shadow.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true);
     this.shadow.setPosition(this.sprite.x-10, this.sprite.y+18);
@@ -109,8 +120,24 @@ export default class NpcSprite {
     return;
   }
 
+  updateKeyLight () {
+    if (this.scene.manager.time != undefined) {
+      let keylight = this.scene.manager.time.keylight;
+      if (KEYLIGHTS[keylight] != undefined) {
+        this.sprite.setTint(KEYLIGHTS[keylight].skeles_tint);
+      }
+    }
+  }
+
   freeze() {
     this.sprite.anims.stop();
     this.sprite.body.setVelocity(0);
+  }
+
+  destroy() {
+    this.sprite.destroy();
+    if (this.footShadow != undefined) this.footShadow.destroy();
+    if (this.footMask != undefined) this.footMask.destroy();
+    //if (this.shadow != undefined) this.shadow.destroy();
   }
 }

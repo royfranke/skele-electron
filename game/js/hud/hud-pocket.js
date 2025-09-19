@@ -127,7 +127,11 @@ export default class HudPocket {
         var found = false;
         this.pockets.forEach(function (pocket, index) {
             if (!found) {
-                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.slug == item_slug) {
+                var item = pocket[pocket.STATE];
+                if (item.hasOwnProperty('info')) {
+                    item = item.info.slug;
+                }
+                if (pocket.STATE != 'EMPTY' && item == item_slug) {
                     found = index;
                 }
             }
@@ -204,6 +208,7 @@ export default class HudPocket {
 
     availableBag(item, exclude = null) {
         var found = false;
+        var self = this;
         this.pockets.forEach(function (pocket, index) {
             if (!found) {
                 if (exclude != index) {

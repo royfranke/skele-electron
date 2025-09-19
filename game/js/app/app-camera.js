@@ -57,6 +57,12 @@ export default class AppCamera {
         if (this.state.fadeIn) {
             this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
         }
+        else if (this.state.irisIn != undefined) {
+            this.irisIn(this.state.irisIn);
+        }
+        else {
+            this.camera.fadeIn(0, 75, 66, 74);
+        }
     }
 
     end () {
@@ -67,7 +73,7 @@ export default class AppCamera {
 
     follow (followMe) {
         /// TODO: return to make a smoother follow
-        this.camera.startFollow(followMe,true, 1, 1, -32, 16);
+        this.camera.startFollow(followMe,true, 1, 1, -32, -16);
         
         this.camera.setDeadzone(80,16);
     }

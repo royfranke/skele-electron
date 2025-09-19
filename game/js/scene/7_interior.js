@@ -2,6 +2,8 @@ import AppManager from "../app/app-manager.js";
 import GameManager from "../game/game-manager.js";
 import InteriorManager from "../interior/interior-manager.js";
 import PlayerManager from "../player/player-manager.js";
+import TutorialManager from "../tutorial/tutorial-manager.js";
+import NpcManager from "../npc/npc-manager.js";
 
 /**
  * Interior
@@ -29,27 +31,43 @@ export default class InteriorScene extends Phaser.Scene {
         }, this);
         this.interior = new InteriorManager(this);
         this.player = new PlayerManager(this);
+        this.npcs = new NpcManager(this);
+
         this.interior.create();
         this.player.create();
          //// Load the save!
          this.app.initializeRoomSave();
+
+         if (this.slot.TUTORIAL < 30) {
+            this.tutorial = new TutorialManager(this);
+            this.tutorial.stepTutorial(this.slot.TUTORIAL);
+         }
     }
 
     update() {
         this.app.update();
         this.manager.update();
         this.player.update();
+        this.npcs.update();
         this.interior.update();
     }
 
     portalTo(portal) {
         this.slot = this.app.softSaveGameData();
         if (this.verbose) console.log(this.slot);
-        this.slot.POSITION.X = portal.x;
-        this.slot.POSITION.Y = portal.y;
+        if (portal.address != undefined) {
+            this.slot.POSITION.ADDRESS = portal.address;
+        }
+        else {
+            this.slot.POSITION.X = portal.x;
+            this.slot.POSITION.Y = portal.y;
+        }
         this.slot.POSITION.FACING = portal.facing;
         this.slot.POSITION.ROOM = portal.room_id;
         this.slot.POSITION.RETURN = portal.return;
+        if (this.tutorial != undefined) {
+            this.slot.TUTORIAL = this.tutorial.tutorial_step;
+        }
         if (portal.room_id == '-1') {
             this.scene.stop('Interior Scene');
             this.scene.start('Game Scene',{slot: this.slot});

@@ -18,7 +18,7 @@ import KEYLIGHT from "../config/key-light.js";
         this.player_start_y = 7;
         this.built = false;
         this.room = new Room(this.scene, this.scene.room_id);
-
+        this.doors = [];
         this.createMap();
         
  
@@ -72,6 +72,10 @@ import KEYLIGHT from "../config/key-light.js";
 
     createItems () {
         ///
+        if (this.room.config.roomData.itemList == undefined) return;
+        this.room.config.roomData.itemList.forEach(item => {
+            this.scene.manager.itemManager.newItemToWorld(item.x + 1, item.y + this.wall_height + 1, item.slug);
+        });
     }
 
     buildRoom () {
@@ -136,7 +140,21 @@ import KEYLIGHT from "../config/key-light.js";
                 let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
                 
                 if (obj != null && feature.params != undefined && feature.params.portal != undefined) {
+                    if (feature.params.portal.room_id == -1) {
+                        // get the address of this room and assign it to the portal
+                        console.log(this.room.config.address);
+                        if (this.room.config.address != undefined) {
+                            feature.params.portal.address = this.room.config.address;
+                        }
+                    }
                     obj.setPortal(feature.params.portal);
+                    console.log(feature.params.portal);
+                    this.doors.push(obj);
+
+                }
+
+                if (obj != null && feature.params != undefined) {
+                    obj.setParams(feature.params);
                 }
                 
                 if (obj.info.type == 'STORE_COUNTER') {
@@ -158,9 +176,7 @@ import KEYLIGHT from "../config/key-light.js";
             }
         }
     }
-
-
-
+/*
     setPortalFromSave (portal) {
         if (portal != undefined) {
             if (this.front_door != undefined) {
@@ -179,7 +195,7 @@ import KEYLIGHT from "../config/key-light.js";
             console.log('No portal for room ' + this.room_id);
         }
     }
-
+*/
     getEntry () {
         return {
             x: this.player_start_x,

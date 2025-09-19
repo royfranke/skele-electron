@@ -72,19 +72,22 @@ export default class ItemManager {
         }
         return item;
     }
-/*
+
     putItemInBag (item,exclude=null) {
         var result = this.scene.manager.hud.availableBag(item,exclude);
         if (!result) {
             this.scene.manager.hud.hudDisplay.tellBrain('No space found...',2000,'missing');
         }
         return result;
-    }*/
+    }
 
     putItemInWorld (item, _x, _y) {
         var result = this.registry.placeItem(item,_x,_y);
         if (!result) {
             this.scene.manager.hud.hudThinking.think('Something here already');
+        }
+        else {
+            this.scene.manager.handleKeylight('ITEMS');
         }
         return result;
     }

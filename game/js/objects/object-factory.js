@@ -25,7 +25,7 @@ export default class ObjectFactory {
             if (this.valid_objects[slug].slots != undefined && this.valid_objects[slug].slots > 0) {
                 var object = new ObjectChest(this.scene,this.valid_objects[slug],items);
             }
-            else if (this.valid_objects[slug].type == 'WINDOW_EXT_' || this.valid_objects[slug].type == 'EXT_DOOR_' || this.valid_objects[slug].type == 'STORE_DOOR_' || this.valid_objects[slug].type == 'STORE_WINDOW_EXT' || this.valid_objects[slug].type == 'BASEMENT_WINDOW') {
+            else if (this.valid_objects[slug].type == 'WINDOW_EXT_' || this.valid_objects[slug].type == 'EXT_DOOR_' || this.valid_objects[slug].type == 'INT_DOOR_' || this.valid_objects[slug].type == 'STORE_DOOR_' || this.valid_objects[slug].type == 'STORE_WINDOW_EXT' || this.valid_objects[slug].type == 'BASEMENT_WINDOW') {
                 var object = new ObjectGlass(this.scene,this.valid_objects[slug]);
          
             }

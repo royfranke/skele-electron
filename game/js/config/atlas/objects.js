@@ -93,6 +93,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          ASH_TRAY: {
+        name: 'Ash Tray',
+        slug: 'ASH_TRAY', 
+        type: 'DECOR',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 17,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           BARBER_POLE: {
         name: 'Barber Pole Sign',
         slug: 'BARBER_POLE', 
@@ -224,6 +264,46 @@ const OBJECTS = {
               name: 'EMPTY',
               transition: 'false',
               frames: ['BASKET_RACK-1',]},],
+
+          interactions: {
+                                  },
+    },
+          BED_1: {
+        name: 'Bed 1',
+        slug: 'BED_1', 
+        type: 'BED',
+        bounding: {
+          h:6, 
+          w:3
+        },
+        base: {
+          h:4, 
+          w:3,
+          x:0, 
+          y:2
+        },
+        depth: -12,
+        sprite: {
+          h:96, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:60, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:24
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -520,6 +600,46 @@ const OBJECTS = {
         },
         varieties: 7,
         solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          CURTAIN_SINGLE_BROWN: {
+        name: 'Brown Single Window Curtains',
+        slug: 'CURTAIN_SINGLE_BROWN', 
+        type: 'WINDOW_COVERING',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
         portal: 0,
         loot: [
                   ],
@@ -2047,17 +2167,15 @@ const OBJECTS = {
             name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
           }],
         default_state: 'COIN_LOCKED',        states: [                {
-              name: 'COIN_RETRACTING',
-              transition: 'COIN_LOCKED',
-              frames: ['SPECIAL_NEWS_BOX_-6','SPECIAL_NEWS_BOX_-5','SPECIAL_NEWS_BOX_-4','SPECIAL_NEWS_BOX_-3','SPECIAL_NEWS_BOX_-2','SPECIAL_NEWS_BOX_-1',]},            {
               name: 'COIN_LOCKED',
               transition: 'false',
-              frames: ['SPECIAL_NEWS_BOX_-1',]
-              },               {
+              frames: ['SPECIAL_NEWS_BOX_-1',]},                {
               name: 'COIN_DISPENSING',
               transition: 'COIN_RETRACTING',
-              frames: ['SPECIAL_NEWS_BOX_-2', 'SPECIAL_NEWS_BOX_-3', 'SPECIAL_NEWS_BOX_-4', 'SPECIAL_NEWS_BOX_-5', 'SPECIAL_NEWS_BOX_-6', ]
-              },],
+              frames: ['SPECIAL_NEWS_BOX_-2','SPECIAL_NEWS_BOX_-3','SPECIAL_NEWS_BOX_-4','SPECIAL_NEWS_BOX_-5','SPECIAL_NEWS_BOX_-6',]},                {
+              name: 'COIN_RETRACTING',
+              transition: 'COIN_LOCKED',
+              frames: ['SPECIAL_NEWS_BOX_-6','SPECIAL_NEWS_BOX_-5','SPECIAL_NEWS_BOX_-4','SPECIAL_NEWS_BOX_-3','SPECIAL_NEWS_BOX_-2','SPECIAL_NEWS_BOX_-1',]},                           ],
 
           interactions: {
                                             group_29: {
@@ -3430,6 +3548,113 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          DRESSER_1: {
+        name: 'Dresser 1',
+        slug: 'DRESSER_1', 
+        type: 'DRESSER',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: -4,
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        default_state: 'CLOSED',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['DRESSER_1-1',]
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['DRESSER_1-1', 'DRESSER_1-2', 'DRESSER_1-3', 'DRESSER_1-4', ]
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['DRESSER_1-4',]
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['DRESSER_1-4', 'DRESSER_1-3', 'DRESSER_1-2', 'DRESSER_1-1', ]
+              },                           {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: ['DRESSER_1-4', ]
+              },],            slots: 4,
+            items: [],
+
+          interactions: {
+                                  },
+    },
+          DRESSER_MIRROR: {
+        name: 'Dresser Mirror',
+        slug: 'DRESSER_MIRROR', 
+        type: 'MIRROR',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:24
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           EXT_DOOR_WINDOWS_GRAY: {
         name: 'Ext Door Windows Gray',
         slug: 'EXT_DOOR_WINDOWS_GRAY', 
@@ -4534,6 +4759,67 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          FRIDGE: {
+        name: 'Fridge 1',
+        slug: 'FRIDGE', 
+        type: 'FRIDGE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:24
+        },
+        offset: {
+          x:8, 
+          y:28
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        default_state: 'CLOSED',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['FRIDGE-1',]
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['FRIDGE-1', 'FRIDGE-2', 'FRIDGE-3', 'FRIDGE-4', ]
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['FRIDGE-4',]
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['FRIDGE-4', 'FRIDGE-3', 'FRIDGE-2', 'FRIDGE-1', ]
+              },],            slots: 0,
+            items: [],
+
+          interactions: {
+                                  },
+    },
           FURNACE: {
         name: 'Furnace',
         slug: 'FURNACE', 
@@ -4741,6 +5027,46 @@ const OBJECTS = {
         },
         varieties: 1,
         solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          CURTAIN_SINGLE_GREEN: {
+        name: 'Green Single Window Curtains',
+        slug: 'CURTAIN_SINGLE_GREEN', 
+        type: 'WINDOW_COVERING',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
         portal: 0,
         loot: [
                   ],
@@ -5570,6 +5896,66 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          INT_DOOR_SIDE_WHITE: {
+        name: 'Int Side Door White',
+        slug: 'INT_DOOR_SIDE_WHITE', 
+        type: 'INT_DOOR_',
+        bounding: {
+          h:4, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:64, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 7,
+        solid: 0,
+        portal: 1,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['INT_DOOR_SIDE_WHITE-7',]
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['INT_DOOR_SIDE_WHITE-7', 'INT_DOOR_SIDE_WHITE-6', 'INT_DOOR_SIDE_WHITE-5', 'INT_DOOR_SIDE_WHITE-4', 'INT_DOOR_SIDE_WHITE-3', 'INT_DOOR_SIDE_WHITE-2', 'INT_DOOR_SIDE_WHITE-1', ]
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['INT_DOOR_SIDE_WHITE-1',]
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['INT_DOOR_SIDE_WHITE-1', 'INT_DOOR_SIDE_WHITE-2', 'INT_DOOR_SIDE_WHITE-3', 'INT_DOOR_SIDE_WHITE-4', 'INT_DOOR_SIDE_WHITE-5', 'INT_DOOR_SIDE_WHITE-6', 'INT_DOOR_SIDE_WHITE-7', ]
+              },],
+
+          interactions: {
+                                  },
+    },
           TABLE_WOOD_FOLDING_JAMMED: {
         name: 'Jammed Folding Wood Table',
         slug: 'TABLE_WOOD_FOLDING_JAMMED', 
@@ -5606,6 +5992,66 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          KITCHEN_SINK: {
+        name: 'Kitchen Sink',
+        slug: 'KITCHEN_SINK', 
+        type: 'SINK',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }],
+        default_state: 'OFF',        states: [            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['KITCHEN_SINK-1',]
+              },               {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: ['KITCHEN_SINK-1', 'KITCHEN_SINK-2', 'KITCHEN_SINK-3', 'KITCHEN_SINK-4', ]
+              },            {
+              name: 'ON',
+              transition: 'false',
+              frames: ['KITCHEN_SINK-2','KITCHEN_SINK-3','KITCHEN_SINK-4',]
+              },               {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: ['KITCHEN_SINK-3', 'KITCHEN_SINK-2', 'KITCHEN_SINK-1', ]
+              },],
 
           interactions: {
                                   },
@@ -5942,86 +6388,6 @@ const OBJECTS = {
               frames: ['MAILBOX_WEATHERED-5', 'MAILBOX_WEATHERED-4', 'MAILBOX_WEATHERED-3', 'MAILBOX_WEATHERED-2', 'MAILBOX_WEATHERED-1', ]
               },                           ],            slots: 4,
             items: [],
-
-          interactions: {
-                                  },
-    },
-          MAPLE_5X7: {
-        name: 'Maple 5x7',
-        slug: 'MAPLE_5X7', 
-        type: 'TREE',
-        bounding: {
-          h:7, 
-          w:5
-        },
-        base: {
-          h:1, 
-          w:1,
-          x:2, 
-          y:6
-        },
-        depth: 0,
-        sprite: {
-          h:112, 
-          w:80,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:16, 
-          w:12
-        },
-        offset: {
-          x:34, 
-          y:96
-        },
-        varieties: 1,
-        solid: 1,
-        portal: 0,
-        loot: [
-                  ],
-        actions: [],
-        default_state: 'DEFAULT',        states: [],
-
-          interactions: {
-                                  },
-    },
-          MAPLE_7X7: {
-        name: 'Maple 7x7',
-        slug: 'MAPLE_7X7', 
-        type: 'TREE',
-        bounding: {
-          h:7, 
-          w:7
-        },
-        base: {
-          h:1, 
-          w:1,
-          x:3, 
-          y:6
-        },
-        depth: 0,
-        sprite: {
-          h:112, 
-          w:112,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:16, 
-          w:16
-        },
-        offset: {
-          x:48, 
-          y:96
-        },
-        varieties: 1,
-        solid: 1,
-        portal: 0,
-        loot: [
-                  ],
-        actions: [],
-        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -7946,6 +8312,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          CURTAIN_SINGLE_RED: {
+        name: 'Red Single Window Curtains',
+        slug: 'CURTAIN_SINGLE_RED', 
+        type: 'WINDOW_COVERING',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           SIGN_BACK_RED_10: {
         name: 'Red Storefront Sign Background',
         slug: 'SIGN_BACK_RED_10', 
@@ -8262,6 +8668,96 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BLINDS_SINGLE: {
+        name: 'Single Window Blinds',
+        slug: 'BLINDS_SINGLE', 
+        type: 'WINDOW_COVERING',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          STUMP_SEAT: {
+        name: 'Sitting Stump',
+        slug: 'STUMP_SEAT', 
+        type: 'SEAT',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: -5,
+        sprite: {
+          h:27, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:18
+        },
+        offset: {
+          x:7, 
+          y:12
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'SITTING',
+              transition: 'false',
+              frames: []
+              },],
 
           interactions: {
                                   },
@@ -9889,7 +10385,7 @@ const OBJECTS = {
           x:0, 
           y:1
         },
-        depth: 0,
+        depth: 17,
         sprite: {
           h:32, 
           w:16,
@@ -10000,17 +10496,15 @@ const OBJECTS = {
             name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
           }],
         default_state: 'COIN_LOCKED',        states: [                {
-              name: 'COIN_RETRACTING',
-              transition: 'COIN_LOCKED',
-              frames: ['DAILY_NEWS_BOX_-6','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-2',]},            {
               name: 'COIN_LOCKED',
               transition: 'false',
-              frames: ['DAILY_NEWS_BOX_-1',]
-              },               {
+              frames: ['DAILY_NEWS_BOX_-1',]},                {
               name: 'COIN_DISPENSING',
               transition: 'COIN_RETRACTING',
-              frames: ['DAILY_NEWS_BOX_-2', 'DAILY_NEWS_BOX_-3', 'DAILY_NEWS_BOX_-4', 'DAILY_NEWS_BOX_-5', 'DAILY_NEWS_BOX_-6', ]
-              },],
+              frames: ['DAILY_NEWS_BOX_-2','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-6',]},                {
+              name: 'COIN_RETRACTING',
+              transition: 'COIN_LOCKED',
+              frames: ['DAILY_NEWS_BOX_-6','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-2',]},                           ],
 
           interactions: {
                                             group_29: {
@@ -10439,7 +10933,7 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_DARK_WOOD-4', ]
-              },],            slots: 0,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -10506,7 +11000,7 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_LIGHT_WOOD-4', ]
-              },],            slots: 0,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -10640,7 +11134,7 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_S_YELLOW-4', ]
-              },],            slots: 0,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -10707,7 +11201,7 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_DARK_WOOD-1', ]
-              },],            slots: 0,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -10774,7 +11268,7 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_LIGHT_WOOD-1', ]
-              },],            slots: 0,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -10841,7 +11335,7 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_PEELING_WOOD-1', ]
-              },],            slots: 0,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -10908,7 +11402,7 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1', ]
-              },],            slots: 0,
+              },],            slots: 3,
             items: [],
 
           interactions: {
@@ -12592,6 +13086,46 @@ const OBJECTS = {
               transition: 'DEFAULT',
               frames: ['OBJ_FLYER_YELLOW-1', 'OBJ_FLYER_YELLOW-2', 'OBJ_FLYER_YELLOW-3', 'OBJ_FLYER_YELLOW-4', 'OBJ_FLYER_YELLOW-5', 'OBJ_FLYER_YELLOW-6', 'OBJ_FLYER_YELLOW-7', 'OBJ_FLYER_YELLOW-8', ]
               },],
+
+          interactions: {
+                                  },
+    },
+          CURTAIN_SINGLE_YELLOW: {
+        name: 'Yellow Single Window Curtains',
+        slug: 'CURTAIN_SINGLE_YELLOW', 
+        type: 'WINDOW_COVERING',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },

@@ -286,8 +286,13 @@ export default class Shop {
             let room_id = this.prop.portal.room_id;
             let x = this.prop.portal.x;
             let y = this.prop.portal.y;
+
+            this.prop.portal.world = {
+                x: _x + 1,
+                y: _y + 3
+            };
             
-            this.front_door.setPortal({room_id: room_id, x: x, y: y, facing: 'N', return: {ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door}});
+            this.front_door.setPortal({room_id: room_id, x: x, y: y, facing: 'N', world: this.prop.portal.world, return: {ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door}});
         }
         let door_gate = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROLLING_GATE_DOOR');
         this.gates.push(door_gate);

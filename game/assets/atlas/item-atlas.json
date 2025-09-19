@@ -2280,7 +2280,7 @@
     
                          
       ,  { 
-		"filename": "ALE",
+		"filename": "ALE_OPEN",
 		"frame": {"x":464,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3015,6 +3015,190 @@
 	}
     
                          
-                                                              	
+      ,  { 
+		"filename": "STRING",
+		"frame": {"x":400,"y":176,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TOILET_PAPER",
+		"frame": {"x":416,"y":176,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "TOILET_PAPER_67",
+		"frame": {"x":432,"y":176,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "SOFT_SERVE_VANILLA",
+		"frame": {"x":448,"y":176,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "SOFT_SERVE_CHOCOLATE",
+		"frame": {"x":464,"y":176,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "SOFT_SERVE_TWIST",
+		"frame": {"x":480,"y":176,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "FANNY_PACK",
+		"frame": {"x":496,"y":176,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+          ,  { 
+		"filename": "PRAYER_CANDLE_GREEN",
+		"frame": {"x":0,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_GREEN_USED",
+		"frame": {"x":16,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_GREEN_EMPTY",
+		"frame": {"x":32,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_WHITE",
+		"frame": {"x":48,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_WHITE_USED",
+		"frame": {"x":64,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_WHITE_EMPTY",
+		"frame": {"x":80,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_YELLOW",
+		"frame": {"x":96,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_YELLOW_USED",
+		"frame": {"x":112,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_YELLOW_EMPTY",
+		"frame": {"x":128,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_ORANGE",
+		"frame": {"x":144,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_ORANGE_USED",
+		"frame": {"x":160,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_ORANGE_EMPTY",
+		"frame": {"x":176,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_RED",
+		"frame": {"x":192,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_RED_USED",
+		"frame": {"x":208,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_RED_EMPTY",
+		"frame": {"x":224,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRAYER_CANDLE_EMPTY",
+		"frame": {"x":240,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+                                                                  	
 ]
 }

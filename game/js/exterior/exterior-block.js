@@ -95,6 +95,8 @@ export default class Block {
                     case 12:
                         this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION',Phaser.Math.RND.between(1,44));
                     break;
+                    case 13:
+                        //this.scene.manager.objectManager.newObjectToWorld(x, y, 'STUMP_SEAT');
                 }
             }
         }

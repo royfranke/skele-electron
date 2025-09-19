@@ -70,10 +70,7 @@ export default class ItemBag extends Item {
 
     doAction(action) {
         if (action == 'WEAR' || action == 'PUT AWAY' || action == 'PICK UP') {
-            var valid = this.scene.manager.hud.availablePocket(this);
-            if (valid) {
-                this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
-            }
+            this.pickupItem();
         }
         if (action == 'OPEN') {
             /// change focus to ui chest window

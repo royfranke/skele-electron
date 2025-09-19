@@ -343,16 +343,22 @@ export default class Npc {
       if (this.standingTile.x == this.destinations[0].x && this.standingTile.y == this.destinations[0].y) { // Arrived at the destination TILE!
         this.destinations.shift();
         this.setState('IDLE');
+
+        this.scene.events.emit('NPC_ARRIVED_'+this.info.slug, this);
       }
       else {
         this.moveToward(this.destinations[0].x, this.destinations[0].y);
       }
     }
     else { /// No locations queued.
-      if (this.state.name != 'EXCHANGE' && this.state.name != 'PICKUP' && this.state.name != 'EAT' && this.state.name != 'DIG' && this.state.name != 'HOP' && this.state.name != 'PUSH' && this.state.name != 'PULL') {
+      if (this.state.name != 'EXCHANGE' && this.state.name != 'PICKUP' && this.state.name != 'EAT' && this.state.name != 'DIG' && this.state.name != 'HOP' && this.state.name != 'PUSH' && this.state.name != 'PULL' && this.state.name != 'TRIP') {
         this.setState('IDLE');
       }
     }
+  }
+
+  destroy() {
+    this.scene.npcs.discardNpcBySlug(this.info.slug);
   }
 }
 

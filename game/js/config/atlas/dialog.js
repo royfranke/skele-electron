@@ -44,7 +44,7 @@ const DIALOGS = {
     },
       6: {
         id: 6,
-        text: 'Oh! You’re up, oh good. Grab your backpack and things— you will leave with Mr. Gilly after a little breakfast. No time to come back downstairs, hear?',
+        text: 'Oh! You’re up, oh good. Grab your backpack and things. You will leave with Mr. Gilly after a little breakfast. No time to come back downstairs, do you hear?',
         next: 0,
                 responses: [
                   {
@@ -185,6 +185,67 @@ const DIALOGS = {
       20: {
         id: 20,
         text: 'That’s the stuff! Now then, run from the pit, yeah?',
+        next: 0,
+                responses: [
+              ]
+    },
+      21: {
+        id: 21,
+        text: 'Skele, you are missing your backpack. Is it too heavy? Get right next to it when you put it on.',
+        next: 0,
+                                                responses: [
+              ]
+    },
+      22: {
+        id: 22,
+        text: 'You have everything? I put toast in for you. Go mind the toaster.',
+        next: 0,
+                responses: [
+              ]
+    },
+      23: {
+        id: 23,
+        text: 'Skele, I have your summer school notebook here. You still need to complete satisfactory work to be promoted to the next grade.',
+        next: 24,
+                responses: [
+              ]
+    },
+      24: {
+        id: 24,
+        text: 'DO NOT BLOW THIS OFF. You don’t want to repeat fifth grade, right? Keep on top of it and there won’t be much to do.',
+        next: 0,
+                responses: [
+              ]
+    },
+      25: {
+        id: 25,
+        text: 'I have ten dollars for you for emergencies. Where do you keep your money?',
+        next: 0,
+                responses: [
+                  {
+            text: 'In my pocket',
+            next: 26
+          },
+                  {
+            text: 'In my backpack',
+            next: 26
+          },
+                  {
+            text: 'In my hands',
+            next: 26
+          }
+              ]
+    },
+      26: {
+        id: 26,
+        text: 'That... that won’t do. Ah, I know!',
+        next: 0,
+                responses: [
+              ]
+    },
+      27: {
+        id: 27,
+        text: 'Here, this is a proper coinpurse. Don’t lose this, okay?',
         next: 0,
                 responses: [
               ]

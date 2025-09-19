@@ -156,6 +156,7 @@ export default class ExteriorBlockNode {
             }
         });
 
+        /* Debug
         this.drawConeBox(
             this.node.left,
             this.node.top,
@@ -163,6 +164,7 @@ export default class ExteriorBlockNode {
             this.node.height,
             true
         );
+        */
     }
 
     buildObjects () {
@@ -234,10 +236,6 @@ export default class ExteriorBlockNode {
             var slotted = this.scene.manager.objectManager.objectInfo('STOP_SIGN_'+signs.STOP);
             var behind = signs.STOP == 'N' || signs.STOP == 'E' ? true : false;
             pole.setSlot(.5,2,slotted,false,behind);
-            /*if (behind) {
-                var slotted = this.scene.manager.objectManager.objectInfo('OBJ_FLYER_YELLOW');
-                pole.setSlot(0,1,slotted, false);
-            }*/
         }
 
         if (signs.TELEPHONE) {
@@ -317,7 +315,6 @@ export default class ExteriorBlockNode {
             pole.setSlot(.5,3.75,slotted);
             pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_'+corner);
         }
-        console.log(this.traffic_lights);
     }
 
     drawConeBox (_x,_y,width,height,center=false) {

@@ -356,6 +356,7 @@ import KEYLIGHT from "../config/key-light.js";
 
         if (block.offset.n > 0 && block.offset.w > 0) { // Upper left
             this.groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_, block.left - 1, block.top - 1,1, 1);
+            this.groundLayer.weightedRandomize(TILES.CURB.EAST_, block.left - 1, block.top,1, 1);
             this.groundLayer.weightedRandomize(TILES.CURB.SOUTH_, block.left, block.top - 1,1, 1);
             recipe_x = block.left;
             recipe_y = block.top;
@@ -437,6 +438,23 @@ import KEYLIGHT from "../config/key-light.js";
         return quadrant;
 
     }
+
+    getFrontDoorTilesFromAddress(dir, number, street) {
+        let door = this.getFrontDoorFromAddress(dir, number, street);
+        console.log(door);
+        return {x: door.x, y: door.y};
+    }
+
+    getFrontDoorFromAddress(dir, number, street) {
+         let prop = this.getPropertyFromAddress(dir, number, street);
+         if (!prop) {
+              return;
+         }
+         else {
+            console.log(prop.portal);
+          return {x: prop.portal.world.x,y: prop.portal.world.y};
+         }
+     }
 
     getMailboxTilesFromAddress(dir, number, street) {
         let mailbox = this.getMailboxFromAddress(dir, number, street);

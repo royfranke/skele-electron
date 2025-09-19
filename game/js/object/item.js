@@ -117,14 +117,13 @@ export default class Item {
                 this.scene.player.setState('PICKUP');
 
                 this.scene.time.addEvent({
-                    delay: 500,
+                    delay: 750,
                     callback: ()=>{
                         this.scene.manager.itemManager.registry.removeItem(this.tile_x, this.tile_y);
                         if (this.hasFX) {
                             if (this.info.status.fx_end != '') {
                                 this.active_fx.destroy();
                                 this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx_end, this.tile_x * 16, this.tile_y * 16);
-
                                 this.active_fx.once('animationcomplete', () => {
                                     this.active_fx.destroy();
                                 });
@@ -137,7 +136,7 @@ export default class Item {
                 });
 
                 this.scene.time.addEvent({
-                    delay: 1000,
+                    delay: 1125,
                     callback: ()=>{
                         this.scene.player.setState('IDLE');
                     }
@@ -193,16 +192,18 @@ export default class Item {
             if (this.hasFX) {
                 if (this.info.status.fx_start != '') {
                     this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx_start, x_pixels, y_pixels);
-
+                    this.active_fx.setDepth(this.sprite.depth + 1);
                     this.active_fx.once('animationcomplete', () => {
                         this.active_fx.destroy();
                         if (this.info.status.fx != '') {
                         this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx, x_pixels, y_pixels);
+                        this.active_fx.setDepth(this.sprite.depth + 1);
                         }
                     });
                 }
                 else {
                     this.active_fx = this.scene.manager.fx.handleFX(this.info.status.fx, x_pixels, y_pixels);
+                    this.active_fx.setDepth(this.sprite.depth + 1);
                 }
                 
             }
@@ -357,6 +358,13 @@ export default class Item {
 
 
             this.setRegistration(false);
+        }
+    }
+
+    setLight (keylight) {
+        if (this.sprite != null) {
+            console.warn("Setting light tint on item: "+this.info.slug+" to "+keylight.objects_tint);
+            this.sprite.setTint(keylight.objects_tint);
         }
     }
 }

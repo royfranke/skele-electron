@@ -55,6 +55,10 @@ export default class GameManager {
         if (this.hud != null && this.hud.hudInput != undefined) {
             this.hud.refreshDisplay();
         }
+
+        if (this.scene.tutorial != undefined) {
+            this.scene.tutorial.wake();
+        }
     }
 
     openBag (bag) {
@@ -262,15 +266,31 @@ export default class GameManager {
         return this.time.keylight;
     }
 
-    handleKeylight () {
+    handleKeylight (select=null) {
         var keylight = this.getKeyLight();
         if (keylight != null) {
-            
             if (keylight != this.scene[this.scene.locale].lastKeyLight) {
                 this.scene[this.scene.locale].setKeyLight(keylight);
                 this.objectManager.registry.updateLights(keylight);
                 this.plantManager.registry.updateLights(keylight);
                 this.treeManager.registry.updateLights(keylight);
+                this.itemManager.registry.updateLights(keylight);
+            }
+            if (select != null) {
+                switch (select) {
+                    case 'OBJECTS':
+                        this.objectManager.registry.updateLights(keylight);
+                        break;
+                    case 'PLANTS':
+                        this.plantManager.registry.updateLights(keylight);
+                        break;
+                    case 'TREES':
+                        this.treeManager.registry.updateLights(keylight);
+                        break;
+                    case 'ITEMS':
+                        this.itemManager.registry.updateLights(keylight);
+                        break;
+                }
             }
         }
     }

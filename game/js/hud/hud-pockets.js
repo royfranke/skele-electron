@@ -108,7 +108,6 @@ export default class HudPockets extends HudCommon {
             y: this.view.top + this.view.margin.top,
         };
         let highlight = this.makeBlock(highlightMargin.x, highlightMargin.y,32,32,'BLOCK_SHALLOW_YELLOW_FRAME');
-        //highlight.setVisible(false);
         highlight.setDepth(100250);
         return highlight;
     }
@@ -676,9 +675,9 @@ export default class HudPockets extends HudCommon {
     addPocketTextBlock() {
         let margin = {
             x: 8,
-            y: this.view.margin.top + 96,
+            y: this.view.margin.top + 72,
         };
-        let display_width = 144;
+        let display_width = 180;
 
         let text = this.makeBitmapText((this.view.right - display_width) - margin.x, this.view.top + margin.y, display_width - 16, '', 8, 'SkeleTalk');
 
@@ -696,7 +695,7 @@ export default class HudPockets extends HudCommon {
             let text_height = this.pocket_textblock.text.getTextBounds().local.height;
 
             //let text_width = this.pocket_textblock.text.getTextBounds().local.width;
-            let display_width = 144;
+            let display_width = 180;
 
             
             this.pocket_textblock.block = this.makeBlock(this.pocket_textblock.text.x - 8, this.pocket_textblock.text.y - 12, display_width, text_height + 24, 'BLOCK_MID_BEIGE_BORDER');

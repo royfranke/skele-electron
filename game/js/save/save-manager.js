@@ -11,7 +11,17 @@ export default class SaveManager {
 
     initializeSave () {
         var data = this.scene.slot;
-        this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
+        console.log(data.POSITION.ADDRESS);
+        if (data.POSITION.ADDRESS != undefined) {
+            console.log("NO HONK");
+            var front = this.scene.exterior.getFrontDoorTilesFromAddress(data.POSITION.ADDRESS.dir, data.POSITION.ADDRESS.number, data.POSITION.ADDRESS.street);
+            this.scene.player.setPositionTile(front.x,front.y + 1);
+        }
+        else {
+            console.log("HONK");
+            this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
+        }
+        
         this.scene.player.setFacing(data.POSITION.FACING);
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
@@ -34,7 +44,7 @@ export default class SaveManager {
         }
         this.scene.manager.hud.hudWatch.plungeWatch();
         this.scene.manager.hud.pocket.setPocketsFromSave([data.POCKETS.SLOTS.SLOT0, data.POCKETS.SLOTS.SLOT1, data.POCKETS.SLOTS.SLOT2]);
-        this.scene.interior.setPortalFromSave(data.POSITION.RETURN);
+        //this.scene.interior.setPortalFromSave(data.POSITION.RETURN);
     }
 
     initializeTutorialSave () {

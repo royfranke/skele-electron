@@ -29,6 +29,7 @@ export default class PlayerManager {
     this.locale = this.scene[this.scene.place];
     this.underfoot = null;
     this.hopping = false;
+    this.tripping = false;
     this.player_focus = false;
   }
 
@@ -77,7 +78,6 @@ export default class PlayerManager {
     if (this.hopping) {
       return;
     }
-    console.log("Hopping");
     this.hopping = true;
     this.setState('HOP');
     this.scene.time.addEvent({
@@ -86,6 +86,22 @@ export default class PlayerManager {
         callback: () => {
             this.hopping = false;
             this.setState('IDLE');
+        }
+    });
+  }
+
+  trip() {
+    if (this.tripping) {
+      return;
+    }
+    this.tripping = true;
+    this.setState('TRIP');
+    this.scene.time.addEvent({
+        delay: 1500,
+        loop: false,
+        callback: () => {
+            this.setState('IDLE');
+            this.tripping = false;
         }
     });
   }
@@ -136,7 +152,7 @@ export default class PlayerManager {
         this.updateActiveTile();
         this.playerInput.update();
 
-        if (this.state.name != 'HOP' && this.state.name != 'PICKUP' && this.state.name != 'EXCHANGE') {
+        if (this.state.name != 'HOP' && this.state.name != 'PICKUP' && this.state.name != 'EXCHANGE' && this.state.name != 'DIG' && this.state.name != 'EAT' && this.state.name != 'PUSH' && this.state.name != 'PULL' && this.state.name != 'TRIP') {
           if (this.playerInput.held) {
             if (this.playerInput.run) {
               this.setState('RUN');
@@ -183,6 +199,9 @@ export default class PlayerManager {
       return 0;
     }
     if (this.state.name == 'DIG') {
+      return 0;
+    }
+    if (this.state.name == 'TRIP') {
       return 0;
     }
     if (this.state.name == 'EAT') {
@@ -288,13 +307,12 @@ export default class PlayerManager {
   }
 
   goToSleep () {
-    this.scene.app.camera.end();
     var tip = "Another dawn begins.";
     this.scene.app.appView.drawTip(tip);
     console.log("Saving game");
     this.scene.manager.time.setTimeFromSleep();
     this.scene.app.saveManager.saveGameData();
-    this.scene.app.camera.wake();
+    //this.scene.app.camera.wake();
     return;
   }
 

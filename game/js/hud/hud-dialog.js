@@ -43,6 +43,7 @@ export default class HudDialog extends HudCommon {
             else {
                 this.closeDialog();
             }
+            this.scene.events.emit('DIALOG_REPLY');
         }
         else {
             /// First change the frame of the button to indicate selection
@@ -77,6 +78,8 @@ export default class HudDialog extends HudCommon {
 
                 if (next != 0) {
                     this.scene.manager.dialog.triggerDialog(next);
+                    this.scene.events.emit('DIALOG_NEXT');
+                    
                 }
                 else {
                             
@@ -194,7 +197,7 @@ export default class HudDialog extends HudCommon {
         console.log("Focusing dialog");
     }
 
-    tellDialogBox (content, next=0, trigger=null, court=null) {
+    tellDialogBox (content, next=0, trigger=null, court=null, id=0) {
         if (!this.currentDialog) {
             this.currentDialog = true;
             this.scene.manager.setFocus('DIALOG');
@@ -202,6 +205,7 @@ export default class HudDialog extends HudCommon {
             this.dialogBox.dialog.next = next;
             this.dialogBox.dialog.trigger = trigger;
             this.dialogBox.dialog.court = court;
+            this.dialogBox.dialog.id = id;
             // replace ’ with \'
             content = content.replace('’', '\'');
             /// Break the dialog up by word
@@ -234,8 +238,15 @@ export default class HudDialog extends HudCommon {
     }
 
     closeDialog () {
+        var id = 0;
+        if (this.dialogBox != undefined && this.dialogBox.dialog != undefined && this.dialogBox.dialog.id != undefined) {
+            id = this.dialogBox.dialog.id;
+        }
         this.clearDialog();
         this.scene.events.emit('DIALOG_CLOSE');
+        if (id > 0) {
+            this.scene.events.emit('DIALOG_CLOSE_ID_'+id);
+        }
         this.scene.manager.setFocus('PLAYER');
     }
 

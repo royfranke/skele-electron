@@ -23,6 +23,10 @@ const NPC_STATES = {
         name: 'EXCHANGE',
         speed: 0
     },
+    TRIP: {
+        name: 'TRIP',
+        speed: 0
+    },
     EAT: {
         name: 'EAT',
         speed: 0

@@ -8,9 +8,9 @@ export default class Room {
         this.scene = scene;
         this.roomsJSON = ROOMS;
         this.config = this.roomsJSON["room_"+room_id];
-
+        
         this.config = this.convertToInteger(this.config);
-
+        this.doors = [];
         this.built = false;
         console.log(this.config);
 

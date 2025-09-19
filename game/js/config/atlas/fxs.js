@@ -450,6 +450,26 @@
                                       ],
                   repeat: -1
               },
+                          PRAYER_CANDLE_FRAME_HIGH: {
+                  name: 'Prayer Candle Flame High',
+                  slug: 'PRAYER_CANDLE_FRAME_HIGH',
+                  frames: [
+                                          'PRAYER_CANDLE_FRAME_HIGH-1',
+                                          'PRAYER_CANDLE_FRAME_HIGH-2',
+                                          'PRAYER_CANDLE_FRAME_HIGH-3'
+                                      ],
+                  repeat: -1
+              },
+                          PRAYER_CANDLE_FRAME_MID: {
+                  name: 'Prayer Candle Flame Mid',
+                  slug: 'PRAYER_CANDLE_FRAME_MID',
+                  frames: [
+                                          'PRAYER_CANDLE_FRAME_MID-1',
+                                          'PRAYER_CANDLE_FRAME_MID-2',
+                                          'PRAYER_CANDLE_FRAME_MID-3'
+                                      ],
+                  repeat: -1
+              },
                           SELECTOR_PUNCHY_: {
                   name: 'Punchy Selector',
                   slug: 'SELECTOR_PUNCHY_',

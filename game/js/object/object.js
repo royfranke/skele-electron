@@ -98,10 +98,11 @@ export default class Object {
                         break;
                     }
                     var new_item = this.scene.manager.itemManager.newItemToWorld(pos_x, pos_y, product_info.slug);
+
                     new_item.sprite.setDepth(((_y + .5) * 16) + 1);
                     new_item.updateStackCount(product_info.stack - 1);
                     new_item.setOwner(owner);
-
+                    new_item.hasFX = false;
                     switch (slots) {
                         case 3: new_item.sprite.y = new_item.sprite.y + 4;
                         break;
@@ -318,6 +319,17 @@ export default class Object {
 
     setPortal (portal) {
         this.portal = portal;
+    }
+
+    getPortal () {
+        return this.portal;
+    }
+
+    setParams (params) {
+        // Used for setting extra parameters from save data
+        if (params.state != undefined) {
+            this.setState(params.state, true);
+        }
     }
 
     setLight (keylight) {

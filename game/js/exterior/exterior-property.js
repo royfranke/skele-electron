@@ -139,6 +139,7 @@ export default class PropertyLine {
 
         if (this.prop.structure.type == 'DUPLEX-LEFT') {
             _x = left + 2;
+            this.buildGarden(_x, _y-1, 6, 3);
         }
         if (this.prop.structure.type == 'DUPLEX-RIGHT') {
             _x = left;
@@ -526,8 +527,6 @@ export default class PropertyLine {
     }
 
     buildEntry(_x, _y) {
-        /// Get the portal from the property object, whenever that gets built out... Until then, hardcode it.
-        //this.front_door.setPortal({ room_id: '6', x: 3, y: 9, facing: 'N' });
         this.setFrontDoor(_x, _y);
         let hasDoormat = this.roll([0,1,2,3]);
         if (hasDoormat > 0) {
@@ -547,6 +546,10 @@ export default class PropertyLine {
         this.buildYardBorder(_x, 2); // path width
     }
 
+    getFrontDoor() {
+        return this.front_door;
+    }
+
     setFrontDoor(_x, _y) {
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.door);
         this.front_door.sprite.setDepth(this.front_door.sprite.depth - 4);
@@ -555,8 +558,12 @@ export default class PropertyLine {
             let room_id = this.prop.portal.room_id;
             let x = this.prop.portal.x;
             let y = this.prop.portal.y;
+            this.prop.portal.world = {
+                x: _x + 1,
+                y: _y + 1
+            };
 
-            this.front_door.setPortal({ room_id: room_id, x: x, y: y, facing: 'N', return: { ROOM: -1, X: _x + 1, Y: _y + 3, FACING: 'S', SLUG: this.settings.door } });
+            this.front_door.setPortal({ room_id: room_id, x: x, y: y, facing: 'N', world: this.prop.portal.world, return: { ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door } });
         }
     }
 
@@ -565,7 +572,7 @@ export default class PropertyLine {
 
         for (var j = 1; j < height - 1; j++) {
             for (var i = 1; i < width - 1; i++) {
-                var exists = this.roll([1,2,3]);
+                var exists = this.roll([1,2,3,4,4,4,4]);
                 if (exists == 1) {
                     var dandelion = this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'DANDELION', Phaser.Math.RND.between(1, 44));
                 }
@@ -574,10 +581,12 @@ export default class PropertyLine {
                     
                 }
                 else if (exists == 3) {
-                    var sorrel = this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'FOXTAIL', Phaser.Math.RND.between(1, 28));
+                    var foxtail = this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'FOXTAIL', Phaser.Math.RND.between(1, 28));
                     
                 }
-
+                else if (exists == 4) {
+                    var milkweed = this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'MILKWEED', Phaser.Math.RND.between(20, 52));
+                }
             }
         }
     }

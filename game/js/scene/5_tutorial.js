@@ -2,6 +2,7 @@ import AppManager from "../app/app-manager.js";
 import GameManager from "../game/game-manager.js";
 import InteriorManager from "../interior/interior-manager.js";
 import PlayerManager from "../player/player-manager.js";
+import TutorialManager from "../tutorial/tutorial-manager.js";
 
 /**
  * Tutorial
@@ -30,12 +31,14 @@ export default class TutorialScene extends Phaser.Scene {
          //// Load the save!
          this.app.initializeTutorialSave();
 
+         this.tutorial = new TutorialManager(this);
+
        // Set timeout before tutorial begins
        this.time.addEvent({
         delay: 1000,
         callback: () => {
             
-            this.manager.hud.startTutorial();
+            this.tutorial.startTutorial();
         }
     });
     
@@ -54,9 +57,10 @@ export default class TutorialScene extends Phaser.Scene {
         this.slot = this.app.softSaveGameData();
         if (this.verbose) console.log(this.slot);
         this.slot.POSITION.X = 9 + 1;
-        this.slot.POSITION.Y = 6 + 3;
+        this.slot.POSITION.Y = 6 + 5;
         this.slot.POSITION.FACING = 'S';
         this.slot.POSITION.ROOM = 3;
+        this.slot.TUTORIAL = this.tutorial.tutorial_step;
 
         this.scene.stop('Tutorial Scene');
         this.scene.start('Interior Scene', {slot: this.slot});

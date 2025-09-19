@@ -1,3 +1,4 @@
+import KEYLIGHTS from "../config/key-light.js";
 /* Item Registry */
 /* Manages items on each scene map */
 
@@ -73,6 +74,14 @@ export default class ItemRegistry {
             // This spot was already empty
             return false;
         }
+    }
+    
+    updateLights (light) {
+        Object.entries(this.registry).forEach(([key, value]) => {
+            if (value != null) {
+                value.setLight(KEYLIGHTS[light]);
+            }
+        });
     }
     
 }
