@@ -41,6 +41,7 @@ export default class Block {
         let groundLayer = this.scene[this.scene.locale].groundLayer;
         if (block.ground.toUpperCase() == 'FOREST') {
             //this.setForest();
+            groundLayer.weightedRandomize(TILES['DIRT'].FILL_, block.left, block.top, block.width, block.height);
         }
         else {
             groundLayer.weightedRandomize(TILES[block.ground.toUpperCase()].FILL_, block.left, block.top, block.width, block.height);
@@ -173,7 +174,35 @@ export default class Block {
             this.buildStreetPole(this.block.right-1, this.block.top+7,{TELEPHONE:true},false);
 
         }
+        
+        if (this.block.ground.toUpperCase() == 'FOREST') {
+            this.buildForest();
+        }
     
+    }
+
+    buildForest () {
+        const block = this.block;
+        const groundLayer = this.scene[this.scene.locale].groundLayer;
+
+        for (let h = 0; h < block.height - (block.offset.n + block.offset.s); h++) {
+            for (let w = 0; w < block.width - (block.offset.w + block.offset.e); w++) {
+                var tile = Phaser.Math.RND.between(0, 128);
+                var x = block.left+w+block.offset.w;
+                var y = block.top+h+block.offset.n;
+
+                switch (tile) {
+                    case 12:
+                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION',Phaser.Math.RND.between(1,44));
+                    break;
+                    case 13:
+                        var stump = this.scene.manager.objectManager.newObjectToWorld(x, y, 'STUMP_SEAT');
+                        stump.setVariety(Phaser.Math.RND.between(1,3));
+                        w++;
+                    break;
+                }
+            }
+        }
     }
 
 

@@ -53,6 +53,7 @@ export default class GameManager {
     wake () {
         console.log("Waking!");
         if (this.hud != null && this.hud.hudInput != undefined) {
+            this.hud.pocket.setPocketsFromSave();
             this.hud.refreshDisplay();
         }
 

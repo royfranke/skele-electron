@@ -12,7 +12,7 @@ export default class AppView {
         this.scene = scene;
         this.view = view;
         this.tip = null;
-        this.version = '1.0.7';
+        this.version = '1.2.1';
         this.create(state_name);
     }
 
@@ -34,17 +34,6 @@ export default class AppView {
         }
         
         this.state_name = state_name;
-    }
-
-    createMain() {
-
-        var start_top = this.view.top + (this.view.height / 1.5);
-        var start_left = this.view.left;
-        var color = ['#32675a', '#3d56d2', '#7758ab', '#974d9e', '#d93232', '#f47832', '#ed931e', '#f2b22b', '#f8d239'];
-        for (var i = 0; i < color.length; i++) {
-            this.scene.add.dom(start_left + (4 * i), start_top - (4 * i), 'div', 'animation-delay:' + (i * .5) + 's;width: ' + this.view.width + 'px;color:' + color[i], 'Summer Break').setOrigin(0).setClassName('title-card');
-        }
-        this.addVersion();
     }
 
     drawTip(tip) {
@@ -99,6 +88,7 @@ export default class AppView {
 
     createLoad() {
         this.addVersion();
+        var self = this;
         var tip_message = [
             '"Don\'t forget about your pile of homework."',
             '"Keep good company."',
@@ -122,6 +112,40 @@ export default class AppView {
             var top = this.view.top + this.view.margin.top + ((height + 4) *i);
             var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
             var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_RED_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
+
+            
+            // Mouse/Touch Input
+            slot_slice.setInteractive(); 
+            if (i === 0) {
+                slot_slice.on('pointerover', function (pointer) {
+                    // This function will be called when the menu block is clicked or tapped
+                    self.scene.app.menu.setSelected(1);
+                });
+                slot_slice.on('pointerdown', function (pointer) {
+                    // This function will be called when the menu block is clicked or tapped
+                    self.scene.app.menu.select(1);
+                });
+            }
+            if (i === 1) {
+                slot_slice.on('pointerover', function (pointer) {
+                    // This function will be called when the menu block is clicked or tapped
+                    self.scene.app.menu.setSelected(2);
+                });
+                slot_slice.on('pointerdown', function (pointer) {
+                    // This function will be called when the menu block is clicked or tapped
+                    self.scene.app.menu.select(2);
+                });
+            }
+            if (i === 2) {
+                slot_slice.on('pointerover', function (pointer) {
+                    // This function will be called when the menu block is clicked or tapped
+                    self.scene.app.menu.setSelected(3);
+                });
+                slot_slice.on('pointerdown', function (pointer) {
+                    // This function will be called when the menu block is clicked or tapped
+                    self.scene.app.menu.select(3);
+                });
+            }
             
             
 

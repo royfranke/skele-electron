@@ -13,9 +13,9 @@ export default class HudPocket {
     
     setSaveFromPockets() {
         let pockets = {
-            SLOT0: this.getPocket(0),
-            SLOT1: this.getPocket(1),
-            SLOT2: this.getPocket(2)
+            SLOT0: this.getPocketForSave(0),
+            SLOT1: this.getPocketForSave(1),
+            SLOT2: this.getPocketForSave(2)
         };
         for (var i = 0; i < 3; i++) {
             if (pockets['SLOT'+i].STATE != 'EMPTY') {
@@ -23,8 +23,8 @@ export default class HudPocket {
                 if (pockets['SLOT'+i][pockets['SLOT'+i].STATE].items != undefined) {
                     pockets['SLOT'+i][pockets['SLOT'+i].STATE].items.forEach(function (item) {
                         items.push({
-                            ITEM: item.info.slug,
-                            STACK: item.stackCount
+                            ITEM: item.info != undefined ? item.info.slug : item,
+                            STACK: item.stackCount ? item.stackCount : 1
                         });
                     });
                 }
@@ -32,21 +32,18 @@ export default class HudPocket {
                 let item = pockets['SLOT'+i][pockets['SLOT'+i].STATE];
                 
                 pockets['SLOT'+i][pockets['SLOT'+i].STATE] = {
-                    ITEM: item.info.slug,
-                    STACK: item.stackCount,
+                    ITEM: item.info != undefined ? item.info.slug : item,
+                    STACK: item.stackCount ? item.stackCount : 1,
                     ITEMS: items
                 };
             }
         }
-        console.log(pockets);
         return pockets;
 
     }
 
     setPocketsFromSave() {
         console.log("Setting pockets from save");
-        console.log(this.scene.slot.POCKETS.SLOTS);
-
         if (this.scene.manager != undefined) {
             var itemManager = this.scene.manager.itemManager;
         }
@@ -68,7 +65,6 @@ export default class HudPocket {
                     
                     pocket[pocket.STATE].ITEMS.forEach(function (item) {
                         if (itemManager != false) {
-                            //console.log(item.ITEM);
                             let stack_item = itemManager.newItem(item.ITEM);
                             if (item.STACK != undefined) {
                                 stack_item.stackCount = item.STACK;
@@ -86,7 +82,6 @@ export default class HudPocket {
                 }
                 
             }
-
             this.setPocket(i, pocket.STATE, new_item);
         }
     }
@@ -108,8 +103,46 @@ export default class HudPocket {
         }
     }
 
-    getFlatPocket(pocketIndex) {
-        return this.pockets[pocketIndex];
+    getPocketForSave(pocketIndex) {
+        console.log("Getting Pocket For Save...");
+        var pocket = this.pockets[pocketIndex];
+        var item_list = [];
+        if (pocket[pocket.STATE] != 'DISALLOWED' && pocket[pocket.STATE] != null) {
+            if (pocket[pocket.STATE].items != undefined) {
+                pocket[pocket.STATE].items.forEach(function (item) {
+                    item_list.push({ITEM: item.info.slug, STACK: item.stackCount});
+                });
+            }
+        }
+    
+        var save_pocket = {
+            TYPE: pocket.TYPE,
+            STATE: pocket.STATE,
+            EMPTY: pocket.EMPTY,
+            HOLDS: pocket.HOLDS,
+            USES: pocket.USES,
+            WEARS: pocket.WEARS
+        };
+
+        if (pocket.HOLDS != 'DISALLOWED' && pocket.HOLDS != null)
+             {
+                save_pocket.HOLDS.ITEM = pocket.HOLDS.info.slug; save_pocket.HOLDS.STACK = pocket.HOLDS.stackCount;
+                save_pocket.HOLDS.ITEMS = item_list;
+                }
+
+        if (pocket.USES != 'DISALLOWED' && pocket.USES != null)
+                {
+                save_pocket.USES.ITEM = pocket.USES.info.slug; save_pocket.USES.STACK = pocket.USES.stackCount;
+                save_pocket.USES.ITEMS = item_list;
+                }
+
+        if (pocket.WEARS != 'DISALLOWED' && pocket.WEARS != null) 
+             {
+                save_pocket.WEARS.ITEM = pocket.WEARS.info.slug; save_pocket.WEARS.STACK = pocket.WEARS.stackCount;
+                save_pocket.WEARS.ITEMS = item_list; 
+             }
+
+        return save_pocket;
     }
 
     getPocket(pocketIndex) {

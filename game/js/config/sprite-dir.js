@@ -10,7 +10,9 @@ const SPRITE_DIR = {
         'TRIP',
         'PICKUP',
         'PUSH',
-        'PULL'
+        'PULL',
+        'SLEEP',
+        'CURL_UP'
     ],
     FACES: [
         'N',
@@ -350,6 +352,54 @@ const SPRITE_DIR = {
             S: {
                 START: 0,
                 END: 12,
+            }
+        }
+    },
+    CURL_UP: {
+        ANIM: {
+            N: {
+                START: 0,
+                END: 10,
+            },
+            N_SIDE: {
+                START: 0,
+                END: 10,
+            },
+            SIDE: {
+                START: 0,
+                END: 10,
+            },
+            S_SIDE: {
+                START: 0,
+                END: 10,
+            },
+            S: {
+                START: 0,
+                END: 10,
+            }
+        }
+    },
+    SLEEP: {
+        ANIM: {
+            N: {
+                START: 0,
+                END: 10,
+            },
+            N_SIDE: {
+                START: 0,
+                END: 10,
+            },
+            SIDE: {
+                START: 0,
+                END: 10,
+            },
+            S_SIDE: {
+                START: 0,
+                END: 10,
+            },
+            S: {
+                START: 0,
+                END: 10,
             }
         },
     }

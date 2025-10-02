@@ -118,6 +118,21 @@ export default class TimeManager {
 
     }
 
+    getDateFromSave (save) {
+        var elapsed = {
+            day: save.DAY,
+            hour: save.HOUR,
+            minute: save.MINUTE,
+            second: save.SECOND,
+            alarm: {
+                set: save.ALARM.SET,
+                hour: save.ALARM.HOUR,
+                minute: save.ALARM.MINUTE
+            }
+        };
+        return this.getDate(elapsed);
+    }
+
     getDate (elapsed=this.now) {
         var date = {
             day: elapsed.day + this.start_date,

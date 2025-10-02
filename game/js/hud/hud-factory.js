@@ -2,7 +2,7 @@ export default class HudFactory {
 
     constructor(scene) {
        this.scene = scene;
-
+       this.cursor_hover = { cursor: 'url(assets/images/cursor-hover.png), pointer' };
        this.depth = {
             FOCUS_HINT_SLOT: 80000,
             FOCUS_HINT: 80050,
@@ -28,6 +28,38 @@ export default class HudFactory {
         let quote_block = this.makeBlock(_x-16,_y-16, width+32, quote_text.displayHeight+32, 'BLOCK_MID_CREAM_BORDER');
 
         return {block: quote_block, text: quote_text};
+    }
+
+    makeButton (_x,_y, text = 'OK', button='X') {
+        let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 16).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+
+        let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 24, 'BLOCK_MID_BEIGE_RIGHT');
+        block.setOrigin(1,0);
+
+        let button_block = this.makeBlock(block.x - block.width, block.y, 18, 24, 'BLOCK_MID_SAPPHIRE_LEFT');
+        button_block.setOrigin(1,0);
+        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', button, 16).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0xe2f2f3).setLineSpacing(11);
+        let click_area = this.scene.add.zone(block.x - block.width - 18, block.y, button_block.width + block.width, button_block.height).setOrigin(0).setScrollFactor(0).setDepth(100300).setInteractive(this.cursor_hover);
+
+        
+        let button_data = {
+            block: block,
+            text: slip_text,
+            button: button_block,
+            button_text: button_text,
+            click_area: click_area
+        };
+
+        button_data.click_area.on('pointerover', () => {
+            button_data.block.setFrame('BLOCK_MID_CREAM_RIGHT');
+            button_data.button.setFrame('BLOCK_MID_BLUE_LEFT');
+        });
+        button_data.click_area.on('pointerout', () => {
+            button_data.block.setFrame('BLOCK_MID_BEIGE_RIGHT');
+            button_data.button.setFrame('BLOCK_MID_SAPPHIRE_LEFT');
+        });
+
+        return button_data;
     }
 
     makeSlip(_x, _y, text = 'HOLD', button='X') {

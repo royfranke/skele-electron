@@ -3198,6 +3198,79 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          WOOD_SIDE_TABLE_NO_DRAWER: {
+        name: 'Decorative Wood Side Table',
+        slug: 'WOOD_SIDE_TABLE_NO_DRAWER', 
+        type: 'SIDE_TABLE',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: -6,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        default_state: 'NO_DRAWER',        states: [                {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []},                {
+              name: 'NO_DRAWER',
+              transition: 'false',
+              frames: ['WOOD_SIDE_TABLE_NO_DRAWER-1',]},            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },                           {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
+              },],            slots: 4,
+            items: [],
+
+          interactions: {
+                                  },
+    },
           DINER_TABLE: {
         name: 'Diner Table',
         slug: 'DINER_TABLE', 
@@ -7351,6 +7424,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          AREA_RUG_PINK: {
+        name: 'Pink Area Rug',
+        slug: 'AREA_RUG_PINK', 
+        type: 'RUG',
+        bounding: {
+          h:4, 
+          w:5
+        },
+        base: {
+          h:4, 
+          w:5,
+          x:0, 
+          y:0
+        },
+        depth: -80,
+        sprite: {
+          h:64, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           OBJ_FLYER_PINK: {
         name: 'Pink Flyer',
         slug: 'OBJ_FLYER_PINK', 
@@ -7496,10 +7609,10 @@ const OBJECTS = {
           w:4
         },
         base: {
-          h:2, 
+          h:1, 
           w:4,
           x:0, 
-          y:1
+          y:2
         },
         depth: -16,
         sprite: {
@@ -7522,23 +7635,23 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'SLEEP', stateTrigger: 'SLEEPING', validStates: ['CURLED_UP']
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
           }, {
-            name: 'CURL UP ON', stateTrigger: 'CURLED_UP', validStates: ['DEFAULT']
+            name: 'CURL UP ON', stateTrigger: 'CURL_UP', validStates: ['DEFAULT']
           }],
         default_state: 'DEFAULT',        states: [            {
-              name: 'CURLED_UP',
-              transition: 'false',
-              frames: []
-              },               {
-              name: 'SLEEPING',
-              transition: 'false',
-              frames: []
-              },            {
               name: 'DEFAULT',
               transition: 'false',
               frames: []
-              },               ],
+              },               {
+              name: 'SITTING',
+              transition: 'false',
+              frames: []
+              },                           {
+              name: 'CURL_UP',
+              transition: 'SLEEPING',
+              frames: []
+              },],
 
           interactions: {
                                   },
@@ -8536,6 +8649,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          DECOR_SAMPLER: {
+        name: 'Sampler',
+        slug: 'DECOR_SAMPLER', 
+        type: 'DECOR_ART',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           SOFA_SHLUBBY_1: {
         name: 'Shlubby Sofa',
         slug: 'SOFA_SHLUBBY_1', 
@@ -8571,23 +8724,23 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'SLEEP', stateTrigger: 'SLEEPING', validStates: ['CURLED_UP']
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
           }, {
-            name: 'CURL UP ON', stateTrigger: 'CURLED_UP', validStates: ['DEFAULT']
+            name: 'CURL UP ON', stateTrigger: 'CURL_UP', validStates: ['DEFAULT']
           }],
         default_state: 'DEFAULT',        states: [            {
-              name: 'CURLED_UP',
-              transition: 'false',
-              frames: []
-              },               {
-              name: 'SLEEPING',
-              transition: 'false',
-              frames: []
-              },            {
               name: 'DEFAULT',
               transition: 'false',
               frames: []
-              },               ],
+              },               {
+              name: 'SITTING',
+              transition: 'false',
+              frames: []
+              },                           {
+              name: 'CURL_UP',
+              transition: 'SLEEPING',
+              frames: []
+              },],
 
           interactions: {
                                   },
@@ -10383,9 +10536,9 @@ const OBJECTS = {
           h:1, 
           w:1,
           x:0, 
-          y:1
+          y:2
         },
-        depth: 17,
+        depth: 33,
         sprite: {
           h:32, 
           w:16,
@@ -12968,7 +13121,13 @@ const OBJECTS = {
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
           }],
-        default_state: 'CLOSED',        states: [            {
+        default_state: 'CLOSED',        states: [                {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []},                {
+              name: 'NO_DRAWER',
+              transition: 'false',
+              frames: []},            {
               name: 'CLOSED',
               transition: 'false',
               frames: ['WOOD_SIDE_TABLE-1',]

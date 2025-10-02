@@ -56,12 +56,32 @@ const PRELOAD_SOUND = [
         FILES: ['gifted-item.wav']
     },
       {
+        NAME: 'STEP_GRASS_RUN',
+        FILES: ['HighGrassStep.wav','HighGrassStep1.wav','HighGrassStep2.wav']
+    },
+      {
+        NAME: 'STEP_GRASS_WALK',
+        FILES: ['GrassStep1.wav','GrassStep2.wav','GrassStep3.wav']
+    },
+      {
+        NAME: 'STEP_HARD_SQUEAKY',
+        FILES: ['HardStepSqueak.wav','HardStepSqueak2.wav']
+    },
+      {
+        NAME: 'STEP_HARD',
+        FILES: ['HardStep1.wav','HardStep2.wav','HardStep3.wav']
+    },
+      {
         NAME: 'INVENTORY_INVALID',
         FILES: ['skele-invalid-1.wav','skele-invalid-2.wav','skele-invalid-3.wav']
     },
       {
         NAME: 'ITEM_PUT_AWAY',
         FILES: ['item-put-away-1.wav','item-put-away-2.wav','item-put-away-3.wav']
+    },
+      {
+        NAME: 'KNOCKING',
+        FILES: ['Knocking.wav']
     },
       {
         NAME: 'MENU_INPUT',
@@ -88,8 +108,20 @@ const PRELOAD_SOUND = [
         FILES: ['ringing-phone.wav']
     },
       {
+        NAME: 'STEP_SOFT',
+        FILES: ['SoftStep.wav','SoftStep1.wav','SoftStep2.wav']
+    },
+      {
         NAME: 'WELL_DONE_TINY',
         FILES: ['tiny-well-done.wav']
+    },
+      {
+        NAME: 'TITLE_MUSIC',
+        FILES: ['IntroSong.wav']
+    },
+      {
+        NAME: 'TRIP',
+        FILES: ['Trip2.wav']
     },
       {
         NAME: 'WAKE_FROM_DREAM',

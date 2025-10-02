@@ -117,7 +117,7 @@ export default class PropertyLine {
             return;
         }
 
-        this.setMaterials();
+        this.setMaterials(this.prop.structure.settings ? this.prop.structure.settings : {});
         const top = this.prop.lines.top;
         const left = this.prop.lines.left;
         const bottom = this.prop.lines.bottom;
@@ -127,8 +127,6 @@ export default class PropertyLine {
         const facing = this.prop.address.facing;
 
         //check for "detached" tag-- make perimeter of space around building if found
-
-
 
         let yard = 5;
 
@@ -146,7 +144,7 @@ export default class PropertyLine {
             this.buildGarden(_x + 4, _y-1, 6, 3);
         }
 
-        var material = this.roll([1, 2, 1, 1, 2, 2]);
+        var material = this.roll([1, 2]);
 
         if (material == 0) {
             var colors = ['YELLOW', 'BROWN', 'RED', 'GRAY', 'WHITE'];

@@ -29,8 +29,10 @@ export default class PlayerManager {
     this.locale = this.scene[this.scene.place];
     this.underfoot = null;
     this.hopping = false;
+    this.running_hop = false;
     this.tripping = false;
     this.player_focus = false;
+    this.audio = false;
   }
 
 
@@ -78,16 +80,40 @@ export default class PlayerManager {
     if (this.hopping) {
       return;
     }
+    var state = this.getState();
+    if (state.name == 'RUN') {
+      this.running_hop = true;
+    }
+    else if (state.name == 'WALK') {
+      this.running_hop = false;
+    }
     this.hopping = true;
     this.setState('HOP');
     this.scene.time.addEvent({
         delay: 500,
         loop: false,
         callback: () => {
-            this.hopping = false;
-            this.setState('IDLE');
+            this.endHop();
         }
     });
+  }
+
+  endHop () {
+    this.hopping = false;
+    //// Pick a random number to see if we trip
+    var trip_chance = Phaser.Math.Between(1,100);
+    var trip_threshold = 3; // 5% chance to trip
+    // Check if we were running or walking before the hop
+    if (this.running_hop) {
+      this.running_hop = false;
+      trip_threshold = 40;
+    }
+    
+    if (trip_chance <= trip_threshold) {
+      this.trip();
+      return;
+    }
+    this.setState('IDLE');
   }
 
   trip() {
@@ -96,8 +122,11 @@ export default class PlayerManager {
     }
     this.tripping = true;
     this.setState('TRIP');
+    /// Set the current frame to 0
+    this.playerSprite.sprite.anims.setCurrentFrame(this.playerSprite.sprite.anims.currentAnim.frames[0]);
+
     this.scene.time.addEvent({
-        delay: 1500,
+        delay: 1625,
         loop: false,
         callback: () => {
             this.setState('IDLE');
@@ -176,6 +205,66 @@ export default class PlayerManager {
         this.stateChanged();
       }
       this.action.update();
+
+      if (this.speed > 0 && this.audio == false) {
+        /// Get the current frame for the player
+        if ( (this.state.name == 'WALK' || this.state.name == 'RUN') && (this.playerSprite.sprite.anims.currentFrame.index == 1 || this.playerSprite.sprite.anims.currentFrame.index == 5)) {
+          this.audio = true;
+          if (this.underfoot != undefined && (this.underfoot.TYPE == 'ASPHALT' || this.underfoot.TYPE == 'CEMENT' || this.underfoot.TYPE == 'CROSSWALK' || this.underfoot.TYPE == 'PLAZA' || this.underfoot.TYPE == 'STREET')) {
+            var step = this.scene.manager.hud.hudSound.play('STEP_HARD');
+          }
+          else if (this.underfoot != undefined && (this.underfoot.TYPE == 'TILE' || this.underfoot.TYPE == 'LINOLEUM')) {
+            var step = this.scene.manager.hud.hudSound.play('STEP_HARD_SQUEAKY');
+          }
+          else if (this.underfoot != undefined && (this.underfoot.TYPE == 'GRASS' || this.underfoot.TYPE == 'MEADOW' || this.underfoot.TYPE == 'MARSH')) {
+            /// Get whether running or walking
+            if (this.state.name == 'RUN') {
+              var step = this.scene.manager.hud.hudSound.play('STEP_GRASS_RUN');
+            }
+            else {
+              var step = this.scene.manager.hud.hudSound.play('STEP_GRASS_WALK');
+            }
+          }
+          else {
+            var step = this.scene.manager.hud.hudSound.play('STEP_SOFT');
+          }
+          
+          this.scene.time.addEvent({
+            delay: 250,
+            loop: false,
+            callback: () => {
+                this.audio = false;
+            }
+          });
+        }
+
+        if ( this.state.name == 'HOP' && (this.playerSprite.sprite.anims.currentFrame.index == 4)) {
+          this.audio = true;
+          var step = this.scene.manager.hud.hudSound.play('STEP_HARD');
+          this.scene.time.addEvent({
+            delay: 250,
+            loop: false,
+            callback: () => {
+                this.audio = false;
+            }
+          });
+        }
+
+        
+      }
+      else if (this.audio == false) {
+        if ( this.state.name == 'TRIP' && (this.playerSprite.sprite.anims.currentFrame.index == 2)) {
+          this.audio = true;
+          var step = this.scene.manager.hud.hudSound.play('TRIP');
+          this.scene.time.addEvent({
+            delay: 250,
+            loop: false,
+            callback: () => {
+                this.audio = false;
+            }
+          });
+        }
+      }
     }
     else { // If focus off player
       var last = this.getLastFocus();
@@ -202,6 +291,9 @@ export default class PlayerManager {
       return 0;
     }
     if (this.state.name == 'TRIP') {
+      return 0;
+    }
+    if (this.state.name == 'SLEEP') {
       return 0;
     }
     if (this.state.name == 'EAT') {
@@ -306,12 +398,25 @@ export default class PlayerManager {
     this.coinpurse.addDollar(dollar_amount);
   }
 
-  goToSleep () {
-    var tip = "Another dawn begins.";
-    this.scene.app.appView.drawTip(tip);
-    console.log("Saving game");
-    this.scene.manager.time.setTimeFromSleep();
-    this.scene.app.saveManager.saveGameData();
+  goToSleep (x_,y_) {
+    this.scene.player.playerSprite.footShadow.setVisible(false);
+    this.scene.player.setPositionTile(x_,y_ + .5);
+    this.scene.player.setState('CURL_UP');
+    this.scene.time.addEvent({
+        delay: 1250,
+        loop: false,
+        callback: () => {
+            this.scene.player.setState('SLEEP');
+            this.scene.time.addEvent({
+              delay: 2500,
+              loop: false,
+              callback: () => {
+                  this.scene.save();
+              }
+          });
+        }
+    });
+    
     //this.scene.app.camera.wake();
     return;
   }

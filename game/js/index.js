@@ -7,6 +7,7 @@ import LoadGameScene from "./scene/4_load-game.js";
 import TutorialScene from "./scene/5_tutorial.js";
 import GameScene from "./scene/6_game.js";
 import InteriorScene from "./scene/7_interior.js";
+import SaveScene from "./scene/7_save.js";
 import CourtsScene from "./scene/8_courts.js";
 
 const config = {
@@ -26,6 +27,7 @@ const config = {
     TutorialScene,
     GameScene,
     InteriorScene,
+    SaveScene,
     CourtsScene
   ],
   physics: {

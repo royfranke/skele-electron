@@ -104,12 +104,17 @@ export default class PreloadManager{
     const states = SPRITE_DIR.STATES;
     states.forEach(function (state, index) {
       if (verbose) console.log("Loading state: "+state);
+      var frameWidth = 32;
+      var frameHeight = 32;
+      if (state == 'SLEEP' || state == 'CURL_UP') {
+        frameWidth = 48;
+      }
       self.load.spritesheet(
         "player-"+state,
         path+"spritesheets/skele_"+state+"-sheet.png",
         {
-          frameWidth: 32,
-          frameHeight: 32
+          frameWidth: frameWidth,
+          frameHeight: frameHeight
         }
       );
       count++;

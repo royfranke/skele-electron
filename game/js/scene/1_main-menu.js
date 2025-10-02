@@ -17,6 +17,7 @@ export default class MainMenuScene extends Phaser.Scene {
 
     create() {
         console.log("Main Menu Scene");
+        this.version = '1.2.1';
         this.data.settings = this.cache.json.get('SETTINGSCONFIG');
         this.ITEMS = ITEMS;
 
@@ -75,7 +76,7 @@ export default class MainMenuScene extends Phaser.Scene {
     }
 
     assembleVersion() {
-        let version = this.add.bitmapText(this.camera.view.left + this.camera.view.margin.left + 56, this.camera.view.bottom - 24, 'SkeleNotebook', 'v1.2.0');
+        let version = this.add.bitmapText(this.camera.view.left + this.camera.view.margin.left + 56, this.camera.view.bottom - 24, 'SkeleNotebook', this.version);
         version.setOrigin(0,0);
         version.setFontSize(8);
         version.setTintFill(0xb29638);
@@ -83,7 +84,7 @@ export default class MainMenuScene extends Phaser.Scene {
     }
 
     assembleBackground() {
-        let background = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_MID_SAPPHIRE_FAT_BORDER');
+        let background = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_MID_DARK_FAT_BORDER');
         background.setDepth(1);
 
         let background_frame = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_SHALLOW_RED_EDGE_FRAME');

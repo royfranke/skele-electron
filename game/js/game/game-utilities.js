@@ -43,7 +43,7 @@ export default class GameUtilities {
             var tile = layer.getTileAt(_x,_y);
             var tile_type = GROUND_LOOKUP[tile.index];
 
-            if (tile_type == undefined) { return GROUND_TYPE['DIRT']; }
+            if (tile_type == undefined) { return GROUND_TYPE['VOID']; }
             return GROUND_TYPE[tile_type];
         }
     }

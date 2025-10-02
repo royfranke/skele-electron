@@ -65,6 +65,19 @@ export default class Object {
         this.chestFunctions(items);
     }
 
+    setVariety(variety) {
+        if (variety != undefined && variety > 0 && variety <= this.info.varieties) {
+            this.variety = variety;
+        }
+        else {
+            this.variety = Phaser.Math.Between(1, this.info.varieties);
+        }
+        if (this.sprite != null) {
+            var frame = this.info.slug+'-'+this.variety;
+            this.sprite.setFrame(frame);
+        }
+    }
+
     setShelfProducts (_x, _y, items, owner, start_at=0) {
         var slots = 4;
         if (this.on_shelf == undefined) {
@@ -286,9 +299,13 @@ export default class Object {
             return this.scene.app.saveManager.saveGameData();
         }
 
-        if (action == 'SLEEP') {
+        if (action == 'CURL UP ON') {
             console.log("Sleeping - Saving game");
-            return this.scene.player.goToSleep();
+            /// get the center of this object
+            var x = (this.tile_x - this.info.base.x) + (this.info.sprite.w / 2)/ 16;
+            var y = (this.tile_y - this.info.base.y)+ (this.info.sprite.h / 2)/ 16;
+            this.sprite.setDepth(this.sprite.depth - 32); 
+            return this.scene.player.goToSleep(x,y);
         }
 
         if (action == 'RING') {

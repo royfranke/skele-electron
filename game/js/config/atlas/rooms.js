@@ -83,9 +83,10 @@ delivers: [
             },
                             front_room: 1,
         roomData: { 
-                featureList: [{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA","params":{}},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN","params":{}},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW","params":{}},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER","params":{}},{"x":"0","y":"8","slug":"BASKET_RACK","params":{}},{"x":"0","y":"10","slug":"CONE_UPRIGHT","params":{}},{"x":"1","y":"8","slug":"CARDBOARD_FLOOR_MAT","params":{}},{"x":"0","y":"3","slug":"STORE_COUNTER_BONEDEGA_1","params":{}},{"x":"3","y":"3","slug":"STORE_COUNTER_BONEDEGA_3","params":{}},{"x":"1","y":"3","slug":"STAFFED_COUNTER_BONEDEGA","params":{}},{"x":"4","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"4","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"8","y":"9","slug":"MILK_CRATE","params":{}},{"x":"11","y":"7","slug":"FAN_OSCILLATING","params":{}},{"x":"1","y":"11","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA","params":{}},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN","params":{}},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW","params":{}},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER","params":{}},{"x":"0","y":"8","slug":"BASKET_RACK","params":{}},{"x":"0","y":"10","slug":"CONE_UPRIGHT","params":{}},{"x":"1","y":"8","slug":"CARDBOARD_FLOOR_MAT","params":{}},{"x":"0","y":"3","slug":"STORE_COUNTER_BONEDEGA_1","params":{}},{"x":"3","y":"3","slug":"STORE_COUNTER_BONEDEGA_3","params":{}},{"x":"1","y":"3","slug":"STAFFED_COUNTER_BONEDEGA","params":{}},{"x":"4","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"4","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"8","y":"9","slug":"MILK_CRATE","params":{}},{"x":"11","y":"7","slug":"FAN_OSCILLATING","params":{}},{"x":"1","y":"11","slug":"EXT_DOOR_STORE_BLACK","params":{"portal":{"room_id":-1}}},{"x":"1","y":"11","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
-                removalList: [{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"10","y":"0"},{"x":"11","y":"0"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"10","y":"1"},{"x":"11","y":"1"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"10","y":"2"},{"x":"11","y":"2"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"},{"x":"10","y":"3"},{"x":"11","y":"3"},{"x":"0","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"},{"x":"10","y":"11"},{"x":"11","y":"11"}]
+                removalList: [{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"10","y":"0"},{"x":"11","y":"0"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"10","y":"1"},{"x":"11","y":"1"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"10","y":"2"},{"x":"11","y":"2"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"},{"x":"10","y":"3"},{"x":"11","y":"3"},{"x":"0","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"},{"x":"10","y":"11"},{"x":"11","y":"11"}],
+                itemList: []
          }
 }
 , room_3: { 
@@ -100,7 +101,7 @@ delivers: [
     wallSlug: "PAINT.GRAY_WORN_",
         
         roomData: { 
-                featureList: [{"x":"8","y":"4","slug":"SOFA_SHLUBBY_1","params":{}},{"x":"12","y":"5","slug":"WOOD_SIDE_TABLE","params":{}},{"x":"7","y":"4","slug":"OUTLET_SINGLE","params":{}},{"x":"7","y":"4","slug":"NIGHT_LIGHT","params":{}},{"x":"0","y":"6","slug":"HOT_WATER_HEATER","params":{}},{"x":"2","y":"6","slug":"FURNACE","params":{}},{"x":"5","y":"-1","slug":"INT_DOOR_RED_BROWN","params":{"portal":{"room_id":19,"x":10,"y":10}}},{"x":"9","y":"2","slug":"BASEMENT_WINDOW","params":{}},{"x":"9","y":"6","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"8","y":"4","slug":"SOFA_SHLUBBY_1","params":{}},{"x":"12","y":"5","slug":"WOOD_SIDE_TABLE","params":{}},{"x":"7","y":"4","slug":"OUTLET_SINGLE","params":{}},{"x":"7","y":"4","slug":"NIGHT_LIGHT","params":{}},{"x":"0","y":"6","slug":"HOT_WATER_HEATER","params":{}},{"x":"2","y":"6","slug":"FURNACE","params":{}},{"x":"5","y":"-1","slug":"INT_DOOR_RED_BROWN","params":{"portal":{"room_id":19,"x":10,"y":9,"facing":"N"}}},{"x":"9","y":"2","slug":"BASEMENT_WINDOW","params":{}},{"x":"9","y":"6","slug":"FRONTDOOR","params":{}}],
                 recipeList: [{"x":"5","y":"0","slug":"PLANK.BROWN_"},{"x":"6","y":"0","slug":"PLANK.BROWN_"},{"x":"5","y":"1","slug":"STAIRS.CEMENT_"},{"x":"6","y":"1","slug":"STAIRS.CEMENT_"},{"x":"5","y":"2","slug":"STAIRS.CEMENT_"},{"x":"6","y":"2","slug":"STAIRS.CEMENT_"},{"x":"5","y":"3","slug":"STAIRS.CEMENT_"},{"x":"6","y":"3","slug":"STAIRS.CEMENT_"},{"x":"5","y":"4","slug":"STAIRS.CEMENT_"},{"x":"6","y":"4","slug":"STAIRS.CEMENT_"},{"x":"0","y":"6","slug":"TILE.GREEN_CHECKERED_"},{"x":"1","y":"6","slug":"TILE.GREEN_CHECKERED_"},{"x":"2","y":"6","slug":"TILE.GREEN_CHECKERED_"},{"x":"3","y":"6","slug":"TILE.GREEN_CHECKERED_"},{"x":"4","y":"6","slug":"TILE.GREEN_CHECKERED_"},{"x":"0","y":"7","slug":"TILE.GREEN_CHECKERED_"},{"x":"1","y":"7","slug":"TILE.GREEN_CHECKERED_"},{"x":"2","y":"7","slug":"TILE.GREEN_CHECKERED_"},{"x":"3","y":"7","slug":"TILE.GREEN_CHECKERED_"},{"x":"4","y":"7","slug":"TILE.GREEN_CHECKERED_"}],
                 removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"10","y":"0"},{"x":"11","y":"0"},{"x":"12","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"3","y":"1"},{"x":"4","y":"1"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"10","y":"1"},{"x":"11","y":"1"},{"x":"12","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"3","y":"2"},{"x":"4","y":"2"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"10","y":"2"},{"x":"11","y":"2"},{"x":"12","y":"2"},{"x":"0","y":"3"},{"x":"1","y":"3"},{"x":"2","y":"3"},{"x":"3","y":"3"},{"x":"4","y":"3"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"},{"x":"10","y":"3"},{"x":"11","y":"3"},{"x":"12","y":"3"},{"x":"0","y":"4"},{"x":"1","y":"4"},{"x":"2","y":"4"},{"x":"3","y":"4"},{"x":"4","y":"4"},{"x":"7","y":"4"},{"x":"8","y":"4"},{"x":"9","y":"4"},{"x":"10","y":"4"},{"x":"11","y":"4"},{"x":"12","y":"4"},{"x":"0","y":"5"},{"x":"1","y":"5"},{"x":"2","y":"5"},{"x":"3","y":"5"},{"x":"4","y":"5"}],
                 itemList: [{"x":"11","y":"7","slug":"BACKPACK_PURPLE"}]
@@ -110,12 +111,12 @@ delivers: [
     id: 6,
     name: "Auntie Room 1",
     floorWidth: 10,
-    floorHeight: 10,
+    floorHeight: 9,
     wallHeight: 3,
-    overallHeight: 12,
+    overallHeight: 11,
     overallWidth: 12,
-    floorSlug: "PLANK.FILL_",
-    wallSlug: "PAINT.PURPLE_WORN_LIGHT_",
+    floorSlug: "PLANK.BROWN_",
+    wallSlug: "PAINT.DARK_GREEN_WORN_",
         front_room: 6,
         household: { slug: "SKELE_AUNTIE",
 name: "Auntie’s House",
@@ -132,9 +133,9 @@ listingName: "Graves, Marcy", },
             },
  
             roomData: { 
-                featureList: [{"x":"6","y":"2","slug":"INT_DOOR_WHITE","params":{"portal":{"room_id":15,"x":3,"y":9}}},{"x":"0","y":"3","slug":"TABLE_WOOD_SIMPLE","params":{}},{"x":"6","y":"5","slug":"SOFA_PLAID_1","params":{}},{"x":"9","y":"3","slug":"WOOD_SIDE_TABLE","params":{}},{"x":"3","y":"-1","slug":"COUNTERTOP_CORNER_GREEN","params":{}},{"x":"3","y":"0","slug":"UNDERCOUNTER_CABINET_S_PEELING_WOOD","params":{}},{"x":"4","y":"1","slug":"UNDERCOUNTER_CABINET_W_PEELING_WOOD","params":{}},{"x":"5","y":"2","slug":"OUTLET_SINGLE","params":{}},{"x":"5","y":"2","slug":"NIGHT_LIGHT","params":{}},{"x":"5","y":"6","slug":"LAMP_YELLOW_TABLE","params":{}},{"x":"9","y":"2","slug":"ANSWERING_MACHINE","params":{}},{"x":"0","y":"0","slug":"FRIDGE","params":{}},{"x":"2","y":"0","slug":"OVEN_1","params":{}},{"x":"0","y":"5","slug":"DINER_CHAIR_MAROON","params":{}},{"x":"1","y":"8","slug":"EXT_DOOR_WINDOWS_GREEN","params":{"portal":{"room_id":-1}}},{"x":"1","y":"8","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"6","y":"2","slug":"INT_DOOR_WHITE","params":{"portal":{"room_id":15,"x":3,"y":9}}},{"x":"0","y":"3","slug":"TABLE_WOOD_SIMPLE","params":{}},{"x":"9","y":"3","slug":"WOOD_SIDE_TABLE","params":{}},{"x":"3","y":"-1","slug":"COUNTERTOP_CORNER_GREEN","params":{}},{"x":"3","y":"0","slug":"UNDERCOUNTER_CABINET_S_PEELING_WOOD","params":{}},{"x":"4","y":"1","slug":"UNDERCOUNTER_CABINET_W_PEELING_WOOD","params":{}},{"x":"5","y":"2","slug":"OUTLET_SINGLE","params":{}},{"x":"5","y":"2","slug":"NIGHT_LIGHT","params":{}},{"x":"9","y":"2","slug":"ANSWERING_MACHINE","params":{}},{"x":"0","y":"0","slug":"FRIDGE","params":{}},{"x":"2","y":"0","slug":"OVEN_1","params":{}},{"x":"0","y":"5","slug":"DINER_CHAIR_MAROON","params":{}},{"x":"1","y":"8","slug":"EXT_DOOR_WINDOWS_GREEN","params":{"portal":{"room_id":-1}}},{"x":"8","y":"3","slug":"DECOR_SAMPLER","params":{}},{"x":"5","y":"5","slug":"AREA_RUG_PINK","params":{}},{"x":"6","y":"6","slug":"SOFA_PLAID_1","params":{}},{"x":"5","y":"6","slug":"WOOD_SIDE_TABLE_NO_DRAWER","params":{}},{"x":"5","y":"5","slug":"LAMP_YELLOW_TABLE","params":{}},{"x":"3","y":"-1","slug":"KITCHEN_SINK","params":{}},{"x":"1","y":"8","slug":"FRONTDOOR","params":{}}],
                 recipeList: [{"x":"0","y":"0","slug":"TILE.CHECKERED_GREEN_BLUE_PURPLE_BLACK_"},{"x":"1","y":"0","slug":"TILE.CHECKERED_WHITE_BROWN_"},{"x":"2","y":"0","slug":"TILE.CHECKERED_BLUE_WHITE_"},{"x":"3","y":"0","slug":"TILE.CHECKERED_BLUE_WHITE_"},{"x":"4","y":"0","slug":"TILE.CHECKERED_GREEN_BLUE_PURPLE_BLACK_"},{"x":"0","y":"1","slug":"TILE.CHECKERED_WHITE_BROWN_"},{"x":"1","y":"1","slug":"TILE.CHECKERED_GREEN_BLUE_PURPLE_BLACK_"},{"x":"2","y":"1","slug":"TILE.CHECKERED_WHITE_BROWN_"},{"x":"3","y":"1","slug":"TILE.CHECKERED_BLUE_WHITE_"},{"x":"4","y":"1","slug":"TILE.CHECKERED_WHITE_BROWN_"},{"x":"0","y":"2","slug":"TILE.CHECKERED_GREEN_BLUE_PURPLE_BLACK_"},{"x":"1","y":"2","slug":"TILE.CHECKERED_WHITE_BROWN_"},{"x":"2","y":"2","slug":"TILE.CHECKERED_GREEN_BLUE_PURPLE_BLACK_"},{"x":"3","y":"2","slug":"TILE.CHECKERED_WHITE_BROWN_"},{"x":"4","y":"2","slug":"TILE.CHECKERED_WHITE_BROWN_"}],
-                removalList: [{"x":"5","y":"0"},{"x":"6","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"5","y":"1"},{"x":"6","y":"1"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"5","y":"2"},{"x":"6","y":"2"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"0","y":"8"},{"x":"3","y":"8"},{"x":"0","y":"9"},{"x":"1","y":"9"},{"x":"2","y":"9"},{"x":"3","y":"9"}],
+                removalList: [{"x":"5","y":"0"},{"x":"6","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"5","y":"1"},{"x":"6","y":"1"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"5","y":"2"},{"x":"6","y":"2"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"}],
                 itemList: []
          }
 }
@@ -228,10 +229,10 @@ sells: [
             },
                             front_room: 11,
         roomData: { 
-                featureList: [{"x":"3","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"7","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"5","slug":"TABLE_WOOD_FOLDING_JAMMED"},{"x":"0","y":"11","slug":"EXT_DOOR_STORE_BLACK","params":{"portal":{"room_id":-1}}},{"x":"1","y":"11","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"3","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"7","y":"1","slug":"LAUNDRY_COMMERCIAL_DRYER"},{"x":"5","y":"5","slug":"TABLE_WOOD_FOLDING_JAMMED"},{"x":"0","y":"11","slug":"EXT_DOOR_STORE_BLACK","params":{"portal":{"room_id":-1}}},{"x":"2","y":"0","slug":"NO_SMOKING_PAPER","params":{}},{"x":"9","y":"10","slug":"CONE_UPRIGHT","params":{}},{"x":"8","y":"10","slug":"CONE_UPRIGHT","params":{}},{"x":"1","y":"11","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
-                removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"6","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"2","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"}],
-                itemList: []
+                removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"6","y":"0"},{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"2","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"}],
+                itemList: [{"x":"7","y":"10","slug":"MOP"},{"x":"5","y":"7","slug":"LAUNDRY_BASKET_PINK"},{"x":"6","y":"7","slug":"LAUNDRY_POWDER"}]
          }
 }
 , room_12: { 
@@ -496,7 +497,7 @@ name: "Auntie’s House",
 listingName: "Graves, Marcy", },
     
             roomData: { 
-                featureList: [{"x":"1","y":"5","slug":"INT_DOOR_WHITE","params":{"portal":{"room_id":6,"x":8,"y":7}}},{"x":"0","y":"0","slug":"DRESSER_1","params":{}},{"x":"-1","y":"3","slug":"INT_DOOR_SIDE_WHITE","params":{"portal":{"room_id":16,"x":6,"y":5}}},{"x":"0","y":"-1","slug":"DRESSER_MIRROR","params":{}},{"x":"0","y":"-1","slug":"ASH_TRAY","params":{}},{"x":"2","y":"-1","slug":"EXT_WINDOW_2_SINGLE_CREAM","params":{}},{"x":"2","y":"-1","slug":"BLINDS_SINGLE","params":{}},{"x":"2","y":"0","slug":"BED_1","params":{}},{"x":"1","y":"5","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"1","y":"5","slug":"INT_DOOR_WHITE","params":{"portal":{"room_id":6,"x":8,"y":7}}},{"x":"0","y":"0","slug":"DRESSER_1","params":{}},{"x":"0","y":"-1","slug":"DRESSER_MIRROR","params":{}},{"x":"0","y":"-1","slug":"ASH_TRAY","params":{}},{"x":"2","y":"-1","slug":"EXT_WINDOW_2_SINGLE_CREAM","params":{}},{"x":"2","y":"-1","slug":"BLINDS_SINGLE","params":{}},{"x":"2","y":"0","slug":"BED_1","params":{}},{"x":"-1","y":"1","slug":"INT_DOOR_SIDE_WHITE","params":{"portal":{"room_id":16,"x":6,"y":5}}},{"x":"1","y":"5","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
                 removalList: [],
                 itemList: []
@@ -597,9 +598,10 @@ delivers: [
             },
                             front_room: 17,
         roomData: { 
-                featureList: [{"x":"0","y":"2","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"3","slug":"DINER_TABLE"},{"x":"0","y":"5","slug":"DINER_BOOTH_GREEN_N"},{"x":"0","y":"5","slug":"DINER_BOOTH_RED_S"},{"x":"0","y":"6","slug":"DINER_TABLE"},{"x":"0","y":"8","slug":"DINER_BOOTH_RED_N"},{"x":"0","y":"8","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"9","slug":"DINER_TABLE"},{"x":"0","y":"11","slug":"DINER_BOOTH_GREEN_N"},{"x":"4","y":"1","slug":"STORE_WINDOW_COUNTER_3"},{"x":"5","y":"11","slug":"FRONTDOOR"}],
+                featureList: [{"x":"0","y":"2","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"3","slug":"DINER_TABLE"},{"x":"0","y":"5","slug":"DINER_BOOTH_GREEN_N"},{"x":"0","y":"5","slug":"DINER_BOOTH_RED_S"},{"x":"0","y":"6","slug":"DINER_TABLE"},{"x":"0","y":"8","slug":"DINER_BOOTH_RED_N"},{"x":"0","y":"8","slug":"DINER_BOOTH_GREEN_S"},{"x":"0","y":"9","slug":"DINER_TABLE"},{"x":"0","y":"11","slug":"DINER_BOOTH_GREEN_N"},{"x":"4","y":"1","slug":"STORE_WINDOW_COUNTER_3"},{"x":"5","y":"11","slug":"EXT_DOOR_STORE_METAL","params":{"portal":{"room_id":-1}}},{"x":"5","y":"11","slug":"FRONTDOOR","params":{}}],
                 recipeList: [{"x":"4","y":"5","slug":"TILE.CHECKERED_BLUE_WHITE_"},{"x":"5","y":"9","slug":"TILE.CHECKERED_BLUE_WHITE_"}],
-                removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"3","y":"1"}]
+                removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"3","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"3","y":"1"}],
+                itemList: []
          }
 }
 , room_18: { 
@@ -682,9 +684,10 @@ sells: [
             },
                             front_room: 18,
         roomData: { 
-                featureList: [{"x":"10","y":"5","slug":"SHOP_SHELVES_MOTTLED"},{"x":"10","y":"2","slug":"SHOP_SHELVES_MOTTLED"},{"x":"6","y":"5","slug":"SHOP_SHELVES_MOTTLED"},{"x":"4","y":"5","slug":"SHOP_SHELVES_MOTTLED"},{"x":"9","y":"-1","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"0","y":"2","slug":"STORE_WINDOW_COUNTER_4"},{"x":"5","y":"0","slug":"SHOP_SHELVES_MOTTLED"},{"x":"7","y":"0","slug":"SHOP_SHELVES_MOTTLED"},{"x":"2","y":"7","slug":"FRONTDOOR"}],
+                featureList: [{"x":"10","y":"5","slug":"SHOP_SHELVES_MOTTLED"},{"x":"10","y":"2","slug":"SHOP_SHELVES_MOTTLED"},{"x":"6","y":"5","slug":"SHOP_SHELVES_MOTTLED"},{"x":"4","y":"5","slug":"SHOP_SHELVES_MOTTLED"},{"x":"9","y":"-1","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"0","y":"2","slug":"STORE_WINDOW_COUNTER_4"},{"x":"5","y":"0","slug":"SHOP_SHELVES_MOTTLED"},{"x":"7","y":"0","slug":"SHOP_SHELVES_MOTTLED"},{"x":"2","y":"7","slug":"EXT_DOOR_STORE_WHITE","params":{"portal":{"room_id":-1}}},{"x":"2","y":"7","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
-                removalList: [{"x":"4","y":"0"},{"x":"4","y":"1"},{"x":"4","y":"2"}]
+                removalList: [{"x":"4","y":"0"},{"x":"4","y":"1"},{"x":"4","y":"2"}],
+                itemList: []
          }
 }
 , room_19: { 
@@ -699,9 +702,10 @@ sells: [
     wallSlug: "",
         
         roomData: { 
-                featureList: [{"x":"10","y":"-1","slug":"COUNTERTOP_CORNER_PEACH","params":{}},{"x":"10","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"11","y":"1","slug":"UNDERCOUNTER_CABINET_W_YELLOW","params":{}},{"x":"9","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"9","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"7","y":"0","slug":"OVEN_1","params":{}},{"x":"9","y":"-1","slug":"TOASTER","params":{}},{"x":"5","y":"3","slug":"TABLE_WOOD_DECOR","params":{}},{"x":"1","y":"-1","slug":"EXT_DOOR_WINDOWS_GRAY","params":{}},{"x":"8","y":"-1","slug":"EXT_WINDOW_2_SINGLE_YELLOW","params":{}},{"x":"9","y":"5","slug":"INT_DOOR_RED_BROWN","params":{"portal":{"room_id":3,"x":7,"y":4}}},{"x":"5","y":"0","slug":"FRIDGE","params":{}},{"x":"4","y":"4","slug":"DINER_CHAIR_MAROON","params":{}},{"x":"8","y":"-1","slug":"CURTAIN_SINGLE_YELLOW","params":{}},{"x":"1","y":"-1","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"10","y":"-1","slug":"COUNTERTOP_CORNER_PEACH","params":{}},{"x":"10","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"11","y":"1","slug":"UNDERCOUNTER_CABINET_W_YELLOW","params":{}},{"x":"9","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"9","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"7","y":"0","slug":"OVEN_1","params":{}},{"x":"5","y":"3","slug":"TABLE_WOOD_DECOR","params":{}},{"x":"1","y":"-1","slug":"EXT_DOOR_WINDOWS_GRAY","params":{}},{"x":"8","y":"-1","slug":"EXT_WINDOW_2_SINGLE_YELLOW","params":{}},{"x":"9","y":"5","slug":"INT_DOOR_RED_BROWN","params":{"portal":{"room_id":3,"x":7,"y":4}}},{"x":"5","y":"0","slug":"FRIDGE","params":{}},{"x":"4","y":"4","slug":"DINER_CHAIR_MAROON","params":{}},{"x":"-1","y":"3","slug":"INT_DOOR_SIDE_WHITE","params":{}},{"x":"10","y":"0","slug":"TOASTER","params":{}},{"x":"8","y":"-1","slug":"KITCHEN_SINK","params":{}},{"x":"8","y":"-1","slug":"BLINDS_SINGLE","params":{}},{"x":"1","y":"-1","slug":"FRONTDOOR","params":{}}],
                 recipeList: [{"x":"0","y":"0","slug":"PLANK.LAMINATE_"},{"x":"1","y":"0","slug":"PLANK.LAMINATE_"},{"x":"2","y":"0","slug":"PLANK.LAMINATE_"},{"x":"0","y":"1","slug":"PLANK.LAMINATE_"},{"x":"1","y":"1","slug":"PLANK.LAMINATE_"},{"x":"2","y":"1","slug":"PLANK.LAMINATE_"},{"x":"0","y":"2","slug":"PLANK.LAMINATE_"},{"x":"1","y":"2","slug":"PLANK.LAMINATE_"},{"x":"2","y":"2","slug":"PLANK.LAMINATE_"},{"x":"3","y":"2","slug":"PLANK.LAMINATE_"},{"x":"0","y":"3","slug":"PLANK.LAMINATE_"},{"x":"1","y":"3","slug":"PLANK.LAMINATE_"},{"x":"2","y":"3","slug":"PLANK.LAMINATE_"},{"x":"3","y":"3","slug":"PLANK.LAMINATE_"},{"x":"0","y":"4","slug":"PLANK.LAMINATE_"},{"x":"1","y":"4","slug":"PLANK.LAMINATE_"},{"x":"2","y":"4","slug":"PLANK.LAMINATE_"},{"x":"3","y":"4","slug":"PLANK.LAMINATE_"},{"x":"0","y":"5","slug":"PLANK.LAMINATE_"},{"x":"1","y":"5","slug":"PLANK.LAMINATE_"},{"x":"2","y":"5","slug":"PLANK.LAMINATE_"},{"x":"3","y":"5","slug":"PLANK.LAMINATE_"}],
-                removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"3","y":"1"},{"x":"4","y":"1"}]
+                removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"3","y":"1"},{"x":"4","y":"1"}],
+                itemList: []
          }
 }
   };

@@ -18,6 +18,7 @@ export default class InteriorScene extends Phaser.Scene {
         this.locale = 'interior';
         this.slot = data.slot;
         this.room_id = data.slot.POSITION.ROOM;
+        
     }
 
     create() {
@@ -28,6 +29,7 @@ export default class InteriorScene extends Phaser.Scene {
         this.events.on(Phaser.Scenes.Events.WAKE, function ()
         {
             this.manager.wake();
+            
         }, this);
         this.interior = new InteriorManager(this);
         this.player = new PlayerManager(this);
@@ -37,7 +39,7 @@ export default class InteriorScene extends Phaser.Scene {
         this.player.create();
          //// Load the save!
          this.app.initializeRoomSave();
-
+         this.manager.hud.pocket.setPocketsFromSave();
          if (this.slot.TUTORIAL < 30) {
             this.tutorial = new TutorialManager(this);
             this.tutorial.stepTutorial(this.slot.TUTORIAL);
@@ -79,15 +81,25 @@ export default class InteriorScene extends Phaser.Scene {
         
     }
 
+    save () {
+        this.slot = this.app.softSaveGameData();
+        this.manager.time.setTimeFromSleep();
+        this.app.saveManager.saveGameData();
+        
+    }
+
     saveGameData(data,slot) {
         // Replace `data` and `slot` with the actual data and slot you want to save
         if (this.verbose) console.log("I'm going to call save-data for slot "+slot);
         if (this.verbose) console.log(data);
         let save_data = {data:data,slot:slot};
         const manager = this.manager;
+        var self = this;
         window.api.invoke('save-data', save_data)
             .then(function(res) {
-                manager.hud.pocket.setPocketsFromSave();
+                
+                self.scene.stop('Interior Scene');
+                self.scene.start('Save Scene', {slot: self.slot});
                 return true;
             })
             .catch(function(err) {

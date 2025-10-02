@@ -547,7 +547,7 @@ export default class HudPockets extends HudCommon {
                 this.setSlotColor(r, i, color);
                 if (state != 'EMPTY' && selected.pocket == r && pocket[state].info.type == 'BAG') {
                     this.setSlotVisible(r, i, true);
-                    //this.setSlotColor(r, i, color);
+                    this.setSlotColor(r, i, color);
                     if (selected.contents == 1) {
                         this.setSlipVisible(slot_x, true);
                     }

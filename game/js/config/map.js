@@ -1600,6 +1600,9 @@ const MAP_CONFIG = {
             structure: {
                 type: "DUPLEX-LEFT",
                 zoning: "RESIDENTIAL",
+                settings: {
+                    door: 'EXT_DOOR_WINDOWS_GREEN'
+                }
             },
             listing: {
 
@@ -2449,6 +2452,34 @@ const MAP_CONFIG = {
             structure: {
                 type: "BUNGALOW",
                 zoning: "RESIDENTIAL",
+                settings: {
+                    door: 'EXT_DOOR_WINDOWS_GREEN',
+                    window: 'EXT_WINDOW_2_GRAND_GREEN',
+                    stair_rail: 'PORCH_STAIR_RAIL_LEFT',
+                    stoop: {
+                        landing: {
+                            width: 2,
+                            depth: 2,
+                            material: {
+                                MATERIAL: 'PLANK',
+                                VARIETY: ['WORN_']
+                            }
+                        },
+                        steps: {
+                            height: 1,
+                            material: {
+                                MATERIAL: 'CEMENT_',
+                                VARIETY: []
+                            },
+                        },
+                        rail: {
+                            material: {
+                                MATERIAL: 'CEMENT',
+                                VARIETY: []
+                            }
+                        }
+                    }
+                }
             },
             listing: {
 

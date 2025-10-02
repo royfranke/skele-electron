@@ -1,18 +1,8 @@
 const PLAYER_STATES = {
-    IDLE: {
-        name: 'IDLE',
-        input: true,
+    CURL_UP: {
+        name: 'CURL_UP',
+        input: false,
         speed: 0
-    },
-    WALK: {
-        name: 'WALK',
-        input: true,
-        speed: 70
-    },
-    RUN: {
-        name: 'RUN',
-        input: true,
-        speed: 140
     },
     DIG: {
         name: 'DIG',
@@ -24,34 +14,52 @@ const PLAYER_STATES = {
         input: false,
         speed: 0
     },
+    EXCHANGE: {
+        name: 'EXCHANGE',
+        speed: 0
+    },
     HOP: {
         name: 'HOP',
         input: true,
         speed: 80
     },
+    IDLE: {
+        name: 'IDLE',
+        input: true,
+        speed: 0
+    },
     PICKUP: {
         name: 'PICKUP',
         speed: 0
-    },
-    EXCHANGE: {
-        name: 'EXCHANGE',
-        speed: 0
-    },
-    TRIP: {
-        name: 'TRIP',
-        speed: 0
-    },
-    PUSH: {
-        name: 'PUSH',
-        input: true,
-        speed: 20
     },
     PULL: {
         name: 'PULL',
         input: true,
         speed: -20
     },
+    PUSH: {
+        name: 'PUSH',
+        input: true,
+        speed: 20
+    },
+    RUN: {
+        name: 'RUN',
+        input: true,
+        speed: 140
+    },
+    SLEEP: {
+        name: 'SLEEP',
+        speed: 0
+    },
+    TRIP: {
+        name: 'TRIP',
+        speed: 0
+    },
+    WALK: {
+        name: 'WALK',
+        input: true,
+        speed: 70
+    },
 };
-    
-    export default PLAYER_STATES;
-    
+
+export default PLAYER_STATES;

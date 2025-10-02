@@ -3,6 +3,8 @@ const OBJECT_TYPES = {
       'AC_WINDOW_UNIT'    ],
       ADDING_MACHINE: [
       'ADDING_MACHINE'    ],
+      DECOR_ART: [
+      'DECOR_SAMPLER'    ],
       BASEMENT_WINDOW: [
       'BASEMENT_WINDOW'    ],
       BASKET_RACK: [
@@ -119,12 +121,14 @@ const OBJECT_TYPES = {
       'ROCK_SMALL'    ],
       ROLLING_GATE: [
       'ROLLING_GATE_DOOR','ROLLING_GATE_WIDE'    ],
+      RUG: [
+      'AREA_RUG_PINK'    ],
       SEAT: [
       'STUMP_SEAT'    ],
       SHOP_SHELVES: [
       'SHOP_SHELVES_MOTTLED'    ],
       SIDE_TABLE: [
-      'WOOD_SIDE_TABLE'    ],
+      'WOOD_SIDE_TABLE_NO_DRAWER','WOOD_SIDE_TABLE'    ],
       SIMPLE_PLANT: [
       'CREEK_SEDGE'    ],
       SINK: [

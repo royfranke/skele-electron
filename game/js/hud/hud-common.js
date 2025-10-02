@@ -38,6 +38,10 @@ export default class HudCommon {
         makeSlip(_x,_y,text,button) {
             return this.factory.makeSlip(_x, _y, text, button);
         }
+
+        makeButton(_x,_y,text,button) {
+            return this.factory.makeButton(_x, _y, text, button);
+        }
     
         makeBitmapText (_x,_y, width, size=24, font='SkeleButton') {
             return this.factory.makeBitmapText(_x, _y, width, size, font);

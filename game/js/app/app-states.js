@@ -84,6 +84,18 @@ const APP_STATES = {
         avail_input: false,
         save: true
     },
+    SAVE: {
+        name: 'SAVE',
+        super: 'Save Game',
+        fadeIn: 500,
+        fadeOut: 500,
+        autoEnd: 0,
+        menu: false,
+        input: true,
+        app_input: true,
+        avail_input: false,
+        save: true
+    },
     COURTS: {
         name: 'COURTS',
         super: 'Courts Scene',
