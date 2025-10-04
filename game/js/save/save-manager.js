@@ -13,7 +13,7 @@ export default class SaveManager {
         var data = this.scene.slot;
         if (data.POSITION.ADDRESS != undefined) {
             var front = this.scene.exterior.getFrontDoorTilesFromAddress(data.POSITION.ADDRESS.dir, data.POSITION.ADDRESS.number, data.POSITION.ADDRESS.street);
-            this.scene.player.setPositionTile(front.x,front.y + 1);
+            this.scene.player.setPositionTile(front.x,front.y);
         }
         else {
             this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);

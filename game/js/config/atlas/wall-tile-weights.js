@@ -234,6 +234,40 @@ const TILE_WEIGHTS = {
   STUDS: {
 },
   PANELS: {
+    DARK_WOOD_VERTICAL_: {
+          TOP_:
+          [{
+            index: [103, 104, 105],
+            weight: 1
+          }],
+              MID_:
+          [{
+            index: [106, 107, 108],
+            weight: 1
+          }],
+              LOWER_:
+          [{
+            index: [109, 110, 111],
+            weight: 1
+          }],
+        },
+    WHITE_WOOD_VERTICAL_: {
+          TOP_:
+          [{
+            index: [112, 113, 114],
+            weight: 1
+          }],
+              MID_:
+          [{
+            index: [115, 116, 117],
+            weight: 1
+          }],
+              LOWER_:
+          [{
+            index: [118, 119, 120],
+            weight: 1
+          }],
+        },
 },
   TILE: {
     FILL_: {
@@ -247,517 +281,517 @@ const TILE_WEIGHTS = {
     YELLOW_CEMENT_: {
         TOP_LEFT_:
           [{
-            index: [103],
+            index: [121],
             weight: 1
           }],
         TOP_:
           [{
-            index: [104, 105],
+            index: [122, 123],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [106],
+            index: [124],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [107],
+            index: [125],
             weight: 1
           }],
         MID_:
           [{
-            index: [108, 109],
+            index: [126, 127],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [110],
+            index: [128],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [111],
+            index: [129],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [112, 113],
+            index: [130, 131],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [114],
+            index: [132],
             weight: 1
           }],
       },
     RED_CEMENT_: {
         TOP_LEFT_:
           [{
-            index: [115],
+            index: [133],
             weight: 1
           }],
         TOP_:
           [{
-            index: [116, 117],
+            index: [134, 135],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [118],
+            index: [136],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [119],
+            index: [137],
             weight: 1
           }],
         MID_:
           [{
-            index: [120, 121],
+            index: [138, 139],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [122],
+            index: [140],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [123],
+            index: [141],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [124, 125],
+            index: [142, 143],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [126],
+            index: [144],
             weight: 1
           }],
       },
     WHITE_CEMENT_: {
         TOP_LEFT_:
           [{
-            index: [127],
+            index: [145],
             weight: 1
           }],
         TOP_:
           [{
-            index: [128, 129],
+            index: [146, 147],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [130],
+            index: [148],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [131],
+            index: [149],
             weight: 1
           }],
         MID_:
           [{
-            index: [132, 133],
+            index: [150, 151],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [134],
+            index: [152],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [135],
+            index: [153],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [136, 137],
+            index: [154, 155],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [138],
+            index: [156],
             weight: 1
           }],
       },
     GRAY_CEMENT_: {
         TOP_LEFT_:
           [{
-            index: [139],
+            index: [157],
             weight: 1
           }],
         TOP_:
           [{
-            index: [140, 141],
+            index: [158, 159],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [142],
+            index: [160],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [143],
+            index: [161],
             weight: 1
           }],
         MID_:
           [{
-            index: [144, 145],
+            index: [162, 163],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [146],
+            index: [164],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [147],
+            index: [165],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [148, 149],
+            index: [166, 167],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [150],
+            index: [168],
             weight: 1
           }],
       },
     CEMENT_STONE_: {
         TOP_LEFT_:
           [{
-            index: [151],
+            index: [169],
             weight: 1
           }],
         TOP_:
           [{
-            index: [152, 153],
+            index: [170, 171],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [154],
+            index: [172],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [155],
+            index: [173],
             weight: 1
           }],
         MID_:
           [{
-            index: [156, 157],
+            index: [174, 175],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [158],
+            index: [176],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [159],
+            index: [177],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [160, 161],
+            index: [178, 179],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [162],
+            index: [180],
             weight: 1
           }],
       },
     BROWN_CEMENT_: {
         TOP_LEFT_:
           [{
-            index: [163],
+            index: [181],
             weight: 1
           }],
         TOP_:
           [{
-            index: [164, 165],
+            index: [182, 183],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [166],
+            index: [184],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [167],
+            index: [185],
             weight: 1
           }],
         MID_:
           [{
-            index: [168, 169],
+            index: [186, 187],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [170],
+            index: [188],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [171],
+            index: [189],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [172, 173],
+            index: [190, 191],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [174],
+            index: [192],
             weight: 1
           }],
       },
     RED_WEATHERED_: {
         TOP_LEFT_:
           [{
-            index: [193],
+            index: [211],
             weight: 1
           }],
         TOP_:
           [{
-            index: [194, 195, 196, 197],
+            index: [212, 213, 214, 215],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [198],
+            index: [216],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [199, 201],
+            index: [217, 219],
             weight: 1
           }],
         MID_:
           [{
-            index: [175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192],
+            index: [193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [200, 202],
+            index: [218, 220],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [289],
+            index: [307],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [290, 291, 292, 293],
+            index: [308, 309, 310, 311],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [294],
+            index: [312],
             weight: 1
           }],
       },
     RED_COMMERCIAL_: {
         TOP_LEFT_:
           [{
-            index: [218],
+            index: [236],
             weight: 1
           }],
         TOP_:
           [{
-            index: [219, 220, 221],
+            index: [237, 238, 239],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [222],
+            index: [240],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [203, 208],
+            index: [221, 226],
             weight: 1
           }],
         MID_:
           [{
-            index: [204, 205, 206, 209, 210, 211],
+            index: [222, 223, 224, 227, 228, 229],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [207, 212],
+            index: [225, 230],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [213],
+            index: [231],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [214, 215, 216],
+            index: [232, 233, 234],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [217],
+            index: [235],
             weight: 1
           }],
       },
     YELLOW_COMMERCIAL_: {
         TOP_LEFT_:
           [{
-            index: [223],
+            index: [241],
             weight: 1
           }],
         TOP_:
           [{
-            index: [224, 225, 226],
+            index: [242, 243, 244],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [227],
+            index: [245],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [228, 233],
+            index: [246, 251],
             weight: 1
           }],
         MID_:
           [{
-            index: [229, 230, 231, 234, 235, 236],
+            index: [247, 248, 249, 252, 253, 254],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [232, 237],
+            index: [250, 255],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [238],
+            index: [256],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [239, 240, 241],
+            index: [257, 258, 259],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [242],
+            index: [260],
             weight: 1
           }],
       },
     BLACK_COMMERCIAL_: {
         TOP_LEFT_:
           [{
-            index: [243],
+            index: [261],
             weight: 1
           }],
         TOP_:
           [{
-            index: [244, 245, 246],
+            index: [262, 263, 264],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [247],
+            index: [265],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [248, 253],
+            index: [266, 271],
             weight: 1
           }],
         MID_:
           [{
-            index: [249, 250, 251, 254, 255, 256],
+            index: [267, 268, 269, 272, 273, 274],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [252, 257],
+            index: [270, 275],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [258],
+            index: [276],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [259, 260, 261],
+            index: [277, 278, 279],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [262],
+            index: [280],
             weight: 1
           }],
       },
     BLUE_COMMERCIAL_: {
         TOP_LEFT_:
           [{
-            index: [263],
+            index: [281],
             weight: 1
           }],
         TOP_:
           [{
-            index: [264, 265, 266],
+            index: [282, 283, 284],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [267],
+            index: [285],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [268, 273],
+            index: [286, 291],
             weight: 1
           }],
         MID_:
           [{
-            index: [269, 270, 271, 274, 275, 276],
+            index: [287, 288, 289, 292, 293, 294],
             weight: 1
           }],
         MID_RIGHT_:
           [{
-            index: [272, 277],
+            index: [290, 295],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [278],
+            index: [296],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [279, 280, 281],
+            index: [297, 298, 299],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [282],
+            index: [300],
             weight: 1
           }],
       },
@@ -766,17 +800,17 @@ const TILE_WEIGHTS = {
     YELLOW_WEATHERED_: {
                         LOWER_LEFT_:
           [{
-            index: [283],
+            index: [301],
             weight: 1
           }],
         LOWER_:
           [{
-            index: [284, 285, 286, 287],
+            index: [302, 303, 304, 305],
             weight: 1
           }],
         LOWER_RIGHT_:
           [{
-            index: [288],
+            index: [306],
             weight: 1
           }],
       },
@@ -789,150 +823,103 @@ const TILE_WEIGHTS = {
     SECTIONED_: {
         TOP_LEFT_:
           [{
-            index: [306],
+            index: [324],
             weight: 1
           }],
           TOP_RIGHT_:
           [{
-            index: [307],
+            index: [325],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [308],
+            index: [326],
             weight: 1
           }],
           MID_RIGHT_:
           [{
-            index: [309],
+            index: [327],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [295],
+            index: [313],
             weight: 1
           }],
           LOWER_RIGHT_:
           [{
-            index: [296],
+            index: [314],
             weight: 1
           }],
       },
     TOPVIEW_: {
         TOP_LEFT_:
           [{
-            index: [297],
+            index: [315],
             weight: 1
           }],
         TOP_:
           [{
-            index: [298, 301, 304],
+            index: [316, 319, 322],
             weight: 1
           }],
         TOP_RIGHT_:
           [{
-            index: [299],
+            index: [317],
             weight: 1
           }],
           MID_LEFT_:
           [{
-            index: [300],
+            index: [318],
             weight: 1
           }],
           MID_RIGHT_:
           [{
-            index: [302],
+            index: [320],
             weight: 1
           }],
           LOWER_LEFT_:
           [{
-            index: [303],
+            index: [321],
             weight: 1
           }],
           LOWER_RIGHT_:
           [{
-            index: [305],
+            index: [323],
             weight: 1
           }],
       },
     SECTIONED_CEMENT_: {
                           LOWER_:
           [{
-            index: [310, 311, 312],
+            index: [328, 329, 330],
             weight: 1
           }],
         },
     SECTIONED_CARPET_: {
                           LOWER_:
           [{
-            index: [313, 314, 315],
+            index: [331, 332, 333],
             weight: 1
           }],
         },
     SECTIONED_TILE_: {
                           LOWER_:
           [{
-            index: [316, 317, 318],
+            index: [334, 335, 336],
             weight: 1
           }],
         },
     SECTIONED_PLANK_: {
                           LOWER_:
           [{
-            index: [319, 320, 321],
+            index: [337, 338, 339],
             weight: 1
           }],
         },
 },
   SIDING: {
     BLUE_WOOD_: {
-        TOP_LEFT_:
-          [{
-            index: [322],
-            weight: 1
-          }],
-        TOP_:
-          [{
-            index: [323, 324, 325, 326],
-            weight: 1
-          }],
-        TOP_RIGHT_:
-          [{
-            index: [327],
-            weight: 1
-          }],
-          MID_LEFT_:
-          [{
-            index: [328],
-            weight: 1
-          }],
-        MID_:
-          [{
-            index: [329, 330, 331, 332],
-            weight: 1
-          }],
-        MID_RIGHT_:
-          [{
-            index: [333],
-            weight: 1
-          }],
-          LOWER_LEFT_:
-          [{
-            index: [334],
-            weight: 1
-          }],
-        LOWER_:
-          [{
-            index: [335, 336, 337, 338],
-            weight: 1
-          }],
-        LOWER_RIGHT_:
-          [{
-            index: [339],
-            weight: 1
-          }],
-      },
-    GRAY_WOOD_: {
         TOP_LEFT_:
           [{
             index: [340],
@@ -979,7 +966,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    ORANGE_WOOD_: {
+    GRAY_WOOD_: {
         TOP_LEFT_:
           [{
             index: [358],
@@ -1026,7 +1013,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    PURPLE_WOOD_: {
+    ORANGE_WOOD_: {
         TOP_LEFT_:
           [{
             index: [376],
@@ -1073,7 +1060,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    YELLOW_WOOD_: {
+    PURPLE_WOOD_: {
         TOP_LEFT_:
           [{
             index: [394],
@@ -1120,7 +1107,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    GREEN_DARK_WOOD_: {
+    YELLOW_WOOD_: {
         TOP_LEFT_:
           [{
             index: [412],
@@ -1167,7 +1154,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    WHITE_WOOD_: {
+    GREEN_DARK_WOOD_: {
         TOP_LEFT_:
           [{
             index: [430],
@@ -1214,7 +1201,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    RED_WOOD_: {
+    WHITE_WOOD_: {
         TOP_LEFT_:
           [{
             index: [448],
@@ -1261,7 +1248,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    GREEN_WEATHERED_WOOD_: {
+    RED_WOOD_: {
         TOP_LEFT_:
           [{
             index: [466],
@@ -1308,7 +1295,7 @@ const TILE_WEIGHTS = {
             weight: 1
           }],
       },
-    DARK_BLUE_WOOD_: {
+    GREEN_WEATHERED_WOOD_: {
         TOP_LEFT_:
           [{
             index: [484],
@@ -1352,6 +1339,53 @@ const TILE_WEIGHTS = {
         LOWER_RIGHT_:
           [{
             index: [501],
+            weight: 1
+          }],
+      },
+    DARK_BLUE_WOOD_: {
+        TOP_LEFT_:
+          [{
+            index: [502],
+            weight: 1
+          }],
+        TOP_:
+          [{
+            index: [503, 504, 505, 506],
+            weight: 1
+          }],
+        TOP_RIGHT_:
+          [{
+            index: [507],
+            weight: 1
+          }],
+          MID_LEFT_:
+          [{
+            index: [508],
+            weight: 1
+          }],
+        MID_:
+          [{
+            index: [509, 510, 511, 512],
+            weight: 1
+          }],
+        MID_RIGHT_:
+          [{
+            index: [513],
+            weight: 1
+          }],
+          LOWER_LEFT_:
+          [{
+            index: [514],
+            weight: 1
+          }],
+        LOWER_:
+          [{
+            index: [515, 516, 517, 518],
+            weight: 1
+          }],
+        LOWER_RIGHT_:
+          [{
+            index: [519],
             weight: 1
           }],
       },

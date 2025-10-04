@@ -281,13 +281,19 @@ export default class Object {
             /// Get portal location info from object -- what room_id, x, y, player facing direction
             /// Go to portal... (maybe this is redraw of ground)
             /// Have this after opening anim of doors
-            if (this.portal != null) {
-                this.scene.portalTo(this.portal);
-            }
-            else {
+            // Play the door opening sound
+            this.scene.manager.hud.hudSound.play('DOOR_OPENING');
+            /// Time delay for door opening sound
+            this.scene.time.delayedCall(375, () => {
+                if (this.portal != null) {
+                    this.scene.portalTo(this.portal);
+                }
+            });
+        }
+        else {
                 console.log("No portal set for this object");
             }
-        }
+        
 
         if (action == 'CHECK OUT' || action == 'CHECKOUT') {
             this.scene.manager.hud.hudStore.checkout();

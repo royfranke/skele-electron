@@ -52,6 +52,10 @@ const PRELOAD_SOUND = [
         FILES: ['ding-ding.wav']
     },
       {
+        NAME: 'DOOR_OPENING',
+        FILES: ['DoorOpening2.wav']
+    },
+      {
         NAME: 'GIFTED_ITEM',
         FILES: ['gifted-item.wav']
     },

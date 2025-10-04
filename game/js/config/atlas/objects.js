@@ -348,6 +348,66 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          LAMP_BLUE_TABLE: {
+        name: 'Blue Table Lamp',
+        slug: 'LAMP_BLUE_TABLE', 
+        type: 'LAMP',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:18, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:4, 
+          w:6
+        },
+        offset: {
+          x:4, 
+          y:10
+        },
+        varieties: 5,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }],
+        default_state: 'ON',        states: [            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['LAMP_BLUE_TABLE-5',]
+              },               {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: ['LAMP_BLUE_TABLE-5', 'LAMP_BLUE_TABLE-4', ]
+              },            {
+              name: 'ON',
+              transition: 'false',
+              frames: ['LAMP_BLUE_TABLE-4',]
+              },               {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: ['LAMP_BLUE_TABLE-4', 'LAMP_BLUE_TABLE-5', ]
+              },],
+
+          interactions: {
+                                  },
+    },
           BEADED_CURTAIN_BODEGA: {
         name: 'Bodega Beaded Curtain',
         slug: 'BEADED_CURTAIN_BODEGA', 
@@ -4832,6 +4892,86 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          DECOR_FRAME_1: {
+        name: 'Framed Picture 1',
+        slug: 'DECOR_FRAME_1', 
+        type: 'DECOR_ART',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          DECOR_FRAME_GROUP_1: {
+        name: 'Framed Picture Group 1',
+        slug: 'DECOR_FRAME_GROUP_1', 
+        type: 'DECOR_ART',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           FRIDGE: {
         name: 'Fridge 1',
         slug: 'FRIDGE', 
@@ -6029,6 +6169,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          DECOR_VENT: {
+        name: 'Interior Vent',
+        slug: 'DECOR_VENT', 
+        type: 'DECOR_ART',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           TABLE_WOOD_FOLDING_JAMMED: {
         name: 'Jammed Folding Wood Table',
         slug: 'TABLE_WOOD_FOLDING_JAMMED', 
@@ -6081,9 +6261,9 @@ const OBJECTS = {
           h:1, 
           w:1,
           x:0, 
-          y:0
+          y:1
         },
-        depth: 0,
+        depth: 33,
         sprite: {
           h:16, 
           w:16,
@@ -7083,6 +7263,46 @@ const OBJECTS = {
                                 ]
 
             },                      },
+    },
+          DECOR_OVAL_FRAME: {
+        name: 'Oval Framed Picture',
+        slug: 'DECOR_OVAL_FRAME', 
+        type: 'DECOR_ART',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
     },
           OVEN_1: {
         name: 'Oven 1',

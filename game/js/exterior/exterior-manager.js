@@ -441,7 +441,6 @@ import KEYLIGHT from "../config/key-light.js";
 
     getFrontDoorTilesFromAddress(dir, number, street) {
         let door = this.getFrontDoorFromAddress(dir, number, street);
-        console.log(door);
         return {x: door.x, y: door.y};
     }
 
