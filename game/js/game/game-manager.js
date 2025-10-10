@@ -5,11 +5,13 @@ import GameUtilities from "./game-utilities.js";
 import HudManager from "../hud/hud-manager.js";
 import DataManager from "../data/data-manager.js";
 import ItemManager from "../items/item-manager.js";
+import NavigatorManager from "../navigator/navigator-manager.js";
 import ObjectManager from "../objects/object-manager.js";
 import PlantManager from "../plants/plant-manager.js";
 import LootManager from "../loot/loot-manager.js";
 import TimeManager from "../time/time-manager.js";
 import TreeManager from "../trees/tree-manager.js";
+import VehicleManager from "../vehicles/vehicle-manager.js";
 import KnowledgeManager from "../knowledge/knowledge-manager.js";
 import DialogManager from "../dialog/dialog-manager.js";
 import QuestManager from "../quest/quest-manager.js";
@@ -33,6 +35,8 @@ export default class GameManager {
         this.itemManager = new ItemManager(this.scene);
         this.plantManager = new PlantManager(this.scene);
         this.treeManager = new TreeManager(this.scene);
+        this.nav = new NavigatorManager(this.scene);
+        this.vehicleManager = new VehicleManager(this.scene);
         this.dataManager = new DataManager(this.scene);
         this.hud = new HudManager(this.scene);
         this.fx = new FXManager(this.scene);
@@ -102,6 +106,9 @@ export default class GameManager {
         }
         if (focus_string == 'NOTEBOOK') {
             this.hud.setState('NOTEBOOK_FOCUSED');
+        }
+        if (focus_string == 'NUMBERPAD') {
+            this.hud.setState('NUMBERPAD_FOCUSED');
         }
         if (focus_string == 'PAYMENT') {
             this.hud.setState('PAYMENT_FOCUSED');
@@ -201,6 +208,9 @@ export default class GameManager {
                 if (focus.name == 'QUOTE') {
                     this.setFocus('QUOTE');  
                 }
+                if (focus.name == 'NUMBERPAD') {
+                    this.setFocus('PLAYER');  
+                }
 
                 this.hud.hudSound.play('BACK_BUTTON');
             }
@@ -243,6 +253,9 @@ export default class GameManager {
             this.plantManager.update();
         }
 
+        if (this.vehicleManager != null) {
+            this.vehicleManager.update();
+        }
     }
 
     loadGame () {

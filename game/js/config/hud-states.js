@@ -55,6 +55,11 @@ const HUD_STATES = {
         input: true,
         visible: true
     },
+    NUMBERPAD_FOCUSED: {
+        name: 'NUMBERPAD_FOCUSED',
+        input: true,
+        visible: true
+    },
     DIALOG_FOCUSED: {
         name: 'DIALOG_FOCUSED',
         input: true,

@@ -104,6 +104,54 @@ const PRELOAD_SOUND = [
         FILES: ['new-quest.wav']
     },
       {
+        NAME: 'PHONE_0',
+        FILES: ['phone-0.wav']
+    },
+      {
+        NAME: 'PHONE_1',
+        FILES: ['phone-1.wav']
+    },
+      {
+        NAME: 'PHONE_2',
+        FILES: ['phone-2.wav']
+    },
+      {
+        NAME: 'PHONE_3',
+        FILES: ['phone-3.wav']
+    },
+      {
+        NAME: 'PHONE_4',
+        FILES: ['phone-4.wav']
+    },
+      {
+        NAME: 'PHONE_5',
+        FILES: ['phone-5.wav']
+    },
+      {
+        NAME: 'PHONE_6',
+        FILES: ['phone-6.wav']
+    },
+      {
+        NAME: 'PHONE_7',
+        FILES: ['phone-7.wav']
+    },
+      {
+        NAME: 'PHONE_8',
+        FILES: ['phone-8.wav']
+    },
+      {
+        NAME: 'PHONE_9',
+        FILES: ['phone-9.wav']
+    },
+      {
+        NAME: 'PHONE_#',
+        FILES: ['phone-pound.wav']
+    },
+      {
+        NAME: 'PHONE_*',
+        FILES: ['phone-star.wav']
+    },
+      {
         NAME: 'ANSWER_RIGHT',
         FILES: ['right-answer-1.wav','right-answer-2.wav','right-answer-3.wav','right-answer-4.wav']
     },

@@ -33,7 +33,7 @@ export default class HudFactory {
     makeButton (_x,_y, text = 'OK', button='X') {
         let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 16).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
-        let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 24, 'BLOCK_MID_BEIGE_RIGHT');
+        let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 24, 'BLOCK_MID_WHITE_RIGHT');
         block.setOrigin(1,0);
 
         let button_block = this.makeBlock(block.x - block.width, block.y, 18, 24, 'BLOCK_MID_SAPPHIRE_LEFT');
@@ -55,7 +55,7 @@ export default class HudFactory {
             button_data.button.setFrame('BLOCK_MID_BLUE_LEFT');
         });
         button_data.click_area.on('pointerout', () => {
-            button_data.block.setFrame('BLOCK_MID_BEIGE_RIGHT');
+            button_data.block.setFrame('BLOCK_MID_WHITE_RIGHT');
             button_data.button.setFrame('BLOCK_MID_SAPPHIRE_LEFT');
         });
 
@@ -96,6 +96,10 @@ export default class HudFactory {
 
 
     makeNotebook (_x,_y) {
+        return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.NOTEBOOK).setScrollFactor(0);
+    }
+
+    makeNumberPad (_x,_y, keys=[1,2,3,4,5,6,7,8,9,'#',0,'*']) {
         return this.scene.add.image(_x,_y, 'UI','NOTEBOOK_CLOSED_RED').setOrigin(0).setDepth(this.depth.NOTEBOOK).setScrollFactor(0);
     }
 

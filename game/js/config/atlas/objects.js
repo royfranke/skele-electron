@@ -362,7 +362,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: 8,
         sprite: {
           h:18, 
           w:16,
@@ -3280,12 +3280,12 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
-          w:16
+          h:8, 
+          w:8
         },
         offset: {
-          x:0, 
-          y:16
+          x:4, 
+          y:18
         },
         varieties: 1,
         solid: 1,
@@ -5769,6 +5769,89 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          HOME_PHONE_WALL_MOUNTED: {
+        name: 'Home Phone Wall Mounted',
+        slug: 'HOME_PHONE_WALL_MOUNTED', 
+        type: 'PHONE',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 4,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'ANSWER', stateTrigger: 'ANSWERING', validStates: ['RINGING']
+          }, {
+            name: 'HANG UP', stateTrigger: 'HANGING_UP', validStates: ['AWAITING_DIAL','AWAITING_PAYMENT','CALLING','DIALING','ON_PHONE']
+          }, {
+            name: 'DIAL', stateTrigger: 'DIALING', validStates: ['AWAITING_DIAL']
+          }, {
+            name: 'USE PHONE', stateTrigger: 'DIALING', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [                {
+              name: 'ON_PHONE',
+              transition: 'false',
+              frames: ['HOME_PHONE_WALL_MOUNTED-1',]},            {
+              name: 'RINGING',
+              transition: 'DEFAULT',
+              frames: ['HOME_PHONE_WALL_MOUNTED-2','HOME_PHONE_WALL_MOUNTED-4','HOME_PHONE_WALL_MOUNTED-3','HOME_PHONE_WALL_MOUNTED-4','HOME_PHONE_WALL_MOUNTED-3','HOME_PHONE_WALL_MOUNTED-4','HOME_PHONE_WALL_MOUNTED-3','HOME_PHONE_WALL_MOUNTED-4','HOME_PHONE_WALL_MOUNTED-2','HOME_PHONE_WALL_MOUNTED-2',]
+              },               {
+              name: 'ANSWERING',
+              transition: 'DEFAULT',
+              frames: ['HOME_PHONE_WALL_MOUNTED-1', ]
+              },            {
+              name: 'AWAITING_DIAL',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'AWAITING_PAYMENT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'CALLING',
+              transition: 'false',
+              frames: ['HOME_PHONE_WALL_MOUNTED-1',]
+              }, {
+              name: 'DIALING',
+              transition: 'CALLING',
+              frames: ['HOME_PHONE_WALL_MOUNTED-1',]
+              },                {
+              name: 'HANGING_UP',
+              transition: 'DEFAULT',
+              frames: ['HOME_PHONE_WALL_MOUNTED-4', 'HOME_PHONE_WALL_MOUNTED-3', 'HOME_PHONE_WALL_MOUNTED-2', ]
+              },                                       {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: ['HOME_PHONE_WALL_MOUNTED-2',]
+              },               ],
+
+          interactions: {
+                                  },
+    },
           HOT_WATER_HEATER: {
         name: 'Hot Water Heater',
         slug: 'HOT_WATER_HEATER', 
@@ -7380,6 +7463,73 @@ const OBJECTS = {
               transition: 'CLOSED',
               frames: ['OVEN_1-3', 'OVEN_1-2', 'OVEN_1-1', ]
               },],
+
+          interactions: {
+                                  },
+    },
+          OVERCOUNTER_CABINET_S_DARK_WOOD: {
+        name: 'Overcounter Cabinet S Dark Wood',
+        slug: 'OVERCOUNTER_CABINET_S_DARK_WOOD', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        default_state: 'CLOSED',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },                           {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
+              },],            slots: 0,
+            items: [],
 
           interactions: {
                                   },
@@ -10704,6 +10854,55 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          CAR_SEDAN_1: {
+        name: 'Taupe Sedan',
+        slug: 'CAR_SEDAN_1', 
+        type: 'VEHICLE',
+        bounding: {
+          h:4, 
+          w:9
+        },
+        base: {
+          h:3, 
+          w:7,
+          x:1, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:64, 
+          w:144,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:40, 
+          w:120
+        },
+        offset: {
+          x:12, 
+          y:18
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'FACING_EAST',        states: [                {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: []},                {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: ['CAR_SEDAN_1-1',]},                {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: []},],
+
+          interactions: {
+                                  },
+    },
           TELEPHONE_POLE_TOP: {
         name: 'Telephone Pole Top',
         slug: 'TELEPHONE_POLE_TOP', 
@@ -11899,7 +12098,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: 8,
         sprite: {
           h:23, 
           w:16,

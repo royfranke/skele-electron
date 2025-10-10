@@ -20,6 +20,9 @@ const FOCUS_STATES = {
     NOTEBOOK: {
         name: 'NOTEBOOK'
     },
+    NUMBERPAD: {
+        name: 'NUMBERPAD'
+    },
     MAP: {
         name: 'MAP'
     },

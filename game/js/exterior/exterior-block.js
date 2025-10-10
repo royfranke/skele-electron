@@ -150,6 +150,7 @@ export default class Block {
         if (this.block.offset.n > 0) {
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+7, this.block.top,'POSTBOX_S');
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+12, this.block.top,'HYDRANT_CITY_');
+            //this.scene.manager.vehicleManager.newVehicleToWorld(this.block.left+7, this.block.top - 4, 'CAR_SEDAN_1');
 
         }  
         if (this.block.offset.s > 0) {

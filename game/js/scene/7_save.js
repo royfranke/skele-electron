@@ -47,7 +47,7 @@ export default class SaveScene extends Phaser.Scene {
     saved () {
         var date = this.time.getDateFromSave(this.slot.TIME);
 
-        this.date = date.weekday+', '+date.month+' '+date.day+', '+date.year;
+        this.date = date.weekday+', '+date.month+' '+date.day;
 
         var tip = "Tripping over the curb? Slow down to keep upright.";
         this.app.appView.drawTip(tip);
@@ -77,7 +77,7 @@ export default class SaveScene extends Phaser.Scene {
 
         let background_frame = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_SHALLOW_RED_EDGE_FRAME');
 
-        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top +this.camera.view.margin.top, 200, this.camera.view.height - (this.camera.view.margin.top + this.camera.view.margin.bottom), 'BLOCK_MID_CREAM_FAT_BORDER');
+        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top +this.camera.view.margin.top, 200, this.camera.view.height - (this.camera.view.margin.top + this.camera.view.margin.bottom), 'BLOCK_MID_SKY_FAT_BORDER');
         menu_background.setDepth(2);
 
         let menu_background_frame = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top +this.camera.view.margin.top, 200, this.camera.view.height - (this.camera.view.margin.top + this.camera.view.margin.bottom), 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME');
@@ -92,11 +92,18 @@ export default class SaveScene extends Phaser.Scene {
         var headline = this.slot.SAVE.HEADLINE.toLowerCase().replace(/ /g,"_");
         var slot_headline = this.add.bitmapText(menu_background.x + menu_background.width/2, menu_background.y + 16, 'SkeleMarquee', headline, 16).setOrigin(.5,0).setScrollFactor(0).setDepth(1000);
 
-        var summary = "Today I...";
+        
         var slot_summary = this.add.bitmapText(menu_background.x + 16, slot_headline.y + 16 + slot_headline.displayHeight, 'SkeleNotebook', summary, 8).setOrigin(0,0).setScrollFactor(0).setDepth(1000).setTintFill(0x465e62).setLineSpacing(11);
 
         var ready = "Ready to begin\n"+this.date+"?";
-        var slot_ready = this.add.bitmapText(menu_background.x + menu_background.width/2, menu_background.y + menu_background.height - 72, 'SkeleNotebook', ready, 8).setOrigin(.5,0).setScrollFactor(0).setDepth(1000).setTintFill(0x465e62).setLineSpacing(11).setCenterAlign();
+        var slot_ready = this.add.bitmapText(menu_background.x + 16, menu_background.y + menu_background.height - 36, 'SkeleNotebook', ready, 8).setOrigin(0,0).setScrollFactor(0).setDepth(1000).setTintFill(0x465e62).setLineSpacing(11);
 
+        this.notebook = {};
+        var summary = "Today I...";
+        this.notebook.panel = this.hud.factory.makeNotebook(menu_background.x + 32, slot_headline.y + 8 + slot_headline.displayHeight);
+        this.notebook.panel.setFrame('NOTEBOOK_OPEN');
+        this.notebook.page = this.hud.makeBitmapText(this.notebook.panel.x + 42, this.notebook.panel.y + 16, 80, 8, 'SkeleNotebook');
+        this.notebook.page.setText(summary+'\n1. Shoplifted\n2. Threw rocks\n3. Picked up 6 pieces of litter\n4. Copied a key\n5. Tested my psychic abilities');
+        this.notebook.page.setLineSpacing(8);
     }
 }

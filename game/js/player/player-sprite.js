@@ -39,6 +39,7 @@ export default class PlayerSprite {
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);
     this.scene.physics.add.collider(this.sprite, this.scene.exterior.wallLayer);
     this.scene.exterior.wallLayer.setCollisionByExclusion([-1]);
+    this.scene.manager.vehicleManager.setCollider();
     //this.sprite.setCollideWorldBounds(true);
     //this.setExteriorZones();
     

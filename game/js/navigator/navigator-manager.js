@@ -83,27 +83,40 @@ export default class NavigatorManager {
             }
             else if (step < route.length) {
                 var direction = this.getDirectionMoved([route[step-1][0],route[step-1][1]],[route[step][0],route[step][1]]);
-
+                var message = "";
                 if (direction == 'n') {
                     if (node.streets.n.found == 1) {
-                        return "Go North on "+node.streets.n.name+"\n";
+                        message = "Go North on "+node.streets.n.name;
                     }
                 }
                 else if (direction == 'e') {
                     if (node.streets.e.found == 1) {
-                        return "Go East on "+node.streets.e.name+"\n";
+                        message = "Go East on "+node.streets.e.name;
                     }
                 }
                 else if (direction == 'w') {
                     if (node.streets.w.found == 1) {
-                        return "Go West on "+node.streets.w.name+"\n";
+                        message = "Go West on "+node.streets.w.name;
                     }
                 }
                 else if (direction == 's') {
                     if (node.streets.s.found == 1) {
-                        return "Go South on "+node.streets.s.name+"\n";
+                        message = "Go South on "+node.streets.s.name;
                     }
                 }
+                return {
+                    message: message,
+                    direction: direction,
+                    street: node.streets[direction].name,
+                    start: {
+                        x: route[step-1][0],
+                        y: route[step-1][1]
+                    },
+                    end: {
+                        x: route[step][0],
+                        y: route[step][1]
+                    }
+                };
             }
         }
     }
@@ -115,6 +128,44 @@ export default class NavigatorManager {
             steps.push(step);
         }
         return steps;
+    }
+
+    getNearestIntersectionToTile (tile_x,tile_y) {
+        var nearest = null;
+        return this.xyToBlock(tile_x,tile_y);
+    }
+
+    xyToBlock (_x,_y) {
+        return {
+            x: Math.floor(_x/MAP_CONFIG.blockWidth),
+            y: Math.floor(_y/MAP_CONFIG.blockHeight),
+            within_block_x: _x % MAP_CONFIG.blockWidth,
+            within_block_y: _y % MAP_CONFIG.blockHeight
+        };
+    }
+
+    getRouteToIntersectionFromTiles (a_x,a_y,b_x,b_y,type='intersection') {
+        var start = this.getNearestIntersectionToTile(a_x,a_y);
+        var route = this.plotRoutes(start.x,start.y,b_x,b_y,"intersection");
+        return route;
+    }
+
+    getPathFromRoute(route) {
+        var path = [];
+        var index = 0;
+        route.forEach(step => {
+            if (index != 0) {
+                console.log(step);
+                var dest = {
+                    x: step.end.x * MAP_CONFIG.blockWidth,
+                    y: step.end.y * MAP_CONFIG.blockHeight,
+                    direction: step.direction
+                };
+                path.push(dest);
+            }
+            index++;
+        });
+        return path;
     }
 
     getFullRoute (a_x,a_y,b_x,b_y,type='intersection') {

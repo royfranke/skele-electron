@@ -10,6 +10,7 @@ import HudKeyboard from "./hud-keyboard.js"; //Extends HudCommon
 import HudQuest from "./hud-quest.js"; //Extends HudCommon
 import HudMap from "./hud-map.js"; //Extends HudCommon
 import HudNotebook from "./hud-notebook.js"; //Extends HudCommon
+import HudNumberPad from "./hud-numberpad.js"; //Extends HudCommon
 import HudPayment from "./hud-payment.js"; //Extends HudCommon
 import HudPocket from "./hud-pocket.js";
 import HudPockets from "./hud-pockets.js"; //Extends HudCommon
@@ -53,6 +54,7 @@ export default class HudManager {
         /// Use this method to gather managers that are not needed for the tutorial/new game
         console.log("Initializing game HUD");
         this.hudThinking = new HudThinking(this.scene);
+        this.hudNumberPad = new HudNumberPad(this.scene);
         this.hudChest = new HudChest(this.scene);
         this.hudHealth = new HudHealth(this.scene);
         this.hudWatch = new HudWatch(this.scene);
@@ -175,6 +177,13 @@ export default class HudManager {
                 this.hudNotebook.closeNotebook();
             }
 
+            if (this.last_state.name != 'NUMBERPAD_FOCUSED' && this.state.name == 'NUMBERPAD_FOCUSED') {
+                this.hudNumberPad.openNumberPad();
+            }
+            /// Close NumberPad
+            if (this.state.name != 'NUMBERPAD_FOCUSED' && this.last_state.name == 'NUMBERPAD_FOCUSED') {
+                this.hudNumberPad.closeNumberPad();
+            }
 
             if (this.last_state.name != 'MAP_FOCUSED' && this.state.name == 'MAP_FOCUSED') {
                 this.hudMap.openMap();

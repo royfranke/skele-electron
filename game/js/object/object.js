@@ -290,15 +290,10 @@ export default class Object {
                 }
             });
         }
-        else {
-                console.log("No portal set for this object");
-            }
-        
 
         if (action == 'CHECK OUT' || action == 'CHECKOUT') {
             this.scene.manager.hud.hudStore.checkout();
         }
-
         
         if (action == 'SAVE') {
             console.log("Saving game");
@@ -316,6 +311,19 @@ export default class Object {
 
         if (action == 'RING') {
             this.scene.manager.hud.hudSound.play('DING_DING');
+        }
+
+        if (action == 'USE PHONE') {
+            this.scene.manager.setFocus('NUMBERPAD');
+            this.scene.events.addListener('CALL_PHONE', function (number) {
+                console.log("Calling "+number);
+                this.scene.time.delayedCall(3000, () => {
+                    this.scene.manager.hud.hudSound.play('ANSWER_WRONG');
+                    this.doAction('HANG UP');
+                    this.scene.manager.setFocus('PLAYER');
+                });
+                
+            }, this);
         }
 
 
@@ -350,6 +358,7 @@ export default class Object {
 
     setParams (params) {
         // Used for setting extra parameters from save data
+        
         if (params.state != undefined) {
             this.setState(params.state, true);
         }
@@ -430,6 +439,7 @@ export default class Object {
     }
 
     setState (state_name, force=true) {
+        console.log("Setting state to "+state_name+" for "+this.info.slug);
         if (this.last_state == null) {
             force = true;
         }
