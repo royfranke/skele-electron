@@ -19,19 +19,17 @@ export default class HudPayment extends HudCommon {
         this.payWith = [];
 
         this.position = {
-            unfocused: {
                 board: {
                     x: this.view.left + (this.view.margin.left*7.5),
                     y: this.view.top + (this.view.margin.top*3.5),
                     width: 196,
                     height: this.view.height - (this.view.margin.top*3.5 + this.view.margin.bottom + 40)
                 }
-            },
-            focused: {
-
-            }
         };
-
+        this.position.pay_button = {
+            x: this.position.board.x + this.position.board.width - 32,
+            y: this.position.board.y + this.position.board.height - 32
+        }
         this.payment_components = [];
 
     }
@@ -46,10 +44,24 @@ export default class HudPayment extends HudCommon {
     openInterface() {
         
         this.setPaymentState('FOCUSED');
-        this.board = this.makeBlock(this.position.unfocused.board.x, this.position.unfocused.board.y,this.position.unfocused.board.width, this.position.unfocused.board.height,'BLOCK_MID_LILAC_FAT_BORDER');
-        this.frame = this.makeBlock(this.position.unfocused.board.x, this.position.unfocused.board.y,this.position.unfocused.board.width, this.position.unfocused.board.height,'BLOCK_SHALLOW_RED_FRAME');
+        this.board = this.makeBlock(this.position.board.x, this.position.board.y,this.position.board.width, this.position.board.height,'BLOCK_MID_LILAC_FAT_BORDER');
+        this.frame = this.makeBlock(this.position.board.x, this.position.board.y,this.position.board.width, this.position.board.height,'BLOCK_SHALLOW_RED_FRAME');
+        var text = this.scene.add.bitmapText(this.position.board.x + 16, this.position.board.y + 16, 'SkeleTalk', 'Ready to pay?', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
-        this.setupBoard();
+        var button = this.makeButton(this.position.pay_button.x, this.position.pay_button.y,'PAY', 'X');
+        button.click_area.on('pointerdown', () => {
+            this.inputSelect();
+        });
+
+        this.payment_components.push(text);
+
+        this.payment_components.push(button.block);
+        this.payment_components.push(button.text);
+        this.payment_components.push(button.button);
+        this.payment_components.push(button.button_text);
+        this.payment_components.push(button.click_area);
+
+        //this.setupBoard();
         this.manager.listen();
     }
 
@@ -65,6 +77,7 @@ export default class HudPayment extends HudCommon {
         this.scene.player.coinpurse.updateTotal();
         this.scene.manager.hud.hudStore.destroyReceipt();
         this.setPaymentState('UNFOCUSED');
+        this.scene.manager.setFocus('PLAYER');
     }
 
     takePayment(amount, total) {
@@ -214,13 +227,14 @@ export default class HudPayment extends HudCommon {
 
 
     setupBoard() {
-        let _x = this.position.unfocused.board.x + 8;
-        let _y = this.position.unfocused.board.y + 8;
+        let _x = this.position.board.x + 8;
+        let _y = this.position.board.y + 8;
 
         var coins = [];
         /// Get coinpurse contents
         this.scene.player.coinpurse.updateTotal();
         var content = this.scene.player.coinpurse.getTalliedTotal();
+        /*
         if (content.length > 0) {
             let coin_slots = [];
             let coin_slot_height = 12;
@@ -247,7 +261,7 @@ export default class HudPayment extends HudCommon {
             });
             content = new_content;
         }
-        
+        */
         if (content.length == 0) { 
             // Nothing in coinpurse
         }
@@ -255,11 +269,14 @@ export default class HudPayment extends HudCommon {
         let flag_text = this.scene.add.bitmapText(_x + 20, _y + 10, 'SkeleTalk', content, 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
         this.payment_components.push(flag_text);
 
+        /*
         let row_arrow_left = this.makeHUDLeftArrow(_x + 32, _y + 4, 'SHADOW');
 
         let row_arrow_right = this.makeHUDRightArrow(_x + 72, _y + 4, 'SHADOW');
         this.payment_components.push(row_arrow_left);
         this.payment_components.push(row_arrow_right);
+        */
+
         
     }
 

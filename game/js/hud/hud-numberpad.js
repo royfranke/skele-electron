@@ -12,9 +12,10 @@ export default class HudNumberPad extends HudCommon {
     }
 
     initialize() {
-        this.keys = [1,2,3,4,5,6,7,8,9,'#',0,'*'];
-        this.manager = new NumberPadManager(this.scene, this.keys);
+        this.keys = [1,2,3,4,5,6,7,8,9,'*',0,'#'];
+        this.manager = new NumberPadManager(this.scene);
         this.state = 'UNFOCUSED';
+        this.container = null;
         this.position = {
             container: {
                 x: this.view.center.x + 48,
@@ -37,8 +38,11 @@ export default class HudNumberPad extends HudCommon {
     }
 
     checkNumberPad() {
-        if (this.container == undefined) {
+        if (this.container == undefined || this.container == null) {
             this.addNumberPad();
+        }
+        else if (this.container.list.length == 0) {
+            this.setUpNumberPad();
         }
     }
 
@@ -47,9 +51,7 @@ export default class HudNumberPad extends HudCommon {
         this.state = state;
     }
 
-    addNumberPad() {
-        this.container = this.scene.add.container(this.position.container.x, this.position.container.y).setDepth(1000).setScrollFactor(0);
-
+    setUpNumberPad() {
 
         var panel = this.makeBlock(this.position.panel.x, this.position.panel.y, this.position.panel.width, this.position.panel.height, 'BLOCK_MID_CREAM_BORDER');
 
@@ -60,12 +62,11 @@ export default class HudNumberPad extends HudCommon {
             let key_y = this.position.key.y + (Math.floor(i / 3) * (this.position.key.height + this.position.key.y));
 
             let key_block = this.makeBlock(key_x, key_y, this.position.key.width, this.position.key.height, 'BLOCK_DEEP_BEIGE').setDepth(1).setInteractive();
-
             key_block.on('pointerdown', () => {
                 this.manager.pressKey(this.keys[i]);
                 key_block.setFrame('BLOCK_SHALLOW_BEIGE');
                 this.scene.time.addEvent({
-                    delay: 500,
+                    delay: 250,
                     callback: ()=>{
                         key_block.setFrame('BLOCK_DEEP_BEIGE');
                     }
@@ -78,7 +79,11 @@ export default class HudNumberPad extends HudCommon {
             this.container.add(key_text);
 
         }
+    }
 
+    addNumberPad() {
+        this.container = this.scene.add.container(this.position.container.x, this.position.container.y).setDepth(1000).setScrollFactor(0);
+        this.setUpNumberPad();
     }
 
     openNumberPad() {
@@ -91,9 +96,16 @@ export default class HudNumberPad extends HudCommon {
 
     closeNumberPad() {
         this.manager.destroyListeners();
-        this.checkNumberPad();
         this.setNumberPadState('UNFOCUSED');
-        this.container.destroy();
+        this.container.alpha = 0;
+        this.scene.time.addEvent({
+            delay: 250,
+            callback: ()=>{
+                this.container.destroy();
+                this.container = null;
+            }
+        });
+        
     }
 
 }

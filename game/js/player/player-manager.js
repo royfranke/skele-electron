@@ -283,6 +283,10 @@ export default class PlayerManager {
     
   }
 
+  moveToTile(x_, y_) {
+    this.playerSprite.moveToTile(x_, y_);
+  }
+
   getSpeed() {
     if (this.state.name == 'IDLE') {
       return 0;

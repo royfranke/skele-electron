@@ -67,6 +67,8 @@ import KEYLIGHT from "../config/key-light.js";
 
         this.ground = new Ground(this.groundLayer, this.edgeLayer);
         //this.scene.app.camera.setBounds(this.map.widthInPixels, this.map.heightInPixels);
+
+        this.setMouseInput();
         
     }
 
@@ -126,6 +128,26 @@ import KEYLIGHT from "../config/key-light.js";
             this.drawWallCutAway();
             this.built = true;
         }
+    }
+
+    setMouseInput () {
+        var self = this;
+        this.scene.input.on('pointerup', function (pointer) {
+            //console.log('Pointer up at world coordinates:', Math.round(pointer.worldX/16), Math.round(pointer.worldY/16));
+            var tile = self.groundLayer.getTileAt(Math.round(pointer.worldX/16), Math.round(pointer.worldY/16)); 
+
+            if (tile) {
+                // A tile was clicked! You can now access its properties:
+                console.log("Clicked tile at:", tile.x, tile.y);
+                console.log("Tile index:", tile.index);
+                if (self.scene.player.state.name == 'IDLE' || self.scene.player.state.name == 'WALKING') {
+                    // Perform actions based on the clicked tile
+                    self.scene.player.moveToTile(tile.x, tile.y);
+
+                }
+                
+            }
+        });
     }
 
     buildFeatureList () {

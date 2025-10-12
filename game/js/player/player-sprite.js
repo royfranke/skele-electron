@@ -170,4 +170,14 @@ export default class PlayerSprite {
     this.sprite.body.setVelocity(0);
     this.action.showMenu = false;
   }
+
+  moveToTile(x, y) {
+    var focus = this.scene.manager.getFocus();
+    if (focus.name == 'PLAYER') {
+      var tile_x = x * 16;
+      var tile_y = y * 16;
+      this.sprite.setPosition(tile_x, tile_y);
+    }
+
+  }
 }

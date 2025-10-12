@@ -3,9 +3,8 @@
 
 export default class NumberPadManager {
 
-    constructor(scene, keys) {
+    constructor(scene) {
         this.scene = scene;
-        this.keys = keys;
         this.string = '';
         this.calling = false;
     }
@@ -31,6 +30,8 @@ export default class NumberPadManager {
 
    destroyListeners () {
         this.scene.events.off('INPUT_NUMBERPAD');
+        this.scene.events.off('CALL_PHONE');
+        this.reset();
    }
 
 }

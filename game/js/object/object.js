@@ -314,6 +314,7 @@ export default class Object {
         }
 
         if (action == 'USE PHONE') {
+            console.log("Using phone");
             this.scene.manager.setFocus('NUMBERPAD');
             this.scene.events.addListener('CALL_PHONE', function (number) {
                 console.log("Calling "+number);
