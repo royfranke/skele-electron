@@ -22,9 +22,13 @@ export default class ItemBag extends Item {
     bagItem(item) {
         if (!this.isFull()) {
             this.items.push(item);
+            this.scene.manager.hud.hudThinking.tellBrain("I put "+item.name+" in the "+this.info.name+".");
             return true;
         } else {
             console.log("Bag.bagItem: no more room in bag.");
+
+           //this.scene.manager.hud.hudThinking.tellBrain("There's no more room in the "+this.info.name+".");
+            
             return false;
         }
     }
@@ -91,6 +95,9 @@ export default class ItemBag extends Item {
                         self.scene.manager.hud.pocket.setPocket(item.pocketIndex, 'EMPTY');
                         var sound_var = Phaser.Math.RND.between(1, 3);
                         self.scene.manager.hud.hudSound.play('ITEM_PUT_AWAY_' + sound_var);
+                    }
+                    else {
+                        self.scene.manager.hud.hudThinking.tellBrain("There's no more room in the "+self.info.name+".");
                     }
                     self.scene.manager.hud.refreshDisplay();
                 }

@@ -3199,6 +3199,30 @@
 	}
     
                          
-                                                                  	
+      ,  { 
+		"filename": "BINDLE",
+		"frame": {"x":256,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BANDANA_RED",
+		"frame": {"x":272,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BINDLE_PLASTIC",
+		"frame": {"x":288,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+                                                                      	
 ]
 }

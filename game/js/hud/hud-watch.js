@@ -48,9 +48,9 @@ export default class HudWatch extends HudCommon {
     }
 
     addHiddenWatch(conditions='with_coinpurse') {
-        this.watch.display = this.makeBitmapText(this.position[conditions].unfocused.x+8,this.position[conditions].unfocused.y + 11, 64, 16, 'SkeleWatch')
+        this.watch.display = this.makeBitmapText(this.position[conditions].unfocused.x+10,this.position[conditions].unfocused.y + 11, 64, 16, 'SkeleWatch')
         this.watch.display.setText("00:00BM");
-        this.watch.slice = this.makeBlock(this.position[conditions].unfocused.x, this.position[conditions].unfocused.y, this.watch.display.displayWidth + 4, 32, 'HUD_DIGITAL_WATCH_FACE');
+        this.watch.slice = this.makeBlock(this.position[conditions].unfocused.x, this.position[conditions].unfocused.y, this.watch.display.displayWidth + 8, 32, 'HUD_DIGITAL_WATCH_FACE');
     }
 
     plungeWatch(conditions='with_coinpurse') {

@@ -294,11 +294,11 @@ export default class Object {
         if (action == 'CHECK OUT' || action == 'CHECKOUT') {
             this.scene.manager.hud.hudStore.checkout();
         }
-        
+        /*
         if (action == 'SAVE') {
             console.log("Saving game");
             return this.scene.app.saveManager.saveGameData();
-        }
+        }*/
 
         if (action == 'CURL UP ON') {
             console.log("Sleeping - Saving game");
@@ -311,6 +311,7 @@ export default class Object {
 
         if (action == 'RING') {
             this.scene.manager.hud.hudSound.play('DING_DING');
+            this.scene.manager.fx.newFX('DING_DING_FX', this.sprite.x + (this.info.sprite.w), this.sprite.y - (this.info.sprite.h / 2));
         }
 
         if (action == 'USE PHONE') {

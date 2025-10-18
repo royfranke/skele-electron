@@ -35,10 +35,12 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 #game-container>canvas {
   border-radius: 5px;
+  border:2px solid #3f3c35;
 }
 
 @keyframes shuffle {

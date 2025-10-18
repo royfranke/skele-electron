@@ -194,6 +194,21 @@
                                       ],
                   repeat: -1
               },
+                          DING_DING_FX: {
+                  name: 'Ding Ding',
+                  slug: 'DING_DING_FX',
+                  frames: [
+                                          'DING_DING_FX-1',
+                                          'DING_DING_FX-2',
+                                          'DING_DING_FX-3',
+                                          'DING_DING_FX-4',
+                                          'DING_DING_FX-5',
+                                          'DING_DING_FX-6',
+                                          'DING_DING_FX-7',
+                                          'DING_DING_FX-8'
+                                      ],
+                  repeat: 0
+              },
                           DRIP_SINGLE: {
                   name: 'Drip Single',
                   slug: 'DRIP_SINGLE',

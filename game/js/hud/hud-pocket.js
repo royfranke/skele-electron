@@ -267,6 +267,10 @@ export default class HudPocket {
 
             }
         });
+
+        if (!found) {
+            this.scene.manager.hud.hudThinking.tellBrain("I'm out of bag space.");
+        }
         return found;
     }
 

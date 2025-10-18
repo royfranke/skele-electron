@@ -37,6 +37,23 @@ export default class TimeManager {
         }
     }
 
+    getDateForNotebook () {
+        /// Check if we are between midnight and 4am, if so, return previous day
+        var hour = this.now.hour;
+        if (hour < 5) {
+            var elapsed = {
+                day: this.now.day - 1,
+                hour: this.now.hour,
+                minute: this.now.minute,
+                second: this.now.second
+            };
+            return this.getDate(elapsed);
+        }
+        else {
+            return this.getDate();
+        }
+    }
+
     setTimeFromSleep () {
         var alarm = this.getAlarmTime();
         if (this.now.hour > alarm.hour || (this.now.hour == alarm.hour && this.now.minute > alarm.minute)) {
