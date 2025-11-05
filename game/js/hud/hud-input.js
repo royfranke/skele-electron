@@ -31,7 +31,7 @@ export default class HudInput {
         }
     }
 
-    setSelectedContents(from_selected) {
+    setSelectedContents(from_selected, force = false) {
         if (this.scene.manager.hud.hudPockets.state == 'OPEN') {
             var pocket = this.scene.manager.hud.pocket.getPocket(this.selected.pocket);
 
@@ -60,6 +60,9 @@ export default class HudInput {
                     if (selected >= content_length || selected < -1) {
                         selected = content_length - 1;
                         /// Down arrow on inventory content            
+                    }
+                    if (force) {
+                        selected = from_selected;
                     }
                     if (selected == content_length - 1) {
                         this.scene.manager.hud.arrowDown(this.selected.pocket);

@@ -77,11 +77,10 @@ export default class PlayerSprite {
 
   update() {
     var state = this.scene.player.getState();
-    this.facing = this.scene.player.getFacing(this.facing);
     this.sprite.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true);
 
     if (state.name == 'WALK') {
-      this.sprite.body.setVelocity(0);
+      //this.sprite.body.setVelocity(0);
     }
 
     this.updateVelocity();
@@ -95,31 +94,37 @@ export default class PlayerSprite {
     */
   }
 
-  updateVelocity () {
-    const speed = this.scene.player.speed;
-    let input = this.scene.player.playerInput;
-    
-    // Horizontal movement
+  updateFlip () {
     var flip = (this.facing == 'nw' || this.facing == 'w' || this.facing == 'sw') ? true : false;
     this.sprite.setFlipX(flip);
+  }
 
-    this.move({up: input.up, right: input.right, down: input.down, left: input.left}, speed);
+  updateVelocity () {
+    if (this.scene.player.destinations.length == 0) {
+      let input = this.scene.player.playerInput;
+      let speed = this.scene.player.speed;
+      this.facing = input.getFacing(this.facing);
+      
+      this.move({up: input.up, right: input.right, down: input.down, left: input.left}, speed);
+    }
+    this.updateFlip();
   }
   
   move (dir={up: false, right: false, down: false, left: false}, speed) {
+    var self = this;
     if (dir.up) {
-      this.sprite.body.setVelocityY(-speed);
+      self.sprite.body.setVelocityY(-speed);
     } else if (dir.down) {
-      this.sprite.body.setVelocityY(speed);
+      self.sprite.body.setVelocityY(speed);
     }
 
     if (dir.left) {
-      this.sprite.body.setVelocityX(-speed);
+      self.sprite.body.setVelocityX(-speed);
     } else if (dir.right) {
-      this.sprite.body.setVelocityX(speed);
+      self.sprite.body.setVelocityX(speed);
     }
 
-    this.sprite.body.velocity.normalize().scale(speed);
+    self.sprite.body.velocity.normalize().scale(speed);
   }
 
   updateKeyLight () {
@@ -176,7 +181,12 @@ export default class PlayerSprite {
     if (focus.name == 'PLAYER') {
       var tile_x = x * 16;
       var tile_y = y * 16;
-      this.sprite.setPosition(tile_x, tile_y);
+      
+      var current_x = this.scene.player.standingTile.x;
+      var current_y = this.scene.player.standingTile.y;
+      var route = this.scene.manager.nav.getFullRoute(current_x, current_y,x,y, 'simple_tile');
+      this.scene.player.destinations = route;
+      //this.sprite.setPosition(tile_x, tile_y);
     }
 
   }

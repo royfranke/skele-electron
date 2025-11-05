@@ -25,13 +25,13 @@ export default class HudHealth extends HudCommon {
 
         this.setHealthMax(3);
         this.addHealth();
-        this.setHealth(1.5);
+        this.setHealth(2.75);
     }
 
 
     addHealth () {
         if (this.verbose) {console.log("Adding health to HUD");}
-        this.health.slice = this.makeBlock(this.position.x, this.position.y, (this.health.hearts.length * 18) + 16, 32, 'SHOULDERS_UNFOCUSED');
+        this.health.slice = this.makeBlock(this.position.x, this.position.y, (this.health.hearts.length * 18) + 16, 32, 'BLOCK_MID_RED_FAT_BORDER');
         this.health.slice.setOrigin(1,1);
     }
 
@@ -61,9 +61,17 @@ export default class HudHealth extends HudCommon {
         for (let i = 0; i < this.health.hearts.length; i++) {
             this.health.hearts[i].setTexture('UI', 'HEART_FULL');
             if (i < hearts) {
+                if (hearts - i == 0.25) {
+                    //this.heartFX(i,'HEART_FULL_TO_HALF');
+                    this.health.hearts[i].setTexture('UI', 'HEART_QUARTER');
+                }
                 if (hearts - i == 0.5) {
                     //this.heartFX(i,'HEART_FULL_TO_HALF');
                     this.health.hearts[i].setTexture('UI', 'HEART_HALF');
+                }
+                if (hearts - i == 0.75) {
+                    //this.heartFX(i,'HEART_FULL_TO_HALF');
+                    this.health.hearts[i].setTexture('UI', 'HEART_3_QUARTER');
                 }
             } else {
                 // Set to empty heart if less than half

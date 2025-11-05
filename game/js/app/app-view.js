@@ -67,7 +67,7 @@ export default class AppView {
     }
 
     createCourts () {
-        this.scene.add.nineslice(this.view.left,this.view.top, 'UI', 'BLOCK_MID_DARK_BORDER', this.view.width, this.view.height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(800);
+        this.scene.add.nineslice(this.view.left,this.view.top, 'UI', 'BLOCK_MID_SAPPHIRE_BORDER', this.view.width, this.view.height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(800);
         this.addVersion();
         this.courtManager = new CourtsManager(this.scene);
     }
@@ -150,7 +150,7 @@ export default class AppView {
             
 
             if (SAVES.length > i) {
-                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY + ', ' + SAVES[i].SAVE.DATE, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
                 var _x = left + this.view.margin.left;
                 var _y = top + this.view.margin.top*2;
@@ -245,7 +245,7 @@ export default class AppView {
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_WHITE_FAT_BORDER');
+                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_YELLOW_FAT_BORDER');
                     this.slots[selected - 1].selector.setVisible(true);
 
                     this.slots[selected - 1].slot_headline.setText('loading...');

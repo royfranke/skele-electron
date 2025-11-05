@@ -138,6 +138,7 @@ import KEYLIGHT from "../config/key-light.js";
 
             if (tile) {
                 // A tile was clicked! You can now access its properties:
+                self.scene.player.clearDestinations();
                 console.log("Clicked tile at:", tile.x, tile.y);
                 console.log("Tile index:", tile.index);
                 if (self.scene.player.state.name == 'IDLE' || self.scene.player.state.name == 'WALKING') {

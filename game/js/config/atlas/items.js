@@ -2688,9 +2688,9 @@ items: []    },
                     },
                   {
                     slot_type: 'IN_HAND',
-                    type: 'ITEM',
+                    type: 'ITEM_KIND',
                     result: 'CONSUMED',
-                    ITEM: 'STICK'
+                    ITEM_KIND: 'STICK'
                     }
                                 ]
 
@@ -7095,9 +7095,9 @@ items: []    },
                     },
                   {
                     slot_type: 'IN_HAND',
-                    type: 'ITEM',
+                    type: 'ITEM_KIND',
                     result: 'CONSUMED',
-                    ITEM: 'STICK'
+                    ITEM_KIND: 'STICK'
                     }
                                 ]
 

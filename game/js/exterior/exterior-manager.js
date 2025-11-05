@@ -228,12 +228,16 @@ import KEYLIGHT from "../config/key-light.js";
         
     }
 
+    buildBlock (_x,_y) {
+        this.blocks[_y][_x].buildProperties();
+        this.blocks[_y][_x].buildObjects();
+    }
+
     create () {
         self = this;
         MAP_CONFIG.blocks.forEach(function (block, index) {
             self.setCorners(block);
-            self.blocks[block.y][block.x].buildProperties();
-            self.blocks[block.y][block.x].buildObjects(); 
+            self.buildBlock(block.x, block.y); 
         });
         const objectManager = this.scene.manager.objectManager;
 
@@ -241,7 +245,7 @@ import KEYLIGHT from "../config/key-light.js";
             self.nodes[node.y][node.x].buildObjects(objectManager); 
         });
         this.ground.initializeTiles();
-        
+        this.setMouseInput();
     }
 
     setKeyLight (key_light_name) {
@@ -259,6 +263,27 @@ import KEYLIGHT from "../config/key-light.js";
             blocks[block.y][block.x].buildItems(); 
         });
         
+    }
+
+    setMouseInput () {
+        var self = this;
+        this.scene.input.on('pointerup', function (pointer) {
+
+            var tile = self.groundLayer.getTileAt(Math.round(pointer.worldX/16), Math.round(pointer.worldY/16)); 
+
+            if (tile) {
+                // A tile was clicked! You can now access its properties:
+                self.scene.player.clearDestinations();
+                console.log("Clicked tile at:", tile.x, tile.y);
+                console.log("Tile index:", tile.index);
+                if (self.scene.player.state.name == 'IDLE' || self.scene.player.state.name == 'WALKING') {
+                    // Perform actions based on the clicked tile
+                    self.scene.player.moveToTile(tile.x, tile.y);
+
+                }
+                
+            }
+        });
     }
 
     update () {

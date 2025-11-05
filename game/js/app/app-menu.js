@@ -65,7 +65,7 @@ export default class AppMenu {
     buildBackground () {
         const view = this.view;
 
-        this.scene.add.nineslice(view.left,view.top, 'UI', 'BLOCK_MID_DARK_BORDER', view.width, view.height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(800);
+        this.scene.add.nineslice(view.left,view.top, 'UI', 'BLOCK_MID_SAPPHIRE_BORDER', view.width, view.height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(800);
     }
 
     setSelected (selected=0) {

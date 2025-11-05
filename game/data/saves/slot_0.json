@@ -1,1 +1,181 @@
-{"BODY":{"ODOR":2,"HUNGER":31,"FATIGUE":2,"THIRST":5,"FILTH":2,"EASE":2,"WET":0},"COINPURSE":{"COIN":{"QUARTER":1,"NICKEL":1,"PENNY":1},"STATUS":{"HAS":"TRUE","HAD":"FALSE","LOST":"FALSE"},"PAPER":{"TEN":1}},"KNOWLEDGE":{"CURSES":{},"NUMBERS":{},"ADDRESSES":{},"INTERSECTIONS":{}},"NOTEBOOKS":{"STATUS":{"CURRENT":{"NOTEBOOK":1}},"NOTEBOOK1":{"PAGES":[{"title":"Phone Numbers","content":"Mom: 555-4322\nGillys: 555-4218"},{"title":"Thursday, June 9","content":"Testing!"},{"title":"TEST","content":"Testing!"},{"title":"Saturday, June 11","content":"Testing!"}],"SPECS":{"COLOR":"RED"},"EPHEMERA":{}}},"POCKETS":{"SLOTS":{"SLOT0":{"TYPE":"SHOULDERS","STATE":"WEARS","EMPTY":{"NAME":"shoulders","ICON":"SHOULDERS"},"HOLDS":"DISALLOWED","USES":"DISALLOWED","WEARS":{"ITEM":"BACKPACK_PURPLE","STACK":1,"ITEMS":[{"ITEM":"CEREAL_BOX_2","STACK":1},{"ITEM":"RABBITS_FOOT","STACK":1},{"ITEM":"SHOVEL","STACK":1},{"ITEM":"BUS_TICKET","STACK":1},{"ITEM":"MILK_BODEGA","STACK":1},{"ITEM":"BREAKFAST_TART_PINK","STACK":1}]}},"SLOT1":{"TYPE":"HAND","STATE":"HOLDS","EMPTY":{"NAME":"right","ICON":"RIGHT_HAND"},"HOLDS":{"ITEM":"PLASTIC_BAG_1","STACK":1,"ITEMS":[{"ITEM":"MUFFIN_BERRY","STACK":1},{"ITEM":"BANANA_BRUISED","STACK":1}]},"USES":null,"WEARS":"DISALLOWED"},"SLOT2":{"TYPE":"HAND","STATE":"EMPTY","EMPTY":{"NAME":"left","ICON":"LEFT_HAND"},"HOLDS":null,"USES":null,"WEARS":"DISALLOWED"}},"STATES":{"EMPTY":"EMPTY","HOLDS":"HOLDS","WEARS":"WEARS","USES":"USES"}},"POSITION":{"ROOM":6,"X":8,"Y":10},"SAVE":{"HEADLINE":"NEW IN TOWN","SLOT":0},"SETTINGS":{"CONTENT":{"MOTHS":"TRUE","BUTTERFLIES":"TRUE","SMOKES":"TRUE","BOOZE":"TRUE"}},"TIME":{"HOUR":8,"MINUTE":29,"SECOND":0,"DAY":9,"ALARM":{"SET":"FALSE","HOUR":8,"MINUTE":30}}}
+{
+    "BODY": {
+        "ODOR": 2,
+        "HUNGER": 3,
+        "FATIGUE": 2,
+        "THIRST": 5,
+        "FILTH": 2,
+        "EASE": 2,
+        "WET": 0
+    },
+    "COINPURSE": {
+        "COIN": {
+            "QUARTER": 1,
+            "NICKEL": 1,
+            "PENNY": 1
+        },
+        "STATUS": {
+            "HAS": "TRUE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
+        },
+        "PAPER": {
+            "TEN": 1
+        }
+    },
+    "KNOWLEDGE": {
+        "CURSES": {},
+        "NUMBERS": {},
+        "ADDRESSES": {},
+        "INTERSECTIONS": {}
+    },
+    "NOTEBOOKS": {
+        "STATUS": {
+            "CURRENT": {
+                "NOTEBOOK": 1
+            }
+        },
+        "NOTEBOOK1": {
+            "PAGES": [
+                {
+                    "title": "Phone Numbers",
+                    "content": "Mom: 555-4322\nGillys: 555-4218"
+                },
+                {
+                    "title": "Thursday, June 9",
+                    "content": "Testing!"
+                },
+                {
+                    "title": "Friday, June 10",
+                    "content": "Testing!"
+                },
+                {
+                    "title": "Saturday, June 11",
+                    "content": "Testing!"
+                }
+            ],
+            "SPECS": {
+                "COLOR": "RED"
+            },
+            "EPHEMERA": {}
+        }
+    },
+    "POCKETS": {
+        "SLOTS": {
+            "SLOT0": {
+                "TYPE": "SHOULDERS",
+                "STATE": "WEARS",
+                "EMPTY": {
+                    "NAME": "shoulders",
+                    "ICON": "SHOULDERS"
+                },
+                "HOLDS": "DISALLOWED",
+                "USES": "DISALLOWED",
+                "WEARS": {
+                    "ITEM": "BACKPACK_PURPLE",
+                    "STACK": 1,
+                    "ITEMS": [
+                        {
+                            "ITEM": "CEREAL_BOX_2",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "RABBITS_FOOT",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "SHOVEL",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "BUS_TICKET",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "MILK_BODEGA",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "BREAKFAST_TART_PINK",
+                            "STACK": 1
+                        }
+                    ]
+                }
+            },
+            "SLOT1": {
+                "TYPE": "HAND",
+                "STATE": "HOLDS",
+                "EMPTY": {
+                    "NAME": "right",
+                    "ICON": "RIGHT_HAND"
+                },
+                "HOLDS": {
+                    "ITEM": "PLASTIC_BAG_1",
+                    "STACK": 1,
+                    "ITEMS": [
+                        {
+                            "ITEM": "MUFFIN_BERRY",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "BANANA_BRUISED",
+                            "STACK": 1
+                        }
+                    ]
+                },
+                "USES": null,
+                "WEARS": "DISALLOWED"
+            },
+            "SLOT2": {
+                "TYPE": "HAND",
+                "STATE": "HOLDS",
+                "EMPTY": {
+                    "NAME": "left",
+                    "ICON": "LEFT_HAND"
+                },
+                "HOLDS": {
+                    "ITEM": "STICK_1",
+                    "STACK": 1,
+                    "ITEMS": []
+                },
+                "USES": null,
+                "WEARS": "DISALLOWED"
+            }
+        },
+        "STATES": {
+            "EMPTY": "EMPTY",
+            "HOLDS": "HOLDS",
+            "WEARS": "WEARS",
+            "USES": "USES"
+        }
+    },
+    "POSITION": {
+        "ROOM": 6,
+        "X": 8,
+        "Y": 10
+    },
+    "SAVE": {
+        "HEADLINE": "BEJEWELLED",
+        "SLOT": 0,
+        "DATE": "Monday, June 13"
+    },
+    "SETTINGS": {
+        "CONTENT": {
+            "MOTHS": "TRUE",
+            "BUTTERFLIES": "TRUE",
+            "SMOKES": "TRUE",
+            "BOOZE": "TRUE"
+        }
+    },
+    "TIME": {
+        "HOUR": 8,
+        "MINUTE": 29,
+        "SECOND": 0,
+        "DAY": 11,
+        "ALARM": {
+            "SET": "TRUE",
+            "HOUR": 8,
+            "MINUTE": 30
+        }
+    }
+}

@@ -86,6 +86,27 @@ export default class HudPocket {
         }
     }
 
+    setItemsInBag (pocketIndex, items) {
+        let self = this;
+        let pocket = this.getPocket(pocketIndex);
+        if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == 'BAG') {
+            pocket[pocket.STATE].items = [];
+            items.forEach(function (item) {
+                pocket[pocket.STATE].items.push(item);
+            });
+        }
+    }
+
+    getItemsInBag (pocketIndex) {
+        let self = this;
+        let pocket = this.getPocket(pocketIndex);
+        let items = [];
+        if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == 'BAG') {
+            items = pocket[pocket.STATE].items;
+        }
+        return items;
+    }
+
     setPocket(pocketIndex, pocket_state, value = null) {
         let self = this;
         if (this.getPocketAllowed(pocketIndex, pocket_state)) {
@@ -352,10 +373,28 @@ export default class HudPocket {
                     }
                     if (requirement.result == 'TRANSFORMED') {
                         var transform_into = item_action.req_result_item;
-                        self.setPocket(pocketIndex, 'EMPTY');
-                        self.scene.manager.itemManager.newItemToPocket(pocketIndex,transform_into);
+
+                        console.log("Transforming "+requirement[requirement.type]+" into "+item_action.req_result_item);
+
+                        /// Get the index for the current pocket
+                        /// Get the pocket matching requirement[requirement.type]
+                        var requirement_index = self.findInPockets(requirement[requirement.type]);
+
+                        // if the item type is bag, we need to preserve contents
+                        var contents = self.getItemsInBag(requirement_index);
+
+                        self.setPocket(requirement_index, 'EMPTY');
+                        
+                        self.scene.manager.itemManager.newItemToPocket(requirement_index,transform_into);
+
+                        // if the item type is a bag, we need to persist contents
+                        if (contents.length > 0) {
+                            self.setItemsInBag(requirement_index, contents);
+                        }
+
                     }
                     if (requirement.result == 'CONSUMED') {
+                        
                         self.setPocket(pocketIndex, 'EMPTY');
 
                     }
@@ -376,6 +415,7 @@ export default class HudPocket {
                 }  
             });
             this.scene.events.emit('REQ_'+item_action.req_group+'_MET');
+            console.log('REQ_'+item_action.req_group+'_MET');
 
         }
         return action_result;

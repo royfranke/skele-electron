@@ -113,8 +113,9 @@
         "FACING": "S"
     },
     "SAVE": {
-        "HEADLINE": "NEW",
-        "SLOT": 0
+        "HEADLINE": "Starting Fresh",
+        "SLOT": 1,
+        "DATE": "Friday, June 3rd"
     },
     "SETTINGS": {
         "CONTENT": {

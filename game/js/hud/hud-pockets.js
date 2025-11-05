@@ -57,6 +57,7 @@ export default class HudPockets extends HudCommon {
 
             slots[y][x].slot.setVisible(false);
             slots[y][x].icon.setVisible(false);
+            this.addHoldInteraction(slots[y][x].slip, x);
 
             y = 2;
             slots[y][x] = {
@@ -143,6 +144,21 @@ export default class HudPockets extends HudCommon {
         return slot;
     }
 
+    addArrowInteraction(slot_x, slot_y, arrow) {
+        // Mouse/Touch Input
+        arrow.setInteractive(); 
+        var self = this;
+        arrow.on('pointerover', function (pointer) {
+            // This function will be called when the coinpurse block is clicked or tapped
+            
+        });
+        arrow.on('pointerdown', function (pointer) {
+            // This function will be called when the slot is clicked or tapped
+            self.arrowDown(slot_x);
+            //this.scene.manager.hud.hudInput.setSelectedContents(2, true);
+        });
+    }
+
     addSlotInteraction(slot_x, slot_y, block) {
 
             // Mouse/Touch Input
@@ -150,7 +166,11 @@ export default class HudPockets extends HudCommon {
             var self = this;
             block.on('pointerover', function (pointer) {
                 // This function will be called when the coinpurse block is clicked or tapped
-                
+                if (self.scene.manager.getFocus().name == 'POCKETS') {
+                    self.scene.manager.hud.hudInput.setSelectedPocket(slot_x);
+                    self.scene.manager.hud.hudInput.setSelectedContents(slot_y);
+                    self.refreshDisplay();
+                }
             });
             block.on('pointerdown', function (pointer) {
                 // This function will be called when the slot is clicked or tapped
@@ -190,6 +210,7 @@ export default class HudPockets extends HudCommon {
         };
         let arrow = this.factory.makeArrow((this.view.right - slotMargin.x), (this.view.top + slotMargin.y));
         arrow.setVisible(false);
+        this.addArrowInteraction(slot_x, slot_y, arrow);
         return arrow;
     }
 
@@ -258,7 +279,7 @@ export default class HudPockets extends HudCommon {
                     yoyo: true,
                 });
                 tween.on('complete', () => {
-                    this.scene.manager.hud.hudInput.setSelectedContents(-1);
+                    this.scene.manager.hud.hudInput.setSelectedContents(1, true);
                     this.refreshDisplay();
                     var new_item = this.slots[1][slot_x].icon;
                     this.scene.tweens.add({
@@ -368,6 +389,18 @@ export default class HudPockets extends HudCommon {
         button_block.setVisible(false);
         button_text.setVisible(false);
 
+        block.setInteractive();
+        var self = this;
+        block.on('pointerdown', function (pointer) {
+            console.log("Drop item from pocket " + slot_x);
+            var doAction = self.scene.manager.hud.pocket.doAction(slot_x, 'DROP');
+            self.refreshDisplay();
+        });
+        block.on('pointerover', function (pointer) {
+            // This function will be called when the drop block is clicked or tapped
+            self.scene.manager.hud.hudInput.setSelectedContents(-1, true);
+            self.refreshDisplay();
+        });
         return {
             block: block,
             text: drop_text,
@@ -422,6 +455,20 @@ export default class HudPockets extends HudCommon {
         slip.button.setVisible(false);
         slip.button_text.setVisible(false);
         return slip;
+    }
+
+    addHoldInteraction(slip, slot_x) {
+        // Mouse/Touch Input
+        slip.block.setInteractive();
+        var self = this;
+        slip.block.on('pointerdown', function (pointer) {
+            // This function will be called when the slip is clicked or tapped
+            /// TODO
+            console.log("Check!");
+            self.tapSlip(slot_x);
+            //self.refreshDisplay();
+            
+        });
     }
 
     makeSlip(_x, _y, text = 'HOLD') {

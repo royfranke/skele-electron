@@ -174,6 +174,10 @@ export default class NavigatorManager {
 
     plotRoutes (a_x,a_y,b_x,b_y,type='intersection') {
         console.log("Plotting route from "+a_x+","+a_y+" to "+b_x+","+b_y);
+        if (a_x == undefined || a_y == undefined || b_x == undefined || b_y == undefined) {
+            console.log("Invalid coordinates for route plotting!");
+            return [];
+        }
         var start = [a_x,a_y];
         var end = [b_x,b_y];
     
@@ -243,6 +247,8 @@ export default class NavigatorManager {
                 return this.findIntersectionRouteOptions(frontier,visited);
             case 'tile':
                 return this.findTileRouteOptions(frontier,visited);
+            case 'simple_tile':
+                return this.findSimpleTileRouteOptions(frontier,visited);
         }
         return [];
     }
@@ -283,6 +289,38 @@ export default class NavigatorManager {
                             branches.push([tile_x,tile_y]);
                         }
                     }
+                }
+            }
+        }
+        return branches;
+    }
+
+    findSimpleTileRouteOptions (frontier,visited) {
+        var _x = frontier[0][0];
+        var _y = frontier[0][1];
+        var branches = [];
+        for (var y=-1; y < 2; y++) {
+            for (var x=-1; x < 2; x++) {
+                if (x == 0 && y == 0) {
+                    continue;
+                }
+                if (x == -1 && y == 1) {
+                    continue;
+                }
+                if (x == -1 && y == -1) {
+                    continue;
+                }
+                if (x == 1 && y == -1) {
+                    continue;
+                }
+                if (x == 1 && y == 1) {
+                    continue;
+                }
+                var tile_x = _x + x;
+                var tile_y = _y + y;
+                
+                if (!this.compareCoordinates(visited,[tile_x,tile_y]) && !this.compareCoordinates(frontier,[tile_x,tile_y])) {
+                    branches.push([tile_x,tile_y]);
                 }
             }
         }

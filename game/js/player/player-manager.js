@@ -33,6 +33,7 @@ export default class PlayerManager {
     this.tripping = false;
     this.player_focus = false;
     this.audio = false;
+    this.destinations = [];
   }
 
 
@@ -140,10 +141,13 @@ export default class PlayerManager {
     this.playerSprite.facing = facing.toLowerCase();
   }
 
-  getFacing(facing) {
+  getFacing(facing, up=false, right=false, down=false, left=false) {
     var focus = this.getFocus();
-    if (focus.name == 'PLAYER') {
+    if (focus.name == 'PLAYER' && this.destinations.length == 0) {
       return this.playerInput.getFacing(facing);
+    }
+    else if (focus.name == 'PLAYER' && this.destinations.length > 0) {
+      return this.scene.manager.utilities.getFacing(facing, up, right, down, left);
     }
     else {
       return facing;
@@ -164,6 +168,50 @@ export default class PlayerManager {
     };
   }
 
+  clearDestinations() {
+    this.destinations = [];
+    this.setState('IDLE');
+  }
+
+
+  moveToward(_x, _y) {
+    console.log("Moving toward tile: " + _x + ", " + _y); 
+    var x_distance = this.standingTile.x - _x;
+    var y_distance = this.standingTile.y - _y;
+    var up = false;
+    var right = false;
+    var down = false;
+    var left = false;
+
+    if (x_distance > 0) {
+      left = true;
+    }
+    else if (x_distance < 0) {
+      right = true;
+    }
+    if (y_distance > 0) {
+      up = true;
+    }
+    else if (y_distance < 0) {
+      down = true;
+    }
+    this.facing = this.getFacing(this.facing, up, right, down, left);
+    this.playerSprite.facing = this.facing;
+    this.playerSprite.move({ up: up, right: right, down: down, left: left }, this.speed);
+  }
+
+  checkItinerary() {
+    if (this.destinations.length > 0) {
+      /// Move toward the next location
+      if (this.standingTile.x == this.destinations[0][0] && this.standingTile.y == this.destinations[0][1]) { // Arrived at the destination TILE!
+        this.destinations.shift();
+      }
+      else {
+        this.moveToward(this.destinations[0][0], this.destinations[0][1]);
+      }
+    }
+  }
+
   create() {
     this.playerSprite.setCollider();
     this.playerSprite.createFooting();
@@ -180,9 +228,9 @@ export default class PlayerManager {
 
         this.updateActiveTile();
         this.playerInput.update();
-
+        
         if (this.state.name != 'HOP' && this.state.name != 'PICKUP' && this.state.name != 'EXCHANGE' && this.state.name != 'DIG' && this.state.name != 'EAT' && this.state.name != 'PUSH' && this.state.name != 'PULL' && this.state.name != 'TRIP') {
-          if (this.playerInput.held) {
+          if (this.playerInput.held || this.destinations.length > 0) {
             if (this.playerInput.run) {
               this.setState('RUN');
             }
@@ -199,7 +247,7 @@ export default class PlayerManager {
         this.resetInputs();
       }
 
-
+      this.checkItinerary();
       this.speed = this.getSpeed();
       if (this.last_state.name != this.state.name) {
         this.stateChanged();
@@ -284,6 +332,8 @@ export default class PlayerManager {
   }
 
   moveToTile(x_, y_) {
+    this.clearDestinations();
+    console.log(this.destinations);
     this.playerSprite.moveToTile(x_, y_);
   }
 

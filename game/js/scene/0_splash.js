@@ -23,7 +23,7 @@ export default class SplashScene extends Phaser.Scene {
 
         let text = this.hud.makeBitmapText(this.cameras.main.centerX, this.cameras.main.centerY + 32, 200, 8, 'SkelePuff');
         text.setTintFill(0xffe57b);
-        text.setText("PLUCK");
+        text.setText("MERCY");
         text.setOrigin(0.5, 0.5);
         
         this.circle = this.add.circle(this.cameras.main.centerX, this.cameras.main.centerY,20, 0x54467f);

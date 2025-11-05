@@ -84,13 +84,15 @@ export default class MainMenuScene extends Phaser.Scene {
     }
 
     assembleBackground() {
-        let background = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_MID_DARK_FAT_BORDER');
+        let background = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_MID_SAPPHIRE_FAT_BORDER');
         background.setDepth(1);
 
         let background_frame = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_SHALLOW_RED_EDGE_FRAME');
 
         let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_MID_ORANGE_FAT_BORDER');
         menu_background.setDepth(2);
+
+        let menu_frame = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME');
 
     }
 
