@@ -27,11 +27,6 @@ export default class ItemManager {
         item.destroy();
     }
 
-    dropItem (item) {
-        /// Stub to replace with method that places item in the world
-        item.destroy();
-    }
-
     addItemToPockets (item,specific_pocket=null) {
         return this.scene.manager.hud.availablePocket(item, specific_pocket);
     }
@@ -71,14 +66,6 @@ export default class ItemManager {
             return false;
         }
         return item;
-    }
-
-    putItemInBag (item,exclude=null) {
-        var result = this.scene.manager.hud.availableBag(item,exclude);
-        if (!result) {
-            this.scene.manager.hud.hudDisplay.tellBrain('No space found...',2000,'missing');
-        }
-        return result;
     }
 
     putItemInWorld (item, _x, _y) {

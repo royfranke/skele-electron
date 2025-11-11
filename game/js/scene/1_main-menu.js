@@ -29,6 +29,7 @@ export default class MainMenuScene extends Phaser.Scene {
         this.assembleBackground();
         this.assembleMenu();
         this.assembleTitle();
+        this.assembleSubtitle();
         this.assembleVersion();
         this.assembleItemGrid();
 
@@ -128,6 +129,14 @@ export default class MainMenuScene extends Phaser.Scene {
             }
         });
         
+    }
+
+    assembleSubtitle() {
+        let subtitle = this.add.bitmapText(this.cameras.main.centerX, this.camera.view.top + (this.camera.view.height * .36), 'SkeleScript', 'An Elegy for Aunties');
+        subtitle.setOrigin(0.5);
+        subtitle.setFontSize(8);
+        subtitle.setTintFill(0xc3b572);
+        subtitle.setDepth(10);
     }
 
     assembleMenu () {

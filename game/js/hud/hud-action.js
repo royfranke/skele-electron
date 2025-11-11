@@ -13,6 +13,7 @@ export default class HudAction extends HudCommon {
     clearActions () {
         if (this.actionsGroup) {
             this.actionsGroup.forEach(function (action) {
+                action.action = null;
                 action.block.destroy();
                 action.text.destroy();
                 action.button.destroy();
@@ -58,6 +59,7 @@ export default class HudAction extends HudCommon {
             button_text.setVisible(false);
         }
         return {
+            action: action,
             block: block,
             text: slip_text,
             button: button_block,

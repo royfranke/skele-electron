@@ -81,7 +81,6 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     buildRoom () {
-        console.log('building room');
         if (!this.built) {
             this.config = this.room.config;
             /// Start with the floor.

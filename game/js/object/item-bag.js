@@ -5,10 +5,20 @@ import Item from "./item.js";
 export default class ItemBag extends Item {
     constructor(scene, item, items = []) {
         super(scene, item);
-        this.actions = [{ action: 'PICK UP', object: this, ground: '', fx: ''}, { action: 'OPEN', object: this, ground: '', fx: '' }];
-
+        this.actions = [
+            {
+                action: 'PICK UP',
+                object: this,
+                ground: '',
+                fx: ''
+            }, {
+                action: 'OPEN',
+                object: this,
+                ground: '',
+                fx: ''
+            }
+        ];
         this.items = items;
-
     }
 
     isFull() {
@@ -19,16 +29,17 @@ export default class ItemBag extends Item {
         return this.items.length === 0;
     }
 
-    bagItem(item) {
+    bagItem(item, place = null) {
         if (!this.isFull()) {
-            this.items.push(item);
+            if (place !== null && place < this.info.slots) {
+                this.items.splice(place, 0, item);
+            } else {
+                this.items.push(item);
+            }
             this.scene.manager.hud.hudThinking.tellBrain("I put "+item.name+" in the "+this.info.name+".");
             return true;
         } else {
-            console.log("Bag.bagItem: no more room in bag.");
-
-           //this.scene.manager.hud.hudThinking.tellBrain("There's no more room in the "+this.info.name+".");
-            
+            // No more room in the bag
             return false;
         }
     }
@@ -93,8 +104,6 @@ export default class ItemBag extends Item {
                     let placed = self.bagItem(item.item);
                     if (placed) {
                         self.scene.manager.hud.pocket.setPocket(item.pocketIndex, 'EMPTY');
-                        var sound_var = Phaser.Math.RND.between(1, 3);
-                        self.scene.manager.hud.hudSound.play('ITEM_PUT_AWAY_' + sound_var);
                     }
                     else {
                         self.scene.manager.hud.hudThinking.tellBrain("There's no more room in the "+self.info.name+".");

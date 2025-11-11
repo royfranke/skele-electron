@@ -133,6 +133,32 @@ export default class HudManager {
     closeChest() {
         this.hudChest.closeChest();
     }
+    
+    tapAction(slot_x, action_y, action) {
+        this.hudPockets.tapAction(slot_x, action_y);
+        this.scene.manager.hud.pocket.doAction(slot_x, action);
+    }
+
+    tapHold(slot_x) {
+        this.tapSlip(slot_x);
+        var pocket = this.pocket.getPocket(slot_x);
+        var state = pocket.STATE;
+        if (state != 'EMPTY') {
+            var item = pocket[state].pullItem(0);
+            var placed = this.scene.manager.hud.availablePocket(item);
+            if (placed != false) {
+                console.log("Placed! Refreshing");
+                this.refreshDisplay();
+            }
+            else {
+                var sound_var = Phaser.Math.RND.between(1, 3);
+                this.scene.manager.hud.hudSound.play('SKELE_INVALID_' + sound_var);
+                this.scene.manager.hud.hudThinking.tellBrain('My hands are full...');
+                //put the thing back in the bag
+                pocket[state].bagItem(item,0);
+            }
+        }
+    }
 
     tapSlip(slot_x) {
         this.hudPockets.tapSlip(slot_x);

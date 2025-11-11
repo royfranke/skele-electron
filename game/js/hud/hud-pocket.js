@@ -8,9 +8,8 @@ export default class HudPocket {
         this.scene = scene;
         this.pockets = POCKET_CONFIG.POCKETS.SLOTS;
         this.states = POCKET_CONFIG.POCKETS.STATES;
-        
     }
-    
+
     setSaveFromPockets() {
         let pockets = {
             SLOT0: this.getPocketForSave(0),
@@ -18,10 +17,10 @@ export default class HudPocket {
             SLOT2: this.getPocketForSave(2)
         };
         for (var i = 0; i < 3; i++) {
-            if (pockets['SLOT'+i].STATE != 'EMPTY') {
+            if (pockets['SLOT' + i].STATE != 'EMPTY') {
                 let items = [];
-                if (pockets['SLOT'+i][pockets['SLOT'+i].STATE].items != undefined) {
-                    pockets['SLOT'+i][pockets['SLOT'+i].STATE].items.forEach(function (item) {
+                if (pockets['SLOT' + i][pockets['SLOT' + i].STATE].items != undefined) {
+                    pockets['SLOT' + i][pockets['SLOT' + i].STATE].items.forEach(function (item) {
                         items.push({
                             ITEM: item.info != undefined ? item.info.slug : item,
                             STACK: item.stackCount ? item.stackCount : 1
@@ -29,9 +28,9 @@ export default class HudPocket {
                     });
                 }
 
-                let item = pockets['SLOT'+i][pockets['SLOT'+i].STATE];
-                
-                pockets['SLOT'+i][pockets['SLOT'+i].STATE] = {
+                let item = pockets['SLOT' + i][pockets['SLOT' + i].STATE];
+
+                pockets['SLOT' + i][pockets['SLOT' + i].STATE] = {
                     ITEM: item.info != undefined ? item.info.slug : item,
                     STACK: item.stackCount ? item.stackCount : 1,
                     ITEMS: items
@@ -39,11 +38,9 @@ export default class HudPocket {
             }
         }
         return pockets;
-
     }
 
     setPocketsFromSave() {
-        console.log("Setting pockets from save");
         if (this.scene.manager != undefined) {
             var itemManager = this.scene.manager.itemManager;
         }
@@ -51,9 +48,12 @@ export default class HudPocket {
             var itemManager = false;
             console.log("Item Manager is undefined-- is this the tutorial?");
         }
-        
-        
-        this.slots = [this.scene.slot.POCKETS.SLOTS.SLOT0, this.scene.slot.POCKETS.SLOTS.SLOT1, this.scene.slot.POCKETS.SLOTS.SLOT2];
+
+        this.slots = [
+            this.scene.slot.POCKETS.SLOTS.SLOT0,
+            this.scene.slot.POCKETS.SLOTS.SLOT1,
+            this.scene.slot.POCKETS.SLOTS.SLOT2
+        ];
 
         for (var i = 0; i < this.slots.length; i++) {
             var pocket = this.slots[i];
@@ -62,7 +62,6 @@ export default class HudPocket {
                 var items = [];
 
                 if (pocket[pocket.STATE].ITEMS != undefined) {
-                    
                     pocket[pocket.STATE].ITEMS.forEach(function (item) {
                         if (itemManager != false) {
                             let stack_item = itemManager.newItem(item.ITEM);
@@ -76,18 +75,15 @@ export default class HudPocket {
                 if (itemManager != false) {
                     new_item = itemManager.newItem(pocket[pocket.STATE].ITEM, items);
                 }
-
                 if (pocket[pocket.STATE].STACK != undefined) {
                     new_item.stackCount = pocket[pocket.STATE].STACK;
                 }
-                
             }
             this.setPocket(i, pocket.STATE, new_item);
         }
     }
 
-    setItemsInBag (pocketIndex, items) {
-        let self = this;
+    setItemsInBag(pocketIndex, items) {
         let pocket = this.getPocket(pocketIndex);
         if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == 'BAG') {
             pocket[pocket.STATE].items = [];
@@ -97,8 +93,7 @@ export default class HudPocket {
         }
     }
 
-    getItemsInBag (pocketIndex) {
-        let self = this;
+    getItemsInBag(pocketIndex) {
         let pocket = this.getPocket(pocketIndex);
         let items = [];
         if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == 'BAG') {
@@ -125,17 +120,16 @@ export default class HudPocket {
     }
 
     getPocketForSave(pocketIndex) {
-        console.log("Getting Pocket For Save...");
         var pocket = this.pockets[pocketIndex];
         var item_list = [];
         if (pocket[pocket.STATE] != 'DISALLOWED' && pocket[pocket.STATE] != null) {
             if (pocket[pocket.STATE].items != undefined) {
                 pocket[pocket.STATE].items.forEach(function (item) {
-                    item_list.push({ITEM: item.info.slug, STACK: item.stackCount});
+                    item_list.push({ ITEM: item.info.slug, STACK: item.stackCount });
                 });
             }
         }
-    
+
         var save_pocket = {
             TYPE: pocket.TYPE,
             STATE: pocket.STATE,
@@ -145,23 +139,21 @@ export default class HudPocket {
             WEARS: pocket.WEARS
         };
 
-        if (pocket.HOLDS != 'DISALLOWED' && pocket.HOLDS != null)
-             {
-                save_pocket.HOLDS.ITEM = pocket.HOLDS.info.slug; save_pocket.HOLDS.STACK = pocket.HOLDS.stackCount;
-                save_pocket.HOLDS.ITEMS = item_list;
-                }
+        if (pocket.HOLDS != 'DISALLOWED' && pocket.HOLDS != null) {
+            save_pocket.HOLDS.ITEM = pocket.HOLDS.info.slug; save_pocket.HOLDS.STACK = pocket.HOLDS.stackCount;
+            save_pocket.HOLDS.ITEMS = item_list;
+        }
 
-        if (pocket.USES != 'DISALLOWED' && pocket.USES != null)
-                {
-                save_pocket.USES.ITEM = pocket.USES.info.slug; save_pocket.USES.STACK = pocket.USES.stackCount;
-                save_pocket.USES.ITEMS = item_list;
-                }
+        if (pocket.USES != 'DISALLOWED' && pocket.USES != null) {
+            save_pocket.USES.ITEM = pocket.USES.info.slug; save_pocket.USES.STACK = pocket.USES.stackCount;
+            save_pocket.USES.ITEMS = item_list;
+        }
 
-        if (pocket.WEARS != 'DISALLOWED' && pocket.WEARS != null) 
-             {
-                save_pocket.WEARS.ITEM = pocket.WEARS.info.slug; save_pocket.WEARS.STACK = pocket.WEARS.stackCount;
-                save_pocket.WEARS.ITEMS = item_list; 
-             }
+        if (pocket.WEARS != 'DISALLOWED' && pocket.WEARS != null) {
+            save_pocket.WEARS.ITEM = pocket.WEARS.info.slug;
+            save_pocket.WEARS.STACK = pocket.WEARS.stackCount;
+            save_pocket.WEARS.ITEMS = item_list;
+        }
 
         return save_pocket;
     }
@@ -209,7 +201,7 @@ export default class HudPocket {
         var heldItems = [];
         this.pockets.forEach(function (pocket, index) {
             if (pocket.STATE != 'EMPTY') {
-                heldItems.push({pocketIndex: index, item: pocket[pocket.STATE]});
+                heldItems.push({ pocketIndex: index, item: pocket[pocket.STATE] });
             }
         });
         return heldItems;
@@ -247,7 +239,7 @@ export default class HudPocket {
             if (!found) {
                 if (exclude != index) {
                     if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.contains.length > 0) {
-                        
+
                         if (!found && pocket[pocket.STATE].replaceContents(item)) {
                             found = true;
                             self.scene.manager.hud.refreshDisplay();
@@ -270,15 +262,15 @@ export default class HudPocket {
 
                         //The below needs to apply to all the contents of the bag, not stacking the bag itself
                         pocket[pocket.STATE].items.forEach(function (bag_item) {
-                         if (!found) {
-                            if (bag_item.info.slug == item.info.slug && bag_item.isStackable(item.stackCount)) {
-                                found = true;
-                                bag_item.updateStackCount(item.stackCount);
-                                self.scene.manager.hud.refreshDisplay();
+                            if (!found) {
+                                if (bag_item.info.slug == item.info.slug && bag_item.isStackable(item.stackCount)) {
+                                    found = true;
+                                    bag_item.updateStackCount(item.stackCount);
+                                    self.scene.manager.hud.refreshDisplay();
+                                }
                             }
-                         }
                         });
-                        
+
                         if (!found && pocket[pocket.STATE].bagItem(item)) {
                             found = true;
                             self.scene.manager.hud.refreshDisplay();
@@ -323,7 +315,6 @@ export default class HudPocket {
                     placed.blow();
                 }
             })
-            
         }
         else if (action_string == 'PUT AWAY' && pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];
@@ -354,7 +345,7 @@ export default class HudPocket {
                         this.scene.player.setState('IDLE');
                     }
                 })
-                
+
             }
             var item_action = item.findInPocketActions(action_string);
             if (item_action == false) {
@@ -368,13 +359,13 @@ export default class HudPocket {
                             self.scene.manager.dataManager.setData(req_data_key, item_action.req_result_data_set);
                         }
                         if (item_action.req_result_data_modify != '') {
-                            self.scene.manager.dataManager.modifyData('BODY',req_data_key, item_action.req_result_data_modify);
+                            self.scene.manager.dataManager.modifyData('BODY', req_data_key, item_action.req_result_data_modify);
                         }
                     }
                     if (requirement.result == 'TRANSFORMED') {
                         var transform_into = item_action.req_result_item;
 
-                        console.log("Transforming "+requirement[requirement.type]+" into "+item_action.req_result_item);
+                        console.log("Transforming " + requirement[requirement.type] + " into " + item_action.req_result_item);
 
                         /// Get the index for the current pocket
                         /// Get the pocket matching requirement[requirement.type]
@@ -384,8 +375,8 @@ export default class HudPocket {
                         var contents = self.getItemsInBag(requirement_index);
 
                         self.setPocket(requirement_index, 'EMPTY');
-                        
-                        self.scene.manager.itemManager.newItemToPocket(requirement_index,transform_into);
+
+                        self.scene.manager.itemManager.newItemToPocket(requirement_index, transform_into);
 
                         // if the item type is a bag, we need to persist contents
                         if (contents.length > 0) {
@@ -394,29 +385,34 @@ export default class HudPocket {
 
                     }
                     if (requirement.result == 'CONSUMED') {
-                        
-                        self.setPocket(pocketIndex, 'EMPTY');
-
+                        var consume = self.getPocket(pocketIndex);
+                        consume.HOLDS.updateStackCount(-1);
+                        // If the item is finished, empty the pocket
+                        if (consume.HOLDS.stackCount <= 0) {
+                            self.setPocket(pocketIndex, 'EMPTY');
+                        }
                     }
                     if (requirement.result == 'DUPLICATED') {
                         var dupe = self.getPocket(pocketIndex);
-                        dupe.updateStackCount(dupe.stackCount + 1);
+                        dupe.HOLDS.updateStackCount(1);
                     }
                     if (requirement.result == 'MAILED') {
-                        self.setPocket(pocketIndex, 'EMPTY');
+                        var mailed = self.getPocket(pocketIndex);
+                        mail.HOLDS.updateStackCount(-1);
                     }
                     if (requirement.result == 'FILLED') {
                         var fill_with = item_action.req_result_item;
-                        console.log("Fill this "+requirement[requirement.type]+" up with "+item_action.req_result_item);
-                        self.scene.manager.itemManager.newContentToPocket(pocketIndex,fill_with);
-                        
+                        console.log("Fill this " + requirement[requirement.type] + " up with " + item_action.req_result_item);
+                        self.scene.manager.itemManager.newContentToPocket(pocketIndex, fill_with);
                     }
-                    
-                }  
+                }
             });
-            this.scene.events.emit('REQ_'+item_action.req_group+'_MET');
-            console.log('REQ_'+item_action.req_group+'_MET');
+            this.scene.events.emit('REQ_' + item_action.req_group + '_MET');
+            console.log('REQ_' + item_action.req_group + '_MET');
 
+        }
+        if (action_result) {
+            this.scene.manager.hud.refreshDisplay();
         }
         return action_result;
     }
