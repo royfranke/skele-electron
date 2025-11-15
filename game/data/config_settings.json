@@ -82,7 +82,8 @@
             "RUN": "SHIFT",
             "MAP": "M",
             "NOTEBOOK": "N",
-            "INVENTORY": "I"
+            "INVENTORY": "I",
+            "KEYCHAIN": "K"
         },
         "CUSTOM": {
             "UP": "UP",
@@ -96,7 +97,8 @@
             "RUN": "SHIFT",
             "MAP": "M",
             "NOTEBOOK": "N",
-            "INVENTORY": "I"
+            "INVENTORY": "I",
+            "KEYCHAIN": "K"
         }
     }
 }

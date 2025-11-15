@@ -399,6 +399,10 @@ export default class HudPocket {
                     if (requirement.result == 'MAILED') {
                         var mailed = self.getPocket(pocketIndex);
                         mail.HOLDS.updateStackCount(-1);
+                        // If the item is finished, empty the pocket
+                        if (mail.HOLDS.stackCount <= 0) {
+                            self.setPocket(pocketIndex, 'EMPTY');
+                        }
                     }
                     if (requirement.result == 'FILLED') {
                         var fill_with = item_action.req_result_item;

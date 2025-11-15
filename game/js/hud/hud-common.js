@@ -125,5 +125,10 @@ export default class HudCommon {
             }
             return display_number;
         }
+
+
+        makeClickArea(_x,_y,width,height,onclick=null) {
+            return this.factory.makeClickArea(_x,_y,width,height,onclick);
+        }
     
 }

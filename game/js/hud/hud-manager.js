@@ -7,6 +7,7 @@ import HudFocusHints from "./hud-focus-hints.js";
 import HudHealth from "./hud-health.js";    //Extends HudCommon
 import HudInput from "./hud-input.js";
 import HudKeyboard from "./hud-keyboard.js"; //Extends HudCommon
+import HudKeychain from "./hud-keys.js"; //Extends HudCommon
 import HudQuest from "./hud-quest.js"; //Extends HudCommon
 import HudMap from "./hud-map.js"; //Extends HudCommon
 import HudNotebook from "./hud-notebook.js"; //Extends HudCommon
@@ -59,6 +60,7 @@ export default class HudManager {
         this.hudHealth = new HudHealth(this.scene);
         this.hudWatch = new HudWatch(this.scene);
         this.hudNotebook = new HudNotebook(this.scene);
+        this.hudKeychain = new HudKeychain(this.scene);
         this.hudMap = new HudMap(this.scene);
         this.hudQuest = new HudQuest(this.scene);
         this.hudAction = new HudAction(this.scene);
@@ -194,6 +196,12 @@ export default class HudManager {
             if (this.last_state.name == 'POCKETS_FOCUSED' && this.state.name != 'POCKETS_FOCUSED') {
                 this.hudPockets.closePockets();
                 this.hudCoinpurse.closeCoinpurse();
+            }
+            if (this.last_state.name != 'KEYCHAIN_FOCUSED' && this.state.name == 'KEYCHAIN_FOCUSED') {
+                this.hudKeychain.openKeychain();
+            }
+            if (this.state.name != 'KEYCHAIN_FOCUSED' && this.last_state.name == 'KEYCHAIN_FOCUSED') {
+                this.hudKeychain.closeKeychain();
             }
             if (this.last_state.name != 'NOTEBOOK_FOCUSED' && this.state.name == 'NOTEBOOK_FOCUSED') {
                 this.hudNotebook.openNotebook();

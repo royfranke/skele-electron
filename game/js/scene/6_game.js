@@ -17,18 +17,23 @@ export default class GameScene extends Phaser.Scene {
         this.locale = 'exterior';
         this.slot = data.slot;
         this.room_id = data.slot.POSITION.ROOM;
+        /*
         if (this.room_id != '-1') {
             this.scene.stop('Game Scene');
             this.scene.start('Interior Scene',{slot: this.slot});
-        }
+        }*/
     }
-
 
 
     create() {
         if (this.slot.SAVE.HEADLINE == 'NEW') {
             if (this.verbose) console.log("New Game");
             return this.newGame();
+        }
+        if (this.room_id != '-1') {
+            this.scene.stop('Game Scene');
+            this.scene.start('Interior Scene',{slot: this.slot});
+            return;
         }
 
         this.place = 'exterior';

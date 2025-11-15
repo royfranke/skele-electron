@@ -29,6 +29,12 @@ export default class HudFocusHints extends HudCommon {
                 x: (this.view.left + this.view.margin.left) + 40,
                 y: this.view.bottom - (this.view.margin.bottom + 58)
             },
+            {
+                char: 'K',
+                focus: 'KEYCHAIN',
+                x: (this.view.left + this.view.margin.left) + 40,
+                y: this.view.bottom - (this.view.margin.bottom + 58 + 40)
+            },
         ];
 
         this.makeFocusHints();
@@ -55,6 +61,7 @@ export default class HudFocusHints extends HudCommon {
             POCKETS: null,
             NOTEBOOK: null,
             MAP: null,
+            KEYCHAIN: null,
             PAUSE: null
         };
         for (var i=0; i<this.focusHints.length;i++) {

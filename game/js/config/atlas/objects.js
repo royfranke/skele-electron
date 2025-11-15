@@ -5810,7 +5810,7 @@ const OBJECTS = {
           }, {
             name: 'DIAL', stateTrigger: 'DIALING', validStates: ['AWAITING_DIAL']
           }, {
-            name: 'USE PHONE', stateTrigger: 'DIALING', validStates: ['DEFAULT']
+            name: 'USE PHONE', stateTrigger: 'AWAITING_DIAL', validStates: ['DEFAULT']
           }],
         default_state: 'DEFAULT',        states: [                {
               name: 'ON_PHONE',
@@ -11028,7 +11028,29 @@ const OBJECTS = {
               },],
 
           interactions: {
-                                  },
+                                group_32: {
+                req_group: 32,
+                req_group_name: 'Grab Toast from Toaster',
+                req_pocket_action: '',
+                req_world_action: 'GRAB TOAST',
+                req_state: '',
+                req_result_item: 'TOAST',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_KIND',
+                    result: 'UNTOUCHED',
+                    OBJ_KIND: 'TOASTER'
+                    }
+                                ]
+
+            },                                  },
     },
           DAILY_NEWS_BOX_: {
         name: 'Town Daily Box',

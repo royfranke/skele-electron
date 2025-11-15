@@ -111,7 +111,7 @@ export default class HudNotebook extends HudCommon {
     }
 
     addNotebook() {
-        this.notebook.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, 'BAG_UNFOCUSED');
+        this.notebook.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, 'ITEM_UNFOCUSED');
         this.notebook.icon = this.scene.manager.fx.handleHudFX('NOTEBOOK_CLOSE', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
 
         this.notebook.panel = this.factory.makeNotebook(this.position.unfocused.panel.x, this.position.unfocused.panel.y);

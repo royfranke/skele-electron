@@ -1,8 +1,8 @@
 const HUD_STATES = {
-    NOT_LOADED: {
-        name: 'NOT_LOADED',
-        input: false,
-        visible: false
+    DIALOG_FOCUSED: {
+        name: 'DIALOG_FOCUSED',
+        input: true,
+        visible: true
     },
     HUD_LOADED: {
         name: 'HUD_LOADED',
@@ -10,14 +10,44 @@ const HUD_STATES = {
         time: false,
         visible: false
     },
+    INVISIBLE: {
+        name: 'INVISIBLE',
+        input: false,
+        visible: false
+    },
+    KEYCHAIN_FOCUSED: {
+        name: 'KEYCHAIN_FOCUSED',
+        input: true,
+        visible: true
+    },
+    LOADED: {
+        name: 'LOADED',
+        input: false,
+        visible: true
+    },
     LOADING: {
         name: 'LOADING',
         input: false,
         visible: false
     },
-    LOADED: {
-        name: 'LOADED',
+    MAP_FOCUSED: {
+        name: 'MAP_FOCUSED',
+        input: true,
+        visible: true
+    },
+    NOTEBOOK_FOCUSED: {
+        name: 'NOTEBOOK_FOCUSED',
+        input: true,
+        visible: true
+    },
+    NOT_LOADED: {
+        name: 'NOT_LOADED',
         input: false,
+        visible: false
+    },
+    NUMBERPAD_FOCUSED: {
+        name: 'NUMBERPAD_FOCUSED',
+        input: true,
         visible: true
     },
     PAYMENT_FOCUSED: {
@@ -40,40 +70,15 @@ const HUD_STATES = {
         input: true,
         visible: true
     },
-    ZENER_FOCUSED: {
-        name: 'ZENER_FOCUSED',
-        input: true,
-        visible: true
-    },
-   MAP_FOCUSED: {
-        name: 'MAP_FOCUSED',
-        input: true,
-        visible: true
-    },
-    NOTEBOOK_FOCUSED: {
-        name: 'NOTEBOOK_FOCUSED',
-        input: true,
-        visible: true
-    },
-    NUMBERPAD_FOCUSED: {
-        name: 'NUMBERPAD_FOCUSED',
-        input: true,
-        visible: true
-    },
-    DIALOG_FOCUSED: {
-        name: 'DIALOG_FOCUSED',
-        input: true,
-        visible: true
-    },
     VISIBLE_UNFOCUSED: {
         name: 'VISIBLE_UNFOCUSED',
         input: false,
         visible: true
     },
-    INVISIBLE: {
-        name: 'INVISIBLE',
-        input: false,
-        visible: false
+    ZENER_FOCUSED: {
+        name: 'ZENER_FOCUSED',
+        input: true,
+        visible: true
     }
 };
 

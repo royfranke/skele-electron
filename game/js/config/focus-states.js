@@ -1,33 +1,36 @@
 const FOCUS_STATES = {
-    NOT_LOADED: {
-        name: 'NOT_LOADED'
-    },
-    PLAYER: {
-        name: 'PLAYER'
-    },
-    PAUSE: {
-        name: 'PAUSE'
+    CHEST: {
+        name: 'CHEST'
     },
     DIALOG: {
         name: 'DIALOG'
     },
-    CHEST: {
-        name: 'CHEST'
-    },
-    POCKETS: {
-        name: 'POCKETS'
-    },
-    NOTEBOOK: {
-        name: 'NOTEBOOK'
-    },
-    NUMBERPAD: {
-        name: 'NUMBERPAD'
+    KEYCHAIN: {
+        name: 'KEYCHAIN'
     },
     MAP: {
         name: 'MAP'
     },
+    NOTEBOOK: {
+        name: 'NOTEBOOK'
+    },
+    NOT_LOADED: {
+        name: 'NOT_LOADED'
+    },
+    NUMBERPAD: {
+        name: 'NUMBERPAD'
+    },
+    PAUSE: {
+        name: 'PAUSE'
+    },
     PAYMENT: {
         name: 'PAYMENT'
+    },
+    PLAYER: {
+        name: 'PLAYER'
+    },
+    POCKETS: {
+        name: 'POCKETS'
     },
     QUOTE: {
         name: 'QUOTE'

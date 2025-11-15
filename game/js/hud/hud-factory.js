@@ -30,6 +30,14 @@ export default class HudFactory {
         return {block: quote_block, text: quote_text};
     }
 
+    makeClickArea (_x,_y, width, height, onclick=null) {  
+        var click_area = this.scene.add.zone(_x,_y, width, height).setOrigin(0).setScrollFactor(0).setDepth(100500).setInteractive(this.cursor_hover);
+        if (onclick != null) {
+            click_area.on('pointerdown', onclick);
+        }
+        return click_area;
+    }
+
     makeButton (_x,_y, text = 'OK', button='X') {
         let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 16).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 

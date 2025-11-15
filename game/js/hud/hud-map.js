@@ -68,6 +68,14 @@ export default class HudMap extends HudCommon {
         this.side = {};
         this.side.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, 'BAG_UNFOCUSED');
         this.side.icon = this.scene.manager.fx.handleHudFX('MAP_ICON', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
+        this.side.click_area = this.makeClickArea(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, () => {   
+            if (this.state == 'UNFOCUSED') {
+                this.scene.manager.setFocus('MAP');
+            }
+            else {
+                this.scene.manager.setFocus('PLAYER');
+            }
+        });
     }
 
 
