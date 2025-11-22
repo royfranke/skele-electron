@@ -19,6 +19,15 @@ export default class ItemRegistry {
         return null;
     }
 
+    getAllItems () {
+        let items = [];
+        //Change this to Object.entries later
+        for (var [key, item] of Object.entries(this.registry)) {
+            items.push({'slug': item.info.slug, 'x': key.split("_")[0], 'y': key.split("_")[1], stack: item.stackCount, items: item.getAllItems()});
+        };
+        return items;
+    }
+
     placeEmpty (_x, _y) {
         if (this.dirtySlot(_x, _y)) {
             return this.registry[_x+"_"+_y] == null;

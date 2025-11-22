@@ -140,8 +140,8 @@ export default class HudFactory {
     }
 
     makeWorldBlock (_x,_y, width=32, height=32, frameName='THOUGHT_CLOUD') {
-
-        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 16,16,16,16).setOrigin(.5,1).setDepth(this.scene.player.snappedStanding.y + 16);
+        let depth = this.scene.player.snappedStanding != null ? this.scene.player.snappedStanding.y + 16 : 1000;
+        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 16,16,16,16).setOrigin(.5,1).setDepth(depth);
  
     }
 

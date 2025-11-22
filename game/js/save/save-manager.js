@@ -75,6 +75,9 @@ export default class SaveManager {
         data.NOTEBOOKS = this.scene.manager.hud.hudNotebook.manager.setSaveFromNotebook();
         data.POCKETS.SLOTS = this.scene.manager.hud.pocket.setSaveFromPockets();
         data.POSITION =     this.scene.player.getPositionTile();
+        if (this.scene.room_id > 0) {
+            data.ROOMS[this.scene.room_id] = this.setSaveFromInterior();
+        }
         return data;
     }
 
@@ -114,6 +117,16 @@ export default class SaveManager {
             }
         }
         return slot;
+    }
+
+    setSaveFromInterior () {
+        /// Get Items from registry
+        let ITEMS = this.scene.manager.itemManager.registry.getAllItems();
+        let data = {
+            OBJECTS: [],
+            ITEMS: ITEMS
+        }
+        return data;
     }
 
 }

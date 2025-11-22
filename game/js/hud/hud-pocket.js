@@ -213,12 +213,18 @@ export default class HudPocket {
         this.pockets.forEach(function (pocket, index) {
             if (!specific_pocket || (specific_pocket != null && specific_pocket == index)) {
                 if (!found) {
+                    if (item.slug != undefined) {
+                        item = self.scene.manager.itemManager.newItem(item.slug);
+                    }
                     if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.slug == item.info.slug && pocket[pocket.STATE].isStackable(item.stackCount)) {
                         found = true;
                         pocket[pocket.STATE].updateStackCount(item.stackCount);
                     }
                 }
                 if (!found) {
+                    if (item.slug != undefined) {
+                        item = self.scene.manager.itemManager.newItem(item.slug);
+                    }
                     if (pocket.STATE == 'EMPTY' && pocket[item.info.use] != 'DISALLOWED') {
                         self.setPocket(index, item.info.use, item);
                         found = true;
@@ -263,6 +269,9 @@ export default class HudPocket {
                         //The below needs to apply to all the contents of the bag, not stacking the bag itself
                         pocket[pocket.STATE].items.forEach(function (bag_item) {
                             if (!found) {
+                                if (bag_item.slug != undefined) {
+                                    bag_item = self.scene.manager.itemManager.newItem(bag_item.slug);
+                                }
                                 if (bag_item.info.slug == item.info.slug && bag_item.isStackable(item.stackCount)) {
                                     found = true;
                                     bag_item.updateStackCount(item.stackCount);
@@ -287,36 +296,34 @@ export default class HudPocket {
         return found;
     }
 
-    // TODO: Refactor
-    doAction(pocketIndex, action_string) {
-        var _x = this.scene.player.action.actionTile.x;
-        var _y = this.scene.player.action.actionTile.y;
-
-        var action_result = false;
+    dropItem(pocketIndex, _x, _y) {
         var pocket = this.getPocket(pocketIndex);
-        if (action_string == 'DROP' && pocket.STATE != 'EMPTY') {
-            var item = pocket[pocket.STATE];
-            var placed = this.scene.manager.itemManager.putItemInWorld(item, _x, _y);
-            if (placed) {
+        if (pocket.STATE != 'EMPTY') {
+        var item = pocket[pocket.STATE];
+        var placed = this.scene.manager.itemManager.putItemInWorld(item, _x, _y);
+        if (placed) {
                 this.setPocket(pocketIndex, 'EMPTY');
             }
         }
-        else if (action_string == 'DROP ONE' && pocket.STATE != 'EMPTY') {
+    }
+
+    dropOneItem(pocketIndex, _x, _y) {
+        var pocket = this.getPocket(pocketIndex);
+        if (pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];
             var placed = this.scene.manager.itemManager.newItemToWorld(_x, _y, item.info.slug);
             if (placed) {
                 item.updateStackCount(-1);
-            }
-
-            this.scene.time.addEvent({
-                delay: 1000,
-                loop: false,
-                callback: () => {
-                    placed.blow();
+                if (item.stackCount <= 0) {
+                    this.setPocket(pocketIndex, 'EMPTY');
                 }
-            })
+            }
         }
-        else if (action_string == 'PUT AWAY' && pocket.STATE != 'EMPTY') {
+    }
+    
+    putAwayItem(pocketIndex) {
+        var pocket = this.getPocket(pocketIndex);
+        if (pocket.STATE != 'EMPTY') {
             var item = pocket[pocket.STATE];
             /// Check for bags
             /// Check bags for space
@@ -324,15 +331,34 @@ export default class HudPocket {
             var inBag = this.availableBag(item, pocketIndex);
             if (inBag) {
                 /// Remove from this pocket
-                /// Tween; when tween done empty pocket
                 this.setPocket(pocketIndex, 'EMPTY');
-                var sound_var = Phaser.Math.RND.between(1, 3);
-                this.scene.manager.hud.hudSound.play('ITEM_PUT_AWAY_' + sound_var);
-                action_result = true;
+                return true;
             }
         }
-        else if (pocket.STATE != 'EMPTY') {
+        return false;
+    }
+
+    // TODO: Refactor
+    doAction(pocketIndex, action_string) {
+        var _x = this.scene.player.action.actionTile.x;
+        var _y = this.scene.player.action.actionTile.y;
+
+        var action_result = false;
+        var pocket = this.getPocket(pocketIndex);
+
+        if (pocket.STATE != 'EMPTY') {
+            if (action_string == 'DROP') {
+                this.dropItem(pocketIndex, _x, _y);
+            }
+            else if (action_string == 'DROP ONE') {
+                this.dropOneItem(pocketIndex, _x, _y);
+            }
+            else if (action_string == 'PUT AWAY') {
+                action_result = this.putAwayItem(pocketIndex);
+            }
+        
             var item = pocket[pocket.STATE];
+           
             var self = this;
             if (action_string == 'EAT' && this.scene.player.state.name != 'EAT') {
                 self.scene.player.setState('EAT');
@@ -347,10 +373,13 @@ export default class HudPocket {
                 })
 
             }
-            var item_action = item.findInPocketActions(action_string);
-            if (item_action == false) {
-                return false;
-            }
+
+            if (pocket.STATE != 'EMPTY') {
+                var item_action = item.findInPocketActions(action_string);
+                if (item_action == false) {
+                    return false;
+                }
+            
             item_action.requires.forEach(function (requirement) {
                 if (requirement.type == 'ITEM' || requirement.type == 'ITEM_KIND') {
                     if (item_action.req_result_data_key != null) {
@@ -413,7 +442,7 @@ export default class HudPocket {
             });
             this.scene.events.emit('REQ_' + item_action.req_group + '_MET');
             console.log('REQ_' + item_action.req_group + '_MET');
-
+            }
         }
         if (action_result) {
             this.scene.manager.hud.refreshDisplay();

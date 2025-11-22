@@ -73,11 +73,28 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     createItems () {
-        ///
-        if (this.room.config.roomData.itemList == undefined) return;
-        this.room.config.roomData.itemList.forEach(item => {
-            this.scene.manager.itemManager.newItemToWorld(item.x + 1, item.y + this.wall_height + 1, item.slug);
-        });
+        /// First check save data for items in this room
+        var self = this;
+        if (this.scene.slot.ROOMS[this.scene.room_id]) {
+            this.scene.slot.ROOMS[this.scene.room_id].ITEMS.forEach(item => {
+                var items = [];
+                if (item.items != undefined && item.items.length > 0 && item.items[0].slug != undefined) {
+                    item.items.forEach(sub_item => {
+                        var new_sub_item = self.scene.manager.itemManager.newItem(sub_item.slug);
+                        items.push(new_sub_item);
+                    });
+                }
+                var new_item = this.scene.manager.itemManager.newItemToWorld(item.x, item.y, item.slug, items);
+                if (new_item == false) return;
+                new_item.setStackCount(item.stack);
+            });
+        }
+        else {
+            if (this.room.config.roomData.itemList == undefined) return;
+            this.room.config.roomData.itemList.forEach(item => {
+                this.scene.manager.itemManager.newItemToWorld(item.x + 1, item.y + this.wall_height + 1, item.slug, item.items ?? []);
+            });
+        }
     }
 
     buildRoom () {

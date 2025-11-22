@@ -21,6 +21,20 @@ export default class ItemBag extends Item {
         this.items = items;
     }
 
+    makeItems() {
+        var self = this;
+        if (this.items.length > 0 && this.items[0] instanceof Item) {
+            return; // Items are already created
+        }
+        this.items.forEach(function (item_data) {
+            var item = self.scene.manager.itemManager.newItem(item_data.slug, item_data.items);
+            if (item_data.hasOwnProperty('stack')) {
+                item.updateStackCount(item_data.stack);
+            }
+            self.bagItem(item);
+        });
+    }
+
     isFull() {
         return this.items.length >= this.info.slots;
     }
@@ -113,5 +127,13 @@ export default class ItemBag extends Item {
             });
         }
         this.scene.player.action.clearActions();
+    }
+
+    getAllItems() {
+        let items = [];
+        this.items.forEach(function (item) {
+            items.push({ 'slug': item.info.slug, stack: item.stackCount, items: item.getAllItems() });
+        });
+        return items;
     }
 }

@@ -367,6 +367,10 @@ export default class Item {
             this.sprite.setTint(keylight.objects_tint);
         }
     }
+
+    getAllItems() {
+        return [];
+    }
 }
 
 
