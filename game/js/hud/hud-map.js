@@ -1,23 +1,24 @@
-import HudCommon from './hud-common.js';
+import HudSide from './hud-side.js';
 import MapManager from '../map/map-manager.js';
 /*
  * Controls the map display on the HUD
  */
 
-export default class HudMap extends HudCommon {
+export default class HudMap extends HudSide {
 
     constructor(scene) {
         super(scene);
     }
 
-    initialize() {
-        this.board = null;
-        this.frame = null;
-        this.map_title = null;
-        this.manager = new MapManager(this.scene);
-        this.manager.map.initialize();
-        this.state = 'UNFOCUSED';
-        this.selected = 0;
+        setVariables() {
+        this.keytip = 'MAP';
+        this.colors = {
+            selected: 'BAG_SELECTED',
+            normal: 'BAG_UNFOCUSED'
+        };
+
+        this.icon = 'KEY_RING_1';
+
         this.position = {
             unfocused: {
                 slot: {
@@ -27,10 +28,6 @@ export default class HudMap extends HudCommon {
                 icon: {
                     x: (this.view.left + this.view.margin.left) + 8,
                     y: this.view.bottom - (this.view.margin.bottom + 72) + 8
-                },
-                keytip: {
-                    x: (this.view.left + this.view.margin.left),
-                    y: this.view.bottom - (this.view.margin.bottom + 120)
                 },
                 board: {
                     x: this.view.right - (this.view.margin.right*10),
@@ -54,60 +51,37 @@ export default class HudMap extends HudCommon {
             }
         };
 
-        this.position.focused = {
-            keytip: {
-                x: this.position.unfocused.keytip.x - 48,
-                y: this.position.unfocused.keytip.y
-            }
-        };
-        this.addMap();
+        this.board = null;
+        this.frame = null;
+        this.map_title = null;
+        this.manager = new MapManager(this.scene);
+        this.manager.map.initialize();
 
-    }
-
-    addMap () {
-        this.side = {};
-        this.side.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, 'BAG_UNFOCUSED');
+        this.side = {icon: null}
         this.side.icon = this.scene.manager.fx.handleHudFX('MAP_ICON', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
-        this.side.click_area = this.makeClickArea(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, () => {   
-            if (this.state == 'UNFOCUSED') {
-                this.scene.manager.setFocus('MAP');
-            }
-            else {
-                this.scene.manager.setFocus('PLAYER');
-            }
-        });
     }
 
 
-    setMapState(state) {
-        /// FOCUSED, UNFOCUSED
-        this.state = state;
-    }
 
-
-    openMap() {
-        this.scene.manager.hud.hudFocusHints.setKeyTip('MAP', true);  
-        this.setMapState('FOCUSED');
+    openManager() {
         this.board = this.makeBlock(this.position.unfocused.board.x, this.position.unfocused.board.y,this.position.unfocused.board.width, this.position.unfocused.board.height,'BLOCK_MID_CREAM');
         this.frame = this.makeBlock(this.position.unfocused.board.x, this.position.unfocused.board.y,this.position.unfocused.board.width, this.position.unfocused.board.height,'BLOCK_SHALLOW_GREEN_FRAME');
 
         this.side.icon.destroy();
         this.side.icon = this.scene.manager.fx.handleHudFX('MAP_ICON', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
-        this.side.block.setFrame('BAG_FOCUSED');
-
+        //this.side.block.setFrame(this.colors.selected);
         this.drawMap();
         this.drawMapMenu();
         this.manager.listen();
     }
 
-    closeMap() {
+
+
+    closeManager() {
         this.eraseMap();
         this.manager.destroyListeners();
         this.board.destroy();
         this.frame.destroy();
-        this.side.block.setFrame('BAG_UNFOCUSED');
-        this.setMapState('UNFOCUSED');
-        this.scene.manager.hud.hudFocusHints.setKeyTip('MAP', false);
     }
 
     drawMapMenu() {

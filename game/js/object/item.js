@@ -363,7 +363,7 @@ export default class Item {
 
     setLight (keylight) {
         if (this.sprite != null) {
-            console.warn("Setting light tint on item: "+this.info.slug+" to "+keylight.objects_tint);
+            //console.warn("Setting light tint on item: "+this.info.slug+" to "+keylight.objects_tint);
             this.sprite.setTint(keylight.objects_tint);
         }
     }

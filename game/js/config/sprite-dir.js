@@ -383,23 +383,23 @@ const SPRITE_DIR = {
         ANIM: {
             N: {
                 START: 0,
-                END: 10,
+                END: 9,
             },
             N_SIDE: {
                 START: 0,
-                END: 10,
+                END: 9,
             },
             SIDE: {
                 START: 0,
-                END: 10,
+                END: 9,
             },
             S_SIDE: {
                 START: 0,
-                END: 10,
+                END: 9,
             },
             S: {
                 START: 0,
-                END: 10,
+                END: 9,
             }
         },
     }

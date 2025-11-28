@@ -1,18 +1,24 @@
-import HudCommon from './hud-common.js';
+import HudSide from './hud-side.js';
 import NotebookManager from '../notebook/notebook-manager.js';
 /*
  * Controls the notebook display on the HUD
  */
 
-export default class HudNotebook extends HudCommon {
+export default class HudNotebook extends HudSide {
 
     constructor(scene) {
         super(scene);
     }
 
-    initialize() {
+    setVariables() {
         this.manager = new NotebookManager(this.scene);
-        this.state = 'UNFOCUSED';
+        this.keytip = 'NOTEBOOK';
+        this.colors = {
+            selected: 'ITEM_FOCUSED',
+            normal: 'BAG_UNFOCUSED'
+        };
+
+        this.icon = 'NOTEBOOK_CLOSED_RED';
         this.position = {
             unfocused: {
                 slot: {
@@ -22,10 +28,6 @@ export default class HudNotebook extends HudCommon {
                 icon: {
                     x: this.view.left + this.view.margin.left,
                     y: this.view.bottom - (this.view.margin.bottom + 30)
-                },
-                keytip: {
-                    x: (this.view.left + this.view.margin.left),
-                    y: this.view.bottom - (this.view.margin.bottom + 56)
                 },
                 panel: {
                     x: this.view.left,
@@ -40,11 +42,11 @@ export default class HudNotebook extends HudCommon {
                 arrow: {
                     left: {
                         x: this.view.left + this.view.margin.left + 32,
-                        y: this.view.bottom - (this.view.margin.bottom + 144)
+                        y: this.view.bottom - (this.view.margin.bottom + 160)
                     },
                     right: {
                         x: this.view.left + this.view.margin.left + 112,
-                        y: this.view.bottom - (this.view.margin.bottom + 144)
+                        y: this.view.bottom - (this.view.margin.bottom + 160)
                     },
                 }
 
@@ -57,23 +59,19 @@ export default class HudNotebook extends HudCommon {
         this.position.focused = {
             slot: {
                 x: this.position.unfocused.slot.x + 40,
-                y: this.position.unfocused.slot.y - 112
+                y: this.position.unfocused.slot.y - 128
             },
             icon: {
                 x: this.position.unfocused.icon.x + 40,
-                y: this.position.unfocused.icon.y - 112
-            },
-            keytip: {
-                x: this.position.unfocused.keytip.x - 48,
-                y: this.position.unfocused.keytip.y
+                y: this.position.unfocused.icon.y - 128
             },
             panel: {
                 x: this.position.unfocused.panel.x,
-                y: this.position.unfocused.panel.y - 124
+                y: this.position.unfocused.panel.y - 140
             },
             page: {
                 x: this.position.unfocused.page.x,
-                y: this.position.unfocused.page.y - 124
+                y: this.position.unfocused.page.y - 140
             },
             arrow: {
                 left: {
@@ -87,7 +85,7 @@ export default class HudNotebook extends HudCommon {
             }
         };
 
-        this.notebook = {
+        this.side = {
             block: null,
             icon: null,
             display: null,
@@ -96,46 +94,32 @@ export default class HudNotebook extends HudCommon {
                 right: null
             }
         };
-        this.checkNotebook();
     }
 
-    checkNotebook() {
-        if (this.notebook.block == null) {
-            this.addNotebook();
-        }
-    }
+    add() {
+        this.side.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, this.colors.normal);
+        this.side.icon = this.scene.manager.fx.handleHudFX('NOTEBOOK_CLOSE', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
 
-    setNotebookState(state) {
-        /// FOCUSED, UNFOCUSED
-        this.state = state;
-    }
+        this.side.panel = this.factory.makeNotebook(this.position.unfocused.panel.x, this.position.unfocused.panel.y);
 
-    addNotebook() {
-        this.notebook.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, 'ITEM_UNFOCUSED');
-        this.notebook.icon = this.scene.manager.fx.handleHudFX('NOTEBOOK_CLOSE', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
+        this.side.page = this.makeBitmapText(this.position.unfocused.page.x, this.position.unfocused.page.y, this.position.unfocused.page.width, '', 8);
 
-        this.notebook.panel = this.factory.makeNotebook(this.position.unfocused.panel.x, this.position.unfocused.panel.y);
+        this.side.arrow.left = this.factory.makeSideArrow(this.position.unfocused.arrow.left.x, this.position.unfocused.arrow.left.y, 'BAG_ARROW_FOCUSED', true);
 
-        this.notebook.page = this.makeBitmapText(this.position.unfocused.page.x, this.position.unfocused.page.y, this.position.unfocused.page.width, '', 8);
+        this.side.arrow.right = this.factory.makeSideArrow(this.position.unfocused.arrow.right.x, this.position.unfocused.arrow.right.y, 'BAG_ARROW_FOCUSED', false);
 
-        this.notebook.arrow.left = this.factory.makeSideArrow(this.position.unfocused.arrow.left.x, this.position.unfocused.arrow.left.y, 'BAG_ARROW_FOCUSED', true);
-
-        this.notebook.arrow.right = this.factory.makeSideArrow(this.position.unfocused.arrow.right.x, this.position.unfocused.arrow.right.y, 'BAG_ARROW_FOCUSED', false);
-
-        this.notebook.arrow.left.setVisible(false);
-        this.notebook.arrow.right.setVisible(false);
+        this.side.arrow.left.setVisible(false);
+        this.side.arrow.right.setVisible(false);
 
     }
 
-    openNotebook() {
-        this.checkNotebook();
-        this.scene.manager.hud.hudFocusHints.setKeyTip('NOTEBOOK', true);
-        this.notebook.panel.setFrame('NOTEBOOK_OPEN');
+    openManager() {
+        this.side.panel.setFrame('NOTEBOOK_OPEN');
         // To redraw page
         this.manager.setSelected(this.manager.selected);
-        this.notebook.icon.anims.play('NOTEBOOK_OPEN');
+        this.side.icon.anims.play('NOTEBOOK_OPEN');
         this.scene.tweens.add({
-            targets: [this.notebook.block],
+            targets: [this.side.block],
             y: this.position.focused.slot.y,
             x: this.position.focused.slot.x,
             duration: 250,
@@ -145,7 +129,7 @@ export default class HudNotebook extends HudCommon {
         });
 
         this.scene.tweens.add({
-            targets: [this.notebook.icon],
+            targets: [this.side.icon],
             y: this.position.focused.icon.y,
             x: this.position.focused.icon.x,
             duration: 300,
@@ -154,10 +138,8 @@ export default class HudNotebook extends HudCommon {
             yoyo: false,
         });
 
-        //
-        this.notebook.block.setFrame('ITEM_FOCUSED');
         var load_panel = this.scene.tweens.add({
-            targets: [this.notebook.panel],
+            targets: [this.side.panel],
             y: this.position.focused.panel.y,
             x: this.position.focused.panel.x,
             duration: 350,
@@ -166,11 +148,11 @@ export default class HudNotebook extends HudCommon {
             yoyo: false,
         });
         load_panel.on('complete', () => {
-            this.setNotebookState('FOCUSED');
+            this.setState('FOCUSED');
         });
 
         this.scene.tweens.add({
-            targets: [this.notebook.page],
+            targets: [this.side.page],
             y: this.position.focused.page.y,
             x: this.position.focused.page.x,
             duration: 350,
@@ -179,36 +161,19 @@ export default class HudNotebook extends HudCommon {
             yoyo: false,
         });
 
-        this.notebook.arrow.left.setVisible(true);
-        this.notebook.arrow.right.setVisible(true);
+        this.side.arrow.left.setVisible(true);
+        this.side.arrow.right.setVisible(true);
 
         this.manager.listen();
     }
 
-    closeNotebook() {
+    closeManager() {
         this.manager.destroyListeners();
-        this.checkNotebook();
-        this.notebook.arrow.left.setVisible(false);
-        this.notebook.arrow.right.setVisible(false);
-        this.notebook.block.setFrame('ITEM_UNFOCUSED');
-        //this.notebook.panel.setFrame('NOTEBOOK_CLOSED_RED');
-        this.setNotebookState('UNFOCUSED');
-        this.scene.manager.hud.hudFocusHints.setKeyTip('NOTEBOOK', false);
-        /*
-        var keytip = this.scene.manager.hud.hudFocusHints.getKeyTip('NOTEBOOK');
+        this.side.arrow.left.setVisible(false);
+        this.side.arrow.right.setVisible(false);
 
         this.scene.tweens.add({
-            targets: [keytip.block, keytip.text],
-            y: this.position.unfocused.keytip.y,
-            x: this.position.unfocused.keytip.x,
-            duration: 200,
-            ease: 'Sine.easeIn',
-            loop: 0,
-            yoyo: false,
-        });
-        */
-        this.scene.tweens.add({
-            targets: [this.notebook.block],
+            targets: [this.side.block],
             y: this.position.unfocused.slot.y,
             x: this.position.unfocused.slot.x,
             duration: 250,
@@ -216,9 +181,9 @@ export default class HudNotebook extends HudCommon {
             loop: 0,
             yoyo: false,
         });
-        this.notebook.icon.anims.play('NOTEBOOK_CLOSE');
+        this.side.icon.anims.play('NOTEBOOK_CLOSE');
         this.scene.tweens.add({
-            targets: [this.notebook.icon],
+            targets: [this.side.icon],
             y: this.position.unfocused.icon.y,
             x: this.position.unfocused.icon.x,
             duration: 300,
@@ -228,7 +193,7 @@ export default class HudNotebook extends HudCommon {
         });
 
         this.scene.tweens.add({
-            targets: [this.notebook.panel],
+            targets: [this.side.panel],
             y: this.position.unfocused.panel.y,
             x: this.position.unfocused.panel.x,
             duration: 350,
@@ -238,7 +203,7 @@ export default class HudNotebook extends HudCommon {
         });
 
         this.scene.tweens.add({
-            targets: [this.notebook.page],
+            targets: [this.side.page],
             y: this.position.unfocused.page.y,
             x: this.position.unfocused.page.x,
             duration: 350,
@@ -248,7 +213,7 @@ export default class HudNotebook extends HudCommon {
         });
 
         this.scene.tweens.add({
-            targets: [this.notebook.arrow.right],
+            targets: [this.side.arrow.right],
             x: this.position.unfocused.arrow.right.x,
             duration: 350,
             ease: 'Sine.easeOut',
@@ -257,7 +222,7 @@ export default class HudNotebook extends HudCommon {
         });
 
         this.scene.tweens.add({
-            targets: [this.notebook.arrow.left],
+            targets: [this.side.arrow.left],
             x: this.position.unfocused.arrow.left.x,
             duration: 350,
             ease: 'Sine.easeOut',
@@ -279,18 +244,18 @@ export default class HudNotebook extends HudCommon {
         if (draw == null) {
             return;
         }
-        this.notebook.page.setText(draw.title + '\n' + draw.content);
+        this.side.page.setText(draw.title + '\n' + draw.content);
     }
 
 
     arrowRight() {
         if (this.state == 'FOCUSED') {
-            this.setNotebookState('UNFOCUSED');
-            this.notebook.arrow.right.setFrame('BAG_ARROW_SELECTED');
-            this.notebook.icon.anims.play('NOTEBOOK_NEXT');
+            this.setState('UNFOCUSED');
+            this.side.arrow.right.setFrame('BAG_ARROW_SELECTED');
+            this.side.icon.anims.play('NOTEBOOK_NEXT');
             /// Arrow down tween on right arrow
             var tween = this.scene.tweens.add({
-                targets: [this.notebook.arrow.right],
+                targets: [this.side.arrow.right],
                 y: this.position.focused.arrow.right.y,
                 x: this.position.focused.arrow.right.x + 8,
                 duration: 250,
@@ -300,8 +265,8 @@ export default class HudNotebook extends HudCommon {
             });
             this.manager.selectNext();
             tween.on('complete', () => {
-                this.setNotebookState('FOCUSED');
-                this.notebook.arrow.right.setFrame('BAG_ARROW_FOCUSED');
+                this.setState('FOCUSED');
+                this.side.arrow.right.setFrame('BAG_ARROW_FOCUSED');
             });
 
 
@@ -310,14 +275,14 @@ export default class HudNotebook extends HudCommon {
 
     arrowLeft() {
         if (this.state == 'FOCUSED') {
-            this.setNotebookState('UNFOCUSED');
+            this.setState('UNFOCUSED');
             this.manager.selectPrevious();
 
-            this.notebook.arrow.left.setFrame('BAG_ARROW_SELECTED');
-            this.notebook.icon.anims.play('NOTEBOOK_PREVIOUS');
+            this.side.arrow.left.setFrame('BAG_ARROW_SELECTED');
+            this.side.icon.anims.play('NOTEBOOK_PREVIOUS');
             /// Arrow down tween on left arrow
             var tween = this.scene.tweens.add({
-                targets: [this.notebook.arrow.left],
+                targets: [this.side.arrow.left],
                 x: this.position.focused.arrow.left.x - 8,
                 duration: 250,
                 ease: 'Sine.easeIn',
@@ -326,8 +291,8 @@ export default class HudNotebook extends HudCommon {
             });
 
             tween.on('complete', () => {
-                this.setNotebookState('FOCUSED');
-                this.notebook.arrow.left.setFrame('BAG_ARROW_FOCUSED');
+                this.setState('FOCUSED');
+                this.side.arrow.left.setFrame('BAG_ARROW_FOCUSED');
             });
         }
     }

@@ -498,7 +498,7 @@ export default class HudPockets extends HudCommon {
     }
 
     tapSlip(slot_x) {
-        if (this.slots[1][slot_x].slip != null) {
+        if (this.slots[1][slot_x].slip != null && this.slots[1][slot_x].slip.block != null) {
             this.slots[1][slot_x].slip.block.setFrame('BLOCK_SHALLOW_BLUE_RIGHT');
 
             this.scene.time.addEvent({
@@ -511,14 +511,9 @@ export default class HudPockets extends HudCommon {
     }
 
     tapAction(slot_x, action_y) {
-        if (this.pocket_actions != null && this.pocket_actions[action_y] != null) {
+        if (this.pocket_actions != null && this.pocket_actions[action_y] != null && this.pocket_actions[action_y].block != null) {
             this.pocket_actions[action_y].block.setFrame('BLOCK_MID_BLUE_RIGHT');
-            this.scene.time.addEvent({
-                delay: 125,
-                callback: () => {
-                    this.pocket_actions[action_y].block.setFrame('BLOCK_SHALLOW_BEIGE_RIGHT');
-                }
-            });
+            
         }
     }
 

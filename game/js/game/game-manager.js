@@ -162,7 +162,7 @@ export default class GameManager {
             var focus = this.getFocus();
             const input = this.scene.app.input.INPUT;
             if (input.INVENTORY.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
-                if (focus.name == 'PLAYER' || focus.name == 'MAP' || focus.name == 'NOTEBOOK') {
+                if (focus.name == 'PLAYER' || focus.name == 'MAP' || focus.name == 'NOTEBOOK' || focus.name == 'KEYCHAIN') {
                     this.setFocus('POCKETS');
                 }
                 else if (focus.name == 'POCKETS') {

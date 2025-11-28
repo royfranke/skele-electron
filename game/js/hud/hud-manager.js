@@ -198,17 +198,17 @@ export default class HudManager {
                 this.hudCoinpurse.closeCoinpurse();
             }
             if (this.last_state.name != 'KEYCHAIN_FOCUSED' && this.state.name == 'KEYCHAIN_FOCUSED') {
-                this.hudKeychain.openKeychain();
+                this.hudKeychain.open();
             }
             if (this.state.name != 'KEYCHAIN_FOCUSED' && this.last_state.name == 'KEYCHAIN_FOCUSED') {
-                this.hudKeychain.closeKeychain();
+                this.hudKeychain.close();
             }
             if (this.last_state.name != 'NOTEBOOK_FOCUSED' && this.state.name == 'NOTEBOOK_FOCUSED') {
-                this.hudNotebook.openNotebook();
+                this.hudNotebook.open();
             }
             /// Close Notebook
             if (this.state.name != 'NOTEBOOK_FOCUSED' && this.last_state.name == 'NOTEBOOK_FOCUSED') {
-                this.hudNotebook.closeNotebook();
+                this.hudNotebook.close();
             }
 
             if (this.last_state.name != 'NUMBERPAD_FOCUSED' && this.state.name == 'NUMBERPAD_FOCUSED') {
@@ -220,11 +220,11 @@ export default class HudManager {
             }
 
             if (this.last_state.name != 'MAP_FOCUSED' && this.state.name == 'MAP_FOCUSED') {
-                this.hudMap.openMap();
+                this.hudMap.open();
             }
             /// Close Map
             if (this.state.name != 'MAP_FOCUSED' && this.last_state.name == 'MAP_FOCUSED') {
-                this.hudMap.closeMap();
+                this.hudMap.close();
             }
             if (this.last_state.name != 'DIALOG_FOCUSED' && this.state.name == 'DIALOG_FOCUSED') {
                 this.hudDialog.focusDialog();
