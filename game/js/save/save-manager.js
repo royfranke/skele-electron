@@ -22,10 +22,7 @@ export default class SaveManager {
         this.scene.player.setFacing(data.POSITION.FACING);
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
-        if (this.scene.player.coinpurse.contents.STATUS.HAS == 'TRUE') {
-            this.scene.manager.hud.hudCoinpurse.plungeCoinPurse();
-        }
-        this.scene.manager.hud.hudWatch.plungeWatch();
+        //this.scene.manager.hud.hudWatch.plungeWatch();
         this.scene.manager.hud.pocket.setPocketsFromSave();
     }
 
@@ -35,11 +32,7 @@ export default class SaveManager {
         this.scene.player.setFacing(data.POSITION.FACING);
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
-
-        if (this.scene.player.coinpurse.contents.STATUS.HAS == 'TRUE') {
-            this.scene.manager.hud.hudCoinpurse.plungeCoinPurse();
-        }
-        this.scene.manager.hud.hudWatch.plungeWatch();
+        //this.scene.manager.hud.hudWatch.plungeWatch();
         this.scene.manager.hud.pocket.setPocketsFromSave();
         //this.scene.interior.setPortalFromSave(data.POSITION.RETURN);
     }
@@ -75,7 +68,8 @@ export default class SaveManager {
         data.NOTEBOOKS = this.scene.manager.hud.hudNotebook.manager.setSaveFromNotebook();
         data.POCKETS.SLOTS = this.scene.manager.hud.pocket.setSaveFromPockets();
         data.POSITION =     this.scene.player.getPositionTile();
-        if (this.scene.room_id > 0) {
+        if (data.ROOMS === undefined) { data.ROOMS = {}; }
+        if (this.scene.room_id > 0 && this.scene.room_id != 10) {
             data.ROOMS[this.scene.room_id] = this.setSaveFromInterior();
         }
         return data;

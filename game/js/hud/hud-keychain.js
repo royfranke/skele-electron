@@ -14,7 +14,8 @@ export default class HudKeychain extends HudSide {
         this.keytip = 'KEYCHAIN';
         this.colors = {
             selected: 'ITEM_FOCUSED',
-            normal: 'BAG_UNFOCUSED'
+            normal: 'BAG_UNFOCUSED',
+            frame:'BLOCK_SHALLOW_YELLOW_FRAME'
         };
 
         this.icon = 'KEY_RING_3';

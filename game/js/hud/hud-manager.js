@@ -1,20 +1,20 @@
 import HudAction from "./hud-action.js"; //Extends HudCommon
 import HudChest from "./hud-chest.js"; //Extends HudCommon
-import HudCoinpurse from "./hud-coinpurse.js"; //Extends HudCommon
 import HudDialog from "./hud-dialog.js";
 import HudDisplay from "./hud-display.js";
 import HudFocusHints from "./hud-focus-hints.js";
 import HudHealth from "./hud-health.js";    //Extends HudCommon
 import HudInput from "./hud-input.js";
 import HudKeyboard from "./hud-keyboard.js"; //Extends HudCommon
-import HudKeychain from "./hud-keys.js"; //Extends HudCommon
+import HudKeychain from "./hud-keychain.js"; //Extends HudSide
 import HudQuest from "./hud-quest.js"; //Extends HudCommon
-import HudMap from "./hud-map.js"; //Extends HudCommon
+import HudMap from "./hud-map.js"; //Extends HudSide
 import HudNotebook from "./hud-notebook.js"; //Extends HudCommon
 import HudNumberPad from "./hud-numberpad.js"; //Extends HudCommon
 import HudPayment from "./hud-payment.js"; //Extends HudCommon
 import HudPocket from "./hud-pocket.js";
 import HudPockets from "./hud-pockets.js"; //Extends HudCommon
+import HudCoinpurse from "./hud-coinpurse.js"; //Extend HudSide
 import HudSound from "./hud-sound.js";
 import HudState from "./hud-state.js";
 import HudThinking from "./hud-thinking.js"; //Extends HudCommon
@@ -45,7 +45,6 @@ export default class HudManager {
         this.hudPockets = new HudPockets(this.scene);
         this.pocket = new HudPocket(this.scene);
         this.hudFocusHints = new HudFocusHints(this.scene);
-        this.hudCoinpurse = new HudCoinpurse(this.scene);
         this.hudInput = new HudInput(this.scene);
         this.hudSound = new HudSound(this.scene);
         this.hudKeyboard = new HudKeyboard(this.scene);
@@ -62,6 +61,7 @@ export default class HudManager {
         this.hudNotebook = new HudNotebook(this.scene);
         this.hudKeychain = new HudKeychain(this.scene);
         this.hudMap = new HudMap(this.scene);
+        this.hudCoinpurse = new HudCoinpurse(this.scene);
         this.hudQuest = new HudQuest(this.scene);
         this.hudAction = new HudAction(this.scene);
         this.hudZener = new HudZener(this.scene);
@@ -69,9 +69,6 @@ export default class HudManager {
         this.hudStore = new HudStore(this.scene);
         this.hudPayment = new HudPayment(this.scene);
         this.hudDisplay = new HudDisplay(this.scene);
-
-        this.hudCoinpurse.addHiddenCoinPurse();
-
     }
 
 
@@ -189,13 +186,17 @@ export default class HudManager {
             this.hudPockets.pocketsVisible(true);
         }
         else {
+            if (this.last_state.name != 'COINPURSE_FOCUSED' && this.state.name == 'COINPURSE_FOCUSED') {
+                this.hudCoinpurse.open();
+            }
+            if (this.state.name != 'COINPURSE_FOCUSED' && this.last_state.name == 'COINPURSE_FOCUSED') {
+                this.hudCoinpurse.close();
+            }
             if (this.state.name == 'POCKETS_FOCUSED') {
                 this.hudPockets.openPockets();
-                this.hudCoinpurse.openCoinpurse();
             }
             if (this.last_state.name == 'POCKETS_FOCUSED' && this.state.name != 'POCKETS_FOCUSED') {
                 this.hudPockets.closePockets();
-                this.hudCoinpurse.closeCoinpurse();
             }
             if (this.last_state.name != 'KEYCHAIN_FOCUSED' && this.state.name == 'KEYCHAIN_FOCUSED') {
                 this.hudKeychain.open();
@@ -256,6 +257,14 @@ export default class HudManager {
             }
 
         }
+
+        if (this.state.name == 'WATCH_FOCUSED' && this.last_state != null && this.last_state.name != 'WATCH_FOCUSED') {
+            this.hudWatch.open();
+        }
+        /// Close Watch
+        if (this.state.name != 'WATCH_FOCUSED' && this.last_state != null && this.last_state.name == 'WATCH_FOCUSED') {
+            this.hudWatch.close();
+        }   
 
 
         /// Open Card Game (Zener)

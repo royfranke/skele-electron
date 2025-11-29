@@ -14,7 +14,8 @@ export default class HudSide extends HudCommon {
         this.keytip = '';
         this.colors = {
             selected: 'BAG_SELECTED',
-            normal: 'BAG_UNFOCUSED'
+            normal: 'BAG_UNFOCUSED',
+            frame:'BLOCK_SHALLOW_CREAM_EDGE_FRAME'
         };
 
         this.icon = '';
@@ -58,8 +59,25 @@ export default class HudSide extends HudCommon {
 
         this.state = 'UNFOCUSED';
         this.selected = 0;
-
+        
         this.add();
+        this.tweenFrame();
+    }
+
+    tweenFrame() {
+        if (this.frame_tween) {
+            this.frame_tween.stop();
+        }
+        this.frame_tween = this.scene.tweens.add({
+            targets: [this.side.active_frame],
+            scale: .95,
+            x: '+=1',
+            y: '+=1',
+            duration: 500,
+            ease: 'Sine.easeIn',
+            loop: -1,
+            yoyo: true,
+        });
     }
 
     add () {
@@ -67,6 +85,16 @@ export default class HudSide extends HudCommon {
             this.side = {icon: null, block: null, click_area: null};
         }
         this.side.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, this.colors.normal);
+
+        var frame_x = this.position.unfocused.slot.x - 3;
+        var frame_y = this.position.unfocused.slot.y - 3;
+        if (this.position.focused != null && this.position.focused != undefined && this.position.focused.slot != null && this.position.focused.slot != undefined) {
+            frame_x = this.position.focused.slot.x - 3;
+            frame_y = this.position.focused.slot.y - 3;
+        }
+        this.side.active_frame = this.makeBlock(frame_x, frame_y, 38, 38, this.colors.frame);
+        this.side.active_frame.setDepth(this.side.block.depth+1);
+        this.side.active_frame.setVisible(false);
 
         if (this.side.icon == null || this.side.icon == undefined) {
             this.side.icon = this.makeIcon(this.position.unfocused.icon.x, this.position.unfocused.icon.y,'UI', this.icon);
@@ -96,6 +124,7 @@ export default class HudSide extends HudCommon {
         this.scene.manager.hud.hudFocusHints.setKeyTip(this.keytip, true);
         this.setState('FOCUSED');
         this.side.block.setFrame(this.colors.selected);
+        this.side.active_frame.setVisible(true);
         this.openManager();
     }
 
@@ -106,6 +135,7 @@ export default class HudSide extends HudCommon {
     close() {
         this.closeManager();
         this.side.block.setFrame(this.colors.normal);
+        this.side.active_frame.setVisible(false);
         this.setState('UNFOCUSED');
         this.scene.manager.hud.hudFocusHints.setKeyTip(this.keytip, false);
     }

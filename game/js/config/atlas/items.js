@@ -258,7 +258,29 @@ const ITEMS = {
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+        group_35: {
+                req_group: 35,
+                req_group_name: 'Eat Berry Muffin',
+                req_pocket_action: 'EAT',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'HUNGER',
+                req_result_data_set: '1',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'CONSUMED',
+                    ITEM: 'MUFFIN_BERRY'
+                    }
+                                ]
+
+            },        },
     },
       BIRD_SEED_BAG: {
         name: 'Bird Seed',
@@ -962,7 +984,29 @@ const ITEMS = {
         stack: 3,
         stacks: [        ],
         interactions: {
-        },
+        group_33: {
+                req_group: 33,
+                req_group_name: 'Eat Bruised Banana',
+                req_pocket_action: 'EAT',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'BANANA_TRASH',
+                req_result_data_key: 'HUNGER',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'BANANA_BRUISED'
+                    }
+                                ]
+
+            },        },
     },
       DIGITAL_WATCH: {
         name: 'BSC-100 Digital Watch',
@@ -2190,6 +2234,52 @@ items: []    },
         description: 'Redeem this can for 5 cents at your local Can Redemption Center.',
         cost: 0,
         tags: [{category:'Spawn Points', tag: 'spawn on ledges'}, {category:'Spawn Points', tag: 'spawn in woods garbage patch'}, {category:'Spawn Points', tag: 'spawn in recycling zone'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
+    },
+      MUFFIN_WRAPPER: {
+        name: 'Empty Muffin Wrapper',
+        slug: 'MUFFIN_WRAPPER', 
+        use:  'HOLDS',
+        icon: 'MUFFIN_WRAPPER',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
         deplete_from: 0,
         contains: [],
         containedBy: [],
@@ -4756,7 +4846,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_34: {
+                req_group: 34,
+                req_group_name: 'Eat Muffin',
+                req_pocket_action: 'EAT',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'HUNGER',
+                req_result_data_set: '1',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'CONSUMED',
+                    ITEM: 'MUFFIN'
+                    }
+                                ]
+
+            },        },
     },
       MUG_1: {
         name: 'Mug 1',
@@ -7188,7 +7300,7 @@ items: []    },
         deplete_from: 0,
         contains: [],
         containedBy: [],
-        stack: 4,
+        stack: 1,
         stacks: [ {
             icon: 'TOAST_27',
             type: 'asset',
@@ -7204,7 +7316,7 @@ items: []    },
         use:  'HOLDS',
         icon: 'TOAST_JELLY',
         type: 'FOOD',
-        default_status: '',
+        default_status: 'STEAMING',
         description: '',
         cost: 0,
         tags: [],

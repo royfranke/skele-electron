@@ -1,86 +1,69 @@
-import HudCommon from './hud-common.js';
+import HudSide from './hud-side.js';
 /*
  * Controls the watch display on the HUD
  */
 
-export default class HudWatch extends HudCommon {
+export default class HudWatch extends HudSide {
 
     constructor(scene) {
        super(scene);
        
     }
 
-    initialize () {
-        this.position = {
-            x: this.view.left + 56,
-            y: this.view.top + this.view.margin.top
+    setVariables () {
+        this.keytip = 'WATCH';
+        this.colors = {
+            selected: 'ITEM_FOCUSED',
+            normal: 'BAG_UNFOCUSED',
+            frame:'BLOCK_SHALLOW_YELLOW_FRAME'
         };
 
+        this.icon = 'WATCH_DEFAULT';
+
         this.position = {
-            with_coinpurse: {
-                unfocused: {
-                    x: this.view.left + 56,
-                    y: this.view.top - 32
-                },
-                focused: {
-                    x: this.view.left + 56,
+            unfocused: {
+                slot: {
+                    x: (this.view.left + this.view.margin.left),
                     y: this.view.top + this.view.margin.top
-                }
+                },
+                icon: {
+                    x: (this.view.left + this.view.margin.left),
+                    y: this.view.top + this.view.margin.top
+                },
+                watch: {
+                    x: (this.view.left + this.view.margin.left) + 64,
+                    y: this.view.top + this.view.margin.top
+                },
             },
-            solo: {
-                unfocused: {
-                    x: this.view.left + this.view.margin.left,
-                    y: this.view.top - 32
-                },
-                focused: {
-                    x: this.view.left + this.view.margin.left,
-                    y: this.view.top + this.view.margin.top
-                }
+            focused: {
+
             }
         };
-
         this.watch = {
             display: null,
             slice: null
         };
-
         this.addHiddenWatch();
     }
 
     addHiddenWatch(conditions='with_coinpurse') {
-        this.watch.display = this.makeBitmapText(this.position[conditions].unfocused.x+10,this.position[conditions].unfocused.y + 11, 64, 16, 'SkeleWatch')
+        this.watch.display = this.makeBitmapText(this.position.unfocused.watch.x + 11,this.position.unfocused.watch.y + 11, 64, 16, 'SkeleWatch')
         this.watch.display.setText("00:00BM");
-        this.watch.slice = this.makeBlock(this.position[conditions].unfocused.x, this.position[conditions].unfocused.y, this.watch.display.displayWidth + 8, 32, 'HUD_DIGITAL_WATCH_FACE');
+        this.watch.slice = this.makeBlock(this.position.unfocused.watch.x,this.position.unfocused.watch.y, this.watch.display.displayWidth + 8, 32, 'HUD_DIGITAL_WATCH_FACE');
+        this.watch.slice.setVisible(false);
+        this.watch.display.setVisible(false);
     }
 
-    plungeWatch(conditions='with_coinpurse') {
-        if (this.watch.slice != null) {
-            this.scene.tweens.add({
-                targets: this.watch.slice,
-                y: this.position[conditions].focused.y,
-                duration: 1800,
-                repeat: 0,
-                hold: 500,
-                repeatDelay: 500,
-                ease: 'bounce.out'
-            });
-
-            this.scene.tweens.add({
-                targets: this.watch.display,
-                y: this.position[conditions].focused.y + 11,
-                duration: 1800,
-                repeat: 0,
-                hold: 500,
-                repeatDelay: 500,
-                ease: 'bounce.out'
-            });
-        }
+    openManager () {
+        this.side.icon.setFrame('WATCH_BRIGHT');
+        this.watch.slice.setVisible(true);
+        this.watch.display.setVisible(true);
     }
 
-    addWatch (conditions='with_coinpurse') {
-        this.watch.display = this.makeBitmapText(this.position[conditions].focused.x+8,this.position[conditions].focused.y + 11, 64, 16, 'SkeleWatch')
-        this.watch.display.setText("00:00BM");
-        this.watch.slice = this.makeBlock(this.position[conditions].focused.x, this.position[conditions].focused.y, this.watch.display.displayWidth + 4, 32, 'HUD_DIGITAL_WATCH_FACE');
+    closeManager () {
+        this.side.icon.setFrame('WATCH_DEFAULT');
+        this.watch.slice.setVisible(false);
+        this.watch.display.setVisible(false);
     }
 
     setWatch (time) {

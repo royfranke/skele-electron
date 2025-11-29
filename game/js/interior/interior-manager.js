@@ -75,7 +75,8 @@ import KEYLIGHT from "../config/key-light.js";
     createItems () {
         /// First check save data for items in this room
         var self = this;
-        if (this.scene.slot.ROOMS[this.scene.room_id]) {
+        console.log(this.scene.room_id);
+        if (this.scene.slot.ROOMS != undefined && this.scene.slot.ROOMS[this.scene.room_id]) {
             this.scene.slot.ROOMS[this.scene.room_id].ITEMS.forEach(item => {
                 var items = [];
                 if (item.items != undefined && item.items.length > 0 && item.items[0].slug != undefined) {

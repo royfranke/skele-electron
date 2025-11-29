@@ -95,6 +95,9 @@ export default class GameManager {
         if (focus_string == 'PLAYER' || focus_string == 'PAUSE' || focus_string == 'CHEST') {
             this.hud.setState('VISIBLE_UNFOCUSED');
         }
+        if (focus_string == 'COINPURSE') {
+            this.hud.setState('COINPURSE_FOCUSED');
+        }
         if (focus_string == 'DIALOG') {
             this.hud.setState('DIALOG_FOCUSED');
         }
@@ -121,6 +124,9 @@ export default class GameManager {
         }
         if (focus_string == 'STORE') {
             this.hud.setState('STORE_FOCUSED');
+        }
+        if (focus_string == 'WATCH') {
+            this.hud.setState('WATCH_FOCUSED');
         }
         if (focus_string == 'ZENER') {
             this.hud.setState('ZENER_FOCUSED');
@@ -162,7 +168,7 @@ export default class GameManager {
             var focus = this.getFocus();
             const input = this.scene.app.input.INPUT;
             if (input.INVENTORY.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
-                if (focus.name == 'PLAYER' || focus.name == 'MAP' || focus.name == 'NOTEBOOK' || focus.name == 'KEYCHAIN') {
+                if (focus.name == 'PLAYER' || focus.name == 'MAP' || focus.name == 'NOTEBOOK' || focus.name == 'KEYCHAIN' || focus.name == 'COINPURSE' || focus.name == 'WATCH') {
                     this.setFocus('POCKETS');
                 }
                 else if (focus.name == 'POCKETS') {
@@ -178,6 +184,24 @@ export default class GameManager {
                 else {
                     this.setFocus('PLAYER');  
                 }
+            }
+            if (input.COINPURSE.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
+                if (focus.name != 'COINPURSE') {
+                    this.closeChest();
+                    this.setFocus('COINPURSE');
+                }
+                else {
+                    this.setFocus('PLAYER');  
+                }   
+            }
+            if (input.WATCH.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
+                if (focus.name != 'WATCH') {
+                    this.closeChest();
+                    this.setFocus('WATCH');
+                }
+                else {
+                    this.setFocus('PLAYER');  
+                }   
             }
             if (input.NOTEBOOK.TAP && focus.name != 'DIALOG' && focus.name != 'QUOTE' && focus.name != 'ZENER' && focus.name != 'SOCKS') {
                 if (focus.name != 'NOTEBOOK') {
@@ -202,6 +226,9 @@ export default class GameManager {
                 if (focus.name == 'POCKETS') {
                     this.setFocus('PLAYER');   
                 }
+                if (focus.name == 'COINPURSE') {
+                    this.setFocus('PLAYER');  
+                }
                 if (focus.name == 'KEYCHAIN') {
                     this.setFocus('PLAYER');  
                 }
@@ -224,6 +251,9 @@ export default class GameManager {
                     this.setFocus('QUOTE');  
                 }
                 if (focus.name == 'NUMBERPAD') {
+                    this.setFocus('PLAYER');  
+                }
+                if (focus.name == 'WATCH') {
                     this.setFocus('PLAYER');  
                 }
 

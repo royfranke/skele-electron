@@ -134,6 +134,9 @@ export default class PlayerCoinpurse {
 
     addCoin (coin_amount) {
         let coin = this.coinRef[coin_amount];
+        if (!this.contents.COIN[coin]) {
+            this.contents.COIN[coin] = 0;
+        }
         this.contents.COIN[coin]++;
         let amount_string = coin_amount;
         this.updateTotal();
@@ -141,6 +144,9 @@ export default class PlayerCoinpurse {
 
     addDollar (amount) {
         let paper = this.paperRef[amount];
+        if (!this.contents.PAPER[paper]) {
+            this.contents.PAPER[paper] = 0;
+        }
         this.contents.PAPER[paper]++;
         this.updateTotal();
     }

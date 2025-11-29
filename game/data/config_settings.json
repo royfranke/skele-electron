@@ -83,7 +83,9 @@
             "MAP": "M",
             "NOTEBOOK": "N",
             "INVENTORY": "I",
-            "KEYCHAIN": "K"
+            "KEYCHAIN": "K",
+            "COINPURSE": "P",
+            "WATCH": "W"
         },
         "CUSTOM": {
             "UP": "UP",
@@ -98,7 +100,9 @@
             "MAP": "M",
             "NOTEBOOK": "N",
             "INVENTORY": "I",
-            "KEYCHAIN": "K"
+            "KEYCHAIN": "K",
+            "COINPURSE": "P",
+            "WATCH": "W"
         }
     }
 }

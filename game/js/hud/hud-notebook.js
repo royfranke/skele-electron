@@ -15,7 +15,8 @@ export default class HudNotebook extends HudSide {
         this.keytip = 'NOTEBOOK';
         this.colors = {
             selected: 'ITEM_FOCUSED',
-            normal: 'BAG_UNFOCUSED'
+            normal: 'BAG_UNFOCUSED',
+            frame:'BLOCK_SHALLOW_YELLOW_FRAME'
         };
 
         this.icon = 'NOTEBOOK_CLOSED_RED';
@@ -42,11 +43,11 @@ export default class HudNotebook extends HudSide {
                 arrow: {
                     left: {
                         x: this.view.left + this.view.margin.left + 32,
-                        y: this.view.bottom - (this.view.margin.bottom + 160)
+                        y: this.view.bottom - (this.view.margin.bottom + 32)
                     },
                     right: {
                         x: this.view.left + this.view.margin.left + 112,
-                        y: this.view.bottom - (this.view.margin.bottom + 160)
+                        y: this.view.bottom - (this.view.margin.bottom + 32)
                     },
                 }
 
@@ -59,19 +60,19 @@ export default class HudNotebook extends HudSide {
         this.position.focused = {
             slot: {
                 x: this.position.unfocused.slot.x + 40,
-                y: this.position.unfocused.slot.y - 128
+                y: this.view.bottom - (this.view.margin.bottom + 32)
             },
             icon: {
                 x: this.position.unfocused.icon.x + 40,
-                y: this.position.unfocused.icon.y - 128
+                y: this.view.bottom - (this.view.margin.bottom + 32)
             },
             panel: {
                 x: this.position.unfocused.panel.x,
-                y: this.position.unfocused.panel.y - 140
+                y: this.position.unfocused.panel.y - 188
             },
             page: {
                 x: this.position.unfocused.page.x,
-                y: this.position.unfocused.page.y - 140
+                y: this.position.unfocused.page.y - 188
             },
             arrow: {
                 left: {
@@ -94,12 +95,14 @@ export default class HudNotebook extends HudSide {
                 right: null
             }
         };
-    }
 
-    add() {
-        this.side.block = this.makeBlock(this.position.unfocused.slot.x, this.position.unfocused.slot.y, 32, 32, this.colors.normal);
         this.side.icon = this.scene.manager.fx.handleHudFX('NOTEBOOK_CLOSE', this.position.unfocused.icon.x, this.position.unfocused.icon.y);
 
+    }
+
+
+    openManager() {
+        
         this.side.panel = this.factory.makeNotebook(this.position.unfocused.panel.x, this.position.unfocused.panel.y);
 
         this.side.page = this.makeBitmapText(this.position.unfocused.page.x, this.position.unfocused.page.y, this.position.unfocused.page.width, '', 8);
@@ -111,9 +114,18 @@ export default class HudNotebook extends HudSide {
         this.side.arrow.left.setVisible(false);
         this.side.arrow.right.setVisible(false);
 
-    }
+        this.side.arrow.left.setInteractive();
+        this.side.arrow.right.setInteractive();
 
-    openManager() {
+        this.side.arrow.left.on('pointerdown', () => {
+            this.arrowLeft();
+        });
+        
+        this.side.arrow.right.on('pointerdown', () => {
+            this.arrowRight();
+        });
+
+
         this.side.panel.setFrame('NOTEBOOK_OPEN');
         // To redraw page
         this.manager.setSelected(this.manager.selected);
@@ -122,6 +134,16 @@ export default class HudNotebook extends HudSide {
             targets: [this.side.block],
             y: this.position.focused.slot.y,
             x: this.position.focused.slot.x,
+            duration: 250,
+            ease: 'Sine.easeIn',
+            loop: 0,
+            yoyo: false,
+        });
+
+        this.scene.tweens.add({
+            targets: [this.side.active_frame],
+            y: this.position.focused.slot.y - 4,
+            x: this.position.focused.slot.x - 4,
             duration: 250,
             ease: 'Sine.easeIn',
             loop: 0,

@@ -27,7 +27,7 @@ export default class HudFocusHints extends HudCommon {
                 char: 'M',
                 focus: 'MAP',
                 x: (this.view.left + this.view.margin.left) + 40,
-                y: this.view.bottom - (this.view.margin.bottom + 58)
+                y: this.view.bottom - (this.view.margin.bottom + 58 + 80)
             },
             {
                 char: 'K',
@@ -35,6 +35,18 @@ export default class HudFocusHints extends HudCommon {
                 x: (this.view.left + this.view.margin.left) + 40,
                 y: this.view.bottom - (this.view.margin.bottom + 58 + 40)
             },
+            {
+                char: 'P',
+                focus: 'COINPURSE',
+                x: (this.view.left + this.view.margin.left) + 40,
+                y: this.view.bottom - (this.view.margin.bottom + 58)
+            },
+            {
+                char: 'W',
+                focus: 'WATCH',
+                x: (this.view.left + this.view.margin.left) + 40,
+                y: this.view.top + this.view.margin.top
+            }
         ];
 
         this.makeFocusHints();
@@ -62,6 +74,7 @@ export default class HudFocusHints extends HudCommon {
             NOTEBOOK: null,
             MAP: null,
             KEYCHAIN: null,
+            COINPURSE: null,
             PAUSE: null
         };
         for (var i=0; i<this.focusHints.length;i++) {

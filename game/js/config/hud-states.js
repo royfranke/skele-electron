@@ -1,4 +1,9 @@
 const HUD_STATES = {
+    COINPURSE_FOCUSED: {
+        name: 'COINPURSE_FOCUSED',
+        input: true,
+        visible: true
+    },
     DIALOG_FOCUSED: {
         name: 'DIALOG_FOCUSED',
         input: true,
@@ -60,6 +65,7 @@ const HUD_STATES = {
         input: true,
         visible: true
     },
+
     SOCKS_FOCUSED: {
         name: 'SOCKS_FOCUSED',
         input: true,
@@ -73,6 +79,11 @@ const HUD_STATES = {
     VISIBLE_UNFOCUSED: {
         name: 'VISIBLE_UNFOCUSED',
         input: false,
+        visible: true
+    },
+    WATCH_FOCUSED: {
+        name: 'WATCH_FOCUSED',
+        input: true,
         visible: true
     },
     ZENER_FOCUSED: {

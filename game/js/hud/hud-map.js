@@ -13,8 +13,9 @@ export default class HudMap extends HudSide {
         setVariables() {
         this.keytip = 'MAP';
         this.colors = {
-            selected: 'BAG_SELECTED',
-            normal: 'BAG_UNFOCUSED'
+            selected: 'ITEM_FOCUSED',
+            normal: 'BAG_UNFOCUSED',
+            frame:'BLOCK_SHALLOW_YELLOW_FRAME'
         };
 
         this.icon = 'KEY_RING_1';
@@ -23,12 +24,13 @@ export default class HudMap extends HudSide {
             unfocused: {
                 slot: {
                     x: (this.view.left + this.view.margin.left),
-                    y: this.view.bottom - (this.view.margin.bottom + 72)
+                    y: this.view.bottom - (this.view.margin.bottom + 72 + 40 + 40)
                 },
                 icon: {
                     x: (this.view.left + this.view.margin.left) + 8,
-                    y: this.view.bottom - (this.view.margin.bottom + 72) + 8
+                    y: this.view.bottom - (this.view.margin.bottom + 72 + 40 + 40) + 8
                 },
+
                 board: {
                     x: this.view.right - (this.view.margin.right*10),
                     y: this.view.top + (this.view.margin.top*3.5),

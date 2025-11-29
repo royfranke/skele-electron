@@ -447,7 +447,7 @@ export default class Object {
         }
         this.last_state = this.state;
         if (this.state != null && this.state.name == state_name) {
-            console.log("Already set to that state.");
+            //console.log("Already set to that state.");
             return;
         }
         if (!force) { // TODO: Figure out why this didn't work to cycle the states

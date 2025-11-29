@@ -2,6 +2,9 @@ const FOCUS_STATES = {
     CHEST: {
         name: 'CHEST'
     },
+    COINPURSE: {
+        name: 'COINPURSE'
+    },
     DIALOG: {
         name: 'DIALOG'
     },
@@ -40,6 +43,9 @@ const FOCUS_STATES = {
     },
     STORE: {
         name: 'STORE'
+    },
+    WATCH: {
+        name: 'WATCH'
     },
     ZENER: {
         name: 'ZENER'
