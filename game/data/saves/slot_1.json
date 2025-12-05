@@ -50,6 +50,13 @@
             "HUNDRED": 0
         }
     },
+    "KEYS": [],
+        "KEYRING":   
+        {"STATUS": {
+            "HAS": "FALSE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
+        }},
     "KNOWLEDGE": {
         "CURSES": {},
         "NUMBERS": {},
@@ -61,19 +68,18 @@
         "MAIL": {},
         "INTERSECTIONS": {}
     },
-    "NOTEBOOKS": {
+    "MAPS": [],
+    "NOTEBOOK": {
         "STATUS": {
-            "CURRENT": {
-                "NOTEBOOK": 1
-            }
+            "HAS": "FALSE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
         },
-        "NOTEBOOK1": {
-            "PAGES": [],
-            "SPECS": {
-                "COLOR": "RED"
-            },
-            "EPHEMERA": {}
-        }
+        "PAGES": [],
+        "SPECS": {
+            "COLOR": "RED"
+        },
+        "EPHEMERA": {}
     },
     "POCKETS": {
         "STATES": {
@@ -133,7 +139,7 @@
         },
         "SECOND": 0,
         "MINUTE": 0,
-        "HOUR": 21,
+        "HOUR": 20,
         "DAY": 1
     }
 }

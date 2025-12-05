@@ -60,6 +60,9 @@ export default class HudSide extends HudCommon {
         this.state = 'UNFOCUSED';
         this.selected = 0;
         
+        if (this.keytip == '' || this.keytip == null || this.keytip == undefined) {
+            return;
+        }
         this.add();
         this.tweenFrame();
     }

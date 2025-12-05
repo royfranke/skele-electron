@@ -1,3 +1,4 @@
+import KEYLIGHTS from "../config/key-light.js";
 /*
  * Manages application viewport
  * Including: camera, scale, fade, view, position, follow, bounds
@@ -98,6 +99,19 @@ export default class AppCamera {
             yoyo: false,
             ease: 'Sine.easeIn'
         });
+    }
+
+    setKeyLightBackground (keylight) {
+        let color = KEYLIGHTS[keylight].reflection_color;
+        if (color == null || color == undefined) {
+            color = '#4b424a';
+        }
+        /// if first two characters are "0x", convert to #
+        if (color.substring(0,2) == '0x') {
+            color = '#' + color.substring(2);
+        }
+        console.log("Setting keylight background to "+color);
+        this.camera.setBackgroundColor(color);
     }
 
 }

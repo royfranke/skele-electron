@@ -20,7 +20,7 @@ export default class DialogManager {
             if (!quest) {
                 this.scene.manager.hud.hudDialog.clearDialog();
                 //Replace in the future with a hint text found in the quest
-                this.scene.manager.hud.hudDialog.tellDialogBox('Ahh-- you have already been given this quest.');
+                this.scene.manager.hud.hudDialog.tellDialogBox('Ahh-- someone already asked you to do this.');
             }
             if (quest == 'CLEAR_SPACE') {
                 this.scene.manager.hud.hudDialog.clearDialog();

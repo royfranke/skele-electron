@@ -11,6 +11,9 @@ export default class HudCoinpurse extends HudSide {
     }
 
     setVariables() {
+        if (this.scene.slot.COINPURSE.STATUS.HAS == 'FALSE') {
+            return;
+        }
         this.keytip = 'COINPURSE';
         this.colors = {
             selected: 'ITEM_FOCUSED',

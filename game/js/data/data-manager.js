@@ -27,6 +27,9 @@ export default class DataManager {
         }
         value = Math.abs(value);
         this.scene.manager.hud.hudThinking.tellBrain( key+" "+modifier+" "+value);
+        if (key == "HUNGER") {
+            this.scene.manager.hud.hudHealth.modifyHealth(value);
+        }
 
 
         

@@ -5,25 +5,20 @@ export default class NotebookManager {
 
     constructor(scene) {
         this.scene = scene;
-        this.notebook = new Notebook(this.scene.slot.NOTEBOOKS);
+        //console.log(this.scene.slot);
+        this.notebook = new Notebook(this.scene.slot.NOTEBOOK);
         this.selected = 0;
     }
 
     setSaveFromNotebook() {
+        let status = this.scene.slot.NOTEBOOK.STATUS;
         return {
-            "STATUS": {
-                "CURRENT": {
-                    "NOTEBOOK": 1
-                }
+            "STATUS": status,
+            "PAGES": this.notebook.pages,
+            "SPECS": {
+                "COLOR": "RED"
             },
-            "NOTEBOOK1": {
-                "PAGES": this.notebook.pages,
-                "SPECS": {
-                    "COLOR": "RED"
-                },
-                "EPHEMERA": {
-                }
-            }
+            "EPHEMERA": {}
         };
     }
 
@@ -51,7 +46,7 @@ export default class NotebookManager {
         this.scene.manager.hud.hudNotebook.drawPage(this.selected);
     }
 
-    listen () {
+    listen() {
         var callback_left = function () {
             this.selectPrevious();
         }
@@ -60,11 +55,11 @@ export default class NotebookManager {
         }
         this.scene.events.addListener('INPUT_LEFT_NOTEBOOK', callback_left, this);
         this.scene.events.addListener('INPUT_RIGHT_NOTEBOOK', callback_right, this);
-   }
+    }
 
-   destroyListeners () {
+    destroyListeners() {
         this.scene.events.off('INPUT_LEFT_NOTEBOOK');
         this.scene.events.off('INPUT_RIGHT_NOTEBOOK');
-   }
+    }
 
 }

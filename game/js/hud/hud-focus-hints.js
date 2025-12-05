@@ -78,6 +78,18 @@ export default class HudFocusHints extends HudCommon {
             PAUSE: null
         };
         for (var i=0; i<this.focusHints.length;i++) {
+            if (this.focusHints[i].focus === 'MAP' && this.scene.slot.MAPS.length == 0) {
+                continue;
+            }
+            if (this.focusHints[i].focus === 'KEYCHAIN' && this.scene.slot.KEYRING.STATUS.HAS == 'FALSE') {
+                continue;
+            }
+            if (this.focusHints[i].focus === 'COINPURSE' && this.scene.slot.COINPURSE.STATUS.HAS == 'FALSE') {
+                continue;
+            }
+            if (this.focusHints[i].focus === 'NOTEBOOK' && this.scene.slot.NOTEBOOK.STATUS.HAS == 'FALSE') {
+                continue;
+            }
             var hint = this.makeFocusHint(this.focusHints[i]);
             this.hints[this.focusHints[i].focus] = hint;
         }

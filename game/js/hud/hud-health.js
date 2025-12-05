@@ -23,9 +23,18 @@ export default class HudHealth extends HudCommon {
             slice: null
         };
 
-        this.setHealthMax(3);
+        
+        
+        if (this.scene.slot.HEALTH != null) {
+            this.setHealthMax(this.scene.slot.HEALTH.MAX);
+            this.setHealth(this.scene.slot.HEALTH.CURRENT);
+        }
+        else {
+            this.setHealthMax(3);
+            this.setHealth(3);
+        }
+
         this.addHealth();
-        this.setHealth(2.75);
     }
 
 
@@ -130,5 +139,10 @@ export default class HudHealth extends HudCommon {
 
     }
 
-    
+    setSaveFromHealth() {
+        return {
+            "CURRENT": this.getHealth(),
+            "MAX": this.getHealthMax()
+        };
+    }
 }

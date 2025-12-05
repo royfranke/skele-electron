@@ -11,6 +11,9 @@ export default class HudNotebook extends HudSide {
     }
 
     setVariables() {
+        if (this.scene.slot.NOTEBOOK.STATUS.HAS == 'FALSE') {
+            return;
+        }
         this.manager = new NotebookManager(this.scene);
         this.keytip = 'NOTEBOOK';
         this.colors = {
@@ -31,22 +34,22 @@ export default class HudNotebook extends HudSide {
                     y: this.view.bottom - (this.view.margin.bottom + 30)
                 },
                 panel: {
-                    x: this.view.left,
+                    x: this.view.left + 64,
                     y: this.view.bottom,
                 },
                 page: {
-                    x: this.view.left + 43,
+                    x: this.view.left + 43 + 64,
                     y: this.view.bottom + 16,
                     width: 72,
                     height: 88
                 },
                 arrow: {
                     left: {
-                        x: this.view.left + this.view.margin.left + 32,
+                        x: this.view.left + this.view.margin.left + 64 + 32,
                         y: this.view.bottom - (this.view.margin.bottom + 32)
                     },
                     right: {
-                        x: this.view.left + this.view.margin.left + 112,
+                        x: this.view.left + this.view.margin.left + 112 + 64,
                         y: this.view.bottom - (this.view.margin.bottom + 32)
                     },
                 }
@@ -59,11 +62,11 @@ export default class HudNotebook extends HudSide {
 
         this.position.focused = {
             slot: {
-                x: this.position.unfocused.slot.x + 40,
+                x: this.position.unfocused.slot.x + 40 + 64,
                 y: this.view.bottom - (this.view.margin.bottom + 32)
             },
             icon: {
-                x: this.position.unfocused.icon.x + 40,
+                x: this.position.unfocused.icon.x + 40 + 64,
                 y: this.view.bottom - (this.view.margin.bottom + 32)
             },
             panel: {
@@ -76,11 +79,11 @@ export default class HudNotebook extends HudSide {
             },
             arrow: {
                 left: {
-                    x: this.view.left + this.view.margin.left + 32,
+                    x: this.view.left + this.view.margin.left + 32 + 64,
                     y: this.position.unfocused.arrow.left.y
                 },
                 right: {
-                    x: this.view.left + this.view.margin.left + 112,
+                    x: this.view.left + this.view.margin.left + 112 + 64,
                     y: this.position.unfocused.arrow.right.y
                 },
             }

@@ -123,6 +123,7 @@ export default class PlayerManager {
     }
     this.tripping = true;
     this.setState('TRIP');
+    this.scene.manager.hud.hudHealth.modifyHealth(-0.25);
     /// Set the current frame to 0
     this.playerSprite.sprite.anims.setCurrentFrame(this.playerSprite.sprite.anims.currentAnim.frames[0]);
 
@@ -333,7 +334,7 @@ export default class PlayerManager {
 
   moveToTile(x_, y_) {
     this.clearDestinations();
-    console.log(this.destinations);
+    //console.log(this.destinations);
     this.playerSprite.moveToTile(x_, y_);
   }
 

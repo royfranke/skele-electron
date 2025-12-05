@@ -235,7 +235,7 @@ export default class HudPocket {
                 }
             }
         });
-        return found;
+        return item.info != undefined ? item : false;
     }
 
 
@@ -356,19 +356,29 @@ export default class HudPocket {
             else if (action_string == 'PUT AWAY') {
                 action_result = this.putAwayItem(pocketIndex);
             }
+            else if (action_string == 'PUT ON KEYCHAIN') {
+                action_result = this.scene.manager.hud.hudKeychain.manager.putKeyOnKeychain(pocket[pocket.STATE]);
+
+                var consume = this.getPocket(pocketIndex);
+                consume.HOLDS.updateStackCount(-1);
+                // If the item is finished, empty the pocket
+                if (consume.HOLDS.stackCount <= 0) {
+                    this.setPocket(pocketIndex, 'EMPTY');
+                }
+            }
         
             var item = pocket[pocket.STATE];
            
             var self = this;
-            if (action_string == 'EAT' && this.scene.player.state.name != 'EAT') {
+            if (action_string == 'EAT' && self.scene.player.state.name != 'EAT') {
                 self.scene.player.setState('EAT');
 
-                this.scene.time.addEvent({
+                self.scene.time.addEvent({
                     delay: 1000,
                     loop: false,
                     callback: () => {
                         // Fade out
-                        this.scene.player.setState('IDLE');
+                        self.scene.player.setState('IDLE');
                     }
                 })
 

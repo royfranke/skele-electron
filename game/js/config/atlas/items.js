@@ -264,10 +264,10 @@ const ITEMS = {
                 req_pocket_action: 'EAT',
                 req_world_action: '',
                 req_state: '',
-                req_result_item: '',
+                req_result_item: 'MUFFIN_WRAPPER',
                 req_result_data_key: 'HUNGER',
-                req_result_data_set: '1',
-                req_result_data_modify: '',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
                 req_result_texture: '',
                 req_result_fx: '',
                 req_result_ground: '',
@@ -275,7 +275,7 @@ const ITEMS = {
                   {
                     slot_type: 'IN_HAND',
                     type: 'ITEM',
-                    result: 'CONSUMED',
+                    result: 'TRANSFORMED',
                     ITEM: 'MUFFIN_BERRY'
                     }
                                 ]
@@ -4852,10 +4852,10 @@ items: []    },
                 req_pocket_action: 'EAT',
                 req_world_action: '',
                 req_state: '',
-                req_result_item: '',
+                req_result_item: 'MUFFIN_WRAPPER',
                 req_result_data_key: 'HUNGER',
-                req_result_data_set: '1',
-                req_result_data_modify: '',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
                 req_result_texture: '',
                 req_result_fx: '',
                 req_result_ground: '',
@@ -4863,7 +4863,7 @@ items: []    },
                   {
                     slot_type: 'IN_HAND',
                     type: 'ITEM',
-                    result: 'CONSUMED',
+                    result: 'TRANSFORMED',
                     ITEM: 'MUFFIN'
                     }
                                 ]

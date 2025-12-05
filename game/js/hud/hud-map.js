@@ -11,6 +11,9 @@ export default class HudMap extends HudSide {
     }
 
         setVariables() {
+        if (this.scene.slot.MAPS.length == 0) {
+            return;
+        }
         this.keytip = 'MAP';
         this.colors = {
             selected: 'ITEM_FOCUSED',

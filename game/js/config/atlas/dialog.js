@@ -60,7 +60,7 @@ const DIALOGS = {
       7: {
         id: 7,
         text: 'Oh-- good.',
-        next: 0,
+        next: 28,
                 responses: [
               ]
     },
@@ -198,7 +198,7 @@ const DIALOGS = {
     },
       22: {
         id: 22,
-        text: 'You have everything? I put toast in for you. Go mind the toaster.',
+        text: 'You have your bag? There is toast on the table for you.',
         next: 0,
                 responses: [
               ]
@@ -239,13 +239,20 @@ const DIALOGS = {
       26: {
         id: 26,
         text: 'That... that won’t do. Ah, I know!',
-        next: 0,
+        next: 27,
                 responses: [
               ]
     },
       27: {
         id: 27,
         text: 'Here, this is a proper coinpurse. Don’t lose this, okay?',
+        next: 0,
+                responses: [
+              ]
+    },
+      28: {
+        id: 28,
+        text: 'Don’t take too long.',
         next: 0,
                 responses: [
               ]

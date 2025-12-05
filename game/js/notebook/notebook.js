@@ -4,8 +4,7 @@ export default class Notebook {
 
 
     constructor(save_data) {
-        this.current = save_data.STATUS.CURRENT.NOTEBOOK;
-        this.pages = save_data['NOTEBOOK'+this.current].PAGES;
+        this.pages = save_data.PAGES;
     }
 
     addPage (title, content) {

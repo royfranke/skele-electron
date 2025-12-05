@@ -145,6 +145,14 @@ export default class Item {
         }
     }
 
+    setAddress(address) {
+        this.address = address;
+    }
+
+    getAddress() {
+        return this.address;
+    }
+
     nextItem (new_item) {
         this.scene.manager.itemManager.itemSwap(new_item);
     }
@@ -304,6 +312,11 @@ export default class Item {
         if (!put_away) {
             actions_simple.push('PUT AWAY');
         }
+        if (this.info.type == 'KEY' && !actions_simple.includes('PUT ON KEYCHAIN')) {
+            actions_simple.push('PUT ON KEYCHAIN');
+        }
+
+
         return actions_simple;
     }
 
@@ -368,8 +381,29 @@ export default class Item {
         }
     }
 
+    setParameters(params) {
+        if (params.onSurface != undefined) {
+            this.onSurface = params.onSurface;
+        }
+        if (params.address != undefined) {
+           this.setAddress(params.address);
+           console.log("Item "+this.info.slug+" set address to "+params.address);
+        }
+    }
+
     getAllItems() {
         return [];
+    }
+
+    getParameters() {
+        var params = {};
+        if (this.address != null && this.address != undefined) {
+            params['address'] = this.address;
+        }
+        if (this.onSurface) {
+            params['onSurface'] = true
+        }
+        return params;
     }
 }
 

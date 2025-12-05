@@ -61,19 +61,17 @@
         "MAIL": {},
         "INTERSECTIONS": {}
     },
-    "NOTEBOOKS": {
+    "NOTEBOOK": {
         "STATUS": {
-            "CURRENT": {
-                "NOTEBOOK": 1
-            }
+            "HAS": "FALSE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
         },
-        "NOTEBOOK1": {
-            "PAGES": {},
-            "SPECS": {
-                "COLOR": "RED"
-            },
-            "EPHEMERA": {}
-        }
+        "PAGES": [],
+        "SPECS": {
+            "COLOR": "RED"
+        },
+        "EPHEMERA": {}
     },
     "POCKETS": {
         "STATES": {
@@ -107,14 +105,15 @@
         }
     },
     "POSITION": {
-        "ROOM": 10,
+        "ROOM": -1,
         "X": 20,
-        "Y": 20,
+        "Y": 22,
         "FACING": "S"
     },
     "SAVE": {
         "HEADLINE": "NEW",
-        "SLOT": 0
+        "SLOT": 1,
+        "DATE": "Friday, June 3rd"
     },
     "SETTINGS": {
         "CONTENT": {
@@ -132,7 +131,7 @@
         },
         "SECOND": 0,
         "MINUTE": 0,
-        "HOUR": 4,
+        "HOUR": 20,
         "DAY": 1
     }
 }

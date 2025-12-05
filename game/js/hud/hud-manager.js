@@ -187,9 +187,17 @@ export default class HudManager {
         }
         else {
             if (this.last_state.name != 'COINPURSE_FOCUSED' && this.state.name == 'COINPURSE_FOCUSED') {
+                if (this.scene.slot.COINPURSE.STATUS.HAS == 'FALSE') {
+                    this.scene.manager.setFocus('PLAYER');
+                    return;
+                }
                 this.hudCoinpurse.open();
             }
             if (this.state.name != 'COINPURSE_FOCUSED' && this.last_state.name == 'COINPURSE_FOCUSED') {
+                if (this.scene.slot.COINPURSE.STATUS.HAS == 'FALSE') {
+                    this.scene.manager.setFocus('PLAYER');
+                    return;
+                }
                 this.hudCoinpurse.close();
             }
             if (this.state.name == 'POCKETS_FOCUSED') {
@@ -199,16 +207,28 @@ export default class HudManager {
                 this.hudPockets.closePockets();
             }
             if (this.last_state.name != 'KEYCHAIN_FOCUSED' && this.state.name == 'KEYCHAIN_FOCUSED') {
+                if (this.scene.slot.KEYRING.STATUS.HAS == 'FALSE') {
+                    this.scene.manager.setFocus('PLAYER');
+                    return;
+                }
                 this.hudKeychain.open();
             }
             if (this.state.name != 'KEYCHAIN_FOCUSED' && this.last_state.name == 'KEYCHAIN_FOCUSED') {
                 this.hudKeychain.close();
             }
             if (this.last_state.name != 'NOTEBOOK_FOCUSED' && this.state.name == 'NOTEBOOK_FOCUSED') {
+                if (this.scene.slot.NOTEBOOK.STATUS.HAS == 'FALSE') {
+                    this.scene.manager.setFocus('PLAYER');
+                    return;
+                }
                 this.hudNotebook.open();
             }
             /// Close Notebook
             if (this.state.name != 'NOTEBOOK_FOCUSED' && this.last_state.name == 'NOTEBOOK_FOCUSED') {
+                if (this.scene.slot.NOTEBOOK.STATUS.HAS == 'FALSE') {
+                    this.scene.manager.setFocus('PLAYER');
+                    return;
+                }
                 this.hudNotebook.close();
             }
 
@@ -221,10 +241,18 @@ export default class HudManager {
             }
 
             if (this.last_state.name != 'MAP_FOCUSED' && this.state.name == 'MAP_FOCUSED') {
+                if (this.scene.slot.MAPS.length == 0) {
+                    this.scene.manager.setFocus('PLAYER');
+                    return;
+                }
                 this.hudMap.open();
             }
             /// Close Map
             if (this.state.name != 'MAP_FOCUSED' && this.last_state.name == 'MAP_FOCUSED') {
+                if (this.scene.slot.MAPS.length == 0) {
+                    this.scene.manager.setFocus('PLAYER');
+                    return;
+                }
                 this.hudMap.close();
             }
             if (this.last_state.name != 'DIALOG_FOCUSED' && this.state.name == 'DIALOG_FOCUSED') {

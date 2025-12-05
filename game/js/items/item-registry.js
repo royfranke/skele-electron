@@ -23,7 +23,7 @@ export default class ItemRegistry {
         let items = [];
         //Change this to Object.entries later
         for (var [key, item] of Object.entries(this.registry)) {
-            items.push({'slug': item.info.slug, 'x': key.split("_")[0], 'y': key.split("_")[1], stack: item.stackCount, items: item.getAllItems()});
+            items.push({'slug': item.info.slug, 'x': key.split("_")[0], 'y': key.split("_")[1], stack: item.stackCount, items: item.getAllItems(), params: item.getParameters()});
         };
         return items;
     }

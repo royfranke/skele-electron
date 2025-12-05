@@ -63,11 +63,13 @@ export default class SaveManager {
         /// Via scene, get various data we intend to write to the save
         console.log("Soft saving game data");
         let data = this.scene.slot;
+        data.HEALTH = this.scene.manager.hud.hudHealth.setSaveFromHealth();
         data.TIME = this.scene.manager.time.setSaveFromTime();
         data.COINPURSE = this.scene.player.coinpurse.setSaveFromCoinpurse();
-        data.NOTEBOOKS = this.scene.manager.hud.hudNotebook.manager.setSaveFromNotebook();
+        data.NOTEBOOK = this.scene.manager.hud.hudNotebook.manager ? this.scene.manager.hud.hudNotebook.manager.setSaveFromNotebook() : this.scene.slot.NOTEBOOK;
+        data.KEYS = this.scene.manager.hud.hudKeychain.manager ? this.scene.manager.hud.hudKeychain.manager.setSaveFromKeychain() : this.scene.slot.KEYS;
         data.POCKETS.SLOTS = this.scene.manager.hud.pocket.setSaveFromPockets();
-        data.POSITION =     this.scene.player.getPositionTile();
+        data.POSITION = this.scene.player.getPositionTile();
         if (data.ROOMS === undefined) { data.ROOMS = {}; }
         if (this.scene.room_id > 0 && this.scene.room_id != 10) {
             data.ROOMS[this.scene.room_id] = this.setSaveFromInterior();

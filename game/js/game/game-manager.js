@@ -334,6 +334,7 @@ export default class GameManager {
                 this.plantManager.registry.updateLights(keylight);
                 this.treeManager.registry.updateLights(keylight);
                 this.itemManager.registry.updateLights(keylight);
+                
             }
             if (select != null) {
                 switch (select) {

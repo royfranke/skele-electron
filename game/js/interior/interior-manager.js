@@ -75,8 +75,9 @@ import KEYLIGHT from "../config/key-light.js";
     createItems () {
         /// First check save data for items in this room
         var self = this;
-        console.log(this.scene.room_id);
         if (this.scene.slot.ROOMS != undefined && this.scene.slot.ROOMS[this.scene.room_id]) {
+            console.log("Loading saved items for room "+this.scene.room_id);
+            console.log(this.scene.slot.ROOMS[this.scene.room_id].ITEMS);
             this.scene.slot.ROOMS[this.scene.room_id].ITEMS.forEach(item => {
                 var items = [];
                 if (item.items != undefined && item.items.length > 0 && item.items[0].slug != undefined) {
@@ -87,6 +88,7 @@ import KEYLIGHT from "../config/key-light.js";
                 }
                 var new_item = this.scene.manager.itemManager.newItemToWorld(item.x, item.y, item.slug, items);
                 if (new_item == false) return;
+                new_item.setParameters(item.params ?? {});
                 new_item.setStackCount(item.stack);
             });
         }

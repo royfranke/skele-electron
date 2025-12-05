@@ -62,7 +62,7 @@
         }
         else if (yielded[0] == 0) {
             this.scene.manager.hud.hudThinking.tellBrain('There\'s nothing here.');
-            this.scene.manager.hud.hudHealth.modifyHealth(-0.5);
+            //this.scene.manager.hud.hudHealth.modifyHealth(-0.5);
         }
         else { /// It's an item
             /// Try to add item to pockets
