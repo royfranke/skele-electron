@@ -58,17 +58,8 @@ export default class AppView {
         this.tip = text_tip;
     }
 
-    addVersion () {
-        let version = this.scene.add.bitmapText(this.view.left + this.view.margin.left, this.view.bottom - this.view.margin.bottom, 'SkeleTalk', 'v.'+this.version+' Skele\'s Summer Break', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
-
-        let block = this.scene.add.nineslice(version.x - 8,version.y - 5, 'UI', 'BLOCK_MID_BROWN_BORDER', version.displayWidth + 16, version.displayHeight + 8, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1000);
-
-        this.display_version = {block: block, text: version};
-    }
-
     createCourts () {
         this.scene.add.nineslice(this.view.left,this.view.top, 'UI', 'BLOCK_MID_SAPPHIRE_BORDER', this.view.width, this.view.height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(800);
-        this.addVersion();
         this.courtManager = new CourtsManager(this.scene);
     }
 
@@ -82,12 +73,42 @@ export default class AppView {
         var width = this.view.right - _x - this.view.margin.right;
 
         this.settingsManager.setView(_x,_y, width, height, 'content');
-        this.addVersion();
        //this.settingsManager.saveSettings('input');
     }
 
+    addCootieCatcher(_x,_y) {
+        var catcher = this.scene.add.sprite(_x, _y, "FX", 0);
+        catcher.setDepth(100500);
+        catcher.anims.play('COOTIE_CATCHER_1', false);
+        catcher.setOrigin(0.5, 0.5);
+        catcher.stop();
+        return catcher;
+    }
+
+    playCootieCatcher() {
+        if (this.cootiecatcher !== null && this.cootiecatcher.anim) {
+            //this.cootiecatcher.anim.stop();
+            // Check if animation is playing
+            let anims = this.cootiecatcher.anim.anims;
+            if (anims != undefined && anims.isPlaying) {
+                return;
+            }
+
+            if (this.cootiecatcher.last === 1) {
+                this.cootiecatcher.last = 2;
+            }
+            else {
+                this.cootiecatcher.last = 1;
+            }
+            if (this.cootiecatcher.anim.anims != undefined) {
+                this.cootiecatcher.anim.anims.play('COOTIE_CATCHER_'+this.cootiecatcher.last, false);
+            }
+            
+
+        }
+    }
+
     createLoad() {
-        this.addVersion();
         var self = this;
         var tip_message = [
             '"Don\'t forget about your pile of homework."',
@@ -96,6 +117,10 @@ export default class AppView {
 
         ];
         var tip = this.drawTip(Phaser.Math.RND.pick(tip_message));
+        this.cootiecatcher = {};
+        this.cootiecatcher.anim = this.addCootieCatcher(this.view.left + this.view.margin.left + 64, this.view.bottom - 96);
+        this.cootiecatcher.last = 1;
+
         var total_height = this.view.bottom - (this.view.top + this.view.margin.top + (this.view.margin.bottom*2));
         var height = total_height/3;
         var left  = this.view.left + (this.view.margin.left*2) + 120;

@@ -235,7 +235,7 @@ export default class HudPocket {
                 }
             }
         });
-        return item.info != undefined ? item : false;
+        return item.info != undefined && found ? item : false;
     }
 
 

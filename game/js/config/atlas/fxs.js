@@ -1,4 +1,20 @@
           const FXS = {
+                          BANDANA_DROP_TABLE: {
+                  name: 'Bandana Drop on Small Table',
+                  slug: 'BANDANA_DROP_TABLE',
+                  frames: [
+                                          'BANDANA_DROP_TABLE-1',
+                                          'BANDANA_DROP_TABLE-2',
+                                          'BANDANA_DROP_TABLE-3',
+                                          'BANDANA_DROP_TABLE-4',
+                                          'BANDANA_DROP_TABLE-5',
+                                          'BANDANA_DROP_TABLE-6',
+                                          'BANDANA_DROP_TABLE-7',
+                                          'BANDANA_DROP_TABLE-8',
+                                          'BANDANA_DROP_TABLE-9'
+                                      ],
+                  repeat: 0
+              },
                           BLOWN_FLYER_PINK: {
                   name: 'Blown Pink Flyer',
                   slug: 'BLOWN_FLYER_PINK',
@@ -143,7 +159,7 @@
                                           'COOTIE_CATCHER_1-5',
                                           'COOTIE_CATCHER_1-6'
                                       ],
-                  repeat: 1
+                  repeat: 0
               },
                           COOTIE_CATCHER_2: {
                   name: 'Cootie Catcher Open 2',
@@ -155,7 +171,7 @@
                                           'COOTIE_CATCHER_2-4',
                                           'COOTIE_CATCHER_2-5'
                                       ],
-                  repeat: 1
+                  repeat: 0
               },
                           DANDELION_CLOUD: {
                   name: 'Dandelion Cloud',

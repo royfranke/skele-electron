@@ -77,7 +77,7 @@ export default class AppMenu {
         }
         this.last_selected = this.selected;
         this.selected = selected;
-
+        var self = this;
         for (var i=0;i<this.menu_list.length;i++) {
             if (selected == i) {
                 this.selector.block.setY(this.menu_list[i].block.y);
@@ -87,6 +87,10 @@ export default class AppMenu {
                 this.selector.frame.setVisible(false);
             }
             this.menu_list[i].block.setFrame(selected == i ? 'BLOCK_MID_MOONSTONE_RIGHT' : 'BLOCK_MID_DARK_BLUE');
+
+            if (self.scene.app != undefined) {
+                self.scene.app.appView.playCootieCatcher();
+            }
         }
     }
 
@@ -98,8 +102,6 @@ export default class AppMenu {
             item.block.setVisible(false);
             item.text.setVisible(false);
         });
-        this.scene.app.appView.display_version.block.setVisible(false);
-        this.scene.app.appView.display_version.text.setVisible(false);
     }
 
     input (key) {

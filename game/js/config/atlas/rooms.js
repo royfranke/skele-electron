@@ -68,10 +68,11 @@ sells: [
                 "INSTANT_NOODLES_SEAL_RED", 
                         "INSTANT_NOODLES_SEAL_ORANGE", 
                 "PRAYER_CANDLE_WHITE", 
-                "PRAYER_CANDLE_ORANGE"
+                "PRAYER_CANDLE_ORANGE", 
+                "SALT_IODIZED"
         ],
 delivers: [
-                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                            ],
  },
                                         address: {
                 name: "",
@@ -464,6 +465,12 @@ schedule: {
 },
 services: [
     ],
+sells: [
+            "PRAYER_CANDLE_ORANGE", 
+                "PRAYER_CANDLE_GREEN", 
+                "PRAYER_CANDLE_WHITE", 
+                "PRAYER_CANDLE_YELLOW"
+        ],
  },
                         address: {
                 name: "",
@@ -475,7 +482,7 @@ services: [
             },
                             front_room: 14,
         roomData: { 
-                featureList: [{"x":"4","y":"2","slug":"DINER_CHAIR_MAROON"},{"x":"0","y":"3","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"3","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"4","y":"2","slug":"DINER_CHAIR_MAROON"},{"x":"0","y":"3","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"0","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"0","y":"3","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
                 removalList: [{"x":"2","y":"3"},{"x":"3","y":"3"},{"x":"4","y":"3"},{"x":"5","y":"3"}],
                 itemList: []
@@ -702,7 +709,7 @@ sells: [
     wallSlug: "",
         
         roomData: { 
-                featureList: [{"x":"10","y":"-1","slug":"COUNTERTOP_CORNER_PEACH","params":{}},{"x":"10","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"11","y":"1","slug":"UNDERCOUNTER_CABINET_W_YELLOW","params":{}},{"x":"9","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"9","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"7","y":"0","slug":"OVEN_1","params":{}},{"x":"5","y":"3","slug":"TABLE_WOOD_DECOR","params":{}},{"x":"1","y":"-1","slug":"EXT_DOOR_WINDOWS_GRAY","params":{}},{"x":"8","y":"-1","slug":"EXT_WINDOW_2_SINGLE_YELLOW","params":{}},{"x":"9","y":"5","slug":"INT_DOOR_RED_BROWN","params":{"portal":{"room_id":3,"x":7,"y":4}}},{"x":"5","y":"0","slug":"FRIDGE","params":{}},{"x":"4","y":"4","slug":"DINER_CHAIR_MAROON","params":{}},{"x":"-1","y":"3","slug":"INT_DOOR_SIDE_WHITE","params":{}},{"x":"10","y":"0","slug":"TOASTER","params":{}},{"x":"8","y":"-1","slug":"KITCHEN_SINK","params":{}},{"x":"8","y":"-1","slug":"BLINDS_SINGLE","params":{}},{"x":"1","y":"-1","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"10","y":"-1","slug":"COUNTERTOP_CORNER_PEACH","params":{}},{"x":"10","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"11","y":"1","slug":"UNDERCOUNTER_CABINET_W_YELLOW","params":{}},{"x":"9","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"0","slug":"UNDERCOUNTER_CABINET_S_YELLOW","params":{}},{"x":"8","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"9","y":"-1","slug":"COUNTERTOP_S_PEACH","params":{}},{"x":"7","y":"0","slug":"OVEN_1","params":{}},{"x":"5","y":"3","slug":"TABLE_WOOD_DECOR","params":{}},{"x":"1","y":"-1","slug":"EXT_DOOR_WINDOWS_GRAY","params":{}},{"x":"8","y":"-1","slug":"EXT_WINDOW_2_SINGLE_YELLOW","params":{}},{"x":"9","y":"5","slug":"INT_DOOR_RED_BROWN","params":{"portal":{"room_id":3,"x":7,"y":4}}},{"x":"5","y":"0","slug":"FRIDGE","params":{}},{"x":"4","y":"4","slug":"DINER_CHAIR_MAROON","params":{}},{"x":"-1","y":"3","slug":"INT_DOOR_SIDE_WHITE","params":{}},{"x":"10","y":"0","slug":"TOASTER","params":{}},{"x":"8","y":"-1","slug":"BLINDS_SINGLE","params":{}},{"x":"9","y":"0","slug":"KITCHEN_SINK","params":{}},{"x":"1","y":"-1","slug":"FRONTDOOR","params":{}}],
                 recipeList: [{"x":"0","y":"0","slug":"PLANK.LAMINATE_"},{"x":"1","y":"0","slug":"PLANK.LAMINATE_"},{"x":"2","y":"0","slug":"PLANK.LAMINATE_"},{"x":"0","y":"1","slug":"PLANK.LAMINATE_"},{"x":"1","y":"1","slug":"PLANK.LAMINATE_"},{"x":"2","y":"1","slug":"PLANK.LAMINATE_"},{"x":"0","y":"2","slug":"PLANK.LAMINATE_"},{"x":"1","y":"2","slug":"PLANK.LAMINATE_"},{"x":"2","y":"2","slug":"PLANK.LAMINATE_"},{"x":"3","y":"2","slug":"PLANK.LAMINATE_"},{"x":"0","y":"3","slug":"PLANK.LAMINATE_"},{"x":"1","y":"3","slug":"PLANK.LAMINATE_"},{"x":"2","y":"3","slug":"PLANK.LAMINATE_"},{"x":"3","y":"3","slug":"PLANK.LAMINATE_"},{"x":"0","y":"4","slug":"PLANK.LAMINATE_"},{"x":"1","y":"4","slug":"PLANK.LAMINATE_"},{"x":"2","y":"4","slug":"PLANK.LAMINATE_"},{"x":"3","y":"4","slug":"PLANK.LAMINATE_"},{"x":"0","y":"5","slug":"PLANK.LAMINATE_"},{"x":"1","y":"5","slug":"PLANK.LAMINATE_"},{"x":"2","y":"5","slug":"PLANK.LAMINATE_"},{"x":"3","y":"5","slug":"PLANK.LAMINATE_"}],
                 removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"3","y":"1"},{"x":"4","y":"1"}],
                 itemList: []
