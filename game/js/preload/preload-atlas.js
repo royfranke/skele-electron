@@ -40,7 +40,14 @@ const PRELOAD_ATLAS = [
             SPRITE: 'spritesheets/a_TREES.png',
             JSON: 'atlas/tree-atlas.json'
         }
-    }
+    },
+    {
+        NAME: 'VEHICLES',
+        PATH: {
+            SPRITE: 'spritesheets/a_VEHICLES.png',
+            JSON: 'atlas/vehicle-atlas.json'
+        }
+    }   
 ];
 
 export default PRELOAD_ATLAS;

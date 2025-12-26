@@ -2,6 +2,8 @@
 import SPRITE_DIR from "../config/sprite-dir.js";
 import OBJECTS from "../config/atlas/objects.js";
 import FXS from "../config/atlas/fxs.js";
+import VEHICLES from "../config/atlas/vehicles.js";
+
 
 export default class PreloadAnim {
 
@@ -52,6 +54,41 @@ export default class PreloadAnim {
           repeat: fx.repeat,
         });
       }
+    }
+
+    /*
+CAR_SEDAN_1: {
+                  name: 'Sedan 1',
+                  slug: 'CAR_SEDAN_1',
+                  frames: {
+                    n: ['CAR_SEDAN_1-6'],
+                    ne: ['CAR_SEDAN_1-4'],
+                    e: ['CAR_SEDAN_1-2'],
+                    se: ['CAR_SEDAN_1-3'],
+                    s: ['CAR_SEDAN_1-5'],
+                  },
+                  repeat: -1
+              }
+    */
+
+    const vehicles = VEHICLES;
+    for (const [key, vehicle] of Object.entries(vehicles)) {
+      let state_frames = { n: [], ne: [], e: [], se: [], s: [] };
+      for (const [key_dir, dir] of Object.entries(vehicle.frames)) {
+        for (const frame of dir) {
+          state_frames[key_dir].push({ key: 'VEHICLES', frame: frame });
+        }
+
+        console.log(vehicle.slug + "-" + key_dir);
+        console.log(state_frames[key_dir]);
+        anims.create({
+          key: vehicle.slug + "-" + key_dir,
+          frames: state_frames[key_dir],
+          frameRate: 8,
+          repeat: vehicle.repeat,
+        });
+      };
+
     }
 
     states.forEach(function (state, index) {

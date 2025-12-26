@@ -50,16 +50,6 @@ export default class Block {
                 let sidewalk_h = 3;
                 let sidewalk_w = 3;
                 
-                //// Add some dandelions
-                /*
-                for (var i=sidewalk_w; i<block.width - (sidewalk_w*2); i++) {
-                    for (var j=sidewalk_h; j<block.height - (sidewalk_h*2); j++) {
-                        if (Phaser.Math.RND.between(0,16) == 1) {
-                            this.scene.manager.plantManager.newPlantToWorld(i + block.left, j + block.top, 'DANDELION',Phaser.Math.RND.between(1,44));
-                        }
-                    }
-                }
-                */
                     
             }
         }
@@ -150,7 +140,10 @@ export default class Block {
         if (this.block.offset.n > 0) {
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+7, this.block.top,'POSTBOX_S');
             this.scene.manager.objectManager.newObjectToWorld(this.block.left+12, this.block.top,'HYDRANT_CITY_');
-            //this.scene.manager.vehicleManager.newVehicleToWorld(this.block.left+7, this.block.top - 4, 'CAR_SEDAN_1');
+            //let car = this.scene.manager.vehicleManager.newVehicleToWorld(this.block.left+7, this.block.top - 4, 'CAR_SEDAN_1');
+
+            /// start car
+            //car.setStopped(false);
 
         }  
         if (this.block.offset.s > 0) {
@@ -234,10 +227,6 @@ export default class Block {
             var slotted = this.scene.manager.objectManager.objectInfo('STOP_SIGN_'+signs.STOP);
             var behind = signs.STOP == 'N' || signs.STOP == 'E' ? true : false;
             pole.setSlot(.5,2,slotted,false,behind);
-            /*if (behind) {
-                var slotted = this.scene.manager.objectManager.objectInfo('OBJ_FLYER_YELLOW');
-                pole.setSlot(0,2,slotted, false);
-            }*/
         }
 
         if (signs.TELEPHONE) {
@@ -247,25 +236,7 @@ export default class Block {
     }
 
     buildItems () {
-        /*
-            var content = [];
-            if (Phaser.Math.RND.between(0,1) == 1) {
-                content.push(this.scene.manager.itemManager.newItem('APPLE'));
-            }
-            if (Phaser.Math.RND.between(0,2) == 1) {
-                content.push(this.scene.manager.itemManager.newItem('ENVELOPE_FRONT_1'));
-            }
-            if (Phaser.Math.RND.between(0,2) == 1) {
-                content.push(this.scene.manager.itemManager.newItem('CUPCAKE_PINK'));
-            }
-
-            if (Phaser.Math.RND.between(0,1) == 1) {
-            this.scene.manager.itemManager.newItemToWorld(this.block.left+3, this.block.top+2,'BACKPACK_PURPLE',content);
-            }
-            else {
-                this.scene.manager.itemManager.newItemToWorld(this.block.left+3, this.block.top+2,'BACKPACK_CANVAS',content);
-            }
-        */
+        
     
     }
 

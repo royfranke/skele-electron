@@ -45,6 +45,10 @@ export default class PropertyLine {
         if (!settings.hasOwnProperty('window')) {
             settings.window = this.roll(OBJECT_TYPES.WINDOW_EXT_);
         }
+        if (!settings.hasOwnProperty('upper_windows')) {
+            settings.upper_windows = this.roll(OBJECT_TYPES.WINDOW_EXT_);
+            
+        }
         if (!settings.hasOwnProperty('stair_rail')) {
             settings.stair_rail = this.roll(['PORCH_STAIR_RAIL_LEFT','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_DARK','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_GREEN','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WHITE','PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_WOOD']);
         }
@@ -54,15 +58,20 @@ export default class PropertyLine {
                 height: this.roll([1]),
             };
             if (settings.foundation.height > 0) {
-
-                settings.foundation.material = this.roll([WALLTILES.BRICK.RED_WEATHERED_, WALLTILES.BRICK.YELLOW_WEATHERED_]);
+                if (this.prop.structure.type == 'ROWHOUSE') {
+                    settings.foundation.material = this.roll([WALLTILES.BRICK.RED_COMMERCIAL_, WALLTILES.BRICK.YELLOW_COMMERCIAL_,WALLTILES.CEMENT.GREEN_WORN_, WALLTILES.CEMENT.RED_YELLOW_WORN_]);
+                }
+                else {
+                    settings.foundation.material = this.roll([WALLTILES.BRICK.RED_WEATHERED_, WALLTILES.BRICK.YELLOW_WEATHERED_]);
+                }
+                
                 //roll foundation options
                 // Allow stoop
 
                 if (!settings.hasOwnProperty('stoop')) {
                     settings.stoop = {
                         landing: {
-                            width: this.roll([2, 3]),
+                            width: this.roll([2]),
                             depth: this.roll([2]),
                             material: this.roll(STOOP.LANDING)
                         },
@@ -108,9 +117,9 @@ export default class PropertyLine {
         this.scene.manager.objectManager.newObjectToWorld(right - 1, bottom - 1, 'CONE_UPRIGHT');
     }
 
-    buildIt() {
-        /// roll for whether this continues as a house or becomes a shop
 
+
+    buildIt() {
         if (this.prop.structure.zoning == 'COMMERCIAL') {
             //this.showIt();
             let shop = new Shop(this.scene, this.prop, this.settings);
@@ -118,22 +127,28 @@ export default class PropertyLine {
         }
 
         this.setMaterials(this.prop.structure.settings ? this.prop.structure.settings : {});
-        const top = this.prop.lines.top;
         const left = this.prop.lines.left;
         const bottom = this.prop.lines.bottom;
-        const right = this.prop.lines.right;
         const width = this.prop.lines.width;
-        const height = this.prop.lines.height;
-        const facing = this.prop.address.facing;
 
-        //check for "detached" tag-- make perimeter of space around building if found
+        var yard = 5;
 
-        let yard = 5;
-
-        var _x = left + 1;
-        var _y = bottom - yard;
 
         var building_width = width - 2;
+        var _x = left + 1;     
+
+        if (this.prop.structure.type == 'ROWHOUSE') {
+            yard = 1;
+            building_width = width;
+            _x = left;
+        }
+
+        
+        var _y = bottom - yard;
+        
+        if (this.prop.structure.type == 'ROWHOUSE') {
+            this.buildRowhouseFront(_x, _y-3, width, yard+3);
+        }
 
         if (this.prop.structure.type == 'DUPLEX-LEFT') {
             _x = left + 2;
@@ -146,17 +161,12 @@ export default class PropertyLine {
 
         var material = this.roll([1, 2]);
 
-        if (material == 0) {
-            var colors = ['YELLOW', 'BROWN', 'RED', 'GRAY', 'WHITE'];
-            var wallKind = WALLTILES.BRICK[this.roll(colors) + '_CEMENT_'];
-        }
-        else if (material == 1) {
-            //var colors = ['BLUE_COMMERCIAL', 'BLACK_COMMERCIAL', 'RED_COMMERCIAL', 'YELLOW_COMMERCIAL'];
+        if (material == 1 ) {
             var colors = ['RED_COMMERCIAL', 'YELLOW_COMMERCIAL'];
             var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
         }
         else {
-            var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE', 'DARK_BLUE'];
+            var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE', 'DARK_BLUE', 'GREEN_WEATHERED'];
             var wallKind = WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
         }
 
@@ -169,17 +179,26 @@ export default class PropertyLine {
 
         _y = _y - this.settings.foundation.height;
         this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
+        var ground_level_y = _y;
 
-        if (building_width % 2 == 0) {
+        if (this.settings.levels.length > 1 && this.prop.structure.type == 'ROWHOUSE') {
+            _y = _y - this.settings.levels[0].height;
+            this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
+            this.addWindows(_x + 1, _y, building_width - 1);
+        }
+
+
+        if (building_width % 2 == 0 && this.prop.structure.type != 'ROWHOUSE') {
             /////
 
             if (this.prop.structure.type != 'DUPLEX-RIGHT' && this.prop.structure.type != 'ROWHOUSE') {
                 this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y + 1, 'DOWNSPOUT_' + this.settings.levels[0].height + '_W');
             }
 
-            this.buildRoofObjects(_x, _y - (this.settings.levels[0].height) - 5, building_width, 2);
-            this.buildRoofObjects(_x, _y - (this.settings.levels[0].height), building_width, 2);
 
+            this.buildRoofObjects(_x, _y - (this.settings.levels[0].height) - 5, building_width, 2);
+                this.buildRoofObjects(_x, _y - (this.settings.levels[0].height), building_width, 2);
+            
         }
         else {
             this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
@@ -191,13 +210,21 @@ export default class PropertyLine {
 
 
         let entry_x = _x + 1;
-        let entry_y = _y;
+        let entry_y = ground_level_y;
         let window_x = _x + 5;
-        let window_y = _y;
+        let window_y = ground_level_y;
 
         if (this.prop.structure.type == 'DUPLEX-LEFT') {
             entry_x = _x + building_width - 3;
             window_x = _x + 2;
+        }
+        if (this.prop.structure.type == 'ROWHOUSE') {
+            if (this.settings.window.includes('SINGLE')) {
+                window_x = _x + 3;
+            }
+            else {
+                window_x = _x + 4;
+            }
         }
 
         this.scene.manager.objectManager.newObjectToWorld(window_x, window_y, this.settings.window);
@@ -496,6 +523,25 @@ export default class PropertyLine {
         }
     }
 
+    addWindows(_x, _y, width, index=0) {
+        let window_width = 3;
+        if (this.settings.upper_windows.includes('SINGLE') && this.roll([0,1,2,3,4]) == 1) {
+            window_width = 2;
+        }
+        if (width < window_width) {
+            return;
+        }
+        
+        this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, this.settings.window);
+
+
+        var remaining_width = parseInt(width - window_width);
+        if (remaining_width >= window_width) {
+            index++;
+           this.addWindows(_x, _y, remaining_width, index);
+        }
+    }
+
     buildMailbox(_x, _y) {
         let mailbox = this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.mailbox);
 
@@ -533,9 +579,18 @@ export default class PropertyLine {
         
         if (this.settings.foundation.height > 0) {
             //this.buildStoop(_x, _y + 1);
-            this.buildPorch(_x, _y + 1);
-
+            if (this.prop.structure.type == 'ROWHOUSE') {
+                this.buildStoop(_x, _y + 1);
+            }
+            else {
+                this.buildPorch(_x, _y + 1);
+            }
+        
             this.buildFrontWalk(_x, _y + 1 + this.settings.foundation.height + this.settings.stoop.landing.depth);
+
+            if (this.prop.structure.type == 'ROWHOUSE') {
+                return;
+            }
         }
         else {
             this.buildFrontWalk(_x, _y + 1);
@@ -563,6 +618,10 @@ export default class PropertyLine {
 
             this.front_door.setPortal({ room_id: room_id, x: x, y: y, facing: 'N', world: this.prop.portal.world, return: { ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door } });
         }
+    }
+
+    buildRowhouseFront(_x, _y, width, height) {
+        this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.CEMENT.FILL_, _x, _y, width, height);
     }
 
     buildGarden(_x, _y, width, height) {
@@ -646,7 +705,7 @@ export default class PropertyLine {
 
     buildStoop(_x, _y) {
         var facing = 's';
-        var stoop = this.settings.stoop.landing.depth;
+        var stoop = 1;
         var width = this.settings.stoop.landing.width;
         var stairs = this.settings.stoop.steps.height;
 
@@ -654,9 +713,6 @@ export default class PropertyLine {
         var landing_material = this.settings.stoop.landing.material;
         var steps_material = this.settings.stoop.steps.material;
         var rail_material = this.settings.stoop.rail.material;
-
-        // Lay roof tiles
-        //this.buildRoofSection(_x - 1, _y - (this.settings.levels[0].height - 2), width + 2, 3, ROOFTILES.SHINGLES.SOUTH_);
 
         // Lay landing tiles
         this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES[landing_material.MATERIAL][landing_material.VARIETY[0]], _x, _y, width, stoop);

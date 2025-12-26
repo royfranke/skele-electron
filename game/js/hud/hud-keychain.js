@@ -130,12 +130,10 @@ export default class HudKeychain extends HudSide {
     }
 
     arrowLeft() {
-        console.log('LEFT');
         this.drawKeyring(this.manager.selected);
     }
 
     arrowRight() {
-        console.log('RIGHT');
         this.drawKeyring(this.manager.selected);
     }
 

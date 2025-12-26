@@ -339,7 +339,7 @@ export default class Object {
     }
 
     setCollider () {
-        //this.scene.physics.add.overlap(this.scene.player.playerSprite.sprite, this.sprite,this.collision,null, this);
+        this.scene.physics.add.overlap(this.scene.player.playerSprite.sprite, this.sprite,this.collision,null, this);
     }
 
     collision () {
@@ -347,6 +347,10 @@ export default class Object {
             if (this.info.type == 'POOP') {
                 console.log(this.info.slug+" trampled!");
                 this.setState('TRAMPLED', true);
+            }
+
+            if (this.portal != null) { 
+                //this.doAction('OPEN');
             }
     }
 

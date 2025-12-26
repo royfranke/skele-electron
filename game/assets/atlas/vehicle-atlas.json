@@ -1,0 +1,41 @@
+{
+  "frames": [
+      {
+		"filename": "CAR_SEDAN_1-1",
+		"frame": {"x":0,"y":0,"w":144,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":144,"h":64 },
+		"sourceSize": {"w":144,"h":64 }
+	},    
+    {
+		"filename": "CAR_SEDAN_1-2",
+		"frame": {"x":0,"y":0,"w":144,"h":64 },
+    "spriteSourceSize": {"x":0,"y":0,"w":144,"h":64 },
+		"sourceSize": {"w":144,"h":64 }
+	},    
+    {
+		"filename": "CAR_SEDAN_1-3",
+		"frame": {"x":144,"y":0,"w":144,"h":80 },
+    "spriteSourceSize": {"x":0,"y":0,"w":144,"h":80 },
+		"sourceSize": {"w":144,"h":80 }
+	},    
+    {
+		"filename": "CAR_SEDAN_1-4",
+		"frame": {"x":0,"y":80,"w":144,"h":80 },
+    "spriteSourceSize": {"x":0,"y":0,"w":144,"h":80 },
+		"sourceSize": {"w":144,"h":80 }
+	},    
+    {
+		"filename": "CAR_SEDAN_1-5",
+		"frame": {"x":144,"y":80,"w":64,"h":112 },
+    "spriteSourceSize": {"x":0,"y":0,"w":64,"h":112 },
+		"sourceSize": {"w":64,"h":112 }
+	},    
+    {
+		"filename": "CAR_SEDAN_1-6",
+		"frame": {"x":208,"y":80,"w":64,"h":112 },
+    "spriteSourceSize": {"x":0,"y":0,"w":64,"h":112 },
+		"sourceSize": {"w":64,"h":112 }
+	}    
+     
+  ]
+}

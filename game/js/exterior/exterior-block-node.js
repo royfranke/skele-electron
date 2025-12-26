@@ -9,6 +9,16 @@ export default class ExteriorBlockNode {
         this.traffic_lights = {};
         this.node['name'] = this.getIntersectionName();
         this.drawBox();
+        this.stop_sign = {'n':false,'e':false,'s':false,'w':false};
+        this.stop_light = {'n':false,'e':false,'s':false,'w':false};
+    }
+
+    setStopLight (dir, state) {
+        this.stop_light[dir] = state;
+    }
+
+    setStopSign (dir, state) {      
+        this.stop_sign[dir] = state;
     }
 
     drawBox () {
@@ -187,6 +197,7 @@ export default class ExteriorBlockNode {
         }
         else if (node.streets.e.signal == 1) {
             this.buildStreetPole(node.left + node.width + 3, node.top - 1,{EW:street_names.ew,NS:street_names.ns, STOP:stop, CORNER: 'SW'});
+            this.setStopSign('E', true);
         }
 
         /// North side of intersection
@@ -196,6 +207,7 @@ export default class ExteriorBlockNode {
         }
         else if (node.streets.n.signal == 1) {
             this.buildStreetPole(node.left - 1, node.top - 3,{EW:street_names.ew,NS:street_names.ns, STOP:stop, CORNER: 'NW'});
+            this.setStopSign('N', true);
         }
 
         /// West side of intersection
@@ -205,6 +217,7 @@ export default class ExteriorBlockNode {
         }
         else if (node.streets.w.signal == 1) {
             this.buildStreetPole(node.left - 3, node.top + node.height,{EW:street_names.ew,NS:street_names.ns, STOP:stop, CORNER: 'SE'});
+            this.setStopSign('W', true);
         }
 
         this.startTrafficLights();

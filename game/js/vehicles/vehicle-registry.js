@@ -59,7 +59,7 @@ export default class VehicleRegistry {
             console.warn(vehicle);
         }
 
-        return true;
+        return vehicle;
     }
 
     removeVehicles(_x, _y) {

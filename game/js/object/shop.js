@@ -371,6 +371,7 @@ export default class Shop {
     buildHours() {
         if (this.front_door != undefined) {
             this.front_door.setAnnouncement(this.prop.listing,'SHOP_HOURS');
+            this.front_door.setAnnouncement(this.prop.address.number);
         }
     }
 
