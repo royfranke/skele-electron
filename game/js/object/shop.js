@@ -15,6 +15,34 @@ export default class Shop {
         this.buildShop();
     }
 
+    rollWallKind() {
+        var wallKind = [];
+        for (var i = 0; i < this.settings.levels.length; i++) {
+            if (this.roll([0,1,2,3,4,5]) > 0) {
+                var colors = ['YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL', 'BLUE_COMMERCIAL']; // Weighting the array by repeating more desired colors
+                wallKind.push(WALLTILES.BRICK[this.roll(colors) + "_"]);
+            }
+            else {
+                if (i == 0) {
+                    var colors = ['GREEN_WORN_','RED_YELLOW_WORN_']; // Weighting the array by repeating more desired colors
+                    wallKind.push(WALLTILES.CEMENT[this.roll(colors)]);
+                }
+                else {
+                    if (wallKind[0] == WALLTILES.CEMENT['GREEN_WORN_'] || this.roll([0,1]) == 1) {
+                        var colors = ['YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL']; // Weighting the array by repeating more desired colors
+                        wallKind.push(WALLTILES.BRICK[this.roll(colors) + "_"]);
+                    }
+                    else {
+                        wallKind[i] = wallKind[i-1];
+                    }
+                    
+                }
+            }
+        }
+        return wallKind;
+    }
+
+
     setMaterials(settings = {}) {
 
         if (!settings.hasOwnProperty('door')) {
@@ -66,8 +94,7 @@ export default class Shop {
         }
 
         var building_width = width;
-        var colors = ['YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL', 'BLUE_COMMERCIAL']; // Weighting the array by repeating more desired colors
-        var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
+
 
         var _x = left;
         var _y = bottom - 1;
@@ -123,10 +150,10 @@ export default class Shop {
                 this.sign.sprite.setDepth(sign_background.sprite.depth + 32);
             }
         }
-
+        var wallKind = this.rollWallKind();
 
         for (var i = 0; i < this.settings.levels.length; i++) {
-            this.buildFacadeSection(_x, level_position, building_width, this.settings.levels[i].height, wallKind);
+            this.buildFacadeSection(_x, level_position, building_width, this.settings.levels[i].height, wallKind[i]);
             level_position = level_position - this.settings.levels[i].height;
             if (i > 0) {
                 this.addWindows(_x+1,level_position +  this.settings.levels[i].height, building_width - 1);
