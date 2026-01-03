@@ -67,5 +67,15 @@ export default class ObjectManager {
         console.log(_x+', '+_y);
         return this.registry.findOnActiveTile(slug,pick,_x,_y);
     }
+
+    findInObjectActions (action_string, interactions) {
+        var world_action = false;
+        Object.keys(interactions).forEach(function (interaction, index) {
+            if (interactions[interaction].req_world_action.toUpperCase() == action_string.toUpperCase()) {
+                world_action = interactions[interaction];
+            }
+        });
+        return world_action;
+    }
     
 }

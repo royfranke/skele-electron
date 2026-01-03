@@ -299,9 +299,9 @@ export default class HudPocket {
     dropItem(pocketIndex, _x, _y) {
         var pocket = this.getPocket(pocketIndex);
         if (pocket.STATE != 'EMPTY') {
-        var item = pocket[pocket.STATE];
-        var placed = this.scene.manager.itemManager.putItemInWorld(item, _x, _y);
-        if (placed) {
+            var item = pocket[pocket.STATE];
+            var placed = this.scene.manager.itemManager.putItemInWorld(item, _x, _y);
+            if (placed) {
                 this.setPocket(pocketIndex, 'EMPTY');
             }
         }
@@ -320,7 +320,7 @@ export default class HudPocket {
             }
         }
     }
-    
+
     putAwayItem(pocketIndex) {
         var pocket = this.getPocket(pocketIndex);
         if (pocket.STATE != 'EMPTY') {
@@ -366,9 +366,9 @@ export default class HudPocket {
                     this.setPocket(pocketIndex, 'EMPTY');
                 }
             }
-        
+
             var item = pocket[pocket.STATE];
-           
+
             var self = this;
             if (action_string == 'EAT' && self.scene.player.state.name != 'EAT') {
                 self.scene.player.setState('EAT');
@@ -377,7 +377,6 @@ export default class HudPocket {
                     delay: 1000,
                     loop: false,
                     callback: () => {
-                        // Fade out
                         self.scene.player.setState('IDLE');
                     }
                 })
@@ -389,69 +388,69 @@ export default class HudPocket {
                 if (item_action == false) {
                     return false;
                 }
-            
-            item_action.requires.forEach(function (requirement) {
-                if (requirement.type == 'ITEM' || requirement.type == 'ITEM_KIND') {
-                    if (item_action.req_result_data_key != null) {
-                        var req_data_key = item_action.req_result_data_key;
-                        if (item_action.req_result_data_set != '') {
-                            self.scene.manager.dataManager.setData(req_data_key, item_action.req_result_data_set);
+
+                item_action.requires.forEach(function (requirement) {
+                    if (requirement.type == 'ITEM' || requirement.type == 'ITEM_KIND') {
+                        if (item_action.req_result_data_key != null) {
+                            var req_data_key = item_action.req_result_data_key;
+                            if (item_action.req_result_data_set != '') {
+                                self.scene.manager.dataManager.setData(req_data_key, item_action.req_result_data_set);
+                            }
+                            if (item_action.req_result_data_modify != '') {
+                                self.scene.manager.dataManager.modifyData('BODY', req_data_key, item_action.req_result_data_modify);
+                            }
                         }
-                        if (item_action.req_result_data_modify != '') {
-                            self.scene.manager.dataManager.modifyData('BODY', req_data_key, item_action.req_result_data_modify);
+                        if (requirement.result == 'TRANSFORMED') {
+                            var transform_into = item_action.req_result_item;
+
+                            console.log("Transforming " + requirement[requirement.type] + " into " + item_action.req_result_item);
+
+                            /// Get the index for the current pocket
+                            /// Get the pocket matching requirement[requirement.type]
+                            var requirement_index = self.findInPockets(requirement[requirement.type]);
+
+                            // if the item type is bag, we need to preserve contents
+                            var contents = self.getItemsInBag(requirement_index);
+
+                            self.setPocket(requirement_index, 'EMPTY');
+
+                            self.scene.manager.itemManager.newItemToPocket(requirement_index, transform_into);
+
+                            // if the item type is a bag, we need to persist contents
+                            if (contents.length > 0) {
+                                self.setItemsInBag(requirement_index, contents);
+                            }
+
+                        }
+                        if (requirement.result == 'CONSUMED') {
+                            var consume = self.getPocket(pocketIndex);
+                            consume.HOLDS.updateStackCount(-1);
+                            // If the item is finished, empty the pocket
+                            if (consume.HOLDS.stackCount <= 0) {
+                                self.setPocket(pocketIndex, 'EMPTY');
+                            }
+                        }
+                        if (requirement.result == 'DUPLICATED') {
+                            var dupe = self.getPocket(pocketIndex);
+                            dupe.HOLDS.updateStackCount(1);
+                        }
+                        if (requirement.result == 'MAILED') {
+                            var mailed = self.getPocket(pocketIndex);
+                            mail.HOLDS.updateStackCount(-1);
+                            // If the item is finished, empty the pocket
+                            if (mail.HOLDS.stackCount <= 0) {
+                                self.setPocket(pocketIndex, 'EMPTY');
+                            }
+                        }
+                        if (requirement.result == 'FILLED') {
+                            var fill_with = item_action.req_result_item;
+                            console.log("Fill this " + requirement[requirement.type] + " up with " + item_action.req_result_item);
+                            self.scene.manager.itemManager.newContentToPocket(pocketIndex, fill_with);
                         }
                     }
-                    if (requirement.result == 'TRANSFORMED') {
-                        var transform_into = item_action.req_result_item;
-
-                        console.log("Transforming " + requirement[requirement.type] + " into " + item_action.req_result_item);
-
-                        /// Get the index for the current pocket
-                        /// Get the pocket matching requirement[requirement.type]
-                        var requirement_index = self.findInPockets(requirement[requirement.type]);
-
-                        // if the item type is bag, we need to preserve contents
-                        var contents = self.getItemsInBag(requirement_index);
-
-                        self.setPocket(requirement_index, 'EMPTY');
-
-                        self.scene.manager.itemManager.newItemToPocket(requirement_index, transform_into);
-
-                        // if the item type is a bag, we need to persist contents
-                        if (contents.length > 0) {
-                            self.setItemsInBag(requirement_index, contents);
-                        }
-
-                    }
-                    if (requirement.result == 'CONSUMED') {
-                        var consume = self.getPocket(pocketIndex);
-                        consume.HOLDS.updateStackCount(-1);
-                        // If the item is finished, empty the pocket
-                        if (consume.HOLDS.stackCount <= 0) {
-                            self.setPocket(pocketIndex, 'EMPTY');
-                        }
-                    }
-                    if (requirement.result == 'DUPLICATED') {
-                        var dupe = self.getPocket(pocketIndex);
-                        dupe.HOLDS.updateStackCount(1);
-                    }
-                    if (requirement.result == 'MAILED') {
-                        var mailed = self.getPocket(pocketIndex);
-                        mail.HOLDS.updateStackCount(-1);
-                        // If the item is finished, empty the pocket
-                        if (mail.HOLDS.stackCount <= 0) {
-                            self.setPocket(pocketIndex, 'EMPTY');
-                        }
-                    }
-                    if (requirement.result == 'FILLED') {
-                        var fill_with = item_action.req_result_item;
-                        console.log("Fill this " + requirement[requirement.type] + " up with " + item_action.req_result_item);
-                        self.scene.manager.itemManager.newContentToPocket(pocketIndex, fill_with);
-                    }
-                }
-            });
-            this.scene.events.emit('REQ_' + item_action.req_group + '_MET');
-            console.log('REQ_' + item_action.req_group + '_MET');
+                });
+                this.scene.events.emit('REQ_' + item_action.req_group + '_MET');
+                console.log('REQ_' + item_action.req_group + '_MET');
             }
         }
         if (action_result) {

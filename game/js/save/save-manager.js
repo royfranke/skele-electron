@@ -83,6 +83,10 @@ export default class SaveManager {
         if (this.scene.room_id > 0 && this.scene.room_id != 10) {
             data.ROOMS[this.scene.room_id] = this.setSaveFromInterior();
         }
+        if (this.scene.exterior) {
+            let block = this.scene.exterior.xyToBlock(this.scene.player.standingTile.x,this.scene.player.standingTile.y);
+            this.softSaveBlock(block.x, block.y);
+        }
         return data;
     }
 

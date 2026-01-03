@@ -277,6 +277,30 @@ export default class Object {
                 }
             }
         });
+        var req_action = this.findInObjectActions(action);
+        console.log(req_action);
+        if (req_action != false) {
+            var reqs_required = req_action.requires.length;
+            var reqs_met = 0;
+            req_action.requires.forEach(function (requirement) {
+                if (requirement.slot_type == 'ON_ACTIVE' && (requirement.type == 'OBJ_TYPE' && requirement.OBJ_TYPE == self.info.type)) {
+                    reqs_met++;
+                }
+                if (requirement.slot_type == 'ON_ACTIVE' && (requirement.type == 'OBJ_KIND' && requirement.OBJ_KIND == self.info.slug)) {
+                    reqs_met++;
+                }
+            });
+            console.log("Requirements met: "+reqs_met+" of "+reqs_required);
+            if (reqs_met == reqs_required) {
+               if (req_action.req_result_item != '') {
+                    var result = this.scene.manager.itemManager.newItemToPockets(req_action.req_result_item);
+                    if (!result) {
+                        this.scene.manager.hud.hudThinking.tellBrain('My hands are full.');
+                    }
+               }
+            }
+        }
+
         if (action == 'OPEN' && this.info.portal == 1) {
             /// Get portal location info from object -- what room_id, x, y, player facing direction
             /// Go to portal... (maybe this is redraw of ground)
@@ -336,6 +360,16 @@ export default class Object {
                 }
             });
         }
+
+
+
+        
+    }
+
+    findInObjectActions(action_string) {
+        var interactions = this.info.interactions;
+        var world_action = this.scene.manager.objectManager.findInObjectActions(action_string, interactions);
+        return world_action;
     }
 
     setCollider () {

@@ -3,22 +3,12 @@ import Object from "./object.js";
 /* Object Glass Class */
 
 export default class ObjectGlass extends Object {
-    constructor(scene,info) {
-        super(scene,info);
-        this.info = info;
-        this.sprite = null;
-        this.glass = null;
-        this.behind_glass = null;
-        this.tile_x = 0;
-        this.tile_y = 0;
-    }
 
     runSpecial() {
         this.createGlass();
     }
 
     createGlass() {
-
         var x_pixels = (this.tile_x - this.info.base.x) * 16;
         var y_pixels = (this.tile_y - this.info.base.y) * 16;
 
