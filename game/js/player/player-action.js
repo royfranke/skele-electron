@@ -191,6 +191,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                 this.scene.manager.fx.playFX(action.fx,this.scene.player.snappedStanding.x+8,this.scene.player.snappedStanding.y+8,500);
             }
             if (action.ground != undefined && action.ground != '') {
+                this.clearActions();
                 this.scene.time.addEvent({
                     delay: 500,
                     loop: false,
@@ -207,6 +208,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                     callback: () => {
                         // Fade out
                         this.scene.player.setState('IDLE');
+                        this.refreshActions();
                     }
                 })
             }

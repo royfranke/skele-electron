@@ -64,7 +64,7 @@ export default class ObjectChest extends Object {
                 }
             }
         });
-        if (action == 'LOOK INSIDE') {
+        if (action == 'OPEN' || action == 'LOOK INSIDE') {
             /// change focus to ui chest window
             this.scene.manager.openChest(this);
         }

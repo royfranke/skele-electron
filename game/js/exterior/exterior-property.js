@@ -9,12 +9,19 @@ import OBJECT_TYPES from "../config/atlas/object-types.js";
 
 export default class PropertyLine {
 
-    constructor(scene, prop) {
+    constructor(scene, prop, wallsBuilt = false) {
         this.scene = scene;
         this.prop = prop;
-
+        this.wallsBuilt = wallsBuilt;
         this.utilities = new GameUtilities();
-
+        if (wallsBuilt) {
+            var block_properties = this.scene.slot.BLOCKS[this.prop.block.x][this.prop.block.y].properties;
+            for (var i = 0; i < block_properties.length; i++) {
+                if (block_properties[i].address == this.prop.address) {
+                    this.prop.structure.settings = block_properties[i].structure.settings;
+                }
+            }
+        }
     }
 
     setMaterials(settings = {}) {
@@ -59,7 +66,7 @@ export default class PropertyLine {
             };
             if (settings.foundation.height > 0) {
                 if (this.prop.structure.type == 'ROWHOUSE') {
-                    settings.foundation.material = this.roll([WALLTILES.BRICK.RED_COMMERCIAL_, WALLTILES.BRICK.YELLOW_COMMERCIAL_,WALLTILES.CEMENT.GREEN_WORN_, WALLTILES.CEMENT.RED_YELLOW_WORN_]);
+                    settings.foundation.material = this.roll([WALLTILES.BRICK.RED_COMMERCIAL_, WALLTILES.BRICK.YELLOW_COMMERCIAL_,WALLTILES.CEMENT.GREEN_WORN_, WALLTILES.CEMENT.RED_YELLOW_WORN_, WALLTILES.CEMENT.BLUE_WORN_, WALLTILES.STUCCO.YELLOW_WORN_]);
                 }
                 else {
                     settings.foundation.material = this.roll([WALLTILES.BRICK.RED_WEATHERED_, WALLTILES.BRICK.YELLOW_WEATHERED_]);
@@ -90,7 +97,10 @@ export default class PropertyLine {
         if (!settings.hasOwnProperty('levels')) {
             settings.levels = [];
             settings.levels.push({ height: this.roll([4, 4, 4]) });
-            settings.levels.push({ height: this.roll([4, 4, 4]) });
+            if (this.prop.structure.type == 'ROWHOUSE') {
+                settings.levels.push({ height: this.roll([4, 4, 4]) });
+            }
+            
         }
         if (!settings.hasOwnProperty('roof')) {
             settings.roof = {
@@ -99,6 +109,7 @@ export default class PropertyLine {
         }
 
         this.settings = settings;
+        this.prop.structure.settings = settings;
     }
 
     roll(array) {
@@ -119,244 +130,284 @@ export default class PropertyLine {
 
 
 
-    buildIt() {
-        if (this.prop.structure.zoning == 'COMMERCIAL') {
-            //this.showIt();
-            let shop = new Shop(this.scene, this.prop, this.settings);
-            return;
-        }
-
-        this.setMaterials(this.prop.structure.settings ? this.prop.structure.settings : {});
+    // Position Calculator - tracks building coordinates
+    calculateBuildingPositions() {
         const left = this.prop.lines.left;
         const bottom = this.prop.lines.bottom;
         const width = this.prop.lines.width;
-
-        var yard = 5;
-
-
-        var building_width = width - 2;
-        var _x = left + 1;     
-
+        
+        let yard = 5;
+        let building_width = width - 2;
+        let building_x = left + 1;
+        
         if (this.prop.structure.type == 'ROWHOUSE') {
             yard = 1;
             building_width = width;
-            _x = left;
-        }
-
-        
-        var _y = bottom - yard;
-        
-        if (this.prop.structure.type == 'ROWHOUSE') {
-            this.buildRowhouseFront(_x, _y-3, width, yard+3);
+            building_x = left;
         }
 
         if (this.prop.structure.type == 'DUPLEX-LEFT') {
-            _x = left + 2;
-            this.buildGarden(_x, _y-1, 6, 3);
+            building_x = building_x + 1;
         }
         if (this.prop.structure.type == 'DUPLEX-RIGHT') {
-            _x = left;
-            this.buildGarden(_x + 4, _y-1, 6, 3);
+            building_x = building_x - 1;
         }
+        
+        const ground_y = bottom - yard;
+        
+        return {
+            building_x,
+            ground_y,
+            building_width,
+            yard,
+            left,
+            bottom,
+            width
+        };
+    }
 
-        var material = this.roll([1, 2]);
-
-        if (material == 1 ) {
-            var colors = ['RED_COMMERCIAL', 'YELLOW_COMMERCIAL'];
-            var wallKind = WALLTILES.BRICK[this.roll(colors) + "_"];
+    // Calculate wall material based on random selection
+    calculateWallMaterial() {
+        const material = this.roll([1, 2]);
+        
+        if (material == 1) {
+            const colors = ['RED_COMMERCIAL', 'YELLOW_COMMERCIAL'];
+            return WALLTILES.BRICK[this.roll(colors) + "_"];
+        } else {
+            const colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE', 'DARK_BLUE', 'GREEN_WEATHERED'];
+            return WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
         }
-        else {
-            var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE', 'DARK_BLUE', 'GREEN_WEATHERED'];
-            var wallKind = WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
-        }
+    }
 
+    // Draw all tiles for the building
+    drawBuildingTiles(positions, wallMaterial) {
+        let current_y = positions.ground_y;
+        
+        // Draw foundation tiles
         if (this.settings.foundation.height > 0) {
-            /// _y here is where the building meets the ground
-            /// If there is a foundation, this is where the stairs meet the ground.
-            this.buildFoundation(_x, _y, building_width, this.settings.foundation.height, this.settings.foundation.material);
-            _y = _y - 1;
+            this.buildFoundation(
+                positions.building_x,
+                current_y,
+                positions.building_width,
+                this.settings.foundation.height,
+                this.settings.foundation.material
+            );
+            current_y = current_y - 1 - this.settings.foundation.height;
         }
-
-        _y = _y - this.settings.foundation.height;
-        this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
-        var ground_level_y = _y;
-
+        
+        // Draw ground level facade
+        this.buildFacadeSection(
+            positions.building_x,
+            current_y,
+            positions.building_width,
+            this.settings.levels[0].height,
+            wallMaterial
+        );
+        
+        const ground_level_y = current_y;
+        
+        // Draw upper level facade for rowhouses (only if walls aren't already built)
         if (this.settings.levels.length > 1 && this.prop.structure.type == 'ROWHOUSE') {
-            _y = _y - this.settings.levels[0].height;
-            this.buildFacadeSection(_x, _y, building_width, this.settings.levels[0].height, wallKind);
-            this.addWindows(_x + 1, _y, building_width - 1);
+            current_y = current_y - this.settings.levels[0].height;
+            this.buildFacadeSection(
+                positions.building_x,
+                current_y,
+                positions.building_width,
+                this.settings.levels[0].height,
+                wallMaterial
+            );
         }
-
-
-        if (building_width % 2 == 0 && this.prop.structure.type != 'ROWHOUSE') {
-            /////
-
-            if (this.prop.structure.type != 'DUPLEX-RIGHT' && this.prop.structure.type != 'ROWHOUSE') {
-                this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y + 1, 'DOWNSPOUT_' + this.settings.levels[0].height + '_W');
-            }
-
-
-            this.buildRoofObjects(_x, _y - (this.settings.levels[0].height) - 5, building_width, 2);
-                this.buildRoofObjects(_x, _y - (this.settings.levels[0].height), building_width, 2);
-            
+        
+        if (!this.wallsBuilt) {
+            // Draw roof tiles
+            this.drawRoofTiles(positions, current_y);
         }
-        else {
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.ROOF.BITMAP_BRICK_FLAT_, _x, _y - (this.settings.roof.height + this.settings.levels[0].height) + 1, building_width, this.settings.roof.height);
+        
+        return { ground_level_y, current_y };
+    }
 
-            if (this.prop.structure.type != 'DUPLEX-RIGHT' && this.prop.structure.type != 'ROWHOUSE') {
-                this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y, 'DOWNSPOUT_' + this.settings.levels[0].height + '_W');
-            }
+    // Draw roof tiles based on building type
+    drawRoofTiles(positions, current_y) {
+        if (positions.building_width % 2 == 0 && this.prop.structure.type != 'ROWHOUSE') {
+            this.buildFacadeSection(
+                positions.building_x,
+                current_y - (this.settings.levels[0].height) - 5,
+                positions.building_width,
+                2,
+                this.calculateWallMaterial()
+            );
+            this.buildFacadeSection(
+                positions.building_x,
+                current_y - (this.settings.levels[0].height),
+                positions.building_width,
+                2,
+                this.calculateWallMaterial()
+            );
+        } else {
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(
+                TILES.ROOF.BITMAP_BRICK_FLAT_,
+                positions.building_x,
+                current_y - (this.settings.roof.height + this.settings.levels[0].height) + 1,
+                positions.building_width,
+                this.settings.roof.height
+            );
         }
+    }
 
+    // Place all objects on the building
+    placeBuildingObjects(positions, levels) {
+        const { ground_level_y } = levels;
+        
+        // Place downspouts
+        this.placeDownspouts(positions, levels);
+        
+        // Place roof objects
+        this.placeRoofObjects(positions, levels);
+        
+        // Calculate window and entry positions
+        const window_x = this.calculateWindowX(positions);
+        const entry_x = this.calculateEntryX(positions);
+        
+        // Place windows
+        this.placeGroundLevelWindows(window_x, ground_level_y);
+        
+        // Place upper windows for rowhouses
+        if (this.settings.levels.length > 1 && this.prop.structure.type == 'ROWHOUSE') {
+            this.addWindows(positions.building_x + 1, levels.current_y, positions.building_width - 1);
+        }
+        
+        // Place entry (door and related objects)
+        this.buildEntry(entry_x, ground_level_y);
+    }
 
-        let entry_x = _x + 1;
-        let entry_y = ground_level_y;
-        let window_x = _x + 5;
-        let window_y = ground_level_y;
-
+    // Calculate window X position based on building type
+    calculateWindowX(positions) {
         if (this.prop.structure.type == 'DUPLEX-LEFT') {
-            entry_x = _x + building_width - 3;
-            window_x = _x + 2;
+            return positions.building_x + 2;
         }
         if (this.prop.structure.type == 'ROWHOUSE') {
-            if (this.settings.window.includes('SINGLE')) {
-                window_x = _x + 3;
-            }
-            else {
-                window_x = _x + 4;
+            return this.settings.window.includes('SINGLE') ? 
+                positions.building_x + 3 : 
+                positions.building_x + 4;
+        }
+        return positions.building_x + 5;
+    }
+
+    // Calculate entry X position based on building type
+    calculateEntryX(positions) {
+        if (this.prop.structure.type == 'DUPLEX-LEFT') {
+            return positions.building_x + positions.building_width - 3;
+        }
+        return positions.building_x + 1;
+    }
+
+    // Place downspout objects
+    placeDownspouts(positions, levels) {
+        if (this.prop.structure.type != 'DUPLEX-RIGHT' && this.prop.structure.type != 'ROWHOUSE') {
+            if (positions.building_width % 2 == 0 && this.prop.structure.type != 'ROWHOUSE') {
+                this.scene.manager.objectManager.newObjectToWorld(
+                    positions.building_x - 1,
+                    levels.current_y + 1,
+                    'DOWNSPOUT_' + this.settings.levels[0].height + '_W'
+                );
+            } else {
+                this.scene.manager.objectManager.newObjectToWorld(
+                    positions.building_x - 1,
+                    levels.ground_level_y,
+                    'DOWNSPOUT_' + this.settings.levels[0].height + '_W'
+                );
             }
         }
+    }
 
-        this.scene.manager.objectManager.newObjectToWorld(window_x, window_y, this.settings.window);
+    // Place roof objects
+    placeRoofObjects(positions, levels) {
+        if (positions.building_width % 2 == 0 && this.prop.structure.type != 'ROWHOUSE') {
+            this.buildRoofObjects(
+                positions.building_x,
+                levels.current_y - (this.settings.levels[0].height) - 5,
+                positions.building_width,
+                2
+            );
+            this.buildRoofObjects(
+                positions.building_x,
+                levels.current_y - (this.settings.levels[0].height),
+                positions.building_width,
+                2
+            );
+        }
+    }
 
+    // Place ground level windows and AC unit
+    placeGroundLevelWindows(window_x, ground_level_y) {
+        this.scene.manager.objectManager.newObjectToWorld(window_x, ground_level_y, this.settings.window);
+        
         if (this.settings.window.includes('SINGLE')) {
-            this.scene.manager.objectManager.newObjectToWorld(window_x+2, window_y, this.settings.window);
-
-            let window_unit = this.scene.manager.objectManager.newObjectToWorld(window_x, window_y - .5, 'AC_WINDOW_UNIT');
+            this.scene.manager.objectManager.newObjectToWorld(window_x + 2, ground_level_y, this.settings.window);
+            
+            let window_unit = this.scene.manager.objectManager.newObjectToWorld(window_x, ground_level_y - .5, 'AC_WINDOW_UNIT');
             window_unit.sprite.setDepth(window_unit.sprite.depth + 16);
-            window_unit.sprite.setOrigin(.5,1);
+            window_unit.sprite.setOrigin(.5, 1);
         }
-
-        this.buildEntry(entry_x, entry_y);
-
     }
 
-    buildPitchedRoofColumn(_x, _y, height, north, south, material) {
-        var roofLayer = this.scene[this.scene.locale].roofLayer;
-        if (south != 2) {
-            roofLayer.weightedRandomize(material['REPEAT_3_SOUTH_'], _x, _y, 1, 1);
-            roofLayer.weightedRandomize(material['REPEAT_1_SOUTH_'], _x, _y - 1, 1, 1);
+    // Handle front yard features based on building type
+    handleFrontYardFeatures(positions) {
+        if (this.prop.structure.type == 'ROWHOUSE') {
+            this.buildRowhouseFront(positions.building_x, positions.ground_y - 3, positions.width, positions.yard + 3);
         }
-        else {
-            roofLayer.weightedRandomize(material['REPEAT_2_SOUTH_'], _x, _y, 1, 1);
-            roofLayer.weightedRandomize(material['MID_'], _x, _y - 1, 1, 1);
+        
+        if (this.prop.structure.type == 'DUPLEX-LEFT') {
+            this.buildGarden(positions.building_x, positions.ground_y - 1, 6, 3);
         }
-
-        roofLayer.weightedRandomize(material['REPEAT_' + north + '_NORTH_'], _x, _y - height, 1, 1);
-
-        roofLayer.weightedRandomize(material['MID_'], _x, (_y - height) + 1, 1, height - 2);
+        
+        if (this.prop.structure.type == 'DUPLEX-RIGHT') {
+            this.buildGarden(positions.left + 4, positions.ground_y - 1, 6, 3);
+        }
     }
 
-    buildPitchedRoofCap(_x, _y, height, north, south, material) {
-        var roofLayer = this.scene[this.scene.locale].roofLayer;
+    buildIt() {
 
-        roofLayer.weightedRandomize(material['PEAK_' + north + '_NORTH_'], _x, _y - height, 1, 1);
-
-        roofLayer.weightedRandomize(material['PEAK_EDGE_'], _x, (_y - height) + 1, 1, height - 1);
-
-        if (south != 2) {
-            roofLayer.weightedRandomize(material['REPEAT_3_SOUTH_'], _x, _y, 1, 1);
-            roofLayer.weightedRandomize(material['PEAK_' + south + '_SOUTH_'], _x, _y - 1, 1, 1);
-        }
-        else {
-            roofLayer.weightedRandomize(material['PEAK_' + south + '_SOUTH_'], _x, _y, 1, 1);
-            //roofLayer.weightedRandomize(material['MID_'], _x, _y - 1, 1, 1);
-
+        // Handle commercial properties
+        if (this.prop.structure.zoning == 'COMMERCIAL') {
+            let shop = new Shop(this.scene, this.prop, this.wallsBuilt);
+            return;
         }
 
-    }
+        // Initialize materials and settings
+        this.setMaterials(this.prop.structure.settings ? this.prop.structure.settings : {});
 
-    buildPitchedRoof(_x, _y, width, height, material) {
-        var w_material = ROOFTILES.PITCHED[material + 'WEST_'];
-        var e_material = ROOFTILES.PITCHED[material + 'EAST_'];
-        var roofLayer = this.scene[this.scene.locale].roofLayer;
-        /// Lower left is _x, _y
-
-        var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE', 'DARK_BLUE'];
-        var wallKind = WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
-
-        this.buildFacadeSection(_x, _y - 1, width, 3, wallKind);
-        // First determine which roof parts we need
-
-        var w_side_width = Math.floor(width / 2);
-        var w_side_remaining = w_side_width;
-        var w_side_place = 0;
-        var w_y = _y;
-
-        var north = 1;
-        var south = 2;
-
-        while (w_side_remaining > 1) {
-
-            this.buildPitchedRoofColumn(_x + w_side_place, Math.ceil(w_y), height, north, south, w_material);
-
-            north = north == 1 ? 2 : 1;
-            south = south == 1 ? 2 : 1;
-
-            w_side_place++;
-            w_side_remaining--;
-            w_y = w_y - .5;
+        // Calculate all building positions
+        const positions = this.calculateBuildingPositions();
+        
+        // Handle front yard features (rowhouse front, gardens)
+        this.handleFrontYardFeatures(positions);
+        
+        
+        
+        if (!this.wallsBuilt) {
+            // Draw all building tiles (foundation, facade, roof)
+            // Calculate wall material
+            const wallMaterial = this.calculateWallMaterial();
+            var levels = this.drawBuildingTiles(positions, wallMaterial);
+        } else {
+            // Calculate correct levels when walls are already built
+            let current_y = positions.ground_y;
+            if (this.settings.foundation.height > 0) {
+                current_y = current_y - 1 - this.settings.foundation.height;
+            }
+            const ground_level_y = current_y;
+            
+            // Adjust current_y for upper level if rowhouse
+            if (this.settings.levels.length > 1 && this.prop.structure.type == 'ROWHOUSE') {
+                current_y = current_y - this.settings.levels[0].height;
+            }
+            
+            var levels = { ground_level_y, current_y };
         }
-        // Then do roof cap
-        this.buildPitchedRoofCap(_x + w_side_place, Math.ceil(w_y), height, north, south, w_material);
-
-        ////////////////////////////
-        // Start fresh for east side
-        var e_side_width = Math.ceil(width / 2);
-        var e_side_remaining = e_side_width;
-        var e_side_place = 0;
-        var e_y = _y;
-
-        north = 1;
-        south = 2;
-
-        while (e_side_remaining > 1) {
-
-            this.buildPitchedRoofColumn(_x + (width - 1) - e_side_place, Math.ceil(e_y), height, north, south, e_material);
-
-            north = north == 1 ? 2 : 1;
-            south = south == 1 ? 2 : 1;
-
-            e_side_place++;
-            e_side_remaining--;
-            e_y = e_y - .5;
-        }
-        // Then do roof cap
-        this.buildPitchedRoofCap(_x + w_side_width, Math.ceil(e_y), height, north, south, e_material);
-    }
-
-    buildRoofSection(_x, _y, width, height, material) {
-        var roofLayer = this.scene[this.scene.locale].roofLayer;
-
-        /// Lower left is _x, _y
-        roofLayer.weightedRandomize(material.LOWER_LEFT_, _x, _y, 1, 1);
-        roofLayer.weightedRandomize(material.LOWER_, _x + 1, _y, width - 2, 1);
-        roofLayer.weightedRandomize(material.LOWER_RIGHT_, _x + width - 1, _y, 1, 1);
-
-        if (height > 2) {
-            // go up by the number of mid tiles (height-2)
-            _y = _y - (height - 2);
-            roofLayer.weightedRandomize(material.MID_LEFT_, _x, _y, 1, height - 2);
-            roofLayer.weightedRandomize(material.MID_, _x + 1, _y, width - 2, height - 2);
-            roofLayer.weightedRandomize(material.MID_RIGHT_, _x + width - 1, _y, 1, height - 2);
-        }
-        if (height > 1) {
-            _y = _y - 1;
-            roofLayer.weightedRandomize(material.TOP_LEFT_, _x, _y, 1, 1);
-            roofLayer.weightedRandomize(material.TOP_, _x + 1, _y, width - 2, 1);
-            roofLayer.weightedRandomize(material.TOP_RIGHT_, _x + width - 1, _y, 1, 1);
-        }
-
+        
+        // Place all building objects (windows, doors, downspouts, etc.)
+        this.placeBuildingObjects(positions, levels);
     }
 
     buildFacadeSection(_x, _y, width, height, material) {
@@ -365,11 +416,13 @@ export default class PropertyLine {
     }
 
     buildRoofObjects(_x, _y, width, pitch,) {
-        var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE', 'DARK_BLUE'];
-        var wallKind = WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
+        if (!this.wallsBuilt) {
+            var colors = ['ORANGE', 'YELLOW', 'GREEN_DARK', 'GRAY', 'PURPLE', 'BLUE', 'RED', 'WHITE', 'DARK_BLUE'];
+            var wallKind = WALLTILES.SIDING[this.roll(colors) + "_WOOD_"];
 
-        this.buildFacadeSection(_x, _y, width, pitch + 1, wallKind);
-
+            this.buildFacadeSection(_x, _y, width, pitch + 1, wallKind);
+        }
+        
         /// If this is a duplex....
         if (this.prop.structure.type != 'DUPLEX-RIGHT') {
             this.buildRoofObject(_x, _y + 1, width / 2, pitch, 'W', 'SHINGLES_');
@@ -391,7 +444,6 @@ export default class PropertyLine {
 
     buildRoofObject(_x, _y, width, pitch, direction, material) {
         this.scene.manager.objectManager.newObjectToWorld(_x, _y - 5, 'PITCHED_ROOF_BROWN_' + direction + '_' + width + '_' + pitch);
-
 
     }
 
@@ -578,7 +630,6 @@ export default class PropertyLine {
         }
         
         if (this.settings.foundation.height > 0) {
-            //this.buildStoop(_x, _y + 1);
             if (this.prop.structure.type == 'ROWHOUSE') {
                 this.buildStoop(_x, _y + 1);
             }
@@ -743,6 +794,10 @@ export default class PropertyLine {
                 this.scene[this.scene.locale].wallLayer.removeTileAt(_x + i, _y + j);
             }
         }
+    }
+
+    getSaveData() {
+        return this.prop;
     }
 
 }

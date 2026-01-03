@@ -442,7 +442,6 @@ export default class PlayerManager {
     this.underfootLast = this.underfoot;
     this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y);
     this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y);
-
   }
 
   addCoin(coin_amount) {

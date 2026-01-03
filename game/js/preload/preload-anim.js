@@ -79,8 +79,6 @@ CAR_SEDAN_1: {
           state_frames[key_dir].push({ key: 'VEHICLES', frame: frame });
         }
 
-        console.log(vehicle.slug + "-" + key_dir);
-        console.log(state_frames[key_dir]);
         anims.create({
           key: vehicle.slug + "-" + key_dir,
           frames: state_frames[key_dir],

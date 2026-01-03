@@ -15,6 +15,7 @@ import KEYLIGHT from "../config/key-light.js";
 
     constructor(scene) {
         this.scene = scene;
+        this.debug = false;
     }
 
     initialize () {
@@ -33,12 +34,12 @@ import KEYLIGHT from "../config/key-light.js";
             height: MAP_CONFIG.height,
         });
 
-        const tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
+        const ground_tileset = this.map.addTilesetImage("ground", null, 16, 16, 0, 0);
         const edge_tileset = this.map.addTilesetImage("edge", null, 16, 16, 0, 0);
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
         const roof_tileset = this.map.addTilesetImage("roof", null, 16, 16, 0, 0);
         
-        this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(0);
+        this.groundLayer = this.map.createBlankLayer("Ground", ground_tileset).fill(0);
         this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset);
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
         this.roofLayer = this.map.createBlankLayer("Roof", roof_tileset);
@@ -47,7 +48,10 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     buildMap () {
-        console.log('Building map');
+        if (this.debug) {
+            console.log('Building map');
+        }
+        
         this.ground = new Ground(this.groundLayer, this.edgeLayer);
         const self = this;
         const blocks = new Array(MAP_CONFIG.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
@@ -265,6 +269,17 @@ import KEYLIGHT from "../config/key-light.js";
         
     }
 
+    buildTiles() {
+        let loaded = false;
+        if (this.scene.slot.BLOCKS[this.block.x] != undefined) {
+            if (this.scene.slot.BLOCKS[this.block.x][this.block.y] != undefined) {
+                this.scene.exterior.loadBlockWalls(this.scene.slot.BLOCKS[this.block.x][this.block.y]);
+                loaded = true;
+            }
+        }
+        return loaded;
+    }
+
     setMouseInput () {
         var self = this;
         this.scene.input.on('pointerup', function (pointer) {
@@ -291,9 +306,12 @@ import KEYLIGHT from "../config/key-light.js";
         const y = this.scene.player.action.actionTile.y;
         var thisBlock = this.xyToBlock(x,y);
         if (this.lastBlock.x != thisBlock.x || this.lastBlock.y != thisBlock.y) {
+            console.log('Leaving block '+this.lastBlock.x+','+this.lastBlock.y);
+            // Soft save the last block
+            this.scene.app.saveManager.softSaveBlock(this.lastBlock.x, this.lastBlock.y);
             this.lastBlock = thisBlock;
             this.block = this.getBlock(thisBlock.x, thisBlock.y);
-
+            console.log('Entered block '+thisBlock.x+','+thisBlock.y);
             //this.updateDirections(1,1,3,3);
         }
 /*

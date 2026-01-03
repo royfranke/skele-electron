@@ -1,1 +1,340 @@
-{"BODY":{"ODOR":2,"HUNGER":3,"FATIGUE":2,"THIRST":5,"FILTH":2,"EASE":2,"WET":0},"COINPURSE":{"COIN":{"QUARTER":1,"NICKEL":1,"PENNY":1},"STATUS":{"HAS":"TRUE","HAD":"FALSE","LOST":"FALSE"},"PAPER":{"TEN":1}},"KEYRING":{"STATUS":{"HAS":"TRUE","HAD":"FALSE","LOST":"FALSE"}},"KEYS":[{"ADDRESS":"225 TEST","SLUG":"KEY_6","COUNT":2},{"ADDRESS":"251 TEST","SLUG":"KEY_4","COUNT":1}],"KNOWLEDGE":{"CURSES":{},"NUMBERS":{},"ADDRESSES":{},"INTERSECTIONS":{}},"MAPS":[],"NOTEBOOK":{"STATUS":{"HAS":"TRUE","HAD":"FALSE","LOST":"FALSE"},"PAGES":[{"title":"Phone Numbers","content":"Mom: 555-4322\nGillys: 555-4218"},{"title":"Thursday, June 9","content":"Testing!"},{"title":"Friday, June 10","content":"Testing!"},{"title":"Saturday, June 11","content":"Testing!"}],"SPECS":{"COLOR":"RED"},"EPHEMERA":{}},"POCKETS":{"SLOTS":{"SLOT0":{"TYPE":"SHOULDERS","STATE":"WEARS","EMPTY":{"NAME":"shoulders","ICON":"SHOULDERS"},"HOLDS":"DISALLOWED","USES":"DISALLOWED","WEARS":{"ITEM":"BACKPACK_PURPLE","STACK":1,"ITEMS":[{"ITEM":"CEREAL_BOX_2","STACK":1},{"ITEM":"RABBITS_FOOT","STACK":1},{"ITEM":"SHOVEL","STACK":1},{"ITEM":"BUS_TICKET","STACK":1},{"ITEM":"MILK_BODEGA","STACK":1},{"ITEM":"BREAKFAST_TART_PINK","STACK":1}]}},"SLOT1":{"TYPE":"HAND","STATE":"EMPTY","EMPTY":{"NAME":"right","ICON":"RIGHT_HAND"},"HOLDS":null,"USES":null,"WEARS":"DISALLOWED"},"SLOT2":{"TYPE":"HAND","STATE":"HOLDS","EMPTY":{"NAME":"left","ICON":"LEFT_HAND"},"HOLDS":{"ITEM":"BINDLE_PLASTIC","STACK":1,"ITEMS":[{"ITEM":"MUFFIN_BERRY","STACK":1},{"ITEM":"BANANA_BRUISED","STACK":1},{"ITEM":"STICK_1","STACK":1}]},"USES":null,"WEARS":"DISALLOWED"}},"STATES":{"EMPTY":"EMPTY","HOLDS":"HOLDS","WEARS":"WEARS","USES":"USES"}},"POSITION":{"ROOM":6,"X":8,"Y":10},"SAVE":{"HEADLINE":"BEJEWELLED","SLOT":0,"DATE":"Wednesday, June 22"},"SETTINGS":{"CONTENT":{"MOTHS":"TRUE","BUTTERFLIES":"TRUE","SMOKES":"TRUE","BOOZE":"TRUE"}},"TIME":{"HOUR":8,"MINUTE":29,"SECOND":0,"DAY":20,"ALARM":{"SET":"FALSE","HOUR":8,"MINUTE":30}},"ROOMS":{"1":{"OBJECTS":[],"ITEMS":[{"slug":"SODA_RED","x":"6","y":"13","stack":4},{"slug":"SODA_BLUE","x":"5","y":"13","stack":4},{"slug":"CEREAL_BOX_2","x":"6","y":"12","stack":0},{"slug":"CEREAL_BOX_3","x":"5","y":"12","stack":0},{"slug":"JELLY_RASPBERRY","x":"8","y":"13","stack":2},{"slug":"STORE_BREAD","x":"7","y":"13","stack":0},{"slug":"INSTANT_NOODLES_SEAL_RED","x":"8","y":"12","stack":1},{"slug":"INSTANT_NOODLES_SEAL_ORANGE","x":"7","y":"12","stack":1},{"slug":"PRAYER_CANDLE_WHITE","x":"6","y":"10","stack":1},{"slug":"PRAYER_CANDLE_ORANGE","x":"5","y":"10","stack":1},{"slug":"STICK_1","x":"2","y":"10","stack":1}]},"6":{"OBJECTS":[],"ITEMS":[{"slug":"LAUNDRY_BASKET_PINK","x":"10","y":"11","stack":1,"items":[],"params":{}}]},"11":{"OBJECTS":[],"ITEMS":[{"slug":"LAUNDRY_POWDER","x":"7","y":"11","stack":1,"items":[],"params":{}}]},"12":{"OBJECTS":[],"ITEMS":[]},"15":{"OBJECTS":[],"ITEMS":[]}},"HEALTH":{"CURRENT":1.75,"MAX":3}}
+{
+    "BODY": {
+        "ODOR": 2,
+        "HUNGER": 3,
+        "FATIGUE": 2,
+        "THIRST": 5,
+        "FILTH": 2,
+        "EASE": 2,
+        "WET": 0
+    },
+    "COINPURSE": {
+        "COIN": {
+            "QUARTER": 1,
+            "NICKEL": 1,
+            "PENNY": 1
+        },
+        "STATUS": {
+            "HAS": "TRUE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
+        },
+        "PAPER": {
+            "TEN": 1
+        }
+    },
+    "KEYRING": {
+        "STATUS": {
+            "HAS": "TRUE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
+        }
+    },
+    "KEYS": [
+        {
+            "ADDRESS": "225 TEST",
+            "SLUG": "KEY_6",
+            "COUNT": 2
+        },
+        {
+            "ADDRESS": "251 TEST",
+            "SLUG": "KEY_4",
+            "COUNT": 1
+        }
+    ],
+    "KNOWLEDGE": {
+        "CURSES": {},
+        "NUMBERS": {},
+        "ADDRESSES": {},
+        "INTERSECTIONS": {}
+    },
+    "MAPS": [],
+    "NOTEBOOK": {
+        "STATUS": {
+            "HAS": "TRUE",
+            "HAD": "FALSE",
+            "LOST": "FALSE"
+        },
+        "PAGES": [
+            {
+                "title": "Phone Numbers",
+                "content": "Mom: 555-4322\nGillys: 555-4218"
+            },
+            {
+                "title": "Thursday, June 9",
+                "content": "Testing!"
+            },
+            {
+                "title": "Friday, June 10",
+                "content": "Testing!"
+            },
+            {
+                "title": "Saturday, June 11",
+                "content": "Testing!"
+            }
+        ],
+        "SPECS": {
+            "COLOR": "RED"
+        },
+        "EPHEMERA": {}
+    },
+    "POCKETS": {
+        "SLOTS": {
+            "SLOT0": {
+                "TYPE": "SHOULDERS",
+                "STATE": "WEARS",
+                "EMPTY": {
+                    "NAME": "shoulders",
+                    "ICON": "SHOULDERS"
+                },
+                "HOLDS": "DISALLOWED",
+                "USES": "DISALLOWED",
+                "WEARS": {
+                    "ITEM": "BACKPACK_PURPLE",
+                    "STACK": 1,
+                    "ITEMS": [
+                        {
+                            "ITEM": "CEREAL_BOX_2",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "RABBITS_FOOT",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "SHOVEL",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "BUS_TICKET",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "MILK_BODEGA",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "BREAKFAST_TART_PINK",
+                            "STACK": 1
+                        }
+                    ]
+                }
+            },
+            "SLOT1": {
+                "TYPE": "HAND",
+                "STATE": "EMPTY",
+                "EMPTY": {
+                    "NAME": "right",
+                    "ICON": "RIGHT_HAND"
+                },
+                "HOLDS": null,
+                "USES": null,
+                "WEARS": "DISALLOWED"
+            },
+            "SLOT2": {
+                "TYPE": "HAND",
+                "STATE": "HOLDS",
+                "EMPTY": {
+                    "NAME": "left",
+                    "ICON": "LEFT_HAND"
+                },
+                "HOLDS": {
+                    "ITEM": "BINDLE_PLASTIC",
+                    "STACK": 1,
+                    "ITEMS": [
+                        {
+                            "ITEM": "MUFFIN_BERRY",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "BANANA_BRUISED",
+                            "STACK": 1
+                        },
+                        {
+                            "ITEM": "STICK_1",
+                            "STACK": 1
+                        }
+                    ]
+                },
+                "USES": null,
+                "WEARS": "DISALLOWED"
+            }
+        },
+        "STATES": {
+            "EMPTY": "EMPTY",
+            "HOLDS": "HOLDS",
+            "WEARS": "WEARS",
+            "USES": "USES"
+        }
+    },
+    "POSITION": {
+        "ROOM": 6,
+        "X": 8,
+        "Y": 10
+    },
+    "SAVE": {
+        "HEADLINE": "BEJEWELLED",
+        "SLOT": 0,
+        "DATE": "Thursday, June 23"
+    },
+    "SETTINGS": {
+        "CONTENT": {
+            "MOTHS": "TRUE",
+            "BUTTERFLIES": "TRUE",
+            "SMOKES": "TRUE",
+            "BOOZE": "TRUE"
+        }
+    },
+    "TIME": {
+        "HOUR": 8,
+        "MINUTE": 29,
+        "SECOND": 0,
+        "DAY": 21,
+        "ALARM": {
+            "SET": "FALSE",
+            "HOUR": 8,
+            "MINUTE": 30
+        }
+    },
+    "ROOMS": {
+        "1": {
+            "OBJECTS": [],
+            "ITEMS": [
+                {
+                    "slug": "SODA_RED",
+                    "x": "6",
+                    "y": "13",
+                    "stack": 4,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "SODA_BLUE",
+                    "x": "5",
+                    "y": "13",
+                    "stack": 4,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "CEREAL_BOX_2",
+                    "x": "6",
+                    "y": "12",
+                    "stack": 0,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "CEREAL_BOX_3",
+                    "x": "5",
+                    "y": "12",
+                    "stack": 0,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "JELLY_RASPBERRY",
+                    "x": "8",
+                    "y": "13",
+                    "stack": 2,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "STORE_BREAD",
+                    "x": "7",
+                    "y": "13",
+                    "stack": 0,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "INSTANT_NOODLES_SEAL_RED",
+                    "x": "8",
+                    "y": "12",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "INSTANT_NOODLES_SEAL_ORANGE",
+                    "x": "7",
+                    "y": "12",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "PRAYER_CANDLE_WHITE",
+                    "x": "6",
+                    "y": "10",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "PRAYER_CANDLE_ORANGE",
+                    "x": "5",
+                    "y": "10",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "SALT_IODIZED",
+                    "x": "6",
+                    "y": "9",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                },
+                {
+                    "slug": "STICK_1",
+                    "x": "2",
+                    "y": "10",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                }
+            ]
+        },
+        "6": {
+            "OBJECTS": [],
+            "ITEMS": [
+                {
+                    "slug": "LAUNDRY_BASKET_PINK",
+                    "x": "10",
+                    "y": "11",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                }
+            ]
+        },
+        "11": {
+            "OBJECTS": [],
+            "ITEMS": [
+                {
+                    "slug": "LAUNDRY_POWDER",
+                    "x": "7",
+                    "y": "11",
+                    "stack": 1,
+                    "items": [],
+                    "params": {}
+                }
+            ]
+        },
+        "12": {
+            "OBJECTS": [],
+            "ITEMS": []
+        },
+        "15": {
+            "OBJECTS": [],
+            "ITEMS": []
+        }
+    },
+    "HEALTH": {
+        "CURRENT": 1.75,
+        "MAX": 3
+    }
+}

@@ -1,5 +1,6 @@
 import TILES from "../config/atlas/tile-weights.js";
 import PropertyLine from "./exterior-property.js";
+import MAP_CONFIG from "../config/map.js";
 /* Block Class */
 
 export default class Block {
@@ -33,7 +34,48 @@ export default class Block {
         this.scene = scene;
         this.block = block;
         this.propertyLines = [];
-        this.setGround();
+        this.wallsBuilt = false;
+        if (this.scene.slot.BLOCKS[block.x] != undefined) {
+            if (this.scene.slot.BLOCKS[block.x][block.y] != undefined) {
+                this.loadBlockGround(this.scene.slot.BLOCKS[block.x][block.y]);
+                this.loadBlockWalls(this.scene.slot.BLOCKS[block.x][block.y]);
+                this.wallsBuilt = true;
+            }
+            else {
+                this.setGround();
+            }
+        }
+        else {
+            this.setGround();
+        }
+        
+    }
+    
+    loadBlockWalls (data) {
+        const wallLayer = this.scene[this.scene.locale].wallLayer;
+        // Load walls
+        for (let y = 0; y < data.walls.length; y++) {
+            for (let x = 0; x < data.walls[y].length; x++) {
+                let tile_index = data.walls[y][x];
+                if (tile_index >= 0) {
+                    wallLayer.putTileAt(tile_index, this.block.block_tile_x + x, this.block.block_tile_y + y);
+                }
+            }
+        }
+    }   
+
+
+    loadBlockGround (data) {
+        const groundLayer = this.scene[this.scene.locale].groundLayer;
+        // Load ground
+        for (let y = 0; y < data.ground.length; y++) {
+            for (let x = 0; x < data.ground[y].length; x++) {
+                let tile_index = data.ground[y][x];
+                if (tile_index >= 0) {
+                    groundLayer.putTileAt(tile_index, this.block.block_tile_x + x, this.block.block_tile_y + y);
+                }
+            }
+        }
     }
 
     setGround () {
@@ -102,7 +144,7 @@ export default class Block {
         prop.lines.bottom = this.block.top + prop.lines.y + prop.lines.height;
         prop.lines.right = prop.lines.left + prop.lines.width;
 
-        let propertyLine = new PropertyLine(this.scene, prop);
+        let propertyLine = new PropertyLine(this.scene, prop, this.wallsBuilt);
         
         this.propertyLines.push(propertyLine);
     }
@@ -111,6 +153,7 @@ export default class Block {
         this.propertyLines.forEach(function (prop, index) {
             prop.buildIt();
         });
+        
     }
 /*
     onProperty (_x, _y) {
@@ -238,6 +281,58 @@ export default class Block {
     buildItems () {
         
     
+    }
+
+    saveBlock () {
+        let save = {
+            ground: [],
+            walls: [],
+            properties: [],
+            items: [],
+            trees: [],
+            plants: [],
+            objects: [],
+            npcs: []
+        };
+        let block_width = MAP_CONFIG.blockWidth;
+        let block_height = MAP_CONFIG.blockHeight;
+
+        // Save ground
+        const groundLayer = this.scene[this.scene.locale].groundLayer;
+        for (let y = this.block.block_tile_y; y < this.block.block_tile_y + block_height; y++) {
+            let row = [];
+            for (let x = this.block.block_tile_x; x < this.block.block_tile_x + block_width; x++) {
+                let tile = groundLayer.getTileAt(x,y);
+                if (tile != null) {
+                    row.push(tile.index);
+                }
+                else {
+                    row.push(-1);
+                }
+            }
+            save.ground.push(row);
+        }
+        // Save walls
+        const wallLayer = this.scene[this.scene.locale].wallLayer;
+        for (let y = this.block.block_tile_y; y < this.block.block_tile_y + block_height; y++) {
+            let row = [];
+            for (let x = this.block.block_tile_x; x < this.block.block_tile_x + block_width; x++) {
+                let tile = wallLayer.getTileAt(x,y);
+                if (tile != null) {
+                    row.push(tile.index);
+                }
+                else {
+                    row.push(-1);
+                }
+            }
+            save.walls.push(row);
+        }
+
+        /// Get properties
+        this.propertyLines.forEach(function (prop, index) {
+            save.properties.push(prop.getSaveData());
+        });
+        return save;
     }
 
 }

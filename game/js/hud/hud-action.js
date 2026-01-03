@@ -54,6 +54,10 @@ export default class HudAction extends HudCommon {
         button_block.setOrigin(0).setScrollFactor(1);
         let button_text = this.scene.add.bitmapText(button_block.x + 3, button_block.y + 5, 'SkeleTalk', 'X', 8).setOrigin(0).setScrollFactor(1).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
+        ///let click_area = this.makeClickArea(block.x - 12, block.y, block.displayWidth + 12, 16, () => {
+            
+        ///});
+
         if (!selected) {
             button_block.setVisible(false);
             button_text.setVisible(false);
