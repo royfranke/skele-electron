@@ -1,19 +1,19 @@
 const MAP_CONFIG = {
     tileSize: 16,
-    width: 320,
-    height: 200,
+    width:320,
+    height:200,
     sectionsWidth: 5,
     sectionsHeight: 5,
     blockWidth: 64,
     blockHeight: 40,
-    blocks: [
-        {
+    blocks: [ 
+            {
             x: 0,
             y: 0,
-            block_tile_x: 0,
-            block_tile_y: 0,
-            tile_x: 0,
-            tile_y: 0,
+            block_tile_x:0,
+            block_tile_y:0,
+            tile_x:0,
+            tile_y:0,
             width: 64,
             height: 40,
             top: 0,
@@ -38,13 +38,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 3,
             y: 3,
-            block_tile_x: 192,
-            block_tile_y: 120,
-            tile_x: 199,
-            tile_y: 123,
+            block_tile_x:192,
+            block_tile_y:120,
+            tile_x:199,
+            tile_y:123,
             width: 53,
             height: 33,
             top: 123,
@@ -69,13 +69,13 @@ const MAP_CONFIG = {
                 w: "Midline Ave",
             }
         },
-        {
+            {
             x: 1,
             y: 1,
-            block_tile_x: 64,
-            block_tile_y: 40,
-            tile_x: 68,
-            tile_y: 44,
+            block_tile_x:64,
+            block_tile_y:40,
+            tile_x:68,
+            tile_y:44,
             width: 60,
             height: 32,
             top: 44,
@@ -100,13 +100,13 @@ const MAP_CONFIG = {
                 w: "Angel Food Cake Street",
             }
         },
-        {
+            {
             x: 2,
             y: 1,
-            block_tile_x: 128,
-            block_tile_y: 40,
-            tile_x: 128,
-            tile_y: 44,
+            block_tile_x:128,
+            block_tile_y:40,
+            tile_x:128,
+            tile_y:44,
             width: 57,
             height: 32,
             top: 44,
@@ -131,13 +131,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 1,
             y: 3,
-            block_tile_x: 64,
-            block_tile_y: 120,
-            tile_x: 68,
-            tile_y: 124,
+            block_tile_x:64,
+            block_tile_y:120,
+            tile_x:68,
+            tile_y:124,
             width: 60,
             height: 32,
             top: 124,
@@ -162,13 +162,13 @@ const MAP_CONFIG = {
                 w: "Angel Food Cake Street",
             }
         },
-        {
+            {
             x: 0,
             y: 1,
-            block_tile_x: 0,
-            block_tile_y: 40,
-            tile_x: 0,
-            tile_y: 40,
+            block_tile_x:0,
+            block_tile_y:40,
+            tile_x:0,
+            tile_y:40,
             width: 60,
             height: 36,
             top: 40,
@@ -193,13 +193,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 1,
             y: 0,
-            block_tile_x: 64,
-            block_tile_y: 0,
-            tile_x: 64,
-            tile_y: 0,
+            block_tile_x:64,
+            block_tile_y:0,
+            tile_x:64,
+            tile_y:0,
             width: 64,
             height: 36,
             top: 0,
@@ -224,13 +224,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 2,
             y: 0,
-            block_tile_x: 128,
-            block_tile_y: 0,
-            tile_x: 128,
-            tile_y: 0,
+            block_tile_x:128,
+            block_tile_y:0,
+            tile_x:128,
+            tile_y:0,
             width: 57,
             height: 36,
             top: 0,
@@ -255,13 +255,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 4,
             y: 0,
-            block_tile_x: 256,
-            block_tile_y: 0,
-            tile_x: 256,
-            tile_y: 0,
+            block_tile_x:256,
+            block_tile_y:0,
+            tile_x:256,
+            tile_y:0,
             width: 64,
             height: 40,
             top: 0,
@@ -286,13 +286,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 4,
             y: 4,
-            block_tile_x: 256,
-            block_tile_y: 160,
-            tile_x: 256,
-            tile_y: 160,
+            block_tile_x:256,
+            block_tile_y:160,
+            tile_x:256,
+            tile_y:160,
             width: 64,
             height: 40,
             top: 160,
@@ -317,13 +317,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 0,
             y: 4,
-            block_tile_x: 0,
-            block_tile_y: 160,
-            tile_x: 0,
-            tile_y: 160,
+            block_tile_x:0,
+            block_tile_y:160,
+            tile_x:0,
+            tile_y:160,
             width: 64,
             height: 40,
             top: 160,
@@ -348,13 +348,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 0,
             y: 3,
-            block_tile_x: 0,
-            block_tile_y: 120,
-            tile_x: 0,
-            tile_y: 120,
+            block_tile_x:0,
+            block_tile_y:120,
+            tile_x:0,
+            tile_y:120,
             width: 60,
             height: 40,
             top: 120,
@@ -379,13 +379,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 2,
             y: 2,
-            block_tile_x: 128,
-            block_tile_y: 80,
-            tile_x: 131,
-            tile_y: 84,
+            block_tile_x:128,
+            block_tile_y:80,
+            tile_x:131,
+            tile_y:84,
             width: 54,
             height: 32,
             top: 84,
@@ -410,13 +410,13 @@ const MAP_CONFIG = {
                 w: "Brambleberry Street",
             }
         },
-        {
+            {
             x: 2,
             y: 3,
-            block_tile_x: 128,
-            block_tile_y: 120,
-            tile_x: 128,
-            tile_y: 124,
+            block_tile_x:128,
+            block_tile_y:120,
+            tile_x:128,
+            tile_y:124,
             width: 57,
             height: 32,
             top: 124,
@@ -441,13 +441,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 3,
             y: 2,
-            block_tile_x: 192,
-            block_tile_y: 80,
-            tile_x: 199,
-            tile_y: 84,
+            block_tile_x:192,
+            block_tile_y:80,
+            tile_x:199,
+            tile_y:84,
             width: 53,
             height: 33,
             top: 84,
@@ -472,13 +472,13 @@ const MAP_CONFIG = {
                 w: "Midline Ave",
             }
         },
-        {
+            {
             x: 4,
             y: 1,
-            block_tile_x: 256,
-            block_tile_y: 40,
-            tile_x: 256,
-            tile_y: 40,
+            block_tile_x:256,
+            block_tile_y:40,
+            tile_x:256,
+            tile_y:40,
             width: 64,
             height: 40,
             top: 40,
@@ -503,13 +503,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 3,
             y: 0,
-            block_tile_x: 192,
-            block_tile_y: 0,
-            tile_x: 199,
-            tile_y: 0,
+            block_tile_x:192,
+            block_tile_y:0,
+            tile_x:199,
+            tile_y:0,
             width: 57,
             height: 40,
             top: 0,
@@ -534,13 +534,13 @@ const MAP_CONFIG = {
                 w: "Midline Ave",
             }
         },
-        {
+            {
             x: 4,
             y: 3,
-            block_tile_x: 256,
-            block_tile_y: 120,
-            tile_x: 260,
-            tile_y: 120,
+            block_tile_x:256,
+            block_tile_y:120,
+            tile_x:260,
+            tile_y:120,
             width: 60,
             height: 40,
             top: 120,
@@ -565,13 +565,13 @@ const MAP_CONFIG = {
                 w: "Milton Street",
             }
         },
-        {
+            {
             x: 3,
             y: 4,
-            block_tile_x: 192,
-            block_tile_y: 160,
-            tile_x: 199,
-            tile_y: 164,
+            block_tile_x:192,
+            block_tile_y:160,
+            tile_x:199,
+            tile_y:164,
             width: 57,
             height: 36,
             top: 164,
@@ -596,13 +596,13 @@ const MAP_CONFIG = {
                 w: "Midline Ave",
             }
         },
-        {
+            {
             x: 1,
             y: 4,
-            block_tile_x: 64,
-            block_tile_y: 160,
-            tile_x: 64,
-            tile_y: 164,
+            block_tile_x:64,
+            block_tile_y:160,
+            tile_x:64,
+            tile_y:164,
             width: 64,
             height: 36,
             top: 164,
@@ -627,13 +627,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 3,
             y: 1,
-            block_tile_x: 192,
-            block_tile_y: 40,
-            tile_x: 199,
-            tile_y: 40,
+            block_tile_x:192,
+            block_tile_y:40,
+            tile_x:199,
+            tile_y:40,
             width: 57,
             height: 36,
             top: 40,
@@ -658,13 +658,13 @@ const MAP_CONFIG = {
                 w: "Midline Ave",
             }
         },
-        {
+            {
             x: 0,
             y: 2,
-            block_tile_x: 0,
-            block_tile_y: 80,
-            tile_x: 0,
-            tile_y: 84,
+            block_tile_x:0,
+            block_tile_y:80,
+            tile_x:0,
+            tile_y:84,
             width: 60,
             height: 36,
             top: 84,
@@ -689,13 +689,13 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-        {
+            {
             x: 1,
             y: 2,
-            block_tile_x: 64,
-            block_tile_y: 80,
-            tile_x: 68,
-            tile_y: 84,
+            block_tile_x:64,
+            block_tile_y:80,
+            tile_x:68,
+            tile_y:84,
             width: 57,
             height: 32,
             top: 84,
@@ -720,13 +720,13 @@ const MAP_CONFIG = {
                 w: "Angel Food Cake Street",
             }
         },
-        {
+            {
             x: 4,
             y: 2,
-            block_tile_x: 256,
-            block_tile_y: 80,
-            tile_x: 260,
-            tile_y: 80,
+            block_tile_x:256,
+            block_tile_y:80,
+            tile_x:260,
+            tile_y:80,
             width: 60,
             height: 40,
             top: 80,
@@ -751,13 +751,13 @@ const MAP_CONFIG = {
                 w: "Milton Street",
             }
         },
-        {
+            {
             x: 2,
             y: 4,
-            block_tile_x: 128,
-            block_tile_y: 160,
-            tile_x: 128,
-            tile_y: 164,
+            block_tile_x:128,
+            block_tile_y:160,
+            tile_x:128,
+            tile_y:164,
             width: 57,
             height: 36,
             top: 164,
@@ -782,9 +782,9 @@ const MAP_CONFIG = {
                 w: "",
             }
         },
-    ],
-    nodes: [
-        {
+        ],
+    nodes: [   
+            {
             x: 3,
             y: 3,
             center_x: 192,
@@ -798,47 +798,47 @@ const MAP_CONFIG = {
             width: 14,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
                     signal: 2,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Belly Button Street",
                     dir: "e",
                     connect: 4,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                    lanes: 1,
                     name: "Belly Button Street",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 2, found: 1
+                    signal: 2,                                                                                                                                                                                                                                                                                                            found: 1
                 },
             },
         },
-        {
+            {
             x: 2,
             y: 3,
             center_x: 128,
@@ -852,47 +852,47 @@ const MAP_CONFIG = {
             width: 6,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Brambleberry Street",
                     dir: "s",
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
                     signal: 1,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Belly Button Street",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Brambleberry Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                                            lanes: 1,
                     name: "Belly Button Street",
                     dir: "ew",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 0, found: 1
+                    signal: 0,                                                                                                                                                                                                                                                                    found: 1
                 },
             },
         },
-        {
+            {
             x: 2,
             y: 2,
             center_x: 128,
@@ -906,40 +906,40 @@ const MAP_CONFIG = {
             width: 6,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    found: 0
+                                        found: 0
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
                     signal: 1,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Brambleberry Street",
                     dir: "s",
                     connect: 3,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                                                                                    lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 1, found: 1
+                    signal: 1,                                                                                                                                                                                                                            found: 1
                 },
             },
         },
-        {
+            {
             x: 1,
             y: 3,
             center_x: 64,
@@ -953,41 +953,41 @@ const MAP_CONFIG = {
             width: 8,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Angel Food Cake Street",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
                     signal: 2,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Belly Button Street",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Angel Food Cake Street",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    found: 0
+                                                                                                                                                                                                                                                                                                                                                                                            found: 0
                 },
             },
         },
-        {
+            {
             x: 4,
             y: 2,
             center_x: 256,
@@ -1001,40 +1001,40 @@ const MAP_CONFIG = {
             width: 8,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    found: 0
+                                        found: 0
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Milton Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                                                                                                                                                                    lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 0, found: 1
+                    signal: 0,                                                                                                                                            found: 1
                 },
             },
         },
-        {
+            {
             x: 1,
             y: 2,
             center_x: 64,
@@ -1048,47 +1048,47 @@ const MAP_CONFIG = {
             width: 8,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Angel Food Cake Street",
                     dir: "ns",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
                     signal: 2,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Angel Food Cake Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                                                                                                                                                                                                                                                    lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 0,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 2, found: 1
+                    signal: 2,                                                            found: 1
                 },
             },
         },
-        {
+            {
             x: 3,
             y: 4,
             center_x: 192,
@@ -1102,47 +1102,47 @@ const MAP_CONFIG = {
             width: 14,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
                     signal: 2,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Lower Field Street",
                     dir: "ew",
                     connect: 4,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 5,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                                                                                                                                                                                                                                lanes: 1,
                     name: "Lower Field Street",
                     dir: "ew",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 2, found: 1
+                    signal: 2,                                                                                found: 1
                 },
             },
         },
-        {
+            {
             x: 3,
             y: 5,
             center_x: 192,
@@ -1156,41 +1156,41 @@ const MAP_CONFIG = {
             width: 14,
             height: 7,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
                     parking: 0,
                     signal: 0,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    found: 0
+                                                                                                                                                                                                                                                                                                                                                                                            found: 0
                 },
             },
         },
-        {
+            {
             x: 3,
             y: 0,
             center_x: 192,
@@ -1204,34 +1204,34 @@ const MAP_CONFIG = {
             width: 14,
             height: 7,
 
-            streets: {
+            streets: {  
                 n: {
-                    found: 0
+                                        found: 0
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    found: 0
+                                                                                                                                                                                                                                                                                                                                                                                            found: 0
                 },
             },
         },
-        {
+            {
             x: 3,
             y: 2,
             center_x: 192,
@@ -1245,47 +1245,47 @@ const MAP_CONFIG = {
             width: 14,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
                     signal: 2,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 4,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                        lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 2, found: 1
+                    signal: 2,                                                                                                                                                                                                                                                                                        found: 1
                 },
             },
         },
-        {
+            {
             x: 4,
             y: 3,
             center_x: 256,
@@ -1299,47 +1299,47 @@ const MAP_CONFIG = {
             width: 8,
             height: 6,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Milton Street",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 1,
                     parking: 0,
                     signal: 1,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Belly Button Street",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Milton Street",
                     dir: "ns",
                     connect: 4,
                     sidewalk: 1,
                     signal: 1,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                lanes: 1,
                     name: "Belly Button Street",
                     dir: "e",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 1, found: 1
+                    signal: 1,                                                                                                                                                                                                                                                                                                                                found: 1
                 },
             },
         },
-        {
+            {
             x: 4,
             y: 4,
             center_x: 256,
@@ -1353,47 +1353,47 @@ const MAP_CONFIG = {
             width: 8,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Milton Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
                     signal: 0,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Lower Field Street",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Milton Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                                                                                                        lanes: 1,
                     name: "Lower Field Street",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 0, found: 1
+                    signal: 0,                                                                                                                                                                                                        found: 1
                 },
             },
         },
-        {
+            {
             x: 1,
             y: 4,
             center_x: 64,
@@ -1407,41 +1407,41 @@ const MAP_CONFIG = {
             width: 8,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Angel Food Cake Street",
                     dir: "ns",
                     connect: 3,
                     sidewalk: 1,
                     parking: 0,
                     signal: 0,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Lower Field Street",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Angel Food Cake Street",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    found: 0
+                                                                                                                                                                                                                                                                                                                                                                                            found: 0
                 },
             },
         },
-        {
+            {
             x: 0,
             y: 2,
             center_x: 0,
@@ -1455,34 +1455,34 @@ const MAP_CONFIG = {
             width: 7,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    found: 0
+                                        found: 0
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Sundown Lane",
                     dir: "ew",
                     connect: 1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "",
                     dir: "ns",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    found: 0
+                                                                                                                                                                                                                                                                                                                                                                                            found: 0
                 },
             },
         },
-        {
+            {
             x: 1,
             y: 1,
             center_x: 64,
@@ -1496,34 +1496,34 @@ const MAP_CONFIG = {
             width: 8,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    found: 0
+                                        found: 0
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Ridge Road",
                     dir: "ew",
                     connect: 3,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Angel Food Cake Street",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    found: 0
+                                                                                                                                                                                                                                                                                                                                                                                            found: 0
                 },
             },
         },
-        {
+            {
             x: 3,
             y: 1,
             center_x: 192,
@@ -1537,53 +1537,53 @@ const MAP_CONFIG = {
             width: 14,
             height: 8,
 
-            streets: {
+            streets: {  
                 n: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 0,
                     sidewalk: 1,
                     parking: 0,
                     signal: 2,
-                    found: 1
+                                        found: 1
                 },
                 e: {
-                    lanes: 1,
+                                        lanes: 1,
                     name: "Ridge Road",
                     dir: "ew",
                     connect: -1,
                     sidewalk: 1,
                     signal: 0,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 s: {
-                    lanes: 2,
+                                        lanes: 2,
                     name: "Midline Ave",
                     dir: "ns",
                     connect: 2,
                     sidewalk: 1,
                     signal: 2,
-                    parking: 0, found: 1
+                    parking: 0,                    found: 1
                 },
                 w: {
-                    lanes: 1,
+                                                                                                                                                                                                                                                                                                                                                                        lanes: 1,
                     name: "Ridge Road",
                     dir: "ew",
                     connect: 1,
                     sidewalk: 1,
                     parking: 0,
-                    signal: 2, found: 1
+                    signal: 2,                                        found: 1
                 },
             },
         },
-    ],
+        ],
     propertyLines: [
-        {
+                {
             lines: {
                 x: 3,
                 y: 3,
-                width: 8,
+                width: 7,
                 height: 27
             },
             block: {
@@ -1602,16 +1602,16 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
-                x: 11,
+                x: 10,
                 y: 3,
-                width: 8,
+                width: 7,
                 height: 27
             },
             block: {
@@ -1630,16 +1630,16 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
-                x: 19,
+                x: 17,
                 y: 3,
-                width: 8,
+                width: 7,
                 height: 27
             },
             block: {
@@ -1658,14 +1658,14 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
-                x: 27,
+                x: 26,
                 y: 3,
                 width: 12,
                 height: 27
@@ -1686,14 +1686,14 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
-                x: 39,
+                x: 38,
                 y: 3,
                 width: 12,
                 height: 27
@@ -1714,12 +1714,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 38,
                 y: 3,
@@ -1743,65 +1743,64 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "PAWN SHOP",
-                name: "Pawn Shop",
-                listingName: "Break of Pawn - Pawn Shop",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "19:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "19:00"
-                    },
-                    wednesday: {
-                        closed: "TRUE",
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "19:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "20:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "20:00"
-                    },
-                    sunday: {
-                        closed: "FALSE",
-                        open: "11:00",
-                        close: "16:00"
-                    }
-                },
-                sells: [
-                    "POCKET_KNIFE",
-                    "BACKPACK_BROWN",
-                    "DIGITAL_WATCH",
-                    "RADIO_PORTABLE",
-                    "FRYING_PAN"
-                ],
-                buys: [
-                    "POCKET_KNIFE",
-                ],
-                front_room: 13,
+name: "Pawn Shop",
+listingName: "Break of Pawn - Pawn Shop",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
             },
-
-
-            portal: {
+    tuesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "16:00"
+            }
+},
+sells: [
+            "POCKET_KNIFE", 
+                        "BACKPACK_BROWN", 
+                "DIGITAL_WATCH", 
+                "RADIO_PORTABLE", 
+                "FRYING_PAN"
+        ],
+buys: [
+                    "POCKET_KNIFE", 
+                                        ],
+                front_room: 13,                                
+            },
+                                                                                    
+            
+                        portal: {
                 room_id: 13,
                 x: 1,
                 y: 11
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 28,
                 y: 3,
@@ -1825,67 +1824,67 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "LAUNDROMAT",
-                name: "Coin Wash",
-                listingName: "Coin Wash Laundry Laundromat",
-                rollingGate: "TRUE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "21:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "21:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "21:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "21:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "21:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "21:00"
-                    },
-                    sunday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "21:00"
-                    }
-                },
-                services: [
-                ],
-                sells: [
-                    "LAUNDRY_POWDER",
-                    "LAUNDRY_LIQUID",
-                    "LAUNDRY_BASKET_PINK",
-                    "LAUNDRY_BASKET_BLUE",
-                    "SODA_RED",
-                    "SODA_GREEN"
-                ],
-                front_room: 11,
+name: "Coin Wash",
+listingName: "Coin Wash Laundry Laundromat",
+rollingGate: "TRUE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
             },
-
-
-            portal: {
+    tuesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "21:00"
+            }
+},
+services: [
+    ],
+sells: [
+            "LAUNDRY_POWDER", 
+                "LAUNDRY_LIQUID", 
+                "LAUNDRY_BASKET_PINK", 
+                "LAUNDRY_BASKET_BLUE", 
+                "SODA_RED", 
+                "SODA_GREEN"
+        ],
+                front_room: 11,                                
+            },
+                                                                                    
+            
+                        portal: {
                 room_id: 11,
                 x: 2,
                 y: 14
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 22,
                 y: 3,
@@ -1909,97 +1908,96 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "LOCKSMITH",
-                name: "Locksmith",
-                listingName: "Keys Cut Locks Opened",
-                rollingGate: "TRUE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "14:00"
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-                services: [
-                    {
-                        slug: "COPY_KEY",
-                        name: "Copy key",
-                        requirements:
-                        {
-
-                            req_group_name: 'Copy Key',
-                            req_pocket_action: '',
-                            req_world_action: '',
-                            req_state: '',
-                            req_result_item: '',
-                            req_result_data_key: '',
-                            req_result_data_set: '',
-                            req_result_data_modify: '',
-                            req_result_texture: '',
-                            req_result_fx: '',
-                            req_result_ground: '',
-                            requires: [
-                                {
-                                    slot_type: 'IN_HAND',
-                                    type: 'ITEM_KIND',
-                                    result: 'DUPLICATED',
-                                    ITEM_KIND: 'KEY',
-                                },
-                                {
-                                    slot_type: 'IN_COINPURSE',
-                                    type: 'MONEY',
-                                    result: 'CONSUMED',
-                                    MONEY: '200'
-                                }
-                            ]
-                        },
-
-                    }
-
-                ],
-                sells: [
-                    "COMBO_LOCK_RED",
-                    "COMBO_LOCK_BLUE",
-                    "PADLOCK"
-                ],
-                front_room: 12,
+name: "Locksmith",
+listingName: "Keys Cut Locks Opened",
+rollingGate: "TRUE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
             },
-
-
-            portal: {
+    tuesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "14:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+services: [
+        {
+        slug: "COPY_KEY",
+        name: "Copy key",
+        requirements: 
+        {
+            
+req_group_name: 'Copy Key',
+req_pocket_action: '',
+req_world_action: '',
+req_state: '',
+req_result_item: '',
+req_result_data_key: '',
+req_result_data_set: '',
+req_result_data_modify: '',
+req_result_texture: '',
+req_result_fx: '',
+req_result_ground: '',
+requires: [
+  {
+    slot_type: 'IN_HAND',
+    type: 'ITEM_KIND',
+    result: 'DUPLICATED',
+    ITEM_KIND: 'KEY',
+    },
+  {
+    slot_type: 'IN_COINPURSE',
+    type: 'MONEY',
+    result: 'CONSUMED',
+    MONEY: '200'
+    }
+]
+          },
+        
+    }    
+        
+    ],
+sells: [
+            "COMBO_LOCK_RED", 
+                "COMBO_LOCK_BLUE", 
+                "PADLOCK"
+        ],
+                front_room: 12,                                
+            },
+                                                                                    
+            
+                        portal: {
                 room_id: 12,
                 x: 1,
                 y: 9
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 16,
                 y: 3,
@@ -2023,61 +2021,59 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "PSYCHIC",
-                name: "Past Present Future",
-                listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "TRUE",
-                    },
-                    tuesday: {
-                        closed: "TRUE",
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "12:00",
-                        close: "19:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "12:00",
-                        close: "19:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "12:00",
-                        close: "19:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "13:00",
-                        close: "21:00"
-                    },
-                    sunday: {
-                        closed: "FALSE",
-                        open: "13:00",
-                        close: "18:00"
-                    }
-                },
-                services: [
-                ],
-                sells: [
-                    "PRAYER_CANDLE_ORANGE",
-                    "PRAYER_CANDLE_GREEN",
-                    "PRAYER_CANDLE_WHITE",
-                    "PRAYER_CANDLE_YELLOW"
-                ],
-                front_room: 14,
+name: "Past Present Future",
+listingName: "PSYCHIC - PAST PRESENT FUTURE - Fortunes Told",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "TRUE",    }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
             },
-
-
-            portal: {
+    thursday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "19:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "13:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "13:00",
+        close: "18:00"
+            }
+},
+services: [
+    ],
+sells: [
+            "PRAYER_CANDLE_ORANGE", 
+                "PRAYER_CANDLE_GREEN", 
+                "PRAYER_CANDLE_WHITE", 
+                "PRAYER_CANDLE_YELLOW"
+        ],
+                front_room: 14,                                
+            },
+                                                                                    
+            
+                        portal: {
                 room_id: 14,
                 x: 1,
                 y: 6
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 42,
                 y: 3,
@@ -2101,55 +2097,54 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "DOLLAR_STORE",
-                name: "Dollar Store",
-                listingName: "Dollar Store TBA",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "19:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "19:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "19:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "19:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "19:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-                sells: [
-                    "JUMP_ROPE",
-                    "TOOTHBRUSH_BLUE",
-                    "KITE_BLUE"
-                ],
-
+name: "Dollar Store",
+listingName: "Dollar Store TBA",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "19:00"
             },
-
-
-        },
-        {
+    tuesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "19:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "19:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "19:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+sells: [
+            "JUMP_ROPE", 
+                "TOOTHBRUSH_BLUE", 
+                "KITE_BLUE"
+        ],
+                                                
+            },
+                                                                        
+            
+                    },
+                {
             lines: {
                 x: 29,
                 y: 3,
@@ -2172,19 +2167,19 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                slug: "SKELE_AUNTIE",
-                name: "Auntie’s House",
-                listingName: "Graves, Marcy", front_room: 6,
+                                slug: "SKELE_AUNTIE",
+name: "Auntie’s House",
+listingName: "Graves, Marcy",                front_room: 6,                
             },
-
-
-            portal: {
+                                                
+                                                                        
+                        portal: {
                 room_id: 6,
                 x: 2,
                 y: 11
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 16,
                 y: 3,
@@ -2207,12 +2202,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 3,
                 y: 3,
@@ -2235,14 +2230,14 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-                slug: "IRIS",
-                name: "Iris’s House",
-                listingName: "Bone-Apart, Iris",
+                                slug: "IRIS",
+name: "Iris’s House",
+listingName: "Bone-Apart, Iris",                                
             },
-
-
-        },
-        {
+                                                
+                                    
+                    },
+                {
             lines: {
                 x: 3,
                 y: 3,
@@ -2266,81 +2261,80 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "BONEDEGA",
-                name: "Bonedega",
-                listingName: "Bonedega - Bodega Corner Store",
-                rollingGate: "TRUE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "20:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "20:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "20:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "20:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "20:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "20:00"
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-                sells: [
-                    "SODA_RED",
-                    "SODA_BLUE",
-                    "BANANA_BRUISED",
-                    "BEER",
-                    "CIGARETTE_SLIM",
-                    "MUFFIN_BERRY",
-                    "CIGARETTE_MENTHOL",
-                    "BREAKFAST_TART_PINK",
-                    "LOTTO",
-                    "BUS_TICKET",
-                    "MILK_BODEGA",
-                    "CEREAL_BOX_2",
-                    "CEREAL_BOX_3",
-                    "LIGHTER",
-                    "SARDINES_PRODUCT",
-                    "JELLY_RASPBERRY",
-                    "STORE_BREAD",
-                    "INSTANT_NOODLES_SEAL_RED",
-                    "INSTANT_NOODLES_SEAL_ORANGE",
-                    "PRAYER_CANDLE_WHITE",
-                    "PRAYER_CANDLE_ORANGE",
-                    "SALT_IODIZED"
-                ],
-                delivers: [
-                ],
-                front_room: 1,
+name: "Bonedega",
+listingName: "Bonedega - Bodega Corner Store",
+rollingGate: "TRUE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
             },
-
-
-            portal: {
+    tuesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "20:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+sells: [
+            "SODA_RED", 
+                "SODA_BLUE", 
+                "BANANA_BRUISED", 
+                "BEER", 
+                "CIGARETTE_SLIM", 
+                "MUFFIN_BERRY", 
+                                "CIGARETTE_MENTHOL", 
+                "BREAKFAST_TART_PINK", 
+                "LOTTO", 
+                "BUS_TICKET", 
+                "MILK_BODEGA", 
+                "CEREAL_BOX_2", 
+                "CEREAL_BOX_3", 
+                "LIGHTER", 
+                "SARDINES_PRODUCT", 
+                                "JELLY_RASPBERRY", 
+                "STORE_BREAD", 
+                "INSTANT_NOODLES_SEAL_RED", 
+                        "INSTANT_NOODLES_SEAL_ORANGE", 
+                "PRAYER_CANDLE_WHITE", 
+                "PRAYER_CANDLE_ORANGE", 
+                "SALT_IODIZED"
+        ],
+delivers: [
+                                                                                                                                                                                                                            ],
+                front_room: 1,                                
+            },
+                                                                                    
+            
+                        portal: {
                 room_id: 1,
                 x: 2,
                 y: 14
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 3,
                 y: 3,
@@ -2363,12 +2357,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 14,
                 y: 3,
@@ -2391,12 +2385,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 25,
                 y: 3,
@@ -2419,12 +2413,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 37,
                 y: 3,
@@ -2447,12 +2441,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 33,
                 y: 14,
@@ -2476,76 +2470,75 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "HARDWARE",
-                name: "Bits and Nuts Hardware Store",
-                listingName: "Bits &amp; Nuts Hardware Store",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "19:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "19:00"
-                    },
-                    wednesday: {
-                        closed: "TRUE",
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "19:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "19:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "17:00"
-                    },
-                    sunday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "14:00"
-                    }
-                },
-                sells: [
-                    "STAPLE_GUN",
-                    "STAPLES",
-                    "SIDEWALK_CHALK_",
-                    "SPADE",
-                    "SPRAY_PAINT",
-                    "RAKE",
-                    "SHOVEL",
-                    "WATERING_CAN",
-                    "HEDGE_TRIMMERS",
-                    "SCISSORS",
-                    "SACK_GRASS_SEED",
-                    "SACK_MULCH",
-                    "BIRD_SEED_BAG",
-                    "BROOM",
-                    "MOP",
-                    "COMBO_LOCK_RED",
-                    "MASON_LINE",
-                    "BACKPACK_CANVAS",
-                    "LAUNDRY_LIQUID"
-                ],
-                front_room: 18,
+name: "Bits and Nuts Hardware Store",
+listingName: "Bits &amp; Nuts Hardware Store",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
             },
-
-
-            portal: {
+    tuesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "19:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "17:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "14:00"
+            }
+},
+sells: [
+            "STAPLE_GUN", 
+                "STAPLES", 
+                "SIDEWALK_CHALK_", 
+                "SPADE", 
+                "SPRAY_PAINT", 
+                "RAKE", 
+                "SHOVEL", 
+                "WATERING_CAN", 
+                "HEDGE_TRIMMERS", 
+                "SCISSORS", 
+                "SACK_GRASS_SEED", 
+                "SACK_MULCH", 
+                "BIRD_SEED_BAG", 
+                "BROOM", 
+                "MOP", 
+                "COMBO_LOCK_RED", 
+                "MASON_LINE", 
+                "BACKPACK_CANVAS", 
+                "LAUNDRY_LIQUID"
+        ],
+                front_room: 18,                                
+            },
+                                                                                    
+            
+                        portal: {
                 room_id: 18,
                 x: 3,
                 y: 10
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 23,
                 y: 14,
@@ -2569,48 +2562,46 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "BUTCHER",
-                name: "Butcher",
-                listingName: "Flesh and Bone Butcher",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "17:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "17:00"
-                    },
-                    wednesday: {
-                        closed: "TRUE",
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "17:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "17:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "16:00"
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-
+name: "Butcher",
+listingName: "Flesh and Bone Butcher",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
             },
-
-
-        },
-        {
+    tuesday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "17:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "16:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+                                                
+            },
+                                                                        
+            
+                    },
+                {
             lines: {
                 x: 13,
                 y: 9,
@@ -2634,54 +2625,53 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "BAR",
-                name: "Pour Yorick",
-                listingName: "Pour Yorick",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "17:00",
-                        close: "22:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "17:00",
-                        close: "22:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "17:00",
-                        close: "22:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "17:00",
-                        close: "22:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "17:00",
-                        close: "22:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "17:00",
-                        close: "23:00"
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-                serves: [
-                    "BEER",
-                    "ALE"
-                ],
-
+name: "Pour Yorick",
+listingName: "Pour Yorick",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
             },
-
-
-        },
-        {
+    tuesday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "22:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "17:00",
+        close: "23:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+serves: [
+            "BEER", 
+                "ALE"
+        ],
+                                                
+            },
+                                                                        
+            
+                    },
+                {
             lines: {
                 x: 3,
                 y: 9,
@@ -2705,50 +2695,48 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "BARBER",
-                name: "Barber",
-                listingName: "Barber TBA",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    wednesday: {
-                        closed: "TRUE",
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-                services: [
-                ],
-
+name: "Barber",
+listingName: "Barber TBA",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
             },
-
-
-        },
-        {
+    tuesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            }, 
+    wednesday: {
+        closed: "TRUE",    },
+    thursday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+services: [
+    ],
+                                                
+            },
+                                                                        
+            
+                    },
+                {
             lines: {
                 x: 44,
                 y: 3,
@@ -2772,69 +2760,68 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "CHINESE_FOOD",
-                name: "Lucky Dragon II",
-                listingName: "Lucky Dragon II",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "TRUE",
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "11:00",
-                        close: "20:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "11:00",
-                        close: "20:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "11:00",
-                        close: "20:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "11:00",
-                        close: "20:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "11:00",
-                        close: "21:00"
-                    },
-                    sunday: {
-                        closed: "FALSE",
-                        open: "12:00",
-                        close: "18:00"
-                    }
-                },
-                sells: [
-                    "CHINESE_FOOD",
-                    "CHINESE_FOOD_MARKED",
-                    "SOUP_CONTAINER_LARGE",
-                    "SOUP_CONTAINER_SMALL",
-                ],
-                serves: [
-                ],
-                delivers: [
-                    "CHINESE_FOOD",
-                    "CHINESE_FOOD_MARKED",
-                    "SOUP_CONTAINER_LARGE",
-                    "SOUP_CONTAINER_SMALL"
-                ],
-                front_room: 17,
+name: "Lucky Dragon II",
+listingName: "Lucky Dragon II",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
             },
-
-
-            portal: {
+    thursday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "20:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "12:00",
+        close: "18:00"
+            }
+},
+sells: [
+            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL", 
+                                                        ],
+serves: [
+                                                                                    ],
+delivers: [
+                                                            "CHINESE_FOOD", 
+                "CHINESE_FOOD_MARKED", 
+                "SOUP_CONTAINER_LARGE", 
+                "SOUP_CONTAINER_SMALL"
+        ],
+                front_room: 17,                                
+            },
+                                                                                    
+            
+                        portal: {
                 room_id: 17,
                 x: 6,
                 y: 14
             }
-        },
-        {
+                    },
+                {
             lines: {
                 x: 26,
                 y: 3,
@@ -2857,12 +2844,12 @@ const MAP_CONFIG = {
                 zoning: "COMMERCIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 44,
                 y: 3,
@@ -2886,55 +2873,53 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "PHARMACY",
-                name: "Pharmacy",
-                listingName: "Pharmacy TBA",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "09:00",
-                        close: "18:00"
-                    },
-                    saturday: {
-                        closed: "TRUE",
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-                sells: [
-                    "TOOTHBRUSH_RED",
-                    "TOOTHPASTE",
-                    "TOOTHBRUSH_BLUE"
-                ],
-                delivers: [
-                ],
-
+name: "Pharmacy",
+listingName: "Pharmacy TBA",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
             },
-
-
-        },
-        {
+    tuesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "18:00"
+            },
+    saturday: {
+        closed: "TRUE",    },
+    sunday: {
+        closed: "TRUE",    }
+},
+sells: [
+            "TOOTHBRUSH_RED", 
+                "TOOTHPASTE", 
+                "TOOTHBRUSH_BLUE"
+        ],
+delivers: [
+                            ],
+                                                
+            },
+                                                                        
+            
+                    },
+                {
             lines: {
                 x: 33,
                 y: 3,
@@ -2957,12 +2942,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 22,
                 y: 3,
@@ -2985,12 +2970,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 11,
                 y: 3,
@@ -3013,12 +2998,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 0,
                 y: 3,
@@ -3041,12 +3026,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 48,
                 y: 3,
@@ -3070,63 +3055,62 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "BAKERY",
-                name: "Bakery",
-                listingName: "Bakery TBA",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "14:00"
-                    },
-                    tuesday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "14:00"
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "14:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "14:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "07:00",
-                        close: "14:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "08:00",
-                        close: "13:00"
-                    },
-                    sunday: {
-                        closed: "TRUE",
-                    }
-                },
-                sells: [
-                    "PRETZEL",
-                    "MUFFIN",
-                    "CUPCAKE_PINK",
-                    "CUPCAKE_YELLOW",
-                    "CUPCAKE_WHITE",
-                    "CUPCAKE_CHOCOLATE",
-                    "COOKIE",
-                    "MUFFIN_BERRY",
-                    "STORE_BREAD"
-                ],
-                serves: [
-                ],
-
+name: "Bakery",
+listingName: "Bakery TBA",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
             },
-
-
-        },
-        {
+    tuesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "07:00",
+        close: "14:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "08:00",
+        close: "13:00"
+            },
+    sunday: {
+        closed: "TRUE",    }
+},
+sells: [
+            "PRETZEL", 
+                "MUFFIN", 
+                "CUPCAKE_PINK", 
+                "CUPCAKE_YELLOW", 
+                "CUPCAKE_WHITE", 
+                "CUPCAKE_CHOCOLATE", 
+                "COOKIE", 
+                "MUFFIN_BERRY", 
+                "STORE_BREAD"
+        ],
+serves: [
+                                                                            ],
+                                                
+            },
+                                                                        
+            
+                    },
+                {
             lines: {
                 x: 40,
                 y: 3,
@@ -3150,50 +3134,48 @@ const MAP_CONFIG = {
             },
             listing: {
                 slug: "FLORIST",
-                name: "Florist",
-                listingName: "Florist TBA",
-                rollingGate: "FALSE",
-                schedule: {
-                    monday: {
-                        closed: "TRUE",
-                    },
-                    tuesday: {
-                        closed: "TRUE",
-                    },
-                    wednesday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    thursday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    friday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    saturday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "18:00"
-                    },
-                    sunday: {
-                        closed: "FALSE",
-                        open: "10:00",
-                        close: "17:00"
-                    }
-                },
-                sells: [
-                ],
-
+name: "Florist",
+listingName: "Florist TBA",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "TRUE",    }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
             },
-
-
-        },
-        {
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "18:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "17:00"
+            }
+},
+sells: [
+    ],
+                                                
+            },
+                                                                        
+            
+                    },
+                {
             lines: {
                 x: 27,
                 y: 3,
@@ -3216,12 +3198,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 15,
                 y: 3,
@@ -3244,12 +3226,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-        {
+                                                
+            
+                    },
+                {
             lines: {
                 x: 3,
                 y: 3,
@@ -3272,12 +3254,12 @@ const MAP_CONFIG = {
                 zoning: "RESIDENTIAL",
             },
             listing: {
-
+                                
             },
-
-
-        },
-    ]
-
+                                                
+            
+                    },
+            ]
+    
 };
 export default MAP_CONFIG;

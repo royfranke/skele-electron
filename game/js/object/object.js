@@ -289,6 +289,14 @@ export default class Object {
                 if (requirement.slot_type == 'ON_ACTIVE' && (requirement.type == 'OBJ_KIND' && requirement.OBJ_KIND == self.info.slug)) {
                     reqs_met++;
                 }
+                if (requirement.slot_type == 'IN_COINPURSE') {
+                    if (requirement.type == 'MONEY') {
+                        var result = self.scene.player.coinpurse.insertCoins([requirement.MONEY]);
+                        if (result) {
+                            reqs_met++;
+                        }
+                    }
+                }
             });
             console.log("Requirements met: "+reqs_met+" of "+reqs_required);
             if (reqs_met == reqs_required) {
@@ -360,10 +368,6 @@ export default class Object {
                 }
             });
         }
-
-
-
-        
     }
 
     findInObjectActions(action_string) {

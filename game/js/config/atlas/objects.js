@@ -669,6 +669,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          BRANCH_3X1: {
+        name: 'Branch 3x1',
+        slug: 'BRANCH_3X1', 
+        type: 'BRANCH',
+        bounding: {
+          h:1, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:6, 
+          w:40
+        },
+        offset: {
+          x:4, 
+          y:5
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           CURTAIN_SINGLE_BROWN: {
         name: 'Brown Single Window Curtains',
         slug: 'CURTAIN_SINGLE_BROWN', 
@@ -8275,6 +8315,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          PORCH_STAIR_RAIL_LEFT_MED: {
+        name: 'Porch Stair Rail Left Medium',
+        slug: 'PORCH_STAIR_RAIL_LEFT_MED', 
+        type: 'STAIR_RAIL',
+        bounding: {
+          h:5, 
+          w:7
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:5, 
+          y:3
+        },
+        depth: 0,
+        sprite: {
+          h:68, 
+          w:112,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:4
+        },
+        offset: {
+          x:15, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_DARK: {
         name: 'Porch Stair Rail Left Ornamental Dark',
         slug: 'PORCH_STAIR_RAIL_LEFT_ORNAMENTAL_DARK', 
@@ -10850,55 +10930,6 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
-
-          interactions: {
-                                  },
-    },
-          CAR_SEDAN_1: {
-        name: 'Taupe Sedan',
-        slug: 'CAR_SEDAN_1', 
-        type: 'VEHICLE',
-        bounding: {
-          h:4, 
-          w:9
-        },
-        base: {
-          h:3, 
-          w:7,
-          x:1, 
-          y:1
-        },
-        depth: 0,
-        sprite: {
-          h:64, 
-          w:144,
-          x:0, 
-          y:0
-        },
-        size: {
-          h:40, 
-          w:120
-        },
-        offset: {
-          x:12, 
-          y:18
-        },
-        varieties: 1,
-        solid: 1,
-        portal: 0,
-        loot: [
-                  ],
-        actions: [],
-        default_state: 'FACING_EAST',        states: [                {
-              name: 'FACING_NORTH',
-              transition: 'false',
-              frames: []},                {
-              name: 'FACING_EAST',
-              transition: 'false',
-              frames: ['CAR_SEDAN_1-1',]},                {
-              name: 'FACING_SOUTH',
-              transition: 'false',
-              frames: []},],
 
           interactions: {
                                   },
