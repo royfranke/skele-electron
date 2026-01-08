@@ -14,6 +14,63 @@ const SPRITE_DIR = {
         'SLEEP',
         'CURL_UP'
     ],
+    ADULT_STATES: [
+        'IDLE',
+        'WALK'
+    ],
+    ADULTS: [
+        'AUNTIE'
+    ],
+    ADULT_ANIMS: {
+        IDLE: {
+            AUNTIE: {
+                N: {
+                    START: 0,
+                    END: 23,
+                },
+                N_SIDE: {
+                    START: 0,
+                    END: 23,
+                },
+                SIDE: {
+                    START: 0,
+                    END: 23,
+                },
+                S_SIDE: {
+                    START: 0,
+                    END: 23,
+                },
+                S: {
+                    START: 0,
+                    END: 23,
+                }
+            }   
+        },
+        WALK: {
+            AUNTIE: {
+                N: {
+                    START: 0,
+                    END: 6,
+                },
+                N_SIDE: {
+                    START: 7,
+                    END: 13,
+                },
+                SIDE: {
+                    START: 14,
+                    END: 20,
+                },
+                S_SIDE: {
+                    START: 21,
+                    END: 27,
+                },
+                S: {
+                    START: 28,
+                    END: 34,
+                }
+            }
+        } 
+    },
     FACES: [
         'N',
         'N_SIDE',

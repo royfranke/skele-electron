@@ -44,7 +44,6 @@ export default class NpcManager {
         return this.factory.npcInfo(slug);
     }
 
-
     newNpcToWorld (_x,_y,slug,npcs=[]) {
         var npc = this.newNpc(slug,npcs);
         npc.create(_x,_y);

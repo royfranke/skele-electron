@@ -12,7 +12,7 @@ export default class AppView {
         this.scene = scene;
         this.view = view;
         this.tip = null;
-        this.version = '1.2.1';
+        this.version = '1.2.3';
         this.create(state_name);
     }
 

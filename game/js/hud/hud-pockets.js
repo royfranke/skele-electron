@@ -379,6 +379,7 @@ export default class HudPockets extends HudCommon {
         let block = this.makeBlock(this.view.right - slotMargin.x, this.view.top + (slotMargin.y), 32, 16, 'BLOCK_MID_YELLOW');
 
         let drop_text = this.makeBitmapText(block.x + 4, block.y + 5, 48, 'DROP', 8, 'SkeleTalk');
+        drop_text.setTintFill(0x56524f);
 
         let button_block = this.makeBlock(block.x - 12, block.y, 12, 16, 'BLOCK_MID_ORANGE_LEFT');
 

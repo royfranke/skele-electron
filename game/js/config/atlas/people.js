@@ -95,8 +95,8 @@ const NPCS = {
     gender: 'UNKNOWN'
 
   },
-  SKELE_AUNTIE: {
-    slug: 'SKELE_AUNTIE',
+  AUNTIE: {
+    slug: 'AUNTIE',
     name: {
       legal: {
         first: 'Marcella',

@@ -11,7 +11,7 @@ export default class NpcSprite {
     this.npc = npc;
     this.facing = 's';
     this.dir_faces = SPRITE_DIR.DIR_FACES;
-    this.sprite = this.scene.physics.add.sprite(_x, _y, "player-IDLE", 0).setSize(16, 12).setOffset(8, 16);
+    this.sprite = this.scene.physics.add.sprite(_x, _y, this.npc.info.slug.toLowerCase()+"-IDLE", 0).setSize(16, 12).setOffset(8, 16);
     this.setCollider();
   }
 
@@ -47,8 +47,8 @@ export default class NpcSprite {
   update() {
     var state = this.npc.getState();
     var speed = this.npc.getSpeed();
-    
-    this.sprite.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true); 
+
+    this.sprite.anims.play(this.npc.info.slug.toLowerCase()+"-" + state.name + "-" + this.dir_faces[this.facing], true); 
     
     if (state.name == 'WALK' || state.name == 'IDLE') {
       this.sprite.body.setVelocity(0);

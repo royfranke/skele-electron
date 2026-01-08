@@ -29,6 +29,10 @@ export default class SaveManager {
     initializeRoomSave () {
         var data = this.scene.slot;
         this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
+
+        var auntie = this.scene.npcs.newNpcToWorld(data.POSITION.X,data.POSITION.Y - 3,'AUNTIE');
+        auntie.goTo(data.POSITION.X, data.POSITION.Y - 1);
+
         this.scene.player.setFacing(data.POSITION.FACING);
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
