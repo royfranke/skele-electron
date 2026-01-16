@@ -14,6 +14,63 @@ const SPRITE_DIR = {
         'SLEEP',
         'CURL_UP'
     ],
+    KID_STATES: [
+        'IDLE',
+        'WALK'
+    ],
+    KIDS: [
+        'PATRICE'
+    ],
+    KID_ANIMS: {
+        IDLE: {
+            PATRICE: {
+                N: {
+                    START: 0,
+                    END: 0,
+                },
+                N_SIDE: {
+                    START: 1,
+                    END: 1,
+                },
+                SIDE: {
+                    START: 2,
+                    END: 2,
+                },
+                S_SIDE: {
+                    START: 3,
+                    END: 3,
+                },
+                S: {
+                    START: 4,
+                    END: 4,
+                }
+            }   
+        },
+        WALK: {
+            PATRICE: {
+                N: {
+                    START: 0,
+                    END: 9,
+                },
+                N_SIDE: {
+                    START: 10,
+                    END: 19,
+                },
+                SIDE: {
+                    START: 20,
+                    END: 29,
+                },
+                S_SIDE: {
+                    START: 30,
+                    END: 39,
+                },
+                S: {
+                    START: 40,
+                    END: 49,
+                }
+            }
+        } 
+    },
     ADULT_STATES: [
         'IDLE',
         'WALK'
@@ -26,23 +83,23 @@ const SPRITE_DIR = {
             AUNTIE: {
                 N: {
                     START: 0,
-                    END: 23,
+                    END: 30,
                 },
                 N_SIDE: {
                     START: 0,
-                    END: 23,
+                    END: 30,
                 },
                 SIDE: {
                     START: 0,
-                    END: 23,
+                    END: 30,
                 },
                 S_SIDE: {
                     START: 0,
-                    END: 23,
+                    END: 30,
                 },
                 S: {
                     START: 0,
-                    END: 23,
+                    END: 30,
                 }
             }   
         },

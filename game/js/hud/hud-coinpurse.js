@@ -16,7 +16,7 @@ export default class HudCoinpurse extends HudSide {
         }
         this.keytip = 'COINPURSE';
         this.colors = {
-            selected: 'ITEM_FOCUSED',
+            selected: 'BLOCK_MID_BEIGE_FAT_BORDER',
             normal: 'BAG_UNFOCUSED',
             frame: 'BLOCK_SHALLOW_YELLOW_FRAME'
         };

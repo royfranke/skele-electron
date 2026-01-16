@@ -39,6 +39,13 @@ export default class HudCommon {
             return this.factory.makeSlip(_x, _y, text, button);
         }
 
+        setSlipVisible(slip,visible=true) {
+            slip.block.setVisible(visible);
+            slip.text.setVisible(visible);
+            slip.button.setVisible(visible);
+            slip.button_text.setVisible(visible);
+        }
+
         makeButton(_x,_y,text,button) {
             return this.factory.makeButton(_x, _y, text, button);
         }

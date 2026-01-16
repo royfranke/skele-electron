@@ -234,6 +234,28 @@ export default class TimeManager {
         this.now.alarm.minute = minute;
     }
 
+    incrementAlarmTime (hour_inc=0, minute_inc=1) {
+        this.now.alarm.minute += minute_inc;
+
+        while (this.now.alarm.minute >= 60) {
+            this.now.alarm.minute -= 60;
+            this.now.alarm.hour += 1;
+        }
+
+        while (this.now.alarm.minute < 0) {
+            this.now.alarm.minute += 60;
+            this.now.alarm.hour -= 1;
+        }
+
+        while (this.now.alarm.hour >= 24) {
+            this.now.alarm.hour -= 24;
+        }
+
+        while (this.now.alarm.hour < 0) {
+            this.now.alarm.hour += 24;
+        }
+    }
+
     getAlarmTime () {
         return {
             hour: this.now.alarm.hour,

@@ -96,7 +96,7 @@ const OBJECTS = {
           ASH_TRAY: {
         name: 'Ash Tray',
         slug: 'ASH_TRAY', 
-        type: 'DECOR',
+        type: 'ASH_TRAY',
         bounding: {
           h:1, 
           w:1
@@ -122,13 +122,22 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        varieties: 1,
+        varieties: 3,
         solid: 0,
         portal: 0,
         loot: [
                   ],
         actions: [],
-        default_state: 'DEFAULT',        states: [],
+        default_state: 'HALF_FULL',        states: [                {
+              name: 'FULL',
+              transition: 'false',
+              frames: ['ASH_TRAY-3',]},                {
+              name: 'EMPTY',
+              transition: 'false',
+              frames: ['ASH_TRAY-1',]},                {
+              name: 'HALF_FULL',
+              transition: 'false',
+              frames: ['ASH_TRAY-2',]},],
 
           interactions: {
                                   },
@@ -699,6 +708,46 @@ const OBJECTS = {
           y:5
         },
         varieties: 3,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRANCH_5X2: {
+        name: 'Branch 5x2',
+        slug: 'BRANCH_5X2', 
+        type: 'BRANCH',
+        bounding: {
+          h:2, 
+          w:5
+        },
+        base: {
+          h:2, 
+          w:5,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:6, 
+          w:48
+        },
+        offset: {
+          x:20, 
+          y:12
+        },
+        varieties: 2,
         solid: 1,
         portal: 0,
         loot: [

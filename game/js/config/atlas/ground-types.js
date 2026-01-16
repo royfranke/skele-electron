@@ -88,7 +88,7 @@ const GROUND_TYPE = {
     TYPE: "GRASS",
     SPEED: "SLOWED",
     BITMAP: false,
-    EDGE: "SOFT",
+    EDGE: "FEATHER",
     COLLIDES: false,
     USEMASK: true,
     ZINDEX: 5,

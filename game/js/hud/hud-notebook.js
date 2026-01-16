@@ -17,8 +17,8 @@ export default class HudNotebook extends HudSide {
         this.manager = new NotebookManager(this.scene);
         this.keytip = 'NOTEBOOK';
         this.colors = {
-            selected: 'ITEM_FOCUSED',
-            normal: 'BAG_UNFOCUSED',
+            selected: 'BLOCK_MID_BEIGE_FAT_BORDER',
+normal: 'BAG_UNFOCUSED',
             frame:'BLOCK_SHALLOW_YELLOW_FRAME'
         };
 

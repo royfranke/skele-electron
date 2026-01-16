@@ -15,7 +15,9 @@ export default class PreloadAnim {
     const anims = this.scene.anims;
     const states = SPRITE_DIR.STATES;
     const adult_states = SPRITE_DIR.ADULT_STATES;
+    const kid_states = SPRITE_DIR.KID_STATES;
     const adults = SPRITE_DIR.ADULTS;
+    const kids = SPRITE_DIR.KIDS;
     const faces = SPRITE_DIR.FACES;
 
     const objects = OBJECTS;
@@ -98,6 +100,21 @@ CAR_SEDAN_1: {
             key: adult.toLowerCase() + "-" + state + "-" + face,
             frames: anims.generateFrameNumbers(adult.toLowerCase() + "-" + state,
               { start: SPRITE_DIR.ADULT_ANIMS[state][adult][face].START, end: SPRITE_DIR.ADULT_ANIMS[state][adult][face].END }
+            ),
+            frameRate: 8,
+            repeat: -1,
+          });
+        });
+      });
+    });
+
+    kid_states.forEach(function (state, index) {
+      kids.forEach(function (kid, index) {
+        faces.forEach(function (face, index) {
+          anims.create({
+            key: kid.toLowerCase() + "-" + state + "-" + face,
+            frames: anims.generateFrameNumbers(kid.toLowerCase() + "-" + state,
+              { start: SPRITE_DIR.KID_ANIMS[state][kid][face].START, end: SPRITE_DIR.KID_ANIMS[state][kid][face].END }
             ),
             frameRate: 8,
             repeat: -1,

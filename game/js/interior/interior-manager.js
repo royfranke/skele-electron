@@ -180,6 +180,10 @@ import KEYLIGHT from "../config/key-light.js";
             let feature = this.room.config.roomData.featureList[i];
             if (feature.slug != 'FRONTDOOR') {
                 let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
+
+                if (feature.slug == 'WALL_CALENDAR') {
+                    obj.setAnnouncement(obj.state.name,'CALENDAR')
+                }
                 
                 if (obj != null && feature.params != undefined && feature.params.portal != undefined) {
                     if (feature.params.portal.room_id == -1) {

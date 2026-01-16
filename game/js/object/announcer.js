@@ -43,6 +43,11 @@ export default class Announcer {
                     let sign = self.add.nineslice(_x,_y, 'UI', 'BLOCK_MID_YELLOW_BORDER', announce.displayWidth + 12, 20, 8,8,8,8).setOrigin(.5).setDepth(_y + 15);
                     announced.push(sign);
                 }
+                else if (announcement.kind == 'CALENDAR') {
+                    let announce = this.scene.add.sprite(_x + 16,_y - 48, 'UI','CALENDAR_'+announcement.announcement).setOrigin(0).setDepth(10000);
+
+                    announced.push(announce);
+                }
                 else if (announcement.kind.slice(0, 15) === 'STREET_SIGN_NS_') {
 
                     let formatted_announcement = this.formatAnnouncement(announcement.announcement, 'STREET_SIGN');

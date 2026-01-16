@@ -229,13 +229,55 @@ export default class Block {
                 var y = block.top+h+block.offset.n;
 
                 switch (tile) {
+                    case 7:
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
+                    break;
+                    case 8:
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 3, 1);
+                        this.scene.manager.plantManager.newPlantToWorld(x+1, y, 'FOXTAIL',Phaser.Math.RND.between(8,26));
+                        this.scene.manager.plantManager.newPlantToWorld(x+2, y, 'FOXTAIL',Phaser.Math.RND.between(8,26));
+                        this.scene.manager.plantManager.newPlantToWorld(x+3, y, 'MILKWEED',Phaser.Math.RND.between(4,55));
+                        this.scene.manager.plantManager.newPlantToWorld(x+4, y+1, 'MILKWEED',Phaser.Math.RND.between(4,55));
+                        this.scene.manager.plantManager.newPlantToWorld(x+3, y+1, 'FOXTAIL',Phaser.Math.RND.between(8,26));
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 2, y + 1, 2, 1);
+                        w = w + 3
+                    break;
+                    case 9:
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
+                    break;
+                    case 10:
+                        this.scene.manager.treeManager.newTreeToWorld(x, y + .5, 'ASH');
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
+
+                        break;
+                    case 11:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'BRANCH_3X1');
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y, 2, 1);
+                    break;
                     case 12:
                         this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION',Phaser.Math.RND.between(1,44));
                     break;
                     case 13:
-                        var stump = this.scene.manager.objectManager.newObjectToWorld(x, y, 'STUMP_SEAT');
-                        stump.setVariety(Phaser.Math.RND.between(1,3));
-                        w++;
+                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'WOOD_SORREL',Phaser.Math.RND.between(1,30));
+                    break;
+                    case 14:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'STUMP_SEAT');
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 2, 1);
+                    break;
+                    case 15:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'ROCK_SMALL');
+                    break;
+                    case 16:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'CREEK_SEDGE');
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
+                        this.scene.manager.objectManager.newObjectToWorld(x + 1, y + 1, 'CREEK_SEDGE');
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y + 1, 2, 1);
+                        w = w + 2;
+                    break;
+                    case 17:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'BRANCH_5X2');
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y + 1, 3, 1);
+                        w = w + 4;
                     break;
                 }
             }

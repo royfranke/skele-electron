@@ -104,6 +104,29 @@ export default class PreloadManager{
     const states = SPRITE_DIR.STATES;
     const adult_states = SPRITE_DIR.ADULT_STATES;
     const adults = SPRITE_DIR.ADULTS;
+    const kid_states = SPRITE_DIR.KID_STATES;
+    const kids = SPRITE_DIR.KIDS;
+
+    kid_states.forEach(function (state, index) {
+      kids.forEach(function (kid, index) {
+        if (verbose) console.log("Loading kid state: "+state+" for "+kid);
+        var frameWidth = 32;
+        var frameHeight = 32;
+        if (state == 'SLEEP' || state == 'CURL_UP') {
+          frameWidth = 48;
+        }
+        self.load.spritesheet(
+          kid.toLowerCase()+"-"+state,
+          path+"spritesheets/"+kid.toLowerCase()+"_"+state+"-sheet.png",
+          {
+            frameWidth: frameWidth,
+            frameHeight: frameHeight
+          }
+        );
+        count++;
+        if (verbose) console.log("Loaded kid state: "+state+" for "+kid);
+      });
+    });
 
     adult_states.forEach(function (state, index) {
       adults.forEach(function (adult, index) {
