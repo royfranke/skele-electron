@@ -31,6 +31,12 @@ export default class HudStore extends HudCommon {
                     width: 144,
                     height: this.view.height - (this.view.margin.top*3.5 + this.view.margin.bottom + 40)
                 },
+                receipt: {
+                    x: this.view.left + (this.view.margin.left*9),
+                    y: this.view.top + (this.view.margin.top*3.5),
+                    width: 144,
+                    height: this.view.height - (this.view.margin.top*3.5 + this.view.margin.bottom + 40)
+                },
                 back_button: {
                     x: this.view.left + (this.view.margin.left*7),
                     y: this.view.top + 56
@@ -194,18 +200,22 @@ export default class HudStore extends HudCommon {
     }
 
     bagItems () {
+
+        /// Get basket from player's pockets
+        let basket_item = this.hasBasket();
         /// Bag items from the store
         if (this.basket.length == 0) {
-            console.warn('No items in basket to bag');
-            return;
+            //console.warn('No items in basket to bag');
+            
+            return false;
         }
         let bagged_items = [];
         let self = this;
         let already_bagged = [];
         this.basket.forEach(function (item) {;
-            console.log(item);
+            //console.log(item);
             if (already_bagged.includes(item)) {
-                console.warn('Item already bagged, skipping');
+                //console.warn('Item already bagged, skipping');
                 
             }
             else {
@@ -218,19 +228,22 @@ export default class HudStore extends HudCommon {
                             count++;
                         }
                     });
-                    console.log(count);
+                    //console.log(count);
                     new_item.setStackCount(count);
                 }
                 bagged_items.push(new_item);
             }
             
         });
-        let plastic_bag =  this.scene.manager.itemManager.newItemToPockets('PLASTIC_BAG_1',bagged_items);
+        // Replace the shopping basket with a plastic bag containing the items
+        this.scene.manager.hud.think('Here you go. Tell your auntie I said hi.');
+        this.scene.manager.hud.pocket.setPocket(basket_item, 'EMPTY');
 
-
+        let plastic_bag =  this.scene.manager.itemManager.newItemToPocket(basket_item,'PLASTIC_BAG_1',bagged_items);
 
         this.basket = [];
         this.eraseBasketInventory();
+        return true;
     }
 
     addToBasket(item) {
@@ -385,10 +398,28 @@ export default class HudStore extends HudCommon {
         this.store_components = [];
     }
 
+    hasBasket () {
+        /// Check if player has a basket in their pockets
+        let basket_item = this.scene.manager.hud.pocket.findInPockets('BASKET_RED');
+        if (basket_item == false) {
+            return false;
+        }
+        return basket_item;
+    }
+
     checkout() {
         /// Assemble a receipt
+        /// Get basket from player's pockets
+        let basket_item = this.hasBasket();
+        if (basket_item == false) {
+            // Check if they have an empty pocket
+            //console.warn('No basket in pockets to put items in');
+            this.scene.manager.hud.think('Ehh, you need a basket! Everyone needs a basket to shop.');
+            return false;
+        }
         if (this.basket.length == 0) {
-            console.warn('No items in basket to checkout');
+            // Check if holding basket
+            this.scene.manager.hud.think('This basket is empty. Can\'t buy nothing.');
             return;
         }
         let receipt = [];
@@ -407,12 +438,11 @@ export default class HudStore extends HudCommon {
 
     drawReceipt(receipt) {
         /// Draw the receipt
-        this.board = this.makeBlock(this.position.unfocused.board.x, this.position.unfocused.board.y,this.position.unfocused.board.width, this.position.unfocused.board.height,'BLOCK_MID_WHITE');
+        this.board = this.makeBlock(this.position.unfocused.receipt.x, this.position.unfocused.receipt.y,this.position.unfocused.receipt.width, this.position.unfocused.receipt.height,'BLOCK_MID_WHITE');
 
-        var _x = this.position.unfocused.board.x + 16;
-        var _y = this.position.unfocused.board.y + 16;
-        var _width = this.position.unfocused.board.width - 24;
-
+        var _x = this.position.unfocused.receipt.x + 16;
+        var _y = this.position.unfocused.receipt.y + 16;
+        var _width = this.position.unfocused.receipt.width - 24;
         let receipt_text = '';
         let total = 0;
         // Get store name for receipt

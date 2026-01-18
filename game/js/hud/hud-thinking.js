@@ -19,8 +19,8 @@ export default class HudThinking extends HudCommon {
         if (this.thinking) {
             return;
         }
-        var _x = this.scene.player.snappedStanding.x
-        var _y = this.scene.player.snappedStanding.y - 32;
+        var _x = this.scene.player.snappedStanding.x + 8;
+        var _y = this.scene.player.snappedStanding.y - 40;
         var thought_bubble = this.makeThinkingBubble(text, _x, _y);
         this.thinking = true;
         
@@ -33,9 +33,19 @@ export default class HudThinking extends HudCommon {
     }
 
     makeThinkingBubble(text, _x, _y) {
-        let thought = this.makeWorldBitmapText(_x + 1, _y - 10, 112, 8, 'SkeleNotebook');
+        let thought = this.makeThinkingBitmapText(_x + 8, _y - 12, 112, 8, 'SkeleNotebook');
         thought.setText(text);
-        let bubble = this.makeWorldBlock(_x, _y, thought.displayWidth + 20, thought.displayHeight + 20, 'SPEECH_BUBBLE_ROUND');
+        let bubble = this.makeThinkingBlock(_x, _y, thought.displayWidth + 20, thought.displayHeight + 20, 'SPEECH_BUBBLE_ROUND');
+
+        // tween the bubble and thought up a little
+        var tween = this.scene.add.tween({
+            targets: [thought, bubble],
+            y: '-=8',
+            duration: 500,
+            yoyo: false,
+            ease: 'Sine.easeOut',
+            repeat: 0
+        });
 
 
         return { bubble: bubble, thought: thought};
@@ -47,7 +57,7 @@ export default class HudThinking extends HudCommon {
         }
         let thought = this.makeBitmapText(this.view.center.x, this.view.top - 20, 256, 8, 'SkeleNotebook');
         thought.setText(text).setOrigin(.5, 0).setDepth(30000001);
-        let bubble = this.makeWorldBlock(thought.x, thought.y - 8, thought.displayWidth + 32, thought.displayHeight + 16, 'THOUGHT_CLOUD');
+        let bubble = this.makeThinkingBlock(thought.x, thought.y - 8, thought.displayWidth + 32, thought.displayHeight + 16, 'THOUGHT_CLOUD');
         bubble.setScrollFactor(0).setOrigin(.5, 0).setDepth(30000000);
         this.hud_thinking = true;  
         var tween = this.scene.add.tween({

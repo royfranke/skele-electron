@@ -47,7 +47,7 @@ export default class HudFactory {
         let button_block = this.makeBlock(block.x - block.width, block.y, 18, 24, 'BLOCK_MID_SAPPHIRE_LEFT');
         button_block.setOrigin(1,0);
         let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', button, 16).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0xe2f2f3).setLineSpacing(11);
-        let click_area = this.scene.add.zone(block.x - block.width - 18, block.y, button_block.width + block.width, button_block.height).setOrigin(0).setScrollFactor(0).setDepth(100300).setInteractive(this.cursor_hover);
+        let click_area = this.scene.add.zone(block.x - block.width - 18, block.y, button_block.width + block.width, button_block.height).setOrigin(0).setScrollFactor(0).setDepth(100500).setInteractive(this.cursor_hover);
 
         
         let button_data = {
@@ -135,13 +135,13 @@ export default class HudFactory {
     }
 
 
-    makeWorldBitmapText (_x,_y, width, size=8, font='SkeleNotebook') {
-        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(.5, 1).setDepth(this.scene.player.snappedStanding.y+17).setMaxWidth(width).setTintFill(0x8b8bab);
+    makeThinkingBitmapText (_x,_y, width, size=8, font='SkeleNotebook') {
+        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0, 1).setDepth(this.depth.BUBBLE + 1).setMaxWidth(width).setTintFill(0x8b8bab);
     }
 
-    makeWorldBlock (_x,_y, width=32, height=32, frameName='THOUGHT_CLOUD') {
-        let depth = this.scene.player.snappedStanding != null ? this.scene.player.snappedStanding.y + 16 : 1000;
-        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 16,16,16,16).setOrigin(.5,1).setDepth(depth);
+    makeThinkingBlock (_x,_y, width=32, height=32, frameName='THOUGHT_CLOUD') {
+        let depth = this.depth.BUBBLE;
+        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 16,16,16,16).setOrigin(0,1).setDepth(depth);
  
     }
 

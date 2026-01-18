@@ -265,17 +265,44 @@ const OBJECTS = {
         portal: 0,
         loot: [
                   ],
-        actions: [],
+        actions: [ {
+            name: 'TAKE SHOPPING BASKET', stateTrigger: 'HALF_FULL', validStates: ['FULL','HALF_FULL']
+          }],
         default_state: 'FULL',        states: [                {
               name: 'FULL',
               transition: 'false',
               frames: ['BASKET_RACK-6',]},                {
               name: 'EMPTY',
               transition: 'false',
-              frames: ['BASKET_RACK-1',]},],
+              frames: ['BASKET_RACK-1',]},                {
+              name: 'HALF_FULL',
+              transition: 'false',
+              frames: ['BASKET_RACK-4',]},                            ],
 
           interactions: {
-                                  },
+                                group_36: {
+                req_group: 36,
+                req_group_name: 'Take Shopping Basket',
+                req_pocket_action: '',
+                req_world_action: 'TAKE SHOPPING BASKET',
+                req_state: 'full',
+                req_result_item: 'BASKET_RED',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_KIND',
+                    result: 'DEPLETED',
+                    OBJ_KIND: 'BASKET_RACK'
+                    }
+                                ]
+
+            },                                  },
     },
           BED_1: {
         name: 'Bed 1',
@@ -732,7 +759,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: -8,
         sprite: {
           h:32, 
           w:80,
@@ -5409,6 +5436,46 @@ const OBJECTS = {
         },
         varieties: 1,
         solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          GULLY_5X2: {
+        name: 'Gully 5x2',
+        slug: 'GULLY_5X2', 
+        type: 'GULLY',
+        bounding: {
+          h:2, 
+          w:5
+        },
+        base: {
+          h:2, 
+          w:5,
+          x:0, 
+          y:0
+        },
+        depth: -28,
+        sprite: {
+          h:32, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:64
+        },
+        offset: {
+          x:8, 
+          y:14
+        },
+        varieties: 1,
+        solid: 1,
         portal: 0,
         loot: [
                   ],

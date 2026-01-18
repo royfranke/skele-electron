@@ -44,19 +44,14 @@ export default class HudPayment extends HudCommon {
     openInterface() {
         
         this.setPaymentState('FOCUSED');
-        this.board = this.makeBlock(this.position.board.x, this.position.board.y,this.position.board.width, this.position.board.height,'BLOCK_MID_LILAC_FAT_BORDER');
-        this.frame = this.makeBlock(this.position.board.x, this.position.board.y,this.position.board.width, this.position.board.height,'BLOCK_SHALLOW_RED_FRAME');
-        var text = this.scene.add.bitmapText(this.position.board.x + 16, this.position.board.y + 16, 'SkeleTalk', 'Ready to pay?', 8).setOrigin(0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         var button = this.makeButton(this.position.pay_button.x, this.position.pay_button.y,'PAY', 'X');
         button.click_area.on('pointerdown', () => {
             this.inputSelect();
         });
 
-        this.payment_components.push(text);
-
         this.payment_components.push(button.block);
-        this.payment_components.push(button.text);
+        this.payment_components.push(button.text);    
         this.payment_components.push(button.button);
         this.payment_components.push(button.button_text);
         this.payment_components.push(button.click_area);
@@ -68,8 +63,6 @@ export default class HudPayment extends HudCommon {
     closeInterface() {
         //this.erasePayment();
         this.manager.destroyListeners();
-        this.board.destroy();
-        this.frame.destroy();
         this.payment_components.forEach(component => {
             component.destroy();
         });
@@ -178,9 +171,11 @@ export default class HudPayment extends HudCommon {
         /// Player is paying-- check if they have enough money
         this.scene.player.coinpurse.updateTotal();
         let hasPayment = this.scene.player.coinpurse.availableAmount(this.scene.manager.hud.hudStore.total*100);
+        
         if (hasPayment) {
-            this.takePayment(this.scene.player.coinpurse.total,this.scene.manager.hud.hudStore.total*100);
-            this.scene.manager.hud.hudStore.bagItems();
+            if (this.scene.manager.hud.hudStore.bagItems()) {
+                this.takePayment(this.scene.player.coinpurse.total,this.scene.manager.hud.hudStore.total*100);
+            }
             this.scene.manager.hud.hudPayment.closeInterface();
         }
         else {

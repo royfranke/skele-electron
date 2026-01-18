@@ -54,8 +54,8 @@ export default class HudCommon {
             return this.factory.makeBitmapText(_x, _y, width, size, font);
         }
 
-        makeWorldBitmapText (_x,_y, width, size=24, font='SkeleNotebook') {
-            return this.factory.makeWorldBitmapText(_x, _y, width, size, font);
+        makeThinkingBitmapText (_x,_y, width, size=24, font='SkeleNotebook') {
+            return this.factory.makeThinkingBitmapText(_x, _y, width, size, font);
         }
 
         makeBlock(_x, _y, width = 32, height = 32, frameName = 'BLOCK_MID_YELLOW') {
@@ -70,8 +70,8 @@ export default class HudCommon {
             return this.factory.makeFocusBitmapText(_x, _y, width, size, font);
         }
 
-        makeWorldBlock(_x, _y, width = 32, height = 32, frameName = 'THOUGHT_CLOUD') {
-            return this.factory.makeWorldBlock(_x, _y, width, height, frameName);
+        makeThinkingBlock(_x, _y, width = 32, height = 32, frameName = 'THOUGHT_CLOUD') {
+            return this.factory.makeThinkingBlock(_x, _y, width, height, frameName);
         }
 
         makeHUDRightArrow(_x, _y, color = 'YELLOW') {

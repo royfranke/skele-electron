@@ -221,10 +221,10 @@ export default class Block {
     buildForest () {
         const block = this.block;
         const groundLayer = this.scene[this.scene.locale].groundLayer;
-
+        var reserved_tiles = {};
         for (let h = 0; h < block.height - (block.offset.n + block.offset.s); h++) {
             for (let w = 0; w < block.width - (block.offset.w + block.offset.e); w++) {
-                var tile = Phaser.Math.RND.between(0, 128);
+                var tile = Phaser.Math.RND.between(0, 256);
                 var x = block.left+w+block.offset.w;
                 var y = block.top+h+block.offset.n;
 
@@ -278,6 +278,59 @@ export default class Block {
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'BRANCH_5X2');
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y + 1, 3, 1);
                         w = w + 4;
+                    break;
+                    case 18:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_5X2');
+                        groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 3, 1);
+                        w = w + 4;
+                    break;
+                    case 19:
+                        // Create a circle of trees
+                        for (let angle = 0; angle < 360; angle += 45) {
+                            let radius = 6;
+                            let radian = Phaser.Math.DegToRad(angle);
+                            let treeX = x + radius * Math.cos(radian);
+                            let treeY = y + radius * Math.sin(radian) + .5;
+                            let tileX = Math.floor(treeX);
+                            let tileY = Math.floor(treeY);
+                            /// Check tile type under tree
+                            var tile = this.scene.exterior.ground.getGround(tileX,tileY);
+                            if (tile == undefined) {
+                                continue;
+                            }
+                            if (tile.TYPE != 'DIRT' && tile.TYPE != 'MULCH') {
+                                continue;
+                            }
+                            /// For a 3x3 grid with the tree at the center, check if those tiles are reserved
+                            let reserved = false;
+                            for (let checkX = -1; checkX <= 1; checkX++) {
+                                for (let checkY = -1; checkY <= 1; checkY++) {
+                                    let tileX = Math.floor(treeX) + checkX;
+                                    let tileY = Math.floor(treeY) + checkY;
+                                    if (reserved_tiles[tileX + '-' + tileY] != undefined) {
+                                        reserved = true;
+                                    }
+                                }
+                            } 
+                            if (reserved) {
+                                continue;
+                            }
+                            /// Add the 3x3 set of tiles to the reserved list
+                            for (let checkX = -1; checkX <= 1; checkX++) {
+                                for (let checkY = -1; checkY <= 1; checkY++) {
+                                    reserved_tiles[Math.floor(treeX) + checkX + '-' + (Math.floor(treeY) + checkY)] = 1;
+                                }
+                            }   
+                            // Coin flip to decide whether to place the tree
+                            if (Phaser.Math.RND.between(0,1) == 0) {
+                                continue;
+                            }
+                            this.scene.manager.treeManager.newTreeToWorld(treeX, treeY, 'ASH');
+                            groundLayer.weightedRandomize(TILES.MULCH.FILL_, Math.floor(treeX), Math.floor(treeY), 1, 1);
+                            
+                        }
+                        
+                        w = w + 8;
                     break;
                 }
             }

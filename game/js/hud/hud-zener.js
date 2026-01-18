@@ -499,7 +499,7 @@ export default class HudZener extends HudCommon {
                     this.board.score[i].block = this.makeBlock(this.board.score[i].x, this.board.score[i].y, this.board.score[i].width + 16, 32, this.board.score[i].blockFrame).setOrigin(.5).setScrollFactor(0).setDepth(100100);
                 }
                 else {
-                    this.board.score[i].block = this.makeWorldBlock(this.board.score[i].x, this.board.score[i].y - 4, this.board.score[i].width + 16, 32, 'SPEECH_BUBBLE_UPPER_RIGHT');
+                    this.board.score[i].block = this.makeThinkingBlock(this.board.score[i].x, this.board.score[i].y - 4, this.board.score[i].width + 16, 32, 'SPEECH_BUBBLE_UPPER_RIGHT');
                     this.board.score[i].block.setOrigin(.5).setScrollFactor(0).setDepth(100100);
                 }
             }

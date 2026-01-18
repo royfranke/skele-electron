@@ -47,6 +47,10 @@ export default class ItemManager {
         return result;
     }
 
+    removeItemFromPockets (slug) {
+        return this.scene.manager.hud.removeItemFromPockets(slug);
+    }
+
 
     newItemToPockets (slug,items=[]) {
         var item = this.newItem(slug,items);

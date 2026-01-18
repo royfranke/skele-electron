@@ -219,7 +219,7 @@ export default class Shop {
             let chair = this.scene.manager.objectManager.newObjectToWorld(x + 4, y + 1, 'DINER_CHAIR_RED');
             this.scene.manager.objectManager.newObjectToWorld(x + 1, y + 3, 'BOLLARD_PARKING');
             this.scene.manager.objectManager.newObjectToWorld(x + 3, y + 3, 'BOLLARD_PARKING');
-            this.scene.manager.objectManager.newObjectToWorld(x + 5, y + 3, 'BOLLARD_PARKING');
+            this.scene.manager.objectManager.newObjectToWorld(x + 5, y + 3, 'WOOD_POLE');
         }
         
         if (this.prop.listing.slug == 'LAUNDROMAT') {
@@ -240,7 +240,7 @@ export default class Shop {
             this.sign = this.scene.manager.objectManager.newObjectToWorld(x, y - 3, 'LOCKSMITH_STOREFRONT_SIGN');
             this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
             let key_sign = this.scene.manager.objectManager.newObjectToWorld(x + 3.5, y - 1.75, 'NEON_KEY');
-            key_sign.sprite.setDepth(this.gates[0].sprite.depth - 18);
+            key_sign.sprite.setDepth(this.gates[0].sprite.depth - 16);
         }
     }
     
@@ -251,7 +251,7 @@ export default class Shop {
             this.sign.sprite.setDepth(this.sign.sprite.depth + 32);
             
             let lotto_sign = this.scene.manager.objectManager.newObjectToWorld(x + 2.25, y, 'NEON_LOTTO_SIGN');
-            lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 6);
+            lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 5);
             lotto_sign.setState('FLICKERING');
             
             this.scene.manager.objectManager.newObjectToWorld(x - 4, y + 1, 'TRASH_DRUM');
