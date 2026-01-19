@@ -19,6 +19,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.actionTileLookUp = SPRITE_DIR.DIR_TILE;
         this.actionsGroup = this.scene.add.group();
         this.clearActions();
+        this.listen();
     }
 
     clearActions() {
@@ -75,6 +76,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.clearActions();
         this.addItemActions();
         this.addObjectActions();
+        //this.updateActionAvailability();
     }
 
     updateActionAvailability() {
@@ -181,6 +183,24 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             var firstItem = this.availableActions.shift(); // Remove the first item
             this.availableActions.push(firstItem); // Add the first item to the end
         }
+    }
+
+    listen () {
+        var self = this;
+        this.scene.events.on('ACTION_CLICKED', function(action) {
+            let obj = null;
+            self.availableActions.forEach(function (availableAction) {
+                if (availableAction.action == action) {
+                    obj = availableAction.object;
+                }
+            });
+            if (obj != '' && obj != undefined) {
+                obj.doAction(action);
+            }
+            else {
+                self.doAction();
+            }
+        });
     }
 
 

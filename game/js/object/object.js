@@ -324,15 +324,14 @@ export default class Object {
                 }
                 return;
             }
-            
-            this.world_actions.forEach(function (world_action) {
+        }
+        this.world_actions.forEach(function (world_action) {
                 if (world_action.action == action) {
                     if (world_action.stateTrigger != null) {
                         self.setState(world_action.stateTrigger);
                     }
                 }
             });
-        }
 
         if (action == 'OPEN' && this.info.portal == 1) {
             /// Get portal location info from object -- what room_id, x, y, player facing direction

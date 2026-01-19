@@ -90,12 +90,12 @@
                 this.scene.manager.hud.hudCoinpurse.popCoin(yielded[0]);
 
                 if (yielded[0] < 100) {
-                    this.scene.player.addCoin(yielded[0]);
+                    this.scene.player.coinpurse.addCoin(yielded[0]);
                     
                     this.scene.manager.fx.coinUp(_x*16,_y*16,yielded[0]);
                 }
                 else {
-                    this.scene.player.addDollar(yielded[0]);
+                    this.scene.player.coinpurse.addDollar(yielded[0]);
 
                     this.scene.manager.fx.dollarUp(_x*16,_y*16,yielded[0]/100);
                 }

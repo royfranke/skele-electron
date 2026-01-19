@@ -54,11 +54,11 @@ export default class PlayerManager {
     return this.playerState.getState();
   }
 
-  setState(state_string='IDLE') {
+  setState(state_string = 'IDLE') {
     if (this.state.name == state_string) {
       return;
     }
-    this.scene.events.emit('PLAYER_STATE_CHANGE_'+state_string.toUpperCase());
+    this.scene.events.emit('PLAYER_STATE_CHANGE_' + state_string.toUpperCase());
     return this.playerState.setState(state_string);
   }
 
@@ -91,25 +91,25 @@ export default class PlayerManager {
     this.hopping = true;
     this.setState('HOP');
     this.scene.time.addEvent({
-        delay: 500,
-        loop: false,
-        callback: () => {
-            this.endHop();
-        }
+      delay: 500,
+      loop: false,
+      callback: () => {
+        this.endHop();
+      }
     });
   }
 
-  endHop () {
+  endHop() {
     this.hopping = false;
     //// Pick a random number to see if we trip
-    var trip_chance = Phaser.Math.Between(1,100);
-    var trip_threshold = 3; // 5% chance to trip
+    var trip_chance = Phaser.Math.Between(1, 100);
+    var trip_threshold = 3; // 3% chance to trip
     // Check if we were running or walking before the hop
     if (this.running_hop) {
       this.running_hop = false;
-      trip_threshold = 40;
+      trip_threshold = 40; // 40% chance to trip if running
     }
-    
+
     if (trip_chance <= trip_threshold) {
       this.trip();
       return;
@@ -128,21 +128,21 @@ export default class PlayerManager {
     this.playerSprite.sprite.anims.setCurrentFrame(this.playerSprite.sprite.anims.currentAnim.frames[0]);
 
     this.scene.time.addEvent({
-        delay: 1625,
-        loop: false,
-        callback: () => {
-            this.setState('IDLE');
-            this.tripping = false;
-        }
+      delay: 1625,
+      loop: false,
+      callback: () => {
+        this.setState('IDLE');
+        this.tripping = false;
+      }
     });
   }
 
   setFacing(facing) {
-    if (facing == undefined) {facing = 's';}
+    if (facing == undefined) { facing = 's'; }
     this.playerSprite.facing = facing.toLowerCase();
   }
 
-  getFacing(facing, up=false, right=false, down=false, left=false) {
+  getFacing(facing, up = false, right = false, down = false, left = false) {
     var focus = this.getFocus();
     if (focus.name == 'PLAYER' && this.destinations.length == 0) {
       return this.playerInput.getFacing(facing);
@@ -156,7 +156,6 @@ export default class PlayerManager {
   }
 
   setPositionTile(x_, y_) {
-    console.log("Setting player position to tile: " + x_ + ", " + y_);
     this.playerSprite.sprite.setPosition(x_ * 16, y_ * 16);
   }
 
@@ -176,7 +175,6 @@ export default class PlayerManager {
 
 
   moveToward(_x, _y) {
-    console.log("Moving toward tile: " + _x + ", " + _y); 
     var x_distance = this.standingTile.x - _x;
     var y_distance = this.standingTile.y - _y;
     var up = false;
@@ -229,7 +227,7 @@ export default class PlayerManager {
 
         this.updateActiveTile();
         this.playerInput.update();
-        
+
         if (this.state.name != 'HOP' && this.state.name != 'PICKUP' && this.state.name != 'EXCHANGE' && this.state.name != 'DIG' && this.state.name != 'EAT' && this.state.name != 'PUSH' && this.state.name != 'PULL' && this.state.name != 'TRIP') {
           if (this.playerInput.held || this.destinations.length > 0) {
             if (this.playerInput.run) {
@@ -257,7 +255,7 @@ export default class PlayerManager {
 
       if (this.speed > 0 && this.audio == false) {
         /// Get the current frame for the player
-        if ( (this.state.name == 'WALK' || this.state.name == 'RUN') && (this.playerSprite.sprite.anims.currentFrame.index == 1 || this.playerSprite.sprite.anims.currentFrame.index == 5)) {
+        if ((this.state.name == 'WALK' || this.state.name == 'RUN') && (this.playerSprite.sprite.anims.currentFrame.index == 1 || this.playerSprite.sprite.anims.currentFrame.index == 5)) {
           this.audio = true;
           if (this.underfoot != undefined && (this.underfoot.TYPE == 'ASPHALT' || this.underfoot.TYPE == 'CEMENT' || this.underfoot.TYPE == 'CROSSWALK' || this.underfoot.TYPE == 'PLAZA' || this.underfoot.TYPE == 'STREET')) {
             var step = this.scene.manager.hud.hudSound.play('STEP_HARD');
@@ -277,39 +275,39 @@ export default class PlayerManager {
           else {
             var step = this.scene.manager.hud.hudSound.play('STEP_SOFT');
           }
-          
+
           this.scene.time.addEvent({
             delay: 250,
             loop: false,
             callback: () => {
-                this.audio = false;
+              this.audio = false;
             }
           });
         }
 
-        if ( this.state.name == 'HOP' && (this.playerSprite.sprite.anims.currentFrame.index == 4)) {
+        if (this.state.name == 'HOP' && (this.playerSprite.sprite.anims.currentFrame.index == 4)) {
           this.audio = true;
           var step = this.scene.manager.hud.hudSound.play('STEP_HARD');
           this.scene.time.addEvent({
             delay: 250,
             loop: false,
             callback: () => {
-                this.audio = false;
+              this.audio = false;
             }
           });
         }
 
-        
+
       }
       else if (this.audio == false) {
-        if ( this.state.name == 'TRIP' && (this.playerSprite.sprite.anims.currentFrame.index == 2)) {
+        if (this.state.name == 'TRIP' && (this.playerSprite.sprite.anims.currentFrame.index == 2)) {
           this.audio = true;
           var step = this.scene.manager.hud.hudSound.play('TRIP');
           this.scene.time.addEvent({
             delay: 250,
             loop: false,
             callback: () => {
-                this.audio = false;
+              this.audio = false;
             }
           });
         }
@@ -322,19 +320,17 @@ export default class PlayerManager {
         this.setState('IDLE');
         this.action.clearActions();
         this.player_focus = false;
-        //this.resetInputs();
-        // TODO: Do an initial state set on switch from player
+        this.resetInputs();
       }
 
     }
 
     this.playerSprite.update();
-    
+
   }
 
   moveToTile(x_, y_) {
     this.clearDestinations();
-    //console.log(this.destinations);
     this.playerSprite.moveToTile(x_, y_);
   }
 
@@ -364,12 +360,11 @@ export default class PlayerManager {
       return 35;
     }
     /// TODO: Separate curb/hop handling from getspeed
-    
+
     if (this.underfoot != undefined && (this.underfoot.TYPE == 'CURB' || this.underfoot.TYPE == 'STAIRS') && this.state.name != 'HOP') {
       this.hop();
-
     }
-  
+
     if (this.underfoot == undefined) {
       return 60;
     }
@@ -444,33 +439,25 @@ export default class PlayerManager {
     this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y);
   }
 
-  addCoin(coin_amount) {
-    this.coinpurse.addCoin(coin_amount);
-  }
-
-  addDollar(dollar_amount) {
-    this.coinpurse.addDollar(dollar_amount);
-  }
-
-  goToSleep (x_,y_) {
+  goToSleep(x_, y_) {
     this.scene.player.playerSprite.footShadow.setVisible(false);
-    this.scene.player.setPositionTile(x_,y_ + .5);
+    this.scene.player.setPositionTile(x_, y_ + .5);
     this.scene.player.setState('CURL_UP');
     this.scene.time.addEvent({
-        delay: 1250,
-        loop: false,
-        callback: () => {
-            this.scene.player.setState('SLEEP');
-            this.scene.time.addEvent({
-              delay: 2500,
-              loop: false,
-              callback: () => {
-                  this.scene.save();
-              }
-          });
-        }
+      delay: 1250,
+      loop: false,
+      callback: () => {
+        this.scene.player.setState('SLEEP');
+        this.scene.time.addEvent({
+          delay: 2500,
+          loop: false,
+          callback: () => {
+            this.scene.save();
+          }
+        });
+      }
     });
-    
+
     //this.scene.app.camera.wake();
     return;
   }

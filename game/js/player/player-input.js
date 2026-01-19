@@ -17,23 +17,23 @@ export default class PlayerInput {
 
     update() {
         if (this.scene.manager.getFocus().name == 'PLAYER') {
-        var input = this.scene.app.input.INPUT;
-        this.up = input.UP.HOLD;
-        this.down = input.DOWN.HOLD;
-        this.right = input.RIGHT.HOLD;
-        this.left = input.LEFT.HOLD;
+            var input = this.scene.app.input.INPUT;
+            this.up = input.UP.HOLD;
+            this.down = input.DOWN.HOLD;
+            this.right = input.RIGHT.HOLD;
+            this.left = input.LEFT.HOLD;
 
-        this.select = input.SELECT.TAP;
-        this.more = input.MORE.TAP;
+            this.select = input.SELECT.TAP;
+            this.more = input.MORE.TAP;
 
-        if (this.up || this.down || this.right || this.left) {
-            this.held = true;
-        }
-        else {
-            this.held = false;
-        }
+            if (this.up || this.down || this.right || this.left) {
+                this.held = true;
+            }
+            else {
+                this.held = false;
+            }
 
-        this.run = this.scene.app.input.INPUT.RUN.HOLD;
+            this.run = this.scene.app.input.INPUT.RUN.HOLD;
         }
 
     }
