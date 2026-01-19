@@ -1,12 +1,12 @@
 export default class PlayerInput {
-    
+
     constructor(scene) {
         this.scene = scene;
         this.resetInputs();
 
     }
 
-    resetInputs ()  {
+    resetInputs() {
         this.up = false;
         this.down = false;
         this.right = false;
@@ -15,7 +15,8 @@ export default class PlayerInput {
         this.run = false;
     }
 
-    update () {
+    update() {
+        if (this.scene.manager.getFocus().name == 'PLAYER') {
         var input = this.scene.app.input.INPUT;
         this.up = input.UP.HOLD;
         this.down = input.DOWN.HOLD;
@@ -33,15 +34,21 @@ export default class PlayerInput {
         }
 
         this.run = this.scene.app.input.INPUT.RUN.HOLD;
+        }
 
     }
 
     getFacing(facing) {
-        var up = this.up || this.scene.app.input.INPUT.UP.TAP;
-        var right = this.right || this.scene.app.input.INPUT.RIGHT.TAP;
-        var down = this.down || this.scene.app.input.INPUT.DOWN.TAP;
-        var left = this.left || this.scene.app.input.INPUT.LEFT.TAP;
-        return this.scene.manager.utilities.getFacing(facing, up, right, down, left);
+        /// If focus is on player, get facing
+        if (this.scene.manager.getFocus().name == 'PLAYER') {
+            var up = this.up || this.scene.app.input.INPUT.UP.TAP;
+            var right = this.right || this.scene.app.input.INPUT.RIGHT.TAP;
+            var down = this.down || this.scene.app.input.INPUT.DOWN.TAP;
+            var left = this.left || this.scene.app.input.INPUT.LEFT.TAP;
+            return this.scene.manager.utilities.getFacing(facing, up, right, down, left);
+        }
+        return facing;
     }
-
 }
+
+

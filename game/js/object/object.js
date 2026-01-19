@@ -132,8 +132,12 @@ export default class Object {
     
 
     setShadow (_x,_y,frame) {
+        /*
         this.shadow = this.scene.add.sprite(_x,_y, "OBJECTS", frame).setOrigin(.5,0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
         this.shadow.setFlipX(true).setDepth(this.sprite.depth - 1);
+        */
+
+        //
     }
 
     setName (name) {
@@ -270,18 +274,13 @@ export default class Object {
     doAction(action) {
         this.scene.player.action.clearActions();
         var self = this;
-        this.world_actions.forEach(function (world_action) {
-            if (world_action.action == action) {
-                if (world_action.stateTrigger != null) {
-                    self.setState(world_action.stateTrigger);
-                }
-            }
-        });
+        
         var req_action = this.findInObjectActions(action);
-        console.log(req_action);
+
         if (req_action != false) {
             var reqs_required = req_action.requires.length;
             var reqs_met = 0;
+            var refund = 0;
             req_action.requires.forEach(function (requirement) {
                 if (requirement.slot_type == 'ON_ACTIVE' && (requirement.type == 'OBJ_TYPE' && requirement.OBJ_TYPE == self.info.type)) {
                     reqs_met++;
@@ -294,19 +293,45 @@ export default class Object {
                         var result = self.scene.player.coinpurse.insertCoins([requirement.MONEY]);
                         if (result) {
                             reqs_met++;
+                            refund = requirement.MONEY;
+                        }
+                        else {
+                            // format money
+                            self.scene.manager.hud.hudThinking.tellBrain("I don't have $"+(requirement.MONEY/100).toFixed(2)+".");
                         }
                     }
                 }
             });
             console.log("Requirements met: "+reqs_met+" of "+reqs_required);
+            console.log("Refund amount: "+refund);
             if (reqs_met == reqs_required) {
                if (req_action.req_result_item != '') {
                     var result = this.scene.manager.itemManager.newItemToPockets(req_action.req_result_item);
                     if (!result) {
+                        if (refund > 0) {
+                            // Refund money
+                            this.scene.player.coinpurse.addCoin(refund);
+                        }
                         this.scene.manager.hud.hudThinking.tellBrain('My hands are full.');
+                        return;
                     }
                }
             }
+            else {
+                if (refund > 0) {
+                    // Refund money
+                    self.scene.player.coinpurse.addCoin(refund);
+                }
+                return;
+            }
+            
+            this.world_actions.forEach(function (world_action) {
+                if (world_action.action == action) {
+                    if (world_action.stateTrigger != null) {
+                        self.setState(world_action.stateTrigger);
+                    }
+                }
+            });
         }
 
         if (action == 'OPEN' && this.info.portal == 1) {
@@ -471,7 +496,7 @@ export default class Object {
             this.sprite.body.setOffset(this.info.offset.x + (this.info.sprite.w/2), this.info.offset.y + (this.info.sprite.h/2));
         }
 //this.sprite.setTint(0xe88dad, 0xb2977e, 0x787b69, 0x465e62)
-        //this.setShadow(x_pixels, y_pixels, frame);
+        this.setShadow(x_pixels, y_pixels, frame);
 
         this.runSpecial();
         // Temporary for testing

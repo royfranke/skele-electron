@@ -2347,11 +2347,8 @@ const OBJECTS = {
               transition: 'false',
               frames: ['SPECIAL_NEWS_BOX_-1',]},                {
               name: 'COIN_DISPENSING',
-              transition: 'COIN_RETRACTING',
-              frames: ['SPECIAL_NEWS_BOX_-2','SPECIAL_NEWS_BOX_-3','SPECIAL_NEWS_BOX_-4','SPECIAL_NEWS_BOX_-5','SPECIAL_NEWS_BOX_-6',]},                {
-              name: 'COIN_RETRACTING',
               transition: 'COIN_LOCKED',
-              frames: ['SPECIAL_NEWS_BOX_-6','SPECIAL_NEWS_BOX_-5','SPECIAL_NEWS_BOX_-4','SPECIAL_NEWS_BOX_-3','SPECIAL_NEWS_BOX_-2','SPECIAL_NEWS_BOX_-1',]},                           ],
+              frames: ['SPECIAL_NEWS_BOX_-2','SPECIAL_NEWS_BOX_-3','SPECIAL_NEWS_BOX_-4','SPECIAL_NEWS_BOX_-5','SPECIAL_NEWS_BOX_-6',]},                           ],
 
           interactions: {
                                             group_29: {
@@ -4187,7 +4184,7 @@ const OBJECTS = {
           h:64, 
           w:34,
           x:0, 
-          y:0
+          y:1
         },
         size: {
           h:51, 
@@ -6470,11 +6467,11 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:20, 
-          w:18
+          h:24, 
+          w:28
         },
         offset: {
-          x:7, 
+          x:2, 
           y:20
         },
         varieties: 1,
@@ -6570,11 +6567,11 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:20, 
-          w:18
+          h:24, 
+          w:28
         },
         offset: {
-          x:7, 
+          x:2, 
           y:20
         },
         varieties: 1,
@@ -7684,7 +7681,208 @@ const OBJECTS = {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
               frames: []
-              },],            slots: 0,
+              },],            slots: 4,
+            items: [],
+
+          interactions: {
+                                  },
+    },
+          OVERCOUNTER_CABINET_S_LIGHT_WOOD: {
+        name: 'Overcounter Cabinet S Light Wood',
+        slug: 'OVERCOUNTER_CABINET_S_LIGHT_WOOD', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },                           {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
+              },],            slots: 4,
+            items: [],
+
+          interactions: {
+                                  },
+    },
+          OVERCOUNTER_CABINET_S_PEELING_WOOD_COPY: {
+        name: 'Overcounter Cabinet S Peeling Wood',
+        slug: 'OVERCOUNTER_CABINET_S_PEELING_WOOD_COPY', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        default_state: 'CLOSED',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },                           {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
+              },],            slots: 4,
+            items: [],
+
+          interactions: {
+                                  },
+    },
+          OVERCOUNTER_CABINET_S_YELLOW: {
+        name: 'Overcounter Cabinet S Yellow',
+        slug: 'OVERCOUNTER_CABINET_S_YELLOW', 
+        type: 'CABINET',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:12
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }, {
+            name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: []
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: []
+              },                           {
+              name: 'LOOKING_INSIDE',
+              transition: 'OPEN',
+              frames: []
+              },],            slots: 4,
             items: [],
 
           interactions: {
@@ -8807,6 +9005,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          POWER_LINE_POST_BUILDING_2: {
+        name: 'Power Line Post to Building 2',
+        slug: 'POWER_LINE_POST_BUILDING_2', 
+        type: 'ELECTRICAL_LINE',
+        bounding: {
+          h:4, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:3
+        },
+        depth: 0,
+        sprite: {
+          h:58, 
+          w:39,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           PSYCHIC_STOREFRONT_SIGN: {
         name: 'Psychic Storefront Sign',
         slug: 'PSYCHIC_STOREFRONT_SIGN', 
@@ -9373,11 +9611,11 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:20, 
-          w:18
+          h:24, 
+          w:28
         },
         offset: {
-          x:7, 
+          x:2, 
           y:20
         },
         varieties: 1,
@@ -11200,7 +11438,7 @@ const OBJECTS = {
             },                                  },
     },
           DAILY_NEWS_BOX_: {
-        name: 'Town Daily Box',
+        name: 'Town News Box',
         slug: 'DAILY_NEWS_BOX_', 
         type: 'NEWSPAPER_BOX_',
         bounding: {
@@ -11236,16 +11474,13 @@ const OBJECTS = {
         actions: [ {
             name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
           }],
-        default_state: 'COIN_LOCKED',        states: [                {
+        default_state: 'DEFAULT',        states: [                {
               name: 'COIN_LOCKED',
               transition: 'false',
               frames: ['DAILY_NEWS_BOX_-1',]},                {
               name: 'COIN_DISPENSING',
-              transition: 'COIN_RETRACTING',
-              frames: ['DAILY_NEWS_BOX_-2','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-6',]},                {
-              name: 'COIN_RETRACTING',
               transition: 'COIN_LOCKED',
-              frames: ['DAILY_NEWS_BOX_-6','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-2',]},                           ],
+              frames: ['DAILY_NEWS_BOX_-1','DAILY_NEWS_BOX_-2','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-6','DAILY_NEWS_BOX_-6','DAILY_NEWS_BOX_-6','DAILY_NEWS_BOX_-5','DAILY_NEWS_BOX_-4','DAILY_NEWS_BOX_-3','DAILY_NEWS_BOX_-2','DAILY_NEWS_BOX_-1',]},                           ],
 
           interactions: {
                                             group_29: {

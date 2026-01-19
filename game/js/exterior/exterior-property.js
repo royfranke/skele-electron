@@ -146,6 +146,12 @@ export default class PropertyLine {
             building_x = left;
         }
 
+        if (this.prop.structure.type == 'BUNGALOW') {
+            yard = 5;
+            building_width = 10;
+            building_x = left + 1;
+        }
+
         if (this.prop.structure.type == 'DUPLEX-LEFT') {
             building_x = building_x + 1;
         }
@@ -523,14 +529,15 @@ export default class PropertyLine {
             this.buildFence(this.prop.lines.left - .5, this.prop.lines.bottom - (height*3)+2, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
         }
 
-        this.mailbox = this.buildMailbox(_x + width, this.prop.lines.bottom - 1);
-
-
-        if (this.settings.fence.prefix != 'CHAINLINK_S' && this.prop.structure.type != 'DUPLEX-LEFT') {
+        if (this.prop.structure.type != 'DUPLEX-LEFT') {
             // Vertical Fence
             let height = 4
-            this.buildFence(_x + width + right_length, this.prop.lines.bottom - height, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
+            this.buildFence(this.prop.lines.right - .75, this.prop.lines.bottom - height, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
+            this.buildFence(this.prop.lines.right - .75, this.prop.lines.bottom - (height*2)+1, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
+            this.buildFence(this.prop.lines.right - .75, this.prop.lines.bottom - (height*3)+2, height, this.settings.fence.prefix, this.settings.fence.suffix, false);
         }
+
+        this.mailbox = this.buildMailbox(_x + width, this.prop.lines.bottom - 1);
 
 
         if (right_length < 6) {

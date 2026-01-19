@@ -9,6 +9,7 @@ export default class StoreManager {
     }
 
     listen () {
+        var self = this;
         var callback_left = function () {
             this.move('LEFT');
         }
@@ -24,11 +25,16 @@ export default class StoreManager {
         var callback_back = function () {
             this.back();
         }
+        var callback_select = function () {
+            self.scene.manager.hud.hudPayment.inputSelect();
+        }
+
         this.scene.events.addListener('INPUT_LEFT_STORE', callback_left, this);
         this.scene.events.addListener('INPUT_RIGHT_STORE', callback_right, this);
         this.scene.events.addListener('INPUT_UP_STORE', callback_up, this);
         this.scene.events.addListener('INPUT_DOWN_STORE', callback_down, this);
         this.scene.events.addListener('INPUT_BACK_STORE', callback_back, this);
+        this.scene.events.addListener('INPUT_SELECT_STORE', callback_select, this);
    }
 
    destroyListeners () {
@@ -37,6 +43,7 @@ export default class StoreManager {
         this.scene.events.off('INPUT_UP_STORE');
         this.scene.events.off('INPUT_DOWN_STORE');
         this.scene.events.off('INPUT_BACK_STORE');
+        this.scene.events.off('INPUT_SELECT_STORE');
    }
 
     move(direction) {

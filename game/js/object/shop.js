@@ -21,7 +21,7 @@ export default class Shop {
         var wallKind = [];
         for (var i = 0; i < this.settings.levels.length; i++) {
             if (this.roll([0,1,2,3,4,5]) > 2) {
-                var colors = ['YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL', 'BLUE_COMMERCIAL']; // Weighting the array by repeating more desired colors
+                var colors = ['YELLOW_COMMERCIAL','RED_COMMERCIAL', 'YELLOW_COMMERCIAL']; // Weighting the array by repeating more desired colors
                 wallKind.push(WALLTILES.BRICK[this.roll(colors) + "_"]);
             }
             else {
@@ -219,7 +219,7 @@ export default class Shop {
             let chair = this.scene.manager.objectManager.newObjectToWorld(x + 4, y + 1, 'DINER_CHAIR_RED');
             this.scene.manager.objectManager.newObjectToWorld(x + 1, y + 3, 'BOLLARD_PARKING');
             this.scene.manager.objectManager.newObjectToWorld(x + 3, y + 3, 'BOLLARD_PARKING');
-            this.scene.manager.objectManager.newObjectToWorld(x + 5, y + 3, 'WOOD_POLE');
+            this.makePowerPole(x + 5, y + 3, 2);
         }
         
         if (this.prop.listing.slug == 'LAUNDROMAT') {
@@ -251,7 +251,7 @@ export default class Shop {
             this.sign.sprite.setDepth(this.sign.sprite.depth + 32);
             
             let lotto_sign = this.scene.manager.objectManager.newObjectToWorld(x + 2.25, y, 'NEON_LOTTO_SIGN');
-            lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 5);
+            lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 6);
             lotto_sign.setState('FLICKERING');
             
             this.scene.manager.objectManager.newObjectToWorld(x - 4, y + 1, 'TRASH_DRUM');
@@ -479,5 +479,20 @@ export default class Shop {
             groundLayer.weightedRandomize(TILES.CURB.SOUTHWEST_INSET_, _x, _y + height,1, 1);
             groundLayer.weightedRandomize(TILES.CURB.SOUTHEAST_INSET_, _x + width,  _y + height,1,1);
         }
+
+        makePowerPole(_x, _y, width=2) {
+            var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
+            let power = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 5,'POWER_LINE_POST_BUILDING_'+width);
+            power.sprite.setDepth(pole.sprite.depth+32);
+        }
         
+        makeLightPole(x, y) {
+            var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
+
+            if (light) {
+                let sodium = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 6,'SODIUM');
+                sodium.sprite.setDepth(pole.sprite.depth+1);
+                
+            }
+        }
 }

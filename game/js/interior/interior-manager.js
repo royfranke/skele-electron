@@ -151,7 +151,11 @@ import KEYLIGHT from "../config/key-light.js";
 
     setMouseInput () {
         var self = this;
-        this.scene.input.on('pointerup', function (pointer) {
+        this.scene.input.on('pointerdown', function (pointer) {
+            // Check input focus
+            if (!self.scene.player.player_focus) {
+                return;
+            }
             //console.log('Pointer up at world coordinates:', Math.round(pointer.worldX/16), Math.round(pointer.worldY/16));
             var tile = self.groundLayer.getTileAt(Math.round(pointer.worldX/16), Math.round(pointer.worldY/16)); 
 

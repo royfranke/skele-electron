@@ -65,7 +65,6 @@ export default class PaymentManager {
     }
 
     select () {
-        console.log("SELECT");
         this.scene.manager.hud.hudPayment.inputSelect();
     }
 

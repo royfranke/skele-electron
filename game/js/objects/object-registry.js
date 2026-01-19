@@ -63,6 +63,23 @@ export default class ObjectRegistry {
         return null;
     }
 
+    getObjectsAround (_x, _y) {
+        let objects = [];
+        for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+                let nx = _x + dx;
+                let ny = _y + dy;
+                if (!this.placeEmpty(nx, ny)) {
+                    let objs = this.registry[nx + "_" + ny];
+                    if (objs != null && objs.length > 0) {
+                        objects = objects.concat(objs);
+                    }
+                }
+            }
+        }
+        return objects;
+    }
+
     placeEmpty (_x, _y) {
         if (this.dirtySlot(_x, _y)) {
             return this.registry[_x+"_"+_y] == null;

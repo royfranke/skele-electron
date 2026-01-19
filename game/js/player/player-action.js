@@ -79,7 +79,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
     updateActionAvailability() {
         var focus = this.scene.player.getFocus();
-        if (focus.name == 'PLAYER' && this.scene.player.state.name == 'IDLE') {
+        if (focus.name == 'PLAYER' && (this.scene.player.state.name == 'IDLE' || this.scene.player.state.name == 'WALK')) {
             this.showMarker(true);
             this.showActions(true);
         }
@@ -101,6 +101,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     addObjectActions () {
         if (this.scene.manager.objectManager != undefined) {
             var objects = this.scene.manager.objectManager.registry.getObjects(this.actionTile.x,this.actionTile.y);
+            //var objects = this.scene.manager.objectManager.registry.getObjectsAround(this.actionTile.x,this.actionTile.y);
             if (objects != null && objects.length > 0) {
                 objects.forEach(object => {
                     object.addActions();
@@ -196,19 +197,18 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                     delay: 500,
                     loop: false,
                     callback: () => {
-                        // Fade out
                         this.locale.ground.placeTileType(this.actionTile.x, this.actionTile.y, action.ground, true);
-                        /// Add loot manager call here
+
                         this.scene.manager.loot.digUp(this.actionTile.x, this.actionTile.y);
                     }
-                })
+                });
+                var self = this;
                 this.scene.time.addEvent({
                     delay: 1000,
                     loop: false,
                     callback: () => {
-                        // Fade out
-                        this.scene.player.setState('IDLE');
-                        this.refreshActions();
+                        self.scene.player.setState('IDLE');
+                        self.refreshActions();
                     }
                 })
             }

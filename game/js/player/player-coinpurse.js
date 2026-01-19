@@ -90,8 +90,6 @@ export default class PlayerCoinpurse {
         }
         else {
             let missing = this.getMissing(coin_amount_array);
-            // TODO: Fix to use hud
-            this.scene.manager.hud.think('I need a '+missing[0]+'.');
             return false;
         }
     }
