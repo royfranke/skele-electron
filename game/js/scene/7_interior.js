@@ -85,13 +85,11 @@ export default class InteriorScene extends Phaser.Scene {
 
         var date = this.manager.time.getDateForNotebook();
         date = date.weekday+', '+date.month+' '+date.day;
-        
-        //this.manager.hud.hudNotebook.manager.notebook.addPage(date, 'Testing!');
 
         this.slot = this.app.softSaveGameData();
 
         this.slot.SAVE.DATE = date;
-        this.slot.SAVE.HEADLINE = 'BEJEWELLED';
+        this.slot.SAVE.HEADLINE = this.manager.quest.getSaveHeadline().toLowerCase().replace(/ /g,"_");
 
         this.manager.time.setTimeFromSleep();
         this.app.saveManager.saveGameData();

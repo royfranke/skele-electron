@@ -7,40 +7,51 @@ import QuestFactory from './quest-factory.js';
 
     constructor(scene) {
         this.scene = scene;
-
-        /// Point this to const DATA js
-        this.questLog = {
-            current: [],
-            complete: [],
-            abandoned: []
-        };
         this.factory = new QuestFactory(this.scene);
+        this.initialize();  
+    }
+
+    initialize () {
+        // Initialize quest log
+        if (this.scene.slot.QUESTS != undefined) {
+            this.loadQuestLog(this.scene.slot.QUESTS);
+        }
+        else {
+            this.questLog = {
+                current: [],
+                complete: [],
+                abandoned: []
+            };
+        }
+        console.log(this.questLog);
+
+        if (this.questLog.current.length > 0) {
+            // Load current quests into HUD
+            this.questLog.current.forEach(quest_slug => {
+                var quest = this.getQuest(quest_slug);
+                this.addQuest(quest);
+            });
+        }   
+    }
+
+    findQuestIndex (slug) {
+        for (var i = 0; i < this.questLog.current.length; i++) {
+            if (this.questLog.current[i] == slug) {
+                return i;
+            }
+        }
+
+        for (var i = 0; i < this.questLog.complete.length; i++) {
+            if (this.questLog.complete[i] == slug) {
+                return -2;
+            }
+        }
+        return -1;
     }
 
     triggerQuest (id) {
-        // Check if this quest has already been given/completed/abandoned
-        // If not, add it to the current quest log
-        // If so, return false
-        if (this.questLog.current.length > 0) {
-            for (var i = 0; i < this.questLog.current.length; i++) {
-                if (this.questLog.current[i] == id) {
-                    return false;
-                }
-            }
-            this.questLog.complete.forEach(quest => {
-                if (quest == id) {
-                    return false;
-                }
-            });
-            this.questLog.abandoned.forEach(quest => {
-                if (quest == id) {
-                    return false;
-                }
-            });
-        }
         var quest = this.getQuest(id);
         return this.addQuest(quest);
-        
     }
 
     getQuest (id) {
@@ -49,7 +60,21 @@ import QuestFactory from './quest-factory.js';
 
 
     addQuest (quest,hud=true) {
-        console.log(quest);
+        var quest_index = this.findQuestIndex(quest.slug);
+        if (quest_index > -1) {
+            this.scene.manager.hud.hudQuest.addQuest(quest.summary);
+            let req_id = 0;
+            for (var key in quest.completion){
+                req_id = quest.completion[key].req_group;
+            }
+            this.listen(req_id);
+            return false;
+        }
+        if (quest_index == -2) {
+            console.log("QuestManager.addQuest: Quest '"+quest.slug+"' already completed.");
+            return false;
+        }
+
         var quest_items = this.grantQuestItems(quest,hud);
         if (quest_items == false) { return 'CLEAR_SPACE'; }
         this.questLog.current.push(quest.slug);
@@ -107,7 +132,32 @@ import QuestFactory from './quest-factory.js';
         }
     }
 
-    completeQuest (place=0) {
+    completeQuest (req_id) {
+        var place = -1;
+        var quest = this.getQuestByReqID(req_id);
+        if (quest != false) {
+            place = this.findQuestIndex(quest.slug);
+        }
+        if (place > -1) {
+            this.completeQuestAtPlace(place);
+        }
+    }
+
+    getQuestByReqID (req_id) {
+        for (var i = 0; i < this.questLog.current.length; i++) {
+            var quest = this.getQuest(this.questLog.current[i]);
+            var value = 0;
+            for (var key in quest.completion){
+                value = quest.completion[key].req_group;
+            }
+            if (value == req_id) {
+                return quest;
+            }
+        }
+        return false;
+    }   
+
+    completeQuestAtPlace (place=0) {
         if (this.questLog.current.length >= place + 1) {
             var quest = this.questLog.current.splice(place,1);
             this.questLog.complete.push(quest);
@@ -117,7 +167,6 @@ import QuestFactory from './quest-factory.js';
         else {
             console.warn("QuestService.completeQuest: current quest log does not contain a quest at the requested position ("+place+")");
         }
-
     }
 
     discardQuest (place=0) {
@@ -141,14 +190,30 @@ import QuestFactory from './quest-factory.js';
 
     listen (req_id) {
         var callback = function () {
-            this.completeQuest();
+            this.completeQuest(req_id);
             console.log('REQ_' + req_id + '_MET!');
+            /// Destroy listener
+            this.scene.events.off('REQ_' + req_id + '_MET');
         }
         console.log('REQ_' + req_id + '_MET SET');
         this.scene.events.addListener('REQ_' + req_id + '_MET', callback, this, true);
    }
 
+    saveQuestLog () {
+            return this.questLog;
+    }
 
+    loadQuestLog (data) {
+          this.questLog = data;
+    }
 
-    
+    getSaveHeadline () {
+        if (this.questLog.current.length > 0) {
+            var quest = this.getQuest(this.questLog.current[0]);
+            return quest.headline;
+        }
+        else {
+            return 'Not doing nothing';
+        }
+    }
 }

@@ -13,7 +13,7 @@ export default class HudQuest extends HudCommon {
             unfocused: {
                 note: {
                     x: this.view.left + this.view.margin.left + 64,
-                    y: this.view.bottom - (this.view.margin.bottom + 32),
+                    y: this.view.bottom - (this.view.margin.bottom),
                     width: 96,
                 }
             }
@@ -64,9 +64,11 @@ export default class HudQuest extends HudCommon {
             });
 
             tween.on('complete', function () {
-                this.quest.note.destroy();
-                this.quest.text.destroy();
-                this.quest = null;
+                if (this.quest != null) {   
+                    this.quest.note.destroy();
+                    this.quest.text.destroy();
+                    this.quest = null;
+                }
             }
             , this);
             

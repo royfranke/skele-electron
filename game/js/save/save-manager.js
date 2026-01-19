@@ -91,6 +91,7 @@ export default class SaveManager {
             let block = this.scene.exterior.xyToBlock(this.scene.player.standingTile.x,this.scene.player.standingTile.y);
             this.softSaveBlock(block.x, block.y);
         }
+        data.QUESTS = this.scene.manager.quest.saveQuestLog();
         return data;
     }
 

@@ -41,7 +41,7 @@ export default class GameManager {
         this.hud = new HudManager(this.scene);
         this.fx = new FXManager(this.scene);
         this.dialog = new DialogManager(this.scene);
-        this.quest = new QuestManager(this.scene);
+
     }
 
     initializeGame () {
@@ -52,6 +52,7 @@ export default class GameManager {
         this.loot = new LootManager(this.scene);
         this.knowledge = new KnowledgeManager(this.scene);
         this.hud.initializeGameHUD();
+    this.quest = new QuestManager(this.scene);
     }
 
     wake () {

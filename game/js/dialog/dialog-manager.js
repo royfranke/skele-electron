@@ -16,7 +16,7 @@ export default class DialogManager {
 
         if (dialog.trigger == 'QUEST') {
             var quest = this.scene.manager.quest.triggerQuest(dialog.quest);
-            console.log(quest);
+
             if (!quest) {
                 this.scene.manager.hud.hudDialog.clearDialog();
                 //Replace in the future with a hint text found in the quest

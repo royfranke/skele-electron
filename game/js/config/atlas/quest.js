@@ -2,6 +2,8 @@
     LATCHKEY_KID: {
       slug: "LATCHKEY_KID",
       name: "Latchkey Kid",
+      headline: "Latchkey Kid",
+      notebook: "I made a copy of Auntie’s key.",
       summary: "Make a copy of Auntie’s house key. The locksmith is just beyond the Bonedega and the psychic.",
       givers: [
                       {slug: 'SKELE_AUNTIE'}
@@ -42,6 +44,8 @@
       LETTER_CARRIER: {
       slug: "LETTER_CARRIER",
       name: "Mail Letter",
+      headline: "PONY EXPRESS",
+      notebook: "I mailed a letter for @questgiver.",
       summary: "Mail this letter at any blue postbox.",
       givers: [
                       {slug: 'SKELE_AUNTIE'}, 
@@ -89,6 +93,8 @@
       SECOND_BREAKFAST: {
       slug: "SECOND_BREAKFAST",
       name: "Second Breakfast",
+      headline: "Second Breakfast",
+      notebook: "",
       summary: "",
       givers: [
                       {slug: 'SKELE_AUNTIE'}
@@ -97,9 +103,37 @@
                 ],
       goto: 'BONEDEGA',
       use_service: 'NULL',
-      return_to_giver: 'FALSE',
+      return_to_giver: 'TRUE',
       completion: {
-                      },
+                group_37: {
+                req_group: 37,
+                req_group_name: 'Second Breakfast Quest',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'CEREAL_BOX',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM',
+                    result: 'UNTOUCHED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },      },
       empty_hand_message: "",
       hint_messages: "",
       }
