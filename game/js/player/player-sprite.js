@@ -188,7 +188,6 @@ export default class PlayerSprite {
       var current_y = this.scene.player.standingTile.y;
       var route = this.scene.manager.nav.getFullRoute(current_x, current_y,x,y, 'simple_tile');
       this.scene.player.destinations = route;
-      //this.sprite.setPosition(tile_x, tile_y);
     }
 
   }

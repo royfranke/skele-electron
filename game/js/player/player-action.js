@@ -76,7 +76,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.clearActions();
         this.addItemActions();
         this.addObjectActions();
-        //this.updateActionAvailability();
+        this.updateActionAvailability();
     }
 
     updateActionAvailability() {

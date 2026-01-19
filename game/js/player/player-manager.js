@@ -218,115 +218,123 @@ export default class PlayerManager {
 
   update() {
     var focus = this.getFocus();
+    
     if (focus.name == 'PLAYER') {
-      this.player_focus = true;
-      this.last_state = this.getLastState();
-      this.state = this.getState();
-
-      if (this.state.input) {
-
-        this.updateActiveTile();
-        this.playerInput.update();
-
-        if (this.state.name != 'HOP' && this.state.name != 'PICKUP' && this.state.name != 'EXCHANGE' && this.state.name != 'DIG' && this.state.name != 'EAT' && this.state.name != 'PUSH' && this.state.name != 'PULL' && this.state.name != 'TRIP') {
-          if (this.playerInput.held || this.destinations.length > 0) {
-            if (this.playerInput.run) {
-              this.setState('RUN');
-            }
-            else {
-              this.setState('WALK');
-            }
-          }
-          else {
-            this.setState('IDLE');
-          }
-        }
-      }
-      else {
-        this.resetInputs();
-      }
-
-      this.checkItinerary();
-      this.speed = this.getSpeed();
-      if (this.last_state.name != this.state.name) {
-        this.stateChanged();
-      }
-      this.action.update();
-
-      if (this.speed > 0 && this.audio == false) {
-        /// Get the current frame for the player
-        if ((this.state.name == 'WALK' || this.state.name == 'RUN') && (this.playerSprite.sprite.anims.currentFrame.index == 1 || this.playerSprite.sprite.anims.currentFrame.index == 5)) {
-          this.audio = true;
-          if (this.underfoot != undefined && (this.underfoot.TYPE == 'ASPHALT' || this.underfoot.TYPE == 'CEMENT' || this.underfoot.TYPE == 'CROSSWALK' || this.underfoot.TYPE == 'PLAZA' || this.underfoot.TYPE == 'STREET')) {
-            var step = this.scene.manager.hud.hudSound.play('STEP_HARD');
-          }
-          else if (this.underfoot != undefined && (this.underfoot.TYPE == 'TILE' || this.underfoot.TYPE == 'LINOLEUM')) {
-            var step = this.scene.manager.hud.hudSound.play('STEP_HARD_SQUEAKY');
-          }
-          else if (this.underfoot != undefined && (this.underfoot.TYPE == 'GRASS' || this.underfoot.TYPE == 'MEADOW' || this.underfoot.TYPE == 'MARSH')) {
-            /// Get whether running or walking
-            if (this.state.name == 'RUN') {
-              var step = this.scene.manager.hud.hudSound.play('STEP_GRASS_RUN');
-            }
-            else {
-              var step = this.scene.manager.hud.hudSound.play('STEP_GRASS_WALK');
-            }
-          }
-          else {
-            var step = this.scene.manager.hud.hudSound.play('STEP_SOFT');
-          }
-
-          this.scene.time.addEvent({
-            delay: 250,
-            loop: false,
-            callback: () => {
-              this.audio = false;
-            }
-          });
-        }
-
-        if (this.state.name == 'HOP' && (this.playerSprite.sprite.anims.currentFrame.index == 4)) {
-          this.audio = true;
-          var step = this.scene.manager.hud.hudSound.play('STEP_HARD');
-          this.scene.time.addEvent({
-            delay: 250,
-            loop: false,
-            callback: () => {
-              this.audio = false;
-            }
-          });
-        }
-
-
-      }
-      else if (this.audio == false) {
-        if (this.state.name == 'TRIP' && (this.playerSprite.sprite.anims.currentFrame.index == 2)) {
-          this.audio = true;
-          var step = this.scene.manager.hud.hudSound.play('TRIP');
-          this.scene.time.addEvent({
-            delay: 250,
-            loop: false,
-            callback: () => {
-              this.audio = false;
-            }
-          });
-        }
-      }
+      this.updatePlayerFocus();
+    } else {
+      this.handleFocusLoss();
     }
-    else { // If focus off player
-      var last = this.getLastFocus();
-      if (last.name == 'PLAYER' && this.player_focus) { //If focus was just changed off the player
-        this.speed = 0;
-        this.setState('IDLE');
-        this.action.clearActions();
-        this.player_focus = false;
-        this.resetInputs();
-      }
-
-    }
-
+    
     this.playerSprite.update();
+  }
 
+  updatePlayerFocus() {
+    this.player_focus = true;
+    this.last_state = this.getLastState();
+    this.state = this.getState();
+
+    if (this.state.input) {
+      this.updateActiveTile();
+      this.playerInput.update();
+      this.updateMovementState();
+    } else {
+      this.resetInputs();
+    }
+
+    this.checkItinerary();
+    this.speed = this.getSpeed();
+    
+    if (this.last_state.name != this.state.name) {
+      this.stateChanged();
+    }
+    
+    this.action.update();
+    this.updateFootstepAudio();
+  }
+
+  updateMovementState() {
+    const actionStates = ['HOP', 'PICKUP', 'EXCHANGE', 'DIG', 'EAT', 'PUSH', 'PULL', 'TRIP'];
+    
+    if (!actionStates.includes(this.state.name)) {
+      if (this.playerInput.held || this.destinations.length > 0) {
+        this.setState(this.playerInput.run ? 'RUN' : 'WALK');
+      } else {
+        this.setState('IDLE');
+      }
+    }
+  }
+
+  updateFootstepAudio() {
+    if (this.audio) return;
+    
+    if (this.speed > 0) {
+      this.playMovementSounds();
+    } else {
+      this.playTripSound();
+    }
+  }
+
+  playMovementSounds() {
+    const isWalkOrRun = this.state.name == 'WALK' || this.state.name == 'RUN';
+    const isStepFrame = this.playerSprite.sprite.anims.currentFrame.index == 1 || 
+                        this.playerSprite.sprite.anims.currentFrame.index == 5;
+    
+    if (isWalkOrRun && isStepFrame) {
+      this.playFootstepByTerrain();
+      this.scheduleAudioReset(250);
+    } else if (this.state.name == 'HOP' && this.playerSprite.sprite.anims.currentFrame.index == 4) {
+      this.scene.manager.hud.hudSound.play('STEP_HARD');
+      this.scheduleAudioReset(250);
+    }
+  }
+
+  playFootstepByTerrain() {
+    if (!this.underfoot) {
+      this.scene.manager.hud.hudSound.play('STEP_SOFT');
+      return;
+    }
+
+    const hardSurfaces = ['ASPHALT', 'CEMENT', 'CROSSWALK', 'PLAZA', 'STREET'];
+    const squeakySurfaces = ['TILE', 'LINOLEUM'];
+    const grassSurfaces = ['GRASS', 'MEADOW', 'MARSH'];
+
+    if (hardSurfaces.includes(this.underfoot.TYPE)) {
+      this.scene.manager.hud.hudSound.play('STEP_HARD');
+    } else if (squeakySurfaces.includes(this.underfoot.TYPE)) {
+      this.scene.manager.hud.hudSound.play('STEP_HARD_SQUEAKY');
+    } else if (grassSurfaces.includes(this.underfoot.TYPE)) {
+      const soundName = this.state.name == 'RUN' ? 'STEP_GRASS_RUN' : 'STEP_GRASS_WALK';
+      this.scene.manager.hud.hudSound.play(soundName);
+    } else {
+      this.scene.manager.hud.hudSound.play('STEP_SOFT');
+    }
+  }
+
+  playTripSound() {
+    if (this.state.name == 'TRIP' && this.playerSprite.sprite.anims.currentFrame.index == 2) {
+      this.scene.manager.hud.hudSound.play('TRIP');
+      this.scheduleAudioReset(250);
+    }
+  }
+
+  scheduleAudioReset(delay) {
+    this.audio = true;
+    this.scene.time.addEvent({
+      delay: delay,
+      loop: false,
+      callback: () => { this.audio = false; }
+    });
+  }
+
+  handleFocusLoss() {
+    var last = this.getLastFocus();
+    if (last.name == 'PLAYER' && this.player_focus) {
+      this.speed = 0;
+      this.setState('IDLE');
+      this.action.clearActions();
+      this.player_focus = false;
+      this.resetInputs();
+    }
   }
 
   moveToTile(x_, y_) {
@@ -335,95 +343,57 @@ export default class PlayerManager {
   }
 
   getSpeed() {
-    if (this.state.name == 'IDLE') {
-      return 0;
-    }
-    if (this.state.name == 'DIG') {
-      return 0;
-    }
-    if (this.state.name == 'TRIP') {
-      return 0;
-    }
-    if (this.state.name == 'SLEEP') {
-      return 0;
-    }
-    if (this.state.name == 'EAT') {
-      return 0;
-    }
-    if (this.state.name == 'PUSH') {
-      return 20;
-    }
-    if (this.state.name == 'PULL') {
-      return -20;
-    }
-    if (this.state.name == 'HOP') {
-      return 35;
-    }
-    /// TODO: Separate curb/hop handling from getspeed
+    // Fixed speed states
+    const stateSpeed = {
+      'IDLE': 0,
+      'DIG': 0,
+      'TRIP': 0,
+      'SLEEP': 0,
+      'EAT': 0,
+      'PUSH': 20,
+      'PULL': -20,
+      'HOP': 35
+    };
 
-    if (this.underfoot != undefined && (this.underfoot.TYPE == 'CURB' || this.underfoot.TYPE == 'STAIRS') && this.state.name != 'HOP') {
-      this.hop();
+    if (stateSpeed.hasOwnProperty(this.state.name)) {
+      return stateSpeed[this.state.name];
     }
 
-    if (this.underfoot == undefined) {
+    // Check for obstacles that trigger hopping
+    this.checkHopTriggers();
+
+    // Default speed when no terrain info
+    if (!this.underfoot) {
       return 60;
     }
+
+    // Calculate speed based on terrain
     return this.interpretSpeed(this.underfoot.SPEED);
   }
 
-  interpretSpeed(speed) {
-    var interpretted = 0;
-    switch (speed) {
-      case 'BASE_SPEED':
-        if (this.state.name == 'RUN') {
-          interpretted = 180;
-        }
-        if (this.state.name == 'WALK') {
-          interpretted = 72;
-        }
-        break;
-      case 'CRISP':
-        if (this.state.name == 'RUN') {
-          interpretted = 195;
-        }
-        if (this.state.name == 'WALK') {
-          interpretted = 85;
-        }
-        break;
-      case 'QUICKENED':
-        if (this.state.name == 'RUN') {
-          interpretted = 210;
-        }
-        if (this.state.name == 'WALK') {
-          interpretted = 100;
-        }
-        break;
-      case 'SLOWED':
-        if (this.state.name == 'RUN') {
-          interpretted = 120;
-        }
-        if (this.state.name == 'WALK') {
-          interpretted = 60;
-        }
-        break;
-      case 'SLOG':
-        if (this.state.name == 'RUN') {
-          interpretted = 80;
-        }
-        if (this.state.name == 'WALK') {
-          interpretted = 45;
-        }
-        break;
-      case 'MOLASSES':
-        if (this.state.name == 'RUN') {
-          interpretted = 80;
-        }
-        if (this.state.name == 'WALK') {
-          interpretted = 30;
-        }
-        break;
+  checkHopTriggers() {
+    const hopTriggers = ['CURB', 'STAIRS'];
+    if (this.underfoot && hopTriggers.includes(this.underfoot.TYPE) && this.state.name != 'HOP') {
+      this.hop();
     }
-    return interpretted;
+  }
+
+  interpretSpeed(terrainSpeed) {
+    const speedMap = {
+      'BASE_SPEED':  { RUN: 180, WALK: 72 },
+      'CRISP':       { RUN: 195, WALK: 85 },
+      'QUICKENED':   { RUN: 210, WALK: 100 },
+      'SLOWED':      { RUN: 120, WALK: 60 },
+      'SLOG':        { RUN: 80,  WALK: 45 },
+      'MOLASSES':    { RUN: 80,  WALK: 30 }
+    };
+
+    const speeds = speedMap[terrainSpeed];
+    if (!speeds) {
+      return 0;
+    }
+
+    return speeds[this.state.name] || 0;
   }
 
   updateActiveTile() {
