@@ -195,7 +195,9 @@ export default class HudWatch extends HudSide {
             this.scene.time.addEvent({
                 delay: 125,
                 callback: () => {
-                    this.watch.actions.block.setFrame('BLOCK_MID_BEIGE_RIGHT');
+                    if (this.watch.actions.block != null) {
+                        this.watch.actions.block.setFrame('BLOCK_MID_BEIGE_RIGHT');
+                    }
                 }
             });
         }

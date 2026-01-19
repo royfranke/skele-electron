@@ -2,7 +2,6 @@ import STATES from "../config/game-states.js";
 
 /*
  * Manages game state 
- * NOT LOADED | LOADING | LOADED | TUTORIAL | OVERWORLD | DREAM | COURT | INTERIOR
  */
 
 export default class GameState {

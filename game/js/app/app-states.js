@@ -95,20 +95,7 @@ const APP_STATES = {
         app_input: true,
         avail_input: false,
         save: true
-    },
-    COURTS: {
-        name: 'COURTS',
-        super: 'Courts Scene',
-        fadeIn: 500,
-        irisIn: 0,
-        fadeOut: 500,
-        autoEnd: 0,
-        menu: false,
-        input: true,
-        app_input: true,
-        avail_input: false,
-        save: false
-    },
+    }
 };
 
 export default APP_STATES;

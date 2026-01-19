@@ -287,11 +287,16 @@ export default class HudZener extends HudCommon {
             this.board.choices.forEach((choice, index) => {
                 if (index == selected) {
                     this.bobbleChoice(choice);
-                    choice.slot.block.setFrame('ITEM_SELECTED');
-                    choice.arrow.setVisible(true);
+                    if (choice.slot.block != null) {
+                        choice.slot.block.setFrame('ITEM_SELECTED');
+                        choice.arrow.setVisible(true);
+                    }
+                    
                 } else {
-                    choice.slot.block.setFrame('ITEM_FOCUSED');
-                    choice.arrow.setVisible(false);
+                    if (choice.slot.block != null) {
+                        choice.slot.block.setFrame('ITEM_UNFOCUSED');
+                        choice.arrow.setVisible(false);
+                    }
                 }
             });
         }

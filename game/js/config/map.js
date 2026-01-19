@@ -2148,7 +2148,7 @@ sells: [
             lines: {
                 x: 29,
                 y: 3,
-                width: 12,
+                width: 13,
                 height: 26
             },
             block: {
@@ -2156,7 +2156,7 @@ sells: [
                 y: 2
             },
             address: {
-                name: "",
+                name: "Auntie",
                 facing: "S",
                 dir: "W",
                 number: "203",
@@ -2183,7 +2183,7 @@ listingName: "Graves, Marcy",                front_room: 6,
             lines: {
                 x: 16,
                 y: 3,
-                width: 12,
+                width: 13,
                 height: 26
             },
             block: {
@@ -2211,7 +2211,7 @@ listingName: "Graves, Marcy",                front_room: 6,
             lines: {
                 x: 3,
                 y: 3,
-                width: 12,
+                width: 13,
                 height: 26
             },
             block: {
@@ -3055,8 +3055,8 @@ delivers: [
             },
             listing: {
                 slug: "BAKERY",
-name: "Bakery",
-listingName: "Bakery TBA",
+name: "Bone Appetit",
+listingName: "Bone Appetit Bakery",
 rollingGate: "FALSE",
 schedule: {
     monday: {

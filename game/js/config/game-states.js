@@ -40,12 +40,6 @@ const GAME_STATES = {
         input: true,
         time: false,
         hud: 'VISIBLE_UNFOCUSED'
-    },
-    COURT: {
-        name: 'COURT',
-        input: true,
-        time: true,
-        hud: 'VISIBLE_UNFOCUSED'
     }
 };
 

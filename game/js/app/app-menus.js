@@ -2,7 +2,6 @@ const app_menus = {
   MAIN: [
     //{ LABEL: 'New Game', TYPE: 'SCENE', LOADER: 'NEW', BUTTON: 'SELECT', BUTTON_STICK: false },
     { LABEL: 'Load Game', TYPE: 'SCENE', LOADER: 'LOAD', BUTTON: 'SELECT', BUTTON_STICK: false },
-    { LABEL: 'Load Courts', TYPE: 'SCENE', LOADER: 'COURTS', BUTTON: 'SELECT', BUTTON_STICK: false },
     { LABEL: 'Settings', TYPE: 'SCENE', LOADER: 'SETTINGS', BUTTON: 'SELECT', BUTTON_STICK: false },
   ],
   PAUSE: [
