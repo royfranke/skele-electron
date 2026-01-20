@@ -186,8 +186,10 @@ export default class Shop {
             this.addStoreWindows(x, y, width - 2);
         }
         
+        if (this.prop.structure.type != 'PARKING-LOT') {
         // Place upper level windows for all multi-level buildings
-        this.placeUpperWindows(positions);
+            this.placeUpperWindows(positions);
+        }
     }
     
     // Place upper level windows

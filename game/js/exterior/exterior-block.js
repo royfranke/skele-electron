@@ -190,7 +190,7 @@ export default class Block {
 
         }  
         if (this.block.offset.s > 0) {
-            this.buildStreetPole(this.block.left+10, this.block.bottom-1,{},true);
+            this.buildStreetPole(this.block.left+3, this.block.bottom-1,{},true);
             this.scene.manager.objectManager.newObjectToWorld(this.block.right-7, this.block.bottom-1,'HYDRANT_CITY_');
 
 

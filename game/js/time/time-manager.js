@@ -9,6 +9,7 @@ export default class TimeManager {
         this.month = ['June','July','August'];
         this.start_date = 3; // June 3rd, start date
         this.daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday','Monday'];
+        this.shortDaysOfWeek = ['Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun','Mon'];
 
         this.keyLightOrder = ['astronomicalDawn','nauticalDawn', 'civilDawn', 'sunrise', 'morning', 'solarNoon', 'afternoon', 'sunset', 'civilDusk', 'nauticalDusk', 'astronomicalDusk', 'night'];
 
@@ -51,6 +52,22 @@ export default class TimeManager {
         }
         else {
             return this.getDate();
+        }
+    }
+
+    getTomorrowDateForSave () {
+        var hour = this.now.hour;
+        if (hour < 5) {
+            return this.getDate();
+        }
+        else {
+            var elapsed = {
+                day: this.now.day + 1,
+                hour: this.now.hour,
+                minute: this.now.minute,
+                second: this.now.second
+            };
+            return this.getDate(elapsed);
         }
     }
 
@@ -156,6 +173,7 @@ export default class TimeManager {
             month: this.month[0],
             year: 1994,
             weekday: this.getWeekDayName(elapsed),
+            weekshort: this.getWeekDayShortName(elapsed),
             day_data: DAY_DATA[elapsed.day]
         };
         
@@ -169,6 +187,11 @@ export default class TimeManager {
         }
 
         return date;
+    }
+
+    getWeekDayShortName (elapsed=this.now) {
+        let weekdayIndex = ( elapsed.day + this.start_date) % 7;
+        return this.shortDaysOfWeek[weekdayIndex];
     }
 
     getWeekDayName (elapsed=this.now) {
