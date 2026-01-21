@@ -1,8 +1,10 @@
+import RequirementsEngine from "../requirements/requirements-engine.js";
 /* Item Class */
 
 export default class Item {
     constructor(scene, item) {
         this.scene = scene;
+        this.requirementsEngine = new RequirementsEngine(scene);
         this.verbose = false;
         this.registered = false;
         this.tile_x = 0;
@@ -14,6 +16,7 @@ export default class Item {
         this.sprite = null;
         this.stackCount = 1;
         this.info = item;
+        this.requirementsEngine = new RequirementsEngine(this.scene);
         if (this.info.status != undefined && this.info.status != null) {
             if (this.info.status.fx_start != '' || this.info.status.fx != '' || this.info.status.fx_end != '') {
                 this.hasFX = true;
@@ -255,69 +258,31 @@ export default class Item {
 
 
 
-    refreshPocketActions () {
-        var put_away = false;
+      refreshPocketActions() {
+        const interactions = this.info.interactions;
+        const actionsSimple = [];
 
-        var interactions = this.info.interactions;
-        var actions_simple = [];
-        var info = this.info;
-        var self = this.scene;
-        Object.keys(interactions).forEach(function (interaction, index) {
-            var requirement_parts_met = 0;
-            var requirement_parts = interactions[interaction].requires.length;
-            interactions[interaction].requires.forEach(function (requirement, index) {
-                /// If the requirement is for this item or this item kind held in the hand, mark the requirement as met; otherwise check the pockets
-                if (requirement.type == 'ITEM'
-                    && (requirement.ITEM == info.slug
-                        || 
-                        self.manager.hud.pocket.findInPockets(requirement.ITEM)
-                    )
-                    && (requirement.slot_type == 'IN_HAND'
-                    || requirement.slot_type == 'IN_HAND_OR_ACTIVE')) {
-                        
-                    requirement_parts_met++;
-                }
-                if (requirement.type == 'ITEM_KIND'
-                    && (requirement.ITEM_KIND == info.type
-                        || 
-                        self.manager.hud.pocket.findItemKindInPockets(requirement.ITEM_KIND)
-                    )
-                    && (requirement.slot_type == 'IN_HAND'
-                    || requirement.slot_type == 'IN_HAND_OR_ACTIVE')) {
-                    requirement_parts_met++;
-                }
-                if (requirement.type == 'OBJ_KIND'
-                    && self.manager.objectManager.findOnActiveTile(requirement.OBJ_KIND,'kind')
-                    && (requirement.slot_type == 'ON_ACTIVE')) {
-                    requirement_parts_met++;
-                    console.log(''+requirement.OBJ_KIND+' found on active tile');
-                }
-                if (requirement.type == 'OBJ_TYPE'
-                    && self.manager.objectManager.findOnActiveTile(requirement.OBJ_TYPE,'type')
-                    && (requirement.slot_type == 'ON_ACTIVE')) {
-                    requirement_parts_met++;
-                    console.log(''+requirement.OBJ_TYPE+' found on active tile');
-                }
-                if (requirement.type == 'IN_COINPURSE') {
-                    
-                   
-                }
+        Object.values(interactions).forEach(interaction => {
+            const context = { item: this };
+            const checkResult = this.requirementsEngine.checkRequirements(
+                interaction.requires,
+                context
+            );
 
-            });
-            if (requirement_parts_met == requirement_parts) {
-                actions_simple.push(interactions[interaction].req_pocket_action);
+            if (checkResult.satisfied) {
+                actionsSimple.push(interaction.req_pocket_action);
             }
         });
 
-        if (!put_away) {
-            actions_simple.push('PUT AWAY');
+        // Add default actions
+        if (!actionsSimple.includes('PUT AWAY')) {
+            actionsSimple.push('PUT AWAY');
         }
-        if (this.info.type == 'KEY' && !actions_simple.includes('PUT ON KEYCHAIN')) {
-            actions_simple.push('PUT ON KEYCHAIN');
+        if (this.info.type === 'KEY' && !actionsSimple.includes('PUT ON KEYCHAIN')) {
+            actionsSimple.push('PUT ON KEYCHAIN');
         }
 
-
-        return actions_simple;
+        return actionsSimple;
     }
 
     bagItem(item) {

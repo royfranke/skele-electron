@@ -1,11 +1,11 @@
 import Announcer from './announcer.js';
-
+import RequirementsEngine from '../requirements/requirements-engine.js';
 /* Object Class */
 
 export default class Object {
     constructor(scene, object, items=[]) {
         this.scene = scene;
-
+        this.requirementsEngine = new RequirementsEngine(scene);
         /// Starts out not registered, no tile location, no sprite
         this.registered = false;
         this.tile_x = 0;
@@ -188,15 +188,41 @@ export default class Object {
         if (this.state != null) { 
             var player_action = this.scene.player.action;
             const state = this.state;
+            const self = this;
+            
+            // Add standard world actions based on state
             this.world_actions.forEach(function (action) {
                 if (action.validStates.includes(state.name)) {
                     player_action.addAction(action);
                 }
             });
-            this.addChestActions();
             
+            // Add interaction-based world actions
+            if (this.info.interactions) {
+                for (var key in this.info.interactions) {
+                    if (this.info.interactions.hasOwnProperty(key)) {
+                        const interaction = this.info.interactions[key];
+                        if (interaction.req_world_action && interaction.req_world_action !== '') {
+                            // Check if requirements can be met
+                            const context = { activeObject: self };
+                            const checkResult = self.requirementsEngine.checkRequirements(
+                                interaction.requires,
+                                context
+                            );
+                            
+                            if (checkResult.satisfied) {
+                                player_action.addAction({
+                                    action: interaction.req_world_action,
+                                    object: self
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            
+            this.addChestActions();
         }
-        
     }
 
     setServices (services) {
@@ -271,75 +297,71 @@ export default class Object {
 
     }
 
+
+
     doAction(action) {
         this.scene.player.action.clearActions();
         var self = this;
         
-        var req_action = this.findInObjectActions(action);
+        const reqAction = this.findInObjectActions(action);
+        
+        // If there's a requirement-based action, process it
+        if (reqAction) {
+            // Check requirements
+            const context = { activeObject: this };
+            const checkResult = this.requirementsEngine.checkRequirements(
+                reqAction.requires,
+                context
+            );
 
-        if (req_action != false) {
-            var reqs_required = req_action.requires.length;
-            var reqs_met = 0;
-            var refund = 0;
-            req_action.requires.forEach(function (requirement) {
-                if (requirement.slot_type == 'ON_ACTIVE' && (requirement.type == 'OBJ_TYPE' && requirement.OBJ_TYPE == self.info.type)) {
-                    reqs_met++;
-                }
-                if (requirement.slot_type == 'ON_ACTIVE' && (requirement.type == 'OBJ_KIND' && requirement.OBJ_KIND == self.info.slug)) {
-                    reqs_met++;
-                }
-                if (requirement.slot_type == 'IN_COINPURSE') {
-                    if (requirement.type == 'MONEY') {
-                        var result = self.scene.player.coinpurse.insertCoins([requirement.MONEY]);
-                        if (result) {
-                            reqs_met++;
-                            refund = requirement.MONEY;
-                        }
-                        else {
-                            // format money
-                            self.scene.manager.hud.hudThinking.tellBrain("I don't have $"+(requirement.MONEY/100).toFixed(2)+".");
-                        }
-                    }
-                }
-            });
-            console.log("Requirements met: "+reqs_met+" of "+reqs_required);
-            console.log("Refund amount: "+refund);
-            if (reqs_met == reqs_required) {
-               if (req_action.req_result_item != '') {
-                    var result = this.scene.manager.itemManager.newItemToPockets(req_action.req_result_item);
-                    if (!result) {
-                        if (refund > 0) {
-                            // Refund money
-                            this.scene.player.coinpurse.addCoin(refund);
-                        }
-                        this.scene.manager.hud.hudThinking.tellBrain('My hands are full.');
-                        return;
-                    }
-               }
-            }
-            else {
-                if (refund > 0) {
-                    // Refund money
-                    self.scene.player.coinpurse.addCoin(refund);
+            console.log(`Requirements met: ${checkResult.met} of ${checkResult.required}`);
+
+            if (!checkResult.satisfied) {
+                // Refund on failure
+                this.requirementsEngine.refund(checkResult.refunds);
+                
+                // Show failure messages
+                if (checkResult.failures.length > 0) {
+                    console.log('Requirement failures:', checkResult.failures);
                 }
                 return;
             }
-        }
-        this.world_actions.forEach(function (world_action) {
-                if (world_action.action == action) {
-                    if (world_action.stateTrigger != null) {
-                        self.setState(world_action.stateTrigger);
-                    }
-                }
-            });
 
+            // Give result item if specified
+            if (reqAction.req_result_item && reqAction.req_result_item !== '') {
+                const result = this.scene.manager.itemManager.newItemToPockets(
+                    reqAction.req_result_item
+                );
+                if (!result) {
+                    this.requirementsEngine.refund(checkResult.refunds);
+                    this.scene.manager.hud.hudThinking.tellBrain('My hands are full.');
+                    return;
+                }
+            }
+
+            // Apply requirement results
+            this.requirementsEngine.applyResults(reqAction.requires, reqAction, context);
+
+            // Emit quest event
+            this.scene.events.emit('REQ_' + reqAction.req_group + '_MET');
+            console.log('REQ_' + reqAction.req_group + '_MET');
+            
+            // Refresh HUD display to show inventory changes
+            this.scene.manager.hud.refreshDisplay();
+        }
+
+        // Handle state changes from world_actions
+        this.world_actions.forEach(function (world_action) {
+            if (world_action.action == action) {
+                if (world_action.stateTrigger != null) {
+                    self.setState(world_action.stateTrigger);
+                }
+            }
+        });
+
+        // Handle special action effects
         if (action == 'OPEN' && this.info.portal == 1) {
-            /// Get portal location info from object -- what room_id, x, y, player facing direction
-            /// Go to portal... (maybe this is redraw of ground)
-            /// Have this after opening anim of doors
-            // Play the door opening sound
             this.scene.manager.hud.hudSound.play('DOOR_OPENING');
-            /// Time delay for door opening sound
             this.scene.time.delayedCall(375, () => {
                 if (this.portal != null) {
                     this.scene.portalTo(this.portal);
@@ -350,15 +372,9 @@ export default class Object {
         if (action == 'CHECK OUT' || action == 'CHECKOUT') {
             this.scene.manager.hud.hudStore.checkout();
         }
-        /*
-        if (action == 'SAVE') {
-            console.log("Saving game");
-            return this.scene.app.saveManager.saveGameData();
-        }*/
 
         if (action == 'CURL UP ON') {
             console.log("Sleeping - Saving game");
-            /// get the center of this object
             var x = (this.tile_x - this.info.base.x) + (this.info.sprite.w / 2)/ 16;
             var y = (this.tile_y - this.info.base.y)+ (this.info.sprite.h / 2)/ 16;
             this.sprite.setDepth(this.sprite.depth - 32); 
@@ -384,7 +400,7 @@ export default class Object {
             }, this);
         }
 
-
+        // Handle loot triggers
         if (this.loots.length > 0) {
             this.loots.forEach(loot => {
                 if (action == loot.actionTrigger.toUpperCase()) {
@@ -393,6 +409,7 @@ export default class Object {
             });
         }
     }
+
 
     findInObjectActions(action_string) {
         var interactions = this.info.interactions;

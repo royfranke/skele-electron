@@ -8863,8 +8863,18 @@ const OBJECTS = {
         portal: 0,
         loot: [
                   ],
-        actions: [],
-        default_state: 'DEFAULT',        states: [],
+        actions: [ {
+            name: 'MAIL', stateTrigger: 'MAILING', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'MAILING',
+              transition: 'DEFAULT',
+              frames: []
+              },],
 
           interactions: {
                                             group_2: {
@@ -8931,8 +8941,18 @@ const OBJECTS = {
         portal: 0,
         loot: [
                   ],
-        actions: [],
-        default_state: 'DEFAULT',        states: [],
+        actions: [ {
+            name: 'MAIL', stateTrigger: 'MAILING', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'MAILING',
+              transition: 'DEFAULT',
+              frames: []
+              },],
 
           interactions: {
                                             group_2: {

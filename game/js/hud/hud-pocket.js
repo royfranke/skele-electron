@@ -1,4 +1,5 @@
 import POCKET_CONFIG from "../config/pocket-states.js";
+import RequirementsEngine from "../requirements/requirements-engine.js";
 /**
  * 	Manage inventory UI
  */
@@ -8,6 +9,7 @@ export default class HudPocket {
         this.scene = scene;
         this.pockets = POCKET_CONFIG.POCKETS.SLOTS;
         this.states = POCKET_CONFIG.POCKETS.STATES;
+        this.requirementsEngine = new RequirementsEngine(scene);
     }
 
     setSaveFromPockets() {
@@ -195,6 +197,18 @@ export default class HudPocket {
             }
         });
         return found;
+    }   
+
+    findItemKindInPockets(item_kind_slug) {
+        var found = false;
+        this.pockets.forEach(function (pocket, index) {
+            if (!found) {
+                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == item_kind_slug) {
+                    found = index;
+                }
+            }
+        });
+        return found;
     }
 
     getHeldItems() {
@@ -338,125 +352,131 @@ export default class HudPocket {
         return false;
     }
 
+    removeItemFromPockets(item_slug, quantity=1) {
+        var self = this;
+        var removed = 0;
+        this.pockets.forEach(function (pocket, index) {
+            if (removed < quantity) {
+                if (pocket.STATE != 'EMPTY') {
+                    var item = pocket[pocket.STATE];
+                    if (item.info.slug == item_slug) {
+                        let to_remove = Math.min(item.stackCount, quantity - removed);
+                        item.updateStackCount(-to_remove);
+                        removed += to_remove;
+                        if (item.stackCount <= 0) {
+                            self.setPocket(index, 'EMPTY');
+                        }
+                    }
+                }
+            }
+        });
+        return removed;
+    }   
+
     // TODO: Refactor
     doAction(pocketIndex, action_string) {
+        const pocket = this.getPocket(pocketIndex);
+        if (pocket.STATE === 'EMPTY') return false;
+
+        // Handle simple actions
+        if (['DROP', 'DROP ONE', 'PUT AWAY', 'PUT ON KEYCHAIN'].includes(action_string)) {
+            return this.handleSimpleAction(pocketIndex, action_string, pocket);
+        }
+
+        // Handle EAT state
+        if (action_string === 'EAT') {
+            this.handleEatAction();
+        }
+
+        // Process complex requirement-based actions
+        const item = pocket[pocket.STATE];
+        const itemAction = item.findInPocketActions(action_string);
+        
+        if (!itemAction) return false;
+
+        const context = { pocketIndex, item };
+        const checkResult = this.requirementsEngine.checkRequirements(
+            itemAction.requires,
+            context
+        );
+
+        if (!checkResult.satisfied) {
+            return false;
+        }
+
+        // Apply data modifications
+        if (itemAction.req_result_data_key) {
+            this.applyDataModifications(itemAction);
+        }
+
+        // Apply requirement results
+        this.requirementsEngine.applyResults(
+            itemAction.requires,
+            itemAction,
+            context
+        );
+
+        // Emit quest event
+        this.scene.events.emit('REQ_' + itemAction.req_group + '_MET');
+        
+        this.scene.manager.hud.refreshDisplay();
+        return true;
+    }
+
+    handleSimpleAction(pocketIndex, action, pocket) {
         var _x = this.scene.player.action.actionTile.x;
         var _y = this.scene.player.action.actionTile.y;
-
-        var action_result = false;
-        var pocket = this.getPocket(pocketIndex);
-
-        if (pocket.STATE != 'EMPTY') {
-            if (action_string == 'DROP') {
-                this.dropItem(pocketIndex, _x, _y);
-            }
-            else if (action_string == 'DROP ONE') {
-                this.dropOneItem(pocketIndex, _x, _y);
-            }
-            else if (action_string == 'PUT AWAY') {
-                action_result = this.putAwayItem(pocketIndex);
-            }
-            else if (action_string == 'PUT ON KEYCHAIN') {
-                action_result = this.scene.manager.hud.hudKeychain.manager.putKeyOnKeychain(pocket[pocket.STATE]);
-
-                var consume = this.getPocket(pocketIndex);
-                consume.HOLDS.updateStackCount(-1);
-                // If the item is finished, empty the pocket
-                if (consume.HOLDS.stackCount <= 0) {
-                    this.setPocket(pocketIndex, 'EMPTY');
-                }
-            }
-
-            var item = pocket[pocket.STATE];
-
-            var self = this;
-            if (action_string == 'EAT' && self.scene.player.state.name != 'EAT') {
-                self.scene.player.setState('EAT');
-
-                self.scene.time.addEvent({
-                    delay: 1000,
-                    loop: false,
-                    callback: () => {
-                        self.scene.player.setState('IDLE');
-                    }
-                })
-
-            }
-
-            if (pocket.STATE != 'EMPTY') {
-                var item_action = item.findInPocketActions(action_string);
-                if (item_action == false) {
-                    return false;
-                }
-
-                item_action.requires.forEach(function (requirement) {
-                    if (requirement.type == 'ITEM' || requirement.type == 'ITEM_KIND') {
-                        if (item_action.req_result_data_key != null) {
-                            var req_data_key = item_action.req_result_data_key;
-                            if (item_action.req_result_data_set != '') {
-                                self.scene.manager.dataManager.setData(req_data_key, item_action.req_result_data_set);
-                            }
-                            if (item_action.req_result_data_modify != '') {
-                                self.scene.manager.dataManager.modifyData('BODY', req_data_key, item_action.req_result_data_modify);
-                            }
-                        }
-                        if (requirement.result == 'TRANSFORMED') {
-                            var transform_into = item_action.req_result_item;
-
-                            console.log("Transforming " + requirement[requirement.type] + " into " + item_action.req_result_item);
-
-                            /// Get the index for the current pocket
-                            /// Get the pocket matching requirement[requirement.type]
-                            var requirement_index = self.findInPockets(requirement[requirement.type]);
-
-                            // if the item type is bag, we need to preserve contents
-                            var contents = self.getItemsInBag(requirement_index);
-
-                            self.setPocket(requirement_index, 'EMPTY');
-
-                            self.scene.manager.itemManager.newItemToPocket(requirement_index, transform_into);
-
-                            // if the item type is a bag, we need to persist contents
-                            if (contents.length > 0) {
-                                self.setItemsInBag(requirement_index, contents);
-                            }
-
-                        }
-                        if (requirement.result == 'CONSUMED') {
-                            var consume = self.getPocket(pocketIndex);
-                            consume.HOLDS.updateStackCount(-1);
-                            // If the item is finished, empty the pocket
-                            if (consume.HOLDS.stackCount <= 0) {
-                                self.setPocket(pocketIndex, 'EMPTY');
-                            }
-                        }
-                        if (requirement.result == 'DUPLICATED') {
-                            var dupe = self.getPocket(pocketIndex);
-                            dupe.HOLDS.updateStackCount(1);
-                        }
-                        if (requirement.result == 'MAILED') {
-                            var mailed = self.getPocket(pocketIndex);
-                            mailed.HOLDS.updateStackCount(-1);
-                            // If the item is finished, empty the pocket
-                            if (mailed.HOLDS.stackCount <= 0) {
-                                self.setPocket(pocketIndex, 'EMPTY');
-                            }
-                        }
-                        if (requirement.result == 'FILLED') {
-                            var fill_with = item_action.req_result_item;
-                            console.log("Fill this " + requirement[requirement.type] + " up with " + item_action.req_result_item);
-                            self.scene.manager.itemManager.newContentToPocket(pocketIndex, fill_with);
-                        }
-                    }
-                });
-                this.scene.events.emit('REQ_' + item_action.req_group + '_MET');
-                console.log('REQ_' + item_action.req_group + '_MET');
-            }
+        
+        if (action === 'DROP') {
+            this.dropItem(pocketIndex, _x, _y);
+            return true;
         }
-        if (action_result) {
+        else if (action === 'DROP ONE') {
+            this.dropOneItem(pocketIndex, _x, _y);
+            return true;
+        }
+        else if (action === 'PUT AWAY') {
+            const result = this.putAwayItem(pocketIndex);
+            if (result) {
+                this.scene.manager.hud.refreshDisplay();
+            }
+            return result;
+        }
+        else if (action === 'PUT ON KEYCHAIN') {
+            const result = this.scene.manager.hud.hudKeychain.manager.putKeyOnKeychain(pocket[pocket.STATE]);
+            var consume = this.getPocket(pocketIndex);
+            consume.HOLDS.updateStackCount(-1);
+            if (consume.HOLDS.stackCount <= 0) {
+                this.setPocket(pocketIndex, 'EMPTY');
+            }
             this.scene.manager.hud.refreshDisplay();
+            return true;
         }
-        return action_result;
+        return false;
+    }
+
+    handleEatAction() {
+        var self = this;
+        if (self.scene.player.state.name != 'EAT') {
+            self.scene.player.setState('EAT');
+            self.scene.time.addEvent({
+                delay: 1000,
+                loop: false,
+                callback: () => {
+                    self.scene.player.setState('IDLE');
+                }
+            });
+        }
+    }
+
+    applyDataModifications(itemAction) {
+        var req_data_key = itemAction.req_result_data_key;
+        if (itemAction.req_result_data_set != '') {
+            this.scene.manager.dataManager.setData(req_data_key, itemAction.req_result_data_set);
+        }
+        if (itemAction.req_result_data_modify != '') {
+            this.scene.manager.dataManager.modifyData('BODY', req_data_key, itemAction.req_result_data_modify);
+        }
     }
 
 }
