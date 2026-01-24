@@ -26,23 +26,23 @@ const SPRITE_DIR = {
             PATRICE: {
                 N: {
                     START: 0,
-                    END: 0,
+                    END: 45,
                 },
                 N_SIDE: {
-                    START: 1,
-                    END: 1,
+                    START: 0,
+                    END: 45,
                 },
                 SIDE: {
-                    START: 2,
-                    END: 2,
+                    START: 0,
+                    END: 45,
                 },
                 S_SIDE: {
-                    START: 3,
-                    END: 3,
+                    START: 0,
+                    END: 45,
                 },
                 S: {
-                    START: 4,
-                    END: 4,
+                    START: 0,
+                    END: 45,
                 }
             }   
         },

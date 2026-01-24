@@ -113,7 +113,7 @@
         }
     },
     "POSITION": {
-        "ROOM": -1,
+        "ROOM": 10,
         "X": 20,
         "Y": 22,
         "FACING": "S"

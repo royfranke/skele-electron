@@ -64,6 +64,7 @@ export default class PlayerCoinpurse {
     
 
     availableAmount (amount) {
+        this.updateTotal();
         return this.total - amount >= 0;
     }
 

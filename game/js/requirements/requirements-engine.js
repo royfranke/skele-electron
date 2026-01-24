@@ -69,6 +69,15 @@ export default class RequirementsEngine {
         const results = [];
 
         requirements.forEach(requirement => {
+            // Consume money for MONEY type requirements
+            if (requirement.type === 'MONEY') {
+                const consumed = this.consumeMoney(requirement, context);
+                console.log(`Money consumed: ${consumed}`);
+                if (!consumed) {
+                    console.warn('Failed to consume money');
+                }
+            }
+
             if (!requirement.result || requirement.result === 'UNTOUCHED') {
                 return;
             }
@@ -186,18 +195,22 @@ export default class RequirementsEngine {
     }
 
     checkMoney(requirement, context) {
-        const result = this.scene.player.coinpurse.insertCoins([requirement.MONEY]);
+        const hasCoins = this.scene.player.coinpurse.availableCoins([requirement.MONEY]);
         
-        if (!result) {
+        if (!hasCoins) {
             const formatted = (requirement.MONEY / 100).toFixed(2);
             this.scene.manager.hud.hudThinking.tellBrain(`I don't have $${formatted}.`);
         }
 
         return {
-            met: result,
-            reason: !result ? `Insufficient funds: $${(requirement.MONEY / 100).toFixed(2)}` : null,
-            refund: result ? { type: 'MONEY', amount: requirement.MONEY } : null
+            met: hasCoins,
+            reason: !hasCoins ? `Insufficient funds: $${(requirement.MONEY / 100).toFixed(2)}` : null
         };
+    }
+
+    consumeMoney(requirement, context) {
+        const result = this.scene.player.coinpurse.insertCoins([requirement.MONEY]);
+        return result;
     }
 
     checkData(requirement, context) {

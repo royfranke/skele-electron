@@ -218,7 +218,7 @@ export default class Shop {
         if (this.prop.listing.slug == 'PSYCHIC') {
             this.sign = this.scene.manager.objectManager.newObjectToWorld(x + 1, y - 3, 'PSYCHIC_STOREFRONT_SIGN');
             this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
-            let chair = this.scene.manager.objectManager.newObjectToWorld(x + 4, y + 1, 'DINER_CHAIR_RED');
+            let chair = this.scene.manager.objectManager.newObjectToWorld(x + 4, y + 1, 'MILK_CRATE');
             this.scene.manager.objectManager.newObjectToWorld(x + 1, y + 3, 'BOLLARD_PARKING');
             this.scene.manager.objectManager.newObjectToWorld(x + 3, y + 3, 'BOLLARD_PARKING');
             this.makePowerPole(x + 5, y + 3, 2);
@@ -252,6 +252,8 @@ export default class Shop {
             this.sign = this.scene.manager.objectManager.newObjectToWorld(x - 1, y, 'LIT_SIGN_BONEDEGA');
             this.sign.sprite.setDepth(this.sign.sprite.depth + 32);
             
+            this.makeLightPole(x - 1, y + 3);
+
             let lotto_sign = this.scene.manager.objectManager.newObjectToWorld(x + 2.25, y, 'NEON_LOTTO_SIGN');
             lotto_sign.sprite.setDepth(this.gates[0].sprite.depth - 6);
             lotto_sign.setState('FLICKERING');
@@ -264,6 +266,7 @@ export default class Shop {
             this.scene.manager.objectManager.newObjectToWorld(x + 9, y + 1, 'DAILY_NEWS_BOX_');
             this.scene.manager.objectManager.newObjectToWorld(x + 10, y + 1, 'PAYPHONE');
             this.scene.manager.objectManager.newObjectToWorld(x + 11, y + 1, 'PAYPHONE');
+            this.scene.manager.objectManager.newObjectToWorld(x + 11, y - 2, 'EXT_STORE_WALL_LIGHT');
             this.scene.manager.objectManager.newObjectToWorld(x + 11, y + 3, 'BOLLARD_PARKING');
         }
         
@@ -488,7 +491,7 @@ export default class Shop {
             power.sprite.setDepth(pole.sprite.depth+32);
         }
         
-        makeLightPole(x, y) {
+        makeLightPole(_x, _y, light=true) {
             var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
 
             if (light) {

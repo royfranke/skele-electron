@@ -26,7 +26,7 @@ export default class GameScene extends Phaser.Scene {
 
 
     create() {
-        if (this.slot.SAVE.HEADLINE == 'NEW') {
+        if (this.room_id == '10') {
             if (this.verbose) console.log("New Game");
             return this.newGame();
         }
