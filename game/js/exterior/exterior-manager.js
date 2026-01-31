@@ -39,11 +39,10 @@ import KEYLIGHT from "../config/key-light.js";
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
         const roof_tileset = this.map.addTilesetImage("roof", null, 16, 16, 0, 0);
         
-        this.groundLayer = this.map.createBlankLayer("Ground", ground_tileset).fill(0);
-        this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset);
-        this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
-        this.roofLayer = this.map.createBlankLayer("Roof", roof_tileset);
-        this.roofLayer.setDepth(1000);
+        this.groundLayer = this.map.createBlankLayer("Ground", ground_tileset).fill(0).setDepth(2);
+        this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset).setDepth(3);
+        this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset).setDepth(4);
+        this.roofLayer = this.map.createBlankLayer("Roof", roof_tileset).setDepth(1000);
         this.buildMap();
     }
 
@@ -259,6 +258,7 @@ import KEYLIGHT from "../config/key-light.js";
         this.wallLayer.setTint(phase.wall_tint);
         this.roofLayer.setTint(phase.roof_tint);
         this.lastKeyLight = key_light_name;
+        this.scene.app.camera.setKeyLightBackground(phase.reflection_color, phase.glass_opacity);
     }
 
     createItems () {

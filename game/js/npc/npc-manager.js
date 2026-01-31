@@ -18,11 +18,11 @@ export default class NpcManager {
       this.newNpcToWorld(npc_cords.x,npc_cords.y,'PATRICE');
       this.newNpcToWorld(npc_cords.x + 2,npc_cords.y,'SKELE_AUNTIE');
       */
-let dir = "E";
-        let number = "101";
+let dir = "W";
+        let number = "107";
         let street = "Belly Button Street";
-        let npc_cords = this.scene.exterior.getMailboxTilesFromAddress(dir, number, street);
-      this.newNpcToWorld(npc_cords.x,npc_cords.y,'PATRICE');
+        let npc_cords = this.scene.exterior.getFrontDoorTilesFromAddress(dir, number, street);
+      this.newNpcToWorld(npc_cords.x+2,npc_cords.y-2,'PATRICE');
       
     }
 

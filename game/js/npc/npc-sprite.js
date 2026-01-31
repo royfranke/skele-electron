@@ -27,7 +27,7 @@ export default class NpcSprite {
     else {
       this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);
       this.scene.physics.add.collider(this.sprite, this.scene.interior.groundLayer);
-      //this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
+      this.scene.physics.add.collider(this.sprite, this.scene.interior.wallLayer);
       this.scene.interior.wallLayer.setCollisionByExclusion([-1]);
       this.sprite.setCollideWorldBounds(true);
       this.scene.npcs.npcs.add(this.sprite);

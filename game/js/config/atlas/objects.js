@@ -6916,6 +6916,8 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+          }, {
             name: 'TURN EAST', stateTrigger: 'FACING_EAST', validStates: ['FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
             name: 'TURN WEST', stateTrigger: 'FACING_WEST', validStates: ['FACING_EAST','FACING_NORTH','FACING_SOUTH']
@@ -6925,6 +6927,14 @@ const OBJECTS = {
             name: 'TURN SOUTH', stateTrigger: 'FACING_SOUTH', validStates: ['FACING_EAST','FACING_NORTH','FACING_WEST']
           }],
         default_state: 'FACING_SOUTH',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'SITTING',
+              transition: 'false',
+              frames: []
+              },            {
               name: 'FACING_NORTH',
               transition: 'false',
               frames: ['DINER_CHAIR_MAROON-4',]
@@ -8004,6 +8014,55 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          NEON_SIGN_PAST_PRESENT_FUTURE: {
+        name: 'Past Present Future Neon Sign',
+        slug: 'NEON_SIGN_PAST_PRESENT_FUTURE', 
+        type: 'LIT_SIGN',
+        bounding: {
+          h:2, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:24, 
+          w:37,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'ON',        states: [                {
+              name: 'OFF',
+              transition: 'false',
+              frames: []},                {
+              name: 'ON',
+              transition: 'false',
+              frames: ['NEON_SIGN_PAST_PRESENT_FUTURE-1',]},                {
+              name: 'FLICKERING',
+              transition: 'false',
+              frames: []},],
 
           interactions: {
                                   },
@@ -9220,6 +9279,8 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+          }, {
             name: 'TURN EAST', stateTrigger: 'FACING_EAST', validStates: ['FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
             name: 'TURN WEST', stateTrigger: 'FACING_WEST', validStates: ['FACING_EAST','FACING_NORTH','FACING_SOUTH']
@@ -9229,6 +9290,14 @@ const OBJECTS = {
             name: 'TURN SOUTH', stateTrigger: 'FACING_SOUTH', validStates: ['FACING_EAST','FACING_NORTH','FACING_WEST']
           }],
         default_state: 'FACING_WEST',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'SITTING',
+              transition: 'false',
+              frames: []
+              },            {
               name: 'FACING_NORTH',
               transition: 'false',
               frames: ['DINER_CHAIR_RED-4',]

@@ -38,6 +38,7 @@ import KEYLIGHT from "../config/key-light.js";
         this.wallLayer.setTint(phase.wall_tint);
         this.roofLayer.setTint(phase.wall_tint);
         this.lastKeyLight = key_light_name;
+        this.scene.app.camera.setKeyLightBackground(phase.reflection_color);
     }
 
 
@@ -58,8 +59,11 @@ import KEYLIGHT from "../config/key-light.js";
         const wall_tileset = this.map.addTilesetImage("wall", null, 16, 16, 0, 0);
         
         this.groundLayer = this.map.createBlankLayer("Ground", tileset).fill(0);
+        this.groundLayer.setDepth(2);
         this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset);
+        this.edgeLayer.setDepth(3);
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset);
+        this.wallLayer.setDepth(4);
 
         this.roofLayer = this.map.createBlankLayer("Roof", wall_tileset).setDepth(this.map.height*16);
 

@@ -194,7 +194,7 @@ export default class Block {
             this.scene.manager.objectManager.newObjectToWorld(this.block.right-7, this.block.bottom-1,'HYDRANT_CITY_');
 
 
-            this.scene.manager.treeManager.newTreeToWorld(this.block.left+8.25, this.block.bottom - .25, 'ASH');
+            this.scene.manager.treeManager.newTreeToWorld(this.block.left+8.25, this.block.bottom - .25, 'SUGAR_MAPLE');
             this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+8, this.block.bottom - 1, 2, 1);
 
             //this.scene.manager.treeManager.newTreeToWorld(this.block.left+27.25, this.block.bottom - .25, 'ASH');
@@ -325,12 +325,17 @@ export default class Block {
                             if (Phaser.Math.RND.between(0,1) == 0) {
                                 continue;
                             }
-                            this.scene.manager.treeManager.newTreeToWorld(treeX, treeY, 'ASH');
+                            this.scene.manager.treeManager.newTreeToWorld(treeX, treeY, 'SUGAR_MAPLE');
                             groundLayer.weightedRandomize(TILES.MULCH.FILL_, Math.floor(treeX), Math.floor(treeY), 1, 1);
                             
                         }
                         
                         w = w + 8;
+                    break;
+
+                    case 20:
+                        groundLayer.weightedRandomize(TILES.WATER.BITMAP_, x, y, 3, 1);
+                        groundLayer.weightedRandomize(TILES.WATER.BITMAP_, x+1, y+1, 3, 1);
                     break;
                 }
             }

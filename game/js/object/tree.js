@@ -16,6 +16,14 @@ export default class Tree {
         this.name = this.info.name;
     }
 
+    setCollision() {
+        if (this.sprite != null) {
+            this.sprite.body.setSize(12, 8);
+            this.sprite.body.setOffset(this.sprite.displayWidth/2 + 4, this.sprite.displayHeight/2 - 10);
+            this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);
+        }
+    }
+
     setShadow(_x, _y, frame) {
         //this.shadow = this.scene.add.sprite(_x, _y, "TREES", frame).setOrigin(.5, 0).setFlipY(true).setTintFill(0x465e62).setBlendMode(Phaser.BlendModes.MULTIPLY).setAlpha(.5).setAngle(45);
         //this.shadow.setFlipX(true).setDepth(this.sprite.depth - 1);
@@ -40,11 +48,28 @@ export default class Tree {
     }
 
     setBranches(count=2) {
-        this.setBranch(0,-(this.sprite.displayHeight - 40), false, false);
-        this.setBranch(4,-(this.sprite.displayHeight - 38), true, true);
-        this.setBranch(0,-(this.sprite.displayHeight - 16), false, false);
-        this.setBranch(4,-(this.sprite.displayHeight - 12), true, true);
-        this.setBranch(0,-(this.sprite.displayHeight - 8),true, false);
+        if (this.info.slug == 'ASH') {
+            //this.setBranch(0,-(this.sprite.displayHeight - 40), false, false);
+            this.setBranch(4,-(this.sprite.displayHeight - 30), true, true);
+            this.setBranch(0,-(this.sprite.displayHeight - 20), false, false);
+            this.setBranch(4,-(this.sprite.displayHeight - 12), true, true);
+            this.setBranch(0,-(this.sprite.displayHeight - 8),true, false);
+        }
+        if (this.info.slug == 'SUGAR_MAPLE') {
+            
+
+            if (Phaser.Math.RND.between(0,1) == 0) {
+                this.setBranch(-4,-(this.sprite.displayHeight - 6), false, true);
+                this.setBranch(-4,-(this.sprite.displayHeight - 2),true, false);
+                this.setBranch(-8,-(this.sprite.displayHeight + 4),false, false);
+            }
+            else {
+                this.setBranch(-4,-(this.sprite.displayHeight - 4), false, true);
+                this.setBranch(-4,-(this.sprite.displayHeight - 2),true, false);
+            }
+        }
+
+
     }
 
     setBranch(x_offset=0, y_offset=0,flip = false, behind = false) {
@@ -62,7 +87,7 @@ export default class Tree {
             var _x = ((this.tile_x + 1)*16)+ x_offset;
             var _y = (this.tile_y*16) + y_offset;
 
-            var depth = !behind ? this.sprite.depth - y_offset : this.sprite.depth + y_offset;
+            var depth = !behind ? this.sprite.depth - y_offset/2 : this.sprite.depth + y_offset/2;
 
             var sprite = this.scene.physics.add.staticSprite(_x, _y, 'TREES', this.info.slug+'_BRANCH-'+branch, 0).setOrigin(0, 1).setDepth(depth);
 
@@ -140,7 +165,7 @@ export default class Tree {
         var y_pixels = _y * 16;
         var trunk_variant = Phaser.Math.RND.between(1, this.info.trunks);
         this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'TREES', this.info.slug+'_TRUNK-'+trunk_variant, 0).setOrigin(0,1).setDepth(y_pixels);
-
+        this.setCollision();
         this.setBranches();
 
     }

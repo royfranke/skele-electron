@@ -25,7 +25,7 @@ export default class TreeManager {
             if (values != null && values.length > 0) {
                 values.forEach(value => {
                     
-                        value.setCollider();
+                        value.setCollision();
                     
                 });
             }

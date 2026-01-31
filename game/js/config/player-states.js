@@ -55,6 +55,10 @@ const PLAYER_STATES = {
         name: 'TRIP',
         speed: 0
     },
+    SITTING: {
+        name: 'SITTING',
+        speed: 0
+    },
     WALK: {
         name: 'WALK',
         input: true,

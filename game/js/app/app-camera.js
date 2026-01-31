@@ -42,7 +42,6 @@ export default class AppCamera {
     }
 
     start () {
-        this.camera.setBackgroundColor('#4b424a');
         if (this.state.fadeIn) {
             this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
         }
@@ -54,7 +53,6 @@ export default class AppCamera {
 
 
     wake () {
-        this.camera.setBackgroundColor('#4b424a');
         if (this.state.fadeIn) {
             this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
         }
@@ -101,17 +99,17 @@ export default class AppCamera {
         });
     }
 
-    setKeyLightBackground (keylight) {
-        let color = KEYLIGHTS[keylight].reflection_color;
+    setKeyLightBackground (color, opacity=0.25) {
         if (color == null || color == undefined) {
-            color = '#4b424a';
+            color = '0x4b424a';
         }
-        /// if first two characters are "0x", convert to #
-        if (color.substring(0,2) == '0x') {
-            color = '#' + color.substring(2);
-        }
+
         console.log("Setting keylight background to "+color);
-        this.camera.setBackgroundColor(color);
+        //this.camera.setBackgroundColor(color);
+        if (this.background != null) {
+            this.background.destroy();
+        }
+        this.background = this.scene.add.rectangle(this.view.left, this.view.top, this.view.width, this.view.height, color, opacity).setOrigin(0).setDepth(1).setScrollFactor(0);
     }
 
 }

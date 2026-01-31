@@ -88,6 +88,9 @@ export default class PlayerManager {
     else if (state.name == 'WALK') {
       this.running_hop = false;
     }
+    else if (state.name == 'SITTING') {
+      this.running_hop = false;
+    }
     this.hopping = true;
     this.setState('HOP');
     this.scene.time.addEvent({

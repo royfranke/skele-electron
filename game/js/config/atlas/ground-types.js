@@ -10,6 +10,7 @@ const GROUND_TYPE = {
     ADULTPREF: 4,
     CHILDPREF: 0,
     ANIMALPREF: 1,
+    FRIENDS: ['WATER','MUD'],
     ACTIONS: [
          { ITEM: "SACK_GRASS_SEED",
        ACTION: "plant",
@@ -81,6 +82,7 @@ const GROUND_TYPE = {
     ADULTPREF: 0,
     CHILDPREF: 1,
     ANIMALPREF: 1,
+    FRIENDS: ['PLAZA','STAIRS'],
     ACTIONS: [
         ]
   },
@@ -190,6 +192,7 @@ const GROUND_TYPE = {
     ADULTPREF: 1,
     CHILDPREF: 1,
     ANIMALPREF: 4,
+    FRIENDS: ['CEMENT', 'STAIRS'],
     ACTIONS: [
         ]
   },
@@ -335,6 +338,7 @@ const GROUND_TYPE = {
     ADULTPREF: 1,
     CHILDPREF: 1,
     ANIMALPREF: 7,
+    FRIENDS: ['CEMENT','PLAZA'],
     ACTIONS: [
         ]
   },
@@ -391,12 +395,32 @@ const GROUND_TYPE = {
     ADULTPREF: 7,
     CHILDPREF: 1,
     ANIMALPREF: 1,
+    FRIENDS: ['WATER'],
     ACTIONS: [
          { ITEM: "SHOVEL",
        ACTION: "fill hole",
        FX: "CLOUD_DUST_",
        GROUND: "DIRT"
+      } ,
+         { ITEM: "SHOVEL",
+       ACTION: "dig",
+       FX: "CLOUD_DUST_",
+       GROUND: "WATER"
       } 
+        ]
+  },
+  WATER: {
+    TYPE: "WATER",
+    SPEED: "SLOG",
+    BITMAP: true,
+    EDGE: "HARD",
+    COLLIDES: false,
+    USEMASK: true,
+    ZINDEX: 7,
+    ADULTPREF: 50,
+    CHILDPREF: 7,
+    ANIMALPREF: 4,
+    ACTIONS: [
         ]
   }
 };

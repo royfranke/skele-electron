@@ -373,6 +373,35 @@ export default class Object {
             this.scene.manager.hud.hudStore.checkout();
         }
 
+        if (action == 'SIT') {
+            this.scene.player.setState('SITTING');
+            this.scene.player.playerSprite.footShadow.setVisible(false);
+            // Position player onto center of object
+            var x = (this.tile_x - this.info.base.x) + (this.info.sprite.w / 2)/ 16;
+            var y = (this.tile_y - this.info.base.y)+ (this.info.sprite.h / 2)/ 16;
+            this.scene.player.playerSprite.sprite.x = x * 16;
+            this.scene.player.playerSprite.sprite.y = (y * 16) + 4;
+            this.scene.player.playerSprite.sprite.setDepth(this.sprite.depth + 1);
+            // if the object type is SOFA, face south
+            if (this.info.type == 'SOFA' || this.info.type == 'STUMP_SEAT') {
+                this.scene.player.setFacing('s');
+            }
+
+            // Set a new listener for emit to stand up
+
+            this.scene.events.addListener('INPUT_SELECT_PLAYER', function () {
+                this.scene.player.hop();
+                this.setState('DEFAULT');
+                this.scene.player.playerSprite.footShadow.setVisible(true);
+                this.scene.events.off('INPUT_SELECT_PLAYER');
+            }, this);
+
+            
+
+            
+            return;
+        }
+
         if (action == 'CURL UP ON') {
             console.log("Sleeping - Saving game");
             var x = (this.tile_x - this.info.base.x) + (this.info.sprite.w / 2)/ 16;
