@@ -44,7 +44,7 @@ export default class Announcer {
                     announced.push(sign);
                 }
                 else if (announcement.kind == 'CALENDAR') {
-                    let announce = this.scene.add.sprite(_x + 16,_y - 48, 'UI','CALENDAR_'+announcement.announcement).setOrigin(0).setDepth(10000);
+                    let announce = this.scene.add.sprite(_x + 32,_y - 48, 'UI','CALENDAR_'+announcement.announcement).setOrigin(0).setDepth(10000);
 
                     announced.push(announce);
                 }

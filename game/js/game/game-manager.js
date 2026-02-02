@@ -31,6 +31,7 @@ export default class GameManager {
         this.gameState = new GameState();
         this.utilities = new GameUtilities();
         this.gameFocus = new GameFocus();
+        this.time = new TimeManager();
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
         this.plantManager = new PlantManager(this.scene);
@@ -46,7 +47,7 @@ export default class GameManager {
 
     initializeGame () {
         /// Use this method to gather managers that are not needed for the tutorial/new game
-        this.time = new TimeManager();
+        
         this.verbose = true;
         
         this.loot = new LootManager(this.scene);

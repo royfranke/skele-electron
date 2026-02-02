@@ -190,6 +190,11 @@ import KEYLIGHT from "../config/key-light.js";
                 let obj = this.scene.manager.objectManager.newObjectToWorld(_x + feature.x, _y + feature.y,feature.slug);
 
                 if (feature.slug == 'WALL_CALENDAR') {
+                    /// set the month
+                    /// Get month
+                    this.scene.manager.time.setTimeFromSave(this.scene.slot.TIME);
+                    let date = this.scene.manager.time.getDate();
+                    obj.setState(date.month.toUpperCase(), true);
                     obj.setAnnouncement(obj.state.name,'CALENDAR')
                 }
                 

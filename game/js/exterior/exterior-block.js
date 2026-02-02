@@ -337,6 +337,21 @@ export default class Block {
                         groundLayer.weightedRandomize(TILES.WATER.BITMAP_, x, y, 3, 1);
                         groundLayer.weightedRandomize(TILES.WATER.BITMAP_, x+1, y+1, 3, 1);
                     break;
+                    case 21:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_3X2_1');
+                        groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 3, 1);
+                        w = w + 3;
+                    break;
+                    case 22:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_3X2_2');
+                        groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 3, 1);
+                        w = w + 3;
+                    break;
+                    case 23:
+                        this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_2X2');
+                        groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 2, 1);
+                        w = w + 2;
+                    break;
                 }
             }
         }

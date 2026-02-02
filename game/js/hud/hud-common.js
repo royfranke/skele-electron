@@ -46,8 +46,8 @@ export default class HudCommon {
             slip.button_text.setVisible(visible);
         }
 
-        makeButton(_x,_y,text,button) {
-            return this.factory.makeButton(_x, _y, text, button);
+        makeButton(_x,_y,text,button,color='SAPPHIRE') {
+            return this.factory.makeButton(_x, _y, text, button,color);
         }
     
         makeBitmapText (_x,_y, width, size=24, font='SkeleButton') {

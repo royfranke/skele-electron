@@ -5442,6 +5442,126 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          GULLY_2X2: {
+        name: 'Gully 2x2',
+        slug: 'GULLY_2X2', 
+        type: 'GULLY',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:1
+        },
+        depth: -24,
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:18, 
+          w:26
+        },
+        offset: {
+          x:2, 
+          y:10
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          GULLY_3X2_1: {
+        name: 'Gully 3x2 1',
+        slug: 'GULLY_3X2_1', 
+        type: 'GULLY',
+        bounding: {
+          h:2, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:1
+        },
+        depth: -24,
+        sprite: {
+          h:32, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:40
+        },
+        offset: {
+          x:5, 
+          y:8
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          GULLY_3X2_2: {
+        name: 'Gully 3x2 2',
+        slug: 'GULLY_3X2_2', 
+        type: 'GULLY',
+        bounding: {
+          h:2, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:1
+        },
+        depth: -24,
+        sprite: {
+          h:32, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:40
+        },
+        offset: {
+          x:4, 
+          y:6
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           GULLY_5X2: {
         name: 'Gully 5x2',
         slug: 'GULLY_5X2', 
@@ -6401,6 +6521,46 @@ const OBJECTS = {
               transition: 'CLOSED',
               frames: ['INT_DOOR_SIDE_WHITE-1', 'INT_DOOR_SIDE_WHITE-2', 'INT_DOOR_SIDE_WHITE-3', 'INT_DOOR_SIDE_WHITE-4', 'INT_DOOR_SIDE_WHITE-5', 'INT_DOOR_SIDE_WHITE-6', 'INT_DOOR_SIDE_WHITE-7', ]
               },],
+
+          interactions: {
+                                  },
+    },
+          HALF_WALL_OUTLET_1: {
+        name: 'Interior Half Wall with Outlet',
+        slug: 'HALF_WALL_OUTLET_1', 
+        type: 'HALf_WALL',
+        bounding: {
+          h:2, 
+          w:5
+        },
+        base: {
+          h:1, 
+          w:5,
+          x:0, 
+          y:1
+        },
+        depth: -12,
+        sprite: {
+          h:20, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:10, 
+          w:80
+        },
+        offset: {
+          x:0, 
+          y:10
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -9808,6 +9968,86 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          TV_SMALL_NORTH: {
+        name: 'Small Television North',
+        slug: 'TV_SMALL_NORTH', 
+        type: 'TV',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:24, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:10, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:14
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          TV_SMALL_SOUTH: {
+        name: 'Small Television South',
+        slug: 'TV_SMALL_SOUTH', 
+        type: 'TV',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:24, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:10, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:14
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           TRAFFIC_BARRIER_SMALL: {
         name: 'Small Traffic Barrier',
         slug: 'TRAFFIC_BARRIER_SMALL', 
@@ -12469,6 +12709,86 @@ const OBJECTS = {
               frames: ['UNDERCOUNTER_CABINET_W_YELLOW-1', ]
               },],            slots: 3,
             items: [],
+
+          interactions: {
+                                  },
+    },
+          VCR_NORTH: {
+        name: 'VCR North',
+        slug: 'VCR_NORTH', 
+        type: 'MEDIA_PLAYER',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:14
+        },
+        offset: {
+          x:1, 
+          y:3
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          VCR_SOUTH: {
+        name: 'VCR South',
+        slug: 'VCR_SOUTH', 
+        type: 'MEDIA_PLAYER',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:14
+        },
+        offset: {
+          x:1, 
+          y:3
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },

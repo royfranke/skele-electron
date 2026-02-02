@@ -90,7 +90,15 @@ export default class HudMap extends HudSide {
     }
 
     drawMapMenu() {
-        var menu_items = ['Mid Lower Regional: NW', 'Mid Lower Regional: NE', 'Mid Lower Regional: SW', 'Mid Lower Regional: SE'];
+        var maps = this.scene.slot.MAPS;
+        if (maps.length == 0) {
+            return;
+        }
+        var menu_items = [];
+        maps.forEach((map, index) => {
+            menu_items.push(map.NAME);
+        });
+
         var self = this;
         var _x = this.position.unfocused.board.x + 24;
         var _y = this.position.unfocused.board.y + 16;
@@ -120,7 +128,10 @@ export default class HudMap extends HudSide {
 
     drawMap() {
         this.map_title = this.makeBitmapText(this.position.unfocused.map.x + 8, this.position.unfocused.map.y + 8, this.position.unfocused.map.width - 16,  16,'SkeleStreetSigns');
-        this.map_title.setText(('MID LOWER REGIONAL transit map'));
+        let title = this.scene.slot.MAPS[0].NAME;
+        if (title != null && title != undefined && title != '') {
+            this.map_title.setText(title);
+        }
         this.map_title.setTintFill(0xa82b2d);
         this.map_area = this.makeBlock(this.position.unfocused.map.x, this.position.unfocused.map.y, this.position.unfocused.map.width, this.position.unfocused.map.height,'BLOCK_MID_BEIGE');
         this.map_area_frame = this.makeBlock(this.position.unfocused.map.x, this.position.unfocused.map.y, this.position.unfocused.map.width, this.position.unfocused.map.height,'BLOCK_SHALLOW_BROWN_EDGE_FRAME');

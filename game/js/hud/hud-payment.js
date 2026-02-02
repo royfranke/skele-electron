@@ -27,9 +27,19 @@ export default class HudPayment extends HudCommon {
                 }
         };
         this.position.pay_button = {
-            x: this.position.board.x + this.position.board.width - 32,
+            x: this.position.board.x + this.position.board.width - 40,
             y: this.position.board.y + this.position.board.height - 32
         }
+
+        this.position.cancel_button = {
+            x: this.position.board.x + 8,
+            y: this.position.board.y + this.position.board.height - 32
+        }
+
+        this.position.alert = {
+            x: this.position.board.x + this.position.board.width,
+            y: this.position.board.y + this.position.board.height/2
+        };
         this.payment_components = [];
 
     }
@@ -45,9 +55,14 @@ export default class HudPayment extends HudCommon {
         
         this.setPaymentState('FOCUSED');
 
-        var button = this.makeButton(this.position.pay_button.x, this.position.pay_button.y,'PAY', 'X');
+        var button = this.makeButton(this.position.pay_button.x, this.position.pay_button.y,'PAY', 'X', 'SHAMROCK');
         button.click_area.on('pointerdown', () => {
             this.inputSelect();
+        });
+
+        var cancel_button = this.makeButton(this.position.pay_button.x - (button.text.displayWidth + 40), this.position.pay_button.y,'CANCEL', 'Z', 'RED');
+        cancel_button.click_area.on('pointerdown', () => {
+            this.inputBack();
         });
 
         this.payment_components.push(button.block);
@@ -55,6 +70,11 @@ export default class HudPayment extends HudCommon {
         this.payment_components.push(button.button);
         this.payment_components.push(button.button_text);
         this.payment_components.push(button.click_area);
+        this.payment_components.push(cancel_button.block);
+        this.payment_components.push(cancel_button.text);    
+        this.payment_components.push(cancel_button.button);
+        this.payment_components.push(cancel_button.button_text);
+        this.payment_components.push(cancel_button.click_area);
 
         //this.setupBoard();
         this.manager.listen();
@@ -179,11 +199,27 @@ export default class HudPayment extends HudCommon {
             this.scene.manager.hud.hudPayment.closeInterface();
         }
         else {
-            console.log('Does not have payment');
-            
-        }
-        
 
+            this.makePaymentAlert("You don't have the money, honey!");
+        }
+    }
+
+    makePaymentAlert(message) {
+        var alert = this.makeBlock(this.position.alert.x, this.position.alert.y, 140, 48, 'BLOCK_MID_BEIGE');
+        alert.setOrigin(0).setDepth(100300);
+        var alert_frame = this.makeBlock(this.position.alert.x, this.position.alert.y, 140, 48, 'BLOCK_SHALLOW_BRICK_EDGE_FRAME');
+        alert_frame.setOrigin(0).setDepth(100301);
+        var alert_text = this.scene.add.bitmapText(this.position.alert.x + 12, this.position.alert.y + 12, 'SkeleTalk', message, 8).setOrigin(0).setScrollFactor(0).setDepth(100302).setTintFill(0x4b424a).setMaxWidth(120).setLineSpacing(11);
+        
+        this.scene.time.delayedCall(2000, () => {
+            alert.destroy();
+            alert_text.destroy();
+            alert_frame.destroy();
+        }, [], this);
+    }
+
+    inputBack() {
+        this.scene.events.emit('INPUT_BACK_PAYMENT');
     }
 
     inputLeft() {

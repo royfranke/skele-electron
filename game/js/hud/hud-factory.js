@@ -38,13 +38,13 @@ export default class HudFactory {
         return click_area;
     }
 
-    makeButton (_x,_y, text = 'OK', button='X') {
-        let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 16).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+    makeButton (_x,_y, text = 'OK', button='X', color='SAPPHIRE') {
+        let slip_text = this.scene.add.bitmapText(_x - 6, _y + 8, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 24, 'BLOCK_MID_WHITE_RIGHT');
         block.setOrigin(1,0);
 
-        let button_block = this.makeBlock(block.x - block.width, block.y, 18, 24, 'BLOCK_MID_SAPPHIRE_LEFT');
+        let button_block = this.makeBlock(block.x - block.width, block.y, 18, 24, 'BLOCK_MID_' + color + '_LEFT');
         button_block.setOrigin(1,0);
         let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', button, 16).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0xe2f2f3).setLineSpacing(11);
         let click_area = this.scene.add.zone(block.x - block.width - 18, block.y, button_block.width + block.width, button_block.height).setOrigin(0).setScrollFactor(0).setDepth(100500).setInteractive(this.cursor_hover);
@@ -60,11 +60,11 @@ export default class HudFactory {
 
         button_data.click_area.on('pointerover', () => {
             button_data.block.setFrame('BLOCK_MID_CREAM_RIGHT');
-            button_data.button.setFrame('BLOCK_MID_BLUE_LEFT');
+            button_data.button.setFrame('BLOCK_SHALLOW_' + color + '_LEFT');
         });
         button_data.click_area.on('pointerout', () => {
             button_data.block.setFrame('BLOCK_MID_WHITE_RIGHT');
-            button_data.button.setFrame('BLOCK_MID_SAPPHIRE_LEFT');
+            button_data.button.setFrame('BLOCK_MID_' + color + '_LEFT');
         });
 
         return button_data;
