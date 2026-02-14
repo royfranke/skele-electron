@@ -213,7 +213,7 @@ const DIALOGS = {
       24: {
         id: 24,
         text: 'DO NOT BLOW THIS OFF. You don’t want to repeat fifth grade, right? Keep on top of it and there won’t be much to do.',
-        next: 0,
+        next: 29,
                 responses: [
               ]
     },
@@ -253,6 +253,13 @@ const DIALOGS = {
       28: {
         id: 28,
         text: 'Don’t take too long.',
+        next: 0,
+                responses: [
+              ]
+    },
+      29: {
+        id: 29,
+        text: 'I wrote your mom’s number and our number in your notebook. If you can’t get ahold of your mom, call me and we’ll find her.',
         next: 0,
                 responses: [
               ]

@@ -143,4 +143,8 @@ export default class HudSide extends HudCommon {
         this.scene.manager.hud.hudFocusHints.setKeyTip(this.keytip, false);
     }
 
+    sparkle() {
+        this.makeFX('SPARKLE_', this.side.icon.x - 8, this.side.icon.y - 8);
+    }
+
 }

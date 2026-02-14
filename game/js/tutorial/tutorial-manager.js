@@ -30,80 +30,57 @@ export default class TutorialManager {
         this.scene.events.addListener('DIALOG_CLOSE', callback_closed, this);
     }
 
+    createAdvancerZone(x,y,width,height,step) {
+        var zone = this.scene.add.zone(x * 16, y * 16, width, height).setOrigin(0, 0);
+
+        var zone_indicator = this.scene.add.rectangle(x * 16, y * 16, width, height, 0x00ff00,.5).setOrigin(0).setDepth(1000);
+        zone_indicator.setBlendMode(Phaser.BlendModes.ADD);
+
+        this.scene.physics.add.existing(zone, true);
+        this.scene.physics.add.overlap(zone, [this.scene.player.playerSprite.sprite], (_zone, player) => {
+            zone.destroy();
+            this.stepTutorial(step);
+        });
+    }
+
+    listenForStateChange (state, step, delay = 0) {
+
+        var self = this;
+        var callback = function () {
+            self.scene.events.off(state, callback, this);
+            var event = self.scene.time.addEvent({
+                delay: delay,
+                repeat: 0,
+                callback: () => {
+                    self.stepTutorial(step);
+                }
+            });
+        }
+
+        this.scene.events.addListener(state, callback, this);
+    }
+
     stepTutorial(step) {
         console.log("Step Tutorial: " + step);
         if (step == 1) {
-
-            var _x = this.scene.player.standingTile.x - 4;
-            var _y = this.scene.player.standingTile.y + 6;
-            var zone = this.scene.add.zone(_x * 16, _y * 16, 128, 16).setOrigin(0, 0);
-
-            this.scene.physics.add.existing(zone, true);
-            this.scene.physics.add.overlap(zone, [this.scene.player.playerSprite.sprite], (_zone, player) => {
-                zone.destroy();
-                this.stepTutorial(2);
-            });
+            this.createAdvancerZone(this.scene.player.standingTile.x - 4, this.scene.player.standingTile.y + 6, 128, 16, 2);
         }
         if (step == 2) {
             this.scene.manager.dialog.triggerDialog(17);
-            var _x = this.scene.player.standingTile.x - 2;
-            var _y = this.scene.player.standingTile.y - 1;
-            var zone = this.scene.add.zone(_x * 16, _y * 16, 16, 128).setOrigin(0, 0);
-
-            this.scene.physics.add.existing(zone, true);
-            this.scene.physics.add.overlap(zone, [this.scene.player.playerSprite.sprite], (_zone, player) => {
-                zone.destroy();
-                this.stepTutorial(3);
-            });
+            this.createAdvancerZone(this.scene.player.standingTile.x - 2, this.scene.player.standingTile.y - 1, 16, 128, 3);
         }
         if (step == 3) {
             this.scene.manager.dialog.triggerDialog(18);
-            var _x = this.scene.player.standingTile.x + 2;
-            var _y = this.scene.player.standingTile.y - 1;
-            var zone = this.scene.add.zone(_x * 16, _y * 16, 16, 128).setOrigin(0, 0);
-
-            this.scene.physics.add.existing(zone, true);
-            this.scene.physics.add.overlap(zone, [this.scene.player.playerSprite.sprite], (_zone, player) => {
-                zone.destroy();
-                this.stepTutorial(4);
-            });
+            this.createAdvancerZone(this.scene.player.standingTile.x + 2, this.scene.player.standingTile.y - 1, 16, 128, 4);
         }
         if (step == 4) {
             this.scene.manager.dialog.triggerDialog(19);
             // Add input listener for running
-            var self = this;
-
-            var run_callback = function () {
-
-                self.scene.events.off('PLAYER_STATE_CHANGE_RUN', run_callback, this);
-                var event = self.scene.time.addEvent({
-                    delay: 1500,
-                    repeat: 0,
-                    callback: () => {
-                        self.stepTutorial(5);
-                    }
-                });
-
-            }
-            this.scene.events.addListener('PLAYER_STATE_CHANGE_RUN', run_callback, this, true); /// true should be = once
+            this.listenForStateChange('PLAYER_STATE_CHANGE_RUN', 5, 1500);
         }
         if (step == 5) {
             this.scene.manager.dialog.triggerDialog(20);
-            var self = this;
-
-            var run_callback = function () {
-
-                self.scene.events.off('PLAYER_STATE_CHANGE_RUN', run_callback, this);
-                var event = self.scene.time.addEvent({
-                    delay: 2000,
-                    repeat: 0,
-                    callback: () => {
-                        self.stepTutorial(6);
-                    }
-                });
-
-            }
-            this.scene.events.addListener('PLAYER_STATE_CHANGE_RUN', run_callback, this, true); /// true should be = once
+            this.listenForStateChange('PLAYER_STATE_CHANGE_RUN', 6, 2000);
         }
         if (step == 6) {
             this.tutorial_step = 7;
@@ -197,17 +174,8 @@ export default class TutorialManager {
             // Mrs. Gilly leaves
             var gilly = this.scene.npcs.getNpcBySlug('GILLY_MOM');
             
-            
             gilly.goTo(7,2);
-            var event = this.scene.time.addEvent({
-                delay: 500,
-                repeat: 0,
-                callback: () => {
-                    this.scene.interior.doors[0].setState('CLOSING');
-                    gilly.destroy();
-                    this.tutorial_step = 11;
-                }
-            });
+            this.leaveByDoor(gilly, this.scene.interior.doors[0], true, 11);
             
         }
         if (step == 11 && this.scene.slot.POSITION.ROOM == 19) {
@@ -234,7 +202,26 @@ export default class TutorialManager {
                 repeat: 0,
                 callback: () => {
                     this.scene.manager.dialog.triggerDialog(22);
-                    this.tutorial_step = 13;
+                    /// Listen for eating toast or sitting down at the table
+                    this.listenForStateChange('PLAYER_STATE_CHANGE_EAT', 13);
+                }
+            });
+        }
+        if (step == 13 && this.scene.slot.POSITION.ROOM == 19 && this.scene.slot.NOTEBOOK.STATUS.HAS == "FALSE") {
+            var event = this.scene.time.addEvent({
+                delay: 500,
+                repeat: 0,
+                callback: () => {
+                    this.scene.manager.dialog.triggerDialog(23);
+                    /// Listen for DIALOG_CLOSE_ID_24 to trigger the next step, which is receiving the notebook.
+                    var callback = function () {
+                        this.scene.events.off('DIALOG_CLOSE', callback, this);
+                        this.receiveNotebook();
+                        this.tutorial_step = 14;
+                        this.stepTutorial(14);
+                    }
+
+                    this.scene.events.addListener('DIALOG_CLOSE', callback, this);
                 }
             });
         }
@@ -242,8 +229,26 @@ export default class TutorialManager {
         console.log("Tutorial Step: "+this.tutorial_step);
     }
 
+    receiveNotebook() {
+        this.scene.slot.NOTEBOOK.STATUS.HAS = "TRUE";
+        this.scene.manager.hud.hudNotebook.initialize();
+        this.scene.manager.hud.hudNotebook.sparkle();
+    }
 
 
+    leaveByDoor(person, door, close, step) {
+        this.scene.time.addEvent({
+                delay: 500,
+                repeat: 0,
+                callback: () => {
+                    if (close) {
+                        this.scene.interior.doors[0].setState('CLOSING');
+                    }
+                    person.destroy();
+                    this.tutorial_step = step;
+                }
+            });
+    }
   
 }
     

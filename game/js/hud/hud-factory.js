@@ -136,7 +136,7 @@ export default class HudFactory {
 
 
     makeThinkingBitmapText (_x,_y, width, size=8, font='SkeleNotebook') {
-        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0, 1).setDepth(this.depth.BUBBLE + 1).setMaxWidth(width).setTintFill(0x8b8bab);
+        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0, 1).setDepth(this.depth.BUBBLE + 1).setMaxWidth(width).setTintFill(0x3a3a50);
     }
 
     makeThinkingBlock (_x,_y, width=32, height=32, frameName='THOUGHT_CLOUD') {

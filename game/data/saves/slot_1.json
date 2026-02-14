@@ -75,7 +75,10 @@
             "HAD": "FALSE",
             "LOST": "FALSE"
         },
-        "PAGES": [],
+        "PAGES": [{
+                "title": "Phone Numbers",
+                "content": "Mom: 555-4322\nGillys: 555-4218"
+            }],
         "SPECS": {
             "COLOR": "RED"
         },

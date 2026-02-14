@@ -509,6 +509,34 @@ const ITEMS = {
                     }
                                 ]
 
+            },        group_37: {
+                req_group: 37,
+                req_group_name: 'Second Breakfast Quest',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'CEREAL_BOX',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM',
+                    result: 'UNTOUCHED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
             },        },
     },
       ADULT_MAGAZINE_2: {
@@ -1418,6 +1446,24 @@ items: []    },
         interactions: {
         },
     },
+      CAT_FOOD_CAN: {
+        name: 'Cat Food',
+        slug: 'CAT_FOOD_CAN', 
+        use:  'HOLDS',
+        icon: 'CAT_FOOD_CAN',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 100,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       BOOK_2: {
         name: 'Catcher in the Barley',
         slug: 'BOOK_2', 
@@ -1539,6 +1585,34 @@ items: []    },
                     type: 'ITEM',
                     result: 'DEPLETED',
                     ITEM: 'CEREAL_BOX_1'
+                    }
+                                ]
+
+            },        group_37: {
+                req_group: 37,
+                req_group_name: 'Second Breakfast Quest',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'CEREAL_BOX',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM',
+                    result: 'UNTOUCHED',
+                    ITEM: 'MILK_BODEGA'
                     }
                                 ]
 
@@ -2002,7 +2076,35 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+        group_37: {
+                req_group: 37,
+                req_group_name: 'Second Breakfast Quest',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'CEREAL_BOX',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM',
+                    result: 'UNTOUCHED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },        },
     },
       CRAYON_PACK: {
         name: 'Cray-oh-no Crayons',
@@ -2076,7 +2178,35 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+        group_37: {
+                req_group: 37,
+                req_group_name: 'Second Breakfast Quest',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'CEREAL_BOX',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM',
+                    result: 'UNTOUCHED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },        },
     },
       CEREAL_3: {
         name: 'Early Bird Berry Blast Cereal',
@@ -2146,6 +2276,52 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 0,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
+    },
+      CAT_FOOD_EMPTY_CAN: {
+        name: 'Empty Cat Food Can',
+        slug: 'CAT_FOOD_EMPTY_CAN', 
+        use:  'HOLDS',
+        icon: 'CAT_FOOD_EMPTY_CAN',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         group_17: {
@@ -3572,7 +3748,35 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+        group_37: {
+                req_group: 37,
+                req_group_name: 'Second Breakfast Quest',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'CEREAL_BOX',
+                    },
+                  {
+                    slot_type: 'IN_HAND_OR_BAG',
+                    type: 'ITEM',
+                    result: 'UNTOUCHED',
+                    ITEM: 'MILK_BODEGA'
+                    }
+                                ]
+
+            },        },
     },
       HOT_DOG: {
         name: 'Hot Dog',
@@ -5252,6 +5456,24 @@ items: []    },
         interactions: {
         },
     },
+      CAT_FOOD_OPEN_CAN: {
+        name: 'Open Cat Food Can',
+        slug: 'CAT_FOOD_OPEN_CAN', 
+        use:  'HOLDS',
+        icon: 'CAT_FOOD_OPEN_CAN',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       SARDINES: {
         name: 'Open Pigeon of the Sea Sardines',
         slug: 'SARDINES', 
@@ -5414,6 +5636,29 @@ items: []    },
         interactions: {
         },
     },
+      PAPER_TOWEL_ROLL: {
+        name: 'Paper Towel Roll',
+        slug: 'PAPER_TOWEL_ROLL', 
+        use:  'HOLDS',
+        icon: 'PAPER_TOWEL_ROLL',
+        type: 'PAPER_PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 200,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'PAPER_TOWEL_ROLL_69',
+            type: 'asset',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
+        interactions: {
+        },
+    },
       PENCIL: {
         name: 'Pencil',
         slug: 'PENCIL', 
@@ -5446,6 +5691,24 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 3,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      PIGGY_BANK: {
+        name: 'Piggy Bank',
+        slug: 'PIGGY_BANK', 
+        use:  'HOLDS',
+        icon: 'PIGGY_BANK',
+        type: 'Special',
+        default_status: '',
+        description: '',
+        cost: 1200,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -7308,7 +7571,29 @@ items: []    },
             greaterThan: 1
           }        ],
         interactions: {
-        },
+        group_38: {
+                req_group: 38,
+                req_group_name: 'Eat Toast',
+                req_pocket_action: 'EAT',
+                req_world_action: 'EAT',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: 'HUNGER',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND_OR_ACTIVE',
+                    type: 'ITEM',
+                    result: 'CONSUMED',
+                    ITEM: 'TOAST'
+                    }
+                                ]
+
+            },        },
     },
       TOAST_JELLY: {
         name: 'Toast with Jelly',
@@ -7925,6 +8210,42 @@ items: []    },
         default_status: '',
         description: '',
         cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      VIDEO_RENTAL: {
+        name: 'Video Rental',
+        slug: 'VIDEO_RENTAL', 
+        use:  'HOLDS',
+        icon: 'VIDEO_RENTAL',
+        type: 'VHS',
+        default_status: '',
+        description: '',
+        cost: 300,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      VIDEO_RENTAL: {
+        name: 'Video Rental',
+        slug: 'VIDEO_RENTAL', 
+        use:  'HOLDS',
+        icon: 'VIDEO_RENTAL',
+        type: 'MEDIA',
+        default_status: '',
+        description: '',
+        cost: 300,
         tags: [],
         deplete_from: 0,
         contains: [],

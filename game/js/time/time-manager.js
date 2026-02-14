@@ -14,6 +14,7 @@ export default class TimeManager {
         this.keyLightOrder = ['astronomicalDawn','nauticalDawn', 'civilDawn', 'sunrise', 'morning', 'solarNoon', 'afternoon', 'sunset', 'civilDusk', 'nauticalDusk', 'astronomicalDusk', 'night'];
 
         this.second_increment = .5;
+        //this.second_increment = 15;
         this.time_passing = true;
         this.alarm_beeping = false;
         this.today = this.getDate();

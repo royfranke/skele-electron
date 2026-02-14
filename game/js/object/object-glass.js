@@ -19,6 +19,15 @@ export default class ObjectGlass extends Object {
         //this.setGlass(0x89bcc6,.9);
 
     }
+    
+    hideGlass () {
+        if (this.glass != null) {
+            this.glass.setVisible(false);
+        }
+        if (this.behind_glass != null) {
+            this.behind_glass.setVisible(false);
+        }
+    }
 
     setLight (keylight) {
         if (this.sprite != null) {

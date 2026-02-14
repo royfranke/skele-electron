@@ -149,9 +149,9 @@ export default class Tree {
 
     setLight(keylight) {
         if (this.sprite != null) {
-            this.sprite.setTint(keylight.wall_tint);
+            this.sprite.setTint(keylight.objects_tint);
             for (var i = 0; i < this.branches.length; i++) {
-                this.branches[i].setTint(keylight.wall_tint);
+                this.branches[i].setTint(keylight.objects_tint);
                 this.leaves[i].setTint(keylight.roof_tint);
             }
         }

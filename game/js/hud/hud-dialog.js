@@ -246,6 +246,7 @@ export default class HudDialog extends HudCommon {
         this.scene.events.emit('DIALOG_CLOSE');
         if (id > 0) {
             this.scene.events.emit('DIALOG_CLOSE_ID_'+id);
+            
         }
         this.scene.manager.setFocus('PLAYER');
     }
