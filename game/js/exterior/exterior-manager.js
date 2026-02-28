@@ -247,7 +247,7 @@ import KEYLIGHT from "../config/key-light.js";
         MAP_CONFIG.nodes.forEach(function (node, index) {
             self.nodes[node.y][node.x].buildObjects(objectManager); 
         });
-        this.ground.initializeTiles();
+        this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
         this.setMouseInput();
     }
 
@@ -283,7 +283,9 @@ import KEYLIGHT from "../config/key-light.js";
     setMouseInput () {
         var self = this;
         this.scene.input.on('pointerup', function (pointer) {
-
+            if (self.scene.manager.getFocus().name != 'PLAYER') {
+                return;
+            }
             var tile = self.groundLayer.getTileAt(Math.round(pointer.worldX/16), Math.round(pointer.worldY/16)); 
 
             if (tile) {

@@ -14,8 +14,8 @@ import GameUtilities from "../game/game-utilities.js";
 
     }
 
-    initializeTiles () {
-        this.util.initializeTiles(this.layer, this.edgeLayer);
+    initializeTiles (layer=this.layer, scene={}, edgeLayer=this.edgeLayer) {
+        this.util.initializeTiles(layer, scene, edgeLayer);
     }
 
     inBounds(_x, _y) {

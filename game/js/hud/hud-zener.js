@@ -14,6 +14,7 @@ export default class HudZener extends HudCommon {
 
     initialize() {
         this.open = false;
+        this.isGameOver = false;
         this.manager = new ZenerManager(this.scene);
         this.boardView = {
             x: this.view.left+88,
@@ -31,6 +32,10 @@ export default class HudZener extends HudCommon {
         this.results = {
             positive: ['Yes!!','Uh-huh!','That\'s it!','You got it!'],
             negative: ['Uh-uh.','Nope!','Try Again!','No way.','Pfffff. No.']
+        };
+        this.speakerAnimations = {
+            negative: ['HEAD_PATRICE_DISAPPOINTED', 'HEAD_PATRICE_RAZZ'],
+            positive: ['HEAD_PATRICE_BLINK', 'HEAD_PATRICE_SURPRISE']
         };
         this.deckAnimations = [
             {
@@ -218,6 +223,8 @@ export default class HudZener extends HudCommon {
     openZener () {
         if (!this.open) {
             this.open = true;
+            this.isGameOver = false;
+            this.scene.manager.hud.pullToHide();
             this.setupBoard();
             this.manager.startTurn();
         }
@@ -242,13 +249,28 @@ export default class HudZener extends HudCommon {
                     score.block.destroy();
                 }
             });
+            if (this.speakerPlaying != null) {
+                this.speakerPlaying.destroy();
+            }
             this.boardView.arrow_left.destroy();
             this.boardView.arrow_right.destroy();
-            this.destroySlip(this.back_button);
+            this.destroyButton(this.back_button);
+            this.destroyButton(this.end_button);
             this.manager.resetDeck();
             this.manager.destroyListeners();
             this.open = false;
-            
+            this.scene.manager.hud.pullToShow();
+        }
+    }
+
+    drawExpression (result) {
+        if (this.board.score[4].object != null) {
+            var anim = this.speakerAnimations[result ? 'positive' : 'negative'][Phaser.Math.Between(0, this.speakerAnimations[result ? 'positive' : 'negative'].length - 1)];
+            if (this.speakerPlaying != null) {
+                this.speakerPlaying.destroy();
+            }
+            this.speakerPlaying = this.makeFX(anim, this.board.score[4].x - 16, this.board.score[4].y - 14, -1);
+            this.speakerPlaying.setFlipX(true);
         }
     }
 
@@ -283,6 +305,9 @@ export default class HudZener extends HudCommon {
     }
 
     drawSelected (selected) {
+        if (this.isGameOver) {
+            return;
+        }
         if (this.manager.deck.state == 'AWAITING GUESS') {
             this.board.choices.forEach((choice, index) => {
                 if (index == selected) {
@@ -359,6 +384,7 @@ export default class HudZener extends HudCommon {
     }
 
     gameOver () {
+        this.isGameOver = true;
         var targets = [];
         this.board.choices.forEach((choice) => {
             choice.icon.icon.destroy();
@@ -388,12 +414,13 @@ export default class HudZener extends HudCommon {
     }
 
     tallyScore () {
+        this.destroyButton(this.back_button);
         this.board.score[0].object.setFont('SkeleHype');
         this.board.score[0].object.setRightAlign();
         this.board.score[0].object.setFontSize(16);
         this.scene.tweens.add({
             targets: this.board.score[0].object,
-            y: '-=24',
+            y: '-=32',
             duration: 2000,
             ease: 'Sine.easeInOut'
         });
@@ -415,11 +442,25 @@ export default class HudZener extends HudCommon {
                 at: 2500,
                 run: () => {
                     this.setHype('BEST . . . '+this.reference_score.streak_best + '\nHITS . . . ' + this.reference_score.correct + '\nFINAL . . . ' +(this.reference_score.streak_best*this.reference_score.correct));
+                    this.setInstructions(this.gameOverMessage());
                 }
             }
         ]);
 
         timeline.play();
+
+            var callback_select_end = function () {
+                this.scene.events.emit('INPUT_BACK_ZENER');
+            }
+        /// Make Button to end game.
+            this.scene.events.addListener('INPUT_SELECT_ZENER', callback_select_end, this);
+            
+            this.end_button = this.makeButton(this.boardView.x + this.boardView.width - 12, this.boardView.y + this.boardView.height - 36, 'CLOSE', 'X', 'SHAMROCK');
+            /// Add listener to end game button
+
+            this.end_button.click_area.on('pointerdown', () => {
+                this.scene.events.emit('INPUT_BACK_ZENER');
+            });
     }
 
     lastCard () {
@@ -445,9 +486,10 @@ export default class HudZener extends HudCommon {
 
             card_turn.once('animationcomplete', () => {
                 this.setInstructions(this.resultMessage(result.result));
+                this.drawExpression(result.result);
                 
                 this.scene.time.delayedCall(500, () => {
-                    if (this.board.draw.icon.icon != undefined) {
+                    if (this.board.draw.icon.icon != undefined && this.board.draw.icon.icon.anims != undefined) {
                         this.board.draw.icon.icon.anims.play('TURN_CARD_FROM_'+result.card.toUpperCase(), false);
                         this.board.draw.icon.icon.once('animationcomplete', () => {
                             var anim = this.board.draw.icon.icon.anims.play('TURN_CARD_TO_BACK', false);
@@ -514,9 +556,14 @@ export default class HudZener extends HudCommon {
         this.setMisses();
         this.drawSelected(0);
 
-        this.back_button = this.makeBackButton(this.boardView.x - 8, this.boardView.y, 'CLOSE');
+        this.back_button = this.makeButton(this.boardView.x - 8, this.boardView.y,'CANCEL', 'Z', 'RED');
+
+        this.back_button.click_area.on('pointerdown', () => {
+            this.scene.events.emit('INPUT_BACK_ZENER');
+        });
         
         this.manager.listen();
+        this.drawExpression('positive');
     }
 
     setHits (hits='') {
@@ -562,6 +609,19 @@ export default class HudZener extends HudCommon {
         }
         else {
             return this.results.negative[Phaser.Math.Between(0, this.results.negative.length - 1)];
+        }
+    }
+
+    gameOverMessage () {
+        var score = this.reference_score.correct * this.reference_score.streak_best;
+        if (score == 0) {
+            return 'That was truly awful.';
+        }
+        else if (score > 5 && score < 15) {
+            return 'That was pretty okay.';
+        }
+        else {
+            return 'Outstanding!';
         }
     }
 

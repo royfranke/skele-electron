@@ -26,7 +26,7 @@ export default class StoreManager {
             this.back();
         }
         var callback_select = function () {
-            self.scene.manager.hud.hudPayment.inputSelect();
+            
         }
 
         this.scene.events.addListener('INPUT_LEFT_STORE', callback_left, this);

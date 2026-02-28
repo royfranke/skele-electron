@@ -181,6 +181,7 @@ export default class PlayerSprite {
 
   moveToTile(x, y) {
     var focus = this.scene.manager.getFocus();
+    var last_focus = this.scene.manager.getLastFocus();
     if (focus.name == 'PLAYER') {
       var tile_x = x * 16;
       var tile_y = y * 16;

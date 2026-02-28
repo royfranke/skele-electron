@@ -147,4 +147,21 @@ export default class HudSide extends HudCommon {
         this.makeFX('SPARKLE_', this.side.icon.x - 8, this.side.icon.y - 8);
     }
 
+    pullToHide () {
+        this.scene.tweens.add({
+            targets: [this.side.block, this.side.icon],
+            x: '-=48',
+            duration: 500,
+            ease: 'Sine.easeIn',
+        });
+    }
+
+    pullToShow () {
+        this.scene.tweens.add({
+            targets: [this.side.block, this.side.icon],
+            x: '+=48',
+            duration: 500,
+            ease: 'Sine.easeIn',
+        });
+    }
 }

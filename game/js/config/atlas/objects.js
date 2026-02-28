@@ -3901,6 +3901,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          DUCT_TAPE_FLOOR_LINE: {
+        name: 'Duct Tape Floor Line',
+        slug: 'DUCT_TAPE_FLOOR_LINE', 
+        type: 'FLOOR_STICKER',
+        bounding: {
+          h:1, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:3,
+          x:0, 
+          y:0
+        },
+        depth: -16,
+        sprite: {
+          h:5, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           EXT_DOOR_WINDOWS_GRAY: {
         name: 'Ext Door Windows Gray',
         slug: 'EXT_DOOR_WINDOWS_GRAY', 
@@ -4183,7 +4223,7 @@ const OBJECTS = {
         sprite: {
           h:64, 
           w:34,
-          x:0, 
+          x:-2, 
           y:1
         },
         size: {
@@ -4191,7 +4231,7 @@ const OBJECTS = {
           w:26
         },
         offset: {
-          x:8, 
+          x:6, 
           y:7
         },
         varieties: 5,
@@ -6605,6 +6645,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          TABLE_WOOD_JAMMED_SIMPLE_TABLECLOTH: {
+        name: 'Jammed Folding Table Simple Tablecloth',
+        slug: 'TABLE_WOOD_JAMMED_SIMPLE_TABLECLOTH', 
+        type: 'TABLE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:24, 
+          w:28
+        },
+        offset: {
+          x:2, 
+          y:20
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           TABLE_WOOD_FOLDING_JAMMED: {
         name: 'Jammed Folding Wood Table',
         slug: 'TABLE_WOOD_FOLDING_JAMMED', 
@@ -6720,6 +6800,46 @@ const OBJECTS = {
           y:1
         },
         depth: -2,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:24, 
+          w:28
+        },
+        offset: {
+          x:2, 
+          y:20
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          TABLE_WOOD_DECOR_FANCY_TABLECLOTH: {
+        name: 'Lightly Decorative Wood Table Fancy Tablecloth',
+        slug: 'TABLE_WOOD_DECOR_FANCY_TABLECLOTH', 
+        type: 'TABLE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -7076,7 +7196,7 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT','FACING_EAST','FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
             name: 'TURN EAST', stateTrigger: 'FACING_EAST', validStates: ['FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
@@ -7090,11 +7210,11 @@ const OBJECTS = {
               name: 'DEFAULT',
               transition: 'false',
               frames: []
-              },               {
-              name: 'SITTING',
+              }, {
+              name: 'FACING_EAST',
               transition: 'false',
-              frames: []
-              },            {
+              frames: ['DINER_CHAIR_MAROON-1',]
+              }, {
               name: 'FACING_NORTH',
               transition: 'false',
               frames: ['DINER_CHAIR_MAROON-4',]
@@ -7107,10 +7227,10 @@ const OBJECTS = {
               transition: 'false',
               frames: ['DINER_CHAIR_MAROON-3',]
               },               {
-              name: 'FACING_EAST',
+              name: 'SITTING',
               transition: 'false',
-              frames: ['DINER_CHAIR_MAROON-1', ]
-              },                                                                                       ],
+              frames: []
+              },                                                                                                                    ],
 
           interactions: {
                                   },
@@ -8578,12 +8698,28 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT','FACING_EAST','FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
             name: 'CURL UP ON', stateTrigger: 'CURL_UP', validStates: ['DEFAULT']
           }],
         default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_WEST',
               transition: 'false',
               frames: []
               },               {
@@ -9439,7 +9575,7 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT','FACING_EAST','FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
             name: 'TURN EAST', stateTrigger: 'FACING_EAST', validStates: ['FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
@@ -9453,11 +9589,11 @@ const OBJECTS = {
               name: 'DEFAULT',
               transition: 'false',
               frames: []
-              },               {
-              name: 'SITTING',
+              }, {
+              name: 'FACING_EAST',
               transition: 'false',
-              frames: []
-              },            {
+              frames: ['DINER_CHAIR_RED-1',]
+              }, {
               name: 'FACING_NORTH',
               transition: 'false',
               frames: ['DINER_CHAIR_RED-4',]
@@ -9470,10 +9606,10 @@ const OBJECTS = {
               transition: 'false',
               frames: ['DINER_CHAIR_RED-3',]
               },               {
-              name: 'FACING_EAST',
+              name: 'SITTING',
               transition: 'false',
-              frames: ['DINER_CHAIR_RED-1', ]
-              },                                                                                       ],
+              frames: []
+              },                                                                                                                    ],
 
           interactions: {
                                   },
@@ -9777,12 +9913,28 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT','FACING_EAST','FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }, {
             name: 'CURL UP ON', stateTrigger: 'CURL_UP', validStates: ['DEFAULT']
           }],
         default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_WEST',
               transition: 'false',
               frames: []
               },               {
@@ -9853,6 +10005,46 @@ const OBJECTS = {
           y:1
         },
         depth: -2,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:24, 
+          w:28
+        },
+        offset: {
+          x:2, 
+          y:20
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          TABLE_WOOD_SIMPLE_PLAIN_TABLECLOTH: {
+        name: 'Simple Wood Table Plain Tablecloth',
+        slug: 'TABLE_WOOD_SIMPLE_PLAIN_TABLECLOTH', 
+        type: 'TABLE',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:2, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: 0,
         sprite: {
           h:48, 
           w:32,
@@ -9953,10 +10145,26 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT']
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT','FACING_EAST','FACING_NORTH','FACING_SOUTH','FACING_WEST']
           }],
         default_state: 'DEFAULT',        states: [            {
               name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_WEST',
               transition: 'false',
               frames: []
               },               {
@@ -9964,6 +10172,46 @@ const OBJECTS = {
               transition: 'false',
               frames: []
               },],
+
+          interactions: {
+                                  },
+    },
+          SIGN_RED_ARROW_DOWN_SMALL: {
+        name: 'Small Red Arrow Down Sign',
+        slug: 'SIGN_RED_ARROW_DOWN_SMALL', 
+        type: 'PAPER_SIGN',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 4,
+        sprite: {
+          h:20, 
+          w:13,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
 
           interactions: {
                                   },
@@ -11747,7 +11995,7 @@ const OBJECTS = {
                 req_group_name: 'Grab Toast from Toaster',
                 req_pocket_action: '',
                 req_world_action: 'GRAB TOAST',
-                req_state: '',
+                req_state: 'toasted',
                 req_result_item: 'TOAST',
                 req_result_data_key: '',
                 req_result_data_set: '',

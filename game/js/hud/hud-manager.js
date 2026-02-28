@@ -318,4 +318,22 @@ export default class HudManager {
         }
     }
 
+    pullToHide () {
+        this.hudNotebook.pullToHide();
+        this.hudKeychain.pullToHide();
+        this.hudMap.pullToHide();
+        this.hudCoinpurse.pullToHide();
+        this.hudWatch.pullToHide();
+        this.hudFocusHints.setFocusHintsVisible(false);
+    }
+
+    pullToShow () {
+        this.hudNotebook.pullToShow();
+        this.hudKeychain.pullToShow();
+        this.hudMap.pullToShow();
+        this.hudCoinpurse.pullToShow();
+        this.hudWatch.pullToShow();
+        this.hudFocusHints.setFocusHintsVisible(true);
+    }
+
 }

@@ -212,7 +212,7 @@ export default class HudStore extends HudCommon {
         let bagged_items = [];
         let self = this;
         let already_bagged = [];
-        this.basket.forEach(function (item) {;
+        this.basket.forEach(function (item) {
             //console.log(item);
             if (already_bagged.includes(item)) {
                 //console.warn('Item already bagged, skipping');
@@ -235,11 +235,18 @@ export default class HudStore extends HudCommon {
             }
             
         });
+
         // Replace the shopping basket with a plastic bag containing the items
         this.scene.manager.hud.think('Here you go. Tell your auntie I said hi.');
         this.scene.manager.hud.pocket.setPocket(basket_item, 'EMPTY');
 
-        let plastic_bag =  this.scene.manager.itemManager.newItemToPocket(basket_item,'PLASTIC_BAG_1',bagged_items);
+        if (this.basket.length == 1) {
+            // If only one item, don't bag it, just put it in the pocket
+            this.scene.manager.itemManager.addItemToPockets(bagged_items[0], basket_item);
+        }
+        else {
+            this.scene.manager.itemManager.newItemToPocket(basket_item,'PLASTIC_BAG_1',bagged_items);
+        }
 
         this.basket = [];
         this.eraseBasketInventory();

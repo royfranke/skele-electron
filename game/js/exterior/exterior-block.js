@@ -48,10 +48,10 @@ export default class Block {
         else {
             this.setGround();
         }
-        
+
     }
-    
-    loadBlockWalls (data) {
+
+    loadBlockWalls(data) {
         const wallLayer = this.scene[this.scene.locale].wallLayer;
         // Load walls
         for (let y = 0; y < data.walls.length; y++) {
@@ -62,10 +62,10 @@ export default class Block {
                 }
             }
         }
-    }   
+    }
 
 
-    loadBlockGround (data) {
+    loadBlockGround(data) {
         const groundLayer = this.scene[this.scene.locale].groundLayer;
         // Load ground
         for (let y = 0; y < data.ground.length; y++) {
@@ -78,7 +78,7 @@ export default class Block {
         }
     }
 
-    setGround () {
+    setGround() {
         const block = this.block;
         let groundLayer = this.scene[this.scene.locale].groundLayer;
         if (block.ground.toUpperCase() == 'FOREST') {
@@ -91,14 +91,14 @@ export default class Block {
                 ////
                 let sidewalk_h = 3;
                 let sidewalk_w = 3;
-                
-                    
+
+
             }
         }
-        
+
     }
 
-    setForest () {
+    setForest() {
         const block = this.block;
         const groundLayer = this.scene[this.scene.locale].groundLayer;
         const forestTypes = ['LEAVES', 'MULCH', 'DIRT', 'GRASS'];
@@ -113,31 +113,31 @@ export default class Block {
 
                 switch (tile) {
                     case 0:
-                        var x = block.left+w+block.offset.w;
-                        var y = block.top+h+block.offset.n;
+                        var x = block.left + w + block.offset.w;
+                        var y = block.top + h + block.offset.n;
                         this.scene.manager.treeManager.newTreeToWorld(x, y + .5, 'ASH');
-                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x-2, y-2, 5, 5);
-                        groundLayer.weightedRandomize(TILES.LEAVES.FILL_, x-1, y-1, 3, 3);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x - 2, y - 2, 5, 5);
+                        groundLayer.weightedRandomize(TILES.LEAVES.FILL_, x - 1, y - 1, 3, 3);
 
-                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x-1, y-1, 1, 1);
-                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x+1, y-1, 1, 1);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x - 1, y - 1, 1, 1);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y - 1, 1, 1);
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
-                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x-1, y+1, 1, 1);
-                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x+1, y+1, 1, 1);
-                    break;
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x - 1, y + 1, 1, 1);
+                        groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y + 1, 1, 1);
+                        break;
                     case 12:
-                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION',Phaser.Math.RND.between(1,44));
-                    break;
+                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION', Phaser.Math.RND.between(1, 44));
+                        break;
                     case 13:
-                        //this.scene.manager.objectManager.newObjectToWorld(x, y, 'STUMP_SEAT');
+                    //this.scene.manager.objectManager.newObjectToWorld(x, y, 'STUMP_SEAT');
                 }
             }
         }
 
-        
+
     }
 
-    addPropertyLine (prop) {
+    addPropertyLine(prop) {
 
         prop.lines.top = this.block.top + prop.lines.y;
         prop.lines.left = this.block.left + prop.lines.x;
@@ -145,106 +145,257 @@ export default class Block {
         prop.lines.right = prop.lines.left + prop.lines.width;
 
         let propertyLine = new PropertyLine(this.scene, prop, this.wallsBuilt);
-        
+
         this.propertyLines.push(propertyLine);
     }
 
-    buildProperties () {
+    buildProperties() {
         this.propertyLines.forEach(function (prop, index) {
             prop.buildIt();
         });
-        
+
     }
-/*
-    onProperty (_x, _y) {
-        var property = false;
-        this.propertyLines.forEach(function (prop, index) {
-            if (_x > prop.prop.lines.left && _x < prop.prop.lines.right) {
-                if (_y > prop.prop.lines.top && _y < prop.prop.lines.bottom) {
-                    property = prop.prop;
-                    return;
+    /*
+        onProperty (_x, _y) {
+            var property = false;
+            this.propertyLines.forEach(function (prop, index) {
+                if (_x > prop.prop.lines.left && _x < prop.prop.lines.right) {
+                    if (_y > prop.prop.lines.top && _y < prop.prop.lines.bottom) {
+                        property = prop.prop;
+                        return;
+                    }
                 }
-            }
-        });
-        return property;
-    }
-*/
-    getAdjoiningNodes (_x,_y) {
-        var nodes = {NW:null, NE:null, SE:null, SW:null};
+            });
+            return property;
+        }
+    */
+    getAdjoiningNodes(_x, _y) {
+        var nodes = { NW: null, NE: null, SE: null, SW: null };
         nodes.NW = this.scene.exterior.getBlockNodeProperties(_x, _y);
-        nodes.NE = this.scene.exterior.getBlockNodeProperties(_x+1, _y);
-        nodes.SE = this.scene.exterior.getBlockNodeProperties(_x+1, _y+1);
-        nodes.SW = this.scene.exterior.getBlockNodeProperties(_x, _y+1);
+        nodes.NE = this.scene.exterior.getBlockNodeProperties(_x + 1, _y);
+        nodes.SE = this.scene.exterior.getBlockNodeProperties(_x + 1, _y + 1);
+        nodes.SW = this.scene.exterior.getBlockNodeProperties(_x, _y + 1);
         return nodes;
     }
 
-    buildObjects () {
+    buildObjects() {
 
         if (this.block.offset.n > 0) {
-            this.scene.manager.objectManager.newObjectToWorld(this.block.left+7, this.block.top,'POSTBOX_S');
-            this.scene.manager.objectManager.newObjectToWorld(this.block.left+12, this.block.top,'HYDRANT_CITY_');
+            this.scene.manager.objectManager.newObjectToWorld(this.block.left + 7, this.block.top, 'POSTBOX_S');
+            this.scene.manager.objectManager.newObjectToWorld(this.block.left + 12, this.block.top, 'HYDRANT_CITY_');
             //let car = this.scene.manager.vehicleManager.newVehicleToWorld(this.block.left+7, this.block.top - 4, 'CAR_SEDAN_1');
 
             /// start car
             //car.setStopped(false);
 
-        }  
+        }
         if (this.block.offset.s > 0) {
             //this.buildStreetPole(this.block.left+3, this.block.bottom-1,{},true);
-            this.scene.manager.objectManager.newObjectToWorld(this.block.right-7, this.block.bottom-1,'HYDRANT_CITY_');
+            this.scene.manager.objectManager.newObjectToWorld(this.block.right - 7, this.block.bottom - 1, 'HYDRANT_CITY_');
 
 
-            this.scene.manager.treeManager.newTreeToWorld(this.block.left+8.25, this.block.bottom - .25, 'SUGAR_MAPLE');
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+8, this.block.bottom - 1, 2, 1);
+            this.scene.manager.treeManager.newTreeToWorld(this.block.left + 8.25, this.block.bottom - .25, 'SUGAR_MAPLE');
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 8, this.block.bottom - 1, 2, 1);
 
             //this.scene.manager.treeManager.newTreeToWorld(this.block.left+27.25, this.block.bottom - .25, 'ASH');
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left+27, this.block.bottom - 1, 2, 1);
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 27, this.block.bottom - 1, 2, 1);
 
-            this.scene.manager.treeManager.newTreeToWorld(this.block.left+36.25, this.block.bottom - .25, 'ASH');
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MULCH.FILL_, this.block.left+36, this.block.bottom - 1, 2, 1);
+            this.scene.manager.treeManager.newTreeToWorld(this.block.left + 36.25, this.block.bottom - .25, 'ASH');
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MULCH.FILL_, this.block.left + 36, this.block.bottom - 1, 2, 1);
 
 
         }
         if (this.block.offset.e > 0) {
-            this.buildStreetPole(this.block.right-1, this.block.bottom-7,{TELEPHONE:true},false);
+            this.buildStreetPole(this.block.right - 1, this.block.bottom - 7, { TELEPHONE: true }, false);
 
-            this.buildStreetPole(this.block.right-1, this.block.top+7,{TELEPHONE:true},false);
+            this.buildStreetPole(this.block.right - 1, this.block.top + 7, { TELEPHONE: true }, false);
 
         }
-        
+
         if (this.block.ground.toUpperCase() == 'FOREST') {
-            this.buildForest();
+            this.buildForestBySection();
         }
-    
+
     }
 
-    buildForest () {
+    sectionForest() {
+        var section = {
+            width: Math.floor((this.block.width - (this.block.offset.w + this.block.offset.e)) / 6),
+            height: Math.floor((this.block.height - (this.block.offset.n + this.block.offset.s)) / 6),
+        };
+        var sections = [];
+        for (let h = 0; h < 6; h++) {
+            for (let w = 0; w < 6; w++) {
+                sections.push({
+                    density: 0,
+                    path: 0,
+                    x: w,
+                    y: h,
+                    left: this.block.left + this.block.offset.w + (w * section.width),
+                    top: this.block.top + this.block.offset.n + (h * section.height),
+                    width: section.width,
+                    height: section.height,
+                    direction: ''
+                });
+            }
+        }
+        return sections;
+    }
+
+    getPathDirection(x, y, path) {
+        var direction = '';
+        if (y > 0 && path[y - 1][x] == 1) {
+            direction = direction + 'N';
+        }
+        if (x < path[y].length - 1 && path[y][x + 1] == 1) {
+            direction = direction + 'E';
+        }
+        if (y < path.length - 1 && path[y + 1][x] == 1) {
+            direction = direction + 'S';
+        }
+        if (x > 0 && path[y][x - 1] == 1) {
+            direction = direction + 'W';
+        }
+        return direction;
+    }
+
+    routeSections() {
+        var sections = this.sectionForest();
+        var density = [
+            [5, 5, 5, 5, 5, 5],
+            [1, 1, 1, 4, 4, 4],
+            [2, 3, 1, 3, 3, 3],
+            [2, 2, 0, 1, 2, 2],
+            [1, 2, 2, 2, 1, 2],
+            [1, 2, 2, 1, 1, 2]
+        ];
+        var path = [
+            [0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0],
+            [0, 1, 0, 0, 1, 0],
+            [0, 1, 0, 0, 1, 0]
+        ];
+        var self = this;
+        sections.forEach(function (section) {
+            section.density = density[section.y][section.x];
+            section.path = path[section.y][section.x];
+            if (section.path == 1) {
+                section.direction = self.getPathDirection(section.x, section.y, path);
+            }
+        });
+        return sections;
+    }
+
+    buildForestBySection() {
+        var sections = this.routeSections();
+        const groundLayer = this.scene[this.scene.locale].groundLayer;
+        var self = this;
+        sections.forEach(function (section) {
+            groundLayer.weightedRandomize(TILES.MUD.FILL_, section.left, section.top, section.width, section.height);
+            /// As a test, layer the path first, then add density
+
+            if (section.density == 0) {
+                groundLayer.weightedRandomize(TILES.GRASS.FILL_, section.left, section.top, section.width, section.height);
+            }
+            if (section.density == 3) {
+                groundLayer.weightedRandomize(TILES.MULCH.FILL_, section.left, section.top, section.width, section.height);
+            }
+            if (section.density >= 4) {
+                groundLayer.weightedRandomize(TILES.LEAVES.FILL_, section.left, section.top, section.width, section.height);
+            }
+            if (section.path == 1) {
+                self.layPath(section, groundLayer);
+            }
+            if (section.path == 1) {
+                var path_width = 0;
+                var path_height = 0;
+                /// if section.direction N is in the direction string, it will add to the path width and height accordingly
+                if (section.direction.includes('N')) {
+                    path_width = 3;
+                    path_height = Math.round(section.height/2);
+                    var top_offset = 0;
+
+                    groundLayer.weightedRandomize(TILES.DIRT.FILL_, Math.round(section.left + (section.width - path_width) / 2), section.top + top_offset, path_width, path_height);
+                }
+                if (section.direction.includes('E')) {
+                    path_height = 3;
+                    path_width = Math.round(section.width/2);
+                    var left_offset = Math.round(section.width/2);
+                    groundLayer.weightedRandomize(TILES.DIRT.FILL_, section.left + left_offset, Math.round(section.top + (section.height - path_height) / 2), path_width, path_height);
+                }
+                if (section.direction.includes('S')) {
+                    path_width = 3;
+                    path_height = Math.round(section.height/2);
+                    var top_offset = Math.round(section.height/2);
+
+                    groundLayer.weightedRandomize(TILES.DIRT.FILL_, Math.round(section.left + (section.width - path_width) / 2), section.top + top_offset, path_width, path_height);
+                }
+                if (section.direction.includes('W')) {
+                    path_height = 3;
+                    path_width = Math.round(section.width/2);
+                    var left_offset = 0;
+                    groundLayer.weightedRandomize(TILES.DIRT.FILL_, section.left + left_offset, Math.round(section.top + (section.height - path_height) / 2), path_width, path_height);
+                }
+            }
+        });
+    }
+
+    layPath(section, groundLayer) {
+        if (section.path == 1) {
+            var path_width = 0;
+            var path_height = 0;
+            if (section.direction == 'N' || section.direction == 'S' || section.direction == 'NS' || section.direction == 'NE' || section.direction == 'NW' || section.direction == 'SE' || section.direction == 'SW') {
+                path_width = 3;
+                path_height = section.height;
+
+                groundLayer.weightedRandomize(TILES.DIRT.FILL_, Math.round(section.left + (section.width - path_width) / 2), section.top, path_width, path_height);
+            }
+            if (section.direction == 'E' || section.direction == 'W' || section.direction == 'EW' || section.direction == 'NE' || section.direction == 'NW' || section.direction == 'SE' || section.direction == 'SW') {
+                path_height = 3;
+                path_width = section.width;
+
+                groundLayer.weightedRandomize(TILES.DIRT.FILL_, section.left, Math.round(section.top + (section.height - path_height) / 2), path_width, path_height);
+            }
+
+        }
+
+    }
+
+    buildForest() {
         const block = this.block;
         const groundLayer = this.scene[this.scene.locale].groundLayer;
         var reserved_tiles = {};
         for (let h = 0; h < block.height - (block.offset.n + block.offset.s); h++) {
+            if (this.block.top == 0 && h == 8) {
+                var x = block.left + block.offset.w;
+                var y = block.top + 8 + block.offset.n;
+                this.buildFence(x, y, block.width - (block.offset.w + block.offset.e), 'CHAINLINK_S', 'OPEN');
+                h++;
+            }
             for (let w = 0; w < block.width - (block.offset.w + block.offset.e); w++) {
                 var tile = Phaser.Math.RND.between(0, 256);
-                var x = block.left+w+block.offset.w;
-                var y = block.top+h+block.offset.n;
+                var x = block.left + w + block.offset.w;
+                var y = block.top + h + block.offset.n;
 
                 switch (tile) {
                     case 7:
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
-                    break;
+                        break;
                     case 8:
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 3, 1);
-                        this.scene.manager.plantManager.newPlantToWorld(x+1, y, 'FOXTAIL',Phaser.Math.RND.between(8,26));
-                        this.scene.manager.plantManager.newPlantToWorld(x+2, y, 'FOXTAIL',Phaser.Math.RND.between(8,26));
-                        this.scene.manager.plantManager.newPlantToWorld(x+3, y, 'MILKWEED',Phaser.Math.RND.between(4,55));
-                        this.scene.manager.plantManager.newPlantToWorld(x+4, y+1, 'MILKWEED',Phaser.Math.RND.between(4,55));
-                        this.scene.manager.plantManager.newPlantToWorld(x+3, y+1, 'FOXTAIL',Phaser.Math.RND.between(8,26));
+                        this.scene.manager.plantManager.newPlantToWorld(x + 1, y, 'FOXTAIL', Phaser.Math.RND.between(8, 26));
+                        this.scene.manager.plantManager.newPlantToWorld(x + 2, y, 'FOXTAIL', Phaser.Math.RND.between(8, 26));
+                        this.scene.manager.plantManager.newPlantToWorld(x + 3, y, 'MILKWEED', Phaser.Math.RND.between(4, 55));
+                        this.scene.manager.plantManager.newPlantToWorld(x + 4, y + 1, 'MILKWEED', Phaser.Math.RND.between(4, 55));
+                        this.scene.manager.plantManager.newPlantToWorld(x + 3, y + 1, 'FOXTAIL', Phaser.Math.RND.between(8, 26));
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 2, y + 1, 2, 1);
                         w = w + 3
-                    break;
+                        break;
                     case 9:
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
-                    break;
+                        break;
                     case 10:
                         this.scene.manager.treeManager.newTreeToWorld(x, y + .5, 'ASH');
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
@@ -253,37 +404,37 @@ export default class Block {
                     case 11:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'BRANCH_3X1');
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y, 2, 1);
-                    break;
+                        break;
                     case 12:
-                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION',Phaser.Math.RND.between(1,44));
-                    break;
+                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'DANDELION', Phaser.Math.RND.between(1, 44));
+                        break;
                     case 13:
-                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'WOOD_SORREL',Phaser.Math.RND.between(1,30));
-                    break;
+                        this.scene.manager.plantManager.newPlantToWorld(x, y, 'WOOD_SORREL', Phaser.Math.RND.between(1, 30));
+                        break;
                     case 14:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'STUMP_SEAT');
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 2, 1);
-                    break;
+                        break;
                     case 15:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'ROCK_SMALL');
-                    break;
+                        break;
                     case 16:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'CREEK_SEDGE');
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
                         this.scene.manager.objectManager.newObjectToWorld(x + 1, y + 1, 'CREEK_SEDGE');
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y + 1, 2, 1);
                         w = w + 2;
-                    break;
+                        break;
                     case 17:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'BRANCH_5X2');
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x + 1, y + 1, 3, 1);
                         w = w + 4;
-                    break;
+                        break;
                     case 18:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_5X2');
                         groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 3, 1);
                         w = w + 4;
-                    break;
+                        break;
                     case 19:
                         // Create a circle of trees
                         for (let angle = 0; angle < 360; angle += 45) {
@@ -294,7 +445,7 @@ export default class Block {
                             let tileX = Math.floor(treeX);
                             let tileY = Math.floor(treeY);
                             /// Check tile type under tree
-                            var tile = this.scene.exterior.ground.getGround(tileX,tileY);
+                            var tile = this.scene.exterior.ground.getGround(tileX, tileY);
                             if (tile == undefined) {
                                 continue;
                             }
@@ -311,7 +462,7 @@ export default class Block {
                                         reserved = true;
                                     }
                                 }
-                            } 
+                            }
                             if (reserved) {
                                 continue;
                             }
@@ -320,38 +471,38 @@ export default class Block {
                                 for (let checkY = -1; checkY <= 1; checkY++) {
                                     reserved_tiles[Math.floor(treeX) + checkX + '-' + (Math.floor(treeY) + checkY)] = 1;
                                 }
-                            }   
+                            }
                             // Coin flip to decide whether to place the tree
-                            if (Phaser.Math.RND.between(0,1) == 0) {
+                            if (Phaser.Math.RND.between(0, 1) == 0) {
                                 continue;
                             }
                             this.scene.manager.treeManager.newTreeToWorld(treeX, treeY, 'SUGAR_MAPLE');
                             groundLayer.weightedRandomize(TILES.MULCH.FILL_, Math.floor(treeX), Math.floor(treeY), 1, 1);
-                            
+
                         }
-                        
+
                         w = w + 8;
-                    break;
+                        break;
 
                     case 20:
-                        groundLayer.weightedRandomize(TILES.WATER.BITMAP_, x, y, 3, 1);
-                        groundLayer.weightedRandomize(TILES.WATER.BITMAP_, x+1, y+1, 3, 1);
-                    break;
+                        groundLayer.weightedRandomize(TILES.WATER.FILL_, x, y, 3, 1);
+                        groundLayer.weightedRandomize(TILES.WATER.FILL_, x + 1, y + 1, 3, 1);
+                        break;
                     case 21:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_3X2_1');
                         groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 3, 1);
                         w = w + 3;
-                    break;
+                        break;
                     case 22:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_3X2_2');
                         groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 3, 1);
                         w = w + 3;
-                    break;
+                        break;
                     case 23:
                         this.scene.manager.objectManager.newObjectToWorld(x, y, 'GULLY_2X2');
                         groundLayer.weightedRandomize(TILES.DIRT.FILL_, x + 1, y + 1, 2, 1);
                         w = w + 2;
-                    break;
+                        break;
                 }
             }
         }
@@ -359,46 +510,89 @@ export default class Block {
 
 
 
-    buildStreetPole (_x,_y,signs={NS:null,EW:null,STOP:null,CORNER:'',TELEPHONE:false}, light=true) {
+    buildStreetPole(_x, _y, signs = { NS: null, EW: null, STOP: null, CORNER: '', TELEPHONE: false }, light = true) {
 
-        var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y,'WOOD_POLE');
+        var pole = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'WOOD_POLE');
 
         if (light) {
-            let sodium = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 6,'SODIUM');
-            sodium.sprite.setDepth(pole.sprite.depth+1);
-            
+            let sodium = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 6, 'SODIUM');
+            sodium.sprite.setDepth(pole.sprite.depth + 1);
+
         }
 
         if (signs.NS != null && signs.NS != '') {
             var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');
-            pole.setSlot(.5,4.25,slotted);
-            pole.setAnnouncement(signs.NS, 'STREET_SIGN_NS_'+signs.CORNER);
+            pole.setSlot(.5, 4.25, slotted);
+            pole.setAnnouncement(signs.NS, 'STREET_SIGN_NS_' + signs.CORNER);
         }
-        
+
         if (signs.EW != null && signs.EW != '') {
             var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
-            pole.setSlot(.5,3.75,slotted);
-            pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_'+signs.CORNER);
+            pole.setSlot(.5, 3.75, slotted);
+            pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_' + signs.CORNER);
         }
-        
+
         if (signs.STOP != null) {
-            var slotted = this.scene.manager.objectManager.objectInfo('STOP_SIGN_'+signs.STOP);
+            var slotted = this.scene.manager.objectManager.objectInfo('STOP_SIGN_' + signs.STOP);
             var behind = signs.STOP == 'N' || signs.STOP == 'E' ? true : false;
-            pole.setSlot(.5,2,slotted,false,behind);
+            pole.setSlot(.5, 2, slotted, false, behind);
         }
 
         if (signs.TELEPHONE) {
             var slotted = this.scene.manager.objectManager.objectInfo('TELEPHONE_POLE_TOP');
-            pole.setSlot(0,5,slotted);
+            pole.setSlot(0, 5, slotted);
         }
     }
 
-    buildItems () {
-        
-    
+    buildFence(_x, _y, width = 2, prefix = 'WOOD_FENCE', suffix = 'BROWN', horizontal = true) {
+        if (width == 0) {
+            return;
+        }
+        if (width > 6) {
+            if (width % 6 == 0) {
+                var sections = width / 6;
+                for (let i = 0; i < sections; i++) {
+                    this.buildFence(_x + (i * 6 * (horizontal ? 1 : 0)), _y + (i * 6 * (horizontal ? 0 : 1)), 6, prefix, suffix, horizontal);
+                }
+                return;
+            }
+            if (width % 5 == 0) {
+                var sections = width / 5;
+                for (let i = 0; i < sections; i++) {
+                    this.buildFence(_x + (i * 5 * (horizontal ? 1 : 0)), _y + (i * 5 * (horizontal ? 0 : 1)), 5, prefix, suffix, horizontal);
+                }
+                return;
+            }
+            if (width % 4 == 0) {
+                var sections = width / 4;
+                for (let i = 0; i < sections; i++) {
+                    this.buildFence(_x + (i * 4 * (horizontal ? 1 : 0)), _y + (i * 4 * (horizontal ? 0 : 1)), 4, prefix, suffix, horizontal);
+                }
+                return;
+            }
+            if (width % 3 == 0) {
+                var sections = width / 3;
+                for (let i = 0; i < sections; i++) {
+                    this.buildFence(_x + (i * 3 * (horizontal ? 1 : 0)), _y + (i * 3 * (horizontal ? 0 : 1)), 3, prefix, suffix, horizontal);
+                }
+                return;
+            }
+
+
+        }
+        let orientation = horizontal ? '' : 'VERTICAL_';
+        let fence_panel = this.scene.manager.objectManager.newObjectToWorld(_x, _y, prefix + '_' + width + '_' + orientation + suffix);
+        if (!horizontal) {
+            fence_panel.sprite.setDepth(fence_panel.sprite.depth - 1);
+        }
     }
 
-    saveBlock () {
+    buildItems() {
+
+
+    }
+
+    saveBlock() {
         let save = {
             ground: [],
             walls: [],
@@ -417,7 +611,7 @@ export default class Block {
         for (let y = this.block.block_tile_y; y < this.block.block_tile_y + block_height; y++) {
             let row = [];
             for (let x = this.block.block_tile_x; x < this.block.block_tile_x + block_width; x++) {
-                let tile = groundLayer.getTileAt(x,y);
+                let tile = groundLayer.getTileAt(x, y);
                 if (tile != null) {
                     row.push(tile.index);
                 }
@@ -432,7 +626,7 @@ export default class Block {
         for (let y = this.block.block_tile_y; y < this.block.block_tile_y + block_height; y++) {
             let row = [];
             for (let x = this.block.block_tile_x; x < this.block.block_tile_x + block_width; x++) {
-                let tile = wallLayer.getTileAt(x,y);
+                let tile = wallLayer.getTileAt(x, y);
                 if (tile != null) {
                     row.push(tile.index);
                 }

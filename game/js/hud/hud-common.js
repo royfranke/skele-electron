@@ -30,6 +30,18 @@ export default class HudCommon {
             }
         }
 
+        destroyButton(button) {
+            if (button != null) {
+                button.block.destroy();
+                button.text.destroy();
+                button.button.destroy();
+                button.button_text.destroy();
+                button.click_area.destroy();
+                button = null;
+                return button;
+            }
+        }
+
         makeBackButton(_x, _y, text = 'CLOSE') {
             let close_button = 'Z';
             return this.factory.makeSlip(_x, _y, text, close_button);

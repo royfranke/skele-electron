@@ -385,6 +385,28 @@ export default class Object {
             // if the object type is SOFA, face south
             if (this.info.type == 'SOFA' || this.info.type == 'STUMP_SEAT') {
                 this.scene.player.setFacing('s');
+                if (this.info.type == 'STUMP_SEAT') {
+                    // Fix this-- still not in front of stump
+                    this.scene.player.playerSprite.sprite.setDepth(this.sprite.depth + 12);
+                }
+            }
+            else {
+                /// TODO: Set facing based on which way chair is facing
+                /// Set depth based on chair depth + 1 unless facing north, then set depth to chair depth - 1 
+                if (this.last_state.name == 'FACING_NORTH') {
+                    this.scene.player.playerSprite.sprite.setDepth(this.sprite.depth - 1);
+                    this.scene.player.setFacing('n');
+                }
+                if (this.last_state.name == 'FACING_EAST') {
+                    this.scene.player.setFacing('e');
+                }
+                if (this.last_state.name == 'FACING_SOUTH') {
+                    this.scene.player.setFacing('s');
+                }
+                if (this.last_state.name == 'FACING_WEST') {
+                    this.scene.player.setFacing('w');
+                }
+                this.scene.player.playerSprite.sprite.y = this.scene.player.playerSprite.sprite.y - 4;
             }
 
             // Set a new listener for emit to stand up

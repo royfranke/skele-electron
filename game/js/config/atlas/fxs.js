@@ -406,6 +406,55 @@
                                       ],
                   repeat: 0
               },
+                          HEAD_PATRICE_BLINK: {
+                  name: 'Patrice Head Blink',
+                  slug: 'HEAD_PATRICE_BLINK',
+                  frames: [
+                                          'HEAD_PATRICE_BLINK-1',
+                                          'HEAD_PATRICE_BLINK-2',
+                                          'HEAD_PATRICE_BLINK-3',
+                                          'HEAD_PATRICE_BLINK-4',
+                                          'HEAD_PATRICE_BLINK-5',
+                                          'HEAD_PATRICE_BLINK-6',
+                                          'HEAD_PATRICE_BLINK-7'
+                                      ],
+                  repeat: 0
+              },
+                          HEAD_PATRICE_DISAPPOINTED: {
+                  name: 'Patrice Head Disappointed',
+                  slug: 'HEAD_PATRICE_DISAPPOINTED',
+                  frames: [
+                                          'HEAD_PATRICE_DISAPPOINTED-1',
+                                          'HEAD_PATRICE_DISAPPOINTED-2',
+                                          'HEAD_PATRICE_DISAPPOINTED-3',
+                                          'HEAD_PATRICE_DISAPPOINTED-4'
+                                      ],
+                  repeat: 0
+              },
+                          HEAD_PATRICE_RAZZ: {
+                  name: 'Patrice Head Razz',
+                  slug: 'HEAD_PATRICE_RAZZ',
+                  frames: [
+                                          'HEAD_PATRICE_RAZZ-1',
+                                          'HEAD_PATRICE_RAZZ-2',
+                                          'HEAD_PATRICE_RAZZ-3',
+                                          'HEAD_PATRICE_RAZZ-4',
+                                          'HEAD_PATRICE_RAZZ-5'
+                                      ],
+                  repeat: 6
+              },
+                          HEAD_PATRICE_SURPRISE: {
+                  name: 'Patrice Head Surprise',
+                  slug: 'HEAD_PATRICE_SURPRISE',
+                  frames: [
+                                          'HEAD_PATRICE_SURPRISE-1',
+                                          'HEAD_PATRICE_SURPRISE-2',
+                                          'HEAD_PATRICE_SURPRISE-3',
+                                          'HEAD_PATRICE_SURPRISE-4',
+                                          'HEAD_PATRICE_SURPRISE-5'
+                                      ],
+                  repeat: 0
+              },
                           COIN_1_: {
                   name: 'Penny',
                   slug: 'COIN_1_',

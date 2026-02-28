@@ -59,12 +59,16 @@ export default class HudFactory {
         };
 
         button_data.click_area.on('pointerover', () => {
-            button_data.block.setFrame('BLOCK_MID_CREAM_RIGHT');
-            button_data.button.setFrame('BLOCK_SHALLOW_' + color + '_LEFT');
+            if (button_data.block != null && button_data.button != null) {
+                 button_data.block.setFrame('BLOCK_MID_CREAM_RIGHT');
+                 button_data.button.setFrame('BLOCK_SHALLOW_' + color + '_LEFT');
+            }
         });
         button_data.click_area.on('pointerout', () => {
-            button_data.block.setFrame('BLOCK_MID_WHITE_RIGHT');
-            button_data.button.setFrame('BLOCK_MID_' + color + '_LEFT');
+            if (button_data.block != null && button_data.button != null) {
+                button_data.block.setFrame('BLOCK_MID_WHITE_RIGHT');
+                button_data.button.setFrame('BLOCK_MID_' + color + '_LEFT');
+            }
         });
 
         return button_data;
@@ -169,6 +173,7 @@ export default class HudFactory {
 
     makeFX (fx_slug, _x, _y, delay=0) {
         var fx = this.scene.manager.fx.playFX(fx_slug,_x,_y,delay);
+        return fx;
     }
 
     makeHudFX (fx_slug, _x, _y, delay=0) {
