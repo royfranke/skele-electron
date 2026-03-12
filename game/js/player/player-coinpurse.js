@@ -148,6 +148,7 @@ export default class PlayerCoinpurse {
         }
         this.contents.PAPER[paper]++;
         this.updateTotal();
+        console.log(this.contents);
     }
 
 

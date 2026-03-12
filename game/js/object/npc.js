@@ -106,9 +106,7 @@ export default class Npc {
     this.scene.player.action.clearActions();
     if (action == 'GREET') {
       if (!this.greeting) {
-        this.scene.manager.hud.think('??');
-        //this.greeting = this.givePlayerItem('LUNCH_BAG_USED', ['BANANA', 'APPLE']);
-        this.scene.manager.dialog.triggerDialog(16);
+        this.scene.manager.hud.think('Hello.');
         this.greeting = true;
       }
 

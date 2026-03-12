@@ -401,7 +401,7 @@ export default class HudStore extends HudCommon {
         this.store_components.forEach(function (component) {
             component.destroy();
         });
-        this.back_button = this.destroySlip(this.back_button);
+        this.back_button = this.destroyButton(this.back_button);
         this.store_components = [];
     }
 

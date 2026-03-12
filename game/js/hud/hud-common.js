@@ -43,8 +43,7 @@ export default class HudCommon {
         }
 
         makeBackButton(_x, _y, text = 'CLOSE') {
-            let close_button = 'Z';
-            return this.factory.makeSlip(_x, _y, text, close_button);
+            return this.makeButton(_x, _y, text, 'Z', 'RED');
         }
 
         makeSlip(_x,_y,text,button) {

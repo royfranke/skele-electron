@@ -202,7 +202,7 @@ export default class HudMap extends HudSide {
         });
         this.map_area.destroy();
         this.map_area_frame.destroy();
-        this.back_button = this.destroySlip(this.back_button);
+        this.back_button = this.destroyButton(this.back_button);
         this.map_components = [];
         this.map_title = null;
     }

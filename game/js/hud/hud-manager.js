@@ -312,7 +312,7 @@ export default class HudManager {
 
     }
 
-    think(thought) {
+    think (thought) {
         if (this.hudThinking != null) {
             this.hudThinking.think(thought);
         }

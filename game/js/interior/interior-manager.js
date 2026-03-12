@@ -26,9 +26,17 @@ import KEYLIGHT from "../config/key-light.js";
 
     create () {
         this.buildFeatureList();
+        this.createNPCs();
         this.lastKeyLight = null;
         this.keylight = KEYLIGHT;
+    }
 
+    createNPCs () {
+        if (this.room.config.roomData.npcList != undefined) {
+            this.room.config.roomData.npcList.forEach(npc => {
+                this.scene.npcs.newNpcToWorld(npc.x + 1, npc.y + this.wall_height + 1, npc.slug);
+            });
+        }
     }
 
     setKeyLight (key_light_name) {

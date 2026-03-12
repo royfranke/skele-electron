@@ -18,7 +18,7 @@ export default class TutorialManager {
         this.scene.manager.dialog.triggerDialog(1);
 
         let _x = this.scene.player.standingTile.x;
-        let _y = this.scene.player.standingTile.y + 4;
+        let _y = this.scene.player.standingTile.y + 5;
         console.log("Tutorial start at: " + _x + "," + _y);
         //this.scene.manager.fx.playFX('CHALK_ARROW_FX',_x*16,_y*16,2000);
         this.tutorial_step++;
@@ -33,8 +33,8 @@ export default class TutorialManager {
     createAdvancerZone(x,y,width,height,step) {
         var zone = this.scene.add.zone(x * 16, y * 16, width, height).setOrigin(0, 0);
 
-        var zone_indicator = this.scene.add.rectangle(x * 16, y * 16, width, height, 0x00ff00,.5).setOrigin(0).setDepth(1000);
-        zone_indicator.setBlendMode(Phaser.BlendModes.ADD);
+        //var zone_indicator = this.scene.add.rectangle(x * 16, y * 16, width, height, 0x00ff00,.5).setOrigin(0).setDepth(1000);
+        //zone_indicator.setBlendMode(Phaser.BlendModes.ADD);
 
         this.scene.physics.add.existing(zone, true);
         this.scene.physics.add.overlap(zone, [this.scene.player.playerSprite.sprite], (_zone, player) => {
@@ -180,7 +180,6 @@ export default class TutorialManager {
         }
         if (step == 11 && this.scene.slot.POSITION.ROOM == 19) {
             // Player is in the Gilly kitchen
-
             var event = this.scene.time.addEvent({
                 delay: 1000,
                 repeat: 0,
@@ -217,6 +216,9 @@ export default class TutorialManager {
                     var callback = function () {
                         this.scene.events.off('DIALOG_CLOSE', callback, this);
                         this.receiveNotebook();
+
+                        this.scene.manager.hud.hudCoinpurse.receive();
+    
                         this.tutorial_step = 14;
                         this.stepTutorial(14);
                     }

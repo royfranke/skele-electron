@@ -48,6 +48,13 @@ export default class HudCoinpurse extends HudSide {
         };
     }
 
+    receive() {
+        this.scene.slot.COINPURSE.STATUS.HAS = "TRUE";
+        this.initialize();
+        this.sparkle();
+        this.scene.player.coinpurse.addDollar(1000);
+    }
+
     openManager() {
 
         if (this.scene.player.coinpurse.contents.STATUS.HAS == 'TRUE') {
@@ -107,7 +114,7 @@ export default class HudCoinpurse extends HudSide {
 
         if (content.length == 0) {
             content = [' - Empty'];
-            let icon = this.scene.add.sprite(6, line_height + 5, 'UI', 'EMPTY_SYMBOL').setOrigin(0).setScrollFactor(0).setDepth(100200);
+            let icon = this.scene.add.sprite(6, line_height + 8, 'UI', 'EMPTY_SYMBOL').setOrigin(0).setScrollFactor(0).setDepth(100200);
             coins.push(icon);
             this.container.add(icon);
         }

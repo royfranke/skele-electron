@@ -219,7 +219,7 @@ export default class Shop {
             this.sign = this.scene.manager.objectManager.newObjectToWorld(x + 1, y - 3, 'PSYCHIC_STOREFRONT_SIGN');
             this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
             let neon = this.scene.manager.objectManager.newObjectToWorld(x + 2, y-1, 'NEON_SIGN_PAST_PRESENT_FUTURE');
-            neon.sprite.setDepth(this.gates[0].sprite.depth - 16);
+            neon.sprite.setDepth(this.gates[1].sprite.depth - 1);
             let chair = this.scene.manager.objectManager.newObjectToWorld(x + 4, y + 1, 'MILK_CRATE');
             this.scene.manager.objectManager.newObjectToWorld(x + 1, y + 3, 'BOLLARD_PARKING');
             this.scene.manager.objectManager.newObjectToWorld(x + 3, y + 3, 'BOLLARD_PARKING');

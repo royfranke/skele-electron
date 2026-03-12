@@ -104,7 +104,7 @@ export default class Tree {
             }
             
         
-            var leaves_sprite = this.scene.physics.add.staticSprite(_x, _y - 8, 'TREES', this.info.slug+'_LEAVES-'+dir+'-'+leaves, 0).setOrigin(0, 1).setDepth(depth);
+            var leaves_sprite = this.scene.physics.add.staticSprite(_x, _y - 8, 'TREES', this.info.slug+'_LEAVES-'+dir+'-'+leaves, 0).setOrigin(0, 1).setDepth(depth).setAlpha(0.8);
 
             if (flip) {
                 sprite.setOrigin(1, 1).setFlipX(true);
