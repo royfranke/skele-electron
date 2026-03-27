@@ -14,6 +14,7 @@ export default class HudZener extends HudCourt {
 
     initialize() {
         this.initializeCourt(new ZenerManager(this.scene));
+        this.initializeTimer({ enabled: true, mode: 'round', autoStart: true, roundDurationMs: 5000, secondsOnly: true });
         this.boardView = {
             x: this.view.left+88,
             y: this.view.top+56,
@@ -220,6 +221,16 @@ export default class HudZener extends HudCourt {
 
     openZener () {
         this.openCourt(() => this.setupBoard());
+        if (this.manager.deck.state == 'AWAITING GUESS' && !this.timer.running) {
+            this.startRoundTimer(5000);
+        }
+    }
+
+    onRoundTimerExpired() {
+        if (this.open && !this.isGameOver) {
+            this.setInstructions('Too slow!');
+            this.manager.timeoutGuess();
+        }
     }
 
     closeZener () {
@@ -272,6 +283,7 @@ export default class HudZener extends HudCourt {
                     shuffle.once('animationcomplete', () => {
                         this.manager.deck.setState('AWAITING GUESS');
                         this.drawSelected(this.manager.deck.selected);
+                        this.startRoundTimer(5000);
                     });
                 }
             });
@@ -279,6 +291,7 @@ export default class HudZener extends HudCourt {
             if (shuffle == null) {
                 this.manager.deck.setState('AWAITING GUESS');
                 this.drawSelected(this.manager.deck.selected);
+                this.startRoundTimer(5000);
             }
             this.scene.manager.hud.hudSound.play('CARD_SHUFFLE_MID');
         }
@@ -290,6 +303,7 @@ export default class HudZener extends HudCourt {
             this.lastCard();
             this.makeFX('CLOUD_DUST_', this.board.deck.x, this.board.deck.y + 8);
             this.manager.deck.setState('AWAITING GUESS');
+            this.startRoundTimer(5000);
         }
     }
 

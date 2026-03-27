@@ -44,8 +44,25 @@ export default class ZenerManager {
             var sound_var = Phaser.Math.RND.between(1, 3);
             this.scene.manager.hud.hudSound.play('CARD_CLICK_' + sound_var);
             this.scene.manager.hud.hudZener.bobbleArrow();
+            this.scene.manager.hud.hudZener.stopTimer();
             this.makeGuess();
         }
+    }
+
+    timeoutGuess () {
+        if (this.deck.state == 'AWAITING GUESS') {
+            this.makeGuess(this.getForcedWrongChoice(), false);
+        }
+    }
+
+    getForcedWrongChoice () {
+        let card = this.deck.deck[0];
+        for (let i = 0; i < this.choices.length; i++) {
+            if (this.choices[i] != card) {
+                return this.choices[i];
+            }
+        }
+        return this.choices[this.selected];
     }
 
     back () {
@@ -55,9 +72,11 @@ export default class ZenerManager {
        this.scene.manager.setFocus('PLAYER');  
     }
 
-    makeGuess () {
-        this.scene.manager.hud.hudSound.play('ANTICIPATION');
-        var result = this.guess(this.choices[this.selected]);
+    makeGuess (choice = this.choices[this.selected], playAnticipation = true) {
+        if (playAnticipation) {
+            this.scene.manager.hud.hudSound.play('ANTICIPATION');
+        }
+        var result = this.guess(choice);
         this.reveal(result);
     }
 
