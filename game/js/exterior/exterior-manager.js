@@ -484,6 +484,29 @@ import KEYLIGHT from "../config/key-light.js";
 
     }
 
+    getAddressFromSlug (slug) {
+        var found = false;
+        MAP_CONFIG.propertyLines.forEach(function (prop, index) {
+            if (prop.listing.slug == slug) {
+                found = prop.address;
+            }
+        });
+        if (!found) {
+            console.log('Requested property not found: '+slug);
+        }
+        return found;
+    }
+
+    getTilesFromSlug (slug) {
+        let prop = this.getAddressFromSlug(slug);
+        if (!prop) {
+            return;
+        }
+        else {
+            return this.getFrontDoorTilesFromAddress(prop.dir, prop.number, prop.street);
+        }
+    }
+
     getFrontDoorTilesFromAddress(dir, number, street) {
         let door = this.getFrontDoorFromAddress(dir, number, street);
         return {x: door.x, y: door.y};

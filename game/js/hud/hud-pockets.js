@@ -740,8 +740,8 @@ export default class HudPockets extends HudCommon {
 
     addPocketTextBlock() {
         let margin = {
-            x: 8,
-            y: this.view.margin.top + 72,
+            x: 160,
+            y: this.view.margin.top + 14,
         };
         let display_width = 180;
 

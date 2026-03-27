@@ -1,21 +1,19 @@
 import ZenerManager from "../zener/zener-manager.js";
-import HudCommon from "./hud-common.js";
+import HudCourt from "./hud-court.js";
 /*
  * Controls the Zener HUD interface
  * Deploys the ZenerManager to control the game
  * 
  */
 
-export default class HudZener extends HudCommon {
+export default class HudZener extends HudCourt {
 
     constructor(scene) {
         super(scene);
     }
 
     initialize() {
-        this.open = false;
-        this.isGameOver = false;
-        this.manager = new ZenerManager(this.scene);
+        this.initializeCourt(new ZenerManager(this.scene));
         this.boardView = {
             x: this.view.left+88,
             y: this.view.top+56,
@@ -221,17 +219,12 @@ export default class HudZener extends HudCommon {
     }
 
     openZener () {
-        if (!this.open) {
-            this.open = true;
-            this.isGameOver = false;
-            this.scene.manager.hud.pullToHide();
-            this.setupBoard();
-            this.manager.startTurn();
-        }
+        this.openCourt(() => this.setupBoard());
     }
 
     closeZener () {
-        if (this.open) {
+        this.closeCourt({
+            teardown: () => {
             this.boardView.block.destroy();
             this.boardView.frame.block.destroy();
             this.board.deck.slot.block.destroy();
@@ -254,13 +247,9 @@ export default class HudZener extends HudCommon {
             }
             this.boardView.arrow_left.destroy();
             this.boardView.arrow_right.destroy();
-            this.destroyButton(this.back_button);
-            this.destroyButton(this.end_button);
-            this.manager.resetDeck();
-            this.manager.destroyListeners();
-            this.open = false;
-            this.scene.manager.hud.pullToShow();
-        }
+            },
+            resetGame: () => this.manager.resetDeck()
+        });
     }
 
     drawExpression (result) {
@@ -384,6 +373,9 @@ export default class HudZener extends HudCommon {
     }
 
     gameOver () {
+        if (this.isGameOver) {
+            return;
+        }
         this.isGameOver = true;
         var targets = [];
         this.board.choices.forEach((choice) => {
@@ -414,54 +406,16 @@ export default class HudZener extends HudCommon {
     }
 
     tallyScore () {
-        this.destroyButton(this.back_button);
-        this.board.score[0].object.setFont('SkeleHype');
-        this.board.score[0].object.setRightAlign();
-        this.board.score[0].object.setFontSize(16);
-        this.scene.tweens.add({
-            targets: this.board.score[0].object,
-            y: '-=32',
-            duration: 2000,
-            ease: 'Sine.easeInOut'
+        this.tallyScoreCommon(() => {
+            this.setInstructions(this.gameOverMessage());
         });
-
-        let timeline = this.scene.add.timeline([
-            {
-                at: 500,
-                run: () => {
-                    this.setHype('BEST . . . '+this.reference_score.streak_best);
-                }
-            },
-            {
-                at: 1500,
-                run: () => {
-                    this.setHype('BEST . . . '+this.reference_score.streak_best + '\nHITS . . . ' + this.reference_score.correct);
-                }
-            },
-            {
-                at: 2500,
-                run: () => {
-                    this.setHype('BEST . . . '+this.reference_score.streak_best + '\nHITS . . . ' + this.reference_score.correct + '\nFINAL . . . ' +(this.reference_score.streak_best*this.reference_score.correct));
-                    this.setInstructions(this.gameOverMessage());
-                }
-            }
-        ]);
-
-        timeline.play();
-
-            var callback_select_end = function () {
-                this.scene.events.emit('INPUT_BACK_ZENER');
-            }
-        /// Make Button to end game.
-            this.scene.events.addListener('INPUT_SELECT_ZENER', callback_select_end, this);
-            
-            this.end_button = this.makeButton(this.boardView.x + this.boardView.width - 12, this.boardView.y + this.boardView.height - 36, 'CLOSE', 'X', 'SHAMROCK');
-            /// Add listener to end game button
-
-            this.end_button.click_area.on('pointerdown', () => {
-                this.scene.events.emit('INPUT_BACK_ZENER');
-            });
+        this.makeEndButton();
     }
+
+    makeEndButton () {
+        this.makeEndButtonCommon('INPUT_SELECT_ZENER', 'INPUT_BACK_ZENER');
+    }
+
 
     lastCard () {
         this.board.deck.icon.icon.destroy();
@@ -590,17 +544,7 @@ export default class HudZener extends HudCommon {
     }
 
     drawScore (score) {
-        this.reference_score = score;
-        if (score.streak > 1) {
-            this.setHype('STREAK! X' + score.streak);
-            
-        }
-        else {
-            this.setHype();
-        }
-
-        this.setHits(score.correct);
-        this.setMisses(score.incorrect);
+        this.drawScoreCommon(score);
     }
 
     resultMessage (result) {

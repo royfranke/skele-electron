@@ -40,15 +40,7 @@ export default class MapManager {
    }
 
     move(direction) {
-          //this.scene.manager.hud.hudMap.move(direction);
-          if (direction == 'DOWN') {
-            this.scene.manager.hud.hudMap.arrow_down.setFrame('HUD_ARROW_BLUE_DOWN');
-
-            this.scene.time.delayedCall(250, function () {
-                this.scene.manager.hud.hudMap.arrow_down.setFrame('HUD_ARROW_SHADOW_DOWN');
-            }
-            , [], this);
-          }
+        this.scene.manager.hud.hudMap.move(direction);
         
     }
 

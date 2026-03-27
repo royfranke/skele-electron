@@ -46,8 +46,8 @@ export default class HudCommon {
             return this.makeButton(_x, _y, text, 'Z', 'RED');
         }
 
-        makeSlip(_x,_y,text,button) {
-            return this.factory.makeSlip(_x, _y, text, button);
+        makeSlip(_x,_y,text,button,origin=1) {
+            return this.factory.makeSlip(_x, _y, text, button, origin);
         }
 
         setSlipVisible(slip,visible=true) {
@@ -55,6 +55,10 @@ export default class HudCommon {
             slip.text.setVisible(visible);
             slip.button.setVisible(visible);
             slip.button_text.setVisible(visible);
+        }
+
+        makeShortButton(_x,_y,button,color='SAPPHIRE') {
+            return this.factory.makeShortButton(_x, _y, button,color);
         }
 
         makeButton(_x,_y,text,button,color='SAPPHIRE') {

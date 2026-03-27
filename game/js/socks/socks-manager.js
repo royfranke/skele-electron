@@ -40,9 +40,11 @@ export default class SocksManager {
         this.scene.manager.hud.hudSocks.drawSelected(this.dryer.choices[this.selected]);
     }
 
-    resetDryer () {
+    resetDryer (startTurn = true) {
         this.dryer.setState('NOT LOADED');
-        this.startTurn();
+        if (startTurn) {
+            this.startTurn();
+        }
     }
 
     select () {
@@ -69,6 +71,7 @@ export default class SocksManager {
         this.scene.manager.hud.hudSocks.drawReveal(result);
         this.dryer.reveal(result);
         this.drawScore();
+        this.selectNext();
     }
 
     drawScore () {

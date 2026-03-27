@@ -213,7 +213,7 @@ export default class Block {
         }
 
         if (this.block.ground.toUpperCase() == 'FOREST') {
-            this.buildForestBySection();
+            this.buildForest();
         }
 
     }

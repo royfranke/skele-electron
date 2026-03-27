@@ -52,7 +52,7 @@ export default class HudPayment extends HudCommon {
 
 
     openInterface() {
-        
+        this.scene.manager.hud.pullToHide();
         this.setPaymentState('FOCUSED');
 
         var button = this.makeButton(this.position.pay_button.x, this.position.pay_button.y,'PAY', 'X', 'SHAMROCK');
@@ -91,6 +91,7 @@ export default class HudPayment extends HudCommon {
         this.scene.manager.hud.hudStore.destroyReceipt();
         this.setPaymentState('UNFOCUSED');
         this.scene.manager.setFocus('PLAYER');
+        this.scene.manager.hud.pullToShow();
     }
 
     takePayment(amount, total) {

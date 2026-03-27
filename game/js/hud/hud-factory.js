@@ -38,6 +38,33 @@ export default class HudFactory {
         return click_area;
     }
 
+    makeShortButton (_x,_y, button='X', color='SAPPHIRE') {
+
+        let button_block = this.makeBlock(_x,_y, 24, 24, 'BLOCK_MID_' + color);
+        button_block.setOrigin(.5);
+        let button_text = this.scene.add.bitmapText(button_block.x, button_block.y, 'SkeleTalk', button, 16).setOrigin(.5).setScrollFactor(0).setDepth(100200).setTintFill(0xe2f2f3).setLineSpacing(11);
+        let click_area = this.scene.add.zone(_x,_y, button_block.width, button_block.height).setOrigin(.5).setScrollFactor(0).setDepth(100500).setInteractive(this.cursor_hover);
+
+        let button_data = {
+            button: button_block,
+            button_text: button_text,
+            click_area: click_area
+        };
+
+        button_data.click_area.on('pointerover', () => {
+            if (button_data.button != null) {
+                 button_data.button.setFrame('BLOCK_SHALLOW_' + color);
+            }
+        });
+        button_data.click_area.on('pointerout', () => {
+            if (button_data.button != null) {
+                button_data.button.setFrame('BLOCK_MID_' + color);
+            }
+        });
+        
+        return button_data;
+    }
+
     makeButton (_x,_y, text = 'OK', button='X', color='SAPPHIRE') {
         let slip_text = this.scene.add.bitmapText(_x - 6, _y + 8, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
@@ -74,17 +101,21 @@ export default class HudFactory {
         return button_data;
     }
 
-    makeSlip(_x, _y, text = 'HOLD', button='X') {
+    makeSlip(_x, _y, text = 'HOLD', button='X', origin=1) {
         
-
-        let slip_text = this.scene.add.bitmapText(_x - 6, _y + 5, 'SkeleTalk', text, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let slip_text_left = origin == 1 ? _x - 6 : _x + 6;
+        let slip_text = this.scene.add.bitmapText(slip_text_left, _y + 5, 'SkeleTalk', text, 8).setOrigin(origin,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         let block = this.makeBlock(_x, _y, slip_text.displayWidth + 12, 16, 'BLOCK_MID_BEIGE_RIGHT');
-        block.setOrigin(1,0);
+        block.setOrigin(origin,0);
 
-        let button_block = this.makeBlock(block.x - block.width, block.y, 12, 16, 'BLOCK_MID_ORANGE_LEFT');
-        button_block.setOrigin(1,0);
-        let button_text = this.scene.add.bitmapText(button_block.x - 3, button_block.y + 5, 'SkeleTalk', button, 8).setOrigin(1,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
+        let button_block_left = origin == 1 ? block.x - block.width : block.x - 8;
+        let button_block = this.makeBlock(button_block_left, block.y, 12, 16, 'BLOCK_MID_ORANGE_LEFT');
+        button_block.setOrigin(origin,0);
+        
+        
+        let button_text_left = origin == 1 ? button_block.x - 3 : button_block.x + 4;
+        let button_text = this.scene.add.bitmapText(button_text_left, button_block.y + 5, 'SkeleTalk', button, 8).setOrigin(origin,0).setScrollFactor(0).setDepth(100200).setTintFill(0x465e62).setLineSpacing(11);
 
         return {
             block: block,

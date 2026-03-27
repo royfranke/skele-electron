@@ -1,5 +1,5 @@
 import SocksManager from "../socks/socks-manager.js";
-import HudCommon from "./hud-common.js";
+import HudCourt from "./hud-court.js";
 import ITEMS from "../config/atlas/items.js";
 /*
  * Controls the Socks HUD interface
@@ -7,15 +7,19 @@ import ITEMS from "../config/atlas/items.js";
  * 
  */
 
-export default class HudSocks extends HudCommon {
+export default class HudSocks extends HudCourt {
 
     constructor(scene) {
         super(scene);
     }
 
     initialize() {
-        this.open = false;
-        this.manager = new SocksManager(this.scene);
+        this.initializeCourt(new SocksManager(this.scene));
+        this.tracked_icons = [];
+        this.reveal_icons = [];
+        this.reveal_tweens = [];
+        this.scene.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.cleanupOnSceneShutdown());
+        this.scene.events.once(Phaser.Scenes.Events.DESTROY, () => this.cleanupOnSceneShutdown());
         this.boardView = {
             x: this.view.left + 88,
             y: this.view.top + 56,
@@ -185,46 +189,59 @@ export default class HudSocks extends HudCommon {
     }
 
     openSocks() {
-        if (!this.open) {
-            this.open = true;
-            this.setupBoard();
-            this.manager.startTurn();
-        }
+        this.openCourt(() => this.setupBoard());
     }
 
     closeSocks() {
-        if (this.open) {
-            this.boardView.block.destroy();
-            this.boardView.frame.block.destroy();
+        this.closeCourt({
+            teardown: () => {
+            this.clearRevealArtifacts();
+            this.clearTrackedIcons();
+            this.safeDestroy(this.boardView.block);
+            this.safeDestroy(this.boardView.frame.block);
             var self = this;
             for (const [key, value] of Object.entries(self.board)) {
                 if (self.board[key].slot != null) {
                     if (self.board[key].slot.block != null) {
-                        self.board[key].slot.block.destroy();
+                        this.safeDestroy(self.board[key].slot.block);
+                        self.board[key].slot.block = null;
                     }
                     if (self.board[key].icon != null && self.board[key].icon.icon != null) {
-                        self.board[key].icon.icon.destroy();
+                        this.safeDestroy(self.board[key].icon.icon);
+                        self.board[key].icon.icon = null;
                     }
                 }
             }
             for (let i = 0; i < this.board.score.length; i++) {
                 if (self.board.score[i].block != null) {
-                    self.board.score[i].block.destroy();
+                    this.safeDestroy(self.board.score[i].block);
+                    self.board.score[i].block = null;
                 }
                 if (self.board.score[i].object != null) {
-                    self.board.score[i].object.destroy();
+                    this.safeDestroy(self.board.score[i].object);
+                    self.board.score[i].object = null;
                 }
             }
             if (this.sock_in_play != null) {
-                this.sock_in_play.destroy();
+                this.safeDestroy(this.sock_in_play);
+                this.sock_in_play = null;
             }
             if (this.board.in_hand.icon.icon != null) {
-                this.board.in_hand.icon.icon.destroy();
+                this.safeDestroy(this.board.in_hand.icon.icon);
+                this.board.in_hand.icon.icon = null;
             }
-            this.manager.resetDryer();
+            },
+            resetGame: () => this.manager.resetDryer(false)
+        });
+    }
+
+    cleanupOnSceneShutdown() {
+        this.clearRevealArtifacts();
+        this.clearTrackedIcons();
+        if (this.manager != null) {
             this.manager.destroyListeners();
-            this.open = false;
         }
+        this.open = false;
     }
 
 
@@ -234,7 +251,6 @@ export default class HudSocks extends HudCommon {
 
     arrowDown() {
         this.manager.selectNext();
-
         this.scene.tweens.add({
             targets: [this.board.arrow_down.slot.block],
             y: '+= 4',
@@ -260,19 +276,33 @@ export default class HudSocks extends HudCommon {
     }
 
     gameOver() {
+        if (this.isGameOver) {
+            return;
+        }
+        this.isGameOver = true;
         var targets = [];
-        /// For each object in this.board draw a slot and icon
         var self = this;
         for (const [key, value] of Object.entries(self.board)) {
             if (self.board[key].slot != undefined) {
                 targets.push(self.board[key].slot.block);
             }
             if (self.board[key].icon != null) {
-                self.board[key].icon.icon
-                targets.push(self.board[key].icon.icon);
+                if (self.board[key].icon.icon != null) {
+                    targets.push(self.board[key].icon.icon);
+                }
             }
 
         }
+        /// For score objects, push the text and block if it exists
+        for (let i = 0; i < this.board.score.length; i++) {
+            if (i == 0) {continue;}
+            if (self.board.score[i].block != null) {
+                targets.push(self.board.score[i].block);
+            }
+            if (self.board.score[i].object != null) {
+                targets.push(self.board.score[i].object);
+            }
+         }
         var tween = this.scene.tweens.add({
             targets: targets,
             y: 1200,
@@ -285,7 +315,7 @@ export default class HudSocks extends HudCommon {
 
         tween.on('complete', () => {
             targets.forEach((target) => {
-                target.destroy();
+                this.safeDestroy(target);
             });
         });
 
@@ -293,37 +323,12 @@ export default class HudSocks extends HudCommon {
     }
 
     tallyScore() {
-        this.board.score[0].object.setFont('SkeleTalk');
-        this.board.score[0].object.setFontSize(16);
-        this.scene.tweens.add({
-            targets: this.board.score[0].object,
-            y: '-=24',
-            duration: 2000,
-            ease: 'Sine.easeInOut'
-        });
+        this.tallyScoreCommon();
+        this.makeEndButton();
+    }
 
-        let timeline = this.scene.add.timeline([
-            {
-                at: 500,
-                run: () => {
-                    this.setHype('BEST STREAK: ' + this.reference_score.streak_best);
-                }
-            },
-            {
-                at: 1500,
-                run: () => {
-                    this.setHype('BEST STREAK: ' + this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct);
-                }
-            },
-            {
-                at: 2500,
-                run: () => {
-                    this.setHype('BEST STREAK: ' + this.reference_score.streak_best + '\nHITS: ' + this.reference_score.correct + '\nFINAL: ' + (this.reference_score.streak_best * this.reference_score.correct));
-                }
-            }
-        ]);
-
-        timeline.play();
+    makeEndButton () {
+        this.makeEndButtonCommon('INPUT_SELECT_SOCKS', 'INPUT_BACK_SOCKS');
     }
 
 
@@ -332,11 +337,14 @@ export default class HudSocks extends HudCommon {
     }
 
     drawSelected(slug) {
+        if (this.isGameOver) {
+            return;
+        }
         // draw the selected sock
         if (this.board.in_hand.icon.icon != null) {
-            this.board.in_hand.icon.icon.destroy();
+            this.safeDestroy(this.board.in_hand.icon.icon);
         }
-        this.board.in_hand.icon.icon = this.makeIcon(this.board.in_hand.x, this.board.in_hand.y, 'ITEMS', slug);
+        this.board.in_hand.icon.icon = this.makeTrackedIcon(this.board.in_hand.x, this.board.in_hand.y, 'ITEMS', slug);
         this.scene.tweens.add({
             targets: [this.board.in_hand.icon.icon],
             y: '-= 2',
@@ -349,10 +357,57 @@ export default class HudSocks extends HudCommon {
 
     ejectSock(slug) {
         if (this.sock_in_play != null) {
-            this.sock_in_play.destroy();
+            this.safeDestroy(this.sock_in_play);
         }
-        this.sock_in_play = this.makeIcon(this.board.dryer.x, this.board.dryer.y, 'ITEMS', slug);
+        this.sock_in_play = this.makeTrackedIcon(this.board.dryer.x, this.board.dryer.y, 'ITEMS', slug);
         this.sock_in_play_slug = slug;
+    }
+
+    makeTrackedIcon(_x, _y, textureName, frameName) {
+        let icon = this.makeIcon(_x, _y, textureName, frameName);
+        this.tracked_icons.push(icon);
+        return icon;
+    }
+
+    safeDestroy(target) {
+        if (target != null && target.active) {
+            target.destroy();
+        }
+    }
+
+    clearTrackedIcons() {
+        this.tracked_icons.forEach((icon) => {
+            this.safeDestroy(icon);
+        });
+        this.tracked_icons = [];
+    }
+
+    trackRevealIcon(icon) {
+        if (icon != null) {
+            this.reveal_icons.push(icon);
+        }
+        return icon;
+    }
+
+    trackRevealTween(tween) {
+        if (tween != null) {
+            this.reveal_tweens.push(tween);
+        }
+        return tween;
+    }
+
+    clearRevealArtifacts() {
+        this.reveal_tweens.forEach((tween) => {
+            if (tween != null && tween.isPlaying()) {
+                tween.stop();
+            }
+        });
+        this.reveal_tweens = [];
+
+        this.reveal_icons.forEach((icon) => {
+            this.safeDestroy(icon);
+        });
+        this.reveal_icons = [];
     }
 
 
@@ -361,10 +416,12 @@ export default class HudSocks extends HudCommon {
             // draw valid indicator or fx and have the socks become one rolled sock and fall into the laundry basket match pile
             let self = this;
             let bundled = ITEMS[this.sock_in_play_slug].stacks[0].icon;
-            let bundled_icon = this.makeIcon(this.sock_in_play.x, this.sock_in_play.y, 'ITEMS', bundled);
-            this.sock_in_play.destroy();
-            this.board.in_hand.icon.icon.destroy();
-            let tween = this.scene.tweens.add({
+            let bundled_icon = this.trackRevealIcon(this.makeTrackedIcon(this.sock_in_play.x, this.sock_in_play.y, 'ITEMS', bundled));
+            this.safeDestroy(this.sock_in_play);
+            this.sock_in_play = null;
+            this.safeDestroy(this.board.in_hand.icon.icon);
+            this.board.in_hand.icon.icon = null;
+            let tween = this.trackRevealTween(this.scene.tweens.add({
                 targets: [bundled_icon],
                 x: this.board.match_pile.x,
                 y: this.board.match_pile.y,
@@ -372,35 +429,42 @@ export default class HudSocks extends HudCommon {
                 ease: 'Sine.easeInOut',
                 loop: 0,
                 yoyo: false,
-            });
+            }));
             tween.on('complete', () => {
-                bundled_icon.destroy();
+                this.safeDestroy(bundled_icon);
+                self.reveal_icons = self.reveal_icons.filter((icon) => icon !== bundled_icon);
+                self.reveal_tweens = self.reveal_tweens.filter((tracked) => tracked !== tween);
                 if (self.board.match_pile.icon.icon != null) {
-                    self.board.match_pile.icon.icon.destroy();
+                    this.safeDestroy(self.board.match_pile.icon.icon);
                 }
                 self.board.match_pile.icon.icon = self.getStackIcon('match_pile', self.reference_score.correct);
             });
 
         } else {
             //draw invalid indicator and have the socks bounce off each other and fall in the mismatch pile
-            let doomed_sock = this.makeIcon(this.sock_in_play.x, this.sock_in_play.y, 'ITEMS', this.sock_in_play_slug);
-            this.sock_in_play.destroy();
+            let self = this;
+            let doomed_sock = this.trackRevealIcon(this.makeTrackedIcon(this.sock_in_play.x, this.sock_in_play.y, 'ITEMS', this.sock_in_play_slug));
+            this.safeDestroy(this.sock_in_play);
+            this.sock_in_play = null;
 
-            let doomed_other_sock = this.makeIcon(this.board.in_hand.icon.icon.x, this.board.in_hand.icon.icon.y, 'ITEMS', this.board.in_hand.icon.icon.frame.name);
-            this.board.in_hand.icon.icon.destroy();
+            let doomed_other_sock = this.trackRevealIcon(this.makeTrackedIcon(this.board.in_hand.icon.icon.x, this.board.in_hand.icon.icon.y, 'ITEMS', this.board.in_hand.icon.icon.frame.name));
+            this.safeDestroy(this.board.in_hand.icon.icon);
+            this.board.in_hand.icon.icon = null;
 
-            let tween = this.scene.tweens.add({
-                targets: [doomed_sock, this.board.in_hand.icon.icon],
+            let tween = this.trackRevealTween(this.scene.tweens.add({
+                targets: [doomed_sock, doomed_other_sock],
                 x: this.board.mismatch_pile.x,
                 y: this.board.mismatch_pile.y,
                 duration: 1000,
                 ease: 'Sine.easeInOut',
                 loop: 0,
                 yoyo: false,
-            });
+            }));
             tween.on('complete', () => {
-                doomed_other_sock.destroy();
-                doomed_sock.destroy();
+                this.safeDestroy(doomed_other_sock);
+                this.safeDestroy(doomed_sock);
+                self.reveal_icons = self.reveal_icons.filter((icon) => icon !== doomed_sock && icon !== doomed_other_sock);
+                self.reveal_tweens = self.reveal_tweens.filter((tracked) => tracked !== tween);
             });
         }
 
@@ -418,7 +482,7 @@ export default class HudSocks extends HudCommon {
             icon = this.match_pile_icon[0].slug;
         }
 
-        return this.makeIcon(this.board[pile].x, this.board[pile].y, 'UI', icon);
+        return this.makeTrackedIcon(this.board[pile].x, this.board[pile].y, 'UI', icon);
     }
 
 
@@ -436,16 +500,16 @@ export default class HudSocks extends HudCommon {
 
             if (this.board[key].icon != null) {
                 if (this.board[key].icon.icon != null) {
-                    this.board[key].icon.icon.destroy();
+                    this.safeDestroy(this.board[key].icon.icon);
                 }
-                this.board[key].icon.icon = this.makeIcon(this.board[key].x, this.board[key].y, this.board[key].icon.textureName, this.board[key].icon.frameName);
+                this.board[key].icon.icon = this.makeTrackedIcon(this.board[key].x, this.board[key].y, this.board[key].icon.textureName, this.board[key].icon.frameName);
             }
 
         }
         if (this.board.arrow_up.slot.block != null) {
-            this.board.arrow_up.slot.block.destroy();
+            this.safeDestroy(this.board.arrow_up.slot.block);
         }
-        this.board.arrow_up.slot.block = this.makeIcon(this.board.arrow_up.x, this.board.arrow_up.y, 'UI', this.board.arrow_up.slot.frameName);
+        this.board.arrow_up.slot.block = this.makeTrackedIcon(this.board.arrow_up.x, this.board.arrow_up.y, 'UI', this.board.arrow_up.slot.frameName);
         this.board.arrow_up.slot.block.flipY = true;
 
 
@@ -468,34 +532,38 @@ export default class HudSocks extends HudCommon {
         }
         this.setHits();
         this.setMisses();
+        this.drawSelected(0);
+
+        this.back_button = this.makeButton(this.boardView.x - 8, this.boardView.y,'CANCEL', 'Z', 'RED');
+
+
+        this.back_button.click_area.on('pointerdown', () => {
+            this.scene.events.emit('INPUT_BACK_SOCKS');
+        });
 
         this.manager.listen();
     }
 
     setHits(hits = '') {
-        this.board.score[1].object.setText(this.getNumberSymbol(hits));
+        if (this.board.score[1].object != null) {
+            this.board.score[1].object.setText(this.getNumberSymbol(hits));
+        }
     }
 
     setMisses(misses = '') {
-        this.board.score[2].object.setText(this.getNumberSymbol(misses));
+        if (this.board.score[2].object != null) {
+            this.board.score[2].object.setText(this.getNumberSymbol(misses));
+        }
     }
 
     setHype(hype = '') {
-        this.board.score[0].object.setText(hype);
+        if (this.board.score[0].object != null) {
+            this.board.score[0].object.setText(hype);
+        }
     }
 
     drawScore(score) {
-        this.reference_score = score;
-        if (score.streak > 1) {
-            this.setHype('STREAK! X' + score.streak);
-
-        }
-        else {
-            this.setHype();
-        }
-
-        this.setHits(score.correct);
-        this.setMisses(score.incorrect);
+        this.drawScoreCommon(score);
     }
 
 }

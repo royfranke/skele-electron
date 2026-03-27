@@ -102,12 +102,24 @@ export default class Npc {
     //// Stub
   }
 
+  testMoveToSlug(slug) {
+    var tiles = this.getTilesFromSlug(slug);
+    if (tiles) {
+      this.goTo(tiles.x, tiles.y);
+    }
+  }
+
+  getTilesFromSlug(slug) {
+    return this.scene.exterior.getTilesFromSlug(slug);
+  }
+
   doAction(action) {
     this.scene.player.action.clearActions();
     if (action == 'GREET') {
       if (!this.greeting) {
         this.scene.manager.hud.think('Hello.');
         this.greeting = true;
+        //this.testMoveToSlug('LAUNDROMAT');
       }
 
     }

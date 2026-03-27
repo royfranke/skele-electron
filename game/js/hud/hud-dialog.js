@@ -181,15 +181,19 @@ export default class HudDialog extends HudCommon {
         }
         else {
             /// Place an X in the corner of the dialog to indicate close
-            let _x = this.dialogBox.block.x + this.dialogBox.block.displayWidth - 32;
-            let _y = this.dialogBox.block.y + this.dialogBox.block.displayHeight - 24;
+            let _x = this.dialogBox.block.x + this.dialogBox.block.displayWidth - 16;
+            let _y = this.dialogBox.block.y + this.dialogBox.block.displayHeight - 18;
 
-            var close_block = this.makeHUDDownArrow(_x , _y, 'YELLOW');
-            
-            var close_button = this.makeBitmapText(_x + 5,_y - 6, 32, 'X',8,'SkeleNotebook');
-            close_button.setTintFill(0x465e62);
-            this.closure = {block:close_block,button:close_button};
-            this.flutter([close_block,close_button], 1000);
+             var close_button = this.makeShortButton(_x,_y,'X');
+
+
+
+            this.closure = close_button;
+            this.closure.click_area.on('pointerdown', () => {
+                this.select();
+            });
+
+            this.flutter([close_button.button,close_button.button_text, close_button.click_area], 1000);
         }
     }
 
@@ -255,10 +259,9 @@ export default class HudDialog extends HudCommon {
         let _x = this.view.left + this.view.margin.left + 88;
         let _y = this.view.bottom - (96 + this.view.margin.bottom);
         let block = this.makeBlock(_x,_y, 224, 96, 'BLOCK_MID_BEIGE');
-        let portrait_block = this.makeBlock(_x - 40,_y, 32, 32, 'BLOCK_MID_YELLOW_FAT_BORDER');
         let frame = this.makeBlock(_x,_y, 224, 96, 'BLOCK_SHALLOW_YELLOW_FRAME');
         let dialog = this.makeBitmapText(_x + 16,_y + 16, 194, '', 8);
-        return {block: block, dialog: dialog, frame: frame, portrait_block: portrait_block};
+        return {block: block, dialog: dialog, frame: frame};
     }
 
     makeReplyBox (content=[{'text': 'Yes', 'next': 0},{'text': 'No', 'next': 0}]) {
@@ -327,9 +330,6 @@ export default class HudDialog extends HudCommon {
                 if (this.dialogBox.block != undefined) {
                     this.dialogBox.block.destroy();
                 }
-                if (this.dialogBox.portrait_block != undefined) {
-                    this.dialogBox.portrait_block.destroy();
-                }
                 if (this.dialogBox.dialog != undefined) {
                     this.dialogBox.dialog.destroy();
                 }
@@ -364,8 +364,9 @@ export default class HudDialog extends HudCommon {
         }
         else {
             if (this.closure != null) {
-                this.closure.block.destroy();
                 this.closure.button.destroy();
+                this.closure.button_text.destroy();
+                this.closure.click_area.destroy();
                 this.closure = null;
             }
         }

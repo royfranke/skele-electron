@@ -94,7 +94,7 @@ normal: 'BAG_UNFOCUSED',
             this.key_icons.push(keyBlock);
 
             if (i === selected) {
-                var slip = this.makeSlip(x + 32,y + 37, 'HOLD', 'X');
+                var slip = this.makeSlip(x,y + 37, 'HOLD KEY FOR ' + key.ADDRESS, 'X',0);
                 if (this.slip == null) { this.slip = []; }
                 this.slip.push(slip);
             }

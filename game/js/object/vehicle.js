@@ -306,12 +306,12 @@ export default class Vehicle {
             //this.scene.physics.add.collider(this.sprite, vehicles);
             const self = this;
             this.scene.physics.add.collider(this.sprite, vehicles, function (vehicle1, vehicle2) {
-                console.log("Vehicle collision detected");
+                //console.log("Vehicle collision detected");
                 // Simple collision response: stop both vehicles
                 vehicle1.body.setVelocity(0);
                 vehicle2.body.setVelocity(0);
                 // Additional logic can be added here, such as damage calculation, bounce effect, etc.
-
+                
             });
             
 
