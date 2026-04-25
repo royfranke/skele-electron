@@ -5045,6 +5045,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          FLAT_ROOF_NINE_SLICE: {
+        name: 'Flat Roof Nineslice Test',
+        slug: 'FLAT_ROOF_NINE_SLICE', 
+        type: 'ROOF_FLAT',
+        bounding: {
+          h:4, 
+          w:7
+        },
+        base: {
+          h:1, 
+          w:7,
+          x:0, 
+          y:3
+        },
+        depth: 0,
+        sprite: {
+          h:64, 
+          w:112,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           DECOR_FRAME_1: {
         name: 'Framed Picture 1',
         slug: 'DECOR_FRAME_1', 

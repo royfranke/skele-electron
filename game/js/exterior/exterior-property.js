@@ -342,6 +342,15 @@ export default class PropertyLine {
                 2
             );
         }
+        if (this.prop.structure.type == 'ROWHOUSE') {
+            /// Get the roof depth and create a nine slice roof object to cover the entire roof area
+            let _x = positions.building_x;
+            let _y = levels.current_y - this.settings.roof.height - this.settings.levels[0].height + 1;
+            let number = Phaser.Math.RND.between(1, 2);
+            let roof_depth = this.settings.roof.height;
+            this.scene.add.nineslice(_x*16,_y*16, 'OBJECTS', 'FLAT_ROOF_NINE_SLICE-' + number, 112, 16*roof_depth, 16,16,16,32).setOrigin(0).setDepth((levels.current_y)*16);
+            //this.scene.manager.objectManager.newObjectToWorld(positions.building_x, levels.current_y - (this.settings.levels[0].height),'FLAT_ROOF_NINE_SLICE');
+        }
     }
 
     // Place ground level windows and AC unit

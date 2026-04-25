@@ -438,7 +438,7 @@ const ITEMS = {
         icon: 'MILK_BODEGA',
         type: 'DRINK_INGREDIENT',
         default_status: '',
-        description: 'A quart of 0.8% milk— the best dairy your bodega has on hand.  Expires day after tomorrow.',
+        description: 'A quart of 0.8% milk: the best dairy your bodega has on hand.  Expires day after tomorrow.',
         cost: 120,
         tags: [{category:'Product Display', tag: 'refridgerator'}],
         deplete_from: 0,
