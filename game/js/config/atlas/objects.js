@@ -9460,6 +9460,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          MURAL_PRETZEL: {
+        name: 'Pretzel Mural',
+        slug: 'MURAL_PRETZEL', 
+        type: 'MURAL',
+        bounding: {
+          h:2, 
+          w:3
+        },
+        base: {
+          h:2, 
+          w:3,
+          x:0, 
+          y:0
+        },
+        depth: -8,
+        sprite: {
+          h:32, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:32, 
+          w:48
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           PSYCHIC_STOREFRONT_SIGN: {
         name: 'Psychic Storefront Sign',
         slug: 'PSYCHIC_STOREFRONT_SIGN', 

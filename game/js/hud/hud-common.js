@@ -73,6 +73,10 @@ export default class HudCommon {
             return this.factory.makeThinkingBitmapText(_x, _y, width, size, font);
         }
 
+        makeSpeakingBitmapText (_x,_y, width, size=24, font='SkeleNotebook') {
+            return this.factory.makeSpeakingBitmapText(_x, _y, width, size, font);
+        }
+
         makeBlock(_x, _y, width = 32, height = 32, frameName = 'BLOCK_MID_YELLOW') {
             return this.factory.makeBlock(_x, _y, width, height, frameName);
         }
@@ -87,6 +91,10 @@ export default class HudCommon {
 
         makeThinkingBlock(_x, _y, width = 32, height = 32, frameName = 'THOUGHT_CLOUD') {
             return this.factory.makeThinkingBlock(_x, _y, width, height, frameName);
+        }
+
+        makeSpeakingBlock(_x, _y, width = 32, height = 32, frameName = 'SPEECH_BUBBLE_ROUND') {
+            return this.factory.makeSpeakingBlock(_x, _y, width, height, frameName);
         }
 
         makeHUDRightArrow(_x, _y, color = 'YELLOW') {

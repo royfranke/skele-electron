@@ -184,6 +184,7 @@ export default class Shop {
         if (this.prop.structure.type == 'CORNER-STORE-RIGHT') {
             this.setFrontDoor(x + width - 2, y);
             this.addStoreWindows(x, y, width - 2);
+            this.placeCornerStoreRightObjects(x, y);
         }
         
         if (this.prop.structure.type != 'PARKING-LOT') {
@@ -245,6 +246,12 @@ export default class Shop {
             this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
             let key_sign = this.scene.manager.objectManager.newObjectToWorld(x + 2.5, y - 1.5, 'NEON_KEY');
             key_sign.sprite.setDepth(this.gates[1].sprite.depth - 1);
+        }
+    }
+
+    placeCornerStoreRightObjects(x, y) {
+        if (this.prop.listing.slug == 'BAKERY') {
+            this.scene.manager.objectManager.newObjectToWorld(x+4, y-2, 'MURAL_PRETZEL');
         }
     }
     

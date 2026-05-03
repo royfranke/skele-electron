@@ -16,6 +16,7 @@ import HudPocket from "./hud-pocket.js";
 import HudPockets from "./hud-pockets.js"; //Extends HudCommon
 import HudCoinpurse from "./hud-coinpurse.js"; //Extend HudSide
 import HudSound from "./hud-sound.js";
+import HudSpeak from "./hud-speak.js";
 import HudState from "./hud-state.js";
 import HudThinking from "./hud-thinking.js"; //Extends HudCommon
 import HudWatch from "./hud-watch.js"; //Extends HudCommon
@@ -54,6 +55,7 @@ export default class HudManager {
         /// Use this method to gather managers that are not needed for the tutorial/new game
         console.log("Initializing game HUD");
         this.hudThinking = new HudThinking(this.scene);
+        this.hudSpeak = new HudSpeak(this.scene);
         this.hudNumberPad = new HudNumberPad(this.scene);
         this.hudChest = new HudChest(this.scene);
         this.hudHealth = new HudHealth(this.scene);
@@ -315,6 +317,12 @@ export default class HudManager {
     think (thought) {
         if (this.hudThinking != null) {
             this.hudThinking.think(thought);
+        }
+    }
+
+    speak (speech) {
+        if (this.hudSpeak != null) {
+            this.hudSpeak.speak(speech);
         }
     }
 

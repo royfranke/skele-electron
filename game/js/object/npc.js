@@ -117,7 +117,7 @@ export default class Npc {
     this.scene.player.action.clearActions();
     if (action == 'GREET') {
       if (!this.greeting) {
-        this.scene.manager.hud.think('Hello.');
+        this.scene.manager.hud.speak('Hello.');
         this.greeting = true;
         //this.testMoveToSlug('LAUNDROMAT');
       }
@@ -142,7 +142,7 @@ export default class Npc {
       this.following = null;
       this.clearDestinations();
       this.scene.manager.hud.think('?!');
-      this.givePlayerItem('APPLE');
+      //this.givePlayerItem('APPLE');
     }
 
     if (action == 'MATCH SOCKS') {

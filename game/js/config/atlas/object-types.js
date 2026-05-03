@@ -107,6 +107,8 @@ const OBJECT_TYPES = {
       'VCR_NORTH','VCR_SOUTH'    ],
       MIRROR: [
       'DRESSER_MIRROR'    ],
+      MURAL: [
+      'MURAL_PRETZEL'    ],
       NEWSPAPER_BOX_: [
       'SPECIAL_NEWS_BOX_','DAILY_NEWS_BOX_'    ],
       NIGHT_LIGHT: [

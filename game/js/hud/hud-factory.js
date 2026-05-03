@@ -169,6 +169,10 @@ export default class HudFactory {
         return this.makeBitmapText(_x,_y, width, size, font).setDepth(this.depth.FOCUS_HINT).setScrollFactor(0);
     }
 
+    makeSpeakingBitmapText (_x,_y, width, size=8, font='SkeleTalk') {
+        return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0, 1).setDepth(this.depth.BUBBLE + 1).setMaxWidth(width).setTintFill(0x3a3a50);
+    }
+
 
     makeThinkingBitmapText (_x,_y, width, size=8, font='SkeleNotebook') {
         return this.scene.add.bitmapText(_x, _y, font, '', size).setOrigin(0, 1).setDepth(this.depth.BUBBLE + 1).setMaxWidth(width).setTintFill(0x3a3a50);
@@ -179,6 +183,11 @@ export default class HudFactory {
         return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 16,16,16,16).setOrigin(0,1).setDepth(depth);
  
     }
+
+    makeSpeakingBlock (_x,_y, width=32, height=32, frameName='SPEECH_BUBBLE_ROUND') {
+        let depth = this.depth.BUBBLE;
+        return this.scene.add.nineslice(_x,_y, 'UI', frameName, width, height, 16,16,16,16).setOrigin(0,1).setDepth(depth);
+    }   
 
     makeSideArrow (_x,_y, frameName='BAG_ARROW_FOCUSED', left=false) {
         if (left) {
