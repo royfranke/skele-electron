@@ -140,7 +140,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     addTileActions(tile) {
         this.actionTile = {x: tile.x, y: tile.y};
 
-        let ground = (this.scene?.exterior?.getGroundAt)
+        let ground = (this.locale === this.scene.exterior)
             ? this.scene.exterior.getGroundAt(tile.x, tile.y)
             : this.locale.ground.getGround(tile.x, tile.y);
         if (ground != null) {

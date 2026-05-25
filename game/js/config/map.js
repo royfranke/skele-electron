@@ -2,7 +2,6 @@ const MAP_CONFIG = {
     tileSize: 16,
     width:320,
     height:200,
-    useWorldNavForTileRoutes: true,
     useStrictSimpleTileWalkability: false,
     useWorldGroundForActors: true,
     debugNavRouteFailures: false,
@@ -22,7 +21,6 @@ const MAP_CONFIG = {
             height: 40,
             top: 0,
             right: 64,
-            bottom: 40,
             left: 0,
             center: {
                 x: 32,

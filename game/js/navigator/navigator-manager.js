@@ -268,7 +268,6 @@ export default class NavigatorManager {
         var _y = frontier[0][1];
         var branches = [];
         var favored = 100;
-        const useWorldNavForTileRoutes = MAP_CONFIG.useWorldNavForTileRoutes !== false;
         for (var y=-1; y < 2; y++) {
             for (var x=-1; x < 2; x++) {
                 if (x == 0 && y == 0) {
@@ -290,16 +289,11 @@ export default class NavigatorManager {
                 var tile_y = _y + y;
                 
                 if (!this.compareCoordinates(visited,[tile_x,tile_y]) && !this.compareCoordinates(frontier,[tile_x,tile_y])) {
-                    var tile = null;
-                    if (useWorldNavForTileRoutes) {
-                        if (!this.worldIsWalkable(tile_x, tile_y)) {
-                            continue;
-                        }
-                        tile = this.worldGetGround(tile_x,tile_y);
+                    if (!this.worldIsWalkable(tile_x, tile_y)) {
+                        continue;
                     }
-                    else {
-                        tile = this.scene.exterior.ground.getGround(tile_x,tile_y);
-                    }
+
+                    var tile = this.worldGetGround(tile_x,tile_y);
 
                     if (tile != undefined) {
                         if (tile[pref+"PREF"] <= favored) {

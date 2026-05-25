@@ -199,9 +199,8 @@ export default class Item {
         tween.on('complete', () => {
             this.createFooting();
             let locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
-            let world = this.scene.exterior;
-            let ground = (world?.getGroundAt)
-                ? world.getGroundAt(this.tile_x, this.tile_y)
+            let ground = (locale === this.scene.exterior)
+                ? this.scene.exterior.getGroundAt(this.tile_x, this.tile_y)
                 : locale.ground.getGround(this.tile_x, this.tile_y);
             if (this.hasFX) {
                 if (this.info.status.fx_start != '') {

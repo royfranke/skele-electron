@@ -445,7 +445,7 @@ export default class Block {
                             let tileX = Math.floor(treeX);
                             let tileY = Math.floor(treeY);
                             /// Check tile type under tree
-                            var tile = this.scene.exterior.ground.getGround(tileX, tileY);
+                            var tile = this.scene.exterior.getGroundAt(tileX, tileY);
                             if (tile == undefined) {
                                 continue;
                             }
