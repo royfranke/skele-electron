@@ -6,6 +6,9 @@ import Block from "./exterior-block.js";
 import Navigator from "../navigator/navigator-manager.js";
 import BlockNode from "./exterior-block-node.js";
 import KEYLIGHT from "../config/key-light.js";
+import ChunkManager from "../world/chunk-manager.js";
+import { CHUNK_SIZE } from "../world/chunk.js";
+import WorldDataLoader from "../world/world-data-loader.js";
 
 /**
  * 	Manage Exteriors (Overworld tile scenes)
@@ -15,7 +18,7 @@ import KEYLIGHT from "../config/key-light.js";
 
     constructor(scene) {
         this.scene = scene;
-        this.debug = false;
+        this.debug = true;
     }
 
     initialize () {
@@ -23,6 +26,28 @@ import KEYLIGHT from "../config/key-light.js";
         this.keylight = KEYLIGHT;
 
         this.nav = new Navigator(this.scene);
+
+        // World chunk system — runs in parallel with Phaser rendering.
+        const worldChunksWidth  = Math.ceil(MAP_CONFIG.width  / CHUNK_SIZE);
+        const worldChunksHeight = Math.ceil(MAP_CONFIG.height / CHUNK_SIZE);
+        this.chunkManager = new ChunkManager({
+            activeRadius:      2,
+            worldChunksWidth,
+            worldChunksHeight,
+        });
+        this.useChunkStreamingBootstrap = this.shouldUseChunkStreamingBootstrap();
+        this.worldDataLoader = this.useChunkStreamingBootstrap ? new WorldDataLoader() : null;
+        this.pendingChunkLoads = new Set();
+        this.missingChunkKeys = new Set();
+
+        this.chunkManager.onChunkLoad   = (chunk) => {
+            this.handleChunkLoad(chunk);
+            if (this.debug) console.log(`[ChunkManager] load   ${chunk.key}`);
+        };
+        this.chunkManager.onChunkUnload = (chunk) => {
+            this.unrenderChunk(chunk);
+            if (this.debug) console.log(`[ChunkManager] unload ${chunk.key}`);
+        };
 
         this.lastBlock = {x: 0, y: 0};
         this.lastTile = {x: 0, y: 0};
@@ -43,7 +68,25 @@ import KEYLIGHT from "../config/key-light.js";
         this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset).setDepth(3);
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset).setDepth(4);
         this.roofLayer = this.map.createBlankLayer("Roof", roof_tileset).setDepth(1000);
-        this.buildMap();
+
+        if (!this.useChunkStreamingBootstrap) {
+            this.buildMap();
+        }
+    }
+
+    shouldUseChunkStreamingBootstrap () {
+        if (MAP_CONFIG.useChunkStreamingBootstrap === true) {
+            return true;
+        }
+
+        if (MAP_CONFIG.useChunkStreamingBootstrap === false) {
+            return false;
+        }
+
+        // Auto-enable only for very large maps unless explicitly disabled.
+        // 1024x1024 tiles = 1,048,576 tiles.
+        const mapTileCount = MAP_CONFIG.width * MAP_CONFIG.height;
+        return mapTileCount >= 1048576;
     }
 
     buildMap () {
@@ -237,6 +280,14 @@ import KEYLIGHT from "../config/key-light.js";
     }
 
     create () {
+        if (this.useChunkStreamingBootstrap) {
+            this.ground = new Ground(this.groundLayer, this.edgeLayer);
+            this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
+            this.setMouseInput();
+            this.beginChunkStreaming();
+            return;
+        }
+
         self = this;
         MAP_CONFIG.blocks.forEach(function (block, index) {
             self.setCorners(block);
@@ -249,6 +300,190 @@ import KEYLIGHT from "../config/key-light.js";
         });
         this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
         this.setMouseInput();
+
+        // Snapshot all Phaser-painted tiles into chunk data now that the
+        // build pass is complete.  This is a one-time O(width*height) read.
+        this.snapshotToChunks();
+
+        // Switch rendering over to chunk streaming.
+        this.beginChunkStreaming();
+    }
+
+    /**
+     * Walk every tile in the ground and wall layers once and populate the
+     * ChunkManager so chunk data mirrors the Phaser state.
+     * Terrain = groundLayer tile index.
+     * Collision = any non-empty wallLayer tile (matches existing Phaser collision setup).
+     */
+    snapshotToChunks () {
+        const w = MAP_CONFIG.width;
+        const h = MAP_CONFIG.height;
+
+        for (let y = 0; y < h; y++) {
+            for (let x = 0; x < w; x++) {
+                // Terrain
+                const groundTile = this.groundLayer.getTileAt(x, y);
+                const groundIndex = (groundTile && groundTile.index != null) ? groundTile.index : 0;
+                this.chunkManager.setLayerTile('ground', x, y, groundIndex);
+                const groundInfo = this.ground.getGround(x, y);
+                if (groundInfo && groundInfo.TYPE) {
+                    const chunk = this.chunkManager.getChunkAtTile(x, y);
+                    chunk.setGroundType(x, y, groundInfo.TYPE);
+                }
+
+                // Edge / Wall / Roof
+                const edgeTile = this.edgeLayer.getTileAt(x, y);
+                const edgeIndex = (edgeTile && edgeTile.index != null) ? edgeTile.index : -1;
+                this.chunkManager.setLayerTile('edge', x, y, edgeIndex);
+
+                const wallTile = this.wallLayer.getTileAt(x, y);
+                const wallIndex = (wallTile && wallTile.index != null) ? wallTile.index : -1;
+                this.chunkManager.setLayerTile('wall', x, y, wallIndex);
+
+                const roofTile = this.roofLayer.getTileAt(x, y);
+                const roofIndex = (roofTile && roofTile.index != null) ? roofTile.index : -1;
+                this.chunkManager.setLayerTile('roof', x, y, roofIndex);
+
+                // Collision — any tile present on the wall layer = blocked
+                if (wallIndex > -1) {
+                    const chunk = this.chunkManager.getChunkAtTile(x, y);
+                    chunk.setCollision(x, y, true);
+                }
+            }
+        }
+
+        // Mark all chunks as loaded now that data is populated
+        this.chunkManager.getAllChunks().forEach(chunk => {
+            chunk.loaded = true;
+            chunk.dirty  = false;
+        });
+
+        if (this.debug) {
+            console.log(`[ChunkManager] snapshot complete — ${this.chunkManager.getAllChunks().length} chunks populated`);
+        }
+    }
+
+    beginChunkStreaming () {
+        this.clearRenderedLayers();
+        this.refreshChunkCollisions();
+
+        const standingTile = this.scene.player?.standingTile;
+        const startX = standingTile?.x ?? this.scene.player?.action?.actionTile?.x ?? 0;
+        const startY = standingTile?.y ?? this.scene.player?.action?.actionTile?.y ?? 0;
+
+        this.chunkManager.update(startX, startY);
+    }
+
+    handleChunkLoad (chunk) {
+        if (!this.useChunkStreamingBootstrap) {
+            this.renderChunk(chunk);
+            return;
+        }
+
+        this.loadAndRenderChunk(chunk);
+    }
+
+    async loadAndRenderChunk (chunk) {
+        if (!chunk || chunk.rendered) {
+            return;
+        }
+
+        if (chunk.loaded) {
+            if (this.chunkManager.isChunkActive(chunk.chunkX, chunk.chunkY)) {
+                this.renderChunk(chunk);
+            }
+            return;
+        }
+
+        if (this.pendingChunkLoads.has(chunk.key) || this.missingChunkKeys.has(chunk.key)) {
+            return;
+        }
+
+        this.pendingChunkLoads.add(chunk.key);
+
+        let loaded = false;
+        if (this.worldDataLoader != null) {
+            loaded = await this.worldDataLoader.loadChunk(chunk);
+        }
+
+        this.pendingChunkLoads.delete(chunk.key);
+
+        if (!loaded) {
+            this.missingChunkKeys.add(chunk.key);
+            if (this.debug) {
+                console.warn(`[ChunkManager] missing chunk data for ${chunk.key}`);
+            }
+            return;
+        }
+
+        if (this.chunkManager.isChunkActive(chunk.chunkX, chunk.chunkY)) {
+            this.renderChunk(chunk);
+        }
+    }
+
+    clearRenderedLayers () {
+        this.groundLayer.fill(0);
+        this.edgeLayer.fill(-1);
+        this.wallLayer.fill(-1);
+        this.roofLayer.fill(-1);
+    }
+
+    renderChunk (chunk) {
+        if (!chunk || !chunk.loaded || chunk.rendered) {
+            return;
+        }
+
+        const originX = chunk.tileOriginX;
+        const originY = chunk.tileOriginY;
+
+        for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+            for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+                const wx = originX + lx;
+                const wy = originY + ly;
+                if (wx < 0 || wy < 0 || wx >= MAP_CONFIG.width || wy >= MAP_CONFIG.height) {
+                    continue;
+                }
+
+                this.groundLayer.putTileAt(chunk.getLayerTile('ground', wx, wy), wx, wy);
+                this.edgeLayer.putTileAt(chunk.getLayerTile('edge', wx, wy), wx, wy);
+                this.wallLayer.putTileAt(chunk.getLayerTile('wall', wx, wy), wx, wy);
+                this.roofLayer.putTileAt(chunk.getLayerTile('roof', wx, wy), wx, wy);
+            }
+        }
+
+        chunk.rendered = true;
+        this.refreshChunkCollisions();
+    }
+
+    unrenderChunk (chunk) {
+        if (!chunk || !chunk.rendered) {
+            return;
+        }
+
+        const originX = chunk.tileOriginX;
+        const originY = chunk.tileOriginY;
+
+        for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+            for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+                const wx = originX + lx;
+                const wy = originY + ly;
+                if (wx < 0 || wy < 0 || wx >= MAP_CONFIG.width || wy >= MAP_CONFIG.height) {
+                    continue;
+                }
+
+                this.groundLayer.putTileAt(0, wx, wy);
+                this.edgeLayer.putTileAt(-1, wx, wy);
+                this.wallLayer.putTileAt(-1, wx, wy);
+                this.roofLayer.putTileAt(-1, wx, wy);
+            }
+        }
+
+        chunk.rendered = false;
+        this.refreshChunkCollisions();
+    }
+
+    refreshChunkCollisions () {
+        this.wallLayer.setCollisionByExclusion([-1]);
     }
 
     setKeyLight (key_light_name) {
@@ -306,6 +541,19 @@ import KEYLIGHT from "../config/key-light.js";
     update () {
         const x = this.scene.player.action.actionTile.x;
         const y = this.scene.player.action.actionTile.y;
+
+        // Keep ChunkManager aware of the player's world tile position.
+        if (this.scene.player.standingTile != undefined) {
+            this.chunkManager.update(
+                this.scene.player.standingTile.x,
+                this.scene.player.standingTile.y
+            );
+        }
+
+        if (this.useChunkStreamingBootstrap) {
+            return;
+        }
+
         var thisBlock = this.xyToBlock(x,y);
         if (this.lastBlock.x != thisBlock.x || this.lastBlock.y != thisBlock.y) {
             console.log('Leaving block '+this.lastBlock.x+','+this.lastBlock.y);
@@ -609,6 +857,46 @@ import KEYLIGHT from "../config/key-light.js";
             return false;
         }
         return true;
+    }
+
+    inWorldBounds (_x, _y) {
+        return (_x >= 0 && _y >= 0 && _x < MAP_CONFIG.width && _y < MAP_CONFIG.height);
+    }
+
+    isWalkable (_x, _y) {
+        if (!this.inWorldBounds(_x, _y)) {
+            return false;
+        }
+
+        // Primary source: chunk simulation data
+        if (this.chunkManager != undefined) {
+            const chunk = this.chunkManager.getChunkAtTile(_x, _y);
+            if (chunk != undefined && chunk.loaded) {
+                return chunk.isWalkable(_x, _y);
+            }
+        }
+
+        // Transitional fallback while legacy systems still exist.
+        const wallTile = this.wallLayer.getTileAt(_x, _y);
+        return !(wallTile && wallTile.index > -1);
+    }
+
+    getGroundAt (_x, _y) {
+        if (!this.inWorldBounds(_x, _y)) {
+            return undefined;
+        }
+
+        if (this.chunkManager != undefined) {
+            const chunk = this.chunkManager.getChunkAtTile(_x, _y);
+            if (chunk != undefined && chunk.loaded) {
+                const groundType = chunk.getGroundType(_x, _y);
+                if (groundType != null) {
+                    return { TYPE: groundType, CHILDPREF: 100, ADULTPREF: 100 };
+                }
+            }
+        }
+
+        return this.ground.getGround(_x, _y);
     }
 
 }

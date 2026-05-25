@@ -279,7 +279,11 @@ export default class NavigatorManager {
                 var tile_y = _y + y;
                 
                 if (!this.compareCoordinates(visited,[tile_x,tile_y]) && !this.compareCoordinates(frontier,[tile_x,tile_y])) {
-                    var tile = this.scene.exterior.ground.getGround(tile_x,tile_y);
+                    if (!this.worldIsWalkable(tile_x, tile_y)) {
+                        continue;
+                    }
+
+                    var tile = this.worldGetGround(tile_x,tile_y);
                     if (tile != undefined) {
                         if (tile[pref+"PREF"] <= favored) {
                             favored = tile[pref+"PREF"];
@@ -320,7 +324,9 @@ export default class NavigatorManager {
                 var tile_y = _y + y;
                 
                 if (!this.compareCoordinates(visited,[tile_x,tile_y]) && !this.compareCoordinates(frontier,[tile_x,tile_y])) {
-                    branches.push([tile_x,tile_y]);
+                    if (this.worldIsWalkable(tile_x, tile_y)) {
+                        branches.push([tile_x,tile_y]);
+                    }
                 }
             }
         }
@@ -377,5 +383,19 @@ export default class NavigatorManager {
             }
         }
         return false;
+    }
+
+    worldIsWalkable (_x, _y) {
+        if (this.scene?.exterior?.isWalkable) {
+            return this.scene.exterior.isWalkable(_x, _y);
+        }
+        return false;
+    }
+
+    worldGetGround (_x, _y) {
+        if (this.scene?.exterior?.getGroundAt) {
+            return this.scene.exterior.getGroundAt(_x, _y);
+        }
+        return undefined;
     }
 }
