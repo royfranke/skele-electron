@@ -10,6 +10,7 @@ import ChunkManager from "../world/chunk-manager.js";
 import { CHUNK_SIZE } from "../world/chunk.js";
 import WorldDataLoader from "../world/world-data-loader.js";
 import GROUND_TYPE from "../config/atlas/ground-types.js";
+import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
 /**
  * 	Manage Exteriors (Overworld tile scenes)
@@ -326,11 +327,9 @@ import GROUND_TYPE from "../config/atlas/ground-types.js";
                 const groundTile = this.groundLayer.getTileAt(x, y);
                 const groundIndex = (groundTile && groundTile.index != null) ? groundTile.index : 0;
                 this.chunkManager.setLayerTile('ground', x, y, groundIndex);
-                const groundInfo = this.ground.getGround(x, y);
-                if (groundInfo && groundInfo.TYPE) {
-                    const chunk = this.chunkManager.getChunkAtTile(x, y);
-                    chunk.setGroundType(x, y, groundInfo.TYPE);
-                }
+                const groundType = TYPE_BY_TILE_INDEX[groundIndex] || 'VOID';
+                const chunk = this.chunkManager.getChunkAtTile(x, y);
+                chunk.setGroundType(x, y, groundType);
 
                 // Edge / Wall / Roof
                 const edgeTile = this.edgeLayer.getTileAt(x, y);
@@ -872,37 +871,38 @@ import GROUND_TYPE from "../config/atlas/ground-types.js";
             return false;
         }
 
-        // Primary source: chunk simulation data
-        if (this.chunkManager != undefined) {
-            const chunk = this.chunkManager.getChunkAtTile(_x, _y);
-            if (chunk != undefined && chunk.loaded) {
-                return chunk.isWalkable(_x, _y);
-            }
+        if (this.chunkManager == undefined) {
+            return false;
         }
 
-        // Transitional fallback while legacy systems still exist.
-        const wallTile = this.wallLayer.getTileAt(_x, _y);
-        return !(wallTile && wallTile.index > -1);
+        const chunk = this.chunkManager.getChunkAtTile(_x, _y);
+        if (chunk == undefined || !chunk.loaded) {
+            return false;
+        }
+
+        return chunk.isWalkable(_x, _y);
     }
 
     getGroundAt (_x, _y) {
         if (!this.inWorldBounds(_x, _y)) {
-            return undefined;
+            return GROUND_TYPE.VOID;
         }
 
-        if (this.chunkManager != undefined) {
-            const chunk = this.chunkManager.getChunkAtTile(_x, _y);
-            if (chunk != undefined && chunk.loaded) {
-                const groundType = chunk.getGroundType(_x, _y);
-                if (groundType != null) {
-                    if (GROUND_TYPE[groundType] != undefined) {
-                        return GROUND_TYPE[groundType];
-                    }
-                }
-            }
+        if (this.chunkManager == undefined) {
+            return GROUND_TYPE.VOID;
         }
 
-        return this.ground.getGround(_x, _y);
+        const chunk = this.chunkManager.getChunkAtTile(_x, _y);
+        if (chunk == undefined || !chunk.loaded) {
+            return GROUND_TYPE.VOID;
+        }
+
+        const groundType = chunk.getGroundType(_x, _y);
+        if (groundType != null && GROUND_TYPE[groundType] != undefined) {
+            return GROUND_TYPE[groundType];
+        }
+
+        return GROUND_TYPE.VOID;
     }
 
 }
