@@ -199,17 +199,7 @@ export default class HudPocket {
         return found;
     }   
 
-    findItemKindInPockets(item_kind_slug) {
-        var found = false;
-        this.pockets.forEach(function (pocket, index) {
-            if (!found) {
-                if (pocket.STATE != 'EMPTY' && pocket[pocket.STATE].info.type == item_kind_slug) {
-                    found = index;
-                }
-            }
-        });
-        return found;
-    }
+    
 
     getHeldItems() {
         var heldItems = [];

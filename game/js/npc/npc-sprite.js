@@ -16,6 +16,7 @@ export default class NpcSprite {
   }
 
   setCollider () {
+    this.sprite.body.pushable = false;
     if (this.scene.slot.POSITION.ROOM == -1) {
       this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);
       this.scene.physics.add.collider(this.sprite, this.scene.exterior.groundLayer);

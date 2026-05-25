@@ -154,7 +154,8 @@ export default class RequirementsEngine {
                 return this.scene.manager.hud.pocket.findItemKindInPockets(requirement.ITEM_KIND) ||
                        this.scene.manager.objectManager.findOnActiveTile(requirement.ITEM_KIND, 'type');
             },
-            'IN_HAND_OR_BAG': () => this.scene.manager.hud.pocket.findItemKindInPockets(requirement.ITEM_KIND)
+            'IN_HAND_OR_BAG': () => this.scene.manager.hud.pocket.findItemKindInPockets(requirement.ITEM_KIND),
+            'WORN': () => this.scene.manager.hud.pocket.findWornItemKind(requirement.ITEM_KIND)
         };
 
         const checker = slotCheckers[requirement.slot_type];

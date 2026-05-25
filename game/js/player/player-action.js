@@ -14,6 +14,9 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     initialize() {
         if (this.debug) {this.debugActionTile = this.scene.add.rectangle(0, 0, 16, 16, 0x6666ff).setOrigin(0);}
         this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
+        this.actionRadius = 2;
+        this.actionFacing = 's';
+        this.pendingAction = null;
         this.actionTile = {x: 0, y: 0};
         this.actionTileLast = {x: 0, y: 0};
         this.actionTileLookUp = SPRITE_DIR.DIR_TILE;
@@ -74,9 +77,76 @@ import SPRITE_DIR from "../config/sprite-dir.js";
 
     refreshActions() {
         this.clearActions();
-        this.addItemActions();
-        this.addObjectActions();
+        const originalActionTile = {x: this.actionTile.x, y: this.actionTile.y};
+        const tiles = this.getActionTilesByDistance(originalActionTile, this.actionRadius, this.actionFacing);
+
+        tiles.forEach((tile) => {
+            this.addTileActions(tile);
+        });
+
+        this.actionTile = originalActionTile;
         this.updateActionAvailability();
+    }
+
+    setActionRadius(radius = 1) {
+        let parsedRadius = parseInt(radius);
+        if (isNaN(parsedRadius)) {
+            parsedRadius = 1;
+        }
+        this.actionRadius = Math.max(1, parsedRadius);
+    }
+
+    getActionTilesByDistance(originTile, radius = 1, facing = this.actionFacing) {
+        let tiles = [];
+        const direction = this.actionTileLookUp[facing] || this.actionTileLookUp.s;
+
+        for (let dx = -radius; dx <= radius; dx++) {
+            for (let dy = -radius; dy <= radius; dy++) {
+                if (!this.isTileInFacingDirection(dx, dy, direction)) {
+                    continue;
+                }
+                const distance = Math.abs(dx) + Math.abs(dy);
+                const linearDistance = Math.sqrt((dx * dx) + (dy * dy));
+                tiles.push({
+                    x: originTile.x + dx,
+                    y: originTile.y + dy,
+                    distance,
+                    linearDistance
+                });
+            }
+        }
+
+        tiles.sort((a, b) => {
+            if (a.distance != b.distance) {
+                return a.distance - b.distance;
+            }
+            if (a.linearDistance != b.linearDistance) {
+                return a.linearDistance - b.linearDistance;
+            }
+            if (a.x != b.x) {
+                return a.x - b.x;
+            }
+            return a.y - b.y;
+        });
+
+        return tiles;
+    }
+
+    isTileInFacingDirection(dx, dy, direction) {
+        const dot = (dx * direction.x) + (dy * direction.y);
+        return dot >= 0;
+    }
+
+    addTileActions(tile) {
+        this.actionTile = {x: tile.x, y: tile.y};
+
+        let ground = this.locale.ground.getGround(tile.x, tile.y);
+        if (ground != null) {
+            this.getGroundActions(ground, tile);
+        }
+
+        this.addItemActions(tile);
+        this.addObjectActions(tile);
     }
 
     updateActionAvailability() {
@@ -91,19 +161,18 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         }
     }
 
-    addItemActions () {
+    addItemActions (tile = this.actionTile) {
         if (this.scene.manager.itemManager != undefined) {
-            var item = this.scene.manager.itemManager.registry.getItem(this.actionTile.x,this.actionTile.y);
+            var item = this.scene.manager.itemManager.registry.getItem(tile.x,tile.y);
             if (item != null) {
                 item.addActions();
             }
         } 
     }
 
-    addObjectActions () {
+    addObjectActions (tile = this.actionTile) {
         if (this.scene.manager.objectManager != undefined) {
-            var objects = this.scene.manager.objectManager.registry.getObjects(this.actionTile.x,this.actionTile.y);
-            //var objects = this.scene.manager.objectManager.registry.getObjectsAround(this.actionTile.x,this.actionTile.y);
+            var objects = this.scene.manager.objectManager.registry.getObjects(tile.x,tile.y);
             if (objects != null && objects.length > 0) {
                 objects.forEach(object => {
                     object.addActions();
@@ -113,6 +182,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     updateActionTile(facing) {
+        this.actionFacing = facing;
         var mods = this.actionTileLookUp[facing];
         this.actionTile = {
             x: parseInt(this.scene.player.standingTile.x + mods['x']),
@@ -122,16 +192,10 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             x: parseInt(this.actionTile.x + mods['mx'])*16,
             y: parseInt(this.actionTile.y + mods['my'])*16
         };
-        if (this.scene.player.underAction != null) {
-            this.getGroundActions(this.scene.player.underAction);
-        }
-        /// Get objects on the action tile
-        
-        
         this.updateMarker();
     }
 
-    getGroundActions (ground) {
+    getGroundActions (ground, tile = this.actionTile) {
         if (ground != null && this.scene.manager.time != undefined && this.scene.manager.time.time_passing) {
             for (var i=0;i<ground.ACTIONS.length;i++) {
                 var req_met = false;
@@ -146,7 +210,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                 }
 
                 if (req_met) {
-                    this.addAction({action: ground.ACTIONS[i].ACTION.toUpperCase(), object: '', ground: ground.ACTIONS[i].GROUND, fx: ground.ACTIONS[i].FX});
+                    this.addAction({action: ground.ACTIONS[i].ACTION.toUpperCase(), object: '', ground: ground.ACTIONS[i].GROUND, fx: ground.ACTIONS[i].FX, tile});
                 }
             }
         }
@@ -160,14 +224,14 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         }
         this.actionMenu();
 
+        if (this.pendingAction != null) {
+            this.tryExecutePendingAction();
+            return;
+        }
+
         if (this.scene.player.playerInput.select && this.availableActions.length > 0 ) {
-            let obj = this.availableActions[0].object;
-            if (obj != '' && obj != undefined) {
-                obj.doAction(this.availableActions[0].action);
-            }
-            else {
-                this.doAction();
-            }
+            let selectedAction = this.availableActions[0];
+            this.queueActionExecution(selectedAction);
             /*
             if (obj != '') {
               return 'PULL';
@@ -188,24 +252,212 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     listen () {
         var self = this;
         this.scene.events.on('ACTION_CLICKED', function(action) {
-            let obj = null;
+            let selectedAction = null;
             self.availableActions.forEach(function (availableAction) {
                 if (availableAction.action == action) {
-                    obj = availableAction.object;
+                    selectedAction = availableAction;
                 }
             });
-            if (obj != '' && obj != undefined) {
-                obj.doAction(action);
-            }
-            else {
-                self.doAction();
-            }
+            self.queueActionExecution(selectedAction);
         });
     }
 
+    queueActionExecution(selectedAction = null) {
+        if (selectedAction == null) {
+            return;
+        }
 
-    doAction () {
-        let action = this.availableActions[0];
+        const targetTile = selectedAction.tile || this.actionTile;
+        if (targetTile == null || this.scene.player == undefined || this.scene.player.standingTile == undefined) {
+            return;
+        }
+
+        // Check if player is already on any adjacent tile to the target and facing it (works for all action types)
+        const adjacentTiles = this.getAdjacentTiles(targetTile);
+        const onAdjacentTile = adjacentTiles.some(tile => this.isPlayerOnTile(tile));
+        
+        if (onAdjacentTile && this.isPlayerFacingTargetTile(targetTile)) {
+            this.executeActionSelection(selectedAction);
+            return;
+        }
+
+        const approachTile = this.getActionApproachTile(selectedAction, targetTile);
+
+        if (this.isPlayerOnTile(approachTile)) {
+            // Player is on the computed approach tile but not facing; queue without walking
+            this.pendingAction = {
+                selectedAction,
+                approachTile
+            };
+            return;
+        }
+
+        // Player needs to walk to the approach tile
+        this.pendingAction = {
+            selectedAction,
+            approachTile
+        };
+        this.scene.player.moveToTile(approachTile.x, approachTile.y);
+    }
+
+    tryExecutePendingAction() {
+        if (this.pendingAction == null) {
+            return;
+        }
+
+        const selectedAction = this.pendingAction.selectedAction;
+        const approachTile = this.pendingAction.approachTile;
+        if (selectedAction == null || approachTile == null) {
+            this.pendingAction = null;
+            return;
+        }
+
+        if (this.isPlayerOnTile(approachTile) && this.scene.player.destinations.length == 0) {
+            const actionToExecute = selectedAction;
+            this.pendingAction = null;
+            this.executeActionSelection(actionToExecute);
+            return;
+        }
+
+        if (!this.isPlayerOnTile(approachTile) && this.scene.player.destinations.length == 0) {
+            this.pendingAction = null;
+        }
+    }
+
+    getActionApproachTile(selectedAction, targetTile) {
+        if (!this.requiresEdgeApproach(selectedAction)) {
+            return targetTile;
+        }
+
+        const adjacentTiles = this.getAdjacentTiles(targetTile);
+        const playerTile = this.scene.player.standingTile;
+        const nav = this.scene.manager.nav;
+
+        let candidates = adjacentTiles.map((tile) => {
+            let route = null;
+            if (nav != undefined && typeof nav.getFullRoute === 'function') {
+                route = nav.getFullRoute(playerTile.x, playerTile.y, tile.x, tile.y, 'simple_tile');
+            }
+
+            const onTile = this.isPlayerOnTile(tile);
+            const hasRoute = Array.isArray(route) && route.length > 0;
+
+            return {
+                tile,
+                reachable: onTile || hasRoute,
+                routeLength: hasRoute ? route.length : Number.MAX_SAFE_INTEGER,
+                distance: Math.abs(playerTile.x - tile.x) + Math.abs(playerTile.y - tile.y)
+            };
+        });
+
+        candidates.sort((a, b) => {
+            if (a.reachable != b.reachable) {
+                return a.reachable ? -1 : 1;
+            }
+            if (a.routeLength != b.routeLength) {
+                return a.routeLength - b.routeLength;
+            }
+            return a.distance - b.distance;
+        });
+
+        if (candidates.length > 0 && candidates[0].reachable) {
+            return candidates[0].tile;
+        }
+
+        return targetTile;
+    }
+
+    requiresEdgeApproach(selectedAction) {
+        if (selectedAction == null || selectedAction.object == undefined || selectedAction.object == '') {
+            return false;
+        }
+
+        const objectInfo = selectedAction.object.info;
+        if (objectInfo == undefined || objectInfo.solid == undefined) {
+            return false;
+        }
+
+        return objectInfo.solid === 1 || objectInfo.solid === true;
+    }
+
+    getAdjacentTiles(tile) {
+        return [
+            {x: tile.x, y: tile.y - 1},
+            {x: tile.x + 1, y: tile.y},
+            {x: tile.x, y: tile.y + 1},
+            {x: tile.x - 1, y: tile.y}
+        ];
+    }
+
+    isPlayerFacingTargetTile(targetTile) {
+        const playerTile = this.scene.player.standingTile;
+        if (!playerTile || !targetTile) {
+            return false;
+        }
+
+        const offsetX = targetTile.x - playerTile.x;
+        const offsetY = targetTile.y - playerTile.y;
+
+        const facingVector = this.actionTileLookUp[this.actionFacing];
+        if (!facingVector) {
+            return false;
+        }
+
+        return offsetX === facingVector.x && offsetY === facingVector.y;
+    }
+
+    isPlayerOnTile(tile) {
+        if (tile == null || this.scene.player == undefined || this.scene.player.standingTile == undefined) {
+            return false;
+        }
+
+        return this.scene.player.standingTile.x == tile.x && this.scene.player.standingTile.y == tile.y;
+    }
+
+    executeActionSelection(selectedAction = null) {
+        if (selectedAction == null) {
+            return;
+        }
+
+        const targetTile = selectedAction.tile || this.actionTile;
+        this.faceTowardTile(targetTile);
+
+        let obj = selectedAction.object;
+        if (obj != '' && obj != undefined) {
+            obj.doAction(selectedAction.action);
+            return;
+        }
+
+        this.doAction(selectedAction);
+    }
+
+    faceTowardTile(targetTile) {
+        if (targetTile == null || this.scene.player == undefined || this.scene.player.standingTile == undefined) {
+            return;
+        }
+
+        const offsetX = targetTile.x - this.scene.player.standingTile.x;
+        const offsetY = targetTile.y - this.scene.player.standingTile.y;
+
+        const facingDir = this.getFacingDirectionFromOffset(offsetX, offsetY);
+        if (facingDir != null) {
+            this.scene.player.setFacing(facingDir);
+        }
+    }
+
+    getFacingDirectionFromOffset(dx, dy) {
+        for (const [direction, vector] of Object.entries(this.actionTileLookUp)) {
+            if (vector.x === dx && vector.y === dy) {
+                return direction;
+            }
+        }
+        return null;
+    }
+
+
+    doAction (selectedAction = null) {
+        let action = (selectedAction == null) ? this.availableActions[0] : selectedAction;
+        let targetTile = action.tile || this.actionTile;
         if (this.scene.player.state.name == 'IDLE') {
             this.scene.player.setState(action.action.toUpperCase());
             if (action.fx != undefined && action.fx != '') {
@@ -217,9 +469,9 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                     delay: 500,
                     loop: false,
                     callback: () => {
-                        this.locale.ground.placeTileType(this.actionTile.x, this.actionTile.y, action.ground, true);
+                        this.locale.ground.placeTileType(targetTile.x, targetTile.y, action.ground, true);
 
-                        this.scene.manager.loot.digUp(this.actionTile.x, this.actionTile.y);
+                        this.scene.manager.loot.digUp(targetTile.x, targetTile.y);
                     }
                 });
                 var self = this;
@@ -237,6 +489,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     
     addAction(newAction) {
         //action, object
+        const actionTile = newAction.tile || {x: this.actionTile.x, y: this.actionTile.y};
         const map = this.actionsMap;
         if(!map.has(newAction.action)){
             map.set(newAction.action, true);    // set any value to Map
@@ -244,7 +497,8 @@ import SPRITE_DIR from "../config/sprite-dir.js";
                 action: newAction.action,
                 object: newAction.object,
                 ground: newAction.ground,
-                fx: newAction.fx
+                fx: newAction.fx,
+                tile: actionTile
             });
         }
         this.actionsMap = map;

@@ -178,7 +178,7 @@
       completion: {
                 group_39: {
                 req_group: 39,
-                req_group_name: 'Wearing Purple Backpack',
+                req_group_name: 'Has Bag',
                 req_pocket_action: '',
                 req_world_action: '',
                 req_state: '',
@@ -187,14 +187,14 @@
                 req_result_data_set: '',
                 req_result_data_modify: '',
                 req_result_texture: '',
-                req_result_fx: '',
+                req_result_fx: 'SPARKLE_',
                 req_result_ground: '',
                 requires: [
                   {
                     slot_type: 'IN_HAND',
-                    type: 'ITEM',
+                    type: 'ITEM_KIND',
                     result: 'UNTOUCHED',
-                    ITEM: 'BACKPACK_PURPLE'
+                    ITEM_KIND: 'BAG'
                     }
                                 ]
 

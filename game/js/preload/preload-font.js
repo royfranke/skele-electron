@@ -30,6 +30,9 @@ const PRELOAD_FONT = [
         NAME: 'SkeleScript',
     },
     {
+        NAME: 'SkeleSpray',
+    },
+    {
         NAME: 'SkeleStreetSigns',
     },
     {

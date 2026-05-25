@@ -66,8 +66,6 @@ export default class ZenerManager {
     }
 
     back () {
-        //this.deck.setState('GAME OVER');
-       //this.gameOver();
        this.scene.manager.hud.hudZener.closeZener();
        this.scene.manager.setFocus('PLAYER');  
     }
@@ -136,6 +134,7 @@ export default class ZenerManager {
    destroyListeners () {
         this.scene.events.off('INPUT_LEFT_ZENER');
         this.scene.events.off('INPUT_RIGHT_ZENER');
+        this.scene.events.off('INPUT_UP_ZENER');
         this.scene.events.off('INPUT_SELECT_ZENER');
         this.scene.events.off('INPUT_BACK_ZENER');
    }

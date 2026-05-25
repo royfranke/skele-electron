@@ -11,6 +11,7 @@ export default class SocksManager {
 
     update () {
         if (this.dryer.state == 'EJECT SOCK') {
+            this.selectNext();
             this.scene.manager.hud.hudSocks.ejectSock(this.dryer.dryer[0]);
             this.dryer.setState('AWAITING MATCH');
         }

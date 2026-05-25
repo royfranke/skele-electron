@@ -21,9 +21,9 @@ export default class SplashScene extends Phaser.Scene {
         /// Create a yellow circle in the center of the screen
         this.hud = new HudCommon(this);
 
-        let text = this.hud.makeBitmapText(this.cameras.main.centerX, this.cameras.main.centerY + 32, 200, 8, 'SkelePuff');
+        let text = this.hud.makeBitmapText(this.cameras.main.centerX, this.cameras.main.centerY + 32, 200, 8, 'SkeleSpray');
         text.setTintFill(0xffe57b);
-        text.setText("FORTUNE");
+        text.setText("{ FAVORITE }");
         text.setOrigin(0.5, 0.5);
         
         this.circle = this.add.circle(this.cameras.main.centerX, this.cameras.main.centerY,20, 0x54467f);
