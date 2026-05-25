@@ -152,7 +152,10 @@ export default class ItemContainer extends Item {
             this.createFooting();
             this.createFX();
             let locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
-            let ground = locale.ground.getGround(this.tile_x, this.tile_y);
+            let world = this.scene.exterior;
+            let ground = (world?.getGroundAt)
+                ? world.getGroundAt(this.tile_x, this.tile_y)
+                : locale.ground.getGround(this.tile_x, this.tile_y);
             // utilities
             locale.ground.util.updateFooting(ground,this);
         /// put footmask here - item has landed

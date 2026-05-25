@@ -9,6 +9,7 @@ import KEYLIGHT from "../config/key-light.js";
 import ChunkManager from "../world/chunk-manager.js";
 import { CHUNK_SIZE } from "../world/chunk.js";
 import WorldDataLoader from "../world/world-data-loader.js";
+import GROUND_TYPE from "../config/atlas/ground-types.js";
 
 /**
  * 	Manage Exteriors (Overworld tile scenes)
@@ -521,19 +522,22 @@ import WorldDataLoader from "../world/world-data-loader.js";
             if (self.scene.manager.getFocus().name != 'PLAYER') {
                 return;
             }
-            var tile = self.groundLayer.getTileAt(Math.round(pointer.worldX/16), Math.round(pointer.worldY/16)); 
+            const tileX = Math.round(pointer.worldX / 16);
+            const tileY = Math.round(pointer.worldY / 16);
 
-            if (tile) {
-                // A tile was clicked! You can now access its properties:
-                self.scene.player.clearDestinations();
-                console.log("Clicked tile at:", tile.x, tile.y);
-                console.log("Tile index:", tile.index);
-                if (self.scene.player.state.name == 'IDLE' || self.scene.player.state.name == 'WALKING') {
-                    // Perform actions based on the clicked tile
-                    self.scene.player.moveToTile(tile.x, tile.y);
+            if (!self.inWorldBounds(tileX, tileY)) {
+                return;
+            }
 
-                }
-                
+            if (!self.isWalkable(tileX, tileY)) {
+                return;
+            }
+
+            // A world tile was clicked.
+            self.scene.player.clearDestinations();
+            console.log("Clicked tile at:", tileX, tileY);
+            if (self.scene.player.state.name == 'IDLE' || self.scene.player.state.name == 'WALKING') {
+                self.scene.player.moveToTile(tileX, tileY);
             }
         });
     }
@@ -891,7 +895,9 @@ import WorldDataLoader from "../world/world-data-loader.js";
             if (chunk != undefined && chunk.loaded) {
                 const groundType = chunk.getGroundType(_x, _y);
                 if (groundType != null) {
-                    return { TYPE: groundType, CHILDPREF: 100, ADULTPREF: 100 };
+                    if (GROUND_TYPE[groundType] != undefined) {
+                        return GROUND_TYPE[groundType];
+                    }
                 }
             }
         }

@@ -140,7 +140,9 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     addTileActions(tile) {
         this.actionTile = {x: tile.x, y: tile.y};
 
-        let ground = this.locale.ground.getGround(tile.x, tile.y);
+        let ground = (this.scene?.exterior?.getGroundAt)
+            ? this.scene.exterior.getGroundAt(tile.x, tile.y)
+            : this.locale.ground.getGround(tile.x, tile.y);
         if (ground != null) {
             this.getGroundActions(ground, tile);
         }
@@ -196,7 +198,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     getGroundActions (ground, tile = this.actionTile) {
-        if (ground != null && this.scene.manager.time != undefined && this.scene.manager.time.time_passing) {
+        if (ground != null && Array.isArray(ground.ACTIONS) && this.scene.manager.time != undefined && this.scene.manager.time.time_passing) {
             for (var i=0;i<ground.ACTIONS.length;i++) {
                 var req_met = false;
                 if (ground.ACTIONS[i].ITEM != '') {

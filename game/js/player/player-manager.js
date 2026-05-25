@@ -3,6 +3,7 @@ import PlayerSprite from "./player-sprite.js";
 import PlayerInput from "./player-input.js";
 import PlayerAction from "./player-action.js";
 import PlayerCoinpurse from "./player-coinpurse.js";
+import MAP_CONFIG from "../config/map.js";
 /* global Phaser */
 /*
  */
@@ -402,14 +403,24 @@ export default class PlayerManager {
   updateActiveTile() {
     const groundLayer = this.locale.groundLayer;
     const locale = this.locale;
+    const useWorldGroundForActors = MAP_CONFIG.useWorldGroundForActors === true;
+    const worldGround = this.scene?.exterior?.getGroundAt;
 
     this.standingTile = groundLayer.worldToTileXY(this.playerSprite.sprite.x, this.playerSprite.sprite.y + 8);
     this.snappedStanding = groundLayer.tileToWorldXY(this.standingTile.x, this.standingTile.y);
 
     //this.debugUnderfootTile.setPosition(this.snappedStanding.x, this.snappedStanding.y);
     this.underfootLast = this.underfoot;
-    this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y);
-    this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y);
+    if (useWorldGroundForActors && typeof worldGround === 'function') {
+      this.underfoot = worldGround.call(this.scene.exterior, this.standingTile.x, this.standingTile.y)
+        || locale.ground.getGround(this.standingTile.x, this.standingTile.y);
+      this.underAction = worldGround.call(this.scene.exterior, this.action.actionTile.x, this.action.actionTile.y)
+        || locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y);
+    }
+    else {
+      this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y);
+      this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y);
+    }
   }
 
   goToSleep(x_, y_) {

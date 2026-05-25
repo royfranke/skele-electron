@@ -1,5 +1,6 @@
 import NpcState from "../npc/npc-state.js";
 import NpcSprite from "../npc/npc-sprite.js";
+import MAP_CONFIG from "../config/map.js";
 
 /* Npc Class */
 
@@ -274,13 +275,21 @@ export default class Npc {
   updateActiveTile() {
     const groundLayer = this.locale.groundLayer;
     const locale = this.locale;
+    const useWorldGroundForActors = MAP_CONFIG.useWorldGroundForActors === true;
+    const worldGround = this.scene?.exterior?.getGroundAt;
 
     this.standingTile = groundLayer.worldToTileXY(this.sprite.sprite.x, this.sprite.sprite.y + 8);
     this.snappedStanding = groundLayer.tileToWorldXY(this.standingTile.x, this.standingTile.y);
 
     //this.debugUnderfootTile.setPosition(this.snappedStanding.x, this.snappedStanding.y);
     this.underfootLast = this.underfoot;
-    this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y, groundLayer);
+    if (useWorldGroundForActors && typeof worldGround === 'function') {
+      this.underfoot = worldGround.call(this.scene.exterior, this.standingTile.x, this.standingTile.y)
+        || locale.ground.getGround(this.standingTile.x, this.standingTile.y, groundLayer);
+    }
+    else {
+      this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y, groundLayer);
+    }
 
     if (this.standingTile.x == this.scene.player.action.actionTile.x && this.standingTile.y == this.scene.player.action.actionTile.y) {
       this.addActions();

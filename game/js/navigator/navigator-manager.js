@@ -7,6 +7,12 @@ export default class NavigatorManager {
 
     constructor(scene) {
        this.scene = scene;
+       this.routeFailureCounts = {
+           intersection: 0,
+           tile: 0,
+           simple_tile: 0,
+           unknown: 0,
+       };
     }
 
     getIntersection (_x, _y) {
@@ -176,6 +182,7 @@ export default class NavigatorManager {
         console.log("Plotting route from "+a_x+","+a_y+" to "+b_x+","+b_y);
         if (a_x == undefined || a_y == undefined || b_x == undefined || b_y == undefined) {
             console.log("Invalid coordinates for route plotting!");
+            this.recordRouteFailure(type, a_x, a_y, b_x, b_y, 'invalid-coordinates');
             return [];
         }
         var start = [a_x,a_y];
@@ -224,6 +231,9 @@ export default class NavigatorManager {
             }
         }
         var way = solution.reverse();
+        if (!solved || way.length == 0) {
+            this.recordRouteFailure(type, a_x, a_y, b_x, b_y, solved ? 'empty-solution' : 'unsolved');
+        }
         if (type == 'intersection') {
             return this.routeStepsArray(way,'intersection');
         }
@@ -258,6 +268,7 @@ export default class NavigatorManager {
         var _y = frontier[0][1];
         var branches = [];
         var favored = 100;
+        const useWorldNavForTileRoutes = MAP_CONFIG.useWorldNavForTileRoutes !== false;
         for (var y=-1; y < 2; y++) {
             for (var x=-1; x < 2; x++) {
                 if (x == 0 && y == 0) {
@@ -279,11 +290,17 @@ export default class NavigatorManager {
                 var tile_y = _y + y;
                 
                 if (!this.compareCoordinates(visited,[tile_x,tile_y]) && !this.compareCoordinates(frontier,[tile_x,tile_y])) {
-                    if (!this.worldIsWalkable(tile_x, tile_y)) {
-                        continue;
+                    var tile = null;
+                    if (useWorldNavForTileRoutes) {
+                        if (!this.worldIsWalkable(tile_x, tile_y)) {
+                            continue;
+                        }
+                        tile = this.worldGetGround(tile_x,tile_y);
+                    }
+                    else {
+                        tile = this.scene.exterior.ground.getGround(tile_x,tile_y);
                     }
 
-                    var tile = this.worldGetGround(tile_x,tile_y);
                     if (tile != undefined) {
                         if (tile[pref+"PREF"] <= favored) {
                             favored = tile[pref+"PREF"];
@@ -303,6 +320,7 @@ export default class NavigatorManager {
         var _x = frontier[0][0];
         var _y = frontier[0][1];
         var branches = [];
+        const strictSimpleWalkability = MAP_CONFIG.useStrictSimpleTileWalkability === true;
         for (var y=-1; y < 2; y++) {
             for (var x=-1; x < 2; x++) {
                 if (x == 0 && y == 0) {
@@ -324,7 +342,7 @@ export default class NavigatorManager {
                 var tile_y = _y + y;
                 
                 if (!this.compareCoordinates(visited,[tile_x,tile_y]) && !this.compareCoordinates(frontier,[tile_x,tile_y])) {
-                    if (this.worldIsWalkable(tile_x, tile_y)) {
+                    if (!strictSimpleWalkability || this.worldIsWalkable(tile_x, tile_y)) {
                         branches.push([tile_x,tile_y]);
                     }
                 }
@@ -397,5 +415,14 @@ export default class NavigatorManager {
             return this.scene.exterior.getGroundAt(_x, _y);
         }
         return undefined;
+    }
+
+    recordRouteFailure(type, startX, startY, endX, endY, reason = 'unknown') {
+        const key = this.routeFailureCounts[type] != undefined ? type : 'unknown';
+        this.routeFailureCounts[key] += 1;
+
+        if (MAP_CONFIG.debugNavRouteFailures === true) {
+            console.warn(`[Navigator] route failure (${type}) ${startX},${startY} -> ${endX},${endY} [${reason}] count=${this.routeFailureCounts[key]}`);
+        }
     }
 }
