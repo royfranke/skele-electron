@@ -4,6 +4,7 @@ const MAP_CONFIG = {
     height:200,
     useStrictSimpleTileWalkability: true,
     debugNavRouteFailures: false,
+    debugWorldQueryMisses: false,
     sectionsWidth: 5,
     sectionsHeight: 5,
     blockWidth: 64,

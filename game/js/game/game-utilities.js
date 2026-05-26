@@ -65,11 +65,15 @@ export default class GameUtilities {
     getGround(_x, _y, layer) {
         if (this.inBounds(_x, _y, layer)) {
             var tile = layer.getTileAt(_x, _y);
+            if (tile == null || tile.index == undefined) {
+                return GROUND_TYPE['VOID'];
+            }
             var tile_type = GROUND_LOOKUP[tile.index];
 
             if (tile_type == undefined) { return GROUND_TYPE['VOID']; }
             return GROUND_TYPE[tile_type];
         }
+        return GROUND_TYPE['VOID'];
     }
 
     buildFacadeSection(_x, _y, width, height, material, layer) {
@@ -131,7 +135,7 @@ export default class GameUtilities {
 
         if (this.inBounds(_x, _y, layer)) {
             var tile = layer.getTileAt(_x, _y);
-            var old_tile_type = GROUND_LOOKUP[tile.index];
+            var old_tile_type = (tile == null || tile.index == undefined) ? undefined : GROUND_LOOKUP[tile.index];
             if (tile_type != old_tile_type || forceRedraw) {
                 layer.weightedRandomize(TILES[tile_type].FILL_, _x, _y, 1, 1);
                 this.changeTile(_x, _y, layer, edgeLayer);
@@ -162,6 +166,9 @@ export default class GameUtilities {
     calculateTileBitmap(_x, _y, layer, edgeLayer) {
         if (this.inBounds(_x, _y, layer)) {
             var tile = layer.getTileAt(_x, _y);
+            if (tile == null || tile.index == undefined) {
+                return { type: 'VOID', position: 0, border_votes: [], layer: layer, edgeLayer: edgeLayer, x: _x, y: _y };
+            }
             var tile_type = GROUND_LOOKUP[tile.index];
             var tile_attr = GROUND_TYPE[tile_type];
 
@@ -179,7 +186,9 @@ export default class GameUtilities {
                 for (var c = -1; c <= 1; c++) {
                     if (this.inBounds(parseInt(_x + c), parseInt(_y + r), layer)) {
                         var neighbor_tile = layer.getTileAt(parseInt(_x + c), parseInt(_y + r));
-                        var neighbor_tile_type = GROUND_LOOKUP[neighbor_tile.index];
+                        var neighbor_tile_type = (neighbor_tile == null || neighbor_tile.index == undefined)
+                            ? 'VOID'
+                            : GROUND_LOOKUP[neighbor_tile.index];
                         if (neighbor_tile_type == tile_type) {
                             position_index = parseInt(position_index + this.BITMAP_CODE[place]);
                         }

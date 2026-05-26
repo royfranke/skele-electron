@@ -4,7 +4,7 @@
  * Authoritative data container for a fixed region of the world.
  * A chunk is CHUNK_SIZE x CHUNK_SIZE tiles.
  * Phaser layers are NOT stored here — they live in the renderer.
- * This class is the source of truth for terrain, collision, objects,
+ * This class is the source of truth for terrain, collision, entities,
  * and navigation data within its region.
  */
 
@@ -44,9 +44,11 @@ export default class Chunk {
         // Sparse: only set where non-default. null = inherit default.
         this.groundTypes = {};
 
-        // Object / entity metadata list.
-        // Each entry is a plain object { slug, localX, localY, ...params }
-        this.objects = [];
+        // Entity metadata list.
+        // Each entry is a plain object:
+        // { kind, slug, localX, localY, ...params }
+        // kind examples: object, item, plant, tree, vehicle, npc
+        this.entities = [];
 
         // Lifecycle flags
         this.loaded    = false;  // data has been populated
@@ -185,22 +187,107 @@ export default class Chunk {
         this.dirty = true;
     }
 
-    // ─── Objects ──────────────────────────────────────────────────────────────
+    // ─── Entities ─────────────────────────────────────────────────────────────
 
-    addObject(slug, localX, localY, params = {}) {
-        this.objects.push({ slug, localX, localY, ...params });
+    addEntity(kind, slug, localX, localY, params = {}) {
+        this.entities.push({ kind, slug, localX, localY, ...params });
         this.dirty = true;
     }
 
-    removeObject(slug, localX, localY) {
-        this.objects = this.objects.filter(
-            o => !(o.slug === slug && o.localX === localX && o.localY === localY)
+    removeEntity(kind, slug, localX, localY) {
+        this.entities = this.entities.filter(
+            entity => !(
+                entity.kind === kind &&
+                entity.slug === slug &&
+                entity.localX === localX &&
+                entity.localY === localY
+            )
         );
         this.dirty = true;
     }
 
+    getEntities() {
+        return this.entities;
+    }
+
+    getEntitiesByKind(kind) {
+        return this.entities.filter(entity => entity.kind === kind);
+    }
+
+    // ─── Typed entity wrappers ───────────────────────────────────────────────
+
+    addItem(slug, localX, localY, params = {}) {
+        this.addEntity('item', slug, localX, localY, params);
+    }
+
+    removeItem(slug, localX, localY) {
+        this.removeEntity('item', slug, localX, localY);
+    }
+
+    getItems() {
+        return this.getEntitiesByKind('item');
+    }
+
+    addPlant(slug, localX, localY, params = {}) {
+        this.addEntity('plant', slug, localX, localY, params);
+    }
+
+    removePlant(slug, localX, localY) {
+        this.removeEntity('plant', slug, localX, localY);
+    }
+
+    getPlants() {
+        return this.getEntitiesByKind('plant');
+    }
+
+    addTree(slug, localX, localY, params = {}) {
+        this.addEntity('tree', slug, localX, localY, params);
+    }
+
+    removeTree(slug, localX, localY) {
+        this.removeEntity('tree', slug, localX, localY);
+    }
+
+    getTrees() {
+        return this.getEntitiesByKind('tree');
+    }
+
+    addVehicle(slug, localX, localY, params = {}) {
+        this.addEntity('vehicle', slug, localX, localY, params);
+    }
+
+    removeVehicle(slug, localX, localY) {
+        this.removeEntity('vehicle', slug, localX, localY);
+    }
+
+    getVehicles() {
+        return this.getEntitiesByKind('vehicle');
+    }
+
+    addNpc(slug, localX, localY, params = {}) {
+        this.addEntity('npc', slug, localX, localY, params);
+    }
+
+    removeNpc(slug, localX, localY) {
+        this.removeEntity('npc', slug, localX, localY);
+    }
+
+    getNpcs() {
+        return this.getEntitiesByKind('npc');
+    }
+
+    // ─── Legacy object wrappers (backward compatible) ───────────────────────
+
+    addObject(slug, localX, localY, params = {}) {
+        this.addEntity('object', slug, localX, localY, params);
+    }
+
+    removeObject(slug, localX, localY) {
+        this.removeEntity('object', slug, localX, localY);
+    }
+
     getObjects() {
-        return this.objects;
+        return this.getEntitiesByKind('object');
     }
 
     // ─── Serialisation ────────────────────────────────────────────────────────
@@ -216,7 +303,9 @@ export default class Chunk {
             roofTiles:  Array.from(this.roofTiles),
             collision:  Array.from(this.collision),
             groundTypes: this.groundTypes,
-            objects:    this.objects,
+            entities:   this.entities,
+            // Keep legacy output for compatibility with older loaders/tools.
+            objects:    this.getObjects(),
         };
     }
 
@@ -228,7 +317,12 @@ export default class Chunk {
         if (data.roofTiles)  this.roofTiles.set(data.roofTiles);
         if (data.collision)  this.collision.set(data.collision);
         if (data.groundTypes) this.groundTypes = data.groundTypes;
-        if (data.objects)    this.objects = data.objects;
+        if (data.entities) {
+            this.entities = data.entities;
+        }
+        else if (data.objects) {
+            this.entities = data.objects.map(object => ({ kind: 'object', ...object }));
+        }
         this.loaded = true;
         this.dirty  = false;
     }

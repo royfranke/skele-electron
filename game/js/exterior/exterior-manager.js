@@ -41,6 +41,10 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         this.worldDataLoader = this.useChunkStreamingBootstrap ? new WorldDataLoader() : null;
         this.pendingChunkLoads = new Set();
         this.missingChunkKeys = new Set();
+        this.worldQueryMisses = {
+            walkable_unloaded: 0,
+            ground_unloaded: 0,
+        };
 
         this.chunkManager.onChunkLoad   = (chunk) => {
             this.handleChunkLoad(chunk);
@@ -877,6 +881,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
         const chunk = this.chunkManager.getChunkAtTile(_x, _y);
         if (chunk == undefined || !chunk.loaded) {
+            this.trackWorldQueryMiss('walkable_unloaded', _x, _y);
             return false;
         }
 
@@ -894,6 +899,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
         const chunk = this.chunkManager.getChunkAtTile(_x, _y);
         if (chunk == undefined || !chunk.loaded) {
+            this.trackWorldQueryMiss('ground_unloaded', _x, _y);
             return GROUND_TYPE.VOID;
         }
 
@@ -903,6 +909,18 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         }
 
         return GROUND_TYPE.VOID;
+    }
+
+    trackWorldQueryMiss (kind, _x, _y) {
+        if (this.worldQueryMisses[kind] == undefined) {
+            this.worldQueryMisses[kind] = 0;
+        }
+
+        this.worldQueryMisses[kind] += 1;
+
+        if (MAP_CONFIG.debugWorldQueryMisses === true && this.worldQueryMisses[kind] % 50 === 1) {
+            console.warn(`[WorldQueryMiss] ${kind} at ${_x},${_y} (count=${this.worldQueryMisses[kind]})`);
+        }
     }
 
 }
