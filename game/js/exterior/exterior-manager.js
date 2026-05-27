@@ -39,6 +39,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         });
         this.useChunkStreamingBootstrap = this.shouldUseChunkStreamingBootstrap();
         this.worldDataLoader = new WorldDataLoader('/assets/chunks/', { slot: this.getActiveSaveSlot() });
+        this.worldSystem = (window.WorldSystem) ? new window.WorldSystem(this.scene, this.worldDataLoader, { slot: this.getActiveSaveSlot(), chunkManager: this.chunkManager }) : null;
         this.pendingChunkLoads = new Set();
         this.missingChunkKeys = new Set();
         this.worldQueryMisses = {
@@ -47,6 +48,10 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         };
 
         this.chunkManager.onChunkLoad   = (chunk) => {
+            if (this.worldSystem) {
+                try { this.worldSystem.registerChunk(chunk); } catch (e) {}
+                if (chunk.dirty) { try { this.worldSystem.markDirty(chunk); } catch (e) {} }
+            }
             this.handleChunkLoad(chunk);
             if (this.debug) console.log(`[ChunkManager] load   ${chunk.key}`);
         };
@@ -558,6 +563,10 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             params: item.getParameters(),
             items: this.serializeChunkItemContents(item.getAllItems()),
         });
+
+        if (this.worldSystem) {
+            try { this.worldSystem.markDirty(chunk); } catch (e) {}
+        }
     }
 
     removeChunkItemEntity (_item, worldX, worldY) {
@@ -577,6 +586,10 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
         const existing = chunk.getItems().filter(entity => entity.localX === local.x && entity.localY === local.y);
         existing.forEach(entity => chunk.removeItem(entity.slug, local.x, local.y));
+
+        if (this.worldSystem) {
+            try { this.worldSystem.markDirty(chunk); } catch (e) {}
+        }
     }
 
     serializeChunkItemContents (items = []) {
@@ -1065,6 +1078,16 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
     }
 
     async saveDirtyChunks () {
+        // Prefer using WorldSystem if available for centralized dirty tracking
+        if (this.worldSystem != null && typeof this.worldSystem.saveDirtyChunks === 'function') {
+            const res = await this.worldSystem.saveDirtyChunks();
+            if (this.debug) {
+                console.log(`[ChunkManager] saveDirtyChunks dirty=${res.dirty} saved=${res.saved} failed=${res.failed}`);
+            }
+            return { totalDirty: res.dirty, saved: res.saved, failed: res.failed };
+        }
+
+        // Fallback for older behavior
         if (this.chunkManager == undefined || this.worldDataLoader == undefined) {
             return { totalDirty: 0, saved: 0, failed: 0 };
         }
