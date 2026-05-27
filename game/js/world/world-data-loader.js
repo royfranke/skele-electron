@@ -14,9 +14,11 @@ export default class WorldDataLoader {
     /**
      * @param {string} basePath  Path prefix for chunk JSON files.
      */
-    constructor(basePath = '/assets/chunks/') {
+    constructor(basePath = '/assets/chunks/', options = {}) {
         this.basePath = basePath;
         this._cache   = new Map(); // key → raw JSON (prevents double-fetches)
+        this._canUseElectronApi = typeof window !== 'undefined' && window.api && typeof window.api.invoke === 'function';
+        this.slot = options.slot ?? null;
     }
 
     // ─── Async load ───────────────────────────────────────────────────────────
@@ -29,20 +31,35 @@ export default class WorldDataLoader {
      * @returns {Promise<boolean>} true if data was found and applied.
      */
     async loadChunk(chunk) {
-        const key  = chunk.key;
-        const url  = `${this.basePath}chunk_${chunk.chunkX}_${chunk.chunkY}.json`;
-
+        const key  = this.getCacheKey(chunk);
         try {
-            let data;
             if (this._cache.has(key)) {
-                data = this._cache.get(key);
+                chunk.fromJSON(this._cache.get(key));
+                return true;
+            }
+
+            let data = null;
+
+            if (this._canUseElectronApi) {
+                const result = await window.api.invoke('load-chunk', {
+                    chunkX: chunk.chunkX,
+                    chunkY: chunk.chunkY,
+                    slot: this.slot,
+                });
+
+                if (result && result.ok === true) {
+                    data = result.data;
+                }
             } else {
+                const url  = `${this.basePath}chunk_${chunk.chunkX}_${chunk.chunkY}.json`;
                 const response = await fetch(url);
                 if (!response.ok) return false;
                 data = await response.json();
-                this._cache.set(key, data);
             }
 
+            if (data == null) return false;
+
+            this._cache.set(key, data);
             chunk.fromJSON(data);
             return true;
 
@@ -60,9 +77,36 @@ export default class WorldDataLoader {
      * @returns {Promise<boolean>}
      */
     async saveChunk(chunk) {
-        // Stub — implement once persistence pipeline is ready.
-        console.warn(`WorldDataLoader.saveChunk: not yet implemented for chunk ${chunk.key}`);
-        return false;
+        if (!this._canUseElectronApi) {
+            console.warn(`WorldDataLoader.saveChunk: unavailable outside Electron for chunk ${chunk.key}`);
+            return false;
+        }
+
+        try {
+            const data = chunk.toJSON();
+            const result = await window.api.invoke('save-chunk', {
+                chunkX: chunk.chunkX,
+                chunkY: chunk.chunkY,
+                chunkData: data,
+                slot: this.slot,
+            });
+
+            if (!result || result.ok !== true) {
+                console.warn(`WorldDataLoader.saveChunk: failed for chunk ${chunk.key}`, result);
+                return false;
+            }
+
+            this._cache.set(this.getCacheKey(chunk), data);
+            chunk.dirty = false;
+            return true;
+        } catch (_err) {
+            console.warn(`WorldDataLoader.saveChunk: exception for chunk ${chunk.key}`, _err);
+            return false;
+        }
+    }
+
+    getCacheKey(chunk) {
+        return `${this.slot ?? 'default'}:${chunk.key}`;
     }
 
     /** Clear the in-memory JSON cache (e.g. after a scene reset). */

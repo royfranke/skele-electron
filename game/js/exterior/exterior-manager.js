@@ -38,7 +38,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             worldChunksHeight,
         });
         this.useChunkStreamingBootstrap = this.shouldUseChunkStreamingBootstrap();
-        this.worldDataLoader = this.useChunkStreamingBootstrap ? new WorldDataLoader() : null;
+        this.worldDataLoader = new WorldDataLoader('/assets/chunks/', { slot: this.getActiveSaveSlot() });
         this.pendingChunkLoads = new Set();
         this.missingChunkKeys = new Set();
         this.worldQueryMisses = {
@@ -455,6 +455,8 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             }
         }
 
+        this.renderChunkItemEntities(chunk);
+
         chunk.rendered = true;
         this.refreshChunkCollisions();
     }
@@ -482,8 +484,147 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             }
         }
 
+        this.unrenderChunkItemEntities(chunk);
+
         chunk.rendered = false;
         this.refreshChunkCollisions();
+    }
+
+    renderChunkItemEntities (chunk) {
+        const itemManager = this.scene?.manager?.itemManager;
+        if (itemManager == undefined || chunk == undefined || !Array.isArray(chunk.getItems?.())) {
+            return;
+        }
+
+        chunk.getItems().forEach((entity) => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            if (!this.inWorldBounds(wx, wy)) {
+                return;
+            }
+
+            if (itemManager.registry.getItem(wx, wy) != null) {
+                return;
+            }
+
+            const contents = this.deserializeChunkEntityItems(entity.items ?? []);
+            const item = itemManager.newItemToWorld(wx, wy, entity.slug, contents, { syncChunk: false });
+            if (item == false) {
+                return;
+            }
+
+            if (entity.params != undefined && item.setParameters != undefined) {
+                item.setParameters(entity.params);
+            }
+            if (entity.stack != undefined && item.setStackCount != undefined) {
+                item.setStackCount(entity.stack);
+            }
+        });
+    }
+
+    unrenderChunkItemEntities (chunk) {
+        const itemRegistry = this.scene?.manager?.itemManager?.registry;
+        if (itemRegistry == undefined || chunk == undefined || !Array.isArray(chunk.getItems?.())) {
+            return;
+        }
+
+        chunk.getItems().forEach((entity) => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            itemRegistry.removeItem(wx, wy, { syncChunk: false });
+        });
+    }
+
+    upsertChunkItemEntity (item, worldX, worldY) {
+        if (this.chunkManager == undefined || item == undefined) {
+            return;
+        }
+
+        const chunk = this.chunkManager.getChunkAtTile(worldX, worldY);
+        if (chunk == undefined) {
+            return;
+        }
+
+        const local = chunk.worldToLocal(worldX, worldY);
+        if (local == null) {
+            return;
+        }
+
+        const existing = chunk.getItems().filter(entity => entity.localX === local.x && entity.localY === local.y);
+        existing.forEach(entity => chunk.removeItem(entity.slug, local.x, local.y));
+
+        chunk.addItem(item.info.slug, local.x, local.y, {
+            stack: item.stackCount,
+            params: item.getParameters(),
+            items: this.serializeChunkItemContents(item.getAllItems()),
+        });
+    }
+
+    removeChunkItemEntity (_item, worldX, worldY) {
+        if (this.chunkManager == undefined) {
+            return;
+        }
+
+        const chunk = this.chunkManager.getChunkAtTile(worldX, worldY);
+        if (chunk == undefined) {
+            return;
+        }
+
+        const local = chunk.worldToLocal(worldX, worldY);
+        if (local == null) {
+            return;
+        }
+
+        const existing = chunk.getItems().filter(entity => entity.localX === local.x && entity.localY === local.y);
+        existing.forEach(entity => chunk.removeItem(entity.slug, local.x, local.y));
+    }
+
+    serializeChunkItemContents (items = []) {
+        if (!Array.isArray(items)) {
+            return [];
+        }
+
+        return items.map((item) => {
+            const slug = item?.slug ?? item?.info?.slug;
+            if (slug == undefined || slug === '') {
+                return null;
+            }
+
+            return {
+                slug,
+                stack: item?.stack ?? item?.stackCount,
+                items: this.serializeChunkItemContents(item?.items ?? item?.ITEMS ?? []),
+            };
+        }).filter(Boolean);
+    }
+
+    deserializeChunkEntityItems (items = []) {
+        const itemManager = this.scene?.manager?.itemManager;
+        if (!Array.isArray(items) || itemManager == undefined) {
+            return [];
+        }
+
+        const result = [];
+        items.forEach((entry) => {
+            const slug = entry?.slug ?? entry?.info?.slug;
+            if (slug == undefined || slug === '') {
+                return;
+            }
+
+            const nested = this.deserializeChunkEntityItems(entry.items ?? []);
+            const built = itemManager.newItem(slug, nested);
+            if (!built) {
+                return;
+            }
+
+            if (entry.stack != undefined && built.setStackCount != undefined) {
+                built.setStackCount(entry.stack);
+            }
+
+            result.push(built);
+        });
+
+        return result;
     }
 
     refreshChunkCollisions () {
@@ -921,6 +1062,46 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         if (MAP_CONFIG.debugWorldQueryMisses === true && this.worldQueryMisses[kind] % 50 === 1) {
             console.warn(`[WorldQueryMiss] ${kind} at ${_x},${_y} (count=${this.worldQueryMisses[kind]})`);
         }
+    }
+
+    async saveDirtyChunks () {
+        if (this.chunkManager == undefined || this.worldDataLoader == undefined) {
+            return { totalDirty: 0, saved: 0, failed: 0 };
+        }
+
+        const dirtyChunks = this.chunkManager.getAllChunks().filter(chunk => chunk.dirty);
+        if (dirtyChunks.length === 0) {
+            return { totalDirty: 0, saved: 0, failed: 0 };
+        }
+
+        let saved = 0;
+        let failed = 0;
+
+        for (const chunk of dirtyChunks) {
+            const ok = await this.worldDataLoader.saveChunk(chunk);
+            if (ok) {
+                saved += 1;
+            }
+            else {
+                failed += 1;
+            }
+        }
+
+        if (this.debug) {
+            console.log(`[ChunkManager] saveDirtyChunks dirty=${dirtyChunks.length} saved=${saved} failed=${failed}`);
+        }
+
+        return {
+            totalDirty: dirtyChunks.length,
+            saved,
+            failed,
+        };
+    }
+
+    getActiveSaveSlot () {
+        const slot = this.scene?.slot?.SAVE?.SLOT;
+        const parsed = Number.isInteger(slot) ? slot : parseInt(slot, 10);
+        return Number.isInteger(parsed) && parsed >= 0 ? parsed : null;
     }
 
 }

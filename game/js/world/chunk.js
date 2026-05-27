@@ -276,20 +276,6 @@ export default class Chunk {
         return this.getEntitiesByKind('npc');
     }
 
-    // ─── Legacy object wrappers (backward compatible) ───────────────────────
-
-    addObject(slug, localX, localY, params = {}) {
-        this.addEntity('object', slug, localX, localY, params);
-    }
-
-    removeObject(slug, localX, localY) {
-        this.removeEntity('object', slug, localX, localY);
-    }
-
-    getObjects() {
-        return this.getEntitiesByKind('object');
-    }
-
     // ─── Serialisation ────────────────────────────────────────────────────────
 
     /** Produce a plain JSON-serialisable object. */
@@ -304,8 +290,6 @@ export default class Chunk {
             collision:  Array.from(this.collision),
             groundTypes: this.groundTypes,
             entities:   this.entities,
-            // Keep legacy output for compatibility with older loaders/tools.
-            objects:    this.getObjects(),
         };
     }
 
@@ -319,9 +303,6 @@ export default class Chunk {
         if (data.groundTypes) this.groundTypes = data.groundTypes;
         if (data.entities) {
             this.entities = data.entities;
-        }
-        else if (data.objects) {
-            this.entities = data.objects.map(object => ({ kind: 'object', ...object }));
         }
         this.loaded = true;
         this.dirty  = false;

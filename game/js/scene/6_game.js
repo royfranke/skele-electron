@@ -65,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
         this.exterior.update();
     }
 
-    portalTo(portal) {
+    async portalTo(portal) {
         if (this.verbose) console.log(portal);
         /// Before portal, save the game
         this.slot = this.app.softSaveGameData();
@@ -75,6 +75,11 @@ export default class GameScene extends Phaser.Scene {
         this.slot.POSITION.FACING = portal.facing;
         this.slot.POSITION.ROOM = portal.room_id;
         this.slot.POSITION.RETURN = portal.return;
+
+        if (this.exterior != undefined && this.exterior.saveDirtyChunks != undefined) {
+            await this.exterior.saveDirtyChunks();
+        }
+
         console.log(this.slot.POSITION + 'portal to ding ding');
         this.scene.start('Interior Scene', {slot: this.slot});
     }

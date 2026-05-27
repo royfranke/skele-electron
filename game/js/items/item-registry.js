@@ -4,7 +4,8 @@ import KEYLIGHTS from "../config/key-light.js";
 
 export default class ItemRegistry {
 
-    constructor() {
+    constructor(scene = null) {
+        this.scene = scene;
         this.registry = {};
     }
 
@@ -37,18 +38,22 @@ export default class ItemRegistry {
         }
     }
 
-    placeItem (item, _x, _y) {
-        var added = this.addItem(item, _x, _y);
+    placeItem (item, _x, _y, options = {}) {
+        var added = this.addItem(item, _x, _y, options);
         return added;
         /// Should be feedback for when an item cannot be placed (for now the only condition is that another item cannot already be on the tile)
     }
 
-    addItem (item, _x, _y) {
+    addItem (item, _x, _y, options = {}) {
+        const syncChunk = options.syncChunk !== false;
         // Do not refer to this directly, use placeitem
         if (this.placeEmpty(_x,_y)) {
             this.registry[_x+"_"+_y] = item;
             /// Item needs a method (setRegistration) that can be flagged to trigger an in-world sprite
             item.setRegistration(true,{x: _x, y: _y});
+            if (syncChunk) {
+                this.syncChunkItemAdd(item, _x, _y);
+            }
             return true;
         }
         else {
@@ -58,6 +63,9 @@ export default class ItemRegistry {
                 if (this.registry[_x+"_"+_y].isStackable(item.stackCount)) {
                     this.registry[_x+"_"+_y].updateStackCount(item.stackCount);
                     item.setRegistration(false);
+                    if (syncChunk) {
+                        this.syncChunkItemAdd(this.registry[_x+"_"+_y], _x, _y);
+                    }
                     return true;
                 }
             }
@@ -67,7 +75,8 @@ export default class ItemRegistry {
         }
     }
 
-    removeItem (_x, _y) {
+    removeItem (_x, _y, options = {}) {
+        const syncChunk = options.syncChunk !== false;
         if (!this.placeEmpty(_x,_y)) {
             const item = this.registry[_x+"_"+_y];
             item.setRegistration(false);
@@ -77,6 +86,10 @@ export default class ItemRegistry {
                 // Remove the key-value pair
                 delete this.registry[_x+"_"+_y];
               }
+
+            if (syncChunk) {
+                this.syncChunkItemRemove(item, _x, _y);
+            }
             return true;
         }
         else {
@@ -91,6 +104,32 @@ export default class ItemRegistry {
                 value.setLight(KEYLIGHTS[light]);
             }
         });
+    }
+
+    syncChunkItemAdd (item, _x, _y) {
+        if (this.scene == null || this.scene.locale !== 'exterior') {
+            return;
+        }
+
+        const exterior = this.scene.exterior;
+        if (exterior == undefined || exterior.upsertChunkItemEntity == undefined) {
+            return;
+        }
+
+        exterior.upsertChunkItemEntity(item, _x, _y);
+    }
+
+    syncChunkItemRemove (item, _x, _y) {
+        if (this.scene == null || this.scene.locale !== 'exterior') {
+            return;
+        }
+
+        const exterior = this.scene.exterior;
+        if (exterior == undefined || exterior.removeChunkItemEntity == undefined) {
+            return;
+        }
+
+        exterior.removeChunkItemEntity(item, _x, _y);
     }
     
 }

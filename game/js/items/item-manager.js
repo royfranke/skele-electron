@@ -12,7 +12,7 @@ export default class ItemManager {
 
     initializeScene(scene) {
         this.factory = new ItemFactory(scene);
-        this.registry = new ItemRegistry();
+        this.registry = new ItemRegistry(scene);
     }
 
     newItem (slug,items=[]) {
@@ -62,9 +62,9 @@ export default class ItemManager {
         return result;
     }
 
-    newItemToWorld (_x,_y,slug,items=[]) {
+    newItemToWorld (_x,_y,slug,items=[], options = {}) {
         var item = this.newItem(slug,items);
-        var result = this.putItemInWorld(item,_x,_y);
+        var result = this.putItemInWorld(item,_x,_y, options);
         if (!result) {
             console.warn('Could not add to world: '+slug);
             return false;
@@ -72,8 +72,8 @@ export default class ItemManager {
         return item;
     }
 
-    putItemInWorld (item, _x, _y) {
-        var result = this.registry.placeItem(item,_x,_y);
+    putItemInWorld (item, _x, _y, options = {}) {
+        var result = this.registry.placeItem(item,_x,_y, options);
         if (!result) {
             this.scene.manager.hud.hudThinking.tellBrain("Something is here already.");
         }

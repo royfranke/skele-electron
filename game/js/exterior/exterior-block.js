@@ -588,6 +588,45 @@ export default class Block {
     }
 
     buildItems() {
+        const save = this.scene.slot?.BLOCKS?.[this.block.x]?.[this.block.y];
+        if (save == undefined || !Array.isArray(save.items)) {
+            return;
+        }
+
+        const itemManager = this.scene.manager.itemManager;
+
+        save.items.forEach(function (item) {
+            const contents = [];
+            if (Array.isArray(item.items) && item.items.length > 0) {
+                item.items.forEach(function (subItem) {
+                    const subSlug = subItem?.slug ?? subItem?.info?.slug ?? subItem?.ITEM;
+                    if (subSlug != undefined && subSlug !== '') {
+                        const built = itemManager.newItem(subSlug);
+                        if (built) {
+                            contents.push(built);
+                        }
+                    }
+                });
+            }
+
+            const x = parseInt(item.x, 10);
+            const y = parseInt(item.y, 10);
+            if (!Number.isInteger(x) || !Number.isInteger(y)) {
+                return;
+            }
+
+            const newItem = itemManager.newItemToWorld(x, y, item.slug, contents);
+            if (newItem == false) {
+                return;
+            }
+
+            if (item.params != undefined && newItem.setParameters != undefined) {
+                newItem.setParameters(item.params);
+            }
+            if (item.stack != undefined && newItem.setStackCount != undefined) {
+                newItem.setStackCount(item.stack);
+            }
+        });
 
 
     }
@@ -641,6 +680,45 @@ export default class Block {
         this.propertyLines.forEach(function (prop, index) {
             save.properties.push(prop.getSaveData());
         });
+
+        const itemRegistry = this.scene?.manager?.itemManager?.registry;
+        if (itemRegistry != undefined) {
+            const left = this.block.block_tile_x;
+            const top = this.block.block_tile_y;
+            const right = left + block_width;
+            const bottom = top + block_height;
+
+            const serializeNestedItems = (items = []) => {
+                const savedItems = [];
+                items.forEach(function (nested) {
+                    const slug = nested?.slug ?? nested?.info?.slug ?? nested?.ITEM;
+                    if (slug != undefined && slug !== '') {
+                        savedItems.push({ slug });
+                    }
+                });
+                return savedItems;
+            };
+
+            itemRegistry.getAllItems().forEach(function (item) {
+                const x = parseInt(item.x, 10);
+                const y = parseInt(item.y, 10);
+                if (!Number.isInteger(x) || !Number.isInteger(y)) {
+                    return;
+                }
+
+                if (x >= left && y >= top && x < right && y < bottom) {
+                    save.items.push({
+                        slug: item.slug,
+                        x,
+                        y,
+                        stack: item.stack,
+                        items: serializeNestedItems(item.items),
+                        params: item.params ?? {},
+                    });
+                }
+            });
+        }
+
         return save;
     }
 
