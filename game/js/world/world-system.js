@@ -13,6 +13,10 @@
       this.chunkManager = options.chunkManager || null;
       this.chunks = this.chunkManager ? null : new Map(); // fall back when no chunkManager
       this.dirty = new Set(); // set of chunk keys that need saving (used if no chunkManager)
+      this.evictIntervalMs = options.evictIntervalMs ?? 2000;
+      if (this.chunkManager && this.loader) {
+        this._evictTimer = setInterval(() => { this.evictIfNeeded().catch(()=>{}); }, this.evictIntervalMs);
+      }
     }
 
     getChunkKey(x, y){ return `${x}_${y}`; }
@@ -36,6 +40,46 @@
       }
       else {
         this.chunks.set(k, chunk);
+      }
+      // After registering, attempt eviction if over budget
+      try { this.evictIfNeeded().catch(()=>{}); } catch(e){}
+    }
+
+    async evictIfNeeded() {
+      if (!this.chunkManager || !this.loader) return;
+      const max = this.chunkManager.maxLoadedChunks ?? Infinity;
+      const all = this.chunkManager.getAllChunks();
+      const current = all.length;
+      if (current <= max) return;
+
+      let need = current - max;
+      // Request candidates (get a few extra to cover saves that fail)
+      const candidates = this.chunkManager.getEvictionCandidates(need * 2);
+      let evicted = 0;
+      for (const entry of candidates) {
+        if (evicted >= need) break;
+        const { key, chunk } = entry;
+        if (!chunk) continue;
+        // If dirty, attempt to save first
+        if (chunk.dirty) {
+          try {
+            const ok = await this.loader.saveChunk(chunk);
+            if (!ok) {
+              // Save failed; skip eviction for this chunk
+              continue;
+            }
+          } catch (e) {
+            continue;
+          }
+        }
+
+        // Remove chunk from manager
+        try {
+          this.chunkManager.removeChunkByKey(key);
+          evicted++;
+        } catch (e) {
+          continue;
+        }
       }
     }
 

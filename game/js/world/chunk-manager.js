@@ -28,14 +28,26 @@ export default class ChunkManager {
      */
     constructor(options = {}) {
         this.activeRadius      = options.activeRadius      ?? 2;
+        // Number of extra rings around `activeRadius` to prefetch (load data but not activate/render)
+        this.prefetchExtra     = options.prefetchExtra     ?? 1;
+        // Delay (ms) before actually unloading a chunk after it leaves the desired active set.
+        this.unloadDelayMs     = options.unloadDelayMs     ?? 2000;
+        // Maximum number of chunks to keep loaded in memory. Set to Infinity to disable.
+        this.maxLoadedChunks   = options.maxLoadedChunks   ?? Infinity;
         this.worldChunksWidth  = options.worldChunksWidth  ?? Infinity;
         this.worldChunksHeight = options.worldChunksHeight ?? Infinity;
 
         /** All known chunks, keyed by Chunk.makeKey(cx, cy). */
         this._chunks = new Map();
 
+        /** LRU tracking: Map preserves insertion order; oldest entry is first. */
+        this._lru = new Map();
+
         /** Keys of chunks currently in the active set. */
         this._activeKeys = new Set();
+
+        // Tracks keys scheduled for unload: key -> expiry timestamp
+        this._pendingUnloads = new Map();
 
         /** Last chunk the player was in — used to skip redundant sweeps. */
         this._lastPlayerChunkX = null;
@@ -46,6 +58,10 @@ export default class ChunkManager {
         this.onChunkLoad   = (_chunk) => {};
         /** Called with a Chunk instance when it leaves the active set. */
         this.onChunkUnload = (_chunk) => {};
+        /** Called with a Chunk instance when it should be prefetched (load data but do not render). */
+        this.onChunkPrefetch = (_chunk) => {};
+        /** Called with a Chunk instance when it is evicted from memory. */
+        this.onChunkEvict = (_chunk) => {};
     }
 
     // ─── Public API ───────────────────────────────────────────────────────────
@@ -131,9 +147,15 @@ export default class ChunkManager {
     getChunk(chunkX, chunkY) {
         const key = Chunk.makeKey(chunkX, chunkY);
         if (!this._chunks.has(key)) {
-            this._chunks.set(key, new Chunk(chunkX, chunkY));
+            const c = new Chunk(chunkX, chunkY);
+            this._chunks.set(key, c);
+            this._touchLRU(key, c);
+            this._evictIfNeeded();
+            return this._chunks.get(key);
         }
-        return this._chunks.get(key);
+        const existing = this._chunks.get(key);
+        this._touchLRU(key, existing);
+        return existing;
     }
 
     /** Get the chunk that contains a given world tile position. */
@@ -147,6 +169,8 @@ export default class ChunkManager {
     /** Register a pre-built Chunk instance (e.g. loaded from JSON). */
     registerChunk(chunk) {
         this._chunks.set(chunk.key, chunk);
+        this._touchLRU(chunk.key, chunk);
+        this._evictIfNeeded();
     }
 
     /** Returns all currently active Chunk instances. */
@@ -169,6 +193,67 @@ export default class ChunkManager {
         return Array.from(this._chunks.values());
     }
 
+    // ─── LRU helpers ─────────────────────────────────────────────────────────
+
+    _touchLRU(key, chunk) {
+        try {
+            if (this._lru.has(key)) this._lru.delete(key);
+            this._lru.set(key, { key, chunk });
+        } catch (e) {}
+    }
+
+    _evictIfNeeded() {
+        if (this.maxLoadedChunks === Infinity) return;
+        try {
+            if (this._chunks.size <= this.maxLoadedChunks) return;
+
+            // Find eviction candidate(s): oldest in LRU that are not active, not pending unload, and not dirty.
+            for (const [oldestKey, entry] of this._lru) {
+                if (this._chunks.size <= this.maxLoadedChunks) break;
+                if (this._activeKeys.has(oldestKey)) continue;
+                if (this._pendingUnloads.has(oldestKey)) continue;
+                const chunk = this._chunks.get(oldestKey);
+                if (!chunk) { this._lru.delete(oldestKey); continue; }
+                if (chunk.dirty) continue; // don't evict dirty chunks
+
+                // Evict: remove from maps and notify
+                this._lru.delete(oldestKey);
+                this._chunks.delete(oldestKey);
+                try { this.onChunkEvict(chunk); } catch (e) {}
+            }
+        } catch (e) {}
+    }
+
+    /**
+     * Return up to `maxCount` eviction candidates in oldest-first order.
+     * Candidates may be dirty — caller should decide whether to save before eviction.
+     */
+    getEvictionCandidates(maxCount = 1) {
+        const out = [];
+        for (const [key, entry] of this._lru) {
+            if (out.length >= maxCount) break;
+            if (this._activeKeys.has(key)) continue;
+            if (this._pendingUnloads.has(key)) continue;
+            const chunk = this._chunks.get(key);
+            if (!chunk) continue;
+            out.push({ key, chunk });
+        }
+        return out;
+    }
+
+    /**
+     * Remove a chunk by key from the manager and invoke `onChunkEvict`.
+     * Returns the removed chunk or null.
+     */
+    removeChunkByKey(key) {
+        const chunk = this._chunks.get(key);
+        if (!chunk) return null;
+        try { this._lru.delete(key); } catch (e) {}
+        try { this._chunks.delete(key); } catch (e) {}
+        try { this.onChunkEvict(chunk); } catch (e) {}
+        return chunk;
+    }
+
     // ─── Coordinate utilities ─────────────────────────────────────────────────
 
     /** Convert a world tile coordinate to its chunk index. */
@@ -185,7 +270,6 @@ export default class ChunkManager {
 
     _sweep(playerChunkX, playerChunkY) {
         const r = this.activeRadius;
-
         // Build the desired active set
         const desiredKeys = new Set();
         for (let dy = -r; dy <= r; dy++) {
@@ -197,20 +281,68 @@ export default class ChunkManager {
             }
         }
 
-        // Unload chunks that are no longer desired
-        for (const key of this._activeKeys) {
+        // Build the desired prefetch set (active radius + prefetchExtra)
+        const pr = r + this.prefetchExtra;
+        const desiredPrefetch = new Set();
+        for (let dy = -pr; dy <= pr; dy++) {
+            for (let dx = -pr; dx <= pr; dx++) {
+                const cx = playerChunkX + dx;
+                const cy = playerChunkY + dy;
+                if (!this._inWorldBounds(cx, cy)) continue;
+                desiredPrefetch.add(Chunk.makeKey(cx, cy));
+            }
+        }
+
+        const now = Date.now();
+
+        // Schedule unloads for active chunks that are no longer in desired active set
+        for (const key of Array.from(this._activeKeys)) {
             if (!desiredKeys.has(key)) {
-                this._activeKeys.delete(key);
-                const chunk = this._chunks.get(key);
-                if (chunk) {
-                    this.onChunkUnload(chunk);
+                // If already scheduled, skip
+                if (!this._pendingUnloads.has(key)) {
+                    this._pendingUnloads.set(key, now + this.unloadDelayMs);
+                }
+            }
+            else {
+                // Cancel pending unload if chunk re-entered desired set
+                if (this._pendingUnloads.has(key)) this._pendingUnloads.delete(key);
+            }
+        }
+
+        // Perform expirations of pending unloads
+        for (const [key, expiry] of Array.from(this._pendingUnloads.entries())) {
+            if (desiredKeys.has(key)) { // became active again
+                this._pendingUnloads.delete(key);
+                continue;
+            }
+            if (Date.now() >= expiry) {
+                this._pendingUnloads.delete(key);
+                if (this._activeKeys.has(key)) {
+                    this._activeKeys.delete(key);
+                    const chunk = this._chunks.get(key);
+                    if (chunk) this.onChunkUnload(chunk);
                 }
             }
         }
 
-        // Load chunks that are newly desired
+        // Prefetch: ensure chunks in the prefetch ring are created and loaded (but not activated)
+        for (const key of desiredPrefetch) {
+            if (desiredKeys.has(key)) continue; // will be handled by activation
+            // If chunk already exists, skip; otherwise create and invoke prefetch
+            if (!this._chunks.has(key)) {
+                const [cx, cy] = key.split('_').map(Number);
+                const chunk = this.getChunk(cx, cy); // creates empty chunk
+                try {
+                    this.onChunkPrefetch(chunk);
+                } catch (e) {}
+            }
+        }
+
+        // Activate any newly desired chunks (including ones that were pending unload)
         for (const key of desiredKeys) {
             if (!this._activeKeys.has(key)) {
+                // Cancel any pending unload
+                if (this._pendingUnloads.has(key)) this._pendingUnloads.delete(key);
                 this._activeKeys.add(key);
                 const [cx, cy] = key.split('_').map(Number);
                 const chunk = this.getChunk(cx, cy); // creates if absent

@@ -34,6 +34,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         const worldChunksHeight = Math.ceil(MAP_CONFIG.height / CHUNK_SIZE);
         this.chunkManager = new ChunkManager({
             activeRadius:      2,
+            maxLoadedChunks:   128,
             worldChunksWidth,
             worldChunksHeight,
         });
@@ -54,6 +55,31 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             }
             this.handleChunkLoad(chunk);
             if (this.debug) console.log(`[ChunkManager] load   ${chunk.key}`);
+        };
+        this.chunkManager.onChunkPrefetch = (chunk) => {
+            // Attempt to pre-load chunk data without rendering
+            try { this.handleChunkPrefetch(chunk); } catch (e) { if (this.debug) console.warn('prefetch failed', e); }
+        };
+        this.chunkManager.onChunkEvict = (chunk) => {
+            try {
+                // If the chunk is still rendered for any reason, clear its tiles and entities.
+                if (chunk && chunk.rendered) {
+                    this.unrenderChunk(chunk);
+                }
+
+                // Ensure item entities removed from registry
+                try { this.unrenderChunkItemEntities(chunk); } catch (e) {}
+
+                // Refresh collisions if necessary
+                try { this.refreshChunkCollisions(); } catch (e) {}
+
+                // Clear dirty mark in WorldSystem if present
+                if (this.worldSystem && typeof this.worldSystem.clearDirtyFor === 'function') {
+                    try { this.worldSystem.clearDirtyFor(chunk); } catch (e) {}
+                }
+            } catch (e) {
+                if (this.debug) console.warn('onChunkEvict handler error', e);
+            }
         };
         this.chunkManager.onChunkUnload = (chunk) => {
             this.unrenderChunk(chunk);
@@ -427,6 +453,25 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
         if (this.chunkManager.isChunkActive(chunk.chunkX, chunk.chunkY)) {
             this.renderChunk(chunk);
+        }
+    }
+
+    async handleChunkPrefetch (chunk) {
+        if (!chunk || chunk.loaded) return;
+        if (this.pendingChunkLoads.has(chunk.key) || this.missingChunkKeys.has(chunk.key)) return;
+
+        this.pendingChunkLoads.add(chunk.key);
+        let loaded = false;
+        if (this.worldDataLoader != null) {
+            // Use loader to fetch data but do not render
+            loaded = await this.worldDataLoader.loadChunk(chunk);
+        }
+        this.pendingChunkLoads.delete(chunk.key);
+
+        if (!loaded) {
+            this.missingChunkKeys.add(chunk.key);
+            if (this.debug) console.warn(`[ChunkManager] missing chunk data for (prefetch) ${chunk.key}`);
+            return;
         }
     }
 
