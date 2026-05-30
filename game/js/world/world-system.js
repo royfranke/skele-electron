@@ -17,6 +17,7 @@
       if (this.chunkManager && this.loader) {
         this._evictTimer = setInterval(() => { this.evictIfNeeded().catch(()=>{}); }, this.evictIntervalMs);
       }
+      try { window.WorldSystemInstance = this; window.WorldSystemReady = Promise.resolve(this); } catch (e) {}
     }
 
     getChunkKey(x, y){ return `${x}_${y}`; }
@@ -81,6 +82,34 @@
           continue;
         }
       }
+    }
+
+    /**
+     * Force-export all chunks to disk via the configured loader.
+     * Options: { onlyDirty: boolean }
+     * Returns summary { total, exported, skipped, failed, details: [...] }
+     */
+    async forceExportAllChunks(options = {}){
+      const onlyDirty = options.onlyDirty === true;
+      if (!this.loader) return { total:0, exported:0, skipped:0, failed:0, details:[] };
+
+      const chunks = this.chunkManager ? this.chunkManager.getAllChunks() : Array.from(this.chunks.values());
+      const details = [];
+      let exported = 0, skipped = 0, failed = 0;
+
+      for (const chunk of chunks) {
+        if (!chunk) continue;
+        if (onlyDirty && !chunk.dirty) { skipped++; continue; }
+        try {
+          const ok = await this.loader.saveChunk(chunk);
+          if (ok) { exported++; details.push({ key: chunk.key, ok: true }); }
+          else { failed++; details.push({ key: chunk.key, ok: false }); }
+        } catch (e) {
+          failed++; details.push({ key: chunk.key, ok: false, error: String(e) });
+        }
+      }
+
+      return { total: chunks.length, exported, skipped, failed, details };
     }
 
     markDirty(chunk){

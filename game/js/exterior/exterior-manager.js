@@ -4,11 +4,13 @@ import MAP_CONFIG from "../config/map.js";
 import Ground from "../handler/ground.js";
 import Block from "./exterior-block.js";
 import Navigator from "../navigator/navigator-manager.js";
+import "../world/entity-system.js";
 import BlockNode from "./exterior-block-node.js";
 import KEYLIGHT from "../config/key-light.js";
 import ChunkManager from "../world/chunk-manager.js";
 import { CHUNK_SIZE } from "../world/chunk.js";
 import WorldDataLoader from "../world/world-data-loader.js";
+import "../world/world-system.js";
 import GROUND_TYPE from "../config/atlas/ground-types.js";
 import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
@@ -41,6 +43,40 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         this.useChunkStreamingBootstrap = this.shouldUseChunkStreamingBootstrap();
         this.worldDataLoader = new WorldDataLoader('/assets/chunks/', { slot: this.getActiveSaveSlot() });
         this.worldSystem = (window.WorldSystem) ? new window.WorldSystem(this.scene, this.worldDataLoader, { slot: this.getActiveSaveSlot(), chunkManager: this.chunkManager }) : null;
+        if (this.worldSystem) {
+            // Expose for quick DevTools access: `window.WorldSystemInstance.forceExportAllChunks()`
+            try { window.WorldSystemInstance = this.worldSystem; } catch (e) {}
+        }
+        // Instantiate basic EntityManager
+        try {
+            const self = this;
+            const spawnOpts = {
+                chunkManager: this.chunkManager,
+                onSpawnRuntime: (entity) => {
+                    try {
+                        const tileSize = MAP_CONFIG.tileSize || 16;
+                        const px = (entity.worldX * tileSize) + Math.floor(tileSize/2);
+                        const py = (entity.worldY * tileSize) + Math.floor(tileSize/2);
+                        // Create a basic sprite for the runtime form. Use slug as texture key if available.
+                        const sprite = self.scene.add.sprite(px, py, entity.slug || 'placeholder').setOrigin(0.5, 0.5);
+                        // Depth by Y for simple layering
+                        sprite.setDepth(py + 100);
+                        return sprite;
+                    } catch (err) {
+                        return null;
+                    }
+                },
+                onDespawnRuntime: (entity) => {
+                    try {
+                        const r = entity.runtime;
+                        if (r && r.destroy) r.destroy();
+                    } catch (err) {}
+                }
+            };
+
+            this.entitySystem = window.EntitySystem ? new window.EntitySystem.EntityManager(this.scene, spawnOpts) : null;
+            if (this.worldSystem && this.entitySystem) this.worldSystem.entityManager = this.entitySystem;
+        } catch (e) { this.entitySystem = null; }
         this.pendingChunkLoads = new Set();
         this.missingChunkKeys = new Set();
         this.worldQueryMisses = {
@@ -105,6 +141,8 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         this.edgeLayer = this.map.createBlankLayer("Edge",edge_tileset).setDepth(3);
         this.wallLayer = this.map.createBlankLayer("Wall", wall_tileset).setDepth(4);
         this.roofLayer = this.map.createBlankLayer("Roof", roof_tileset).setDepth(1000);
+        // Per-chunk layer bookkeeping (basic create/destroy orchestration)
+        this.chunkLayers = new Map(); // key -> { created: true }
 
         if (!this.useChunkStreamingBootstrap) {
             this.buildMap();
@@ -487,6 +525,9 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             return;
         }
 
+        // Ensure chunk layer exists (basic orchestration hook)
+        try { this.createChunkLayer(chunk); } catch (e) {}
+
         const originX = chunk.tileOriginX;
         const originY = chunk.tileOriginY;
 
@@ -536,8 +577,25 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
         this.unrenderChunkItemEntities(chunk);
 
+        // Destroy per-chunk layer (basic orchestration hook)
+        try { this.destroyChunkLayer(chunk); } catch (e) {}
+
         chunk.rendered = false;
         this.refreshChunkCollisions();
+    }
+
+    // Basic per-chunk layer orchestration (create/destroy only)
+    createChunkLayer(chunk) {
+        if (!chunk) return;
+        if (this.chunkLayers.has(chunk.key)) return;
+        // Placeholder bookkeeping for future pooling/per-chunk layers.
+        this.chunkLayers.set(chunk.key, { created: true });
+    }
+
+    destroyChunkLayer(chunk) {
+        if (!chunk) return;
+        if (!this.chunkLayers.has(chunk.key)) return;
+        this.chunkLayers.delete(chunk.key);
     }
 
     renderChunkItemEntities (chunk) {
