@@ -11,6 +11,7 @@ import ChunkManager from "../world/chunk-manager.js";
 import { CHUNK_SIZE } from "../world/chunk.js";
 import WorldDataLoader from "../world/world-data-loader.js";
 import "../world/world-system.js";
+import ChunkDebugUI from "../dev/chunk-debug-ui.js";
 import GROUND_TYPE from "../config/atlas/ground-types.js";
 import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
@@ -121,6 +122,24 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             this.unrenderChunk(chunk);
             if (this.debug) console.log(`[ChunkManager] unload ${chunk.key}`);
         };
+
+        // Dev UI for inspecting chunks
+        try {
+            if (this.debug) {
+                this.devChunkUI = new ChunkDebugUI({ chunkManager: this.chunkManager, worldSystem: this.worldSystem, scene: this.scene });
+            }
+        } catch (e) { /* ignore in prod */ }
+
+        // Keyboard shortcut to toggle dev UI: Ctrl+Shift+C
+        try {
+            window.addEventListener('keydown', (ev) => {
+                try {
+                    if (ev.ctrlKey && ev.shiftKey && ev.code === 'KeyC') {
+                        if (this.devChunkUI && typeof this.devChunkUI.toggle === 'function') this.devChunkUI.toggle();
+                    }
+                } catch (e) {}
+            });
+        } catch (e) {}
 
         this.lastBlock = {x: 0, y: 0};
         this.lastTile = {x: 0, y: 0};
