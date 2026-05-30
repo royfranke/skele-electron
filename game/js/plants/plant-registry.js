@@ -74,6 +74,28 @@ export default class PlantRegistry {
                 // Remove the key-value pair
                 delete this.registry[_x + "_" + _y];
             }
+            // Also remove plant metadata from chunk storage when possible
+            try {
+                const worldSystem = (typeof window !== 'undefined') ? window.WorldSystemInstance : null;
+                const cm = worldSystem ? worldSystem.chunkManager : null;
+                if (cm) {
+                    const chunk = cm.getChunkAtTile(_x, _y);
+                    if (chunk) {
+                        // Remove all plants at this local position
+                        const local = chunk.worldToLocal(_x, _y);
+                        if (local) {
+                            // Use entities in chunk to find plant slugs
+                            const plantsInChunk = (typeof chunk.getPlants === 'function') ? chunk.getPlants() : (chunk.getEntitiesByKind ? chunk.getEntitiesByKind('plant') : []);
+                            if (Array.isArray(plantsInChunk)) {
+                                plantsInChunk.forEach(p => {
+                                    try { chunk.removePlant(p.slug || p.slugName || p.name || p.kind, local.x, local.y); } catch (e) {}
+                                });
+                                try { if (worldSystem && typeof worldSystem.markDirty === 'function') worldSystem.markDirty(chunk); else chunk.dirty = true; } catch (e) {}
+                            }
+                        }
+                    }
+                }
+            } catch (e) {}
             return true;
         }
         else {

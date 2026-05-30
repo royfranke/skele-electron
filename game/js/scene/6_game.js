@@ -25,7 +25,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
 
-    create() {
+    async create() {
         if (this.room_id == '10') {
             if (this.verbose) console.log("New Game");
             return this.newGame();
@@ -47,6 +47,10 @@ export default class GameScene extends Phaser.Scene {
         }, this);
         this.exterior = new ExteriorManager(this);
         this.exterior.initialize();
+
+        // Instantiate Player/NPC managers synchronously so update() won't
+        // crash, but delay their `create()` (which sets colliders) until
+        // after exterior layers are created.
         this.player = new PlayerManager(this);
         this.npcs = new NpcManager(this);
         

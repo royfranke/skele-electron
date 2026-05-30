@@ -8,6 +8,7 @@ import "../world/entity-system.js";
 import BlockNode from "./exterior-block-node.js";
 import KEYLIGHT from "../config/key-light.js";
 import ChunkManager from "../world/chunk-manager.js";
+import Chunk from "../world/chunk.js";
 import { CHUNK_SIZE } from "../world/chunk.js";
 import WorldDataLoader from "../world/world-data-loader.js";
 import "../world/world-system.js";
@@ -24,6 +25,10 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
     constructor(scene) {
         this.scene = scene;
         this.debug = true;
+        // When true, never attempt to load chunk JSONs from disk; always
+        // use the in-memory/generated chunk data produced during the
+        // procedural build pass.
+        this.alwaysUseGenerated = true;
     }
 
     initialize () {
@@ -38,6 +43,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         this.chunkManager = new ChunkManager({
             activeRadius:      2,
             maxLoadedChunks:   128,
+            debug: this.debug,
             worldChunksWidth,
             worldChunksHeight,
         });
@@ -163,8 +169,39 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         // Per-chunk layer bookkeeping (basic create/destroy orchestration)
         this.chunkLayers = new Map(); // key -> { created: true }
 
+        // Whether chunk JSON files were detected on disk. Populated by
+        // `detectChunkFiles()` which should be awaited before `create()`.
+        this.chunkFilesExist = null;
         if (!this.useChunkStreamingBootstrap) {
             this.buildMap();
+        }
+    }
+
+    /**
+     * Async check for whether saved chunk JSONs exist for the starting
+     * player position. Sets `this.chunkFilesExist` to true/false.
+     * Reasonable heuristic: check the chunk containing the player's start tile.
+     */
+    async detectChunkFiles() {
+        try {
+            if (!this.worldDataLoader) { this.chunkFilesExist = false; return false; }
+
+            const pos = this.scene?.slot?.POSITION ?? null;
+            const startX = pos?.X ?? 0;
+            const startY = pos?.Y ?? 0;
+
+            // Compute chunk coords
+            const cx = Math.floor(startX / CHUNK_SIZE);
+            const cy = Math.floor(startY / CHUNK_SIZE);
+
+            // Create a temporary Chunk instance and ask the loader to populate it.
+            const temp = new Chunk(cx, cy);
+            const ok = await this.worldDataLoader.loadChunk(temp);
+            this.chunkFilesExist = !!ok;
+            return this.chunkFilesExist;
+        } catch (e) {
+            this.chunkFilesExist = false;
+            return false;
         }
     }
 
@@ -382,6 +419,17 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             return;
         }
 
+        // If chunk files were detected on startup, skip the build/generation
+        // and rely on the saved chunk JSONs to populate the world.
+        if (this.chunkFilesExist === true) {
+            if (this.debug) console.log('Detected existing chunk files — skipping generation');
+            this.ground = new Ground(this.groundLayer, this.edgeLayer);
+            this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
+            this.setMouseInput();
+            this.beginChunkStreaming();
+            return;
+        }
+
         self = this;
         MAP_CONFIG.blocks.forEach(function (block, index) {
             self.setCorners(block);
@@ -399,6 +447,19 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         // build pass is complete.  This is a one-time O(width*height) read.
         this.snapshotToChunks();
 
+        // After generating chunks from the procedural build, persist them
+        // to disk so subsequent loads (e.g. after returning from an interior)
+        // will read from the saved chunk files instead of re-generating.
+        try {
+            if (this.worldSystem && typeof this.worldSystem.forceExportAllChunks === 'function') {
+                // Only attempt export when running in an environment that supports saving.
+                if (this.worldDataLoader && this.worldDataLoader._canUseElectronApi) {
+                    this.worldSystem.forceExportAllChunks({ onlyDirty: false }).then((res) => {
+                        if (this.debug) console.log('[WorldSystem] forced export complete', res);
+                    }).catch(err => { if (this.debug) console.warn('forceExportAllChunks failed', err); });
+                }
+            }
+        } catch (e) {}
         // Switch rendering over to chunk streaming.
         this.beginChunkStreaming();
     }
@@ -448,7 +509,10 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         this.chunkManager.getAllChunks().forEach(chunk => {
             chunk.loaded = true;
             chunk.dirty  = false;
+            try { chunk.origin = chunk.origin || 'generated'; } catch (e) {}
         });
+
+        
 
         if (this.debug) {
             console.log(`[ChunkManager] snapshot complete — ${this.chunkManager.getAllChunks().length} chunks populated`);
@@ -467,11 +531,36 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
     }
 
     handleChunkLoad (chunk) {
-        if (!this.useChunkStreamingBootstrap) {
+        const debug = !!this.debug;
+        if (debug) console.log(`[Exterior] handleChunkLoad ${chunk.key} loaded=${!!chunk.loaded} rendered=${!!chunk.rendered}`);
+
+        // If configured to always use generated data, skip any attempts to
+        // load chunk JSONs from disk and render the chunk directly. Ensure
+        // the chunk is marked `loaded` so `renderChunk` proceeds.
+        if (this.alwaysUseGenerated) {
+            if (!chunk.loaded) {
+                chunk.loaded = true;
+                try { chunk.origin = chunk.origin || 'generated'; } catch (e) {}
+            }
             this.renderChunk(chunk);
             return;
         }
 
+        if (!this.useChunkStreamingBootstrap) {
+            // If chunk files exist (we skipped generation), attempt to load
+            // the chunk data from disk before rendering. Otherwise render
+            // from in-memory/generated data.
+            if (!chunk.loaded && this.worldDataLoader != null) {
+                if (debug) console.log(`[Exterior] will attempt loadAndRenderChunk ${chunk.key}`);
+                this.loadAndRenderChunk(chunk);
+            } else {
+                if (debug) console.log(`[Exterior] will renderChunk ${chunk.key}`);
+                this.renderChunk(chunk);
+            }
+            return;
+        }
+
+        if (debug) console.log(`[Exterior] bootstrap: loadAndRenderChunk ${chunk.key}`);
         this.loadAndRenderChunk(chunk);
     }
 
@@ -504,10 +593,40 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             this.missingChunkKeys.add(chunk.key);
             if (this.debug) {
                 console.warn(`[ChunkManager] missing chunk data for ${chunk.key}`);
+
+                // Inspect whether this chunk has any in-memory/generated tiles
+                try {
+                    let hasGeneratedData = false;
+                    const ox = chunk.tileOriginX;
+                    const oy = chunk.tileOriginY;
+                    for (let ly = 0; ly < CHUNK_SIZE && !hasGeneratedData; ly++) {
+                        for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+                            const wx = ox + lx;
+                            const wy = oy + ly;
+                            if (wx < 0 || wy < 0 || wx >= MAP_CONFIG.width || wy >= MAP_CONFIG.height) continue;
+                            const g = chunk.getLayerTile('ground', wx, wy);
+                            const e = chunk.getLayerTile('edge', wx, wy);
+                            const w = chunk.getLayerTile('wall', wx, wy);
+                            const r = chunk.getLayerTile('roof', wx, wy);
+                            if ((g && g !== 0) || (e != null && e !== -1) || (w != null && w !== -1) || (r != null && r !== -1)) {
+                                hasGeneratedData = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    console.log(`[Exterior] missing chunk ${chunk.key} — hasGeneratedData=${hasGeneratedData} origin=${chunk.origin||'unknown'}`);
+                    if (hasGeneratedData && this.chunkManager.isChunkActive(chunk.chunkX, chunk.chunkY)) {
+                        console.log(`[Exterior] fallback: would render generated data for ${chunk.key} (not auto-rendering to preserve current flow)`);
+                    }
+                } catch (e) {
+                    if (this.debug) console.warn('Error while inspecting missing chunk data', e);
+                }
             }
             return;
         }
 
+        if (this.debug) console.log(`[Exterior] chunk ${chunk.key} loaded from file`);
         if (this.chunkManager.isChunkActive(chunk.chunkX, chunk.chunkY)) {
             this.renderChunk(chunk);
         }
@@ -515,6 +634,8 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
     async handleChunkPrefetch (chunk) {
         if (!chunk || chunk.loaded) return;
+        // If we force generated-only mode, skip any prefetch/load attempts.
+        if (this.alwaysUseGenerated) return;
         if (this.pendingChunkLoads.has(chunk.key) || this.missingChunkKeys.has(chunk.key)) return;
 
         this.pendingChunkLoads.add(chunk.key);
@@ -550,6 +671,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         const originX = chunk.tileOriginX;
         const originY = chunk.tileOriginY;
 
+        let placed = 0;
         for (let ly = 0; ly < CHUNK_SIZE; ly++) {
             for (let lx = 0; lx < CHUNK_SIZE; lx++) {
                 const wx = originX + lx;
@@ -558,16 +680,22 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
                     continue;
                 }
 
-                this.groundLayer.putTileAt(chunk.getLayerTile('ground', wx, wy), wx, wy);
-                this.edgeLayer.putTileAt(chunk.getLayerTile('edge', wx, wy), wx, wy);
-                this.wallLayer.putTileAt(chunk.getLayerTile('wall', wx, wy), wx, wy);
-                this.roofLayer.putTileAt(chunk.getLayerTile('roof', wx, wy), wx, wy);
+                const g = chunk.getLayerTile('ground', wx, wy);
+                const e = chunk.getLayerTile('edge', wx, wy);
+                const w = chunk.getLayerTile('wall', wx, wy);
+                const r = chunk.getLayerTile('roof', wx, wy);
+                this.groundLayer.putTileAt(g, wx, wy);
+                this.edgeLayer.putTileAt(e, wx, wy);
+                this.wallLayer.putTileAt(w, wx, wy);
+                this.roofLayer.putTileAt(r, wx, wy);
+                if (g !== 0 || e !== -1 || w !== -1 || r !== -1) placed++;
             }
         }
 
         this.renderChunkItemEntities(chunk);
 
         chunk.rendered = true;
+        if (this.debug) console.log(`[Exterior] rendered chunk ${chunk.key} placedTiles=${placed} origin=${chunk.origin || 'unknown'}`);
         this.refreshChunkCollisions();
     }
 
@@ -575,9 +703,26 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         if (!chunk || !chunk.rendered) {
             return;
         }
-
         const originX = chunk.tileOriginX;
         const originY = chunk.tileOriginY;
+        const debugLog = !!this.debug;
+
+        let cleared = 0;
+        if (debugLog) {
+            for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+                for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+                    const wx = originX + lx;
+                    const wy = originY + ly;
+                    if (wx < 0 || wy < 0 || wx >= MAP_CONFIG.width || wy >= MAP_CONFIG.height) continue;
+                    const g = chunk.getLayerTile('ground', wx, wy);
+                    const e = chunk.getLayerTile('edge', wx, wy);
+                    const w = chunk.getLayerTile('wall', wx, wy);
+                    const r = chunk.getLayerTile('roof', wx, wy);
+                    if ((g && g !== 0) || (e != null && e !== -1) || (w != null && w !== -1) || (r != null && r !== -1)) cleared++;
+                }
+            }
+            console.log(`[Exterior] unrenderChunk clearing ${cleared} tiles for ${chunk.key} origin=${chunk.origin||'unknown'} originTile=${originX},${originY}`);
+        }
 
         for (let ly = 0; ly < CHUNK_SIZE; ly++) {
             for (let lx = 0; lx < CHUNK_SIZE; lx++) {
@@ -600,8 +745,11 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         try { this.destroyChunkLayer(chunk); } catch (e) {}
 
         chunk.rendered = false;
+        if (debugLog) console.log(`[Exterior] finished unrenderChunk ${chunk.key} cleared=${cleared}`);
         this.refreshChunkCollisions();
     }
+
+    
 
     // Basic per-chunk layer orchestration (create/destroy only)
     createChunkLayer(chunk) {
@@ -1040,18 +1188,36 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
     getFrontDoorTilesFromAddress(dir, number, street) {
         let door = this.getFrontDoorFromAddress(dir, number, street);
+        if (!door) return null;
         return {x: door.x, y: door.y};
     }
 
     getFrontDoorFromAddress(dir, number, street) {
          let prop = this.getPropertyFromAddress(dir, number, street);
          if (!prop) {
-              return;
+              return null;
          }
-         else {
-            console.log(prop.portal);
-          return {x: prop.portal.world.x,y: prop.portal.world.y};
-         }
+
+         // If a portal.world coordinate was recorded during property build,
+         // prefer that (this is the authoritative front-door mapping).
+         try {
+             if (prop.portal && prop.portal.world && prop.portal.world.x != null && prop.portal.world.y != null) {
+                 return { x: prop.portal.world.x, y: prop.portal.world.y };
+             }
+         } catch (e) {}
+
+         // Fallback: derive a sensible front-door position from the property's
+         // `lines` rectangle (bottom-center of the parcel).
+         try {
+             if (prop.lines && typeof prop.lines.x === 'number' && typeof prop.lines.y === 'number') {
+                 const fx = prop.lines.x + Math.floor((prop.lines.width ?? 1) / 2);
+                 const fy = prop.lines.y + (prop.lines.height ? (prop.lines.height - 1) : 0);
+                 if (this.debug) console.warn(`[Exterior] using fallback front-door for ${dir} ${number} ${street} -> ${fx},${fy}`);
+                 return { x: fx, y: fy };
+             }
+         } catch (e) {}
+
+         return null;
      }
 
     getMailboxTilesFromAddress(dir, number, street) {

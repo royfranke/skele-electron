@@ -147,18 +147,22 @@ export default class PlayerSprite {
   }
 
   updateFootMask(underfoot) {
+    if (!this.footMask) return;
     var _y = this.sprite.y;
     if (underfoot != undefined) {
       if (underfoot.USEMASK) {
           _y = _y - underfoot.ZINDEX;
       }
     }
-    this.footMask.setPosition(this.sprite.x, _y);
-    this.footMask.setDepth(this.sprite.depth + 1);
+    try {
+      this.footMask.setPosition(this.sprite.x, _y);
+      this.footMask.setDepth(this.sprite.depth + 1);
+    } catch (e) {}
     return;
   }
 
   updateFootShadow(underfoot) {
+    if (!this.footShadow) return;
     var _y = this.sprite.y + 12;
     var scale = 1;
     if (underfoot != undefined) {
@@ -167,9 +171,11 @@ export default class PlayerSprite {
           scale = (underfoot.ZINDEX / 25) + scale;
       }
     }
-    this.footShadow.setPosition(this.sprite.x, _y);
-    this.footShadow.setScale(scale);
-    this.footShadow.setDepth(this.sprite.depth - 1);
+    try {
+      this.footShadow.setPosition(this.sprite.x, _y);
+      this.footShadow.setScale(scale);
+      this.footShadow.setDepth(this.sprite.depth - 1);
+    } catch (e) {}
     return;
   }
 

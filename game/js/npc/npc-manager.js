@@ -18,11 +18,15 @@ export default class NpcManager {
       this.newNpcToWorld(npc_cords.x,npc_cords.y,'PATRICE');
       this.newNpcToWorld(npc_cords.x + 2,npc_cords.y,'SKELE_AUNTIE');
       */
-let dir = "W";
-        let number = "107";
-        let street = "Belly Button Street";
-        let npc_cords = this.scene.exterior.getFrontDoorTilesFromAddress(dir, number, street);
-      this.newNpcToWorld(npc_cords.x+2,npc_cords.y-2,'PATRICE');
+                let dir = "W";
+                let number = "107";
+                let street = "Belly Button Street";
+                let npc_cords = this.scene.exterior.getFrontDoorTilesFromAddress(dir, number, street);
+                if (npc_cords && typeof npc_cords.x === 'number' && typeof npc_cords.y === 'number') {
+                    this.newNpcToWorld(npc_cords.x+2,npc_cords.y-2,'PATRICE');
+                } else {
+                    if (this.scene.exterior && this.scene.exterior.debug) console.warn('NPC spawn skipped: no front-door coords for', dir, number, street);
+                }
       
     }
 

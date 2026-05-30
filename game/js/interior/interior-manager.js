@@ -387,6 +387,29 @@ import KEYLIGHT from "../config/key-light.js";
     tileBlank (_x,_y) {
         return (this.groundLayer.getTileAt(_x, _y) == null || this.groundLayer.getTileAt(_x, _y).index === 0) ? true : false;
     }
+
+    /**
+     * Return true if the given tile is walkable inside an interior.
+     * Uses groundLayer and wallLayer to determine blocking.
+     */
+    isWalkable(_x, _y) {
+        if (!_x && _x !== 0) return false;
+        if (!_y && _y !== 0) return false;
+        if (!_x || !_y) {
+            // guard but allow zero coords
+        }
+        if (this.map == undefined) return false;
+        if (_x < 0 || _y < 0 || _x >= this.map.width || _y >= this.map.height) return false;
+
+        // If ground is blank, it's not walkable
+        if (this.tileBlank(_x, _y)) return false;
+
+        // Any wall layer tile present blocks walking
+        const wallTile = this.wallLayer.getTileAt(_x, _y);
+        if (wallTile && wallTile.index != null && wallTile.index !== -1) return false;
+
+        return true;
+    }
     
 
     cookStairs (_x, _y, width, height) {

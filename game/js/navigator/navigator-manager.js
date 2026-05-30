@@ -398,13 +398,24 @@ export default class NavigatorManager {
     }
 
     worldIsWalkable (_x, _y) {
+        // Prefer interior when present (interior scenes provide their own walkability)
+        if (this.scene?.interior?.isWalkable) {
+            return this.scene.interior.isWalkable(_x, _y);
+        }
         if (this.scene?.exterior?.isWalkable) {
             return this.scene.exterior.isWalkable(_x, _y);
+        }
+        // Global fallback to WorldSystem if available
+        if (typeof window !== 'undefined' && window.world && typeof window.world.isWalkable === 'function') {
+            return window.world.isWalkable(_x, _y);
         }
         return false;
     }
 
     worldGetGround (_x, _y) {
+        if (this.scene?.interior?.getGroundAt) {
+            return this.scene.interior.getGroundAt(_x, _y);
+        }
         if (this.scene?.exterior?.getGroundAt) {
             return this.scene.exterior.getGroundAt(_x, _y);
         }

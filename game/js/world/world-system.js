@@ -17,7 +17,25 @@
       if (this.chunkManager && this.loader) {
         this._evictTimer = setInterval(() => { this.evictIfNeeded().catch(()=>{}); }, this.evictIntervalMs);
       }
-      try { window.WorldSystemInstance = this; window.WorldSystemReady = Promise.resolve(this); } catch (e) {}
+      try { window.WorldSystemInstance = this; window.WorldSystemReady = Promise.resolve(this); window.world = this; } catch (e) {}
+    }
+
+    /**
+     * Query whether a given world tile is walkable.
+     * Delegates to the ChunkManager when available, otherwise returns false.
+     */
+    isWalkable(worldX, worldY) {
+      try {
+        if (this.chunkManager && typeof this.chunkManager.isWalkable === 'function') {
+          return this.chunkManager.isWalkable(worldX, worldY);
+        }
+        // Fallback: if we have a local chunk store, try to resolve chunk then delegate
+        const chunkX = Math.floor(worldX / (this.chunkManager ? this.chunkManager.chunkToWorldTile(1) : 32));
+        const chunkY = Math.floor(worldY / (this.chunkManager ? this.chunkManager.chunkToWorldTile(1) : 32));
+        const chunk = this.getChunk(chunkX, chunkY);
+        if (chunk && typeof chunk.isWalkable === 'function') return chunk.isWalkable(worldX, worldY);
+        return false;
+      } catch (e) { return false; }
     }
 
     getChunkKey(x, y){ return `${x}_${y}`; }

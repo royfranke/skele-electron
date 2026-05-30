@@ -98,7 +98,8 @@ export default class ChunkDebugUI {
       try { objectsCount = (typeof c.getEntitiesByKind === 'function') ? c.getEntitiesByKind('object').length : 0; } catch (e) { objectsCount = 'err'; }
       try { plantsCount = (typeof c.getPlants === 'function') ? c.getPlants().length : (c.getEntitiesByKind ? c.getEntitiesByKind('plant').length : 0); } catch (e) { plantsCount = 'err'; }
       try { treesCount = (typeof c.getTrees === 'function') ? c.getTrees().length : (c.getEntitiesByKind ? c.getEntitiesByKind('tree').length : 0); } catch (e) { treesCount = 'err'; }
-      const meta = document.createElement('div'); meta.innerHTML = `<strong>${c.key}</strong> <span class="chunk-meta">dirty:${c.dirty?1:0} items:${itemsCount} objs:${objectsCount} plants:${plantsCount} trees:${treesCount}</span>`;
+      const origin = c.origin ? c.origin : (c.loaded ? 'memory' : 'unknown');
+      const meta = document.createElement('div'); meta.innerHTML = `<strong>${c.key}</strong> <span class="chunk-meta">origin:${origin} dirty:${c.dirty?1:0} items:${itemsCount} objs:${objectsCount} plants:${plantsCount} trees:${treesCount}</span>`;
       const actions = document.createElement('div');
       const view = document.createElement('button'); view.textContent = 'View'; view.onclick = () => { this.details.value = JSON.stringify(c, null, 2); };
       const exp = document.createElement('button'); exp.textContent = 'Export'; exp.onclick = async () => {

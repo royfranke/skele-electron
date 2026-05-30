@@ -63,7 +63,31 @@ export default class PlantManager {
     }
 
     putPlantInWorld (plant, _x, _y) {
-        return this.registry.placePlant(plant,_x,_y);
+        const added = this.registry.placePlant(plant,_x,_y);
+        if (!added) return false;
+
+        // Also register plant metadata in chunk storage when available
+        try {
+            const cm = this.scene?.exterior?.chunkManager;
+            const worldSystem = this.scene?.exterior?.worldSystem || (typeof window !== 'undefined' ? window.WorldSystemInstance : null);
+            if (cm) {
+                const chunk = cm.getChunkAtTile(_x, _y);
+                if (chunk) {
+                    const local = chunk.worldToLocal(_x, _y);
+                    if (local) {
+                        const slug = plant?.info?.slug ?? plant?.name ?? 'UNKNOWN';
+                        chunk.addPlant(slug, local.x, local.y, { age_days: plant.day });
+                        if (worldSystem && typeof worldSystem.markDirty === 'function') {
+                            try { worldSystem.markDirty(chunk); } catch (e) {}
+                        } else {
+                            try { chunk.dirty = true; } catch (e) {}
+                        }
+                    }
+                }
+            }
+        } catch (e) {}
+
+        return true;
     }
 
 
