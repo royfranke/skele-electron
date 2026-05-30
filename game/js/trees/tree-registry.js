@@ -74,6 +74,26 @@ export default class TreeRegistry {
                 // Remove the key-value pair
                 delete this.registry[_x + "_" + _y];
             }
+            // Also remove tree metadata from chunk storage when possible
+            try {
+                const worldSystem = (typeof window !== 'undefined') ? window.WorldSystemInstance : null;
+                const cm = worldSystem ? worldSystem.chunkManager : null;
+                if (cm) {
+                    const chunk = cm.getChunkAtTile(_x, _y);
+                    if (chunk) {
+                        const local = chunk.worldToLocal(_x, _y);
+                        if (local) {
+                            const treesInChunk = (typeof chunk.getTrees === 'function') ? chunk.getTrees() : (chunk.getEntitiesByKind ? chunk.getEntitiesByKind('tree') : []);
+                            if (Array.isArray(treesInChunk)) {
+                                treesInChunk.forEach(p => {
+                                    try { chunk.removeTree(p.slug || p.slugName || p.name || p.kind, local.x, local.y); } catch (e) {}
+                                });
+                                try { if (worldSystem && typeof worldSystem.markDirty === 'function') worldSystem.markDirty(chunk); else chunk.dirty = true; } catch (e) {}
+                            }
+                        }
+                    }
+                }
+            } catch (e) {}
             return true;
         }
         else {

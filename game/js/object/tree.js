@@ -17,7 +17,7 @@ export default class Tree {
     }
 
     setCollision() {
-        if (this.sprite != null) {
+        if (this.sprite != null && this.sprite.body != null) {
             this.sprite.body.setSize(12, 8);
             this.sprite.body.setOffset(this.sprite.displayWidth/2 + 4, this.sprite.displayHeight/2 - 10);
             this.scene.physics.add.collider(this.sprite, this.scene.player.playerSprite.sprite);

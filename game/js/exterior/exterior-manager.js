@@ -694,6 +694,14 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
         this.renderChunkItemEntities(chunk);
 
+        // Spawn plants then trees (separate rendering passes)
+        try {
+            this.renderChunkPlants(chunk);
+        } catch (e) { if (this.debug) console.warn('renderChunkPlants failed', e); }
+        try {
+            this.renderChunkTrees(chunk);
+        } catch (e) { if (this.debug) console.warn('renderChunkTrees failed', e); }
+
         chunk.rendered = true;
         if (this.debug) console.log(`[Exterior] rendered chunk ${chunk.key} placedTiles=${placed} origin=${chunk.origin || 'unknown'}`);
         this.refreshChunkCollisions();
@@ -740,6 +748,8 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         }
 
         this.unrenderChunkItemEntities(chunk);
+        try { this.unrenderChunkPlants(chunk); } catch (e) {}
+        try { this.unrenderChunkTrees(chunk); } catch (e) {}
 
         // Destroy per-chunk layer (basic orchestration hook)
         try { this.destroyChunkLayer(chunk); } catch (e) {}
@@ -747,6 +757,87 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         chunk.rendered = false;
         if (debugLog) console.log(`[Exterior] finished unrenderChunk ${chunk.key} cleared=${cleared}`);
         this.refreshChunkCollisions();
+    }
+
+    renderChunkPlants (chunk) {
+        if (!chunk) return;
+        const plantManager = this.scene?.manager?.plantManager;
+        if (plantManager == undefined || typeof chunk.getPlants !== 'function') return;
+        const plants = chunk.getPlants();
+        if (!Array.isArray(plants)) return;
+        if (this.debug) console.log(`[Exterior] renderChunkPlants ${chunk.key} plantCount=${plants.length}`);
+        plants.forEach(entity => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            if (this.debug) console.log(`[Exterior] plant entity: slug=${entity.slug} local=${entity.localX},${entity.localY} age=${entity.age_days ?? entity.params?.age_days ?? 0} world=${wx},${wy}`);
+            if (!this.inWorldBounds(wx, wy)) return;
+            try {
+                if (!plantManager.registry.placeEmpty(wx, wy)) {
+                    if (this.debug) console.log(`[Exterior] replacing existing runtime plant at ${wx},${wy}`);
+                    try { plantManager.registry.removePlants(wx, wy); } catch (e) {}
+                }
+            } catch (e) {}
+            const age = entity.age_days ?? entity.params?.age_days ?? 0;
+            const createdPlant = plantManager.newPlantToWorld(wx, wy, entity.slug, age);
+            if (this.debug && !createdPlant) console.warn(`[Exterior] failed to create plant ${entity.slug} at ${wx},${wy}`);
+            try {
+                if (createdPlant && typeof createdPlant === 'object') {
+                    createdPlant.stage = createdPlant.getStage();
+                    if (!createdPlant.sprite) createdPlant.setTileLocation(wx, wy);
+                }
+            } catch (e) {}
+        });
+    }
+
+    renderChunkTrees (chunk) {
+        if (!chunk) return;
+        const treeManager = this.scene?.manager?.treeManager;
+        if (treeManager == undefined || typeof chunk.getTrees !== 'function') return;
+        const trees = chunk.getTrees();
+        if (!Array.isArray(trees)) return;
+        trees.forEach(entity => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            if (!this.inWorldBounds(wx, wy)) return;
+            try {
+                if (!treeManager.registry.placeEmpty(wx, wy)) {
+                    try { treeManager.registry.removeTrees(wx, wy); } catch (e) {}
+                }
+            } catch (e) {}
+            const age = entity.age_days ?? entity.params?.age_days ?? 0;
+            const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age);
+            try {
+                if (createdTree && typeof createdTree === 'object' && !createdTree.sprite) {
+                    createdTree.setTileLocation(wx, wy);
+                }
+            } catch (e) {}
+        });
+    }
+
+    unrenderChunkPlants (chunk) {
+        if (!chunk) return;
+        const plantManager = this.scene?.manager?.plantManager;
+        if (plantManager == undefined || typeof chunk.getPlants !== 'function') return;
+        const plants = chunk.getPlants();
+        if (!Array.isArray(plants)) return;
+        plants.forEach(entity => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            try { plantManager.registry.removePlants(wx, wy); } catch (e) {}
+        });
+    }
+
+    unrenderChunkTrees (chunk) {
+        if (!chunk) return;
+        const treeManager = this.scene?.manager?.treeManager;
+        if (treeManager == undefined || typeof chunk.getTrees !== 'function') return;
+        const trees = chunk.getTrees();
+        if (!Array.isArray(trees)) return;
+        trees.forEach(entity => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            try { treeManager.registry.removeTrees(wx, wy); } catch (e) {}
+        });
     }
 
     
@@ -795,6 +886,62 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
                 item.setStackCount(entity.stack);
             }
         });
+    }
+
+    renderChunkPlantsAndTrees (chunk) {
+        if (!chunk) return;
+
+        const plantManager = this.scene?.manager?.plantManager;
+        if (plantManager != undefined && typeof chunk.getPlants === 'function') {
+            const plants = chunk.getPlants();
+            if (Array.isArray(plants)) {
+                plants.forEach(entity => {
+                    const wx = chunk.tileOriginX + entity.localX;
+                    const wy = chunk.tileOriginY + entity.localY;
+                    if (!this.inWorldBounds(wx, wy)) return;
+                    try {
+                        if (!plantManager.registry.placeEmpty(wx, wy)) {
+                            // Existing runtime-generated plant present — replace with chunk authoritative data
+                            try { plantManager.registry.removePlants(wx, wy); } catch (e) {}
+                        }
+                    } catch (e) {}
+                    const age = entity.age_days ?? entity.params?.age_days ?? 0;
+                    const createdPlant = plantManager.newPlantToWorld(wx, wy, entity.slug, age);
+                    try {
+                        if (createdPlant && typeof createdPlant === 'object') {
+                            // Ensure stage is recalculated from age (lookup) and sprite instantiated
+                            createdPlant.stage = createdPlant.getStage();
+                            if (!createdPlant.sprite) createdPlant.setTileLocation(wx, wy);
+                        }
+                    } catch (e) {}
+                });
+            }
+        }
+
+        const treeManager = this.scene?.manager?.treeManager;
+        if (treeManager != undefined && typeof chunk.getTrees === 'function') {
+            const trees = chunk.getTrees();
+            if (Array.isArray(trees)) {
+                trees.forEach(entity => {
+                    const wx = chunk.tileOriginX + entity.localX;
+                    const wy = chunk.tileOriginY + entity.localY;
+                    if (!this.inWorldBounds(wx, wy)) return;
+                    try {
+                        if (!treeManager.registry.placeEmpty(wx, wy)) {
+                            try { treeManager.registry.removeTrees(wx, wy); } catch (e) {}
+                        }
+                    } catch (e) {}
+                    const age = entity.age_days ?? entity.params?.age_days ?? 0;
+                    const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age);
+                    // Ensure sprite exists; if registry failed to create sprite, force tile placement
+                    try {
+                        if (createdTree && typeof createdTree === 'object' && !createdTree.sprite) {
+                            createdTree.setTileLocation(wx, wy);
+                        }
+                    } catch (e) {}
+                });
+            }
+        }
     }
 
     unrenderChunkItemEntities (chunk) {

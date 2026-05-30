@@ -39,8 +39,8 @@ export default class PlantManager {
 
     
 
-    newPlant (slug,items=[]) {
-        return this.factory.newPlant(slug,items);
+    newPlant (slug, days_old = 0) {
+        return this.factory.newPlant(slug, days_old);
     }
 
     plantInfo (slug) {
@@ -59,7 +59,7 @@ export default class PlantManager {
             return false;
         }
         
-        return true;
+        return plant;
     }
 
     putPlantInWorld (plant, _x, _y) {
@@ -87,7 +87,7 @@ export default class PlantManager {
             }
         } catch (e) {}
 
-        return true;
+        return plant;
     }
 
 

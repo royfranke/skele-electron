@@ -54,11 +54,23 @@ export default class Plant {
 
     getStage() {
         let day = this.day;
+        let best = null;
+        // First try exact range match
         for (const [key, value] of Object.entries(this.info.stages)) {
             if (day >= value.start && day <= value.end) {
                 return value;
             }
+            // keep track of the stage with the largest start <= day
+            if (value.start <= day) {
+                if (best == null || value.start > best.start) {
+                    best = value;
+                }
+            }
         }
+        // If no exact match, return the best-fit stage (most recent past stage) or the first defined stage
+        if (best != null) return best;
+        const entries = Object.values(this.info.stages);
+        return entries.length ? entries[0] : null;
     }
 
     setShadow(_x, _y, frame) {
