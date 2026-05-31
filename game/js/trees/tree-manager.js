@@ -34,8 +34,8 @@ export default class TreeManager {
     }
     
 
-    newTree (slug,items=[]) {
-        return this.factory.newTree(slug,items);
+    newTree (slug) {
+        return this.factory.newTree(slug);
     }
 
     treeInfo (slug) {
@@ -53,12 +53,37 @@ export default class TreeManager {
             console.warn('Could not put this tree in the world from tree manager: '+slug);
             return false;
         }
-        
-        return true;
+
+        return result; // return the tree instance on success
     }
 
     putTreeInWorld (tree, _x, _y) {
-        return this.registry.placeTree(tree,_x,_y);
+        const added = this.registry.placeTree(tree, _x, _y);
+
+        // Also register tree metadata in chunk storage when available
+        try {
+            const cm = this.scene?.exterior?.chunkManager;
+            const worldSystem = this.scene?.exterior?.worldSystem || (typeof window !== 'undefined' ? window.WorldSystemInstance : null);
+            if (cm) {
+                const chunk = cm.getChunkAtTile(_x, _y);
+                if (chunk) {
+                    const local = chunk.worldToLocal(_x, _y);
+                    if (local) {
+                        const slug = tree?.info?.slug ?? tree?.name ?? 'UNKNOWN';
+                        chunk.addTree(slug, local.x, local.y, { age_days: tree.day });
+                        if (worldSystem && typeof worldSystem.markDirty === 'function') {
+                            try { worldSystem.markDirty(chunk); } catch (e) {}
+                        } else {
+                            try { chunk.dirty = true; } catch (e) {}
+                        }
+                    }
+                }
+            }
+        } catch (e) {}
+
+        if (!added) return false;
+
+        return tree;
     }
 
 

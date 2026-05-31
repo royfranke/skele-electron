@@ -29,6 +29,9 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         // use the in-memory/generated chunk data produced during the
         // procedural build pass.
         this.alwaysUseGenerated = true;
+        // When false, do not instantiate objects from chunk entity lists.
+        // Useful when procedural generation already placed objects.
+        this.loadObjectsFromChunks = false;
     }
 
     initialize () {
@@ -512,6 +515,59 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             try { chunk.origin = chunk.origin || 'generated'; } catch (e) {}
         });
 
+        // Snapshot placed world objects into chunks (slug, variety, params, items)
+        try {
+            const objectRegistry = this.scene?.manager?.objectManager?.registry?.registry;
+            if (objectRegistry) {
+                Object.entries(objectRegistry).forEach(([key, objects]) => {
+                    if (!Array.isArray(objects)) return;
+                    const parts = key.split("_");
+                    const worldX = parseInt(parts[0], 10);
+                    const worldY = parseInt(parts[1], 10);
+                    objects.forEach(obj => {
+                        try {
+                            const chunk = this.chunkManager.getChunkAtTile(worldX, worldY);
+                            if (!chunk) return;
+                            const local = chunk.worldToLocal(worldX, worldY);
+                            if (!local) return;
+
+                            const params = {};
+                            if (obj.state && obj.state.name) params.state = obj.state.name;
+                            if (obj.portal) params.portal = obj.portal;
+                            if (obj.services) params.services = obj.services;
+
+                            // Record variety if present
+                            const variety = (typeof obj.variety === 'number') ? obj.variety : undefined;
+
+                            // Serialize any chest/items attached to the object (if present)
+                            const items = this.serializeChunkItemContents(obj.items ?? []);
+
+                            // Capture visual flags: depth and flips
+                            const depth = (obj.sprite && typeof obj.sprite.depth !== 'undefined') ? obj.sprite.depth : undefined;
+                            const flipX = (obj.sprite && obj.sprite.flipX) ? true : false;
+                            const flipY = (obj.sprite && obj.sprite.flipY) ? true : false;
+
+                            // Avoid adding duplicate object entities at same local coord and slug
+                            const existingObjs = (typeof chunk.getEntitiesByKind === 'function') ? chunk.getEntitiesByKind('object') : chunk.entities.filter(e => e.kind === 'object');
+                            const duplicate = Array.isArray(existingObjs) && existingObjs.some(e => e.localX === local.x && e.localY === local.y && e.slug === obj.info.slug);
+                            if (!duplicate) {
+                                chunk.addEntity('object', obj.info.slug, local.x, local.y, {
+                                    variety: variety,
+                                    params: params,
+                                    items: items,
+                                    depth: depth,
+                                    flipX: flipX,
+                                    flipY: flipY,
+                                });
+                            } else if (this.debug) {
+                                console.warn(`[Exterior] skipping duplicate object entity ${obj.info.slug} at ${worldX},${worldY} -> chunk ${chunk.key}`);
+                            }
+                        } catch (e) {}
+                    });
+                });
+            }
+        } catch (e) {}
+
         
 
         if (this.debug) {
@@ -694,6 +750,11 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
         this.renderChunkItemEntities(chunk);
 
+        // Spawn generic placed objects from chunk data (benches, signs, chests, etc.)
+        try {
+            this.renderChunkObjects(chunk);
+        } catch (e) { if (this.debug) console.warn('renderChunkObjects failed', e); }
+
         // Spawn plants then trees (separate rendering passes)
         try {
             this.renderChunkPlants(chunk);
@@ -748,6 +809,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         }
 
         this.unrenderChunkItemEntities(chunk);
+        try { this.unrenderChunkObjects(chunk); } catch (e) {}
         try { this.unrenderChunkPlants(chunk); } catch (e) {}
         try { this.unrenderChunkTrees(chunk); } catch (e) {}
 
@@ -837,6 +899,79 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             const wx = chunk.tileOriginX + entity.localX;
             const wy = chunk.tileOriginY + entity.localY;
             try { treeManager.registry.removeTrees(wx, wy); } catch (e) {}
+        });
+    }
+
+    renderChunkObjects (chunk) {
+        if (!chunk) return;
+        // Skip restoring objects from chunks when configured to do so
+        if (this.loadObjectsFromChunks === false) return;
+        // If this chunk was generated (map generation already placed objects), don't re-create them
+        if (chunk.origin === 'generated') return;
+        const objectManager = this.scene?.manager?.objectManager;
+        if (objectManager == undefined || typeof chunk.getEntitiesByKind !== 'function') return;
+        const objects = chunk.getEntitiesByKind('object');
+        if (!Array.isArray(objects)) return;
+        if (this.debug) console.log(`[Exterior] renderChunkObjects ${chunk.key} objectCount=${objects.length}`);
+        objects.forEach(entity => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            // Debug: detect if multiple entity records target same world tile
+            if (this.debug) {
+                const conflicts = objects.filter(e => e.localX === entity.localX && e.localY === entity.localY);
+                if (conflicts.length > 1) {
+                    console.warn(`[Exterior] multiple object entities (${conflicts.length}) for tile ${wx},${wy} in chunk ${chunk.key}`);
+                }
+            }
+            if (!this.inWorldBounds(wx, wy)) return;
+            try {
+                if (!objectManager.registry.placeEmpty(wx, wy)) {
+                    try { objectManager.registry.removeObjects(wx, wy); } catch (e) {}
+                }
+            } catch (e) {}
+
+            // Recreate object in world using serialized items (if any)
+            const items = entity.items ?? [];
+            const created = objectManager.newObjectToWorld(wx, wy, entity.slug, items);
+            if (!created) return;
+
+            try {
+                if (entity.variety && created.setVariety) created.setVariety(entity.variety);
+                if (entity.params && created.setParams) created.setParams(entity.params);
+
+                // Restore visual flags if present
+                if (entity.depth != null && created.sprite && typeof created.sprite.setDepth === 'function') {
+                    created.sprite.setDepth(entity.depth);
+                }
+                if (entity.flipX && created.sprite && typeof created.sprite.setFlipX === 'function') {
+                    created.sprite.setFlipX(true);
+                }
+                if (entity.flipY && created.sprite && typeof created.sprite.setFlipY === 'function') {
+                    created.sprite.setFlipY(true);
+                }
+                // Also apply to any shell sprite
+                if (created.shell_sprite) {
+                    if (entity.depth != null && typeof created.shell_sprite.setDepth === 'function') created.shell_sprite.setDepth(entity.depth + 1);
+                    if (entity.flipX && typeof created.shell_sprite.setFlipX === 'function') created.shell_sprite.setFlipX(true);
+                    if (entity.flipY && typeof created.shell_sprite.setFlipY === 'function') created.shell_sprite.setFlipY(true);
+                }
+            } catch (e) {}
+        });
+    }
+
+    unrenderChunkObjects (chunk) {
+        if (!chunk) return;
+        // If we didn't render objects from chunks, don't attempt to remove them on unrender
+        if (this.loadObjectsFromChunks === false) return;
+        if (chunk.origin === 'generated') return;
+        const objectRegistry = this.scene?.manager?.objectManager?.registry;
+        if (objectRegistry == undefined || typeof chunk.getEntitiesByKind !== 'function') return;
+        const objects = chunk.getEntitiesByKind('object');
+        if (!Array.isArray(objects)) return;
+        objects.forEach(entity => {
+            const wx = chunk.tileOriginX + entity.localX;
+            const wy = chunk.tileOriginY + entity.localY;
+            try { objectRegistry.removeObjects(wx, wy); } catch (e) {}
         });
     }
 

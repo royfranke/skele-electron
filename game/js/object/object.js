@@ -172,15 +172,26 @@ export default class Object {
     }
 
     playAnimation () {
-        if (this.sprite != null && this.state != null && this.state.frames != null && this.state.frames.length > 0 && this.state.transition != 'false') {
-            this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
-            var transition = this.state.transition;
-            this.sprite.once('animationcomplete', () => {
-                this.setState(transition);
-            });
-        }
-        if (this.sprite != null && this.state != null && this.state.frames != null && this.state.frames.length > 0 && this.state.transition == 'false') {
-            this.sprite.anims.play(this.info.slug+"-"+this.state.name, true);   
+        if (this.sprite != null && this.state != null && this.state.frames != null && this.state.frames.length > 0) {
+            const animKey = this.info.slug + "-" + this.state.name;
+            const hasAnims = this.sprite.anims && typeof this.sprite.anims.play === 'function';
+            if (hasAnims) {
+                try {
+                    this.sprite.anims.play(animKey, true);
+                    if (this.state.transition != 'false' && typeof this.sprite.once === 'function') {
+                        const transition = this.state.transition;
+                        this.sprite.once('animationcomplete', () => {
+                            this.setState(transition);
+                        });
+                    }
+                } catch (e) {
+                    // Fall through to frame fallback if animation play fails
+                    if (this.sprite.setFrame) this.sprite.setFrame(animKey);
+                }
+            } else {
+                // No animation support on this sprite (e.g., non-animated object), set static frame
+                if (this.sprite.setFrame) this.sprite.setFrame(this.info.slug + '-' + (this.variety || 1));
+            }
         }
     }
 

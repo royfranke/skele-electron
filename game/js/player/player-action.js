@@ -14,7 +14,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     initialize() {
         if (this.debug) {this.debugActionTile = this.scene.add.rectangle(0, 0, 16, 16, 0x6666ff).setOrigin(0);}
         this.locale = (this.scene.exterior != null) ? this.scene.exterior : this.scene.interior;
-        this.actionRadius = 2;
+        this.actionRadius = 1;
         this.actionFacing = 's';
         this.pendingAction = null;
         this.actionTile = {x: 0, y: 0};
