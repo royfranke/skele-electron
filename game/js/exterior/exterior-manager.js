@@ -970,6 +970,7 @@ import Shop from "../object/shop.js";
         if (objectManager == undefined || typeof chunk.getEntitiesByKind !== 'function') return;
         const objects = chunk.getEntitiesByKind('object');
         if (!Array.isArray(objects)) return;
+        const clearedTiles = new Set();
         if (this.debug) console.log(`[Exterior] renderChunkObjects ${chunk.key} objectCount=${objects.length}`);
         objects.forEach(entity => {
             const wx = chunk.tileOriginX + entity.localX;
@@ -983,8 +984,12 @@ import Shop from "../object/shop.js";
             }
             if (!this.inWorldBounds(wx, wy)) return;
             try {
-                if (!objectManager.registry.placeEmpty(wx, wy)) {
-                    try { objectManager.registry.removeObjects(wx, wy, { syncChunk: false }); } catch (e) {}
+                const tileKey = `${wx}_${wy}`;
+                if (!clearedTiles.has(tileKey)) {
+                    if (!objectManager.registry.placeEmpty(wx, wy)) {
+                        try { objectManager.registry.removeObjects(wx, wy, { syncChunk: false }); } catch (e) {}
+                    }
+                    clearedTiles.add(tileKey);
                 }
             } catch (e) {}
 
