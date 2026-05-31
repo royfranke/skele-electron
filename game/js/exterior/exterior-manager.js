@@ -15,6 +15,7 @@ import "../world/world-system.js";
 import ChunkDebugUI from "../dev/chunk-debug-ui.js";
 import GROUND_TYPE from "../config/atlas/ground-types.js";
 import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
+import Shop from "../object/shop.js";
 
 /**
  * 	Manage Exteriors (Overworld tile scenes)
@@ -36,6 +37,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         this.objectChunkSyncEnabled = false;
         // True once at least one chunk has been rendered into tile layers.
         this.worldReady = false;
+        this.shopHourBinders = new Map();
     }
 
     initialize () {
@@ -564,6 +566,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
                                 };
                             }
                             if (obj.services) params.services = obj.services;
+                            if (Array.isArray(obj.announcements) && obj.announcements.length > 0) params.announcements = obj.announcements;
 
                             // Record variety if present
                             const variety = (typeof obj.variety === 'number') ? obj.variety : undefined;
@@ -993,6 +996,11 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             try {
                 if (entity.variety && created.setVariety) created.setVariety(entity.variety);
                 if (entity.params && created.setParams) created.setParams(entity.params);
+                if (Array.isArray(entity.params?.announcements)) {
+                    entity.params.announcements.forEach(a => {
+                        if (created.setAnnouncement) created.setAnnouncement(a.announcement, a.kind);
+                    });
+                }
                 if (entity.params?.portal && created.setPortal) {
                     created.setPortal(entity.params.portal);
                 }
@@ -1014,6 +1022,91 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
                     if (entity.flipY && typeof created.shell_sprite.setFlipY === 'function') created.shell_sprite.setFlipY(true);
                 }
             } catch (e) {}
+        });
+
+        this.rebindShopHoursForChunk(chunk);
+    }
+
+    getPropertyWorldLines(prop) {
+        if (prop?.lines?.left != undefined && prop?.lines?.top != undefined) {
+            return {
+                left: prop.lines.left,
+                top: prop.lines.top,
+                width: prop.lines.width,
+                height: prop.lines.height,
+                right: prop.lines.right ?? (prop.lines.left + prop.lines.width),
+                bottom: prop.lines.bottom ?? (prop.lines.top + prop.lines.height),
+            };
+        }
+
+        const block = MAP_CONFIG.blocks.find(b => b.x == prop?.block?.x && b.y == prop?.block?.y);
+        if (block == undefined) {
+            return null;
+        }
+
+        const left = block.left + prop.lines.x;
+        const top = block.top + prop.lines.y;
+        const width = prop.lines.width;
+        const height = prop.lines.height;
+
+        return {
+            left,
+            top,
+            width,
+            height,
+            right: left + width,
+            bottom: top + height,
+        };
+    }
+
+    chunkIntersectsRect(chunk, rect) {
+        if (chunk == undefined || rect == undefined) {
+            return false;
+        }
+
+        const chunkLeft = chunk.tileOriginX;
+        const chunkTop = chunk.tileOriginY;
+        const chunkRight = chunkLeft + CHUNK_SIZE;
+        const chunkBottom = chunkTop + CHUNK_SIZE;
+
+        return rect.left < chunkRight && rect.right > chunkLeft && rect.top < chunkBottom && rect.bottom > chunkTop;
+    }
+
+    getCommercialPropertiesInChunk(chunk) {
+        if (!Array.isArray(MAP_CONFIG.propertyLines)) {
+            return [];
+        }
+
+        return MAP_CONFIG.propertyLines.filter((prop) => {
+            if (prop?.structure?.zoning != 'COMMERCIAL') {
+                return false;
+            }
+
+            const lines = this.getPropertyWorldLines(prop);
+            if (lines == null) {
+                return false;
+            }
+
+            return this.chunkIntersectsRect(chunk, lines);
+        });
+    }
+
+    rebindShopHoursForChunk(chunk) {
+        const props = this.getCommercialPropertiesInChunk(chunk);
+        if (props.length == 0) {
+            return;
+        }
+
+        props.forEach((prop) => {
+            const key = `${prop.block?.x ?? 'x'}_${prop.block?.y ?? 'y'}_${prop.lines?.x ?? 'lx'}_${prop.lines?.y ?? 'ly'}`;
+            let shop = this.shopHourBinders.get(key);
+
+            if (shop == undefined) {
+                shop = new Shop(this.scene, prop, true, false);
+                this.shopHourBinders.set(key, shop);
+            }
+
+            shop.bindHoursFromExistingObjects();
         });
     }
 

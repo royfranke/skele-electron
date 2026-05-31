@@ -335,7 +335,9 @@ export default class PropertyBlueprint {
         const propertyPlan = plan ?? this.plan();
 
         if (propertyPlan.kind == 'commercial') {
-            new Shop(this.scene, this.prop, this.wallsBuilt);
+            const shop = new Shop(this.scene, this.prop, this.wallsBuilt, false);
+            const shopPlan = shop.plan();
+            shop.render(shopPlan);
             return;
         }
 
