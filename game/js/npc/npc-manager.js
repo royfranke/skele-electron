@@ -31,9 +31,15 @@ export default class NpcManager {
     }
 
     update () {
-      this.list.forEach(npc => {
-        npc.update();
-      });
+            if (!Array.isArray(this.list)) {
+                return;
+            }
+
+            this.list.forEach(npc => {
+                if (npc && typeof npc.update === 'function') {
+                        npc.update();
+                }
+            });
     }
 
     initializeScene(scene) {

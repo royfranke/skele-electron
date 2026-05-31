@@ -39,6 +39,10 @@ export default class Npc {
   }
 
   update() {
+    if (!this.sprite || typeof this.sprite.update !== 'function') {
+      return;
+    }
+
     this.state = this.getState();
     this.speed = this.getSpeed();
     this.sprite.facing = this.facing;

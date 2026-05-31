@@ -10,7 +10,7 @@ export default class ObjectManager {
         this.scene = scene;
         this.announce = new AnnouncementRegistry();
         this.factory = new ObjectFactory(this.scene);
-        this.registry = new ObjectRegistry();
+        this.registry = new ObjectRegistry(this.scene);
         
     }
 
@@ -30,9 +30,9 @@ export default class ObjectManager {
         object.destroy();
     }
 
-    newObjectToWorld (_x,_y,slug,items=[]) {
+    newObjectToWorld (_x,_y,slug,items=[],options={}) {
         var object = this.newObject(slug,items);
-        var result = this.putObjectInWorld(object,_x,_y);
+        var result = this.putObjectInWorld(object,_x,_y,options);
         if (!result) {
             console.warn('Could not add to world: '+slug);
             return false;
@@ -41,11 +41,11 @@ export default class ObjectManager {
         return result;
     }
 
-    putObjectInWorld (object, _x, _y) {
+    putObjectInWorld (object, _x, _y, options = {}) {
         if (object == false) {
             return false;
         }
-        var result = this.registry.placeObject(object,_x,_y);
+        var result = this.registry.placeObject(object,_x,_y, options);
         if (!result) {
             console.log('Could not put this object in the world from object manager...');
             return false;

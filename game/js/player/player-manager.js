@@ -403,18 +403,36 @@ export default class PlayerManager {
     const groundLayer = this.locale.groundLayer;
     const locale = this.locale;
 
-    this.standingTile = groundLayer.worldToTileXY(this.playerSprite.sprite.x, this.playerSprite.sprite.y + 8);
-    this.snappedStanding = groundLayer.tileToWorldXY(this.standingTile.x, this.standingTile.y);
+    if (!this.playerSprite || !this.playerSprite.sprite || !groundLayer) {
+      return;
+    }
+
+    const tileSize = this.scene?.exterior?.map?.tileWidth || this.scene?.interior?.map?.tileWidth || 16;
+    const worldX = this.playerSprite.sprite.x;
+    const worldY = this.playerSprite.sprite.y + 8;
+
+    this.standingTile = {
+      x: Math.floor(worldX / tileSize),
+      y: Math.floor(worldY / tileSize)
+    };
+
+    this.snappedStanding = {
+      x: this.standingTile.x * tileSize,
+      y: this.standingTile.y * tileSize,
+    };
 
     //this.debugUnderfootTile.setPosition(this.snappedStanding.x, this.snappedStanding.y);
     this.underfootLast = this.underfoot;
+    const actionTile = this.action?.actionTile;
+    const actionTileX = actionTile?.x ?? this.standingTile.x;
+    const actionTileY = actionTile?.y ?? this.standingTile.y;
     if (locale === this.scene.exterior) {
       this.underfoot = this.scene.exterior.getGroundAt(this.standingTile.x, this.standingTile.y);
-      this.underAction = this.scene.exterior.getGroundAt(this.action.actionTile.x, this.action.actionTile.y);
+      this.underAction = this.scene.exterior.getGroundAt(actionTileX, actionTileY);
     }
     else {
       this.underfoot = locale.ground.getGround(this.standingTile.x, this.standingTile.y);
-      this.underAction = locale.ground.getGround(this.action.actionTile.x, this.action.actionTile.y);
+      this.underAction = locale.ground.getGround(actionTileX, actionTileY);
     }
   }
 

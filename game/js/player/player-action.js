@@ -219,6 +219,14 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     update () {
+        if (this.scene == undefined || this.scene.player == undefined || this.scene.manager == undefined) {
+            return;
+        }
+
+        if (this.scene?.sys?.isActive && !this.scene.sys.isActive()) {
+            return;
+        }
+
         var facing = this.scene.player.getFacing();
         this.updateActionAvailability();
         if (facing != null) {
@@ -507,8 +515,17 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     actionMenu () {
+        const safeClearActionsGroup = () => {
+            if (!this.actionsGroup) return;
+            // Phaser may leave a Group instance with torn-down internals during scene transitions.
+            if (this.actionsGroup.children == undefined) return;
+            try {
+                this.actionsGroup.clear(false, true);
+            } catch (e) {}
+        };
+
         if (!this.showMenu) {
-            this.actionsGroup.clear(false, true);
+            safeClearActionsGroup();
             this.displayActions = null;
         }
         else {  
@@ -524,9 +541,11 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             });
 
             this.displayActions = displayActions;
-            this.scene.manager.hud.hudAction.drawActions(displayActions, this.menu.x, this.menu.y);
+            if (this.scene?.manager?.hud?.hudAction?.drawActions) {
+                this.scene.manager.hud.hudAction.drawActions(displayActions, this.menu.x, this.menu.y);
+            }
             if (displayActions.length == 0) {
-                this.actionsGroup.clear(false, true);
+                safeClearActionsGroup();
                 this.showMarker(false);
             }
         }

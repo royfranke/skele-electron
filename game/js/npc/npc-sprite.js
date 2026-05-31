@@ -46,13 +46,27 @@ export default class NpcSprite {
   }
 
   update() {
+    if (!this.scene || !this.npc || !this.sprite) {
+      return;
+    }
+
     var state = this.npc.getState();
     var speed = this.npc.getSpeed();
+    if (!state || !state.name) {
+      return;
+    }
 
-    this.sprite.anims.play(this.npc.info.slug.toLowerCase()+"-" + state.name + "-" + this.dir_faces[this.facing], true); 
+    const animKey = this.npc.info.slug.toLowerCase()+"-" + state.name + "-" + this.dir_faces[this.facing];
+    try {
+      if (this.sprite.anims && typeof this.sprite.anims.play === 'function') {
+        this.sprite.anims.play(animKey, true);
+      }
+    } catch (e) {}
     
     if (state.name == 'WALK' || state.name == 'IDLE') {
-      this.sprite.body.setVelocity(0);
+      if (this.sprite.body && typeof this.sprite.body.setVelocity === 'function') {
+        this.sprite.body.setVelocity(0);
+      }
     }
 
     this.updateFlip();
@@ -68,10 +82,15 @@ export default class NpcSprite {
   updateFlip () {
     // Horizontal movement
     var flip = (this.facing == 'nw' || this.facing == 'w' || this.facing == 'sw') ? true : false;
+    if (!this.sprite) return;
     this.sprite.setFlipX(flip);
   }
 
   move (dir={up: false, right: false, down: false, left: false}, speed) {
+    if (!this.sprite || !this.sprite.body) {
+      return;
+    }
+
     if (dir.up) {
       this.sprite.body.setVelocityY(-speed);
     } else if (dir.down) {
@@ -88,6 +107,7 @@ export default class NpcSprite {
   }
 
   updateFooting () {
+    if (!this.sprite) return;
     let underfoot = this.npc.underfoot;
     this.updateFootMask(underfoot);
     this.updateFootShadow(underfoot);
@@ -95,18 +115,22 @@ export default class NpcSprite {
   }
 
   updateFootMask(underfoot) {
+    if (!this.footMask || !this.sprite) return;
     var _y = this.sprite.y;
     if (underfoot != undefined) {
       if (underfoot.USEMASK) {
           _y = _y - underfoot.ZINDEX;
       }
     }
-    this.footMask.setPosition(this.sprite.x, _y);
-    this.footMask.setDepth(this.sprite.depth + 1);
+    try {
+      this.footMask.setPosition(this.sprite.x, _y);
+      this.footMask.setDepth(this.sprite.depth + 1);
+    } catch (e) {}
     return;
   }
 
   updateFootShadow(underfoot) {
+    if (!this.footShadow || !this.sprite) return;
     var _y = this.sprite.y + 12;
     var scale = 1;
     if (underfoot != undefined) {
@@ -115,13 +139,16 @@ export default class NpcSprite {
           scale = (underfoot.ZINDEX / 25) + scale;
       }
     }
-    this.footShadow.setPosition(this.sprite.x, _y);
-    this.footShadow.setScale(scale);
-    this.footShadow.setDepth(this.sprite.depth - 1);
+    try {
+      this.footShadow.setPosition(this.sprite.x, _y);
+      this.footShadow.setScale(scale);
+      this.footShadow.setDepth(this.sprite.depth - 1);
+    } catch (e) {}
     return;
   }
 
   updateKeyLight () {
+    if (!this.sprite) return;
     if (this.scene.manager.time != undefined) {
       let keylight = this.scene.manager.time.keylight;
       if (KEYLIGHTS[keylight] != undefined) {

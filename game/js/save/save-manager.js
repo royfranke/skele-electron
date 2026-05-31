@@ -13,13 +13,32 @@ export default class SaveManager {
         var data = this.scene.slot;
         if (data.POSITION.ADDRESS != undefined) {
             var front = this.scene.exterior.getFrontDoorTilesFromAddress(data.POSITION.ADDRESS.dir, data.POSITION.ADDRESS.number, data.POSITION.ADDRESS.street);
-            this.scene.player.setPositionTile(front.x,front.y);
+            if (front != null && front.x != undefined && front.y != undefined) {
+                this.scene.player.setPositionTile(front.x,front.y);
+            }
+            else if (data.POSITION.X != undefined && data.POSITION.Y != undefined) {
+                this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
+            }
+            else if (data.POSITION.RETURN != undefined && data.POSITION.RETURN.X != undefined && data.POSITION.RETURN.Y != undefined) {
+                this.scene.player.setPositionTile(data.POSITION.RETURN.X,data.POSITION.RETURN.Y);
+            }
+            else {
+                this.scene.player.setPositionTile(0,0);
+            }
         }
         else {
-            this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
+            if (data.POSITION.X != undefined && data.POSITION.Y != undefined) {
+                this.scene.player.setPositionTile(data.POSITION.X,data.POSITION.Y);
+            }
+            else if (data.POSITION.RETURN != undefined && data.POSITION.RETURN.X != undefined && data.POSITION.RETURN.Y != undefined) {
+                this.scene.player.setPositionTile(data.POSITION.RETURN.X,data.POSITION.RETURN.Y);
+            }
+            else {
+                this.scene.player.setPositionTile(0,0);
+            }
         }
         
-        this.scene.player.setFacing(data.POSITION.FACING);
+        this.scene.player.setFacing(data.POSITION.FACING ?? data.POSITION.RETURN?.FACING);
         this.scene.manager.time.setTimeFromSave(data.TIME);
         this.scene.player.coinpurse.setContents(data.COINPURSE);
         //this.scene.manager.hud.hudWatch.plungeWatch();

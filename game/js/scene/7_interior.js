@@ -57,16 +57,31 @@ export default class InteriorScene extends Phaser.Scene {
     portalTo(portal) {
         this.slot = this.app.softSaveGameData();
         if (this.verbose) console.log(this.slot);
+        const previousReturn = this.slot?.POSITION?.RETURN;
+        const resolvedReturn = portal?.return ?? previousReturn ?? null;
+
         if (portal.address != undefined) {
             this.slot.POSITION.ADDRESS = portal.address;
+            if (portal.x != undefined && portal.y != undefined) {
+                this.slot.POSITION.X = portal.x;
+                this.slot.POSITION.Y = portal.y;
+            }
         }
         else {
-            this.slot.POSITION.X = portal.x;
-            this.slot.POSITION.Y = portal.y;
+            if (portal.x != undefined && portal.y != undefined) {
+                this.slot.POSITION.X = portal.x;
+                this.slot.POSITION.Y = portal.y;
+            }
+            else if (portal.room_id == '-1' && resolvedReturn != null && resolvedReturn.X != undefined && resolvedReturn.Y != undefined) {
+                // Fallback for interior->exterior transitions where portal payload
+                // may omit direct world coords.
+                this.slot.POSITION.X = resolvedReturn.X;
+                this.slot.POSITION.Y = resolvedReturn.Y;
+            }
         }
-        this.slot.POSITION.FACING = portal.facing;
+        this.slot.POSITION.FACING = portal.facing ?? resolvedReturn?.FACING ?? this.slot.POSITION.FACING;
         this.slot.POSITION.ROOM = portal.room_id;
-        this.slot.POSITION.RETURN = portal.return;
+        this.slot.POSITION.RETURN = resolvedReturn;
         if (this.tutorial != undefined) {
             this.slot.TUTORIAL = this.tutorial.tutorial_step;
         }

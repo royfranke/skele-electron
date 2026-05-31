@@ -23,6 +23,9 @@ import GameUtilities from "../game/game-utilities.js";
     }
 
     getGround(_x, _y) {
+        if (this.layer == undefined || this.layer.layer == undefined) {
+            return this.util.getGround(_x, _y, null);
+        }
         return this.util.getGround(_x, _y, this.layer);
     }
 

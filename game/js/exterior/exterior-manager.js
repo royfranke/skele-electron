@@ -28,10 +28,14 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         // When true, never attempt to load chunk JSONs from disk; always
         // use the in-memory/generated chunk data produced during the
         // procedural build pass.
-        this.alwaysUseGenerated = true;
+        this.alwaysUseGenerated = false;
         // When false, do not instantiate objects from chunk entity lists.
         // Useful when procedural generation already placed objects.
-        this.loadObjectsFromChunks = false;
+        this.loadObjectsFromChunks = true;
+        // Runtime object→chunk sync is enabled only after chunk streaming starts.
+        this.objectChunkSyncEnabled = false;
+        // True once at least one chunk has been rendered into tile layers.
+        this.worldReady = false;
     }
 
     initialize () {
@@ -622,6 +626,8 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
     beginChunkStreaming () {
         this.clearRenderedLayers();
         this.refreshChunkCollisions();
+        this.objectChunkSyncEnabled = true;
+        this.worldReady = false;
 
         const standingTile = this.scene.player?.standingTile;
         const startX = standingTile?.x ?? this.scene.player?.action?.actionTile?.x ?? 0;
@@ -808,8 +814,13 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         } catch (e) { if (this.debug) console.warn('renderChunkTrees failed', e); }
 
         chunk.rendered = true;
+        this.worldReady = true;
         if (this.debug) console.log(`[Exterior] rendered chunk ${chunk.key} placedTiles=${placed} origin=${chunk.origin || 'unknown'}`);
         this.refreshChunkCollisions();
+    }
+
+    isWorldReady () {
+        return this.worldReady === true;
     }
 
     unrenderChunk (chunk) {
@@ -970,13 +981,13 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             if (!this.inWorldBounds(wx, wy)) return;
             try {
                 if (!objectManager.registry.placeEmpty(wx, wy)) {
-                    try { objectManager.registry.removeObjects(wx, wy); } catch (e) {}
+                    try { objectManager.registry.removeObjects(wx, wy, { syncChunk: false }); } catch (e) {}
                 }
             } catch (e) {}
 
             // Recreate object in world using serialized items (if any)
             const items = entity.items ?? [];
-            const created = objectManager.newObjectToWorld(wx, wy, entity.slug, items);
+            const created = objectManager.newObjectToWorld(wx, wy, entity.slug, items, { syncChunk: false });
             if (!created) return;
 
             try {
@@ -1018,7 +1029,7 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         objects.forEach(entity => {
             const wx = chunk.tileOriginX + entity.localX;
             const wy = chunk.tileOriginY + entity.localY;
-            try { objectRegistry.removeObjects(wx, wy); } catch (e) {}
+            try { objectRegistry.removeObjects(wx, wy, { syncChunk: false }); } catch (e) {}
         });
     }
 
@@ -1191,6 +1202,125 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
         }
     }
 
+    upsertChunkObjectEntity (object, worldX, worldY) {
+        if (!this.objectChunkSyncEnabled || this.chunkManager == undefined || object == undefined) {
+            return;
+        }
+
+        const chunk = this.chunkManager.getChunkAtTile(worldX, worldY);
+        if (chunk == undefined) {
+            return;
+        }
+
+        const local = chunk.worldToLocal(worldX, worldY);
+        if (local == null) {
+            return;
+        }
+
+        const params = {};
+        if (object.state && object.state.name) params.state = object.state.name;
+        if (object.services) params.services = object.services;
+        if (object.portal) {
+            const roomId = object.portal.room_id;
+            const portalId = object.portal.portalId ?? `ext:${roomId}:${worldX}:${worldY}`;
+            const returnPortal = object.portal.return ?? {
+                ROOM: -1,
+                X: worldX,
+                Y: worldY,
+                FACING: 'S',
+                SLUG: object.info?.slug,
+            };
+
+            params.portal = {
+                room_id: roomId,
+                x: object.portal.x,
+                y: object.portal.y,
+                facing: object.portal.facing ?? 'N',
+                world: { x: worldX, y: worldY },
+                return: returnPortal,
+                slug: object.portal.slug ?? object.info?.slug,
+                portalId,
+            };
+        }
+
+        const variety = (typeof object.variety === 'number') ? object.variety : undefined;
+        const items = this.serializeChunkItemContents(object.items ?? []);
+        const depth = (object.sprite && typeof object.sprite.depth !== 'undefined') ? object.sprite.depth : undefined;
+        const flipX = (object.sprite && object.sprite.flipX) ? true : false;
+        const flipY = (object.sprite && object.sprite.flipY) ? true : false;
+        const slug = object.info?.slug;
+
+        if (slug == undefined || slug === '') {
+            return;
+        }
+
+        const existingObjects = (typeof chunk.getEntitiesByKind === 'function') ? chunk.getEntitiesByKind('object') : [];
+        existingObjects
+            .filter(entity => entity.localX === local.x && entity.localY === local.y)
+            .forEach(entity => chunk.removeEntity('object', entity.slug, local.x, local.y));
+
+        const existingPortals = (typeof chunk.getEntitiesByKind === 'function') ? chunk.getEntitiesByKind('portal') : [];
+        existingPortals
+            .filter(entity => entity.localX === local.x && entity.localY === local.y)
+            .forEach(entity => chunk.removeEntity('portal', entity.slug, local.x, local.y));
+
+        chunk.addEntity('object', slug, local.x, local.y, {
+            variety,
+            params,
+            items,
+            depth,
+            flipX,
+            flipY,
+        });
+
+        if (params.portal && params.portal.portalId) {
+            chunk.addEntity('portal', params.portal.slug ?? slug, local.x, local.y, {
+                portalId: params.portal.portalId,
+                room_id: params.portal.room_id,
+                x: params.portal.x,
+                y: params.portal.y,
+                facing: params.portal.facing,
+                world: params.portal.world,
+                return: params.portal.return,
+                objectSlug: slug,
+            });
+        }
+
+        if (this.worldSystem) {
+            try { this.worldSystem.markDirty(chunk); } catch (e) {}
+        }
+    }
+
+    removeChunkObjectEntity (_object, worldX, worldY) {
+        if (!this.objectChunkSyncEnabled || this.chunkManager == undefined) {
+            return;
+        }
+
+        const chunk = this.chunkManager.getChunkAtTile(worldX, worldY);
+        if (chunk == undefined) {
+            return;
+        }
+
+        const local = chunk.worldToLocal(worldX, worldY);
+        if (local == null) {
+            return;
+        }
+
+        if (typeof chunk.getEntitiesByKind !== 'function') {
+            return;
+        }
+
+        const existingObjects = chunk.getEntitiesByKind('object').filter(entity => entity.localX === local.x && entity.localY === local.y);
+        existingObjects.forEach(entity => chunk.removeEntity('object', entity.slug, local.x, local.y));
+
+        const existingPortals = chunk.getEntitiesByKind('portal').filter(entity => entity.localX === local.x && entity.localY === local.y);
+        existingPortals.forEach(entity => chunk.removeEntity('portal', entity.slug, local.x, local.y));
+
+        if (this.worldSystem) {
+            try { this.worldSystem.markDirty(chunk); } catch (e) {}
+        }
+    }
+
     serializeChunkItemContents (items = []) {
         if (!Array.isArray(items)) {
             return [];
@@ -1299,14 +1429,28 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
     }
 
     update () {
-        const x = this.scene.player.action.actionTile.x;
-        const y = this.scene.player.action.actionTile.y;
+        const player = this.scene?.player;
+        if (player == undefined) {
+            return;
+        }
+
+        const actionTile = player.action?.actionTile;
+        const standingTile = player.standingTile;
+        if (actionTile == undefined && standingTile == undefined) {
+            return;
+        }
+
+        const x = actionTile?.x ?? standingTile?.x;
+        const y = actionTile?.y ?? standingTile?.y;
+        if (x == undefined || y == undefined) {
+            return;
+        }
 
         // Keep ChunkManager aware of the player's world tile position.
-        if (this.scene.player.standingTile != undefined) {
+        if (this.chunkManager != undefined && standingTile != undefined) {
             this.chunkManager.update(
-                this.scene.player.standingTile.x,
-                this.scene.player.standingTile.y
+                standingTile.x,
+                standingTile.y
             );
         }
 

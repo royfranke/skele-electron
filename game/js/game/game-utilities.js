@@ -59,11 +59,29 @@ export default class GameUtilities {
 
 
     inBounds(_x, _y, layer) {
+        if (layer == undefined) {
+            return false;
+        }
+
+        if (typeof layer.width !== 'number' || typeof layer.height !== 'number') {
+            return false;
+        }
+
         return (_x * 16 >= 0 && _x * 16 < layer.width && _y * 16 >= 0 && _y * 16 < layer.height);
     }
 
     getGround(_x, _y, layer) {
-        if (this.inBounds(_x, _y, layer)) {
+        if (!this.inBounds(_x, _y, layer)) {
+            return GROUND_TYPE['VOID'];
+        }
+
+        // During scene/chunk transitions Phaser may expose a TilemapLayer
+        // whose internal layer data has not been attached yet.
+        if (typeof layer.getTileAt !== 'function' || layer.layer == undefined) {
+            return GROUND_TYPE['VOID'];
+        }
+
+        try {
             var tile = layer.getTileAt(_x, _y);
             if (tile == null || tile.index == undefined) {
                 return GROUND_TYPE['VOID'];
@@ -72,7 +90,10 @@ export default class GameUtilities {
 
             if (tile_type == undefined) { return GROUND_TYPE['VOID']; }
             return GROUND_TYPE[tile_type];
+        } catch (e) {
+            return GROUND_TYPE['VOID'];
         }
+
         return GROUND_TYPE['VOID'];
     }
 

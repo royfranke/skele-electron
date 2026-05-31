@@ -4,7 +4,8 @@ import KEYLIGHTS from "../config/key-light.js";
 
 export default class ObjectRegistry {
 
-    constructor() {
+    constructor(scene = null) {
+        this.scene = scene;
         this.registry = {};
         this.glass_registry = [];
     }
@@ -89,8 +90,8 @@ export default class ObjectRegistry {
         }
     }
 
-    placeObject (object, _x, _y) {
-        var added = this.addObject(object, _x, _y);
+    placeObject (object, _x, _y, options = {}) {
+        var added = this.addObject(object, _x, _y, options);
         if (!added) {
             return false;
         }
@@ -98,7 +99,8 @@ export default class ObjectRegistry {
         /// Should be feedback for when an object cannot be placed (for now the only condition is that another object cannot already be on the tile)
     }
 
-    addObject (object, _x, _y) {
+    addObject (object, _x, _y, options = {}) {
+        const syncChunk = options.syncChunk !== false;
         // Do not refer to this directly, use placeobject
         if (this.placeEmpty(_x,_y)) {
             this.registry[_x+"_"+_y] = [];
@@ -118,13 +120,22 @@ export default class ObjectRegistry {
             if (object.info.type == 'WINDOW_EXT_' || object.info.type == 'EXT_DOOR_' || object.info.type == 'STORE_WINDOW_EXT' || object.info.type == 'STORE_DOOR') {
                 this.glass_registry.push(object.glass);
             }
+            if (syncChunk) {
+                this.syncChunkObjectAdd(object, _x, _y);
+            }
             /// Object needs a method (setRegistration) that can be flagged to trigger an in-world sprite
             return true;
     }
 
-    removeObjects (_x, _y) {
+    removeObjects (_x, _y, options = {}) {
+        const syncChunk = options.syncChunk !== false;
         if (!this.placeEmpty(_x,_y)) {
             var objects = this.registry[_x+"_"+_y];
+            if (syncChunk && Array.isArray(objects)) {
+                objects.forEach(object => {
+                    this.syncChunkObjectRemove(object, _x, _y);
+                });
+            }
             objects.forEach(object => {
                 object.setRegistration(false);
             });
@@ -140,6 +151,32 @@ export default class ObjectRegistry {
             // This spot was already empty
             return false;
         }
+    }
+
+    syncChunkObjectAdd (object, _x, _y) {
+        if (this.scene == null || this.scene.locale !== 'exterior') {
+            return;
+        }
+
+        const exterior = this.scene.exterior;
+        if (exterior == undefined || exterior.upsertChunkObjectEntity == undefined) {
+            return;
+        }
+
+        exterior.upsertChunkObjectEntity(object, _x, _y);
+    }
+
+    syncChunkObjectRemove (object, _x, _y) {
+        if (this.scene == null || this.scene.locale !== 'exterior') {
+            return;
+        }
+
+        const exterior = this.scene.exterior;
+        if (exterior == undefined || exterior.removeChunkObjectEntity == undefined) {
+            return;
+        }
+
+        exterior.removeChunkObjectEntity(object, _x, _y);
     }
     
 }

@@ -47,6 +47,7 @@ export default class GameScene extends Phaser.Scene {
         }, this);
         this.exterior = new ExteriorManager(this);
         this.exterior.initialize();
+        await this.exterior.detectChunkFiles();
 
         // Instantiate Player/NPC managers synchronously so update() won't
         // crash, but delay their `create()` (which sets colliders) until
@@ -62,11 +63,15 @@ export default class GameScene extends Phaser.Scene {
     }
 
     update() {
-        this.app.update();
-        this.manager.update();
-        this.player.update();
-        this.npcs.update();
-        this.exterior.update();
+        if (this.app?.update) this.app.update();
+        if (this.manager?.update) this.manager.update();
+        const exteriorReady = (this.exterior?.isWorldReady && typeof this.exterior.isWorldReady === 'function')
+            ? this.exterior.isWorldReady()
+            : true;
+
+        if (exteriorReady && this.player?.update) this.player.update();
+        if (exteriorReady && this.npcs?.update) this.npcs.update();
+        if (this.exterior?.update) this.exterior.update();
     }
 
     async portalTo(portal) {

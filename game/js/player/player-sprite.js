@@ -79,8 +79,21 @@ export default class PlayerSprite {
   }
 
   update() {
+    if (!this.scene || !this.scene.player || !this.sprite) {
+      return;
+    }
+
     var state = this.scene.player.getState();
-    this.sprite.anims.play("player-" + state.name + "-" + this.dir_faces[this.facing], true);
+    if (!state || !state.name) {
+      return;
+    }
+
+    const animKey = "player-" + state.name + "-" + this.dir_faces[this.facing];
+    try {
+      if (this.sprite.anims && typeof this.sprite.anims.play === 'function') {
+        this.sprite.anims.play(animKey, true);
+      }
+    } catch (e) {}
 
     if (state.name == 'WALK') {
       //this.sprite.body.setVelocity(0);
@@ -103,9 +116,14 @@ export default class PlayerSprite {
   }
 
   updateVelocity () {
+    if (!this.sprite || !this.sprite.body || !this.scene?.player) {
+      return;
+    }
+
     if (this.scene.player.destinations.length == 0) {
       let input = this.scene.player.playerInput;
       let speed = this.scene.player.speed;
+      if (!input) return;
       this.facing = input.getFacing(this.facing);
       
       this.move({up: input.up, right: input.right, down: input.down, left: input.left}, speed);
@@ -115,6 +133,10 @@ export default class PlayerSprite {
   
   move (dir={up: false, right: false, down: false, left: false}, speed) {
     var self = this;
+    if (!self.sprite || !self.sprite.body) {
+      return;
+    }
+
     if (dir.up) {
       self.sprite.body.setVelocityY(-speed);
     } else if (dir.down) {
