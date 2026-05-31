@@ -557,19 +557,51 @@ export default class PropertyBlueprint {
         return this.front_door;
     }
 
+    buildExteriorPortalPayload(_x, _y) {
+        if (this.prop.portal == undefined) {
+            return null;
+        }
+
+        const world = {
+            x: _x + 1,
+            y: _y + 1
+        };
+
+        const returnPortal = {
+            ROOM: -1,
+            X: world.x,
+            Y: world.y,
+            FACING: 'S',
+            SLUG: this.settings.door
+        };
+
+        const portal = {
+            room_id: this.prop.portal.room_id,
+            x: this.prop.portal.x,
+            y: this.prop.portal.y,
+            facing: this.prop.portal.facing ?? 'N',
+            world,
+            return: returnPortal,
+            slug: this.settings.door,
+            portalId: `ext:${this.prop.portal.room_id}:${world.x}:${world.y}`
+        };
+
+        this.prop.portal.world = world;
+        this.prop.portal.return = returnPortal;
+        this.prop.portal.portalId = portal.portalId;
+
+        return portal;
+    }
+
     setFrontDoor(_x, _y) {
         this.front_door = this.scene.manager.objectManager.newObjectToWorld(_x, _y, this.settings.door);
         this.front_door.sprite.setDepth(this.front_door.sprite.depth - 4);
 
         if (this.prop.portal != undefined) {
-            let room_id = this.prop.portal.room_id;
-            let x = this.prop.portal.x;
-            let y = this.prop.portal.y;
-            this.prop.portal.world = {
-                x: _x + 1,
-                y: _y + 1
-            };
-            this.front_door.setPortal({ room_id: room_id, x: x, y: y, facing: 'N', world: this.prop.portal.world, return: { ROOM: -1, X: _x + 1, Y: _y + 1, FACING: 'S', SLUG: this.settings.door } });
+            const portal = this.buildExteriorPortalPayload(_x, _y);
+            if (portal != null) {
+                this.front_door.setPortal(portal);
+            }
         }
     }
 

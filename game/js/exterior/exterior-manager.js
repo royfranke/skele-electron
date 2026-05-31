@@ -533,7 +533,32 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
                             const params = {};
                             if (obj.state && obj.state.name) params.state = obj.state.name;
-                            if (obj.portal) params.portal = obj.portal;
+                            if (obj.portal) {
+                                const world = {
+                                    x: worldX,
+                                    y: worldY,
+                                };
+                                const roomId = obj.portal.room_id;
+                                const portalId = obj.portal.portalId ?? `ext:${roomId}:${worldX}:${worldY}`;
+                                const returnPortal = obj.portal.return ?? {
+                                    ROOM: -1,
+                                    X: worldX,
+                                    Y: worldY,
+                                    FACING: 'S',
+                                    SLUG: obj.info.slug,
+                                };
+
+                                params.portal = {
+                                    room_id: roomId,
+                                    x: obj.portal.x,
+                                    y: obj.portal.y,
+                                    facing: obj.portal.facing ?? 'N',
+                                    world,
+                                    return: returnPortal,
+                                    slug: obj.portal.slug ?? obj.info.slug,
+                                    portalId,
+                                };
+                            }
                             if (obj.services) params.services = obj.services;
 
                             // Record variety if present
@@ -559,6 +584,25 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
                                     flipX: flipX,
                                     flipY: flipY,
                                 });
+
+                                // Phase 2: add a portal index entity for fast global portal queries.
+                                // We intentionally do not render this kind; it is query metadata only.
+                                if (params.portal && params.portal.portalId) {
+                                    const existingPortals = (typeof chunk.getEntitiesByKind === 'function') ? chunk.getEntitiesByKind('portal') : chunk.entities.filter(e => e.kind === 'portal');
+                                    const portalDuplicate = Array.isArray(existingPortals) && existingPortals.some(e => e.portalId === params.portal.portalId);
+                                    if (!portalDuplicate) {
+                                        chunk.addEntity('portal', params.portal.slug ?? obj.info.slug, local.x, local.y, {
+                                            portalId: params.portal.portalId,
+                                            room_id: params.portal.room_id,
+                                            x: params.portal.x,
+                                            y: params.portal.y,
+                                            facing: params.portal.facing,
+                                            world: params.portal.world,
+                                            return: params.portal.return,
+                                            objectSlug: obj.info.slug,
+                                        });
+                                    }
+                                }
                             } else if (this.debug) {
                                 console.warn(`[Exterior] skipping duplicate object entity ${obj.info.slug} at ${worldX},${worldY} -> chunk ${chunk.key}`);
                             }
@@ -938,6 +982,9 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
             try {
                 if (entity.variety && created.setVariety) created.setVariety(entity.variety);
                 if (entity.params && created.setParams) created.setParams(entity.params);
+                if (entity.params?.portal && created.setPortal) {
+                    created.setPortal(entity.params.portal);
+                }
 
                 // Restore visual flags if present
                 if (entity.depth != null && created.sprite && typeof created.sprite.setDepth === 'function') {
@@ -1501,6 +1548,115 @@ import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
 
          return null;
      }
+
+    findPortalEntityInLoadedChunks(portalId, roomId = null) {
+        if (!this.chunkManager || typeof this.chunkManager.getAllChunks !== 'function') {
+            return null;
+        }
+
+        const chunks = this.chunkManager.getAllChunks();
+        for (const chunk of chunks) {
+            if (!chunk || !chunk.loaded || typeof chunk.getEntitiesByKind !== 'function') {
+                continue;
+            }
+
+            const portalIndex = chunk.getEntitiesByKind('portal');
+            if (Array.isArray(portalIndex)) {
+                for (const entity of portalIndex) {
+                    if (portalId != null && entity.portalId === portalId) {
+                        return {
+                            chunk,
+                            entity,
+                            portal: {
+                                portalId: entity.portalId,
+                                room_id: entity.room_id,
+                                x: entity.x,
+                                y: entity.y,
+                                facing: entity.facing,
+                                world: entity.world,
+                                return: entity.return,
+                                slug: entity.slug,
+                            },
+                            worldX: chunk.tileOriginX + entity.localX,
+                            worldY: chunk.tileOriginY + entity.localY,
+                        };
+                    }
+
+                    if (portalId == null && roomId != null && entity.room_id === roomId) {
+                        return {
+                            chunk,
+                            entity,
+                            portal: {
+                                portalId: entity.portalId,
+                                room_id: entity.room_id,
+                                x: entity.x,
+                                y: entity.y,
+                                facing: entity.facing,
+                                world: entity.world,
+                                return: entity.return,
+                                slug: entity.slug,
+                            },
+                            worldX: chunk.tileOriginX + entity.localX,
+                            worldY: chunk.tileOriginY + entity.localY,
+                        };
+                    }
+                }
+            }
+
+            // Backward compatibility for chunks exported before portal index entities existed.
+            const objects = chunk.getEntitiesByKind('object');
+            if (Array.isArray(objects)) {
+                for (const entity of objects) {
+                    const portal = entity?.params?.portal;
+                    if (!portal) {
+                        continue;
+                    }
+
+                    if (portalId != null && portal.portalId === portalId) {
+                        return {
+                            chunk,
+                            entity,
+                            portal,
+                            worldX: chunk.tileOriginX + entity.localX,
+                            worldY: chunk.tileOriginY + entity.localY,
+                        };
+                    }
+
+                    if (portalId == null && roomId != null && portal.room_id === roomId) {
+                        return {
+                            chunk,
+                            entity,
+                            portal,
+                            worldX: chunk.tileOriginX + entity.localX,
+                            worldY: chunk.tileOriginY + entity.localY,
+                        };
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    getExteriorReturnFromPortal(portal = {}) {
+        const portalId = portal?.portalId ?? null;
+        const roomId = portal?.room_id ?? null;
+        const match = this.findPortalEntityInLoadedChunks(portalId, roomId);
+
+        if (!match) {
+            return null;
+        }
+
+        return {
+            portalId: match.portal.portalId ?? portalId,
+            room_id: match.portal.room_id,
+            x: match.worldX,
+            y: match.worldY,
+            facing: match.portal?.return?.FACING ?? 'S',
+            slug: match.portal?.return?.SLUG ?? match.entity?.slug,
+            return: match.portal?.return ?? null,
+        };
+    }
 
     getMailboxTilesFromAddress(dir, number, street) {
         let mailbox = this.getMailboxFromAddress(dir, number, street);
