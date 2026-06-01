@@ -302,6 +302,11 @@ export default class Object {
 
         if (flip) {
            sprite.setFlipX(true);
+           if (sprite.body && slotted_object.offset) {
+               const origOffsetX = slotted_object.offset.x + (slotted_object.sprite.w/2);
+               const newOffsetX = slotted_object.sprite.w - origOffsetX;
+               sprite.body.setOffset(newOffsetX, slotted_object.offset.y + (slotted_object.sprite.h/2));
+           }
         }
         
         this.slotted.push(sprite);

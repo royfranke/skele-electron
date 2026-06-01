@@ -651,6 +651,11 @@ export default class PropertyBlueprint {
         let porch_right = this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x + 2, _y + stoop.height, porch_rail);
         porch_right.sprite.setFlipX(true);
         porch_right.sprite.setOffset(76, 44);
+        if (porch_right.sprite.body) {
+            const bodyOffsetX = porch_right.info.offset.x + (porch_right.info.sprite.w/2);
+            const newBodyOffsetX = porch_right.info.sprite.w - bodyOffsetX;
+            porch_right.sprite.body.setOffset(newBodyOffsetX, porch_right.info.offset.y + (porch_right.info.sprite.h/2));
+        }
 
         var colors = ['TAN', 'BROWN', 'GREEN', 'PURPLE'];
         let porch_roof = this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'PORCH_ROOF_4x2_' + this.roll(colors));

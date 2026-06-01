@@ -1016,6 +1016,11 @@ import Shop from "../object/shop.js";
                 }
                 if (entity.flipX && created.sprite && typeof created.sprite.setFlipX === 'function') {
                     created.sprite.setFlipX(true);
+                    if (created.sprite.body && created.info && created.info.offset && created.info.sprite) {
+                        const bodyOffsetX = created.info.offset.x + (created.info.sprite.w/2);
+                        const newBodyOffsetX = created.info.sprite.w - bodyOffsetX;
+                        created.sprite.body.setOffset(newBodyOffsetX, created.info.offset.y + (created.info.sprite.h/2));
+                    }
                 }
                 if (entity.flipY && created.sprite && typeof created.sprite.setFlipY === 'function') {
                     created.sprite.setFlipY(true);
@@ -1023,7 +1028,14 @@ import Shop from "../object/shop.js";
                 // Also apply to any shell sprite
                 if (created.shell_sprite) {
                     if (entity.depth != null && typeof created.shell_sprite.setDepth === 'function') created.shell_sprite.setDepth(entity.depth + 1);
-                    if (entity.flipX && typeof created.shell_sprite.setFlipX === 'function') created.shell_sprite.setFlipX(true);
+                    if (entity.flipX && typeof created.shell_sprite.setFlipX === 'function') {
+                        created.shell_sprite.setFlipX(true);
+                        if (created.shell_sprite.body && created.info && created.info.offset && created.info.sprite) {
+                            const bodyOffsetX = created.info.offset.x + (created.info.sprite.w/2);
+                            const newBodyOffsetX = created.info.sprite.w - bodyOffsetX;
+                            created.shell_sprite.body.setOffset(newBodyOffsetX, created.info.offset.y + (created.info.sprite.h/2));
+                        }
+                    }
                     if (entity.flipY && typeof created.shell_sprite.setFlipY === 'function') created.shell_sprite.setFlipY(true);
                 }
             } catch (e) {}

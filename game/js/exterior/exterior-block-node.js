@@ -282,6 +282,11 @@ export default class ExteriorBlockNode {
                 var traffic_light = this.scene.manager.objectManager.newObjectToWorld(_x - 1.75, _y - 10.5,'TRAFFIC_LIGHT_EAST');
                 traffic_light.sprite.setDepth(pole.sprite.depth+7.5);
                 traffic_light.sprite.setFlipX(true);
+                if (traffic_light.sprite.body && traffic_light.info && traffic_light.info.offset && traffic_light.info.sprite) {
+                    const bodyOffsetX = traffic_light.info.offset.x + (traffic_light.info.sprite.w/2);
+                    const newBodyOffsetX = traffic_light.info.sprite.w - bodyOffsetX;
+                    traffic_light.sprite.body.setOffset(newBodyOffsetX, traffic_light.info.offset.y + (traffic_light.info.sprite.h/2));
+                }
                 
                 var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_EAST');
                 pole.setSlot(1,5.5,arm,true);
@@ -313,6 +318,11 @@ export default class ExteriorBlockNode {
         var walk_signal = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 2.5,'WALK_SIGNAL_'+facing+'_');
         walk_signal.sprite.setDepth(pole.sprite.depth+3);
         walk_signal.sprite.setFlipX(flip);
+        if (flip && walk_signal.sprite.body && walk_signal.info && walk_signal.info.offset && walk_signal.info.sprite) {
+            const bodyOffsetX = walk_signal.info.offset.x + (walk_signal.info.sprite.w/2);
+            const newBodyOffsetX = walk_signal.info.sprite.w - bodyOffsetX;
+            walk_signal.sprite.body.setOffset(newBodyOffsetX, walk_signal.info.offset.y + (walk_signal.info.sprite.h/2));
+        }
 
 
         this.traffic_lights[corner] = {traffic_light: traffic_light, walk_signal: walk_signal};
