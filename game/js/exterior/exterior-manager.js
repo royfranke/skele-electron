@@ -39,6 +39,14 @@ import Shop from "../object/shop.js";
         // True once at least one chunk has been rendered into tile layers.
         this.worldReady = false;
         this.shopHourBinders = new Map();
+        this.portalIndex = [];
+
+        // Make the manager available during construction-time blueprint
+        // generation so portals can register before `initialize()`/`create()`
+        // completes.
+        try {
+            this.scene.exterior = this;
+        } catch (e) {}
     }
 
     initialize () {
@@ -425,6 +433,7 @@ import Shop from "../object/shop.js";
             this.ground = new Ground(this.groundLayer, this.edgeLayer);
             this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
             this.setMouseInput();
+            this.bootstrapPortalIndexFromDisk();
             this.beginChunkStreaming();
             return;
         }
@@ -436,6 +445,7 @@ import Shop from "../object/shop.js";
             this.ground = new Ground(this.groundLayer, this.edgeLayer);
             this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
             this.setMouseInput();
+            this.bootstrapPortalIndexFromDisk();
             this.beginChunkStreaming();
             return;
         }
@@ -457,6 +467,10 @@ import Shop from "../object/shop.js";
         // build pass is complete.  This is a one-time O(width*height) read.
         this.snapshotToChunks();
 
+        // Build and persist a global portal index file so interior scenes
+        // can resolve exterior return coordinates without loading chunks.
+        this.savePortalIndexFile();
+
         // After generating chunks from the procedural build, persist them
         // to disk so subsequent loads (e.g. after returning from an interior)
         // will read from the saved chunk files instead of re-generating.
@@ -472,6 +486,108 @@ import Shop from "../object/shop.js";
         } catch (e) {}
         // Switch rendering over to chunk streaming.
         this.beginChunkStreaming();
+    }
+
+    clearPortalIndex () {
+        this.portalIndex = [];
+    }
+
+    registerPortalIndexEntry (portal = {}) {
+        if (portal == null || typeof portal !== 'object') {
+            return null;
+        }
+
+        const portalId = portal.portalId ?? null;
+        const worldX = portal?.world?.x ?? portal?.x ?? null;
+        const worldY = portal?.world?.y ?? portal?.y ?? null;
+
+        const entry = {
+            portalId,
+            room_id: portal.room_id,
+            world: (worldX != null && worldY != null) ? { x: worldX, y: worldY } : null,
+            x: worldX,
+            y: worldY,
+            facing: portal.facing ?? 'N',
+            slug: portal.slug ?? null,
+            address: portal.address ?? null,
+            return: portal.return ?? null,
+            objectSlug: portal.objectSlug ?? null,
+            index: this.portalIndex.length,
+        };
+
+        this.portalIndex.push(entry);
+
+        return entry;
+    }
+
+    rebuildPortalIndexFromObjects () {
+        const objectRegistry = this.scene?.manager?.objectManager?.registry?.registry;
+        if (!objectRegistry || typeof objectRegistry !== 'object') {
+            return 0;
+        }
+
+        const rebuilt = [];
+        const seen = new Set();
+
+        Object.entries(objectRegistry).forEach(([key, objects]) => {
+            if (!Array.isArray(objects)) {
+                return;
+            }
+
+            objects.forEach(obj => {
+                const portal = obj?.portal;
+                if (!portal) {
+                    return;
+                }
+
+                const worldX = portal?.world?.x ?? obj?.tile_x ?? null;
+                const worldY = portal?.world?.y ?? obj?.tile_y ?? null;
+                const portalId = portal?.portalId ?? (worldX != null && worldY != null ? `ext:${portal?.room_id ?? 'unknown'}:${worldX}:${worldY}` : null);
+                const dedupeKey = `${portalId ?? 'no-id'}:${worldX ?? 'x'}:${worldY ?? 'y'}`;
+                if (seen.has(dedupeKey)) {
+                    return;
+                }
+
+                seen.add(dedupeKey);
+                rebuilt.push({
+                    portalId,
+                    room_id: portal?.room_id,
+                    world: (worldX != null && worldY != null) ? { x: worldX, y: worldY } : null,
+                    x: worldX,
+                    y: worldY,
+                    facing: portal?.facing ?? 'N',
+                    slug: portal?.slug ?? obj?.info?.slug ?? null,
+                    address: portal?.address ?? null,
+                    return: portal?.return ?? null,
+                    objectSlug: obj?.info?.slug ?? null,
+                    sourceKey: key,
+                });
+            });
+        });
+
+        this.portalIndex = rebuilt;
+        return this.portalIndex.length;
+    }
+
+    async bootstrapPortalIndexFromDisk () {
+        try {
+            if (!this.worldDataLoader || typeof this.worldDataLoader.loadPortalIndex !== 'function') {
+                return false;
+            }
+
+            const loaded = await this.worldDataLoader.loadPortalIndex();
+            if (!loaded || !Array.isArray(loaded.portals) || loaded.portals.length === 0) {
+                return false;
+            }
+
+            this.portalIndex = loaded.portals.slice();
+            return true;
+        } catch (e) {
+            if (this.debug) {
+                console.warn('[Exterior] bootstrapPortalIndexFromDisk failed', e);
+            }
+            return false;
+        }
     }
 
     /**
@@ -564,6 +680,7 @@ import Shop from "../object/shop.js";
                                     return: returnPortal,
                                     slug: obj.portal.slug ?? obj.info.slug,
                                     portalId,
+                                    address: obj.portal.address ?? null,
                                 };
                             }
                             if (obj.services) params.services = obj.services;
@@ -607,6 +724,7 @@ import Shop from "../object/shop.js";
                                             facing: params.portal.facing,
                                             world: params.portal.world,
                                             return: params.portal.return,
+                                            address: params.portal.address,
                                             objectSlug: obj.info.slug,
                                         });
                                     }
@@ -1351,6 +1469,7 @@ import Shop from "../object/shop.js";
                 return: returnPortal,
                 slug: object.portal.slug ?? object.info?.slug,
                 portalId,
+                address: object.portal.address ?? null,
             };
         }
 
@@ -1393,6 +1512,7 @@ import Shop from "../object/shop.js";
                 facing: params.portal.facing,
                 world: params.portal.world,
                 return: params.portal.return,
+                address: params.portal.address,
                 objectSlug: slug,
             });
         }
@@ -1809,113 +1929,91 @@ import Shop from "../object/shop.js";
          return null;
      }
 
-    findPortalEntityInLoadedChunks(portalId, roomId = null) {
-        if (!this.chunkManager || typeof this.chunkManager.getAllChunks !== 'function') {
-            return null;
-        }
-
-        const chunks = this.chunkManager.getAllChunks();
-        for (const chunk of chunks) {
-            if (!chunk || !chunk.loaded || typeof chunk.getEntitiesByKind !== 'function') {
-                continue;
-            }
-
-            const portalIndex = chunk.getEntitiesByKind('portal');
-            if (Array.isArray(portalIndex)) {
-                for (const entity of portalIndex) {
-                    if (portalId != null && entity.portalId === portalId) {
-                        return {
-                            chunk,
-                            entity,
-                            portal: {
-                                portalId: entity.portalId,
-                                room_id: entity.room_id,
-                                x: entity.x,
-                                y: entity.y,
-                                facing: entity.facing,
-                                world: entity.world,
-                                return: entity.return,
-                                slug: entity.slug,
-                            },
-                            worldX: chunk.tileOriginX + entity.localX,
-                            worldY: chunk.tileOriginY + entity.localY,
-                        };
-                    }
-
-                    if (portalId == null && roomId != null && entity.room_id === roomId) {
-                        return {
-                            chunk,
-                            entity,
-                            portal: {
-                                portalId: entity.portalId,
-                                room_id: entity.room_id,
-                                x: entity.x,
-                                y: entity.y,
-                                facing: entity.facing,
-                                world: entity.world,
-                                return: entity.return,
-                                slug: entity.slug,
-                            },
-                            worldX: chunk.tileOriginX + entity.localX,
-                            worldY: chunk.tileOriginY + entity.localY,
-                        };
-                    }
-                }
-            }
-
-            // Backward compatibility for chunks exported before portal index entities existed.
-            const objects = chunk.getEntitiesByKind('object');
-            if (Array.isArray(objects)) {
-                for (const entity of objects) {
-                    const portal = entity?.params?.portal;
-                    if (!portal) {
-                        continue;
-                    }
-
-                    if (portalId != null && portal.portalId === portalId) {
-                        return {
-                            chunk,
-                            entity,
-                            portal,
-                            worldX: chunk.tileOriginX + entity.localX,
-                            worldY: chunk.tileOriginY + entity.localY,
-                        };
-                    }
-
-                    if (portalId == null && roomId != null && portal.room_id === roomId) {
-                        return {
-                            chunk,
-                            entity,
-                            portal,
-                            worldX: chunk.tileOriginX + entity.localX,
-                            worldY: chunk.tileOriginY + entity.localY,
-                        };
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
     getExteriorReturnFromPortal(portal = {}) {
         const portalId = portal?.portalId ?? null;
         const roomId = portal?.room_id ?? null;
-        const match = this.findPortalEntityInLoadedChunks(portalId, roomId);
+        const address = portal?.address ?? null;
+        const portals = Array.isArray(this.portalIndex) ? this.portalIndex : [];
 
+        const normalizeAddressKey = (value) => {
+            if (!value) {
+                return null;
+            }
+
+            const dir = String(value.dir ?? '').trim().toUpperCase();
+            const number = String(value.number ?? '').trim();
+            const street = String(value.street ?? '').trim().toUpperCase();
+            if (dir === '' || number === '' || street === '') {
+                return null;
+            }
+
+            return `${dir}|${number}|${street}`;
+        };
+
+        let match = null;
+        if (portalId != null) {
+            match = portals.find(entry => entry?.portalId === portalId) ?? null;
+        }
         if (!match) {
+            const addressKey = normalizeAddressKey(address);
+            if (addressKey != null) {
+                match = portals.find(entry => normalizeAddressKey(entry?.address) === addressKey) ?? null;
+            }
+        }
+        if (!match && roomId != null) {
+            match = portals.find(entry => String(entry?.room_id) === String(roomId)) ?? null;
+        }
+
+        if (!match || match.x == null || match.y == null) {
             return null;
         }
 
         return {
-            portalId: match.portal.portalId ?? portalId,
-            room_id: match.portal.room_id,
-            x: match.worldX,
-            y: match.worldY,
-            facing: match.portal?.return?.FACING ?? 'S',
-            slug: match.portal?.return?.SLUG ?? match.entity?.slug,
-            return: match.portal?.return ?? null,
+            portalId: match.portalId ?? portalId,
+            room_id: match.room_id,
+            x: match?.return?.X ?? match.x,
+            y: match?.return?.Y ?? match.y,
+            facing: match.return?.FACING ?? match.facing ?? 'S',
+            slug: match.return?.SLUG ?? match.slug ?? null,
+            return: match.return ?? null,
         };
+    }
+
+    buildPortalIndexData () {
+        return {
+            version: 1,
+            generatedAt: Date.now(),
+            slot: this.getActiveSaveSlot(),
+            portals: Array.isArray(this.portalIndex) ? this.portalIndex.slice() : [],
+        };
+    }
+
+    hasPortalIndexEntries () {
+        return Array.isArray(this.portalIndex) && this.portalIndex.length > 0;
+    }
+
+    async savePortalIndexFile () {
+        try {
+            if (!this.worldDataLoader || !this.worldDataLoader._canUseElectronApi || typeof this.worldDataLoader.savePortalIndex !== 'function') {
+                return false;
+            }
+
+            // Rebuild from the current live object registry so every portal
+            // generated by blueprints is captured before writing the file.
+            this.rebuildPortalIndexFromObjects();
+
+            if (!this.hasPortalIndexEntries()) {
+                return false;
+            }
+
+            const payload = this.buildPortalIndexData();
+            return await this.worldDataLoader.savePortalIndex(payload);
+        } catch (e) {
+            if (this.debug) {
+                console.warn('[Exterior] savePortalIndexFile failed', e);
+            }
+            return false;
+        }
     }
 
     getMailboxTilesFromAddress(dir, number, street) {
@@ -2064,23 +2162,27 @@ import Shop from "../object/shop.js";
     }
 
     async saveDirtyChunks () {
+        let portalIndexSaved = false;
+
         // Prefer using WorldSystem if available for centralized dirty tracking
         if (this.worldSystem != null && typeof this.worldSystem.saveDirtyChunks === 'function') {
             const res = await this.worldSystem.saveDirtyChunks();
+            portalIndexSaved = await this.savePortalIndexFile();
             if (this.debug) {
-                console.log(`[ChunkManager] saveDirtyChunks dirty=${res.dirty} saved=${res.saved} failed=${res.failed}`);
+                console.log(`[ChunkManager] saveDirtyChunks dirty=${res.dirty} saved=${res.saved} failed=${res.failed} portalIndexSaved=${portalIndexSaved}`);
             }
-            return { totalDirty: res.dirty, saved: res.saved, failed: res.failed };
+            return { totalDirty: res.dirty, saved: res.saved, failed: res.failed, portalIndexSaved };
         }
 
         // Fallback for older behavior
         if (this.chunkManager == undefined || this.worldDataLoader == undefined) {
-            return { totalDirty: 0, saved: 0, failed: 0 };
+            return { totalDirty: 0, saved: 0, failed: 0, portalIndexSaved };
         }
 
         const dirtyChunks = this.chunkManager.getAllChunks().filter(chunk => chunk.dirty);
         if (dirtyChunks.length === 0) {
-            return { totalDirty: 0, saved: 0, failed: 0 };
+            portalIndexSaved = await this.savePortalIndexFile();
+            return { totalDirty: 0, saved: 0, failed: 0, portalIndexSaved };
         }
 
         let saved = 0;
@@ -2096,14 +2198,17 @@ import Shop from "../object/shop.js";
             }
         }
 
+        portalIndexSaved = await this.savePortalIndexFile();
+
         if (this.debug) {
-            console.log(`[ChunkManager] saveDirtyChunks dirty=${dirtyChunks.length} saved=${saved} failed=${failed}`);
+            console.log(`[ChunkManager] saveDirtyChunks dirty=${dirtyChunks.length} saved=${saved} failed=${failed} portalIndexSaved=${portalIndexSaved}`);
         }
 
         return {
             totalDirty: dirtyChunks.length,
             saved,
             failed,
+            portalIndexSaved,
         };
     }
 

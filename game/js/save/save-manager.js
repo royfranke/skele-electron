@@ -11,6 +11,24 @@ export default class SaveManager {
 
     initializeSave () {
         var data = this.scene.slot;
+        const portalId = data?.POSITION?.PORTAL_ID ?? null;
+
+        if (portalId != null && this.scene?.exterior?.getExteriorReturnFromPortal != null) {
+            const portalCoords = this.scene.exterior.getExteriorReturnFromPortal({
+                portalId: portalId,
+                room_id: data.POSITION.ROOM,
+                address: data.POSITION.ADDRESS ?? null,
+            });
+            if (portalCoords != null && portalCoords.x != undefined && portalCoords.y != undefined) {
+                this.scene.player.setPositionTile(portalCoords.x, portalCoords.y);
+                this.scene.player.setFacing(portalCoords.facing ?? data.POSITION.FACING ?? data.POSITION.RETURN?.FACING);
+                this.scene.manager.time.setTimeFromSave(data.TIME);
+                this.scene.player.coinpurse.setContents(data.COINPURSE);
+                this.scene.manager.hud.pocket.setPocketsFromSave();
+                return;
+            }
+        }
+
         if (data.POSITION.ADDRESS != undefined) {
             var front = this.scene.exterior.getFrontDoorTilesFromAddress(data.POSITION.ADDRESS.dir, data.POSITION.ADDRESS.number, data.POSITION.ADDRESS.street);
             if (front != null && front.x != undefined && front.y != undefined) {

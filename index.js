@@ -6,6 +6,7 @@ const path = require('node:path')
 const fs = require('fs')
 
 const CHUNKS_DIR = path.join(__dirname, 'game', 'assets', 'chunks')
+const PORTAL_INDEX_FILE = 'portal_index.json'
 
 function resolveSlotChunkDir(slot) {
   if (slot === undefined || slot === null) {
@@ -148,6 +149,80 @@ ipcMain.handle('save-chunk', async (_event, data) => {
   try {
     await fs.promises.mkdir(targetDir, { recursive: true })
     await fs.promises.writeFile(filePath, JSON.stringify(chunkData), 'utf8')
+    return { ok: true, path: filePath }
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'write-failed',
+      code: error?.code,
+      message: error?.message,
+      path: filePath,
+      targetDir,
+    }
+  }
+})
+
+ipcMain.handle('load-portal-index', async (_event, data) => {
+  const { slot } = data || {}
+
+  const slotChunkDir = resolveSlotChunkDir(slot)
+  const candidatePaths = []
+
+  if (slotChunkDir) {
+    candidatePaths.push(path.join(slotChunkDir, PORTAL_INDEX_FILE))
+  }
+  candidatePaths.push(path.join(CHUNKS_DIR, PORTAL_INDEX_FILE))
+
+  try {
+    for (const filePath of candidatePaths) {
+      try {
+        const raw = await fs.promises.readFile(filePath, 'utf8')
+        return { ok: true, data: JSON.parse(raw), sourcePath: filePath }
+      } catch (error) {
+        if (!error || error.code !== 'ENOENT') {
+          return {
+            ok: false,
+            reason: 'read-failed',
+            code: error?.code,
+            message: error?.message,
+            path: filePath,
+          }
+        }
+      }
+    }
+
+    return { ok: false, reason: 'not-found' }
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'read-failed',
+      code: error?.code,
+      message: error?.message,
+    }
+  }
+})
+
+ipcMain.handle('save-portal-index', async (_event, data) => {
+  const { slot, portalIndex } = data || {}
+
+  if (portalIndex == null || typeof portalIndex !== 'object') {
+    return {
+      ok: false,
+      reason: 'invalid-payload',
+      details: {
+        hasPortalIndex: portalIndex != null,
+        portalIndexType: typeof portalIndex,
+      },
+    }
+  }
+
+  const slotChunkDir = resolveSlotChunkDir(slot)
+  const targetDir = slotChunkDir || CHUNKS_DIR
+  const filePath = path.join(targetDir, PORTAL_INDEX_FILE)
+
+  try {
+    await fs.promises.mkdir(targetDir, { recursive: true })
+    await fs.promises.writeFile(filePath, JSON.stringify(portalIndex), 'utf8')
     return { ok: true, path: filePath }
   } catch (error) {
     return {

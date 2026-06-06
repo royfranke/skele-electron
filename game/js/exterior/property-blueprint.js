@@ -585,12 +585,28 @@ export default class PropertyBlueprint {
             world,
             return: returnPortal,
             slug: this.settings.door,
-            portalId: `ext:${this.prop.portal.room_id}:${world.x}:${world.y}`
+            portalId: `ext:${this.prop.portal.room_id}:${world.x}:${world.y}`,
+            address: this.prop.address ?? null,
         };
 
         this.prop.portal.world = world;
         this.prop.portal.return = returnPortal;
         this.prop.portal.portalId = portal.portalId;
+        this.prop.portal.address = portal.address;
+
+        if (this.scene?.exterior && typeof this.scene.exterior.registerPortalIndexEntry === 'function') {
+            this.scene.exterior.registerPortalIndexEntry({
+                portalId: portal.portalId,
+                room_id: portal.room_id,
+                x: portal.world.x,
+                y: portal.world.y,
+                facing: portal.facing,
+                slug: portal.slug,
+                address: portal.address,
+                return: portal.return,
+                objectSlug: this.settings.door,
+            });
+        }
 
         return portal;
     }

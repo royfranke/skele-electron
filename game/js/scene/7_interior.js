@@ -4,6 +4,7 @@ import InteriorManager from "../interior/interior-manager.js";
 import PlayerManager from "../player/player-manager.js";
 import TutorialManager from "../tutorial/tutorial-manager.js";
 import NpcManager from "../npc/npc-manager.js";
+import WorldDataLoader from "../world/world-data-loader.js";
 
 /**
  * Interior
@@ -54,13 +55,28 @@ export default class InteriorScene extends Phaser.Scene {
         this.interior.update();
     }
 
-    portalTo(portal) {
+    async portalTo(portal) {
         this.slot = this.app.softSaveGameData();
         if (this.verbose) console.log(this.slot);
         const previousReturn = this.slot?.POSITION?.RETURN;
         const resolvedReturn = portal?.return ?? previousReturn ?? null;
+        const toExterior = String(portal?.room_id) === '-1';
+        const indexedExit = toExterior
+            ? await this.resolveExteriorCoordsFromPortalIndex(portal)
+            : null;
 
-        if (portal.address != undefined) {
+        if (toExterior && indexedExit?.portalId != null) {
+            this.slot.POSITION.PORTAL_ID = indexedExit.portalId;
+        }
+
+        if (toExterior && indexedExit != null) {
+            this.slot.POSITION.X = indexedExit.x;
+            this.slot.POSITION.Y = indexedExit.y;
+            if (portal.address != undefined) {
+                this.slot.POSITION.ADDRESS = portal.address;
+            }
+        }
+        else if (portal.address != undefined) {
             this.slot.POSITION.ADDRESS = portal.address;
             if (portal.x != undefined && portal.y != undefined) {
                 this.slot.POSITION.X = portal.x;
@@ -72,14 +88,8 @@ export default class InteriorScene extends Phaser.Scene {
                 this.slot.POSITION.X = portal.x;
                 this.slot.POSITION.Y = portal.y;
             }
-            else if (portal.room_id == '-1' && resolvedReturn != null && resolvedReturn.X != undefined && resolvedReturn.Y != undefined) {
-                // Fallback for interior->exterior transitions where portal payload
-                // may omit direct world coords.
-                this.slot.POSITION.X = resolvedReturn.X;
-                this.slot.POSITION.Y = resolvedReturn.Y;
-            }
         }
-        this.slot.POSITION.FACING = portal.facing ?? resolvedReturn?.FACING ?? this.slot.POSITION.FACING;
+        this.slot.POSITION.FACING = portal.facing ?? indexedExit?.facing ?? resolvedReturn?.FACING ?? this.slot.POSITION.FACING;
         this.slot.POSITION.ROOM = portal.room_id;
         this.slot.POSITION.RETURN = resolvedReturn;
         if (this.tutorial != undefined) {
@@ -94,6 +104,120 @@ export default class InteriorScene extends Phaser.Scene {
             this.scene.start('Interior Scene', {slot: this.slot});
         }
         
+    }
+
+    getActiveSaveSlot () {
+        const slot = this.slot?.SAVE?.SLOT;
+        const parsed = Number.isInteger(slot) ? slot : parseInt(slot, 10);
+        return Number.isInteger(parsed) && parsed >= 0 ? parsed : null;
+    }
+
+    normalizeAddressKey (address) {
+        if (!address) {
+            return null;
+        }
+
+        const dir = String(address.dir ?? '').trim().toUpperCase();
+        const number = String(address.number ?? '').trim();
+        const street = String(address.street ?? '').trim().toUpperCase();
+        if (dir === '' || number === '' || street === '') {
+            return null;
+        }
+
+        return `${dir}|${number}|${street}`;
+    }
+
+    async resolveExteriorCoordsFromPortalIndex (portal) {
+        try {
+            const slot = this.getActiveSaveSlot();
+            if (slot == null) {
+                return null;
+            }
+
+            if (this.portalIndexLoader == undefined) {
+                this.portalIndexLoader = new WorldDataLoader('/assets/chunks/', { slot });
+            }
+
+            const index = await this.portalIndexLoader.loadPortalIndex();
+            const portals = Array.isArray(index?.portals) ? index.portals : [];
+            if (portals.length === 0) {
+                return null;
+            }
+
+            const portalId = portal?.portalId ?? null;
+            if (portalId != null) {
+                const byId = portals.find(entry => entry?.portalId === portalId);
+                if (byId?.x != null && byId?.y != null) {
+                    return {
+                        x: byId?.return?.X ?? byId.x,
+                        y: byId?.return?.Y ?? byId.y,
+                        facing: byId?.return?.FACING ?? byId?.facing ?? null,
+                        portalId: byId?.portalId ?? portalId,
+                    };
+                }
+            }
+
+            const addressKey = this.normalizeAddressKey(portal?.address ?? this.slot?.POSITION?.ADDRESS ?? null);
+            if (addressKey != null) {
+                const byAddress = portals.find(entry => this.normalizeAddressKey(entry?.address) === addressKey);
+                if (byAddress?.x != null && byAddress?.y != null) {
+                    return {
+                        x: byAddress?.return?.X ?? byAddress.x,
+                        y: byAddress?.return?.Y ?? byAddress.y,
+                        facing: byAddress?.return?.FACING ?? byAddress?.facing ?? null,
+                        portalId: byAddress?.portalId ?? null,
+                    };
+                }
+            }
+
+            const savedPortalId = this.slot?.POSITION?.PORTAL_ID ?? null;
+            if (savedPortalId != null) {
+                const bySavedId = portals.find(entry => entry?.portalId === savedPortalId);
+                if (bySavedId?.x != null && bySavedId?.y != null) {
+                    return {
+                        x: bySavedId?.return?.X ?? bySavedId.x,
+                        y: bySavedId?.return?.Y ?? bySavedId.y,
+                        facing: bySavedId?.return?.FACING ?? bySavedId?.facing ?? null,
+                        portalId: bySavedId?.portalId ?? savedPortalId,
+                    };
+                }
+            }
+
+            const roomId = portal?.room_id;
+            if (roomId != undefined && roomId != null) {
+                const byRoom = portals.find(entry => String(entry?.room_id) === String(roomId));
+                if (byRoom?.x != null && byRoom?.y != null) {
+                    return {
+                        x: byRoom?.return?.X ?? byRoom.x,
+                        y: byRoom?.return?.Y ?? byRoom.y,
+                        facing: byRoom?.return?.FACING ?? byRoom?.facing ?? null,
+                        portalId: byRoom?.portalId ?? null,
+                    };
+                }
+            }
+
+            // For interior->exterior exits, portal payload often has room_id = -1.
+            // Use the current interior room id as the exterior index key.
+            const currentInteriorRoomId = this.room_id;
+            if (currentInteriorRoomId != undefined && currentInteriorRoomId != null) {
+                const byCurrentRoom = portals.find(entry => String(entry?.room_id) === String(currentInteriorRoomId));
+                if (byCurrentRoom?.x != null && byCurrentRoom?.y != null) {
+                    return {
+                        x: byCurrentRoom?.return?.X ?? byCurrentRoom.x,
+                        y: byCurrentRoom?.return?.Y ?? byCurrentRoom.y,
+                        facing: byCurrentRoom?.return?.FACING ?? byCurrentRoom?.facing ?? null,
+                        portalId: byCurrentRoom?.portalId ?? null,
+                    };
+                }
+            }
+
+            return null;
+        } catch (e) {
+            if (this.verbose) {
+                console.warn('resolveExteriorCoordsFromPortalIndex failed', e);
+            }
+            return null;
+        }
     }
 
     save () {

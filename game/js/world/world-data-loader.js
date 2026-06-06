@@ -105,6 +105,54 @@ export default class WorldDataLoader {
         }
     }
 
+    /**
+     * Save global portal index JSON for the active slot.
+     *
+     * @param {object} portalIndex
+     * @returns {Promise<boolean>}
+     */
+    async savePortalIndex(portalIndex) {
+        if (!this._canUseElectronApi) {
+            return false;
+        }
+
+        try {
+            const result = await window.api.invoke('save-portal-index', {
+                slot: this.slot,
+                portalIndex,
+            });
+
+            return !!(result && result.ok === true);
+        } catch (_err) {
+            return false;
+        }
+    }
+
+    /**
+     * Load global portal index JSON for the active slot.
+     *
+     * @returns {Promise<object|null>}
+     */
+    async loadPortalIndex() {
+        if (!this._canUseElectronApi) {
+            return null;
+        }
+
+        try {
+            const result = await window.api.invoke('load-portal-index', {
+                slot: this.slot,
+            });
+
+            if (result && result.ok === true) {
+                return result.data ?? null;
+            }
+
+            return null;
+        } catch (_err) {
+            return null;
+        }
+    }
+
     getCacheKey(chunk) {
         return `${this.slot ?? 'default'}:${chunk.key}`;
     }

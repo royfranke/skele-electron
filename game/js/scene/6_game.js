@@ -56,6 +56,9 @@ export default class GameScene extends Phaser.Scene {
         this.npcs = new NpcManager(this);
         
         this.exterior.create();
+        if (this.exterior && typeof this.exterior.bootstrapPortalIndexFromDisk === 'function') {
+            await this.exterior.bootstrapPortalIndexFromDisk();
+        }
         this.player.create();
         this.npcs.create();
         //// Load the save!
@@ -84,9 +87,14 @@ export default class GameScene extends Phaser.Scene {
         this.slot.POSITION.FACING = portal.facing;
         this.slot.POSITION.ROOM = portal.room_id;
         this.slot.POSITION.RETURN = portal.return;
+        this.slot.POSITION.PORTAL_ID = portal.portalId ?? this.slot.POSITION.PORTAL_ID ?? null;
 
         if (this.exterior != undefined && this.exterior.saveDirtyChunks != undefined) {
             await this.exterior.saveDirtyChunks();
+        }
+
+        if (this.exterior != undefined && typeof this.exterior.savePortalIndexFile === 'function') {
+            await this.exterior.savePortalIndexFile();
         }
 
         console.log(this.slot.POSITION + 'portal to ding ding');
