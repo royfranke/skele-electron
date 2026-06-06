@@ -9,7 +9,12 @@ export default class PropertyLine {
         this.wallsBuilt = wallsBuilt;
 
         if (wallsBuilt) {
-            var block_properties = scene.slot.BLOCKS[prop.block.x][prop.block.y].properties;
+            const blockSave = scene?.slot?.BLOCKS?.[prop.block.x]?.[prop.block.y];
+            if (blockSave == undefined || !Array.isArray(blockSave.properties)) {
+                this._blueprint = new PropertyBlueprint(scene, prop, wallsBuilt);
+                return;
+            }
+            var block_properties = blockSave.properties;
             for (var i = 0; i < block_properties.length; i++) {
                 if (block_properties[i].address == prop.address) {
                     prop.structure.settings = block_properties[i].structure.settings;

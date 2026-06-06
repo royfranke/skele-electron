@@ -26,6 +26,7 @@ import Shop from "../object/shop.js";
     constructor(scene) {
         this.scene = scene;
         this.debug = true;
+        this.useLegacySlotBlockSave = false;
         // When true, never attempt to load chunk JSONs from disk; always
         // use the in-memory/generated chunk data produced during the
         // procedural build pass.
@@ -1502,8 +1503,11 @@ import Shop from "../object/shop.js";
     }
 
     buildTiles() {
+        if (this.useLegacySlotBlockSave !== true) {
+            return false;
+        }
         let loaded = false;
-        if (this.scene.slot.BLOCKS[this.block.x] != undefined) {
+        if (this.scene.slot?.BLOCKS?.[this.block.x] != undefined) {
             if (this.scene.slot.BLOCKS[this.block.x][this.block.y] != undefined) {
                 this.scene.exterior.loadBlockWalls(this.scene.slot.BLOCKS[this.block.x][this.block.y]);
                 loaded = true;
@@ -1572,7 +1576,9 @@ import Shop from "../object/shop.js";
         if (this.lastBlock.x != thisBlock.x || this.lastBlock.y != thisBlock.y) {
             console.log('Leaving block '+this.lastBlock.x+','+this.lastBlock.y);
             // Soft save the last block
-            this.scene.app.saveManager.softSaveBlock(this.lastBlock.x, this.lastBlock.y);
+            if (this.useLegacySlotBlockSave === true) {
+                this.scene.app.saveManager.softSaveBlock(this.lastBlock.x, this.lastBlock.y);
+            }
             this.lastBlock = thisBlock;
             this.block = this.getBlock(thisBlock.x, thisBlock.y);
             console.log('Entered block '+thisBlock.x+','+thisBlock.y);

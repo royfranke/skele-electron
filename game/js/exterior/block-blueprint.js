@@ -9,15 +9,13 @@ export default class BlockBlueprint {
         this.block = block;
         this.propertyLines = [];
         this.wallsBuilt = false;
+        this.useLegacySlotBlockSave = this.scene?.exterior?.useLegacySlotBlockSave === true;
 
-        if (this.scene.slot.BLOCKS[block.x] != undefined) {
-            if (this.scene.slot.BLOCKS[block.x][block.y] != undefined) {
-                this.loadBlockGround(this.scene.slot.BLOCKS[block.x][block.y]);
-                this.loadBlockWalls(this.scene.slot.BLOCKS[block.x][block.y]);
-                this.wallsBuilt = true;
-            } else {
-                this.setGround();
-            }
+        const savedBlock = this.useLegacySlotBlockSave ? this.scene?.slot?.BLOCKS?.[block.x]?.[block.y] : undefined;
+        if (savedBlock != undefined) {
+            this.loadBlockGround(savedBlock);
+            this.loadBlockWalls(savedBlock);
+            this.wallsBuilt = true;
         } else {
             this.setGround();
         }
@@ -366,6 +364,7 @@ export default class BlockBlueprint {
     }
 
     buildItems() {
+        if (!this.useLegacySlotBlockSave) return;
         const save = this.scene.slot?.BLOCKS?.[this.block.x]?.[this.block.y];
         if (save == undefined || !Array.isArray(save.items)) return;
 

@@ -82,6 +82,9 @@ export default class SaveManager {
     }
 
     softSaveBlock(block_x, block_y) {
+        if (this.scene?.exterior?.useLegacySlotBlockSave !== true) {
+            return;
+        }
         let block = this.scene.exterior.getBlock(block_x, block_y);
         let saved_block = block.saveBlock();
         if (this.scene.slot.BLOCKS === undefined) { this.scene.slot.BLOCKS = {}; }
@@ -101,12 +104,11 @@ export default class SaveManager {
         data.KEYS = this.scene.manager.hud.hudKeychain.manager ? this.scene.manager.hud.hudKeychain.manager.setSaveFromKeychain() : this.scene.slot.KEYS;
         data.POCKETS.SLOTS = this.scene.manager.hud.pocket.setSaveFromPockets();
         data.POSITION = this.scene.player.getPositionTile();
-        if (data.BLOCKS === undefined) { data.BLOCKS = {}; }
         if (data.ROOMS === undefined) { data.ROOMS = {}; }
         if (this.scene.room_id > 0 && this.scene.room_id != 10) {
             data.ROOMS[this.scene.room_id] = this.setSaveFromInterior();
         }
-        if (this.scene.exterior) {
+        if (this.scene.exterior && this.scene.exterior.useLegacySlotBlockSave === true) {
             let block = this.scene.exterior.xyToBlock(this.scene.player.standingTile.x,this.scene.player.standingTile.y);
             this.softSaveBlock(block.x, block.y);
         }
