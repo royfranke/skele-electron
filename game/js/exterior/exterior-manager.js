@@ -40,6 +40,7 @@ import Shop from "../object/shop.js";
         this.worldReady = false;
         this.shopHourBinders = new Map();
         this.portalIndex = [];
+        this.pendingChunkFlushes = new Map();
 
         // Make the manager available during construction-time blueprint
         // generation so portals can register before `initialize()`/`create()`
@@ -65,6 +66,7 @@ import Shop from "../object/shop.js";
             worldChunksWidth,
             worldChunksHeight,
         });
+        this.defaultMaxLoadedChunks = this.chunkManager.maxLoadedChunks;
         this.useChunkStreamingBootstrap = this.shouldUseChunkStreamingBootstrap();
         this.worldDataLoader = new WorldDataLoader('/assets/chunks/', { slot: this.getActiveSaveSlot() });
         this.worldSystem = (window.WorldSystem) ? new window.WorldSystem(this.scene, this.worldDataLoader, { slot: this.getActiveSaveSlot(), chunkManager: this.chunkManager }) : null;
@@ -123,6 +125,8 @@ import Shop from "../object/shop.js";
         };
         this.chunkManager.onChunkEvict = (chunk) => {
             try {
+                this.flushChunkOnLeave(chunk, 'evict').catch(() => {});
+
                 // If the chunk is still rendered for any reason, clear its tiles and entities.
                 if (chunk && chunk.rendered) {
                     this.unrenderChunk(chunk);
@@ -143,6 +147,7 @@ import Shop from "../object/shop.js";
             }
         };
         this.chunkManager.onChunkUnload = (chunk) => {
+            this.flushChunkOnLeave(chunk, 'unload').catch(() => {});
             this.unrenderChunk(chunk);
             if (this.debug) console.log(`[ChunkManager] unload ${chunk.key}`);
         };
@@ -450,6 +455,11 @@ import Shop from "../object/shop.js";
             return;
         }
 
+        // During the initial procedural generation/snapshot/export pass we must
+        // keep all generated chunks resident; otherwise LRU eviction can drop
+        // chunks before they are exported, causing missing objects/tiles.
+        this.enterGenerationPersistenceMode();
+
         self = this;
         MAP_CONFIG.blocks.forEach(function (block, index) {
             self.setCorners(block);
@@ -467,6 +477,11 @@ import Shop from "../object/shop.js";
         // build pass is complete.  This is a one-time O(width*height) read.
         this.snapshotToChunks();
 
+        // Rebuild object entities for every populated chunk from the live
+        // runtime registry right before export. This ensures chunks don't
+        // miss objects if any were created after tile snapshotting.
+        this.snapshotAllChunkObjectsFromRuntime();
+
         // Build and persist a global portal index file so interior scenes
         // can resolve exterior return coordinates without loading chunks.
         this.savePortalIndexFile();
@@ -474,18 +489,45 @@ import Shop from "../object/shop.js";
         // After generating chunks from the procedural build, persist them
         // to disk so subsequent loads (e.g. after returning from an interior)
         // will read from the saved chunk files instead of re-generating.
+        const finalizeGeneration = () => {
+            this.exitGenerationPersistenceMode();
+            // Switch rendering over to chunk streaming.
+            this.beginChunkStreaming();
+        };
+
         try {
             if (this.worldSystem && typeof this.worldSystem.forceExportAllChunks === 'function') {
                 // Only attempt export when running in an environment that supports saving.
                 if (this.worldDataLoader && this.worldDataLoader._canUseElectronApi) {
-                    this.worldSystem.forceExportAllChunks({ onlyDirty: false }).then((res) => {
-                        if (this.debug) console.log('[WorldSystem] forced export complete', res);
-                    }).catch(err => { if (this.debug) console.warn('forceExportAllChunks failed', err); });
+                    this.worldSystem.forceExportAllChunks({ onlyDirty: false })
+                        .then((res) => {
+                            if (this.debug) console.log('[WorldSystem] forced export complete', res);
+                        })
+                        .catch(err => { if (this.debug) console.warn('forceExportAllChunks failed', err); })
+                        .finally(() => {
+                            finalizeGeneration();
+                        });
+                    return;
                 }
             }
         } catch (e) {}
-        // Switch rendering over to chunk streaming.
-        this.beginChunkStreaming();
+
+        finalizeGeneration();
+    }
+
+    enterGenerationPersistenceMode () {
+        if (!this.chunkManager) return;
+        this.chunkManager.maxLoadedChunks = Infinity;
+    }
+
+    exitGenerationPersistenceMode () {
+        if (!this.chunkManager) return;
+        this.chunkManager.maxLoadedChunks = this.defaultMaxLoadedChunks;
+        try {
+            if (this.worldSystem && typeof this.worldSystem.evictIfNeeded === 'function') {
+                this.worldSystem.evictIfNeeded().catch(() => {});
+            }
+        } catch (e) {}
     }
 
     clearPortalIndex () {
@@ -645,10 +687,14 @@ import Shop from "../object/shop.js";
                 Object.entries(objectRegistry).forEach(([key, objects]) => {
                     if (!Array.isArray(objects)) return;
                     const parts = key.split("_");
-                    const worldX = parseInt(parts[0], 10);
-                    const worldY = parseInt(parts[1], 10);
+                    const keyX = Number(parts[0]);
+                    const keyY = Number(parts[1]);
                     objects.forEach(obj => {
                         try {
+                            const worldX = Number.isFinite(obj?.tile_x) ? obj.tile_x : keyX;
+                            const worldY = Number.isFinite(obj?.tile_y) ? obj.tile_y : keyY;
+                            if (!Number.isFinite(worldX) || !Number.isFinite(worldY)) return;
+
                             const chunk = this.chunkManager.getChunkAtTile(worldX, worldY);
                             if (!chunk) return;
                             const local = chunk.worldToLocal(worldX, worldY);
@@ -1010,10 +1056,16 @@ import Shop from "../object/shop.js";
             const wy = chunk.tileOriginY + entity.localY;
             if (this.debug) console.log(`[Exterior] plant entity: slug=${entity.slug} local=${entity.localX},${entity.localY} age=${entity.age_days ?? entity.params?.age_days ?? 0} world=${wx},${wy}`);
             if (!this.inWorldBounds(wx, wy)) return;
+
+            const existingPlants = plantManager.registry.getPlants(wx, wy) ?? [];
+            const duplicateKind = Array.isArray(existingPlants) && existingPlants.some(existing => existing?.info?.slug === entity.slug);
+            if (duplicateKind) {
+                return;
+            }
+
             try {
-                if (!plantManager.registry.placeEmpty(wx, wy)) {
-                    if (this.debug) console.log(`[Exterior] replacing existing runtime plant at ${wx},${wy}`);
-                    try { plantManager.registry.removePlants(wx, wy); } catch (e) {}
+                if (!plantManager.registry.placeEmpty(wx, wy) && this.debug) {
+                    console.log(`[Exterior] keeping existing plants at ${wx},${wy}; adding kind=${entity.slug}`);
                 }
             } catch (e) {}
             const age = entity.age_days ?? entity.params?.age_days ?? 0;
@@ -1090,10 +1142,20 @@ import Shop from "../object/shop.js";
         const objects = chunk.getEntitiesByKind('object');
         if (!Array.isArray(objects)) return;
         const clearedTiles = new Set();
+        const renderedKinds = new Set();
         if (this.debug) console.log(`[Exterior] renderChunkObjects ${chunk.key} objectCount=${objects.length}`);
         objects.forEach(entity => {
             const wx = chunk.tileOriginX + entity.localX;
             const wy = chunk.tileOriginY + entity.localY;
+            const tileKindKey = `${wx}_${wy}_${entity.slug}`;
+            if (renderedKinds.has(tileKindKey)) {
+                if (this.debug) {
+                    console.warn(`[Exterior] skipping duplicate object kind ${entity.slug} at ${wx},${wy} in chunk ${chunk.key}`);
+                }
+                return;
+            }
+            renderedKinds.add(tileKindKey);
+
             // Debug: detect if multiple entity records target same world tile
             if (this.debug) {
                 const conflicts = objects.filter(e => e.localX === entity.localX && e.localY === entity.localY);
@@ -1321,10 +1383,16 @@ import Shop from "../object/shop.js";
                     const wx = chunk.tileOriginX + entity.localX;
                     const wy = chunk.tileOriginY + entity.localY;
                     if (!this.inWorldBounds(wx, wy)) return;
+
+                    const existingPlants = plantManager.registry.getPlants(wx, wy) ?? [];
+                    const duplicateKind = Array.isArray(existingPlants) && existingPlants.some(existing => existing?.info?.slug === entity.slug);
+                    if (duplicateKind) {
+                        return;
+                    }
+
                     try {
                         if (!plantManager.registry.placeEmpty(wx, wy)) {
-                            // Existing runtime-generated plant present — replace with chunk authoritative data
-                            try { plantManager.registry.removePlants(wx, wy); } catch (e) {}
+                            // Allow multiple plant kinds per tile while preventing duplicates per kind.
                         }
                     } catch (e) {}
                     const age = entity.age_days ?? entity.params?.age_days ?? 0;
@@ -1446,52 +1514,21 @@ import Shop from "../object/shop.js";
             return;
         }
 
-        const params = {};
-        if (object.state && object.state.name) params.state = object.state.name;
-        if (object.services) params.services = object.services;
-        if (object.portal) {
-            const roomId = object.portal.room_id;
-            const portalId = object.portal.portalId ?? `ext:${roomId}:${worldX}:${worldY}`;
-            const returnPortal = object.portal.return ?? {
-                ROOM: -1,
-                X: worldX,
-                Y: worldY,
-                FACING: 'S',
-                SLUG: object.info?.slug,
-            };
-
-            params.portal = {
-                room_id: roomId,
-                x: object.portal.x,
-                y: object.portal.y,
-                facing: object.portal.facing ?? 'N',
-                world: { x: worldX, y: worldY },
-                return: returnPortal,
-                slug: object.portal.slug ?? object.info?.slug,
-                portalId,
-                address: object.portal.address ?? null,
-            };
-        }
-
-        const variety = (typeof object.variety === 'number') ? object.variety : undefined;
-        const items = this.serializeChunkItemContents(object.items ?? []);
-        const depth = (object.sprite && typeof object.sprite.depth !== 'undefined') ? object.sprite.depth : undefined;
-        const flipX = (object.sprite && object.sprite.flipX) ? true : false;
-        const flipY = (object.sprite && object.sprite.flipY) ? true : false;
-        const slug = object.info?.slug;
-
-        if (slug == undefined || slug === '') {
+        const payload = this.buildChunkObjectPayload(object, worldX, worldY);
+        if (payload == null) {
             return;
         }
 
+        const { slug, params, variety, items, depth, flipX, flipY } = payload;
+
         const existingObjects = (typeof chunk.getEntitiesByKind === 'function') ? chunk.getEntitiesByKind('object') : [];
         existingObjects
-            .filter(entity => entity.localX === local.x && entity.localY === local.y)
+            .filter(entity => entity.localX === local.x && entity.localY === local.y && entity.slug === slug)
             .forEach(entity => chunk.removeEntity('object', entity.slug, local.x, local.y));
 
         const existingPortals = (typeof chunk.getEntitiesByKind === 'function') ? chunk.getEntitiesByKind('portal') : [];
         existingPortals
-            .filter(entity => entity.localX === local.x && entity.localY === local.y)
+            .filter(entity => entity.localX === local.x && entity.localY === local.y && entity.slug === (params.portal?.slug ?? slug))
             .forEach(entity => chunk.removeEntity('portal', entity.slug, local.x, local.y));
 
         chunk.addEntity('object', slug, local.x, local.y, {
@@ -1522,6 +1559,267 @@ import Shop from "../object/shop.js";
         }
     }
 
+    buildChunkObjectPayload (object, worldX, worldY) {
+        const slug = object?.info?.slug;
+        if (slug == undefined || slug === '') {
+            return null;
+        }
+
+        const params = {};
+        if (object.state && object.state.name) {
+            params.state = object.state.name;
+        }
+        if (object.services) {
+            params.services = object.services;
+        }
+        if (Array.isArray(object.announcements) && object.announcements.length > 0) {
+            params.announcements = object.announcements;
+        }
+        if (object.portal) {
+            const roomId = object.portal.room_id;
+            const portalId = object.portal.portalId ?? `ext:${roomId}:${worldX}:${worldY}`;
+            const returnPortal = object.portal.return ?? {
+                ROOM: -1,
+                X: worldX,
+                Y: worldY,
+                FACING: 'S',
+                SLUG: slug,
+            };
+
+            params.portal = {
+                room_id: roomId,
+                x: object.portal.x,
+                y: object.portal.y,
+                facing: object.portal.facing ?? 'N',
+                world: { x: worldX, y: worldY },
+                return: returnPortal,
+                slug: object.portal.slug ?? slug,
+                portalId,
+                address: object.portal.address ?? null,
+            };
+        }
+
+        return {
+            slug,
+            params,
+            variety: (typeof object.variety === 'number') ? object.variety : undefined,
+            items: this.serializeChunkItemContents(object.items ?? []),
+            depth: (object.sprite && typeof object.sprite.depth !== 'undefined') ? object.sprite.depth : undefined,
+            flipX: (object.sprite && object.sprite.flipX) ? true : false,
+            flipY: (object.sprite && object.sprite.flipY) ? true : false,
+        };
+    }
+
+    getChunkObjectEntityFingerprint (entity = {}) {
+        const payload = {
+            slug: entity.slug ?? null,
+            localX: entity.localX ?? null,
+            localY: entity.localY ?? null,
+            variety: entity.variety ?? null,
+            params: entity.params ?? null,
+            items: entity.items ?? [],
+            depth: entity.depth ?? null,
+            flipX: entity.flipX === true,
+            flipY: entity.flipY === true,
+        };
+
+        return JSON.stringify(payload);
+    }
+
+    getChunkObjectPayloadFingerprint (payload = {}, localX = null, localY = null) {
+        const entityLike = {
+            slug: payload.slug ?? null,
+            localX,
+            localY,
+            variety: payload.variety ?? null,
+            params: payload.params ?? null,
+            items: payload.items ?? [],
+            depth: payload.depth ?? null,
+            flipX: payload.flipX === true,
+            flipY: payload.flipY === true,
+        };
+        return this.getChunkObjectEntityFingerprint(entityLike);
+    }
+
+    snapshotChunkObjectsFromRuntime (chunk) {
+        if (chunk == undefined || typeof chunk.getEntitiesByKind !== 'function') {
+            return 0;
+        }
+
+        const objectRegistry = this.scene?.manager?.objectManager?.registry?.registry;
+        if (objectRegistry == undefined || typeof objectRegistry !== 'object') {
+            return 0;
+        }
+
+        const chunkLeft = chunk.tileOriginX;
+        const chunkTop = chunk.tileOriginY;
+        const chunkRight = chunkLeft + CHUNK_SIZE;
+        const chunkBottom = chunkTop + CHUNK_SIZE;
+
+        const existingObjects = chunk.getEntitiesByKind('object');
+        const existingPortals = chunk.getEntitiesByKind('portal');
+        if (Array.isArray(existingObjects)) {
+            existingObjects.forEach((entity) => chunk.removeEntity('object', entity.slug, entity.localX, entity.localY));
+        }
+        if (Array.isArray(existingPortals)) {
+            existingPortals.forEach((entity) => chunk.removeEntity('portal', entity.slug, entity.localX, entity.localY));
+        }
+
+        let addedObjects = 0;
+        const seenObjectKinds = new Set();
+        const seenPortalIds = new Set();
+        Object.entries(objectRegistry).forEach(([key, objects]) => {
+            if (!Array.isArray(objects) || objects.length === 0) {
+                return;
+            }
+
+            const parts = key.split('_');
+            const keyX = Number(parts[0]);
+            const keyY = Number(parts[1]);
+
+            objects.forEach((object) => {
+                const worldX = Number.isFinite(object?.tile_x) ? object.tile_x : keyX;
+                const worldY = Number.isFinite(object?.tile_y) ? object.tile_y : keyY;
+                if (!Number.isFinite(worldX) || !Number.isFinite(worldY)) {
+                    return;
+                }
+
+                if (worldX < chunkLeft || worldY < chunkTop || worldX >= chunkRight || worldY >= chunkBottom) {
+                    return;
+                }
+
+                const local = chunk.worldToLocal(worldX, worldY);
+                if (local == null) {
+                    return;
+                }
+
+                const payload = this.buildChunkObjectPayload(object, worldX, worldY);
+                if (payload == null) {
+                    return;
+                }
+
+                const { slug, params, variety, items, depth, flipX, flipY } = payload;
+                const objectKindKey = `${local.x}_${local.y}_${slug}`;
+                if (seenObjectKinds.has(objectKindKey)) {
+                    return;
+                }
+                seenObjectKinds.add(objectKindKey);
+
+                chunk.addEntity('object', slug, local.x, local.y, {
+                    variety,
+                    params,
+                    items,
+                    depth,
+                    flipX,
+                    flipY,
+                });
+                addedObjects += 1;
+
+                if (params.portal && params.portal.portalId) {
+                    if (seenPortalIds.has(params.portal.portalId)) {
+                        return;
+                    }
+                    seenPortalIds.add(params.portal.portalId);
+                    chunk.addEntity('portal', params.portal.slug ?? slug, local.x, local.y, {
+                        portalId: params.portal.portalId,
+                        room_id: params.portal.room_id,
+                        x: params.portal.x,
+                        y: params.portal.y,
+                        facing: params.portal.facing,
+                        world: params.portal.world,
+                        return: params.portal.return,
+                        address: params.portal.address,
+                        objectSlug: slug,
+                    });
+                }
+            });
+        });
+
+        if (this.worldSystem) {
+            try { this.worldSystem.markDirty(chunk); } catch (e) {}
+        }
+        else {
+            chunk.dirty = true;
+        }
+
+        return addedObjects;
+    }
+
+    snapshotAllChunkObjectsFromRuntime () {
+        if (this.chunkManager == undefined) {
+            return 0;
+        }
+
+        const chunks = this.chunkManager.getAllChunks();
+        if (!Array.isArray(chunks) || chunks.length === 0) {
+            return 0;
+        }
+
+        let total = 0;
+        chunks.forEach((chunk) => {
+            total += this.snapshotChunkObjectsFromRuntime(chunk);
+        });
+
+        if (this.debug) {
+            console.log(`[ChunkSnapshot] rebuilt object entities from runtime across ${chunks.length} chunks, totalObjects=${total}`);
+        }
+
+        return total;
+    }
+
+    async flushChunkOnLeave (chunk, reason = 'leave') {
+        if (!chunk || !chunk.loaded || this.worldDataLoader == undefined) {
+            return false;
+        }
+
+        const existing = this.pendingChunkFlushes.get(chunk.key);
+        if (existing != undefined) {
+            return existing;
+        }
+
+        const flushPromise = (async () => {
+            const added = this.snapshotChunkObjectsFromRuntime(chunk);
+            if (this.debug) {
+                console.log(`[ChunkFlush] ${reason} ${chunk.key} objects=${added}`);
+            }
+
+            if (typeof this.worldDataLoader.saveChunk !== 'function') {
+                return false;
+            }
+
+            const ok = await this.worldDataLoader.saveChunk(chunk);
+            if (ok && this.worldSystem && typeof this.worldSystem.clearDirtyFor === 'function') {
+                try { this.worldSystem.clearDirtyFor(chunk); } catch (e) {}
+            }
+
+            if (this.debug) {
+                console.log(`[ChunkFlush] ${reason} ${chunk.key} saved=${ok}`);
+            }
+
+            return ok;
+        })();
+
+        this.pendingChunkFlushes.set(chunk.key, flushPromise);
+        return flushPromise.finally(() => {
+            this.pendingChunkFlushes.delete(chunk.key);
+        });
+    }
+
+    async flushActiveChunksOnTransition (reason = 'transition') {
+        if (this.chunkManager == undefined) {
+            return { attempted: 0, saved: 0 };
+        }
+
+        const activeChunks = this.chunkManager.getActiveChunks();
+        if (!Array.isArray(activeChunks) || activeChunks.length === 0) {
+            return { attempted: 0, saved: 0 };
+        }
+
+        const results = await Promise.all(activeChunks.map((chunk) => this.flushChunkOnLeave(chunk, reason)));
+        const saved = results.filter(Boolean).length;
+        return { attempted: activeChunks.length, saved };
+    }
+
     removeChunkObjectEntity (_object, worldX, worldY) {
         if (!this.objectChunkSyncEnabled || this.chunkManager == undefined) {
             return;
@@ -1541,10 +1839,19 @@ import Shop from "../object/shop.js";
             return;
         }
 
-        const existingObjects = chunk.getEntitiesByKind('object').filter(entity => entity.localX === local.x && entity.localY === local.y);
+        const slug = _object?.info?.slug ?? null;
+        const existingObjects = chunk.getEntitiesByKind('object').filter(entity => {
+            if (entity.localX !== local.x || entity.localY !== local.y) return false;
+            if (slug == null) return true;
+            return entity.slug === slug;
+        });
         existingObjects.forEach(entity => chunk.removeEntity('object', entity.slug, local.x, local.y));
 
-        const existingPortals = chunk.getEntitiesByKind('portal').filter(entity => entity.localX === local.x && entity.localY === local.y);
+        const existingPortals = chunk.getEntitiesByKind('portal').filter(entity => {
+            if (entity.localX !== local.x || entity.localY !== local.y) return false;
+            if (slug == null) return true;
+            return entity.objectSlug === slug || entity.slug === slug;
+        });
         existingPortals.forEach(entity => chunk.removeEntity('portal', entity.slug, local.x, local.y));
 
         if (this.worldSystem) {
