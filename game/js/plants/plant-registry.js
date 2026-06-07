@@ -47,13 +47,27 @@ export default class PlantRegistry {
         /// Should be feedback for when a plant cannot be placed (for now the only condition is that another plant cannot already be on the tile)
     }
 
+    getPlantKind(plant) {
+        return plant?.info?.slug ?? null;
+    }
+
     addPlant(plant, _x, _y) {
         // Do not refer to this directly, use placeplant
         if (this.placeEmpty(_x, _y)) {
             this.registry[_x + "_" + _y] = [];
 
         }
-        this.registry[_x + "_" + _y].push(plant);
+
+        const key = _x + "_" + _y;
+        const kind = this.getPlantKind(plant);
+        if (kind != null) {
+            const duplicate = this.registry[key].some(existing => this.getPlantKind(existing) === kind);
+            if (duplicate) {
+                return false;
+            }
+        }
+
+        this.registry[key].push(plant);
         if (plant.info == undefined) {
             console.warn('Plant does not have an info property');
             console.warn(plant);

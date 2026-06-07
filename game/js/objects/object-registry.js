@@ -106,6 +106,16 @@ export default class ObjectRegistry {
             this.registry[_x+"_"+_y] = [];
             
         }
+
+        const slotKey = _x+"_"+_y;
+        const incomingSlug = object?.info?.slug ?? null;
+        if (incomingSlug != null) {
+            const duplicateKind = this.registry[slotKey].some(existing => existing?.info?.slug === incomingSlug);
+            if (duplicateKind) {
+                return false;
+            }
+        }
+
         this.registry[_x+"_"+_y].push(object);
             if (object.info == undefined) {
                 console.warn('Object does not have an info property');
