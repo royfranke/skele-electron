@@ -229,6 +229,12 @@ export default class Chunk {
     }
 
     addPlant(slug, localX, localY, params = {}) {
+        const duplicate = this.entities.some(entity => (
+            entity.kind === 'plant' && entity.slug === slug && entity.localX === localX && entity.localY === localY
+        ));
+        if (duplicate) {
+            return;
+        }
         this.addEntity('plant', slug, localX, localY, params);
     }
 
