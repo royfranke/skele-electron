@@ -9,6 +9,8 @@ export default class ObjectGlass extends Object {
     }
 
     createGlass() {
+        this.destroyGlass();
+
         var x_pixels = (this.tile_x - this.info.base.x) * 16;
         var y_pixels = (this.tile_y - this.info.base.y) * 16;
 
@@ -18,6 +20,17 @@ export default class ObjectGlass extends Object {
 
         //this.setGlass(0x89bcc6,.9);
 
+    }
+
+    destroyGlass() {
+        if (this.glass != null) {
+            try { this.glass.destroy(); } catch (e) {}
+            this.glass = null;
+        }
+        if (this.behind_glass != null) {
+            try { this.behind_glass.destroy(); } catch (e) {}
+            this.behind_glass = null;
+        }
     }
     
     hideGlass () {
@@ -46,6 +59,11 @@ export default class ObjectGlass extends Object {
         if (this.behind_glass != null) {
             this.behind_glass.setFillStyle(color, alpha);
         }
+    }
+
+    destroySprite() {
+        this.destroyGlass();
+        super.destroySprite();
     }
 
     
