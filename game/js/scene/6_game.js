@@ -89,6 +89,10 @@ export default class GameScene extends Phaser.Scene {
         this.slot.POSITION.RETURN = portal.return;
         this.slot.POSITION.PORTAL_ID = portal.portalId ?? this.slot.POSITION.PORTAL_ID ?? null;
 
+        if (this.exterior != undefined && typeof this.exterior.flushActiveChunksOnTransition === 'function') {
+            await this.exterior.flushActiveChunksOnTransition('portal');
+        }
+
         if (this.exterior != undefined && this.exterior.saveDirtyChunks != undefined) {
             await this.exterior.saveDirtyChunks();
         }
