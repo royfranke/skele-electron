@@ -631,10 +631,34 @@ export default class Object {
     }
 
     destroySprite() {
-        this.sprite.destroy();
-        this.sprite_shadow.destroy();
-        this.sprite = null;
-        this.sprite_shadow = null;
+        if (this.sprite != null) {
+            try { this.sprite.destroy(); } catch (e) {}
+            this.sprite = null;
+        }
+
+        if (this.shadow != null) {
+            try { this.shadow.destroy(); } catch (e) {}
+            this.shadow = null;
+        }
+
+        if (this.sprite_shadow != null) {
+            try { this.sprite_shadow.destroy(); } catch (e) {}
+            this.sprite_shadow = null;
+        }
+
+        if (this.shell_sprite != null) {
+            try { this.shell_sprite.destroy(); } catch (e) {}
+            this.shell_sprite = null;
+        }
+
+        if (Array.isArray(this.slotted) && this.slotted.length > 0) {
+            this.slotted.forEach((slot) => {
+                if (slot != null && typeof slot.destroy === 'function') {
+                    try { slot.destroy(); } catch (e) {}
+                }
+            });
+            this.slotted = [];
+        }
     }
 }
 
