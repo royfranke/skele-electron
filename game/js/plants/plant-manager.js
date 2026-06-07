@@ -76,7 +76,13 @@ export default class PlantManager {
                     const local = chunk.worldToLocal(_x, _y);
                     if (local) {
                         const slug = plant?.info?.slug ?? plant?.name ?? 'UNKNOWN';
-                        chunk.addPlant(slug, local.x, local.y, { age_days: plant.day });
+                        const existingPlants = (typeof chunk.getPlants === 'function') ? chunk.getPlants() : [];
+                        const alreadyExists = Array.isArray(existingPlants) && existingPlants.some(entity => (
+                            entity.localX === local.x && entity.localY === local.y && entity.slug === slug
+                        ));
+                        if (!alreadyExists) {
+                            chunk.addPlant(slug, local.x, local.y, { age_days: plant.day });
+                        }
                         if (worldSystem && typeof worldSystem.markDirty === 'function') {
                             try { worldSystem.markDirty(chunk); } catch (e) {}
                         } else {
