@@ -468,32 +468,39 @@ export default class ShopBlueprint {
     }
 
 
-    setRollingGate(gate_index, state_name)  {
-        if (this.gates[gate_index] == undefined || this.gates[gate_index].state == undefined) {
+    setRollingGate(gate_or_index, state_name)  {
+        const gateObject = (typeof gate_or_index == 'number') ? this.gates[gate_or_index] : gate_or_index;
+        if (gateObject == undefined || gateObject.state == undefined) {
             return;
         }
-        var gate = this.gates[gate_index].state;
+        var gate = gateObject.state;
         if (gate.name == 'OPEN' && state_name == 'OPENING') {
             return;
         }
         if (gate.name == 'CLOSED' && state_name == 'CLOSING') {
             return;
         }
-        this.gates[gate_index].setState(state_name);
+        gateObject.setState(state_name, true);
+        if (typeof gateObject.playAnimation == 'function') {
+            gateObject.playAnimation();
+        }
     }
 
     setRollingGates(state_name) {
         var shop_closing_delay = this.roll([500, 1000, 1500, 2000]);
-        for (var i = 0; i < this.gates.length; i++) {
+        const gates = this.gates.filter(gate => gate != undefined);
+        for (var i = 0; i < gates.length; i++) {
+            const gateObject = gates[i];
             var delay = shop_closing_delay + (500 * i);
             if (state_name == 'OPEN' || state_name == 'CLOSED') {
-                delay = 0;
+                this.setRollingGate(gateObject, state_name);
+                continue;
             }
             this.scene.time.addEvent({
                 delay: delay,
-                callback: this.setRollingGate,
-                args: [i, state_name],
-                callbackScope: this
+                callback: () => {
+                    this.setRollingGate(gateObject, state_name);
+                }
             });
         }
     }

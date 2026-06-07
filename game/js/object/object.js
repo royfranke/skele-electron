@@ -174,6 +174,7 @@ export default class Object {
     playAnimation () {
         if (this.sprite != null && this.state != null && this.state.frames != null && this.state.frames.length > 0) {
             const animKey = this.info.slug + "-" + this.state.name;
+            const stateFrame = this.state.frames[0] ?? null;
             const hasAnims = this.sprite.anims && typeof this.sprite.anims.play === 'function';
             if (hasAnims) {
                 try {
@@ -185,12 +186,24 @@ export default class Object {
                         });
                     }
                 } catch (e) {
-                    // Fall through to frame fallback if animation play fails
-                    if (this.sprite.setFrame) this.sprite.setFrame(animKey);
+                    if (this.sprite.setFrame) {
+                        if (stateFrame != null) {
+                            this.sprite.setFrame(stateFrame);
+                        }
+                        else {
+                            this.sprite.setFrame(this.info.slug + '-' + (this.variety || 1));
+                        }
+                    }
                 }
             } else {
-                // No animation support on this sprite (e.g., non-animated object), set static frame
-                if (this.sprite.setFrame) this.sprite.setFrame(this.info.slug + '-' + (this.variety || 1));
+                if (this.sprite.setFrame) {
+                    if (stateFrame != null) {
+                        this.sprite.setFrame(stateFrame);
+                    }
+                    else {
+                        this.sprite.setFrame(this.info.slug + '-' + (this.variety || 1));
+                    }
+                }
             }
         }
     }
