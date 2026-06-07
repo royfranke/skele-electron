@@ -59,8 +59,8 @@ import Shop from "../object/shop.js";
         const worldChunksWidth  = Math.ceil(MAP_CONFIG.width  / CHUNK_SIZE);
         const worldChunksHeight = Math.ceil(MAP_CONFIG.height / CHUNK_SIZE);
         this.chunkManager = new ChunkManager({
-            activeRadius:      2,
-            maxLoadedChunks:   128,
+            activeRadius:      1,
+            maxLoadedChunks:   16,
             debug: this.debug,
             worldChunksWidth,
             worldChunksHeight,

@@ -21,7 +21,7 @@ export default class ChunkManager {
 
     /**
      * @param {object} options
-     * @param {number} [options.activeRadius=2]   Chebyshev radius of chunks kept alive around player.
+     * @param {number} [options.activeRadius=0]   Chebyshev radius of chunks kept alive around player.
      *                                             2 = 5×5 grid, 3 = 7×7 grid.
      * @param {number} [options.worldChunksWidth]  Total world width in chunks (optional, for bounds clamping).
      * @param {number} [options.worldChunksHeight] Total world height in chunks (optional, for bounds clamping).
