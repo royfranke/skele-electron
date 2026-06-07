@@ -13,7 +13,15 @@ export default class AnnouncementRegistry {
     loadAnnouncements (_x, _y) {
         this.last_announcements = this.current_announcements;
         if (this.dirtySlot(_x, _y)) {
-            this.current_announcements = this.registry[_x+"_"+_y];
+            const slotKey = _x+"_"+_y;
+            const announcers = Array.isArray(this.registry[slotKey]) ? this.registry[slotKey] : [];
+            this.current_announcements = announcers.filter((announcer) => {
+                if (announcer == null || announcer.object == null) {
+                    return false;
+                }
+                return announcer.object.registered === true && announcer.object.sprite != null;
+            });
+            this.registry[slotKey] = this.current_announcements;
         }
         else {
             this.current_announcements = [];

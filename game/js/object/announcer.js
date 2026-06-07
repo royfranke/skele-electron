@@ -10,6 +10,11 @@ export default class Announcer {
     }
 
     showAnnouncements (show=false) {
+        if (!this.canRenderAnnouncements()) {
+            this.clearAnnouncements();
+            return;
+        }
+
         if (this.announced != null && !show) {
             this.hideAnnouncements();
         }
@@ -28,6 +33,11 @@ export default class Announcer {
     }
 
     drawAnnouncements () {
+        if (!this.canRenderAnnouncements()) {
+            this.clearAnnouncements();
+            return;
+        }
+
         if (this.state == 'UNFORMED') {
             var _x = this.object.sprite.x + Math.floor(this.object.sprite.width/2);
             var _y = this.object.sprite.y - 16;
@@ -218,6 +228,11 @@ export default class Announcer {
     } 
 
     hideAnnouncements () {
+        if (!Array.isArray(this.announced) || this.announced.length === 0) {
+            this.clearAnnouncements();
+            return;
+        }
+
         var last = this.announced.length - 1;
         this.announced.forEach((announce,index) => {
             var tween = this.scene.add.tween({
@@ -242,6 +257,10 @@ export default class Announcer {
     }
 
     bounceAnnouncements () {
+        if (!this.canRenderAnnouncements() || !Array.isArray(this.announced) || this.announced.length === 0) {
+            return;
+        }
+
         var _y = this.object.sprite.y - 16;
         this.announced.forEach((announce) => {
             this.scene.add.tween({
@@ -263,6 +282,15 @@ export default class Announcer {
             this.announced = null;
         }
         this.state = 'UNFORMED';
+    }
+
+    canRenderAnnouncements () {
+        return !!(
+            this.object != null &&
+            this.object.registered === true &&
+            this.object.sprite != null &&
+            this.scene != null
+        );
     }
 
 }
