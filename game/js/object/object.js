@@ -527,6 +527,14 @@ export default class Object {
         if (params.state != undefined) {
             this.setState(params.state, true);
         }
+
+        if (params.signal_axis != undefined) {
+            this.signalAxis = params.signal_axis;
+        }
+
+        if (params.signal_role != undefined) {
+            this.signalRole = params.signal_role;
+        }
     }
 
     setLight (keylight) {

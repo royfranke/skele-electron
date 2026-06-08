@@ -12,6 +12,7 @@ import Chunk from "../world/chunk.js";
 import { CHUNK_SIZE } from "../world/chunk.js";
 import WorldDataLoader from "../world/world-data-loader.js";
 import "../world/world-system.js";
+import TrafficSignalManager from "../world/traffic-signal-manager.js";
 import ChunkDebugUI from "../dev/chunk-debug-ui.js";
 import GROUND_TYPE from "../config/atlas/ground-types.js";
 import TYPE_BY_TILE_INDEX from "../config/atlas/type-by-tile-index.js";
@@ -53,6 +54,8 @@ import Shop from "../object/shop.js";
     initialize () {
         this.lastKeyLight = null;
         this.keylight = KEYLIGHT;
+        this.trafficSignals = new TrafficSignalManager(this.scene);
+        this.lastAppliedTrafficPhaseId = null;
 
         this.nav = new Navigator(this.scene);
 
@@ -1225,6 +1228,151 @@ import Shop from "../object/shop.js";
         });
 
         this.rebindShopHoursForChunk(chunk);
+        this.applyTrafficSignalVisuals(true);
+    }
+
+    inferTrafficAxisForObject (object) {
+        if (object == undefined || object.info == undefined) {
+            return null;
+        }
+
+        if (object.signalAxis === 'EW' || object.signalAxis === 'NS') {
+            return object.signalAxis;
+        }
+
+        const slug = String(object.info.slug ?? '');
+        if (object.info.type === 'TRAFFIC_LIGHT_') {
+            if (slug.includes('TRAFFIC_LIGHT_EAST')) {
+                return 'EW';
+            }
+            if (slug.includes('TRAFFIC_LIGHT_NORTH') || slug.includes('TRAFFIC_LIGHT_SOUTH')) {
+                return 'NS';
+            }
+        }
+
+        return null;
+    }
+
+    applyTrafficSignalVisuals (force = false) {
+        if (this.trafficSignals == undefined || this.trafficSignals.getCurrentPhase == undefined) {
+            return;
+        }
+
+        const phase = this.trafficSignals.getCurrentPhase();
+        if (phase == undefined) {
+            return;
+        }
+
+        if (!force && this.lastAppliedTrafficPhaseId === phase.id) {
+            return;
+        }
+
+        this.lastAppliedTrafficPhaseId = phase.id;
+
+        const objectMap = this.scene?.manager?.objectManager?.registry?.registry;
+        if (objectMap == undefined || typeof objectMap !== 'object') {
+            return;
+        }
+
+        const vehicleSignals = [];
+
+        Object.entries(objectMap).forEach(([_key, objects]) => {
+            if (!Array.isArray(objects)) {
+                return;
+            }
+
+            objects.forEach((object) => {
+                if (object == undefined || object.info == undefined) {
+                    return;
+                }
+
+                if (object.info.type !== 'TRAFFIC_LIGHT_') {
+                    return;
+                }
+
+                const axis = this.inferTrafficAxisForObject(object);
+                if (axis == null) {
+                    return;
+                }
+
+                const x = Number(object.tile_x);
+                const y = Number(object.tile_y);
+                if (!Number.isFinite(x) || !Number.isFinite(y)) {
+                    return;
+                }
+
+                vehicleSignals.push({ axis, x, y });
+            });
+        });
+
+        Object.entries(objectMap).forEach(([_key, objects]) => {
+            if (!Array.isArray(objects)) {
+                return;
+            }
+
+            objects.forEach((object) => {
+                if (object == undefined || object.info == undefined || typeof object.setState !== 'function') {
+                    return;
+                }
+
+                if (object.info.type === 'TRAFFIC_LIGHT_') {
+                    const axis = this.inferTrafficAxisForObject(object);
+                    if (axis == null) {
+                        return;
+                    }
+                    const nextState = axis === 'NS' ? phase.ns.vehicle : phase.ew.vehicle;
+                    object.setState(nextState, true);
+                    return;
+                }
+
+                if (object.info.type === 'TRAFFIC_LIGHT_PED_') {
+                    let axis = this.inferTrafficAxisForObject(object);
+                    if (axis == null) {
+                        axis = this.inferTrafficAxisFromNearbyVehicle(object, vehicleSignals);
+                        if (axis != null) {
+                            object.signalAxis = axis;
+                        }
+                    }
+
+                    if (axis == null) {
+                        return;
+                    }
+                    const nextState = axis === 'NS' ? phase.ns.ped : phase.ew.ped;
+                    object.setState(nextState, true);
+                }
+            });
+        });
+    }
+
+    inferTrafficAxisFromNearbyVehicle (pedSignal, vehicleSignals) {
+        if (!Array.isArray(vehicleSignals) || vehicleSignals.length === 0) {
+            return null;
+        }
+
+        const px = Number(pedSignal?.tile_x);
+        const py = Number(pedSignal?.tile_y);
+        if (!Number.isFinite(px) || !Number.isFinite(py)) {
+            return null;
+        }
+
+        let nearest = null;
+        let nearestDist = Infinity;
+
+        vehicleSignals.forEach((signal) => {
+            const dx = signal.x - px;
+            const dy = signal.y - py;
+            const dist = (dx * dx) + (dy * dy);
+            if (dist < nearestDist) {
+                nearestDist = dist;
+                nearest = signal;
+            }
+        });
+
+        if (nearest == null) {
+            return null;
+        }
+
+        return nearest.axis;
     }
 
     getPropertyWorldLines(prop) {
@@ -1603,6 +1751,14 @@ import Shop from "../object/shop.js";
             };
         }
 
+        if (object.signalAxis != undefined) {
+            params.signal_axis = object.signalAxis;
+        }
+
+        if (object.signalRole != undefined) {
+            params.signal_role = object.signalRole;
+        }
+
         return {
             slug,
             params,
@@ -1974,6 +2130,11 @@ import Shop from "../object/shop.js";
     }
 
     update () {
+        if (this.trafficSignals != undefined && this.trafficSignals.update != undefined) {
+            this.trafficSignals.update();
+        }
+        this.applyTrafficSignalVisuals();
+
         const player = this.scene?.player;
         if (player == undefined) {
             return;

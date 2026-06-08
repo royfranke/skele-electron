@@ -7,6 +7,8 @@ export default class ExteriorBlockNode {
         this.scene = scene;
         this.node = node;
         this.traffic_lights = {};
+        this.lastTrafficPhaseId = null;
+        this.trafficSignalListener = null;
         this.node['name'] = this.getIntersectionName();
         this.drawBox();
         this.stop_sign = {'n':false,'e':false,'s':false,'w':false};
@@ -81,71 +83,45 @@ export default class ExteriorBlockNode {
     }
 
     startTrafficLights () {
-        this.setTrafficLights('EW','GREEN','SIGNAL_HAND_WALK');
-        this.setTrafficLights('NS','RED','SIGNAL_HAND_WALK');
-        var light_length = 8000;
-        var warning_length = 4000;
-        var yellow_length = 3000;
-        var red_length = 1000;
-        var half_cycle = light_length + warning_length + yellow_length + red_length;
+        this.bindTrafficSignalUpdates();
+        this.syncTrafficSignals(true);
+    }
 
-        var cycle = this.scene.add.timeline([{
-            at: light_length,
-            run: () => {
-                this.setTrafficLights('EW','GREEN','SIGNAL_HAND_WARNING');
-                this.setTrafficLights('NS','RED','SIGNAL_HAND_WARNING');
-            }
-        },
-        {
-            at: light_length + warning_length,
-            run: () => {
-                this.setTrafficLights('EW','YELLOW','SIGNAL_HAND_WARNING');
-                this.setTrafficLights('NS','RED','SIGNAL_HAND_WARNING');
-            }
-        },
-        {
-            at: light_length + warning_length + yellow_length,
-            run: () => {
-                this.setTrafficLights('EW','RED','SIGNAL_HAND_WARNING');
-                this.setTrafficLights('NS','RED','SIGNAL_HAND_WARNING');
-            }
-        },
-        {
-            at: light_length + warning_length + yellow_length + red_length,
-            run: () => {
-                this.setTrafficLights('EW','RED','SIGNAL_WALK_HAND');
-                this.setTrafficLights('NS','GREEN','SIGNAL_WALK_HAND');
-            }
-        },
-        {
-            at: light_length + half_cycle,
-            run: () => {
-                this.setTrafficLights('EW','RED','SIGNAL_WARNING_HAND');
-                this.setTrafficLights('NS','GREEN','SIGNAL_WARNING_HAND');
-            }
-        },
-        {
-            at: light_length + half_cycle + warning_length,
-            run: () => {
-                this.setTrafficLights('EW','RED','SIGNAL_WARNING_HAND');
-                this.setTrafficLights('NS','YELLOW','SIGNAL_WARNING_HAND');
-            }
-        },
-        {
-            at: light_length + half_cycle + warning_length + yellow_length,
-            run: () => {
-                this.setTrafficLights('EW','RED','SIGNAL_WARNING_HAND');
-                this.setTrafficLights('NS','RED','SIGNAL_WARNING_HAND');
-            }
-        },
-        {
-            at: light_length + half_cycle + warning_length + yellow_length + red_length,
-            run: () => {
-                this.startTrafficLights();
-            }
+    bindTrafficSignalUpdates () {
+        var signalManager = this.scene?.exterior?.trafficSignals;
+        if (signalManager == undefined || signalManager.subscribe == undefined) {
+            return;
         }
-    ]);
-        cycle.play();
+
+        if (this.trafficSignalListener != null) {
+            return;
+        }
+
+        this.trafficSignalListener = () => {
+            this.syncTrafficSignals();
+        };
+
+        signalManager.subscribe(this.trafficSignalListener);
+    }
+
+    syncTrafficSignals (force=false) {
+        var signalManager = this.scene?.exterior?.trafficSignals;
+        if (signalManager == undefined || signalManager.getIntersectionPhase == undefined) {
+            return;
+        }
+
+        var phase = signalManager.getIntersectionPhase(this.node.name);
+        if (phase == undefined) {
+            return;
+        }
+
+        if (!force && this.lastTrafficPhaseId == phase.id) {
+            return;
+        }
+
+        this.lastTrafficPhaseId = phase.id;
+        this.setTrafficLights('EW', phase.ew.vehicle, phase.ew.ped);
+        this.setTrafficLights('NS', phase.ns.vehicle, phase.ns.ped);
     }
 
     setTrafficLights (dir='EW',state='GREEN',ped_state='SIGNAL_WALK_HAND') {
@@ -322,6 +298,16 @@ export default class ExteriorBlockNode {
             const bodyOffsetX = walk_signal.info.offset.x + (walk_signal.info.sprite.w/2);
             const newBodyOffsetX = walk_signal.info.sprite.w - bodyOffsetX;
             walk_signal.sprite.body.setOffset(newBodyOffsetX, walk_signal.info.offset.y + (walk_signal.info.sprite.h/2));
+        }
+
+        var signal_axis = (corner == 'NW' || corner == 'SE') ? 'EW' : 'NS';
+        if (traffic_light != undefined) {
+            traffic_light.signalAxis = signal_axis;
+            traffic_light.signalRole = 'VEHICLE';
+        }
+        if (walk_signal != undefined) {
+            walk_signal.signalAxis = signal_axis;
+            walk_signal.signalRole = 'PEDESTRIAN';
         }
 
 
