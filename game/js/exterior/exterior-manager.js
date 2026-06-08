@@ -1086,17 +1086,19 @@ import Shop from "../object/shop.js";
         if (treeManager == undefined || typeof chunk.getTrees !== 'function') return;
         const trees = chunk.getTrees();
         if (!Array.isArray(trees)) return;
+        const seenTiles = new Set();
         trees.forEach(entity => {
             const wx = chunk.tileOriginX + entity.localX;
             const wy = chunk.tileOriginY + entity.localY;
             if (!this.inWorldBounds(wx, wy)) return;
+            const tileKey = `${wx}_${wy}`;
+            if (seenTiles.has(tileKey)) return;
+            seenTiles.add(tileKey);
             try {
-                if (!treeManager.registry.placeEmpty(wx, wy)) {
-                    try { treeManager.registry.removeTrees(wx, wy); } catch (e) {}
-                }
+                if (!treeManager.registry.placeEmpty(wx, wy)) return;
             } catch (e) {}
             const age = entity.age_days ?? entity.params?.age_days ?? 0;
-            const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age);
+            const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age, { syncChunk: false });
             try {
                 if (createdTree && typeof createdTree === 'object' && !createdTree.sprite) {
                     createdTree.setTileLocation(wx, wy);
@@ -1412,17 +1414,19 @@ import Shop from "../object/shop.js";
         if (treeManager != undefined && typeof chunk.getTrees === 'function') {
             const trees = chunk.getTrees();
             if (Array.isArray(trees)) {
+                const seenTiles = new Set();
                 trees.forEach(entity => {
                     const wx = chunk.tileOriginX + entity.localX;
                     const wy = chunk.tileOriginY + entity.localY;
                     if (!this.inWorldBounds(wx, wy)) return;
+                    const tileKey = `${wx}_${wy}`;
+                    if (seenTiles.has(tileKey)) return;
+                    seenTiles.add(tileKey);
                     try {
-                        if (!treeManager.registry.placeEmpty(wx, wy)) {
-                            try { treeManager.registry.removeTrees(wx, wy); } catch (e) {}
-                        }
+                        if (!treeManager.registry.placeEmpty(wx, wy)) return;
                     } catch (e) {}
                     const age = entity.age_days ?? entity.params?.age_days ?? 0;
-                    const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age);
+                    const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age, { syncChunk: false });
                     // Ensure sprite exists; if registry failed to create sprite, force tile placement
                     try {
                         if (createdTree && typeof createdTree === 'object' && !createdTree.sprite) {

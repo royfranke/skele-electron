@@ -247,6 +247,9 @@ export default class Chunk {
     }
 
     addTree(slug, localX, localY, params = {}) {
+        this.entities = this.entities.filter(entity => !(
+            entity.kind === 'tree' && entity.localX === localX && entity.localY === localY
+        ));
         this.addEntity('tree', slug, localX, localY, params);
     }
 

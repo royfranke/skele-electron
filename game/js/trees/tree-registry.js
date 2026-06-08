@@ -41,6 +41,10 @@ export default class TreeRegistry {
     }
 
     placeTree(tree, _x, _y) {
+        if (!this.placeEmpty(_x, _y)) {
+            tree.setRegistration(false);
+            return false;
+        }
         var added = this.addTree(tree, _x, _y);
         tree.setRegistration(added, { x: _x, y: _y });
         return added;
@@ -51,7 +55,9 @@ export default class TreeRegistry {
         // Do not refer to this directly, use placetree
         if (this.placeEmpty(_x, _y)) {
             this.registry[_x + "_" + _y] = [];
-
+        }
+        else {
+            return false;
         }
         this.registry[_x + "_" + _y].push(tree);
         if (tree.info == undefined) {
