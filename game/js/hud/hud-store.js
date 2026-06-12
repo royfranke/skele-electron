@@ -430,8 +430,8 @@ export default class HudStore extends HudCommon {
             return;
         }
         let receipt = [];
-        this.basket.forEach(function (item) {
-            let item_info = self.scene.manager.itemManager.itemInfo(item);
+        this.basket.forEach((item) => {
+            let item_info = this.scene.manager.itemManager.itemInfo(item);
             receipt.push({
                 name: item_info.name,
                 cost: item_info.cost
