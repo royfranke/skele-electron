@@ -141,6 +141,24 @@ const ITEMS = {
         interactions: {
         },
     },
+      PRETZELS: {
+        name: 'Bag of Pretzels',
+        slug: 'PRETZELS', 
+        use:  'HOLDS',
+        icon: 'PRETZELS',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 200,
+        tags: [{category:'Product Display', tag: 'shelf stable'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       BANANA: {
         name: 'Banana',
         slug: 'BANANA', 
@@ -1150,6 +1168,42 @@ const ITEMS = {
 
             },        },
     },
+      CANNED_LIMA_BEANS: {
+        name: 'Canned Lima Beans',
+        slug: 'CANNED_LIMA_BEANS', 
+        use:  'HOLDS',
+        icon: 'CANNED_LIMA_BEANS',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 200,
+        tags: [{category:'Product Display', tag: 'shelf stable'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      CANNED_TOMATO: {
+        name: 'Canned Tomato Sauce',
+        slug: 'CANNED_TOMATO', 
+        use:  'HOLDS',
+        icon: 'CANNED_TOMATO',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 200,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       BACKPACK_CANVAS: {
         name: 'Canvas Backpack',
         slug: 'BACKPACK_CANVAS', 
@@ -1166,7 +1220,29 @@ const ITEMS = {
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '6',
 items: []    },
       CASSEROLE_BROWNIE: {
@@ -1690,6 +1766,46 @@ items: []    },
         interactions: {
         },
     },
+      CHIPS: {
+        name: 'Chips',
+        slug: 'CHIPS', 
+        use:  'HOLDS',
+        icon: 'CHIPS',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 200,
+        tags: [{category:'Product Display', tag: 'shelf stable'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_40: {
+                req_group: 40,
+                req_group_name: 'Open Chips',
+                req_pocket_action: 'EAT',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'CHIPS_OPEN',
+                req_result_data_key: 'HUNGER',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'CHIPS'
+                    }
+                                ]
+
+            },        },
+    },
       CUPCAKE_CHOCOLATE: {
         name: 'Chocolate Cupcake',
         slug: 'CUPCAKE_CHOCOLATE', 
@@ -1930,7 +2046,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '2',
 items: []    },
       PAPER_BAG_CLEAN: {
@@ -1949,7 +2087,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '3',
 items: []    },
       CLOVES: {
@@ -2124,6 +2284,98 @@ items: []    },
         interactions: {
         },
     },
+      CHIPS_DECAY: {
+        name: 'Decaying Bag of Chips',
+        slug: 'CHIPS_DECAY', 
+        use:  'HOLDS',
+        icon: 'CHIPS_DECAY',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}, {category:'Spawn Points', tag: 'spawn in mud'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 3,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
+    },
+      PRETZELS_DECAY: {
+        name: 'Decaying Bag of Pretzels',
+        slug: 'PRETZELS_DECAY', 
+        use:  'HOLDS',
+        icon: 'PRETZELS_DECAY',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}, {category:'Spawn Points', tag: 'spawn in mud'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 3,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
+    },
       BEER: {
         name: 'Driver’s Brew',
         slug: 'BEER', 
@@ -2261,6 +2513,144 @@ items: []    },
         stacks: [        ],
         interactions: {
         },
+    },
+      CHIPS_EMPTY: {
+        name: 'Empty Bag of Chips',
+        slug: 'CHIPS_EMPTY', 
+        use:  'HOLDS',
+        icon: 'CHIPS_EMPTY',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 3,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
+    },
+      PRETZELS_EMPTY: {
+        name: 'Empty Bag of Pretzels',
+        slug: 'PRETZELS_EMPTY', 
+        use:  'HOLDS',
+        icon: 'PRETZELS_EMPTY',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [{category:'Spawn Points', tag: 'spawn in woods garbage patch'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 3,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
+    },
+      EMPTY_CAN: {
+        name: 'Empty Can',
+        slug: 'EMPTY_CAN', 
+        use:  'HOLDS',
+        icon: 'EMPTY_CAN',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
     },
       SODA_RED_TRASH: {
         name: 'Empty Cane Soda Can',
@@ -2542,6 +2932,24 @@ items: []    },
                                 ]
 
             },        },
+    },
+      PICKLES_EMPTY: {
+        name: 'Empty Pickle Jar',
+        slug: 'PICKLES_EMPTY', 
+        use:  'HOLDS',
+        icon: 'PICKLES_EMPTY',
+        type: 'MATERIAL',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
     },
       PRAYER_CANDLE_EMPTY: {
         name: 'Empty Prayer Candle',
@@ -2858,7 +3266,29 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '3',
 items: []    },
       PAPER_50_: {
@@ -2913,7 +3343,29 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '4',
 items: []    },
       PLASTIC_BAG_1: {
@@ -2957,6 +3409,28 @@ items: []    },
                     type: 'ITEM_KIND',
                     result: 'CONSUMED',
                     ITEM_KIND: 'STICK'
+                    }
+                                ]
+
+            },        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
                     }
                                 ]
 
@@ -3023,6 +3497,24 @@ items: []    },
         use:  'HOLDS',
         icon: 'FLOPPY_YELLOW',
         type: 'MEDIA',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      PACKAGE_FRAGILE: {
+        name: 'Fragile Package',
+        slug: 'PACKAGE_FRAGILE', 
+        use:  'HOLDS',
+        icon: 'PACKAGE_FRAGILE',
+        type: 'PACKAGE',
         default_status: '',
         description: '',
         cost: 0,
@@ -3290,7 +3782,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '2',
 items: []    },
       PAPER_BAG_GREASY: {
@@ -3309,7 +3823,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '3',
 items: []    },
       PIZZA_BOX_GREASY: {
@@ -3346,7 +3882,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '6',
 items: []    },
       CRAYON_GREEN: {
@@ -3877,6 +4435,24 @@ items: []    },
         default_status: '',
         description: 'Prevents iodine deficiency. Use for taste and protective properties.',
         cost: 500,
+        tags: [{category:'Product Display', tag: 'shelf stable'}],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      PICKLES: {
+        name: 'Jar of Pickles',
+        slug: 'PICKLES', 
+        use:  'HOLDS',
+        icon: 'PICKLES',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 600,
         tags: [{category:'Product Display', tag: 'shelf stable'}],
         deplete_from: 0,
         contains: [],
@@ -4570,7 +5146,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '6',
 items: []    },
       LIBRARY_CARD: {
@@ -5456,12 +6054,143 @@ items: []    },
         interactions: {
         },
     },
+      CHIPS_OPEN: {
+        name: 'Open Bag of Chips',
+        slug: 'CHIPS_OPEN', 
+        use:  'HOLDS',
+        icon: 'CHIPS_OPEN',
+        type: 'FOOD',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_41: {
+                req_group: 41,
+                req_group_name: 'Eat Chips',
+                req_pocket_action: 'EAT',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: 'CHIPS_EMPTY',
+                req_result_data_key: 'HUNGER',
+                req_result_data_set: '',
+                req_result_data_modify: '1',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM',
+                    result: 'TRANSFORMED',
+                    ITEM: 'CHIPS_OPEN'
+                    }
+                                ]
+
+            },        },
+    },
+      PRETZELS_OPEN: {
+        name: 'Open Bag of Pretzels',
+        slug: 'PRETZELS_OPEN', 
+        use:  'HOLDS',
+        icon: 'PRETZELS_OPEN',
+        type: 'FOOD',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      BOX_OPEN: {
+        name: 'Open Box',
+        slug: 'BOX_OPEN', 
+        use:  'HOLDS',
+        icon: 'BOX_OPEN',
+        type: 'BOX',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+slots: '4',
+items: []    },
+      CANNED_LIMA_BEANS_OPEN: {
+        name: 'Open Canned Lima Beans',
+        slug: 'CANNED_LIMA_BEANS_OPEN', 
+        use:  'HOLDS',
+        icon: 'CANNED_LIMA_BEANS_OPEN',
+        type: 'INGREDIENT',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      CANNED_TOMATO_OPEN: {
+        name: 'Open Canned Tomato Sauce',
+        slug: 'CANNED_TOMATO_OPEN', 
+        use:  'HOLDS',
+        icon: 'CANNED_TOMATO_OPEN',
+        type: 'INGREDIENT',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       CAT_FOOD_OPEN_CAN: {
         name: 'Open Cat Food Can',
         slug: 'CAT_FOOD_OPEN_CAN', 
         use:  'HOLDS',
         icon: 'CAT_FOOD_OPEN_CAN',
-        type: 'PRODUCT',
+        type: 'FOOD',
+        default_status: 'STINKING',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      PICKLES_OPEN: {
+        name: 'Open Jar of Pickles',
+        slug: 'PICKLES_OPEN', 
+        use:  'HOLDS',
+        icon: 'PICKLES_OPEN',
+        type: 'FOOD',
         default_status: '',
         description: '',
         cost: 0,
@@ -5695,6 +6424,24 @@ items: []    },
         interactions: {
         },
     },
+      PICKLE_JUICE: {
+        name: 'Pickle Juice',
+        slug: 'PICKLE_JUICE', 
+        use:  'HOLDS',
+        icon: 'PICKLE_JUICE',
+        type: 'INGREDIENT',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       PIGGY_BANK: {
         name: 'Piggy Bank',
         slug: 'PIGGY_BANK', 
@@ -5852,7 +6599,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '3',
 items: []    },
       PLATE_1: {
@@ -6358,7 +7127,29 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '4',
 items: []    },
       CIGARETTE_STRONG: {
@@ -6670,7 +7461,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '6',
 items: []    },
       SCISSORS: {
@@ -6807,6 +7620,25 @@ items: []    },
         interactions: {
         },
     },
+      BOX_SEALED: {
+        name: 'Sealed Box',
+        slug: 'BOX_SEALED', 
+        use:  'HOLDS',
+        icon: 'BOX_SEALED',
+        type: 'BOX',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+slots: '4',
+items: []    },
       SARDINES_PRODUCT: {
         name: 'Sealed Pigeon of the Sea Sardines',
         slug: 'SARDINES_PRODUCT', 
@@ -6816,7 +7648,7 @@ items: []    },
         default_status: '',
         description: 'A sealed tin of oily, factory-farmed noodle fish.',
         cost: 0,
-        tags: [],
+        tags: [{category:'Product Display', tag: 'shelf stable'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
@@ -7125,6 +7957,24 @@ items: []    },
         contains: [],
         containedBy: [],
         stack: 0,
+        stacks: [        ],
+        interactions: {
+        },
+    },
+      PACKAGE_SMALL: {
+        name: 'Small Package',
+        slug: 'PACKAGE_SMALL', 
+        use:  'HOLDS',
+        icon: 'PACKAGE_SMALL',
+        type: 'PACKAGE',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
         stacks: [        ],
         interactions: {
         },
@@ -7622,7 +8472,7 @@ items: []    },
         default_status: '',
         description: 'This toilet paper has the potential to be a paper comet, long tail, calculated bounces and rolls, for matting the tree canopy, and some older person’s dignity, and the neighbor’s roof, with streamers.',
         cost: 100,
-        tags: [],
+        tags: [{category:'Product Display', tag: 'shelf stable'}],
         deplete_from: 0,
         contains: [],
         containedBy: [],
@@ -7865,7 +8715,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '2',
 items: []    },
       PRAYER_CANDLE_ORANGE_USED: {
@@ -7902,7 +8774,29 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        },
+        group_39: {
+                req_group: 39,
+                req_group_name: 'Has Bag',
+                req_pocket_action: '',
+                req_world_action: '',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: 'SPARKLE_',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'UNTOUCHED',
+                    ITEM_KIND: 'BAG'
+                    }
+                                ]
+
+            },        },
 slots: '3',
 items: []    },
       PRAYER_CANDLE_RED_USED: {
