@@ -3,9 +3,6 @@ const PRELOAD_FONT = [
         NAME: 'SkeleButton',
     },
     {
-        NAME: 'SkeleDino',
-    },
-    {
         NAME: 'SkeleHype',
     },
     {
