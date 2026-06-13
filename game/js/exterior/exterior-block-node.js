@@ -209,27 +209,33 @@ export default class ExteriorBlockNode {
             
         }
 
+
         if (signs.NS != null && signs.NS != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');
-            pole.setSlot(.5,4.25,slotted);
-            pole.setAnnouncement(signs.NS, 'STREET_SIGN_NS_'+signs.CORNER);
+            let street_sign_ns = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 4.25, 'STREET_SIGN_NS_');
+            street_sign_ns.sprite.setDepth(pole.sprite.depth+1);
+            pole.setAnnouncement(signs.NS, 'STREET_SIGN_NS_' + signs.CORNER);
         }
-        
+
         if (signs.EW != null && signs.EW != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
-            pole.setSlot(.5,3.75,slotted);
-            pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_'+signs.CORNER);
+            let street_sign_ew = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 3.75, 'STREET_SIGN_EW_');
+            street_sign_ew.sprite.setDepth(pole.sprite.depth+1);
+            pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_' + signs.CORNER);
         }
         
         if (signs.STOP != null) {
-            var slotted = this.scene.manager.objectManager.objectInfo('STOP_SIGN_'+signs.STOP);
+            let stop_sign = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 2, 'STOP_SIGN_'+signs.STOP);
             var behind = signs.STOP == 'N' || signs.STOP == 'E' ? true : false;
-            pole.setSlot(.5,2,slotted,false,behind);
+            if (behind) {
+                stop_sign.sprite.setDepth(pole.sprite.depth-1);
+            }
+            else {
+                stop_sign.sprite.setDepth(pole.sprite.depth+1);
+            }
         }
 
         if (signs.TELEPHONE) {
-            var slotted = this.scene.manager.objectManager.objectInfo('TELEPHONE_POLE_TOP');
-            pole.setSlot(0,5,slotted);
+            let telephone = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 10, 'TELEPHONE_POLE_TOP');
+            telephone.sprite.setDepth(pole.sprite.depth+1);
         }
     }
 
@@ -244,28 +250,31 @@ export default class ExteriorBlockNode {
                 corner = 'SW';
                 flip = true;
                 facing = 'W';
-                
-                var light = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_NORTH');
-                pole.setSlot(-4,7,light,false,true);
-                var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_SOUTH');
-                pole.setSlot(0,6,arm,false);
+                let light_north = this.scene.manager.objectManager.newObjectToWorld(_x + 4, _y - 7,'TRAFFIC_LIGHT_NORTH');
+                light_north.sprite.setDepth(pole.sprite.depth-2);
+
+                let arm_south = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 6,'TRAFFIC_LIGHT_ARM_SOUTH');
+                arm_south.sprite.setDepth(pole.sprite.depth+1);
             break;
             case 'NW':
                 corner = 'SE';
                 facing = 'W';
                 // SE intersection corner
+            let light_east = this.scene.manager.objectManager.newObjectToWorld(_x - 1.75, _y - 10.5,'TRAFFIC_LIGHT_EAST');
 
-                var traffic_light = this.scene.manager.objectManager.newObjectToWorld(_x - 1.75, _y - 10.5,'TRAFFIC_LIGHT_EAST');
-                traffic_light.sprite.setDepth(pole.sprite.depth+7.5);
-                traffic_light.sprite.setFlipX(true);
-                if (traffic_light.sprite.body && traffic_light.info && traffic_light.info.offset && traffic_light.info.sprite) {
-                    const bodyOffsetX = traffic_light.info.offset.x + (traffic_light.info.sprite.w/2);
-                    const newBodyOffsetX = traffic_light.info.sprite.w - bodyOffsetX;
-                    traffic_light.sprite.body.setOffset(newBodyOffsetX, traffic_light.info.offset.y + (traffic_light.info.sprite.h/2));
-                }
+            light_east.sprite.setDepth(pole.sprite.depth+3);
+            light_east.sprite.setFlipX(true);
+            
+            if (light_east.sprite.body && light_east.info && light_east.info.offset && light_east.info.sprite) {
+                const bodyOffsetX = light_east.info.offset.x + (light_east.info.sprite.w/2);
+                const newBodyOffsetX = light_east.info.sprite.w - bodyOffsetX;
+                light_east.sprite.body.setOffset(newBodyOffsetX, light_east.info.offset.y + (light_east.info.sprite.h/2));
+            }
                 
-                var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_EAST');
-                pole.setSlot(1,5.5,arm,true);
+            //var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_EAST');
+            let arm_east = this.scene.manager.objectManager.newObjectToWorld(_x - 1, _y - 5.5,'TRAFFIC_LIGHT_ARM_EAST');
+            arm_east.sprite.setDepth(pole.sprite.depth+1);
+            arm_east.sprite.setFlipX(true);
                 
             break;
             case 'SE':
@@ -284,14 +293,16 @@ export default class ExteriorBlockNode {
 
                 // NE intersection corner
 
-                var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_SOUTH');
-                pole.setSlot(4,6,arm,true);
+                //var arm = this.scene.manager.objectManager.objectInfo('TRAFFIC_LIGHT_ARM_SOUTH');
+                let arm_south_2 = this.scene.manager.objectManager.newObjectToWorld(_x - 4, _y - 6,'TRAFFIC_LIGHT_ARM_SOUTH');
+                arm_south_2.sprite.setDepth(pole.sprite.depth+1);
+                arm_south_2.sprite.setFlipX(true);
 
                 var traffic_light = this.scene.manager.objectManager.newObjectToWorld(_x - 4, _y - 7,'TRAFFIC_LIGHT_SOUTH');
                 traffic_light.sprite.setDepth(pole.sprite.depth+7);
             break;
         }
-        var walk_signal = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 2.5,'WALK_SIGNAL_'+facing+'_');
+        var walk_signal = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 2,'WALK_SIGNAL_'+facing+'_');
         walk_signal.sprite.setDepth(pole.sprite.depth+3);
         walk_signal.sprite.setFlipX(flip);
         if (flip && walk_signal.sprite.body && walk_signal.info && walk_signal.info.offset && walk_signal.info.sprite) {
@@ -314,14 +325,14 @@ export default class ExteriorBlockNode {
         this.traffic_lights[corner] = {traffic_light: traffic_light, walk_signal: walk_signal};
 
         if (signs.NS != null && signs.NS != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');
-            pole.setSlot(.5,4.25,slotted);
+            let street_sign_ns = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 4.25, 'STREET_SIGN_NS_');
+            street_sign_ns.sprite.setDepth(pole.sprite.depth+2);
             pole.setAnnouncement(signs.NS, 'STREET_SIGN_NS_'+corner);
         }
         
         if (signs.EW != null && signs.EW != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
-            pole.setSlot(.5,3.75,slotted);
+            let street_sign_ew = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 3.75, 'STREET_SIGN_EW_');
+            street_sign_ew.sprite.setDepth(pole.sprite.depth+1);
             pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_'+corner);
         }
     }

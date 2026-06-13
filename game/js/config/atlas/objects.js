@@ -10478,8 +10478,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:4, 
-          w:8
+          h:0, 
+          w:0
         },
         offset: {
           x:40, 
@@ -11007,8 +11007,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:32, 
-          w:32
+          h:0, 
+          w:0
         },
         offset: {
           x:0, 
@@ -11087,8 +11087,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:32, 
-          w:32
+          h:0, 
+          w:0
         },
         offset: {
           x:0, 
@@ -11167,8 +11167,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:32, 
-          w:32
+          h:0, 
+          w:0
         },
         offset: {
           x:0, 
@@ -11247,8 +11247,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:32, 
-          w:32
+          h:0, 
+          w:0
         },
         offset: {
           x:0, 
@@ -11927,8 +11927,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:16, 
-          w:32
+          h:0, 
+          w:0
         },
         offset: {
           x:0, 
@@ -11967,8 +11967,8 @@ const OBJECTS = {
           y:0
         },
         size: {
-          h:32, 
-          w:32
+          h:0, 
+          w:0
         },
         offset: {
           x:0, 

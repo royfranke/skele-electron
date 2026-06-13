@@ -50,7 +50,7 @@ export default class ObjectManager {
             console.log('Could not put this object in the world from object manager...');
             return false;
         }
-        if (object.info.solid == 1) {
+        if (object.info.solid == 1 && object.info.size.h > 0 && object.info.size.w > 0) {
             this.scene.physics.add.collider(this.scene.player.playerSprite.sprite, object.sprite);
         }
         return result;

@@ -298,27 +298,32 @@ export default class BlockBlueprint {
             sodium.sprite.setDepth(pole.sprite.depth + 1);
         }
 
-        if (signs.NS != null && signs.NS != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_NS_');
-            pole.setSlot(.5, 4.25, slotted);
+          if (signs.NS != null && signs.NS != '') {
+            let street_sign_ns = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 4.25, 'STREET_SIGN_NS_');
+            street_sign_ns.sprite.setDepth(pole.sprite.depth+1);
             pole.setAnnouncement(signs.NS, 'STREET_SIGN_NS_' + signs.CORNER);
         }
 
         if (signs.EW != null && signs.EW != '') {
-            var slotted = this.scene.manager.objectManager.objectInfo('STREET_SIGN_EW_');
-            pole.setSlot(.5, 3.75, slotted);
+            let street_sign_ew = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 3.75, 'STREET_SIGN_EW_');
+            street_sign_ew.sprite.setDepth(pole.sprite.depth+1);
             pole.setAnnouncement(signs.EW, 'STREET_SIGN_EW_' + signs.CORNER);
         }
 
-        if (signs.STOP != null) {
-            var slotted = this.scene.manager.objectManager.objectInfo('STOP_SIGN_' + signs.STOP);
+       if (signs.STOP != null) {
+            let stop_sign = this.scene.manager.objectManager.newObjectToWorld(_x - .5, _y - 2.75, 'STOP_SIGN_'+signs.STOP);
             var behind = signs.STOP == 'N' || signs.STOP == 'E' ? true : false;
-            pole.setSlot(.5, 2, slotted, false, behind);
+            if (behind) {
+                stop_sign.sprite.setDepth(pole.sprite.depth-1);
+            }
+            else {
+                stop_sign.sprite.setDepth(pole.sprite.depth+1);
+            }
         }
 
         if (signs.TELEPHONE) {
-            var slotted = this.scene.manager.objectManager.objectInfo('TELEPHONE_POLE_TOP');
-            pole.setSlot(0, 5, slotted);
+            let telephone = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 10, 'TELEPHONE_POLE_TOP');
+            telephone.sprite.setDepth(pole.sprite.depth+1);
         }
     }
 
