@@ -3287,6 +3287,174 @@
 	}
     
                          
-                                                                      	
+      ,  { 
+		"filename": "PACKAGE_SMALL",
+		"frame": {"x":432,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CANNED_TOMATO",
+		"frame": {"x":448,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CANNED_TOMATO_OPEN",
+		"frame": {"x":464,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PACKAGE_FRAGILE",
+		"frame": {"x":480,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BOX_SEALED",
+		"frame": {"x":496,"y":192,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "BOX_OPEN",
+		"frame": {"x":0,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CANNED_LIMA_BEANS",
+		"frame": {"x":16,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CANNED_LIMA_BEANS_OPEN",
+		"frame": {"x":32,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "EMPTY_CAN",
+		"frame": {"x":48,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRETZELS",
+		"frame": {"x":64,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRETZELS_OPEN",
+		"frame": {"x":80,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRETZELS_EMPTY",
+		"frame": {"x":96,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PRETZELS_DECAY",
+		"frame": {"x":112,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CHIPS",
+		"frame": {"x":128,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CHIPS_OPEN",
+		"frame": {"x":144,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CHIPS_EMPTY",
+		"frame": {"x":160,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CHIPS_DECAY",
+		"frame": {"x":176,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PICKLES",
+		"frame": {"x":192,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PICKLES_OPEN",
+		"frame": {"x":208,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PICKLE_JUICE",
+		"frame": {"x":224,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PICKLES_EMPTY",
+		"frame": {"x":240,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+                                                                          	
 ]
 }
