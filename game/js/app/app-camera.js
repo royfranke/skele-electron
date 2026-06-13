@@ -109,7 +109,7 @@ export default class AppCamera {
         if (this.background != null) {
             this.background.destroy();
         }
-        this.background = this.scene.add.rectangle(this.view.left, this.view.top, this.view.width, this.view.height, color, opacity).setOrigin(0).setDepth(1).setScrollFactor(0);
+        this.background = this.scene.add.rectangle(this.view.left, this.view.top, this.view.width, this.view.height, color, opacity).setOrigin(0).setDepth(0).setScrollFactor(0);
     }
 
 }
