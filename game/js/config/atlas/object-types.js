@@ -189,6 +189,8 @@ const OBJECT_TYPES = {
       'TRASH_DRUM'    ],
       TREE: [
       'BOXELDER'    ],
+      SIGN_UNLIT: [
+      'SIGN_BOOKSTORE'    ],
       UTILITY_POLE: [
       'METAL_POLE','WOOD_POLE'    ],
       UTILITY_POLE_TOP: [

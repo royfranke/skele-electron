@@ -3371,6 +3371,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          SIGN_BOOKSTORE: {
+        name: 'Dead Language Bookstore Sign',
+        slug: 'SIGN_BOOKSTORE', 
+        type: 'SIGN_UNLIT',
+        bounding: {
+          h:4, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:2, 
+          y:6
+        },
+        depth: 0,
+        sprite: {
+          h:56, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           WOOD_SIDE_TABLE_NO_DRAWER: {
         name: 'Decorative Wood Side Table',
         slug: 'WOOD_SIDE_TABLE_NO_DRAWER', 

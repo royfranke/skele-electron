@@ -1069,6 +1069,12 @@
 		"sourceSize": {"w":16,"h":32 }
 	},    
       {
+		"filename": "SIGN_BOOKSTORE-1",
+		"frame": {"x":976,"y":538,"w":48,"h":56},
+    "spriteSourceSize": {"x":0,"y":0,"w":48,"h":56 },
+		"sourceSize": {"w":48,"h":56 }
+	},    
+      {
 		"filename": "WOOD_SIDE_TABLE_NO_DRAWER-1",
 		"frame": {"x":640,"y":111,"w":16,"h":32},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":32 },
@@ -2756,7 +2762,7 @@
 	},    
       {
 		"filename": "POWER_LINE_POST_BUILDING_2-1",
-		"frame": {"x":448,"y":596,"w":39,"h":58},
+		"frame": {"x":480,"y":596,"w":39,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":39,"h":58 },
 		"sourceSize": {"w":39,"h":58 }
 	},    
@@ -2840,145 +2846,145 @@
 	},    
       {
 		"filename": "ROLLING_GATE_DOOR-1",
-		"frame": {"x":976,"y":538,"w":32,"h":58},
+		"frame": {"x":1024,"y":538,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_DOOR-2",
-		"frame": {"x":1008,"y":538,"w":32,"h":58},
-    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
-		"sourceSize": {"w":32,"h":58 }
-	},    
-    {
-		"filename": "ROLLING_GATE_DOOR-3",
 		"frame": {"x":0,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-4",
+		"filename": "ROLLING_GATE_DOOR-3",
 		"frame": {"x":32,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-5",
+		"filename": "ROLLING_GATE_DOOR-4",
 		"frame": {"x":64,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-6",
+		"filename": "ROLLING_GATE_DOOR-5",
 		"frame": {"x":96,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-7",
+		"filename": "ROLLING_GATE_DOOR-6",
 		"frame": {"x":128,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-8",
+		"filename": "ROLLING_GATE_DOOR-7",
 		"frame": {"x":160,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-9",
+		"filename": "ROLLING_GATE_DOOR-8",
 		"frame": {"x":192,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-10",
+		"filename": "ROLLING_GATE_DOOR-9",
 		"frame": {"x":224,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-11",
+		"filename": "ROLLING_GATE_DOOR-10",
 		"frame": {"x":256,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-12",
+		"filename": "ROLLING_GATE_DOOR-11",
 		"frame": {"x":288,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-13",
+		"filename": "ROLLING_GATE_DOOR-12",
 		"frame": {"x":320,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-14",
+		"filename": "ROLLING_GATE_DOOR-13",
 		"frame": {"x":352,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-15",
+		"filename": "ROLLING_GATE_DOOR-14",
 		"frame": {"x":384,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
     {
-		"filename": "ROLLING_GATE_DOOR-16",
+		"filename": "ROLLING_GATE_DOOR-15",
 		"frame": {"x":416,"y":596,"w":32,"h":58},
+    "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
+		"sourceSize": {"w":32,"h":58 }
+	},    
+    {
+		"filename": "ROLLING_GATE_DOOR-16",
+		"frame": {"x":448,"y":596,"w":32,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":32,"h":58 },
 		"sourceSize": {"w":32,"h":58 }
 	},    
       {
 		"filename": "ROLLING_GATE_WIDE-1",
-		"frame": {"x":487,"y":596,"w":64,"h":58},
+		"frame": {"x":519,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-2",
-		"frame": {"x":551,"y":596,"w":64,"h":58},
+		"frame": {"x":583,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-3",
-		"frame": {"x":615,"y":596,"w":64,"h":58},
+		"frame": {"x":647,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-4",
-		"frame": {"x":679,"y":596,"w":64,"h":58},
+		"frame": {"x":711,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-5",
-		"frame": {"x":743,"y":596,"w":64,"h":58},
+		"frame": {"x":775,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-6",
-		"frame": {"x":807,"y":596,"w":64,"h":58},
+		"frame": {"x":839,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-7",
-		"frame": {"x":871,"y":596,"w":64,"h":58},
+		"frame": {"x":903,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
     {
 		"filename": "ROLLING_GATE_WIDE-8",
-		"frame": {"x":935,"y":596,"w":64,"h":58},
+		"frame": {"x":967,"y":596,"w":64,"h":58},
     "spriteSourceSize": {"x":0,"y":0,"w":64,"h":58 },
 		"sourceSize": {"w":64,"h":58 }
 	},    
@@ -4619,6 +4625,6 @@
 		"frame": {"x":670,"y":32,"w":16,"h":18},
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":18 },
 		"sourceSize": {"w":16,"h":18 }
-	}  
+	}
     ]
 }

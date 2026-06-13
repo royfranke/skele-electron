@@ -302,6 +302,11 @@ export default class ShopBlueprint {
             this.scene.manager.objectManager.newObjectToWorld(x + 11, y + 3, 'BOLLARD_PARKING');
         }
 
+        if (this.prop.listing.slug == 'BOOKSTORE') {
+            this.sign = this.scene.manager.objectManager.newObjectToWorld(x - 1, y, 'SIGN_BOOKSTORE');
+            this.sign.sprite.setDepth(this.sign.sprite.depth + 32);
+        }
+
         if (this.prop.listing.slug == 'BARBER') {
             this.sign = this.scene.manager.objectManager.newObjectToWorld(x - 1.5, y, 'BARBER_POLE');
             this.sign.sprite.setDepth(this.sign.sprite.depth + 130);
