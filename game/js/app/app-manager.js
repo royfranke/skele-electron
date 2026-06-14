@@ -13,6 +13,7 @@ export default class AppManager {
     constructor(scene, state_name) {
        this.scene = scene;
        this.verbose = true;
+         this.sceneStarted = false;
        this.appState = new AppState(state_name);   
        this.create();
     }
@@ -118,8 +119,17 @@ export default class AppManager {
     }
 
     startScene () {
+        if (this.sceneStarted) {
+            return;
+        }
+
+        if (this.scene?.deferSceneStart === true) {
+            return;
+        }
+
         const state = this.state;
         this.camera.start();
+        this.sceneStarted = true;
         let verbose = this.verbose;
         if (verbose) {console.log("Starting Scene: "+state.name)};
 
@@ -133,6 +143,13 @@ export default class AppManager {
                 }
             })
         }
+    }
+
+    startDeferredSceneStart () {
+        if (this.sceneStarted) {
+            return;
+        }
+        this.startScene();
     }
 
     endScene (switchToKey) {

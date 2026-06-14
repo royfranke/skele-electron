@@ -37,6 +37,8 @@ export default class GameScene extends Phaser.Scene {
         }
 
         this.place = 'exterior';
+        this.irisInDelayMs = 300;
+    this.deferSceneStart = true;
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
         this.manager.initializeGame();
@@ -59,10 +61,46 @@ export default class GameScene extends Phaser.Scene {
         if (this.exterior && typeof this.exterior.bootstrapPortalIndexFromDisk === 'function') {
             await this.exterior.bootstrapPortalIndexFromDisk();
         }
+        //// Load save position/facing before runtime collider setup so the player
+        //// does not briefly appear at constructor defaults.
+        this.app.initializeSave();
         this.player.create();
         this.npcs.create();
-        //// Load the save!
-        this.app.initializeSave();
+
+        await this.waitForExteriorPlayerReady();
+        this.deferSceneStart = false;
+        this.app.startDeferredSceneStart();
+    }
+
+    async waitForExteriorPlayerReady(timeoutMs = 4500) {
+        const start = Date.now();
+
+        return new Promise((resolve) => {
+            const checkReady = () => {
+                const exteriorReady = (this.exterior?.isWorldReady && typeof this.exterior.isWorldReady === 'function')
+                    ? this.exterior.isWorldReady()
+                    : true;
+                const playerSprite = this.player?.playerSprite?.sprite;
+                const playerReady = !!(playerSprite && playerSprite.body);
+
+                if (exteriorReady && playerReady) {
+                    resolve(true);
+                    return;
+                }
+
+                if ((Date.now() - start) >= timeoutMs) {
+                    if (this.verbose) {
+                        console.warn('[GameScene] waitForExteriorPlayerReady timed out, starting scene effects anyway');
+                    }
+                    resolve(false);
+                    return;
+                }
+
+                this.time.delayedCall(16, checkReady);
+            };
+
+            checkReady();
+        });
     }
 
     update() {

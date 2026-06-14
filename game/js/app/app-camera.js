@@ -12,6 +12,14 @@ export default class AppCamera {
        this.camera = this.scene.cameras.main;
        this.camera.setZoom(2);
        this.setView();
+         this.irisCoverRect = null;
+         this.irisCoverCircle = null;
+
+         // If this state uses iris-in, immediately place a full cover so
+         // world assembly and save-position corrections are never visible.
+         if (this.state.irisIn != undefined) {
+                this.prepareIrisCover();
+         }
     }
 
     getView () {
@@ -42,22 +50,28 @@ export default class AppCamera {
     }
 
     start () {
+        const irisDelay = (this.scene?.place === 'exterior')
+            ? (Number(this.scene?.irisInDelayMs ?? this.state?.irisDelay ?? 0) || 0)
+            : 0;
         if (this.state.fadeIn) {
             this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
         }
         if (this.state.irisIn != undefined) {
-            this.irisIn(this.state.irisIn);
+            this.irisIn(this.state.irisIn, irisDelay);
         }
     }
 
 
 
     wake () {
+        const irisDelay = (this.scene?.place === 'exterior')
+            ? (Number(this.scene?.irisInDelayMs ?? this.state?.irisDelay ?? 0) || 0)
+            : 0;
         if (this.state.fadeIn) {
             this.camera.fadeIn(this.state.fadeIn, 75, 66, 74);
         }
         else if (this.state.irisIn != undefined) {
-            this.irisIn(this.state.irisIn);
+            this.irisIn(this.state.irisIn, irisDelay);
         }
         else {
             this.camera.fadeIn(0, 75, 66, 74);
@@ -81,21 +95,53 @@ export default class AppCamera {
         this.camera.setBounds(0, 0, width, height);
     }
     
-    irisIn (duration=0) {
-        // Add rectangle that covers the viewport
-        var rect = this.scene.add.rectangle(this.view.left, this.view.top, this.view.width, this.view.height, 0x4b424a, 1).setOrigin(0).setDepth(50000).setScrollFactor(0);
+    prepareIrisCover () {
+        if (this.irisCoverRect && this.irisCoverCircle) {
+            return;
+        }
 
-        var circle = this.scene.add.circle(this.view.center.x, this.view.center.y, 20, 0x4b424a).setOrigin(.5).setScrollFactor(0);
-        var mask = new Phaser.Display.Masks.BitmapMask(this.scene, circle);
+        const rect = this.scene.add.rectangle(this.view.left, this.view.top, this.view.width, this.view.height, 0x4b424a, 1)
+            .setOrigin(0)
+            .setDepth(50000)
+            .setScrollFactor(0);
+
+        const circle = this.scene.add.circle(this.view.center.x, this.view.center.y, 20, 0x4b424a)
+            .setOrigin(0.5)
+            .setScrollFactor(0)
+            .setScale(0.0001);
+
+        const mask = new Phaser.Display.Masks.BitmapMask(this.scene, circle);
         mask.invertAlpha = true;
         rect.setMask(mask);
 
-        const tween = this.scene.add.tween({
-            targets: [rect, circle],
+        this.irisCoverRect = rect;
+        this.irisCoverCircle = circle;
+    }
+
+    irisIn (duration=0, delay=0) {
+        this.prepareIrisCover();
+        const rect = this.irisCoverRect;
+        const circle = this.irisCoverCircle;
+
+        if (!rect || !circle) {
+            return;
+        }
+
+        circle.setScale(0.0001);
+
+        this.scene.add.tween({
+            targets: circle,
             scale: 16,
-            duration: 2000,
+            duration: duration > 0 ? duration : 2000,
+            delay: delay > 0 ? delay : 0,
             yoyo: false,
-            ease: 'Sine.easeIn'
+            ease: 'Sine.easeIn',
+            onComplete: () => {
+                try { rect.destroy(); } catch (e) {}
+                try { circle.destroy(); } catch (e) {}
+                this.irisCoverRect = null;
+                this.irisCoverCircle = null;
+            }
         });
     }
 

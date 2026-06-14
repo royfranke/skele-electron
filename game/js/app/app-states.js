@@ -75,7 +75,7 @@ const APP_STATES = {
         name: 'GAME',
         super: 'Game Scene',
         fadeIn: 0,
-        irisIn: 1000,
+        irisIn: 1500,
         fadeOut: 1000,
         autoEnd: 0,
         menu: false,
