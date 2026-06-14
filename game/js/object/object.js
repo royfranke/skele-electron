@@ -285,48 +285,6 @@ export default class Object {
         return false;
     }
 
-    setSlot(_x,_y,slotted_object,flip=false,behind=false) {
-        var slot_x = this.tile_x - _x;
-        var slot_y = this.tile_y - _y;
-        var base = slotted_object.base;
-        var solid = true; /// placeholder
-        var variety = Phaser.Math.Between(1, slotted_object.varieties);
-
-
-        var frame = slotted_object.slug+'-'+variety;
-
-        var x_pixels = Math.floor((slot_x - base.x) * 16);
-        var y_pixels = Math.floor((slot_y - base.y) * 16);
-
-        var y_depth = Math.floor((this.tile_y - this.info.base.y) * 16 );
-
-        var depth = behind ? y_depth + (this.info.sprite.h - _y) : (this.tile_y * 16) + (this.info.sprite.h + _y);
-
-        if (solid)  {
-            var sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setSize(slotted_object.size.w, slotted_object.size.h).setDepth(depth);
-            
-            sprite.body.setOffset(slotted_object.offset.x + (slotted_object.sprite.w/2), slotted_object.offset.y + (slotted_object.sprite.h/2));
-        }
-        else {
-            var sprite = this.scene.add.sprite(x_pixels, y_pixels, 'OBJECTS', frame, 0).setOrigin(0).setSize(slotted_object.size.w, slotted_object.size.h).setDepth(depth);
-
-            sprite.body.setOffset(slotted_object.offset.x + (slotted_object.sprite.w/2), slotted_object.offset.y + (slotted_object.sprite.h/2));
-        }
-
-        if (flip) {
-           sprite.setFlipX(true);
-           if (sprite.body && slotted_object.offset) {
-               const origOffsetX = slotted_object.offset.x + (slotted_object.sprite.w/2);
-               const newOffsetX = slotted_object.sprite.w - origOffsetX;
-               sprite.body.setOffset(newOffsetX, slotted_object.offset.y + (slotted_object.sprite.h/2));
-           }
-        }
-        
-        this.slotted.push(sprite);
-
-    }
-
-
 
     doAction(action) {
         this.scene.player.action.clearActions();
