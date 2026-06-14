@@ -234,7 +234,7 @@ export default class ExteriorBlockNode {
         }
 
         if (signs.TELEPHONE) {
-            let telephone = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 10, 'TELEPHONE_POLE_TOP');
+            let telephone = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 7, 'TELEPHONE_POLE_TOP');
             telephone.sprite.setDepth(pole.sprite.depth+1);
         }
     }

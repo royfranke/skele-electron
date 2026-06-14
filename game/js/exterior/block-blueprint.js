@@ -322,7 +322,7 @@ export default class BlockBlueprint {
         }
 
         if (signs.TELEPHONE) {
-            let telephone = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 10, 'TELEPHONE_POLE_TOP');
+            let telephone = this.scene.manager.objectManager.newObjectToWorld(_x, _y - 5, 'TELEPHONE_POLE_TOP');
             telephone.sprite.setDepth(pole.sprite.depth+1);
         }
     }
