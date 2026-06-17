@@ -5,10 +5,11 @@ import GameUtilities from "../game/game-utilities.js";
  * Ground Class
  */
  export default class Ground {
-    constructor(layer, edgeLayer) {
+    constructor(layer, edgeLayer, scene = null) {
 
         this.layer = layer;
         this.edgeLayer = edgeLayer;
+        this.scene = scene;
 
         this.util = new GameUtilities();
 
@@ -43,11 +44,21 @@ import GameUtilities from "../game/game-utilities.js";
 
     placeTileType(_x, _y, tile_type, forceRedraw) {
         this.util.placeTileType(_x, _y, this.layer, this.edgeLayer, tile_type, forceRedraw)
+        
+        // Sync tile changes back to chunk data
+        if (this.scene?.exterior && typeof this.scene.exterior.syncPhaserLayersToChunks === 'function') {
+            try { this.scene.exterior.syncPhaserLayersToChunks(); } catch (e) {}
+        }
+        
         return;
     }
 
     changeTile(_x, _y) {
         this.util.changeTile(_x, _y, this.layer, this.edgeLayer);
+        
+        // Sync tile changes back to chunk data
+        if (this.scene?.exterior && typeof this.scene.exterior.syncPhaserLayersToChunks === 'function') {
+            try { this.scene.exterior.syncPhaserLayersToChunks(); } catch (e) {}
+        }
     }
-      
 }

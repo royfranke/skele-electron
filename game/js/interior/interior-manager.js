@@ -77,7 +77,7 @@ import KEYLIGHT from "../config/key-light.js";
 
         this.buildRoom();
 
-        this.ground = new Ground(this.groundLayer, this.edgeLayer);
+        this.ground = new Ground(this.groundLayer, this.edgeLayer, this.scene);
         //this.scene.app.camera.setBounds(this.map.widthInPixels, this.map.heightInPixels);
 
         this.setMouseInput();

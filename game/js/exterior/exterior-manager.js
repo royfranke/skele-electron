@@ -251,7 +251,7 @@ import Shop from "../object/shop.js";
             console.log('Building map');
         }
         
-        this.ground = new Ground(this.groundLayer, this.edgeLayer);
+        this.ground = new Ground(this.groundLayer, this.edgeLayer, this.scene);
         const self = this;
         const blocks = new Array(MAP_CONFIG.sectionsHeight).fill().map(() => new Array(this.map.sectionsWidth).fill(0));
 
@@ -438,7 +438,7 @@ import Shop from "../object/shop.js";
 
     create () {
         if (this.useChunkStreamingBootstrap) {
-            this.ground = new Ground(this.groundLayer, this.edgeLayer);
+            this.ground = new Ground(this.groundLayer, this.edgeLayer, this.scene);
             this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
             this.setMouseInput();
             this.bootstrapPortalIndexFromDisk();
@@ -450,7 +450,7 @@ import Shop from "../object/shop.js";
         // and rely on the saved chunk JSONs to populate the world.
         if (this.chunkFilesExist === true) {
             if (this.debug) console.log('Detected existing chunk files — skipping generation');
-            this.ground = new Ground(this.groundLayer, this.edgeLayer);
+            this.ground = new Ground(this.groundLayer, this.edgeLayer, this.scene);
             this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
             this.setMouseInput();
             this.bootstrapPortalIndexFromDisk();
@@ -791,6 +791,95 @@ import Shop from "../object/shop.js";
 
         if (this.debug) {
             console.log(`[ChunkManager] snapshot complete — ${this.chunkManager.getAllChunks().length} chunks populated`);
+        }
+    }
+
+    /**
+     * Sync current Phaser layer tiles back to chunk data.
+     * Called after tile modifications to ensure chunks reflect visual changes.
+     * Only syncs loaded chunks for efficiency.
+     * 
+     * @param {Chunk[]} chunksToSync - Optional array of specific chunks. If omitted, syncs all loaded chunks.
+     */
+    syncPhaserLayersToChunks(chunksToSync = null) {
+        if (!this.chunkManager) return;
+
+        const chunks = chunksToSync || this.chunkManager.getAllChunks().filter(c => c.loaded);
+        let syncedCount = 0;
+
+        for (const chunk of chunks) {
+            if (!chunk || !chunk.loaded) continue;
+
+            const originX = chunk.tileOriginX;
+            const originY = chunk.tileOriginY;
+            let chunkModified = false;
+
+            // Sync each tile layer from Phaser back to chunk data
+            for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+                for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+                    const wx = originX + lx;
+                    const wy = originY + ly;
+                    
+                    if (wx < 0 || wy < 0 || wx >= MAP_CONFIG.width || wy >= MAP_CONFIG.height) {
+                        continue;
+                    }
+
+                    // Get current Phaser layer tiles
+                    const groundTile = this.groundLayer?.getTileAt(wx, wy);
+                    const groundIndex = (groundTile && groundTile.index != null) ? groundTile.index : 0;
+                    
+                    const edgeTile = this.edgeLayer?.getTileAt(wx, wy);
+                    const edgeIndex = (edgeTile && edgeTile.index != null) ? edgeTile.index : -1;
+                    
+                    const wallTile = this.wallLayer?.getTileAt(wx, wy);
+                    const wallIndex = (wallTile && wallTile.index != null) ? wallTile.index : -1;
+                    
+                    const roofTile = this.roofLayer?.getTileAt(wx, wy);
+                    const roofIndex = (roofTile && roofTile.index != null) ? roofTile.index : -1;
+
+                    // Check if any layer tile differs from chunk data
+                    const chunkGround = chunk.getLayerTile('ground', wx, wy);
+                    const chunkEdge = chunk.getLayerTile('edge', wx, wy);
+                    const chunkWall = chunk.getLayerTile('wall', wx, wy);
+                    const chunkRoof = chunk.getLayerTile('roof', wx, wy);
+
+                    if (groundIndex !== chunkGround || edgeIndex !== chunkEdge || 
+                        wallIndex !== chunkWall || roofIndex !== chunkRoof) {
+                        
+                        // Tile has changed — sync it
+                        chunk.setLayerTile('ground', wx, wy, groundIndex);
+                        chunk.setLayerTile('edge', wx, wy, edgeIndex);
+                        chunk.setLayerTile('wall', wx, wy, wallIndex);
+                        chunk.setLayerTile('roof', wx, wy, roofIndex);
+
+                        // Update ground type if ground changed
+                        if (groundIndex !== chunkGround) {
+                            const groundType = TYPE_BY_TILE_INDEX[groundIndex] || 'VOID';
+                            chunk.setGroundType(wx, wy, groundType);
+                        }
+
+                        // Update collision if wall changed
+                        if (wallIndex !== chunkWall) {
+                            chunk.setCollision(wx, wy, wallIndex > -1);
+                        }
+
+                        chunkModified = true;
+                    }
+                }
+            }
+
+            // If chunk was modified, mark it dirty for saving
+            if (chunkModified) {
+                chunk.dirty = true;
+                if (this.worldSystem && typeof this.worldSystem.markDirty === 'function') {
+                    try { this.worldSystem.markDirty(chunk); } catch (e) {}
+                }
+                syncedCount++;
+            }
+        }
+
+        if (this.debug && syncedCount > 0) {
+            console.log(`[ExteriorManager] syncPhaserLayersToChunks: synced ${syncedCount} chunks`);
         }
     }
 
