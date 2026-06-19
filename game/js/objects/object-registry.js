@@ -8,6 +8,10 @@ export default class ObjectRegistry {
         this.scene = scene;
         this.registry = {};
         this.glass_registry = [];
+        this.maxSolidBaseWidth = 1;
+        this.maxSolidBaseHeight = 1;
+        this.solidFootprintCounts = new Map();
+        this.solidFootprintTilesByObject = new WeakMap();
     }
 
     update () {
@@ -130,12 +134,16 @@ export default class ObjectRegistry {
             if (object.info.type == 'WINDOW_EXT_' || object.info.type == 'EXT_DOOR_' || object.info.type == 'STORE_WINDOW_EXT' || object.info.type == 'STORE_DOOR') {
                 this.glass_registry.push(object.glass);
             }
+
+            this.trackSolidBaseFootprint(object);
+            this.indexSolidFootprint(object, _x, _y);
+
             if (syncChunk) {
                 this.syncChunkObjectAdd(object, _x, _y);
             }
             try {
-                if (this.scene?.locale === 'exterior' && this.scene?.exterior?.refreshChunkCollisionAtTile) {
-                    this.scene.exterior.refreshChunkCollisionAtTile(_x, _y);
+                if (this.scene?.locale === 'exterior' && this.scene?.exterior?.refreshChunkCollisionForObject) {
+                    this.scene.exterior.refreshChunkCollisionForObject(object, _x, _y);
                 }
             } catch (e) {}
             /// Object needs a method (setRegistration) that can be flagged to trigger an in-world sprite
@@ -152,6 +160,16 @@ export default class ObjectRegistry {
                 });
             }
             objects.forEach(object => {
+                this.unindexSolidFootprint(object);
+            });
+            try {
+                if (this.scene?.locale === 'exterior' && this.scene?.exterior?.refreshChunkCollisionForObject) {
+                    objects.forEach(object => {
+                        this.scene.exterior.refreshChunkCollisionForObject(object, _x, _y);
+                    });
+                }
+            } catch (e) {}
+            objects.forEach(object => {
                 object.setRegistration(false);
             });
             this.registry[_x+"_"+_y] = null;
@@ -160,11 +178,6 @@ export default class ObjectRegistry {
                 // Remove the key-value pair
                 delete this.registry[_x+"_"+_y];
             }
-            try {
-                if (this.scene?.locale === 'exterior' && this.scene?.exterior?.refreshChunkCollisionAtTile) {
-                    this.scene.exterior.refreshChunkCollisionAtTile(_x, _y);
-                }
-            } catch (e) {}
             return true;
         }
         else {
@@ -197,6 +210,81 @@ export default class ObjectRegistry {
         }
 
         exterior.removeChunkObjectEntity(object, _x, _y);
+    }
+
+    trackSolidBaseFootprint (object) {
+        const solid = object?.info?.solid;
+        if (!(solid === 1 || solid === true)) {
+            return;
+        }
+
+        const base = object?.info?.base ?? {};
+        const width = Math.max(1, Math.ceil(Number(base.w) || 1));
+        const height = Math.max(1, Math.ceil(Number(base.h) || 1));
+
+        if (width > this.maxSolidBaseWidth) {
+            this.maxSolidBaseWidth = width;
+        }
+        if (height > this.maxSolidBaseHeight) {
+            this.maxSolidBaseHeight = height;
+        }
+    }
+
+    getSolidFootprintBounds (object, anchorX, anchorY) {
+        const base = object?.info?.base ?? {};
+        const width = Math.max(1, Math.ceil(Number(base.w) || 1));
+        const height = Math.max(1, Math.ceil(Number(base.h) || 1));
+        const startX = Math.floor(Number(anchorX));
+        const startY = Math.floor(Number(anchorY));
+
+        return {
+            startX,
+            startY,
+            endX: startX + width - 1,
+            endY: startY + height - 1,
+        };
+    }
+
+    indexSolidFootprint (object, anchorX, anchorY) {
+        const solid = object?.info?.solid;
+        if (!(solid === 1 || solid === true)) {
+            return;
+        }
+
+        const bounds = this.getSolidFootprintBounds(object, anchorX, anchorY);
+        const keys = [];
+        for (let y = bounds.startY; y <= bounds.endY; y++) {
+            for (let x = bounds.startX; x <= bounds.endX; x++) {
+                const key = `${x}_${y}`;
+                keys.push(key);
+                this.solidFootprintCounts.set(key, (this.solidFootprintCounts.get(key) ?? 0) + 1);
+            }
+        }
+
+        this.solidFootprintTilesByObject.set(object, keys);
+    }
+
+    unindexSolidFootprint (object) {
+        const keys = this.solidFootprintTilesByObject.get(object);
+        if (!Array.isArray(keys)) {
+            return;
+        }
+
+        keys.forEach((key) => {
+            const current = this.solidFootprintCounts.get(key) ?? 0;
+            if (current <= 1) {
+                this.solidFootprintCounts.delete(key);
+            }
+            else {
+                this.solidFootprintCounts.set(key, current - 1);
+            }
+        });
+
+        this.solidFootprintTilesByObject.delete(object);
+    }
+
+    isSolidFootprintBlocked (_x, _y) {
+        return (this.solidFootprintCounts.get(`${_x}_${_y}`) ?? 0) > 0;
     }
     
 }

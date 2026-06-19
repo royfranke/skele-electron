@@ -2181,7 +2181,11 @@ import Shop from "../object/shop.js";
             return;
         }
 
-        const chunks = this.chunkManager.getAllChunks().filter(chunk => chunk && chunk.loaded === true);
+        const activeChunks = this.chunkManager.getActiveChunks?.() ?? [];
+        const source = (Array.isArray(activeChunks) && activeChunks.length > 0)
+            ? activeChunks
+            : this.chunkManager.getAllChunks();
+        const chunks = source.filter(chunk => chunk && chunk.loaded === true);
         chunks.forEach((chunk) => {
             this.rebuildChunkCollisionMap(chunk);
         });
@@ -2223,15 +2227,8 @@ import Shop from "../object/shop.js";
 
         // 2) Solid object occupancy blocks movement.
         const objectRegistry = this.scene?.manager?.objectManager?.registry;
-        if (objectRegistry?.placeEmpty && objectRegistry.placeEmpty(_x, _y) === false) {
-            const objectsAtTile = objectRegistry.getObjects(_x, _y) ?? [];
-            const hasSolidObject = objectsAtTile.some((object) => {
-                const solid = object?.info?.solid;
-                return solid === 1 || solid === true;
-            });
-            if (hasSolidObject) {
-                return true;
-            }
+        if (objectRegistry?.isSolidFootprintBlocked && objectRegistry.isSolidFootprintBlocked(_x, _y)) {
+            return true;
         }
 
         // 3) Any tree occupancy blocks movement.
@@ -2258,6 +2255,54 @@ import Shop from "../object/shop.js";
 
         const blocked = this.isTileBlockedForNavigation(_x, _y);
         chunk.setCollision(_x, _y, blocked, { markDirty: false });
+    }
+
+    objectIsSolidForNavigation (object) {
+        const solid = object?.info?.solid;
+        return solid === 1 || solid === true;
+    }
+
+    getObjectFootprintBounds (object, anchorX, anchorY) {
+        const base = object?.info?.base ?? {};
+        const width = Math.max(1, Math.ceil(Number(base.w) || 1));
+        const height = Math.max(1, Math.ceil(Number(base.h) || 1));
+
+        const startX = Math.floor(Number(anchorX));
+        const startY = Math.floor(Number(anchorY));
+        const endX = startX + width - 1;
+        const endY = startY + height - 1;
+
+        return {
+            startX,
+            startY,
+            endX,
+            endY,
+        };
+    }
+
+    objectFootprintCoversTile (object, anchorX, anchorY, tileX, tileY) {
+        if (!this.objectIsSolidForNavigation(object)) {
+            return false;
+        }
+
+        const bounds = this.getObjectFootprintBounds(object, anchorX, anchorY);
+        return (
+            tileX >= bounds.startX && tileX <= bounds.endX &&
+            tileY >= bounds.startY && tileY <= bounds.endY
+        );
+    }
+
+    refreshChunkCollisionForObject (object, anchorX, anchorY) {
+        if (!this.objectIsSolidForNavigation(object)) {
+            return;
+        }
+
+        const bounds = this.getObjectFootprintBounds(object, anchorX, anchorY);
+        for (let wy = bounds.startY; wy <= bounds.endY; wy++) {
+            for (let wx = bounds.startX; wx <= bounds.endX; wx++) {
+                this.refreshChunkCollisionAtTile(wx, wy);
+            }
+        }
     }
 
     setKeyLight (key_light_name) {
