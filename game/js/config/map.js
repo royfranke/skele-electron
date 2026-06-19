@@ -3,6 +3,7 @@ const MAP_CONFIG = {
     width: 384,
     height: 200,
     useStrictSimpleTileWalkability: true,
+    enableChunkWalkabilityCache: true,
     debugNavRouteFailures: false,
     debugWorldQueryMisses: false,
     sectionsWidth: 6,

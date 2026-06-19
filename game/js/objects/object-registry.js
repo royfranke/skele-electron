@@ -133,6 +133,11 @@ export default class ObjectRegistry {
             if (syncChunk) {
                 this.syncChunkObjectAdd(object, _x, _y);
             }
+            try {
+                if (this.scene?.locale === 'exterior' && this.scene?.exterior?.refreshChunkCollisionAtTile) {
+                    this.scene.exterior.refreshChunkCollisionAtTile(_x, _y);
+                }
+            } catch (e) {}
             /// Object needs a method (setRegistration) that can be flagged to trigger an in-world sprite
             return true;
     }
@@ -155,6 +160,11 @@ export default class ObjectRegistry {
                 // Remove the key-value pair
                 delete this.registry[_x+"_"+_y];
             }
+            try {
+                if (this.scene?.locale === 'exterior' && this.scene?.exterior?.refreshChunkCollisionAtTile) {
+                    this.scene.exterior.refreshChunkCollisionAtTile(_x, _y);
+                }
+            } catch (e) {}
             return true;
         }
         else {

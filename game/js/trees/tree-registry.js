@@ -65,6 +65,12 @@ export default class TreeRegistry {
             console.warn(tree);
         }
 
+        try {
+            if (tree?.scene?.locale === 'exterior' && tree?.scene?.exterior?.refreshChunkCollisionAtTile) {
+                tree.scene.exterior.refreshChunkCollisionAtTile(_x, _y);
+            }
+        } catch (e) {}
+
         return true;
     }
 
@@ -101,6 +107,12 @@ export default class TreeRegistry {
                     }
                 } catch (e) {}
             }
+            try {
+                const scene = trees?.[0]?.scene;
+                if (scene?.locale === 'exterior' && scene?.exterior?.refreshChunkCollisionAtTile) {
+                    scene.exterior.refreshChunkCollisionAtTile(_x, _y);
+                }
+            } catch (e) {}
             return true;
         }
         else {

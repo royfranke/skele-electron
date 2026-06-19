@@ -167,11 +167,13 @@ export default class Chunk {
     }
 
     /** Mark a world tile coord as blocked (1) or walkable (0). */
-    setCollision(worldX, worldY, blocked) {
+    setCollision(worldX, worldY, blocked, options = {}) {
         const local = this.worldToLocal(worldX, worldY);
         if (!local) return;
         this.collision[local.y * CHUNK_SIZE + local.x] = blocked ? 1 : 0;
-        this.dirty = true;
+        if (options.markDirty !== false) {
+            this.dirty = true;
+        }
     }
 
     // ─── Ground types ─────────────────────────────────────────────────────────

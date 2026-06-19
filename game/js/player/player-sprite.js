@@ -207,6 +207,77 @@ export default class PlayerSprite {
     this.action.showMenu = false;
   }
 
+  buildSimpleTileRouteFromFindRouteOptions(startX, startY, endX, endY) {
+    const nav = this.scene?.manager?.nav;
+    if (!nav || typeof nav.findRouteOptions !== 'function' || typeof nav.compareCoordinates !== 'function') {
+      return [];
+    }
+
+    const start = [startX, startY];
+    const end = [endX, endY];
+
+    if (startX == endX && startY == endY) {
+      return [start];
+    }
+
+    var frontier = [start];
+    var visited = [];
+    var parents = [];
+    var solved = false;
+    var solution = [];
+    var counter = 0;
+
+    while (frontier.length > 0 && solved == false) {
+      counter++;
+
+      var nextTiles = nav.findRouteOptions(frontier, visited, 'simple_tile');
+      var current = frontier[0];
+      visited.push(current);
+
+      for (var n = 0; n < nextTiles.length; n++) {
+        var nextTile = nextTiles[n];
+        if (!nav.compareCoordinates(visited, nextTile) && !nav.compareCoordinates(frontier, nextTile)) {
+          frontier.push(nextTile);
+          parents.push([nextTile, current]);
+
+          if (nextTile[0] == end[0] && nextTile[1] == end[1]) {
+            solved = true;
+            var place = current;
+            solution = [nextTile, current];
+
+            while (place[0] != start[0] || place[1] != start[1]) {
+              var foundParent = false;
+              for (var d = 0; d < parents.length; d++) {
+                if (parents[d][0][0] == place[0] && parents[d][0][1] == place[1]) {
+                  place = parents[d][1];
+                  solution.push(place);
+                  foundParent = true;
+                  break;
+                }
+              }
+
+              if (!foundParent) {
+                break;
+              }
+            }
+            break;
+          }
+        }
+      }
+
+      frontier.shift();
+      if (counter > 10000) {
+        break;
+      }
+    }
+
+    if (!solved || solution.length == 0) {
+      return [];
+    }
+
+    return solution.reverse();
+  }
+
   moveToTile(x, y) {
     var focus = this.scene.manager.getFocus();
     var last_focus = this.scene.manager.getLastFocus();
@@ -216,7 +287,11 @@ export default class PlayerSprite {
       
       var current_x = this.scene.player.standingTile.x;
       var current_y = this.scene.player.standingTile.y;
-      var route = this.scene.manager.nav.getFullRoute(current_x, current_y,x,y, 'simple_tile');
+
+      var route = this.buildSimpleTileRouteFromFindRouteOptions(current_x, current_y, x, y);
+      if (route.length == 0 && this.scene?.manager?.nav?.getFullRoute) {
+        route = this.scene.manager.nav.getFullRoute(current_x, current_y, x, y, 'simple_tile');
+      }
       this.scene.player.destinations = route;
     }
 

@@ -13,6 +13,90 @@ export default class NavigatorManager {
            simple_tile: 0,
            unknown: 0,
        };
+       this.walkabilityChunkCache = new Map();
+       this.maxWalkabilityChunkCacheEntries = 256;
+    }
+
+    buildWalkabilityChunkCacheEntry (chunk) {
+        if (!chunk || !chunk.collision) {
+            return null;
+        }
+
+        const cellCount = chunk.collision.length;
+        const size = Math.sqrt(cellCount);
+        if (!Number.isInteger(size) || size <= 0) {
+            return null;
+        }
+
+        return {
+            key: chunk.key,
+            chunkRef: chunk,
+            collision: chunk.collision,
+            size,
+            originX: chunk.tileOriginX,
+            originY: chunk.tileOriginY,
+        };
+    }
+
+    pruneWalkabilityChunkCache () {
+        if (this.walkabilityChunkCache.size <= this.maxWalkabilityChunkCacheEntries) {
+            return;
+        }
+
+        for (const [key, entry] of this.walkabilityChunkCache.entries()) {
+            const chunkRef = entry?.chunkRef;
+            if (!chunkRef || chunkRef.loaded !== true) {
+                this.walkabilityChunkCache.delete(key);
+            }
+            if (this.walkabilityChunkCache.size <= this.maxWalkabilityChunkCacheEntries) {
+                return;
+            }
+        }
+
+        while (this.walkabilityChunkCache.size > this.maxWalkabilityChunkCacheEntries) {
+            const oldest = this.walkabilityChunkCache.keys().next().value;
+            if (oldest == undefined) {
+                break;
+            }
+            this.walkabilityChunkCache.delete(oldest);
+        }
+    }
+
+    getWalkabilityChunkCacheEntry (chunk) {
+        const key = chunk?.key;
+        if (key == undefined) {
+            return null;
+        }
+
+        const cached = this.walkabilityChunkCache.get(key);
+        if (cached && cached.chunkRef === chunk && cached.collision === chunk.collision) {
+            return cached;
+        }
+
+        const rebuilt = this.buildWalkabilityChunkCacheEntry(chunk);
+        if (rebuilt == null) {
+            this.walkabilityChunkCache.delete(key);
+            return null;
+        }
+
+        this.walkabilityChunkCache.set(key, rebuilt);
+        this.pruneWalkabilityChunkCache();
+        return rebuilt;
+    }
+
+    isWalkableFromChunkCacheEntry (entry, worldX, worldY) {
+        if (entry == null) {
+            return false;
+        }
+
+        const localX = worldX - entry.originX;
+        const localY = worldY - entry.originY;
+
+        if (localX < 0 || localY < 0 || localX >= entry.size || localY >= entry.size) {
+            return false;
+        }
+
+        return entry.collision[(localY * entry.size) + localX] === 0;
     }
 
     getIntersection (_x, _y) {
@@ -401,6 +485,21 @@ export default class NavigatorManager {
         // Prefer interior when present (interior scenes provide their own walkability)
         if (this.scene?.interior?.isWalkable) {
             return this.scene.interior.isWalkable(_x, _y);
+        }
+        if (MAP_CONFIG.enableChunkWalkabilityCache === true && this.scene?.exterior?.chunkManager) {
+            if (this.scene.exterior?.inWorldBounds && !this.scene.exterior.inWorldBounds(_x, _y)) {
+                return false;
+            }
+
+            const chunk = this.scene.exterior.chunkManager.getChunkAtTile(_x, _y);
+            if (!chunk || chunk.loaded !== true) {
+                return false;
+            }
+
+            const cacheEntry = this.getWalkabilityChunkCacheEntry(chunk);
+            if (cacheEntry) {
+                return this.isWalkableFromChunkCacheEntry(cacheEntry, _x, _y);
+            }
         }
         if (this.scene?.exterior?.isWalkable) {
             return this.scene.exterior.isWalkable(_x, _y);

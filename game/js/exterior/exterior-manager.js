@@ -860,7 +860,7 @@ import Shop from "../object/shop.js";
 
                         // Update collision if wall changed
                         if (wallIndex !== chunkWall) {
-                            chunk.setCollision(wx, wy, wallIndex > -1);
+                            this.refreshChunkCollisionAtTile(wx, wy);
                         }
 
                         chunkModified = true;
@@ -2173,6 +2173,91 @@ import Shop from "../object/shop.js";
 
     refreshChunkCollisions () {
         this.wallLayer.setCollisionByExclusion([-1]);
+        this.rebuildActiveChunkCollisionMaps();
+    }
+
+    rebuildActiveChunkCollisionMaps () {
+        if (!this.chunkManager) {
+            return;
+        }
+
+        const chunks = this.chunkManager.getAllChunks().filter(chunk => chunk && chunk.loaded === true);
+        chunks.forEach((chunk) => {
+            this.rebuildChunkCollisionMap(chunk);
+        });
+    }
+
+    rebuildChunkCollisionMap (chunk) {
+        if (!chunk || chunk.loaded !== true) {
+            return;
+        }
+
+        const originX = chunk.tileOriginX;
+        const originY = chunk.tileOriginY;
+
+        for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+            for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+                const wx = originX + lx;
+                const wy = originY + ly;
+
+                if (!this.inWorldBounds(wx, wy)) {
+                    continue;
+                }
+                const blocked = this.isTileBlockedForNavigation(wx, wy);
+                chunk.setCollision(wx, wy, blocked, { markDirty: false });
+            }
+        }
+    }
+
+    isTileBlockedForNavigation (_x, _y) {
+        if (!this.inWorldBounds(_x, _y)) {
+            return true;
+        }
+
+        // 1) Wall layer occupancy is always blocked.
+        const wallTile = this.wallLayer?.getTileAt(_x, _y);
+        const wallIndex = (wallTile && wallTile.index != null) ? wallTile.index : -1;
+        if (wallIndex > -1) {
+            return true;
+        }
+
+        // 2) Solid object occupancy blocks movement.
+        const objectRegistry = this.scene?.manager?.objectManager?.registry;
+        if (objectRegistry?.placeEmpty && objectRegistry.placeEmpty(_x, _y) === false) {
+            const objectsAtTile = objectRegistry.getObjects(_x, _y) ?? [];
+            const hasSolidObject = objectsAtTile.some((object) => {
+                const solid = object?.info?.solid;
+                return solid === 1 || solid === true;
+            });
+            if (hasSolidObject) {
+                return true;
+            }
+        }
+
+        // 3) Any tree occupancy blocks movement.
+        const treeRegistry = this.scene?.manager?.treeManager?.registry;
+        if (treeRegistry?.placeEmpty && treeRegistry.placeEmpty(_x, _y) === false) {
+            const treesAtTile = treeRegistry.getTrees(_x, _y) ?? [];
+            if (Array.isArray(treesAtTile) && treesAtTile.length > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    refreshChunkCollisionAtTile (_x, _y) {
+        if (!this.chunkManager || !this.inWorldBounds(_x, _y)) {
+            return;
+        }
+
+        const chunk = this.chunkManager.getChunkAtTile(_x, _y);
+        if (!chunk || chunk.loaded !== true) {
+            return;
+        }
+
+        const blocked = this.isTileBlockedForNavigation(_x, _y);
+        chunk.setCollision(_x, _y, blocked, { markDirty: false });
     }
 
     setKeyLight (key_light_name) {
