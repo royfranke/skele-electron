@@ -586,9 +586,8 @@ export default class ShopBlueprint {
 
         this.scene.manager.objectManager.newObjectToWorld(_x + (index*window_width), _y, this.settings.upper_windows);
         if (this.settings.upper_windows.includes('SINGLE') && this.roll([0,1]) == 1) {
-            let window_unit = this.scene.manager.objectManager.newObjectToWorld(_x + (index*(window_width/2)), _y - .5, 'AC_WINDOW_UNIT');
+            let window_unit = this.scene.manager.objectManager.newObjectToWorld(_x + (index*(window_width) - .5), _y - 1.5, 'AC_WINDOW_UNIT');
             window_unit.sprite.setDepth(window_unit.sprite.depth + 16);
-            window_unit.sprite.setOrigin(.5,1);
             window_unit.setState('ON');
         }
 
