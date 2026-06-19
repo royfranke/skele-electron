@@ -1,19 +1,133 @@
 /* Tree Class */
 
 export default class Tree {
-    constructor(scene, tree) {
+    constructor(scene, tree, days_old = 0, appearance = null) {
         this.scene = scene;
         /// Starts out not registered, no tile location, no sprite
         this.registered = false;
         this.tile_x = 0;
         this.tile_y = 0;
         this.sprite = null;
+        this.sprite_shadow = null;
         this.state = null;
         this.branches = [];
         this.leaves = [];
         // Imbue this tree with the config tree info
         this.info = tree;
         this.name = this.info.name;
+        this.day = days_old;
+        this.age_days = days_old;
+        this.appearance = this.normalizeAppearance(appearance);
+    }
+
+    clamp(value, min, max) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) {
+            return min;
+        }
+        return Math.max(min, Math.min(max, numeric));
+    }
+
+    normalizeAppearance(appearance = null) {
+        if (!appearance || typeof appearance !== 'object') {
+            return null;
+        }
+
+        const trunkVariant = Number.isFinite(appearance.trunkVariant) ? appearance.trunkVariant : Number(appearance.trunkVariant);
+        const branches = Array.isArray(appearance.branches)
+            ? appearance.branches.map(branch => this.normalizeBranch(branch))
+            : [];
+
+        return {
+            trunkVariant: Number.isFinite(trunkVariant) ? trunkVariant : null,
+            branches,
+        };
+    }
+
+    normalizeBranch(branch = {}) {
+        const behind = branch.behind === true;
+        const maxBranches = Math.max(1, Number(this.info.branches) || 1);
+        const maxLeaves = Math.max(1, Number(behind ? this.info.leaves_back : this.info.leaves_front) || 1);
+
+        return {
+            xOffset: Number.isFinite(branch.xOffset) ? branch.xOffset : Number(branch.xOffset) || 0,
+            yOffset: Number.isFinite(branch.yOffset) ? branch.yOffset : Number(branch.yOffset) || 0,
+            flipX: branch.flipX === true,
+            behind,
+            branchVariant: this.clamp(branch.branchVariant, 1, maxBranches),
+            leafDir: branch.leafDir === 'BACK' ? 'BACK' : 'FRONT',
+            leavesVariant: this.clamp(branch.leavesVariant, 1, maxLeaves),
+        };
+    }
+
+    getVisualData() {
+        return this.normalizeAppearance(this.appearance);
+    }
+
+    randomTrunkVariant() {
+        return Phaser.Math.RND.between(1, Math.max(1, Number(this.info.trunks) || 1));
+    }
+
+    randomBranchVariant() {
+        let branch = Phaser.Math.RND.between(1, Math.max(1, Number(this.info.branches) || 1));
+        branch += Phaser.Math.RND.between(-1, 1);
+        return this.clamp(branch, 1, Math.max(1, Number(this.info.branches) || 1));
+    }
+
+    randomLeafVariant(behind = false) {
+        const maxLeaves = Math.max(1, Number(behind ? this.info.leaves_back : this.info.leaves_front) || 1);
+        return Phaser.Math.RND.between(1, maxLeaves);
+    }
+
+    createBranchSpec(xOffset, yOffset, flipX = false, behind = false) {
+        return {
+            xOffset,
+            yOffset,
+            flipX,
+            behind,
+            branchVariant: this.randomBranchVariant(),
+            leafDir: behind ? 'BACK' : 'FRONT',
+            leavesVariant: this.randomLeafVariant(behind),
+        };
+    }
+
+    generateBranchSpecs() {
+        if (this.info.slug == 'ASH') {
+            return [
+                this.createBranchSpec(4, -(this.sprite.displayHeight - 30), true, true),
+                this.createBranchSpec(0, -(this.sprite.displayHeight - 20), false, false),
+                this.createBranchSpec(4, -(this.sprite.displayHeight - 12), true, true),
+                this.createBranchSpec(0, -(this.sprite.displayHeight - 8), true, false),
+            ];
+        }
+
+        if (this.info.slug == 'SUGAR_MAPLE') {
+            if (Phaser.Math.RND.between(0, 1) == 0) {
+                return [
+                    this.createBranchSpec(-4, -(this.sprite.displayHeight - 6), false, true),
+                    this.createBranchSpec(-4, -(this.sprite.displayHeight - 2), true, false),
+                    this.createBranchSpec(-8, -(this.sprite.displayHeight + 4), false, false),
+                ];
+            }
+
+            return [
+                this.createBranchSpec(-4, -(this.sprite.displayHeight - 4), false, true),
+                this.createBranchSpec(-4, -(this.sprite.displayHeight - 2), true, false),
+            ];
+        }
+
+        return [];
+    }
+
+    clearBranchSprites() {
+        this.branches.forEach(sprite => {
+            try { sprite.destroy(); } catch (e) {}
+        });
+        this.leaves.forEach(sprite => {
+            try { sprite.destroy(); } catch (e) {}
+        });
+        this.branches = [];
+        this.leaves = [];
     }
 
     setCollision() {
@@ -47,75 +161,47 @@ export default class Tree {
         }
     }
 
-    setBranches(count=2) {
-        if (this.info.slug == 'ASH') {
-            //this.setBranch(0,-(this.sprite.displayHeight - 40), false, false);
-            this.setBranch(4,-(this.sprite.displayHeight - 30), true, true);
-            this.setBranch(0,-(this.sprite.displayHeight - 20), false, false);
-            this.setBranch(4,-(this.sprite.displayHeight - 12), true, true);
-            this.setBranch(0,-(this.sprite.displayHeight - 8),true, false);
-        }
-        if (this.info.slug == 'SUGAR_MAPLE') {
-            
+    setBranches(branchSpecs = null) {
+        const specs = Array.isArray(branchSpecs) && branchSpecs.length > 0
+            ? branchSpecs.map(spec => this.normalizeBranch(spec))
+            : this.generateBranchSpecs();
 
-            if (Phaser.Math.RND.between(0,1) == 0) {
-                this.setBranch(-4,-(this.sprite.displayHeight - 6), false, true);
-                this.setBranch(-4,-(this.sprite.displayHeight - 2),true, false);
-                this.setBranch(-8,-(this.sprite.displayHeight + 4),false, false);
-            }
-            else {
-                this.setBranch(-4,-(this.sprite.displayHeight - 4), false, true);
-                this.setBranch(-4,-(this.sprite.displayHeight - 2),true, false);
-            }
-        }
+        this.clearBranchSprites();
+        this.appearance = this.appearance || {};
+        this.appearance.branches = specs.map(spec => ({ ...spec }));
 
-
+        specs.forEach(spec => this.setBranch(spec));
     }
 
-    setBranch(x_offset=0, y_offset=0,flip = false, behind = false) {
+    setBranch(spec = {}) {
+        const branch = this.normalizeBranch(spec);
 
-        var branch = Phaser.Math.RND.between(1, this.info.branches);
-        var branch_alt = Phaser.Math.RND.between(-1, 1);
-        branch = branch + branch_alt;
-        if (branch < 1) {
-            branch = 1;
+        const _x = ((this.tile_x + 1) * 16) + branch.xOffset;
+        const _y = (this.tile_y * 16) + branch.yOffset;
+
+        let depth = !branch.behind ? this.sprite.depth - branch.yOffset / 2 : this.sprite.depth + branch.yOffset / 2;
+        const sprite = this.scene.physics.add.staticSprite(_x, _y, 'TREES', this.info.slug + '_BRANCH-' + branch.branchVariant, 0).setOrigin(0, 1).setDepth(depth);
+
+        if (branch.behind) {
+            depth = depth - 1;
+        } else {
+            depth = depth + 32;
         }
-        if (branch > this.info.branches) {
-            branch = this.info.branches;
+
+        const leaves_sprite = this.scene.physics.add.staticSprite(_x, _y - 8, 'TREES', this.info.slug + '_LEAVES-' + branch.leafDir + '-' + branch.leavesVariant, 0).setOrigin(0, 1).setDepth(depth).setAlpha(0.8);
+
+        if (branch.flipX) {
+            sprite.setOrigin(1, 1).setFlipX(true);
+            leaves_sprite.setOrigin(1, 1).setFlipX(true);
         }
 
-            var _x = ((this.tile_x + 1)*16)+ x_offset;
-            var _y = (this.tile_y*16) + y_offset;
-
-            var depth = !behind ? this.sprite.depth - y_offset/2 : this.sprite.depth + y_offset/2;
-
-            var sprite = this.scene.physics.add.staticSprite(_x, _y, 'TREES', this.info.slug+'_BRANCH-'+branch, 0).setOrigin(0, 1).setDepth(depth);
-
-
-            if (behind) {
-                var dir = 'BACK';
-                var leaves = Phaser.Math.RND.between(1, this.info.leaves_back);
-                depth = depth - 1;
-            }
-            else {
-                var dir = 'FRONT';
-                var leaves = Phaser.Math.RND.between(1, this.info.leaves_front);
-                depth = depth + 32;
-            }
-            
-        
-            var leaves_sprite = this.scene.physics.add.staticSprite(_x, _y - 8, 'TREES', this.info.slug+'_LEAVES-'+dir+'-'+leaves, 0).setOrigin(0, 1).setDepth(depth).setAlpha(0.8);
-
-            if (flip) {
-                sprite.setOrigin(1, 1).setFlipX(true);
-                leaves_sprite.setOrigin(1, 1).setFlipX(true);
-            }
-
-            this.branches.push(sprite);
-            this.leaves.push(leaves_sprite);
+        this.branches.push(sprite);
+        this.leaves.push(leaves_sprite);
 
         this.hasBranch = true;
         this.tweenBranch();
+
+        return branch;
     }
 
 
@@ -158,15 +244,27 @@ export default class Tree {
     }
 
     setTileLocation(_x, _y) {
+        const savedAppearance = this.normalizeAppearance(this.appearance);
+        this.clearBranchSprites();
+        if (this.sprite != null) {
+            try { this.sprite.destroy(); } catch (e) {}
+            this.sprite = null;
+        }
+
         this.tile_x = _x;
         this.tile_y = _y;
 
-        var x_pixels = _x * 16;
-        var y_pixels = _y * 16;
-        var trunk_variant = Phaser.Math.RND.between(1, this.info.trunks);
-        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'TREES', this.info.slug+'_TRUNK-'+trunk_variant, 0).setOrigin(0,1).setDepth(y_pixels);
+        const x_pixels = _x * 16;
+        const y_pixels = _y * 16;
+        const trunk_variant = savedAppearance?.trunkVariant ?? this.randomTrunkVariant();
+        this.appearance = {
+            trunkVariant: trunk_variant,
+            branches: Array.isArray(savedAppearance?.branches) ? savedAppearance.branches.map(branch => this.normalizeBranch(branch)) : [],
+        };
+
+        this.sprite = this.scene.physics.add.staticSprite(x_pixels, y_pixels, 'TREES', this.info.slug + '_TRUNK-' + trunk_variant, 0).setOrigin(0,1).setDepth(y_pixels);
         this.setCollision();
-        this.setBranches();
+        this.setBranches(this.appearance.branches.length > 0 ? this.appearance.branches : null);
 
     }
 
@@ -177,10 +275,19 @@ export default class Tree {
     }
 
     destroySprite() {
-        this.sprite.destroy();
-        this.sprite_shadow.destroy();
+        this.clearBranchSprites();
+        if (this.sprite != null) {
+            try { this.sprite.destroy(); } catch (e) {}
+        }
+        if (this.sprite_shadow != null) {
+            try { this.sprite_shadow.destroy(); } catch (e) {}
+        }
         this.sprite = null;
         this.sprite_shadow = null;
+    }
+
+    destroy() {
+        this.destroySprite();
     }
 }
 

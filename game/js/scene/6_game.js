@@ -38,15 +38,10 @@ export default class GameScene extends Phaser.Scene {
 
         this.place = 'exterior';
         this.irisInDelayMs = 300;
-    this.deferSceneStart = true;
+        this.deferSceneStart = true;
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
         this.manager.initializeGame();
-        this.events.on(Phaser.Scenes.Events.WAKE, function ()
-        {
-            //this.manager.setState('NOT LOADED');
-
-        }, this);
         this.exterior = new ExteriorManager(this);
         this.exterior.initialize();
         await this.exterior.detectChunkFiles();

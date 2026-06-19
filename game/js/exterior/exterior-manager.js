@@ -1190,7 +1190,22 @@ import Shop from "../object/shop.js";
                 if (!treeManager.registry.placeEmpty(wx, wy)) return;
             } catch (e) {}
             const age = entity.age_days ?? entity.params?.age_days ?? 0;
-            const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age, { syncChunk: false });
+            const treeVisual = entity.treeVisual ?? entity.params?.treeVisual ?? entity.visual ?? entity.params?.visual ?? null;
+            const createdTree = treeManager.newTreeToWorld(wx, wy, entity.slug, age, { syncChunk: false, appearance: treeVisual });
+            if (!treeVisual && createdTree && typeof createdTree.getVisualData === 'function') {
+                const generatedVisual = createdTree.getVisualData();
+                if (generatedVisual) {
+                    entity.treeVisual = generatedVisual;
+                    try {
+                        const worldSystem = this.scene?.exterior?.worldSystem;
+                        if (worldSystem && typeof worldSystem.markDirty === 'function') {
+                            worldSystem.markDirty(chunk);
+                        } else {
+                            chunk.dirty = true;
+                        }
+                    } catch (e) {}
+                }
+            }
             try {
                 if (createdTree && typeof createdTree === 'object' && !createdTree.sprite) {
                     createdTree.setTileLocation(wx, wy);
@@ -1221,7 +1236,7 @@ import Shop from "../object/shop.js";
         trees.forEach(entity => {
             const wx = chunk.tileOriginX + entity.localX;
             const wy = chunk.tileOriginY + entity.localY;
-            try { treeManager.registry.removeTrees(wx, wy); } catch (e) {}
+            try { treeManager.registry.removeTrees(wx, wy, { syncChunk: false }); } catch (e) {}
         });
     }
 

@@ -16,9 +16,9 @@ export default class TreeFactory {
         return false;
     }
 
-    newTree (slug, days_old = 0) {
+    newTree (slug, days_old = 0, appearance = null) {
         if (this.validTree(slug)) {
-            return new Tree(this.scene,this.valid_trees[slug], days_old); /// Returns a non-sprite obj
+            return new Tree(this.scene, this.valid_trees[slug], days_old, appearance); /// Returns a non-sprite obj
         }
         else {
             console.warn("Nonvalid tree slug passed in tree factory: "+slug);
