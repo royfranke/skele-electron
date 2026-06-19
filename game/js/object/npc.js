@@ -15,6 +15,7 @@ export default class Npc {
     this.destinations = [];
     this.greeting = false;
     this.following = null;
+    this.followingTarget = null;
     this.info = npc;
 
     this.npcState = new NpcState();
@@ -109,8 +110,79 @@ export default class Npc {
   testMoveToSlug(slug) {
     var tiles = this.getTilesFromSlug(slug);
     if (tiles) {
-      this.goTo(tiles.x, tiles.y);
+      this.moveToTile(tiles.x, tiles.y);
     }
+  }
+
+  buildSimpleTileRouteFromFindRouteOptions(startX, startY, endX, endY) {
+    const nav = this.scene?.manager?.nav;
+    if (!nav || typeof nav.findRouteOptions !== 'function' || typeof nav.compareCoordinates !== 'function') {
+      return [];
+    }
+
+    const start = [startX, startY];
+    const end = [endX, endY];
+
+    if (startX == endX && startY == endY) {
+      return [start];
+    }
+
+    var frontier = [start];
+    var visited = [];
+    var parents = [];
+    var solved = false;
+    var solution = [];
+    var counter = 0;
+
+    while (frontier.length > 0 && solved == false) {
+      counter++;
+
+      var nextTiles = nav.findRouteOptions(frontier, visited, 'simple_tile');
+      var current = frontier[0];
+      visited.push(current);
+
+      for (var n = 0; n < nextTiles.length; n++) {
+        var nextTile = nextTiles[n];
+        if (!nav.compareCoordinates(visited, nextTile) && !nav.compareCoordinates(frontier, nextTile)) {
+          frontier.push(nextTile);
+          parents.push([nextTile, current]);
+
+          if (nextTile[0] == end[0] && nextTile[1] == end[1]) {
+            solved = true;
+            var place = current;
+            solution = [nextTile, current];
+
+            while (place[0] != start[0] || place[1] != start[1]) {
+              var foundParent = false;
+              for (var d = 0; d < parents.length; d++) {
+                if (parents[d][0][0] == place[0] && parents[d][0][1] == place[1]) {
+                  place = parents[d][1];
+                  solution.push(place);
+                  foundParent = true;
+                  break;
+                }
+              }
+
+              if (!foundParent) {
+                break;
+              }
+            }
+            break;
+          }
+        }
+      }
+
+      frontier.shift();
+      if (counter > 10000) {
+        break;
+      }
+    }
+
+    if (!solved || solution.length == 0) {
+      return [];
+    }
+
+    return solution.reverse();
   }
 
   getTilesFromSlug(slug) {
@@ -309,19 +381,45 @@ export default class Npc {
     }
   }
 
+  moveToTile(_x, _y) {
+    const startX = this.standingTile?.x ?? _x;
+    const startY = this.standingTile?.y ?? _y;
+    const route = this.buildSimpleTileRouteFromFindRouteOptions(startX, startY, _x, _y);
+
+    if (Array.isArray(route) && route.length > 0) {
+      const trimmedRoute = route.filter((step, index) => !(index == 0 && step[0] == startX && step[1] == startY));
+      this.destinations = trimmedRoute.map((step) => ({ x: step[0], y: step[1] }));
+      return true;
+    }
+
+    this.goTo(_x, _y);
+    return false;
+  }
+
   clearDestinations() {
     this.destinations = [];
+    this.followingTarget = null;
     this.setState('IDLE');
   }
 
   follow(object, distance = 1) { /// Could be player, NPC, or other moving target, must having facing and standingTile.x standingTile.y properties
+    if (!object || !object.standingTile) {
+      this.setState('IDLE');
+      return;
+    }
+
     var x_distance = this.standingTile.x - object.standingTile.x;
     var y_distance = this.standingTile.y - object.standingTile.y;
+    const targetKey = `${object.standingTile.x}_${object.standingTile.y}`;
 
     if ((x_distance > distance || x_distance < -distance) || (y_distance > distance || y_distance < -distance)) {
-      this.goTo(object.standingTile.x, object.standingTile.y);
+      if (this.followingTarget !== targetKey || this.destinations.length == 0) {
+        this.followingTarget = targetKey;
+        this.moveToTile(object.standingTile.x, object.standingTile.y);
+      }
     }
     else {
+      this.followingTarget = null;
       this.setState('IDLE');
     }
   }

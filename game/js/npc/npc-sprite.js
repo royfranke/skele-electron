@@ -63,7 +63,7 @@ export default class NpcSprite {
       }
     } catch (e) {}
     
-    if (state.name == 'WALK' || state.name == 'IDLE') {
+    if (state.name == 'IDLE') {
       if (this.sprite.body && typeof this.sprite.body.setVelocity === 'function') {
         this.sprite.body.setVelocity(0);
       }
