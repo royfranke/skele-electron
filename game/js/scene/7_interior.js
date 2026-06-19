@@ -5,6 +5,8 @@ import PlayerManager from "../player/player-manager.js";
 import TutorialManager from "../tutorial/tutorial-manager.js";
 import NpcManager from "../npc/npc-manager.js";
 import WorldDataLoader from "../world/world-data-loader.js";
+import MAP_CONFIG from "../config/map.js";
+import { CHUNK_SIZE } from "../world/chunk.js";
 
 /**
  * Interior
@@ -227,7 +229,7 @@ export default class InteriorScene extends Phaser.Scene {
         date = date.weekshort+', '+date.month+' '+date.day;
 
         var heading = date;
-        var content = "I found a garbage patch in the woods. I threw rocks at birds with J.D. I helped Auntie make dinner.";
+        var content = "I'm checking to see if plants grow overnight.";
 
         this.manager.hud.hudNotebook.manager.notebook.addPage(heading, content);
 
@@ -244,16 +246,88 @@ export default class InteriorScene extends Phaser.Scene {
         
     }
 
-    saveGameData(data,slot) {
-        // Replace `data` and `slot` with the actual data and slot you want to save
+    async agePlantsInChunkFiles(slot, daysToAdvance = 1) {
+        const slotNumber = Number(slot);
+        if (!Number.isInteger(slotNumber) || slotNumber < 0) {
+            console.warn('[InteriorScene] Invalid save slot for chunk aging:', slot);
+            return { scanned: 0, changedChunks: 0, agedPlants: 0 };
+        }
+
+        if (typeof window === 'undefined' || !window.api || typeof window.api.invoke !== 'function') {
+            console.warn('[InteriorScene] IPC bridge unavailable; cannot age chunk files');
+            return { scanned: 0, changedChunks: 0, agedPlants: 0 };
+        }
+
+        const worldChunksWidth = Math.ceil(MAP_CONFIG.width / CHUNK_SIZE);
+        const worldChunksHeight = Math.ceil(MAP_CONFIG.height / CHUNK_SIZE);
+
+        let scanned = 0;
+        let changedChunks = 0;
+        let agedPlants = 0;
+
+        for (let cy = 0; cy < worldChunksHeight; cy++) {
+            for (let cx = 0; cx < worldChunksWidth; cx++) {
+                scanned += 1;
+
+                let loaded;
+                try {
+                    loaded = await window.api.invoke('load-chunk', { chunkX: cx, chunkY: cy, slot: slotNumber });
+                } catch (_e) {
+                    continue;
+                }
+
+                if (!loaded || loaded.ok !== true || !loaded.data || !Array.isArray(loaded.data.entities)) {
+                    continue;
+                }
+
+                const chunkData = loaded.data;
+                let chunkChanged = false;
+
+                for (const entity of chunkData.entities) {
+                    if (!entity || entity.kind !== 'plant') {
+                        continue;
+                    }
+
+                    const currentAge = Number.isFinite(entity.age_days) ? entity.age_days : 0;
+                    entity.age_days = currentAge + daysToAdvance;
+                    agedPlants += 1;
+                    chunkChanged = true;
+                }
+
+                if (!chunkChanged) {
+                    continue;
+                }
+
+                const saved = await window.api.invoke('save-chunk', {
+                    chunkX: cx,
+                    chunkY: cy,
+                    chunkData,
+                    slot: slotNumber,
+                });
+
+                if (saved && saved.ok === true) {
+                    changedChunks += 1;
+                }
+            }
+        }
+
+        console.log(`[InteriorScene] Aged ${agedPlants} plants across ${changedChunks} chunk files (scanned ${scanned})`);
+        return { scanned, changedChunks, agedPlants };
+    }
+
+    async saveGameData(data,slot) {
+        try {
+            await this.agePlantsInChunkFiles(slot, 1);
+        } catch (e) {
+            console.error('[InteriorScene] Plant aging before save failed:', e);
+        }
+
         if (this.verbose) console.log("I'm going to call save-data for slot "+slot);
         if (this.verbose) console.log(data);
         let save_data = {data:data,slot:slot};
-        const manager = this.manager;
         var self = this;
         window.api.invoke('save-data', save_data)
-            .then(function(res) {
-                
+            .then(function(_res) {
                 self.scene.stop('Interior Scene');
                 self.scene.start('Save Scene', {slot: self.slot});
                 return true;

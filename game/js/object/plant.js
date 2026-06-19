@@ -82,6 +82,46 @@ export default class Plant {
         this.name = name;
     }
 
+    /**
+     * Get human-readable age and stage information for debugging.
+     * @returns {string} Age info like "5 days / stage_12"
+     */
+    getAgeInfo() {
+        const stageName = this.stage?.name ?? 'unknown';
+        return `${this.day}d / ${stageName}`;
+    }
+
+    /**
+     * Add a debug text label showing plant age and stage.
+     * For debugging purposes to visualize plant progression.
+     */
+    setDebugLabel() {
+        if (!this.sprite || !this.scene || !this.scene.add) return;
+        
+        // Remove old label if exists
+        if (this.debugLabel) {
+            try {
+                this.debugLabel.destroy();
+            } catch (e) {}
+        }
+
+        try {
+            const ageInfo = this.getAgeInfo();
+            this.debugLabel = this.scene.add.bitmapText(
+                this.sprite.x,
+                this.sprite.y - 16,
+                'SkeleTalk',
+                ageInfo,
+                6
+            )
+            .setOrigin(0.5, 1)
+            .setDepth(this.sprite.depth + 100)
+            .setTintFill(0xffff00);
+        } catch (e) {
+            console.error('Plant.setDebugLabel() error:', e);
+        }
+    }
+
     update() {
 
     }

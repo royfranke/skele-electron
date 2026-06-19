@@ -26,7 +26,7 @@ import Shop from "../object/shop.js";
 
     constructor(scene) {
         this.scene = scene;
-        this.debug = true;
+        this.debug = false;
         this.useLegacySlotBlockSave = false;
         // When true, never attempt to load chunk JSONs from disk; always
         // use the in-memory/generated chunk data produced during the
@@ -2734,6 +2734,74 @@ import Shop from "../object/shop.js";
 
         if (MAP_CONFIG.debugWorldQueryMisses === true && this.worldQueryMisses[kind] % 50 === 1) {
             console.warn(`[WorldQueryMiss] ${kind} at ${_x},${_y} (count=${this.worldQueryMisses[kind]})`);
+        }
+    }
+
+    /**
+     * Run garbage collection and environmental progression routines.
+     * Called before saving to update world state.
+     * 
+     * @param {number} daysToAdvance - Number of days to advance (default: 1)
+     */
+    progressEnvironment(daysToAdvance = 1) {
+        try {
+            // Age all plants in all loaded chunks and their persistent data
+            this.ageAllPlantsInChunks(daysToAdvance);
+            
+            // Add other environmental progression here (NPCs, weather, etc.)
+            // TODO: Tree aging, NPC schedules, seasonal changes, etc.
+        } catch (e) {
+            console.error('ExteriorManager.progressEnvironment() error:', e);
+        }
+    }
+
+    /**
+     * Age all plants in all loaded chunks by advancing days.
+     * Updates both chunk entity data and marks chunks dirty for saving.
+     * 
+     * @param {number} daysToAdvance - Number of days to advance
+     */
+    ageAllPlantsInChunks(daysToAdvance = 1) {
+        try {
+            if (!this.chunkManager) {
+                console.warn('[ExteriorManager] ChunkManager not available');
+                return;
+            }
+
+            const allChunks = this.chunkManager.getAllChunks();
+            console.log(`[ExteriorManager.ageAllPlantsInChunks] Total chunks: ${allChunks.length}`);
+            
+            let plantsAged = 0;
+            let chunksModified = 0;
+
+            for (const chunk of allChunks) {
+                console.log(`[ExteriorManager.ageAllPlantsInChunks] Checking chunk ${chunk.key}, loaded=${chunk.loaded}`);
+                if (!chunk.loaded) continue;
+
+                const plants = chunk.getPlants();
+                console.log(`[ExteriorManager.ageAllPlantsInChunks] Chunk ${chunk.key} has ${plants.length} plants`);
+                
+                for (const plantEntity of plants) {
+                    console.log(`[ExteriorManager.ageAllPlantsInChunks] Aging ${plantEntity.slug}: ${plantEntity.age_days ?? 0} -> ${(plantEntity.age_days ?? 0) + daysToAdvance}`);
+                    if (plantEntity.age_days === undefined) {
+                        plantEntity.age_days = 0;
+                    }
+                    plantEntity.age_days += daysToAdvance;
+                    plantsAged++;
+                }
+
+                if (plants.length > 0) {
+                    chunk.dirty = true;
+                    chunksModified++;
+                    if (this.debug) {
+                        console.log(`[ExteriorManager] Chunk ${chunk.key}: aged ${plants.length} plants by ${daysToAdvance} day(s)`);
+                    }
+                }
+            }
+
+            console.log(`[ExteriorManager.ageAllPlantsInChunks] SUMMARY: aged ${plantsAged} plants across ${chunksModified} chunks`);
+        } catch (e) {
+            console.error('[ExteriorManager] ageAllPlantsInChunks error:', e);
         }
     }
 
