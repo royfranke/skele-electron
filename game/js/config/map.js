@@ -1983,7 +1983,7 @@ const MAP_CONFIG = {
                 x: 3,
                 y: 3,
                 width: 7,
-                height: 28
+                height: 27
             },
             block: {
                 x: 4,

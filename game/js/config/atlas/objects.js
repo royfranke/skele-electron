@@ -665,6 +665,57 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          BOOK_CART: {
+        name: 'Book cart',
+        slug: 'BOOK_CART', 
+        type: 'BOOK_CART',
+        bounding: {
+          h:2, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:4, 
+          w:24
+        },
+        offset: {
+          x:4, 
+          y:26
+        },
+        varieties: 2,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'RUMMAGE', stateTrigger: 'RUMMAGING', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'RUMMAGING',
+              transition: 'DEFAULT',
+              frames: []
+              },],            slots: 6,
+            items: [],
+
+          interactions: {
+                                  },
+    },
           BOXELDER: {
         name: 'Boxelder',
         slug: 'BOXELDER', 
@@ -6139,6 +6190,126 @@ const OBJECTS = {
         depth: 0,
         sprite: {
           h:52, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          PAPER_SIGN_1_DOLLAR: {
+        name: 'Handdrawn Paper Sign $1',
+        slug: 'PAPER_SIGN_1_DOLLAR', 
+        type: 'PAPER_SIGN',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          PAPER_SIGN_2_DOLLAR: {
+        name: 'Handdrawn Paper Sign $2',
+        slug: 'PAPER_SIGN_2_DOLLAR', 
+        type: 'PAPER_SIGN',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          PAPER_SIGN_3_DOLLAR: {
+        name: 'Handdrawn Paper Sign $3',
+        slug: 'PAPER_SIGN_3_DOLLAR', 
+        type: 'PAPER_SIGN',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:16, 
           w:16,
           x:0, 
           y:0

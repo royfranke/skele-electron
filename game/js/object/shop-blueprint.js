@@ -305,6 +305,19 @@ export default class ShopBlueprint {
         if (this.prop.listing.slug == 'BOOKSTORE') {
             this.sign = this.scene.manager.objectManager.newObjectToWorld(x - 1, y, 'SIGN_BOOKSTORE');
             this.sign.sprite.setDepth(this.sign.sprite.depth + 32);
+
+            this.scene.manager.objectManager.newObjectToWorld(x - 2, y, 'BOOK_CART');
+
+             this.scene.manager.objectManager.newObjectToWorld(x - 2, y - 2, 'BOOK_CART');
+            this.scene.manager.objectManager.newObjectToWorld(x + 2, y + 1, 'BOOK_CART');
+            this.scene.manager.objectManager.newObjectToWorld(x + 4, y + 1, 'BOOK_CART');
+
+            let paper_sign = this.scene.manager.objectManager.newObjectToWorld(x + 2.5, y - 1.5, 'PAPER_SIGN_1_DOLLAR');
+            paper_sign.sprite.setDepth(this.gates[0].sprite.depth - 6);
+
+            let paper_sign_2 = this.scene.manager.objectManager.newObjectToWorld(x + 4.5, y - 1.5, 'PAPER_SIGN_2_DOLLAR');
+            paper_sign_2.sprite.setDepth(this.gates[0].sprite.depth - 6);
+
         }
 
         if (this.prop.listing.slug == 'BARBER') {

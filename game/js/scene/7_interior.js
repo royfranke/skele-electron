@@ -227,7 +227,7 @@ export default class InteriorScene extends Phaser.Scene {
         date = date.weekshort+', '+date.month+' '+date.day;
 
         var heading = date;
-        var content = "I missed the last day of school picnic.";
+        var content = "I found a garbage patch in the woods. I threw rocks at birds with J.D. I helped Auntie make dinner.";
 
         this.manager.hud.hudNotebook.manager.notebook.addPage(heading, content);
 
