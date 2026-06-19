@@ -34,8 +34,8 @@ export default class TreeManager {
     }
     
 
-    newTree (slug) {
-        return this.factory.newTree(slug);
+    newTree (slug, days_old = 0, appearance = null) {
+        return this.factory.newTree(slug, days_old, appearance);
     }
 
     treeInfo (slug) {
@@ -47,7 +47,8 @@ export default class TreeManager {
     }
 
     newTreeToWorld (_x,_y,slug,days_old=0, options = {}) {
-        var tree = this.newTree(slug,days_old);
+        const appearance = options?.appearance ?? options?.treeVisual ?? options?.visual ?? null;
+        var tree = this.newTree(slug, days_old, appearance);
         var result = this.putTreeInWorld(tree,_x,_y, options);
         if (!result) {
             try { tree.destroy(); } catch (e) {}
@@ -74,7 +75,8 @@ export default class TreeManager {
                         const local = chunk.worldToLocal(_x, _y);
                         if (local) {
                             const slug = tree?.info?.slug ?? tree?.name ?? 'UNKNOWN';
-                            chunk.addTree(slug, local.x, local.y, { age_days: tree.day });
+                            const treeVisual = (typeof tree.getVisualData === 'function') ? tree.getVisualData() : tree.appearance ?? null;
+                            chunk.addTree(slug, local.x, local.y, { age_days: tree.day, treeVisual });
                             if (worldSystem && typeof worldSystem.markDirty === 'function') {
                                 try { worldSystem.markDirty(chunk); } catch (e) {}
                             } else {
