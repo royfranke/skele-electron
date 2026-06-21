@@ -17,6 +17,9 @@ import KEYLIGHT from "../config/key-light.js";
         this.player_start_x = 3;
         this.player_start_y = 7;
         this.built = false;
+        this.collisionMap = null;
+        this.collisionDebugOverlay = null;
+        this.collisionDebugVisible = false;
         this.room = new Room(this.scene, this.scene.room_id);
         this.doors = [];
         this.createMap();
@@ -26,9 +29,11 @@ import KEYLIGHT from "../config/key-light.js";
 
     create () {
         this.buildFeatureList();
+        this.buildCollisionMap();
         this.createNPCs();
         this.lastKeyLight = null;
         this.keylight = KEYLIGHT;
+        this.bindCollisionDebugToggle();
     }
 
     createNPCs () {
@@ -80,6 +85,7 @@ import KEYLIGHT from "../config/key-light.js";
         this.ground = new Ground(this.groundLayer, this.edgeLayer, this.scene);
         //this.scene.app.camera.setBounds(this.map.widthInPixels, this.map.heightInPixels);
 
+        this.createCollisionDebugOverlay();
         this.setMouseInput();
         
     }
@@ -157,8 +163,133 @@ import KEYLIGHT from "../config/key-light.js";
             }
             this.drawFloorCutAway();
             this.drawWallCutAway();
+            this.buildCollisionMap();
             this.built = true;
         }
+    }
+
+    buildCollisionMap () {
+        if (this.map == undefined) {
+            this.collisionMap = null;
+            return;
+        }
+
+        this.collisionMap = new Uint8Array(this.map.width * this.map.height);
+        for (let y = 0; y < this.map.height; y++) {
+            for (let x = 0; x < this.map.width; x++) {
+                this.collisionMap[(y * this.map.width) + x] = this.isTileBlockedForNavigation(x, y) ? 1 : 0;
+            }
+        }
+
+        this.refreshCollisionDebugOverlay();
+    }
+
+    createCollisionDebugOverlay () {
+        if (this.scene?.add == undefined) {
+            return;
+        }
+
+        if (this.collisionDebugOverlay != null) {
+            return;
+        }
+
+        this.collisionDebugOverlay = this.scene.add.graphics();
+        this.collisionDebugOverlay.setDepth(9999);
+        this.collisionDebugOverlay.setVisible(false);
+        this.refreshCollisionDebugOverlay();
+    }
+
+    refreshCollisionDebugOverlay () {
+        if (this.collisionDebugOverlay == null || this.map == undefined || this.collisionMap == null) {
+            return;
+        }
+
+        const tileWidth = this.map.tileWidth ?? 16;
+        const tileHeight = this.map.tileHeight ?? 16;
+
+        this.collisionDebugOverlay.clear();
+        this.collisionDebugOverlay.fillStyle(0xff2d2d, 0.38);
+
+        for (let y = 0; y < this.map.height; y++) {
+            for (let x = 0; x < this.map.width; x++) {
+                if (this.getCollisionAt(x, y) === 1) {
+                    this.collisionDebugOverlay.fillRect(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+                }
+            }
+        }
+    }
+
+    toggleCollisionDebugOverlay (forceVisible = null) {
+        this.createCollisionDebugOverlay();
+        if (this.collisionDebugOverlay == null) {
+            return;
+        }
+
+        const nextVisible = (forceVisible == null) ? !this.collisionDebugVisible : !!forceVisible;
+        this.collisionDebugVisible = nextVisible;
+        this.collisionDebugOverlay.setVisible(nextVisible);
+
+        if (nextVisible) {
+            this.refreshCollisionDebugOverlay();
+        }
+
+        console.log(`[InteriorManager] Collision debug overlay ${nextVisible ? 'ON' : 'OFF'}`);
+    }
+
+    bindCollisionDebugToggle () {
+        try {
+            if (this.scene?.input?.keyboard == undefined) {
+                return;
+            }
+
+            // Keyboard shortcut to toggle interior collision overlay: Ctrl+Shift+M
+            this.scene.input.keyboard.on('keydown-M', (event) => {
+                if (event?.ctrlKey && event?.shiftKey) {
+                    this.toggleCollisionDebugOverlay();
+                }
+            });
+        } catch (e) {}
+    }
+
+    isTileBlockedForNavigation (_x, _y) {
+        if (this.map == undefined) return true;
+        if (_x < 0 || _y < 0 || _x >= this.map.width || _y >= this.map.height) return true;
+
+        if (this.tileBlank(_x, _y)) return true;
+
+        const wallTile = this.wallLayer.getTileAt(_x, _y);
+        if (wallTile && wallTile.index != null && wallTile.index !== -1) return true;
+
+        const objectRegistry = this.scene?.manager?.objectManager?.registry;
+        if (objectRegistry?.isSolidFootprintBlocked && objectRegistry.isSolidFootprintBlocked(_x, _y)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    getCollisionAt (_x, _y) {
+        if (this.collisionMap == null || this.map == undefined) {
+            return null;
+        }
+
+        if (_x < 0 || _y < 0 || _x >= this.map.width || _y >= this.map.height) {
+            return 1;
+        }
+
+        return this.collisionMap[(_y * this.map.width) + _x] ?? 1;
+    }
+
+    getGroundAt (_x, _y) {
+        if (this.map == undefined) {
+            return null;
+        }
+
+        if (_x < 0 || _y < 0 || _x >= this.map.width || _y >= this.map.height) {
+            return null;
+        }
+
+        return this.groundLayer.getTileAt(_x, _y);
     }
 
     setMouseInput () {
@@ -398,17 +529,12 @@ import KEYLIGHT from "../config/key-light.js";
         if (!_x || !_y) {
             // guard but allow zero coords
         }
-        if (this.map == undefined) return false;
-        if (_x < 0 || _y < 0 || _x >= this.map.width || _y >= this.map.height) return false;
+        const collision = this.getCollisionAt(_x, _y);
+        if (collision != null) {
+            return collision === 0;
+        }
 
-        // If ground is blank, it's not walkable
-        if (this.tileBlank(_x, _y)) return false;
-
-        // Any wall layer tile present blocks walking
-        const wallTile = this.wallLayer.getTileAt(_x, _y);
-        if (wallTile && wallTile.index != null && wallTile.index !== -1) return false;
-
-        return true;
+        return !this.isTileBlockedForNavigation(_x, _y);
     }
     
 
@@ -430,6 +556,7 @@ import KEYLIGHT from "../config/key-light.js";
     clearTileMaps () {
         this.groundLayer.fill(TILES.BLANK);
         this.wallLayer.fill(WALLTILES.BLANK);
+        this.buildCollisionMap();
     }
 
 }

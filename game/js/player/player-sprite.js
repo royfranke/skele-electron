@@ -266,7 +266,7 @@ export default class PlayerSprite {
       }
 
       frontier.shift();
-      if (counter > 10000) {
+      if (counter > 1000) {
         break;
       }
     }

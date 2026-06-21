@@ -459,7 +459,7 @@ export default class Npc {
       /// Move toward the next location
       if (this.standingTile.x == this.destinations[0].x && this.standingTile.y == this.destinations[0].y) { // Arrived at the destination TILE!
         this.destinations.shift();
-        this.setState('IDLE');
+        //this.setState('IDLE');
 
         this.scene.events.emit('NPC_ARRIVED_'+this.info.slug, this);
       }
