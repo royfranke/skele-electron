@@ -1,4 +1,5 @@
 import QuestFactory from './quest-factory.js';
+import RequirementsEngine from '../requirements/requirements-engine.js';
 /**
  * 	Manages quest log
  *	
@@ -8,6 +9,7 @@ import QuestFactory from './quest-factory.js';
     constructor(scene) {
         this.scene = scene;
         this.factory = new QuestFactory(this.scene);
+        this.requirementsEngine = new RequirementsEngine(this.scene);
         this.initialize();  
     }
 
@@ -31,7 +33,44 @@ import QuestFactory from './quest-factory.js';
                 var quest = this.getQuest(quest_slug);
                 this.addQuest(quest);
             });
-        }   
+        }
+
+        this.evaluatePassiveQuestCompletion();
+    }
+
+    evaluatePassiveQuestCompletion () {
+        if (!this.questLog || !Array.isArray(this.questLog.current)) {
+            return;
+        }
+
+        // Evaluate a snapshot of active quest slugs so completion mutations are safe.
+        const activeQuests = [...this.questLog.current];
+
+        activeQuests.forEach(questSlug => {
+            const quest = this.getQuest(questSlug);
+            if (!quest || !quest.completion) {
+                return;
+            }
+
+            const roomRequired = (quest.goto_room !== undefined && quest.goto_room !== null && quest.goto_room !== '' && quest.goto_room !== 'NULL')
+                ? String(quest.goto_room)
+                : null;
+            const roomCurrent = String(this.scene?.slot?.POSITION?.ROOM ?? this.scene?.room_id ?? '');
+
+            if (roomRequired !== null && roomCurrent !== roomRequired) {
+                return;
+            }
+
+            Object.keys(quest.completion).forEach(key => {
+                const reqAction = quest.completion[key];
+                const requires = reqAction?.requires || [];
+                const checkResult = this.requirementsEngine.checkRequirements(requires, {});
+
+                if (checkResult.satisfied) {
+                    this.completeQuest(reqAction.req_group);
+                }
+            });
+        });
     }
 
     findQuestIndex (slug) {
@@ -68,6 +107,7 @@ import QuestFactory from './quest-factory.js';
                 req_id = quest.completion[key].req_group;
             }
             this.listen(req_id);
+            this.evaluatePassiveQuestCompletion();
             return false;
         }
         if (quest_index == -2) {
@@ -90,6 +130,7 @@ import QuestFactory from './quest-factory.js';
             value = quest.completion[key].req_group;
         }
         this.listen(value);
+        this.evaluatePassiveQuestCompletion();
         return true;
     }
 
