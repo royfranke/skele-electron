@@ -121,6 +121,7 @@ import Shop from "../object/shop.js";
             }
             this.handleChunkLoad(chunk);
             if (this.debug) console.log(`[ChunkManager] load   ${chunk.key}`);
+            this.scene.npcs.projector.onChunkLoad(chunk);
         };
         this.chunkManager.onChunkPrefetch = (chunk) => {
             // Attempt to pre-load chunk data without rendering
@@ -545,6 +546,7 @@ import Shop from "../object/shop.js";
         const portalId = portal.portalId ?? null;
         const worldX = portal?.world?.x ?? portal?.x ?? null;
         const worldY = portal?.world?.y ?? portal?.y ?? null;
+        const resolvedAddress = portal.address ?? this.getAddressByPortalRoomId(portal.room_id) ?? null;
 
         const entry = {
             portalId,
@@ -554,7 +556,7 @@ import Shop from "../object/shop.js";
             y: worldY,
             facing: portal.facing ?? 'N',
             slug: portal.slug ?? null,
-            address: portal.address ?? null,
+            address: resolvedAddress,
             return: portal.return ?? null,
             objectSlug: portal.objectSlug ?? null,
             index: this.portalIndex.length,
@@ -563,6 +565,18 @@ import Shop from "../object/shop.js";
         this.portalIndex.push(entry);
 
         return entry;
+    }
+
+    getAddressByPortalRoomId (roomId) {
+        if (roomId == null || !Array.isArray(MAP_CONFIG.propertyLines)) {
+            return null;
+        }
+
+        const match = MAP_CONFIG.propertyLines.find((prop) => {
+            return prop?.portal?.room_id === roomId && prop?.address != null;
+        });
+
+        return match?.address ?? null;
     }
 
     rebuildPortalIndexFromObjects () {
@@ -594,6 +608,10 @@ import Shop from "../object/shop.js";
                 }
 
                 seen.add(dedupeKey);
+                
+                // Address can come from object, portal, or map property definition by room id.
+                const address = obj?.address ?? portal?.address ?? this.getAddressByPortalRoomId(portal?.room_id) ?? null;
+                
                 rebuilt.push({
                     portalId,
                     room_id: portal?.room_id,
@@ -602,7 +620,7 @@ import Shop from "../object/shop.js";
                     y: worldY,
                     facing: portal?.facing ?? 'N',
                     slug: portal?.slug ?? obj?.info?.slug ?? null,
-                    address: portal?.address ?? null,
+                    address: address,
                     return: portal?.return ?? null,
                     objectSlug: obj?.info?.slug ?? null,
                     sourceKey: key,
@@ -625,7 +643,31 @@ import Shop from "../object/shop.js";
                 return false;
             }
 
-            this.portalIndex = loaded.portals.slice();
+            let mutated = false;
+            this.portalIndex = loaded.portals.map((entry) => {
+                if (!entry || typeof entry !== 'object') {
+                    return entry;
+                }
+
+                if (entry.address != null) {
+                    return entry;
+                }
+
+                const fallbackAddress = this.getAddressByPortalRoomId(entry.room_id);
+                if (fallbackAddress == null) {
+                    return entry;
+                }
+
+                mutated = true;
+                return {
+                    ...entry,
+                    address: fallbackAddress,
+                };
+            });
+
+            if (mutated) {
+                this.savePortalIndexFile();
+            }
             return true;
         } catch (e) {
             if (this.debug) {
@@ -1851,7 +1893,7 @@ import Shop from "../object/shop.js";
                 return: returnPortal,
                 slug: object.portal.slug ?? slug,
                 portalId,
-                address: object.portal.address ?? null,
+                address: object.portal.address ?? this.getAddressByPortalRoomId(roomId) ?? null,
             };
         }
 

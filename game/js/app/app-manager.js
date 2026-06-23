@@ -76,6 +76,7 @@ export default class AppManager {
     initializeSave () {
         if (this.saveManager != null && this.scene.slot != undefined) {
             this.saveManager.initializeSave();
+            this.scene.manager.npcSchedule.fromSaveData(this.scene.slot.NPCS, this.scene.time.now);
         }
     }
 

@@ -18,7 +18,7 @@ export default class TimeManager {
         this.time_passing = true;
         this.alarm_beeping = false;
         this.today = this.getDate();
-        
+        this._lastQuarter = Math.floor(this.now.minute / 15);
     }
 
     freezeTime (freeze=true) {
@@ -216,18 +216,15 @@ export default class TimeManager {
 
     incrementMinute(increment) {
         this.now.minute += increment;
-
-        while (this.now.minute >= 60) {
-            this.now.minute -= 60;
-            this.incrementHour(1);
-        }
-
-        while (this.now.minute < 0) {
-            this.now.minute += 60;
-            this.incrementHour(-1);
-        }
-
+        while (this.now.minute >= 60) { this.now.minute -= 60; this.incrementHour(1); }
+        while (this.now.minute < 0)   { this.now.minute += 60; this.incrementHour(-1); }
         this.updateCurrentLightState();
+
+        const newQuarter = Math.floor(this.now.minute / 15);
+        if (newQuarter !== this._lastQuarter) {
+            this._lastQuarter = newQuarter;
+            this._onQuarterChange && this._onQuarterChange(this.now);
+        }
     }
 
     incrementHour(increment) {

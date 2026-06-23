@@ -6,6 +6,7 @@ import HudManager from "../hud/hud-manager.js";
 import DataManager from "../data/data-manager.js";
 import ItemManager from "../items/item-manager.js";
 import NavigatorManager from "../navigator/navigator-manager.js";
+import NpcScheduleManager from "../npc/npc-schedule-manager.js";
 import ObjectManager from "../objects/object-manager.js";
 import PlantManager from "../plants/plant-manager.js";
 import LootManager from "../loot/loot-manager.js";
@@ -32,6 +33,11 @@ export default class GameManager {
         this.utilities = new GameUtilities();
         this.gameFocus = new GameFocus();
         this.time = new TimeManager();
+        this.time._lastQuarter = Math.floor(this.time.now.minute / 15);
+        this.time._onQuarterChange = (now) => {
+            this.scene.events.emit('QUARTER_CHANGE', now);
+        };
+        this.npcSchedule = new NpcScheduleManager(this.scene);
         this.objectManager = new ObjectManager(this.scene);
         this.itemManager = new ItemManager(this.scene);
         this.plantManager = new PlantManager(this.scene);

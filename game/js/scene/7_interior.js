@@ -40,6 +40,7 @@ export default class InteriorScene extends Phaser.Scene {
 
         this.interior.create();
         this.player.create();
+        this.npcs.create();
          //// Load the save!
          this.app.initializeRoomSave();
          this.manager.hud.pocket.setPocketsFromSave();

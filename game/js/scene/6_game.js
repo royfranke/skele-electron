@@ -60,9 +60,9 @@ export default class GameScene extends Phaser.Scene {
         //// does not briefly appear at constructor defaults.
         this.app.initializeSave();
         this.player.create();
-        this.npcs.create();
 
         await this.waitForExteriorPlayerReady();
+        this.npcs.create();
         this.deferSceneStart = false;
         this.app.startDeferredSceneStart();
     }

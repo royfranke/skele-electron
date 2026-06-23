@@ -200,6 +200,7 @@ export default class Npc {
 
     }
     if (action == 'FOLLOW ME') {
+      this.scene.manager.npcSchedule.requestFollow(this.info.slug);
       this.following = { follow: this.scene.player, distance: 1 };
       this.world_actions = [
         { action: 'STOP FOLLOWING ME', object: this },
@@ -207,6 +208,7 @@ export default class Npc {
       ];
     }
     if (action == 'FOLLOW ME AT A DISTANCE') {
+      this.scene.manager.npcSchedule.requestFollow(this.info.slug);
       this.following = { follow: this.scene.player, distance: 3 };
       this.world_actions = [
         { action: 'STOP FOLLOWING ME', object: this },
@@ -215,6 +217,7 @@ export default class Npc {
     }
 
     if (action == 'STOP FOLLOWING ME') {
+      this.scene.manager.npcSchedule.releaseFollow(this.info.slug);
       this.following = null;
       this.clearDestinations();
       this.scene.manager.hud.think('?!');

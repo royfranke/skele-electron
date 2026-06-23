@@ -1,4 +1,5 @@
 import NpcFactory from "./npc-factory.js";
+import NpcRuntimeProjector from "./npc-runtime-projector.js";
 
 /* Npc Manager Class */
 
@@ -10,42 +11,26 @@ export default class NpcManager {
     }
 
     create () {
-        /*
-        let dir = "E";
-        let number = "101";
-        let street = "Belly Button Street";
-        let npc_cords = this.scene.exterior.getMailboxTilesFromAddress(dir, number, street);
-      this.newNpcToWorld(npc_cords.x,npc_cords.y,'PATRICE');
-      this.newNpcToWorld(npc_cords.x + 2,npc_cords.y,'SKELE_AUNTIE');
-      */
-                let dir = "W";
-                let number = "107";
-                let street = "Belly Button Street";
-                let npc_cords = this.scene.exterior.getFrontDoorTilesFromAddress(dir, number, street);
-                if (npc_cords && typeof npc_cords.x === 'number' && typeof npc_cords.y === 'number') {
-                    this.newNpcToWorld(npc_cords.x+2,npc_cords.y-2,'PATRICE');
-                } else {
-                    if (this.scene.exterior && this.scene.exterior.debug) console.warn('NPC spawn skipped: no front-door coords for', dir, number, street);
-                }
+
+               if (this.projector) this.projector.projectAll();
       
     }
 
-    update () {
-            if (!Array.isArray(this.list)) {
-                return;
-            }
+    update() {
+        if (!Array.isArray(this.list)) return;
+        this.list.forEach(npc => { if (npc?.update) npc.update(); });
 
-            this.list.forEach(npc => {
-                if (npc && typeof npc.update === 'function') {
-                        npc.update();
-                }
-            });
+        if (this.projector) this.projector.updateAll();
     }
 
     initializeScene(scene) {
         this.factory = new NpcFactory(scene);
         this.list = [];
         this.newColliderGroup();
+
+        if (scene.manager?.npcSchedule) {
+        this.projector = new NpcRuntimeProjector(scene, this);
+        }
     }
 
     newColliderGroup () {
