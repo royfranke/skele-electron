@@ -150,7 +150,7 @@ const OBJECT_TYPES = {
       SIDE_TABLE: [
       'WOOD_SIDE_TABLE_NO_DRAWER','WOOD_SIDE_TABLE'    ],
       SIMPLE_PLANT: [
-      'CREEK_SEDGE'    ],
+      'CREEK_SEDGE','RASPBERRY_CANE_1','RASPBERRY_CANE_2'    ],
       SINK: [
       'KITCHEN_SINK'    ],
       SOFA: [

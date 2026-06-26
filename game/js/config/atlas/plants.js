@@ -120,7 +120,7 @@ MILKWEED: {
       filename: 'MILKWEED_43_1355',
       width: 16,
       height: 16,
-      tags: ["flower"]
+      tags: []
     }
       ]
 },                                                                        
@@ -137,7 +137,7 @@ MILKWEED: {
       filename: 'MILKWEED_44_1356',
       width: 16,
       height: 16,
-      tags: ["flower"]
+      tags: []
     },
         {
       id: 1360,
@@ -750,6 +750,288 @@ GIANT_CANE: {
       id: 1251,
       filename: 'GIANT_CANE_38_1251',
       width: 32,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                   }
+},
+      
+SUNFLOWER: {
+  name: 'Sunflower',
+  scientific_name: 'Helianthus annuus',
+  slug: 'SUNFLOWER',
+  bounding: {
+    h:3, 
+    w:1
+  },
+  base: {
+    h:1, 
+    w:1,
+    x:0, 
+    y:2
+  },
+  sprite: {
+    h:48, 
+    w:16,
+    x:0, 
+    y:0
+  },
+  size: {
+    h:8, 
+    w:8
+  },
+  offset: {
+    x:40, 
+    y:4
+  },
+  stages: {
+    
+                                      
+            stage_47:{
+  stage_id: 47,
+  start: 0,
+  end: 8,
+  next_stage_id: 49,
+  name: 'Seeds',
+  day_length: 8,
+  frames: [
+      ]
+},            
+                                                
+            stage_49:{
+  stage_id: 49,
+  start: 9,
+  end: 13,
+  next_stage_id: 50,
+  name: 'V-E',
+  day_length: 4,
+  frames: [
+        {
+      id: 1513,
+      filename: 'SUNFLOWER_49_1513',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_50:{
+  stage_id: 50,
+  start: 14,
+  end: 18,
+  next_stage_id: 51,
+  name: 'V-2',
+  day_length: 4,
+  frames: [
+        {
+      id: 1514,
+      filename: 'SUNFLOWER_50_1514',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_51:{
+  stage_id: 51,
+  start: 19,
+  end: 22,
+  next_stage_id: 52,
+  name: 'V-4',
+  day_length: 3,
+  frames: [
+        {
+      id: 1515,
+      filename: 'SUNFLOWER_51_1515',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_52:{
+  stage_id: 52,
+  start: 23,
+  end: 28,
+  next_stage_id: 53,
+  name: 'V-8',
+  day_length: 5,
+  frames: [
+        {
+      id: 1516,
+      filename: 'SUNFLOWER_52_1516',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_53:{
+  stage_id: 53,
+  start: 29,
+  end: 34,
+  next_stage_id: 54,
+  name: 'V-12',
+  day_length: 5,
+  frames: [
+        {
+      id: 1517,
+      filename: 'SUNFLOWER_53_1517',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_54:{
+  stage_id: 54,
+  start: 35,
+  end: 41,
+  next_stage_id: 55,
+  name: 'R-1',
+  day_length: 6,
+  frames: [
+        {
+      id: 1518,
+      filename: 'SUNFLOWER_54_1518',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_55:{
+  stage_id: 55,
+  start: 42,
+  end: 50,
+  next_stage_id: 56,
+  name: 'R-2',
+  day_length: 8,
+  frames: [
+        {
+      id: 1519,
+      filename: 'SUNFLOWER_55_1519',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_56:{
+  stage_id: 56,
+  start: 51,
+  end: 59,
+  next_stage_id: 57,
+  name: 'R-3',
+  day_length: 8,
+  frames: [
+        {
+      id: 1520,
+      filename: 'SUNFLOWER_56_1520',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_57:{
+  stage_id: 57,
+  start: 60,
+  end: 67,
+  next_stage_id: 59,
+  name: 'R-4',
+  day_length: 7,
+  frames: [
+        {
+      id: 1521,
+      filename: 'SUNFLOWER_57_1521',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_59:{
+  stage_id: 59,
+  start: 68,
+  end: 78,
+  next_stage_id: 60,
+  name: 'R-5',
+  day_length: 10,
+  frames: [
+        {
+      id: 1522,
+      filename: 'SUNFLOWER_59_1522',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_60:{
+  stage_id: 60,
+  start: 79,
+  end: 89,
+  next_stage_id: 61,
+  name: 'R-6',
+  day_length: 10,
+  frames: [
+        {
+      id: 1523,
+      filename: 'SUNFLOWER_60_1523',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_61:{
+  stage_id: 61,
+  start: 90,
+  end: 95,
+  next_stage_id: 62,
+  name: 'R-7',
+  day_length: 5,
+  frames: [
+        {
+      id: 1524,
+      filename: 'SUNFLOWER_61_1524',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_62:{
+  stage_id: 62,
+  start: 96,
+  end: 111,
+  next_stage_id: 63,
+  name: 'R-8',
+  day_length: 15,
+  frames: [
+        {
+      id: 1525,
+      filename: 'SUNFLOWER_62_1525',
+      width: 16,
+      height: 48,
+      tags: []
+    }
+      ]
+},                                                                        
+            stage_63:{
+  stage_id: 63,
+  start: 112,
+  end: 119,
+  next_stage_id: 0,
+  name: 'R-9',
+  day_length: 7,
+  frames: [
+        {
+      id: 1526,
+      filename: 'SUNFLOWER_63_1526',
+      width: 16,
       height: 48,
       tags: []
     }

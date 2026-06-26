@@ -3406,7 +3406,7 @@ const OBJECTS = {
         loot: [
                   ],
         actions: [ {
-            name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['HARVESTABLE']
+            name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['FRUITING','HARVESTABLE']
           }],
         default_state: 'HARVESTABLE',        states: [                {
               name: 'HARVESTED',
@@ -3417,7 +3417,16 @@ const OBJECTS = {
               frames: ['CREEK_SEDGE-4','CREEK_SEDGE-5',]},                {
               name: 'HARVESTABLE',
               transition: 'false',
-              frames: ['CREEK_SEDGE-1','CREEK_SEDGE-2','CREEK_SEDGE-3','CREEK_SEDGE-4',]},                           ],
+              frames: ['CREEK_SEDGE-1','CREEK_SEDGE-2','CREEK_SEDGE-3','CREEK_SEDGE-4',]},                {
+              name: 'FLOWERING',
+              transition: 'false',
+              frames: []},                {
+              name: 'UNREADY_HARVEST',
+              transition: 'false',
+              frames: []},                {
+              name: 'FRUITING',
+              transition: 'false',
+              frames: []},                            ],
 
           interactions: {
                                   },
@@ -9751,6 +9760,170 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          RASPBERRY_CANE_1: {
+        name: 'Raspberry Cane 1',
+        slug: 'RASPBERRY_CANE_1', 
+        type: 'SIMPLE_PLANT',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: -6,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:6, 
+          w:4
+        },
+        offset: {
+          x:10, 
+          y:40
+        },
+        varieties: 4,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['FRUITING','HARVESTABLE']
+          }],
+        default_state: 'HARVESTED',        states: [                {
+              name: 'HARVESTED',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_1-1',]},                {
+              name: 'HARVEST',
+              transition: 'HARVESTED',
+              frames: ['RASPBERRY_CANE_1-1',]},                {
+              name: 'HARVESTABLE',
+              transition: 'false',
+              frames: []},                {
+              name: 'FLOWERING',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_1-2',]},                {
+              name: 'UNREADY_HARVEST',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_1-3',]},                {
+              name: 'FRUITING',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_1-4',]},                            ],
+
+          interactions: {
+                                group_42: {
+                req_group: 42,
+                req_group_name: 'Pick Raspberries 1',
+                req_pocket_action: '',
+                req_world_action: 'HARVEST',
+                req_state: 'fruiting',
+                req_result_item: 'RASPBERRY',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_KIND',
+                    result: 'UNTOUCHED',
+                    OBJ_KIND: 'RASPBERRY_CANE_1'
+                    }
+                                ]
+
+            },                                  },
+    },
+          RASPBERRY_CANE_2: {
+        name: 'Raspberry Cane 2',
+        slug: 'RASPBERRY_CANE_2', 
+        type: 'SIMPLE_PLANT',
+        bounding: {
+          h:3, 
+          w:3
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:1, 
+          y:2
+        },
+        depth: -6,
+        sprite: {
+          h:48, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:4
+        },
+        offset: {
+          x:24, 
+          y:38
+        },
+        varieties: 4,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['FRUITING','HARVESTABLE']
+          }],
+        default_state: 'HARVESTED',        states: [                {
+              name: 'HARVESTED',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_2-1',]},                {
+              name: 'HARVEST',
+              transition: 'HARVESTED',
+              frames: ['RASPBERRY_CANE_2-1',]},                {
+              name: 'HARVESTABLE',
+              transition: 'false',
+              frames: []},                {
+              name: 'FLOWERING',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_2-2',]},                {
+              name: 'UNREADY_HARVEST',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_2-3',]},                {
+              name: 'FRUITING',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_2-4',]},                            ],
+
+          interactions: {
+                                group_44: {
+                req_group: 44,
+                req_group_name: 'Pick Raspberries 2',
+                req_pocket_action: '',
+                req_world_action: 'HARVEST',
+                req_state: 'fruiting',
+                req_result_item: 'RASPBERRY',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_KIND',
+                    result: 'UNTOUCHED',
+                    OBJ_KIND: 'RASPBERRY_CANE_2'
+                    }
+                                ]
+
+            },                                  },
+    },
           DINER_BOOTH_RED_N: {
         name: 'Red Diner Booth North',
         slug: 'DINER_BOOTH_RED_N', 
@@ -14938,7 +15111,7 @@ const OBJECTS = {
           x:0, 
           y:6
         },
-        depth: 0,
+        depth: -6,
         sprite: {
           h:112, 
           w:16,
