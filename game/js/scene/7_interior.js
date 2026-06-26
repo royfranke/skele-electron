@@ -247,6 +247,81 @@ export default class InteriorScene extends Phaser.Scene {
         
     }
 
+    async garbageCollectInChunkFiles(slot, daysToAdvance = 1) {
+        // Use this to find specific object kinds and types in chunks and reset or progress their states. For example, we want to close all doors. Another example, we want to fine all instances of an object and if it has a specific state, we want to change it to another state. This is useful for things like fruiting plants that grow harvestable items over time, or doors that should be closed when the player saves and exits the game.
+        const slotNumber = Number(slot);
+        if (!Number.isInteger(slotNumber) || slotNumber < 0) {
+            console.warn('[InteriorScene] Invalid save slot for chunk garbage collection:', slot);
+            return { scanned: 0, changedChunks: 0, processedEntities: 0 };
+        }
+
+        if (typeof window === 'undefined' || !window.api || typeof window.api.invoke !== 'function') {
+            console.warn('[InteriorScene] IPC bridge unavailable; cannot perform garbage collection on chunk files');
+            return { scanned: 0, changedChunks: 0, processedEntities: 0 };
+        }
+
+        const worldChunksWidth = Math.ceil(MAP_CONFIG.width / CHUNK_SIZE);
+        const worldChunksHeight = Math.ceil(MAP_CONFIG.height / CHUNK_SIZE);
+
+        let scanned = 0;
+        let changedChunks = 0;
+        let processedEntities = 0;
+
+        for (let cy = 0; cy < worldChunksHeight; cy++) {
+            for (let cx = 0; cx < worldChunksWidth; cx++) {
+                scanned += 1;
+
+                let loaded;
+                try {
+                    loaded = await window.api.invoke('load-chunk', { chunkX: cx, chunkY: cy, slot: slotNumber });
+                } catch (_e) {
+                    continue;
+                }
+
+                if (!loaded || loaded.ok !== true || !loaded.data || !Array.isArray(loaded.data.entities)) {
+                    continue;
+                }
+
+                const chunkData = loaded.data;
+                let chunkChanged = false;
+
+                for (const entity of chunkData.entities) {
+                    if (!entity) {
+                        continue;
+                    }
+
+                    // Example: Close all doors
+                    if (!entity || entity.kind !== 'object') {
+                        continue;
+                    }
+                    if (entity.slug.startsWith('EXT_DOOR_') && entity.params.state !== 'CLOSED') {
+                        entity.params.state = 'CLOSED';
+                        processedEntities += 1;
+                        chunkChanged = true;
+                    }
+                }
+
+                if (!chunkChanged) {
+                    continue;
+                }
+
+                const saved = await window.api.invoke('save-chunk', {
+                    chunkX: cx,
+                    chunkY: cy,
+                    chunkData,
+                    slot: slotNumber,
+                });
+
+                if (saved && saved.ok === true) {
+                    changedChunks += 1;
+                }
+            }
+        }
+
+        console.log(`[InteriorScene] Processed ${processedEntities} entities across ${changedChunks} chunk files (scanned ${scanned})`);
+        return { scanned, changedChunks, processedEntities };
+    }
+
     async agePlantsInChunkFiles(slot, daysToAdvance = 1) {
         const slotNumber = Number(slot);
         if (!Number.isInteger(slotNumber) || slotNumber < 0) {
@@ -321,6 +396,11 @@ export default class InteriorScene extends Phaser.Scene {
             await this.agePlantsInChunkFiles(slot, 1);
         } catch (e) {
             console.error('[InteriorScene] Plant aging before save failed:', e);
+        }
+        try {
+            await this.garbageCollectInChunkFiles(slot, 1);
+        } catch (e) {
+            console.error('[InteriorScene] Garbage collection before save failed:', e);
         }
 
         if (this.verbose) console.log("I'm going to call save-data for slot "+slot);
