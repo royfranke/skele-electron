@@ -121,7 +121,7 @@ import Shop from "../object/shop.js";
             }
             this.handleChunkLoad(chunk);
             if (this.debug) console.log(`[ChunkManager] load   ${chunk.key}`);
-            this.scene.npcs.projector.onChunkLoad(chunk);
+            try { this.scene?.npcs?.projector?.onChunkLoad(chunk); } catch (e) {}
         };
         this.chunkManager.onChunkPrefetch = (chunk) => {
             // Attempt to pre-load chunk data without rendering

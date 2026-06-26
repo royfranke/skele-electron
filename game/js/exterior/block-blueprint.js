@@ -130,7 +130,7 @@ export default class BlockBlueprint {
         }
 
         if (this.block.offset.e > 0) {
-            this.buildStreetPole(this.block.right - 1, this.block.bottom - 7, { TELEPHONE: true }, false);
+            this.buildStreetPole(this.block.right - 1, this.block.bottom - 8, { TELEPHONE: true }, false);
             this.buildStreetPole(this.block.right - 1, this.block.top + 7, { TELEPHONE: true }, false);
         }
 
@@ -181,6 +181,22 @@ export default class BlockBlueprint {
                 var y = block.top + h + block.offset.n;
 
                 switch (tile) {
+                    case 0:
+                        let obj1 = this.scene.manager.objectManager.newObjectToWorld(x, y, 'RASPBERRY_CANE_1');
+                        obj1.setState('FRUITING');
+
+                        let obj2 = this.scene.manager.objectManager.newObjectToWorld(x+1, y, 'RASPBERRY_CANE_2');
+                        obj2.setState('FRUITING');
+                        x++;
+                        break;
+                    case 2:
+                        let obj3 = this.scene.manager.objectManager.newObjectToWorld(x, y, 'RASPBERRY_CANE_1');
+                        obj3.setState('FRUITING');
+                        break;
+                    case 3:
+                        let obj4 = this.scene.manager.objectManager.newObjectToWorld(x, y, 'RASPBERRY_CANE_1');
+                        obj4.setState('UNREADY_HARVEST');
+                        break;
                     case 7:
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
                         break;
