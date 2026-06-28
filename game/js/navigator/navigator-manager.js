@@ -309,8 +309,8 @@ export default class NavigatorManager {
                 }
             }
             frontier.shift();
-            if (counter > 1000) {
-                console.log("Wayfinding counter exceeded 1000!");
+            if (counter > 100) {
+                console.log("Wayfinding counter exceeded 100!");
                 break;
             }
         }

@@ -38,7 +38,9 @@ export default class NpcRuntimeProjector {
             this._reconcile(record);
             if (record.spawnedScene !== this._sceneId()) continue;
             if (record.mode === 'FOLLOWING_PLAYER') {
-                // delegate entirely to Npc.follow()
+                // Follow mode is driven by runtime NPC behavior; keep record position synced.
+                const npc = this.npcManager.getNpcBySlug(record.slug);
+                this._syncRecordFromRuntime(record, npc);
                 continue;
             }
             this._driveLeg(record);
@@ -59,10 +61,6 @@ export default class NpcRuntimeProjector {
         const existing = this.npcManager.getNpcBySlug(record.slug);
         const shouldBeInScene = this._recordBelongsToScene(record, sceneId);
         const validPos = this._hasValidWorldPosition(record);
-
-        if (record.slug === 'PATRICE') {
-            console.log(`[NPC_PROJECTOR_DEBUG] slug=${record.slug} frameSpawnCheck=1 scene=${sceneId} desiredScene=${record.scene ?? 'null'} shouldBeInScene=${shouldBeInScene} validPos=${validPos} existing=${!!existing} world=${record.worldX},${record.worldY}`);
-        }
 
         if (!shouldBeInScene) {
             if (existing) {
@@ -93,6 +91,12 @@ export default class NpcRuntimeProjector {
 
         record.spawnedScene = sceneId;
         record.runtimeNpc = existing;
+
+        if (record.mode === 'FOLLOWING_PLAYER') {
+            // While following, trust runtime movement and never snap to scheduled tile.
+            this._syncRecordFromRuntime(record, existing);
+            return;
+        }
 
         const tile = existing.standingTile;
         const tileMatches = !!(tile && tile.x === record.worldX && tile.y === record.worldY);
@@ -139,6 +143,10 @@ export default class NpcRuntimeProjector {
     }
 
     _recordBelongsToScene(record, sceneId) {
+        if (record?.mode === 'FOLLOWING_PLAYER') {
+            return true;
+        }
+
         const desiredScene = record.scene ?? (record.activePlan?.indoors ? 'interior' : 'exterior');
         if (desiredScene !== sceneId) {
             return false;
@@ -173,6 +181,18 @@ export default class NpcRuntimeProjector {
         const action = record?.activePlan?.arrivalAction;
         if (typeof action === 'string' && typeof npc.setState === 'function') {
             npc.setState(action);
+        }
+    }
+
+    _syncRecordFromRuntime(record, npc) {
+        if (!record || !npc || !npc.standingTile) {
+            return;
+        }
+
+        const { x, y } = npc.standingTile;
+        if (typeof x === 'number' && typeof y === 'number') {
+            record.worldX = x;
+            record.worldY = y;
         }
     }
 

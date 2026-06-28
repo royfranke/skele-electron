@@ -46,6 +46,17 @@ export default class NpcScheduleManager {
             return false;
         }
 
+        const nextScene = !!rule.indoors ? 'interior' : 'exterior';
+        const nextRoomId = nextScene === 'interior' ? (rule.roomId ?? null) : null;
+
+        // Check if this plan is actually different from the current one
+        const planChanged = !record.activePlan || 
+                           record.activePlan.ruleId !== (rule.id ?? null) ||
+                           record.activePlan.destination.x !== destination.x ||
+                           record.activePlan.destination.y !== destination.y ||
+                           record.scene !== nextScene ||
+                           String(record.roomId ?? '') !== String(nextRoomId ?? '');
+
         record.activePlan = {
             ruleId: rule.id ?? null,
             destination,
@@ -57,16 +68,26 @@ export default class NpcScheduleManager {
         };
         record.currentLegIndex = 0;
 
-        if (record.slug === 'PATRICE') {
-            console.log(`[NPC_SCHEDULE_DEBUG] slug=${record.slug} rule=${record.activePlan.ruleId ?? 'none'} resolvedTile=${destination.x},${destination.y} indoors=${record.activePlan.indoors} roomId=${record.activePlan.roomId ?? 'null'}`);
-        }
 
         if (record.mode === 'SCHEDULED') {
-            record.worldX = destination.x;
-            record.worldY = destination.y;
             record.facing = record.activePlan.arrivalFacing;
-            record.scene = record.activePlan.indoors ? 'interior' : 'exterior';
-            record.roomId = record.scene === 'interior' ? (record.activePlan.roomId ?? null) : null;
+
+            // Check if scene changed before updating
+            const sceneChanged = record.scene !== nextScene || String(record.roomId ?? '') !== String(nextRoomId ?? '');
+
+            record.scene = nextScene;
+            record.roomId = nextRoomId;
+
+            // Always set world position if null (first spawn in scene) or if scene changed.
+            // For same-scene plan changes with existing position, keep current position for routing.
+            if (record.worldX === null || record.worldY === null || sceneChanged) {
+                record.worldX = destination.x;
+                record.worldY = destination.y;
+            }
+
+            if (planChanged) {
+                record.planVersion++;  // trigger movement dispatch in projector
+            }
         }
 
         return true;
@@ -109,6 +130,7 @@ export default class NpcScheduleManager {
         r.mode = 'SCHEDULED';
         r.followTarget = null;
         r.suspendedPlan = null;
+        r._lastDispatchedPlanVersion = -1;  // reset so next replan triggers movement dispatch
         this._replan(r, this.scene.manager.time.now);  // recompute from current time+pos
     }
 
@@ -234,6 +256,8 @@ export default class NpcScheduleManager {
                 spawnedScene: null,         // which scene the NPC is currently spawned in (if any)
                 spawnedChunk: null,         // which chunk the NPC is currently spawned in (if any)
                 runtimeNpc: null,
+                planVersion: 0,             // incremented when plan changes; used to trigger movement one-shot
+                _lastDispatchedPlanVersion: -1,  // tracks which planVersion was already dispatched
             };
             this.registry.set(slug, record);
         }

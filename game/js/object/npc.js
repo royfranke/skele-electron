@@ -36,7 +36,6 @@ export default class Npc {
     this.sprite = new NpcSprite(this.scene, this, x_ * 16, y_ * 16);
     this.sprite.createFooting();
     this.standingTile = { x: x_, y: y_ };
-    //this.goTo(x_ - 7, y_ + 12);
   }
 
   update() {
@@ -173,7 +172,7 @@ export default class Npc {
       }
 
       frontier.shift();
-      if (counter > 10000) {
+      if (counter > 1000) {
         break;
       }
     }
@@ -387,14 +386,22 @@ export default class Npc {
   moveToTile(_x, _y) {
     const startX = this.standingTile?.x ?? _x;
     const startY = this.standingTile?.y ?? _y;
-    const route = this.buildSimpleTileRouteFromFindRouteOptions(startX, startY, _x, _y);
+    let route = this.buildSimpleTileRouteFromFindRouteOptions(startX, startY, _x, _y);
 
-    if (Array.isArray(route) && route.length > 0) {
+    // Prefer collision-map routes; use full route fallback when available.
+    if ((!Array.isArray(route) || route.length == 0) && this.scene?.manager?.nav?.getFullRoute) {
+      route = this.scene.manager.nav.getFullRoute(startX, startY, _x, _y, 'simple_tile');
+    }
+
+    const routeFound = Array.isArray(route) && route.length > 0;
+
+    if (routeFound) {
       const trimmedRoute = route.filter((step, index) => !(index == 0 && step[0] == startX && step[1] == startY));
       this.destinations = trimmedRoute.map((step) => ({ x: step[0], y: step[1] }));
       return true;
     }
 
+    // Fallback to direct move; checkItinerary will step through with collision physics.
     this.goTo(_x, _y);
     return false;
   }
@@ -462,8 +469,6 @@ export default class Npc {
       /// Move toward the next location
       if (this.standingTile.x == this.destinations[0].x && this.standingTile.y == this.destinations[0].y) { // Arrived at the destination TILE!
         this.destinations.shift();
-        //this.setState('IDLE');
-
         this.scene.events.emit('NPC_ARRIVED_'+this.info.slug, this);
       }
       else {
