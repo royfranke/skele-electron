@@ -163,6 +163,45 @@ export default class BlockBlueprint {
         return sections;
     }
 
+    buildRaspberryPatch(_x, _y, width = 3, height = 3) {
+        for (let h = 0; h < height; h++) {
+            for (let w = 0; w < width; w++) {
+                // Randomly skip some tiles to create a more natural-looking patch
+                if (Phaser.Math.RND.between(0, 1) == 0) continue;
+                var x = _x + w;
+                var y = _y + h;
+                var variation = Phaser.Math.RND.between(1, 3);
+                var cane = this.scene.manager.objectManager.newObjectToWorld(x, y, 'RASPBERRY_CANE_'+variation);
+
+                if (cane) {
+                    // Randomly flip the raspberry cane to add some visual variety
+                    cane.sprite.setFlipX((Phaser.Math.RND.between(0, 1) == 0));
+                    this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);
+                    if (variation < 3 && Phaser.Math.RND.between(0, 1) == 0) {
+                        cane.setState('FLOWERING');
+                    }
+                }
+            }
+        }
+    }
+
+    buildMilkweedPatch(_x, _y, width = 3, height = 3) {
+        for (let h = 0; h < height; h++) {
+            for (let w = 0; w < width; w++) {
+                // Randomly skip some tiles to create a more natural-looking patch
+                if (Phaser.Math.RND.between(0, 1) == 0) continue;
+                var x = _x + w;
+                var y = _y + h;
+                var milkweed = this.scene.manager.plantManager.newPlantToWorld(x, y, 'MILKWEED', Phaser.Math.RND.between(2, 16));
+                if (milkweed) {
+                    // Randomly flip the milkweed to add some visual variety
+                    milkweed.sprite.setFlipX((Phaser.Math.RND.between(0, 1) == 0));
+                    this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MUD.FILL_, x, y, 1, 1);
+                }
+            }
+        }
+    }
+
     buildForest() {
         const block = this.block;
         const groundLayer = this.scene[this.scene.locale].groundLayer;
@@ -173,6 +212,7 @@ export default class BlockBlueprint {
                 var x = block.left + block.offset.w;
                 var y = block.top + 8 + block.offset.n;
                 this.buildFence(x, y, block.width - (block.offset.w + block.offset.e), 'CHAINLINK_S', 'OPEN');
+                this.buildRaspberryPatch(x, y - 1, 8, 3);
                 h++;
             }
             for (let w = 0; w < block.width - (block.offset.w + block.offset.e); w++) {
@@ -182,20 +222,14 @@ export default class BlockBlueprint {
 
                 switch (tile) {
                     case 0:
-                        let obj1 = this.scene.manager.objectManager.newObjectToWorld(x, y, 'RASPBERRY_CANE_1');
-                        obj1.setState('FRUITING');
-
-                        let obj2 = this.scene.manager.objectManager.newObjectToWorld(x+1, y, 'RASPBERRY_CANE_2');
-                        obj2.setState('FRUITING');
-                        x++;
+                        var patch_width = Phaser.Math.RND.between(2, 4);
+                        this.buildRaspberryPatch(x, y, patch_width, Phaser.Math.RND.between(2, 4));
+                        x = x + patch_width;
                         break;
-                    case 2:
-                        let obj3 = this.scene.manager.objectManager.newObjectToWorld(x, y, 'RASPBERRY_CANE_1');
-                        obj3.setState('FRUITING');
-                        break;
-                    case 3:
-                        let obj4 = this.scene.manager.objectManager.newObjectToWorld(x, y, 'RASPBERRY_CANE_1');
-                        obj4.setState('UNREADY_HARVEST');
+                    case 1:
+                        var patch_width = Phaser.Math.RND.between(2, 4);
+                        this.buildMilkweedPatch(x, y, patch_width, Phaser.Math.RND.between(2, 4));
+                        x = x + patch_width;
                         break;
                     case 7:
                         groundLayer.weightedRandomize(TILES.MULCH.FILL_, x, y, 1, 1);

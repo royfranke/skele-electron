@@ -9924,6 +9924,66 @@ const OBJECTS = {
 
             },                                  },
     },
+          RASPBERRY_CANE_3: {
+        name: 'Raspberry Cane 3',
+        slug: 'RASPBERRY_CANE_3', 
+        type: 'SIMPLE_PLANT',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: -3,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:6, 
+          w:8
+        },
+        offset: {
+          x:10, 
+          y:40
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'HARVEST', stateTrigger: 'HARVEST', validStates: ['FRUITING','HARVESTABLE']
+          }],
+        default_state: 'DEFAULT',        states: [                {
+              name: 'HARVESTED',
+              transition: 'false',
+              frames: ['RASPBERRY_CANE_3-1',]},                {
+              name: 'HARVEST',
+              transition: 'HARVESTED',
+              frames: []},                {
+              name: 'HARVESTABLE',
+              transition: 'false',
+              frames: []},                {
+              name: 'FLOWERING',
+              transition: 'false',
+              frames: []},                {
+              name: 'UNREADY_HARVEST',
+              transition: 'false',
+              frames: []},                {
+              name: 'FRUITING',
+              transition: 'false',
+              frames: []},                            ],
+
+          interactions: {
+                                  },
+    },
           DINER_BOOTH_RED_N: {
         name: 'Red Diner Booth North',
         slug: 'DINER_BOOTH_RED_N', 
