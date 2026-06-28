@@ -28,6 +28,16 @@ const PLAYER_STATES = {
         input: true,
         speed: 0
     },
+    PHONE_HOME: {
+        name: 'PHONE_HOME',
+        input: true,
+        speed: 0
+    },
+    PHONE_PAY: {
+        name: 'PHONE_PAY',
+        input: false,
+        speed: 0
+    },
     PICKUP: {
         name: 'PICKUP',
         speed: 0

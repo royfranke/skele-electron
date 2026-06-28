@@ -9,6 +9,8 @@ const SPRITE_DIR = {
         'EXCHANGE',
         'TRIP',
         'SITTING',
+        'PHONE_HOME',
+        'PHONE_PAY',
         'PICKUP',
         'PUSH',
         'PULL',
@@ -397,6 +399,54 @@ const SPRITE_DIR = {
                 END: 39,
             }
         },
+    },
+    PHONE_HOME: {
+        ANIM: {
+            N: {
+                START: 0,
+                END: 0,
+            },
+            N_SIDE: {
+                START:1,
+                END: 1,
+            },
+            SIDE: {
+                START: 2,
+                END: 2,
+            },
+            S_SIDE: {
+                START: 3,
+                END: 3,
+            },
+            S: {
+                START: 4,
+                END: 4,
+            }
+        }
+    },
+    PHONE_PAY: {
+        ANIM: {
+            N: {
+                START: 0,
+                END: 0,
+            },
+            N_SIDE: {
+                START:1,
+                END: 1,
+            },
+            SIDE: {
+                START: 2,
+                END: 2,
+            },
+            S_SIDE: {
+                START: 3,
+                END: 3,
+            },
+            S: {
+                START: 4,
+                END: 4,
+            }
+        }   
     },
     PULL: {
         ANIM: {

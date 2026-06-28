@@ -425,14 +425,20 @@ export default class Object {
         }
 
         if (action == 'USE PHONE') {
+            // Set player state to PHONE_HOME and trigger the number pad interface
+            this.scene.player.setState('PHONE_HOME');
             console.log("Using phone");
+            this.setState('DIALING');
             this.scene.manager.setFocus('NUMBERPAD');
             this.scene.events.addListener('CALL_PHONE', function (number) {
                 console.log("Calling "+number);
+                this.scene.player.setFacing('se');
                 this.scene.time.delayedCall(3000, () => {
                     this.scene.manager.hud.hudSound.play('ANSWER_WRONG');
                     this.doAction('HANG UP');
+                    this.scene.player.setFacing('n');
                     this.scene.manager.setFocus('PLAYER');
+                    this.scene.player.setState('IDLE');
                 });
                 
             }, this);
