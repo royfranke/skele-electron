@@ -26,7 +26,7 @@ export default class Object {
         this.name = this.info.name;
         // If there are varieties, randomize variety
         // this is also where variety vs. animation frames should be set
-        if (this.info.states.length > 0) {
+        if (this.info.states.length > 0 && this.statesHaveFrames(this.info.states)) {
             this.variety = 1;
         }
         else {
@@ -63,6 +63,15 @@ export default class Object {
             });
         }
         this.chestFunctions(items);
+    }
+
+    statesHaveFrames(states) {
+        for (var i = 0; i < states.length; i++) {
+            if (states[i].frames != null && states[i].frames.length > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     setVariety(variety) {
