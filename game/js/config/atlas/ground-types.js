@@ -413,7 +413,7 @@ const GROUND_TYPE = {
     TYPE: "WATER",
     SPEED: "SLOG",
     BITMAP: true,
-    EDGE: "HARD",
+    EDGE: "FEATHER",
     COLLIDES: false,
     USEMASK: true,
     ZINDEX: 7,
