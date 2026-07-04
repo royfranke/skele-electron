@@ -59,8 +59,11 @@ export default class WorldDataLoader {
 
             if (data == null) return false;
 
+            if (chunk.fromJSON(data) !== true) {
+                return false;
+            }
+
             this._cache.set(key, data);
-            chunk.fromJSON(data);
             return true;
 
         } catch (_err) {

@@ -440,7 +440,6 @@ import Shop from "../object/shop.js";
     create () {
         if (this.useChunkStreamingBootstrap) {
             this.ground = new Ground(this.groundLayer, this.edgeLayer, this.scene);
-            this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
             this.setMouseInput();
             this.bootstrapPortalIndexFromDisk();
             this.beginChunkStreaming();
@@ -452,7 +451,6 @@ import Shop from "../object/shop.js";
         if (this.chunkFilesExist === true) {
             if (this.debug) console.log('Detected existing chunk files — skipping generation');
             this.ground = new Ground(this.groundLayer, this.edgeLayer, this.scene);
-            this.ground.initializeTiles(this.groundLayer, this.scene, this.edgeLayer);
             this.setMouseInput();
             this.bootstrapPortalIndexFromDisk();
             this.beginChunkStreaming();
@@ -846,11 +844,11 @@ import Shop from "../object/shop.js";
     syncPhaserLayersToChunks(chunksToSync = null) {
         if (!this.chunkManager) return;
 
-        const chunks = chunksToSync || this.chunkManager.getAllChunks().filter(c => c.loaded);
+        const chunks = chunksToSync || this.chunkManager.getAllChunks().filter(c => c.loaded && c.rendered);
         let syncedCount = 0;
 
         for (const chunk of chunks) {
-            if (!chunk || !chunk.loaded) continue;
+            if (!chunk || !chunk.loaded || !chunk.rendered) continue;
 
             const originX = chunk.tileOriginX;
             const originY = chunk.tileOriginY;
@@ -932,8 +930,9 @@ import Shop from "../object/shop.js";
         this.worldReady = false;
 
         const standingTile = this.scene.player?.standingTile;
-        const startX = standingTile?.x ?? this.scene.player?.action?.actionTile?.x ?? 0;
-        const startY = standingTile?.y ?? this.scene.player?.action?.actionTile?.y ?? 0;
+        const savedPosition = this.scene.slot?.POSITION ?? null;
+        const startX = standingTile?.x ?? this.scene.player?.action?.actionTile?.x ?? savedPosition?.X ?? 0;
+        const startY = standingTile?.y ?? this.scene.player?.action?.actionTile?.y ?? savedPosition?.Y ?? 0;
 
         this.chunkManager.update(startX, startY);
     }
@@ -2434,6 +2433,13 @@ import Shop from "../object/shop.js";
                 standingTile.x,
                 standingTile.y
             );
+
+            const activeChunks = this.chunkManager.getActiveChunks?.() ?? [];
+            for (const chunk of activeChunks) {
+                if (chunk && chunk.loaded && !chunk.rendered) {
+                    this.renderChunk(chunk);
+                }
+            }
         }
 
         if (this.useChunkStreamingBootstrap) {

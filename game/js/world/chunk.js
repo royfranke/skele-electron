@@ -306,16 +306,22 @@ export default class Chunk {
 
     /** Restore state from a plain object (e.g. loaded from JSON file). */
     fromJSON(data) {
-        if (data.terrain)    this.terrain.set(data.terrain);
-        if (data.edgeTiles)  this.edgeTiles.set(data.edgeTiles);
-        if (data.wallTiles)  this.wallTiles.set(data.wallTiles);
-        if (data.roofTiles)  this.roofTiles.set(data.roofTiles);
-        if (data.collision)  this.collision.set(data.collision);
+        const expectedLength = CHUNK_SIZE * CHUNK_SIZE;
+        if (!data || !Array.isArray(data.terrain) || data.terrain.length !== expectedLength) {
+            return false;
+        }
+
+        this.terrain.set(data.terrain);
+        if (Array.isArray(data.edgeTiles) && data.edgeTiles.length === expectedLength)  this.edgeTiles.set(data.edgeTiles);
+        if (Array.isArray(data.wallTiles) && data.wallTiles.length === expectedLength)  this.wallTiles.set(data.wallTiles);
+        if (Array.isArray(data.roofTiles) && data.roofTiles.length === expectedLength)  this.roofTiles.set(data.roofTiles);
+        if (Array.isArray(data.collision) && data.collision.length === expectedLength)  this.collision.set(data.collision);
         if (data.groundTypes) this.groundTypes = data.groundTypes;
         if (data.entities) {
             this.entities = data.entities;
         }
         this.loaded = true;
         this.dirty  = false;
+        return true;
     }
 }
