@@ -277,6 +277,9 @@ export default class ShopBlueprint {
         if (this.prop.listing.slug == 'BAKERY') {
             this.scene.manager.objectManager.newObjectToWorld(x+4, y-2, 'MURAL_PRETZEL');
         }
+        if (this.prop.listing.slug == 'PIZZA') {
+            this.scene.manager.objectManager.newObjectToWorld(x+7, y, 'LIT_SIGN_PIZZA');
+        }
     }
 
     placeCornerStoreLeftObjects(x, y) {

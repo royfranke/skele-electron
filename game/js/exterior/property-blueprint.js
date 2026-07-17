@@ -305,6 +305,9 @@ export default class PropertyBlueprint {
         if (this.prop.structure.type == 'DUPLEX-RIGHT') {
             this.buildGarden(positions.left + 4, positions.ground_y - 1, 6, 3);
         }
+        if (this.prop.structure.type == 'BUNGALOW') {
+            this.buildGarden(positions.left + 4, positions.ground_y - 1, 7, 3);
+        }
     }
 
     plan() {
@@ -411,6 +414,9 @@ export default class PropertyBlueprint {
                     sedge.setState('HARVESTABLE');
                 } else if (exists == 2) {
                     this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'DANDELION', Phaser.Math.RND.between(1, 44));
+                }
+                else if (exists == 0) {
+                    //this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'DANDELION', Phaser.Math.RND.between(26, 44));
                 }
             }
         }
@@ -627,11 +633,25 @@ export default class PropertyBlueprint {
     }
 
     buildGarden(_x, _y, width, height) {
-        this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, _x, _y, width, height);
-
+        // Roll for garden border
+        var border = this.roll([0, 1, 2, 3, 4, 5]);
+        if (border > 2) {
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, _x, _y, width, height);
+            /// Place wickets
+            this.buildWickets(_x, _y + height - 1, width);
+        }
+        else if (border == 1) {
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, _x, _y, width, height);
+            /// Place wattle fence
+            this.buildWattle(_x, _y + height - 1, width);
+        }
+        else {
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.GARDEN.BITMAP_, _x, _y, width, height);
+        }
+        
         for (var j = 1; j < height - 1; j++) {
             for (var i = 1; i < width - 1; i++) {
-                var exists = this.roll([1, 2, 3, 4, 4, 4, 4]);
+                var exists = this.roll([1, 2, 3, 4, 4, 5,5]);
                 if (exists == 1) {
                     this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'DANDELION', Phaser.Math.RND.between(1, 44));
                 } else if (exists == 2) {
@@ -640,6 +660,9 @@ export default class PropertyBlueprint {
                     this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'FOXTAIL', Phaser.Math.RND.between(1, 28));
                 } else if (exists == 4) {
                     this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'MILKWEED', Phaser.Math.RND.between(20, 52));
+                }
+                else if (exists == 5) {
+                    this.scene.manager.plantManager.newPlantToWorld(_x + i, _y + j, 'SUNFLOWER', Phaser.Math.RND.between(65, 85));
                 }
             }
         }
@@ -683,6 +706,23 @@ export default class PropertyBlueprint {
         }
 
         return { height: stoop.height + stairs.height, stoop: stoop, stairs: stairs };
+    }
+
+    buildWattle(_x, _y, width) {
+        for (var i = 0; i < width; i++) {
+            this.scene.manager.objectManager.newObjectToWorld(_x + i, _y, 'WATTLE_FENCE');
+        }
+    }
+
+    buildWickets(_x, _y, length, vertical = false, east = false) {
+        for (var i = 0; i < length; i++) {
+            if (vertical) {
+                this.scene.manager.objectManager.newObjectToWorld(_x, _y + i, 'WICKET_' + (east ? 'E' : 'W'));
+            }
+            else {
+                this.scene.manager.objectManager.newObjectToWorld(_x + i, _y, 'WICKET_NS');
+            }
+        }
     }
 
     buildStoop(_x, _y) {

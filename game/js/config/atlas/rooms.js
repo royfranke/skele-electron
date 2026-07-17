@@ -717,6 +717,79 @@ sells: [
                 itemList: []
          }
 }
+, room_20: { 
+    id: 20,
+    name: "Bookstore",
+    floorWidth: 6,
+    floorHeight: 12,
+    wallHeight: 3,
+    overallHeight: 14,
+    overallWidth: 8,
+    floorSlug: "PLANK.BROWN_",
+    wallSlug: "BRICK.RED_WEATHERED_",
+        listing: { slug: "BOOKSTORE",
+name: "Dead Language Bookstore",
+listingName: "Dead Language Bookstore",
+rollingGate: "FALSE",
+schedule: {
+    monday: {
+        closed: "TRUE",    },
+    tuesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            }, 
+    wednesday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    thursday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "20:00"
+            },
+    friday: {
+        closed: "FALSE",
+        open: "10:00",
+        close: "21:00"
+            },
+    saturday: {
+        closed: "FALSE",
+        open: "09:00",
+        close: "21:00"
+            },
+    sunday: {
+        closed: "FALSE",
+        open: "11:00",
+        close: "18:00"
+            }
+},
+sells: [
+            "BOOK_1", 
+                "BOOK_2", 
+                        ],
+buys: [
+                            "BOOK_1", 
+                "BOOK_2"
+        ],
+ },
+                        address: {
+                name: "",
+                facing: "S",
+                dir: "E",
+                number: "201",
+                street: "Belly Button Street",
+                map: 19
+            },
+                            front_room: 20,
+        roomData: { 
+                featureList: [{"x":"0","y":"1","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"0","y":"4","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"0","y":"7","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"3","y":"11","slug":"BOOK_CART","params":{}},{"x":"3","y":"0","slug":"INT_DOOR_RED_BROWN_SIGN","params":{}},{"x":"2","y":"11","slug":"BASKET_RACK","params":{}},{"x":"5","y":"-1","slug":"PAPER_SIGN_POSTED","params":{}},{"x":"2","y":"10","slug":"SIGN_RED_ARROW_DOWN_SMALL","params":{}},{"x":"0","y":"11","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"11","slug":"FRONTDOOR","params":{}}],
+                recipeList: [{"x":"0","y":"10","slug":"CARPET.GREEN_"},{"x":"1","y":"10","slug":"CARPET.GREEN_"},{"x":"0","y":"11","slug":"CARPET.GREEN_"},{"x":"1","y":"11","slug":"CARPET.GREEN_"}],
+                removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"}],
+                itemList: []
+         }
+}
   };
   export default ROOMS;
 

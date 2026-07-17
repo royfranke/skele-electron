@@ -50,7 +50,14 @@ export default class BlockBlueprint {
         let groundLayer = this.scene[this.scene.locale].groundLayer;
         if (block.ground.toUpperCase() == 'FOREST') {
             groundLayer.weightedRandomize(TILES['MULCH'].FILL_, block.left, block.top, block.width, block.height);
-        } else {
+        }
+        else if (block.ground.toUpperCase() == 'RIVER') {
+            groundLayer.weightedRandomize(TILES['MUD'].FILL_, block.left, block.top, block.width, block.height);
+        }
+        else if (block.ground.toUpperCase() == 'MARSH') {
+            groundLayer.weightedRandomize(TILES['MUD'].FILL_, block.left, block.top, block.width, block.height);
+        }
+         else {
             groundLayer.weightedRandomize(TILES[block.ground.toUpperCase()].FILL_, block.left, block.top, block.width, block.height);
         }
     }
@@ -115,17 +122,27 @@ export default class BlockBlueprint {
         }
 
         if (this.block.offset.s > 0) {
-            this.scene.manager.objectManager.newObjectToWorld(this.block.right - 7, this.block.bottom - 1, 'HYDRANT_CITY_');
+            if (this.block.ground.toUpperCase() == 'RIVER') {
+                this.buildBridge(this.block.left + 12, this.block.bottom - 3, this.block.offset.s*2 + 5);
+                this.buildRiver(this.block.left + 14, this.block.top + this.block.offset.n + 1, 26, this.block.height - (this.block.offset.n + this.block.offset.s + 1));
+            }
+            else {
+                this.scene.manager.objectManager.newObjectToWorld(this.block.right - 7, this.block.bottom - 1, 'HYDRANT_CITY_');
 
-            this.scene.manager.treeManager.newTreeToWorld(this.block.left + 8.25, this.block.bottom - .25, 'SUGAR_MAPLE');
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 8, this.block.bottom - 1, 2, 1);
+                this.scene.manager.treeManager.newTreeToWorld(this.block.left + 8.25, this.block.bottom - .25, 'SUGAR_MAPLE');
+                this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 8, this.block.bottom - 1, 2, 1);
 
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 27, this.block.bottom - 1, 2, 1);
+                this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 27, this.block.bottom - 1, 2, 1);
 
-            this.scene.manager.treeManager.newTreeToWorld(this.block.left + 36.25, this.block.bottom - .25, 'ASH');
-            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MULCH.FILL_, this.block.left + 36, this.block.bottom - 1, 2, 1);
+                this.scene.manager.treeManager.newTreeToWorld(this.block.left + 36.25, this.block.bottom - .25, 'ASH');
+                this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MULCH.FILL_, this.block.left + 36, this.block.bottom - 1, 2, 1);
+            }
+
         }
-
+        else if (this.block.offset.n > 0 && this.block.ground.toUpperCase() == 'RIVER') {
+            ///no bridge needed, but still need to build the river
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.WATER.FILL_, this.block.left + 14, this.block.top + this.block.offset.n, 26, this.block.height - this.block.offset.n);
+        }
         if (this.block.offset.e > 0) {
             this.buildStreetPole(this.block.right - 1, this.block.bottom - 8, { TELEPHONE: true }, false);
             this.buildStreetPole(this.block.right - 1, this.block.top + 7, { TELEPHONE: true }, false);
@@ -213,6 +230,24 @@ export default class BlockBlueprint {
         }
     }
 
+    buildGiantCanePatch(_x, _y, width = 3, height = 3) {
+        for (let h = 0; h < height; h++) {
+            for (let w = 0; w < width; w++) {
+                // Randomly skip some tiles to create a more natural-looking patch
+                if (Phaser.Math.RND.between(0, 1) == 0) continue;
+                var x = _x + w;
+                var y = _y + h;
+                if (this.isPathTile(x, y)) continue;
+                var cane = this.scene.manager.plantManager.newPlantToWorld(x, y, 'GIANT_CANE', Phaser.Math.RND.between(1, 130));
+                if (cane) {
+                    // Randomly flip the giant cane to add some visual variety
+                    cane.sprite.setFlipX((Phaser.Math.RND.between(0, 1) == 0));
+                }
+            }
+        }
+    }   
+                
+
     buildCreekSedgePatch(_x, _y, width = 3, height = 3) {
         for (let h = 0; h < height; h++) {
             for (let w = 0; w < width; w++) {
@@ -248,7 +283,7 @@ export default class BlockBlueprint {
     }
 
     buildGully(_x, _y, width = 3, height = 2) {
-        var valid_gully = ['GULLY_2X2', 'GULLY_3X2_1', 'GULLY_3X2_2', 'GULLY_5X2'];
+        var valid_gully = ['GULLY_2X2', 'GULLY_3X2_1', 'GULLY_3X2_2', 'GULLY_5X2','GULLY_4X7'];
         var gully_name = 'GULLY_' + width + 'X' + height;
         if (gully_name == 'GULLY_3X2') {
             gully_name = 'GULLY_3X2_' + Phaser.Math.RND.between(1, 2);
@@ -655,6 +690,81 @@ export default class BlockBlueprint {
             }
         });
     }
+
+    buildStairs(_x, _y, width = 2, height = 1, direction = 'NORTH') {
+        this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.STAIRS.CEMENT_, _x, _y, width, height);
+        this.scene.manager.objectManager.newObjectToWorld(_x-1, _y, 'CEMENT_STAIR_RAIL_L_1_4_');
+        this.scene.manager.objectManager.newObjectToWorld(_x-1, _y + 5, 'CEMENT_STAIR_RAIL_L_1_3_');
+        this.scene.manager.objectManager.newObjectToWorld(_x + 2, _y, 'CEMENT_STAIR_RAIL_R_1_4_');
+    }
+
+    buildRiver(_x, _y, width = 3, height = 2) {
+        const block = this.block;
+        var gully_y = 0;
+        for (let h = 0; h < height; h++) {
+            var section_width = Phaser.Math.RND.between( width - 6, width);
+            var section_height = Phaser.Math.RND.between( 1, 4);
+            var x = _x + Phaser.Math.RND.between(0, 4);
+            var y = _y + h;
+            if (h >= gully_y*6) {
+                this.buildGully(_x - 9, y, 4, 7);
+                gully_y += 1;
+            }
+            
+            if (Phaser.Math.RND.between(0, 2) == 0) {
+                this.buildBranch(x - Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1), Phaser.Math.RND.between(3, 5), Phaser.Math.RND.between(1, 2));
+            }
+            this.buildFoxtailPatch(x - 6, y-1, 4, section_height+2);
+            this.buildGiantCanePatch(x - 3, y-1, 6, section_height+2);
+
+            this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.WATER.FILL_, x, y, section_width, section_height);
+
+            if (Phaser.Math.RND.between(0, 2) == 0) {
+                this.buildRock(x + Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1));
+            }
+
+
+
+            this.buildGiantCanePatch(x + section_width - 2, y-1, 6, section_height+2);
+
+            if (Phaser.Math.RND.between(0, 2) == 0) {
+                this.buildRock(x + section_width - Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1));
+            }
+
+
+            h += section_height - 1;
+        }
+    }
+
+    buildBridge(_x,_y, road_width = 7) {
+        
+        this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'BRIDGE_LEDGE_N_1');
+        this.scene.manager.objectManager.newObjectToWorld(_x+10, _y, 'BRIDGE_LEDGE_N_2');
+        this.scene.manager.objectManager.newObjectToWorld(_x+18, _y, 'BRIDGE_LEDGE_N_3');
+
+        this.buildStairs(_x - 2, _y + road_width + 1, 2, 5);
+        this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.PLAZA.FILL_, _x-2, _y + road_width + 6, 3, 6);
+        this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.CEMENT.FILL_, _x+1, _y + road_width + 6, 1, 6);
+        this.scene.manager.objectManager.newObjectToWorld(_x, _y + road_width, 'BRIDGE_LEDGE_S_1');
+        this.scene.manager.objectManager.newObjectToWorld(_x+10, _y + road_width, 'BRIDGE_LEDGE_S_2');
+        this.scene.manager.objectManager.newObjectToWorld(_x+18, _y + road_width, 'BRIDGE_LEDGE_S_3');
+        
+        this.scene.manager.objectManager.newObjectToWorld(_x, _y + road_width + 1, 'BRIDGE_FOOTING_1');
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 3, _y + road_width + 1, 'BRIDGE_ARCH_1');
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 7, _y + road_width + 1, 'BRIDGE_FOOTING_2');
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 12, _y + road_width + 1, 'BRIDGE_ARCH_2');
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 16, _y + road_width + 1, 'BRIDGE_FOOTING_3');
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 21, _y + road_width + 1, 'BRIDGE_ARCH_3');
+
+        this.scene.manager.objectManager.newObjectToWorld(_x + 25, _y + road_width + 1, 'BRIDGE_FOOTING_4');
+
+    }
+    
 
     saveBlock() {
         let save = {

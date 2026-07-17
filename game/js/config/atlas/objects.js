@@ -836,6 +836,526 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          BRIDGE_ARCH_1: {
+        name: 'Bridge Arch 1',
+        slug: 'BRIDGE_ARCH_1', 
+        type: 'ARCH',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:64, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_ARCH_2: {
+        name: 'Bridge Arch 2',
+        slug: 'BRIDGE_ARCH_2', 
+        type: 'ARCH',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:64, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_ARCH_3: {
+        name: 'Bridge Arch 3',
+        slug: 'BRIDGE_ARCH_3', 
+        type: 'ARCH',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:64, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_FOOTING_1: {
+        name: 'Bridge Footing 1',
+        slug: 'BRIDGE_FOOTING_1', 
+        type: 'BRIDGE_FOOTING',
+        bounding: {
+          h:5, 
+          w:3
+        },
+        base: {
+          h:5, 
+          w:3,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:80, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:76, 
+          w:40
+        },
+        offset: {
+          x:4, 
+          y:0
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_FOOTING_2: {
+        name: 'Bridge Footing 2',
+        slug: 'BRIDGE_FOOTING_2', 
+        type: 'BRIDGE_FOOTING',
+        bounding: {
+          h:5, 
+          w:5
+        },
+        base: {
+          h:5, 
+          w:5,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:80, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:76, 
+          w:72
+        },
+        offset: {
+          x:4, 
+          y:0
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_FOOTING_3: {
+        name: 'Bridge Footing 3',
+        slug: 'BRIDGE_FOOTING_3', 
+        type: 'BRIDGE_FOOTING',
+        bounding: {
+          h:5, 
+          w:5
+        },
+        base: {
+          h:5, 
+          w:5,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:80, 
+          w:80,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:76, 
+          w:72
+        },
+        offset: {
+          x:4, 
+          y:0
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_FOOTING_4: {
+        name: 'Bridge Footing 4',
+        slug: 'BRIDGE_FOOTING_4', 
+        type: 'BRIDGE_FOOTING',
+        bounding: {
+          h:5, 
+          w:3
+        },
+        base: {
+          h:5, 
+          w:3,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:80, 
+          w:48,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:76, 
+          w:40
+        },
+        offset: {
+          x:4, 
+          y:0
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_LEDGE_N_1: {
+        name: 'Bridge North Ledge 1',
+        slug: 'BRIDGE_LEDGE_N_1', 
+        type: 'LEDGE',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:1, 
+          w:10,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:160
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_LEDGE_N_2: {
+        name: 'Bridge North Ledge 2',
+        slug: 'BRIDGE_LEDGE_N_2', 
+        type: 'LEDGE',
+        bounding: {
+          h:2, 
+          w:8
+        },
+        base: {
+          h:1, 
+          w:8,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:128,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:128
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_LEDGE_N_3: {
+        name: 'Bridge North Ledge 3',
+        slug: 'BRIDGE_LEDGE_N_3', 
+        type: 'LEDGE',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:1, 
+          w:10,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:160
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_LEDGE_S_1: {
+        name: 'Bridge South Ledge 1',
+        slug: 'BRIDGE_LEDGE_S_1', 
+        type: 'LEDGE',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:1, 
+          w:10,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:160
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_LEDGE_S_2: {
+        name: 'Bridge South Ledge 2',
+        slug: 'BRIDGE_LEDGE_S_2', 
+        type: 'LEDGE',
+        bounding: {
+          h:2, 
+          w:8
+        },
+        base: {
+          h:1, 
+          w:8,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:128,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:128
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          BRIDGE_LEDGE_S_3: {
+        name: 'Bridge South Ledge 3',
+        slug: 'BRIDGE_LEDGE_S_3', 
+        type: 'LEDGE',
+        bounding: {
+          h:2, 
+          w:10
+        },
+        base: {
+          h:1, 
+          w:10,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:160,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:160
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           CURTAIN_SINGLE_BROWN: {
         name: 'Brown Single Window Curtains',
         slug: 'CURTAIN_SINGLE_BROWN', 
@@ -1085,7 +1605,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:2, 
           w:1,
           x:0, 
           y:1
@@ -1125,7 +1645,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:3, 
           w:1,
           x:0, 
           y:1
@@ -1165,7 +1685,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:4, 
           w:1,
           x:0, 
           y:1
@@ -1205,7 +1725,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:5, 
           w:1,
           x:0, 
           y:1
@@ -1245,7 +1765,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:2, 
+          h:3, 
           w:1,
           x:0, 
           y:1
@@ -1285,7 +1805,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:2, 
+          h:4, 
           w:1,
           x:0, 
           y:1
@@ -1325,7 +1845,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:2, 
+          h:5, 
           w:1,
           x:0, 
           y:1
@@ -1365,7 +1885,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:3, 
+          h:4, 
           w:1,
           x:0, 
           y:1
@@ -1405,7 +1925,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:3, 
+          h:5, 
           w:1,
           x:0, 
           y:1
@@ -1445,7 +1965,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:2, 
           w:1,
           x:0, 
           y:1
@@ -1485,7 +2005,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:3, 
           w:1,
           x:0, 
           y:1
@@ -1525,7 +2045,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:4, 
           w:1,
           x:0, 
           y:1
@@ -1565,7 +2085,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:1, 
+          h:5, 
           w:1,
           x:0, 
           y:1
@@ -1605,7 +2125,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:2, 
+          h:3, 
           w:1,
           x:0, 
           y:1
@@ -1645,7 +2165,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:2, 
+          h:4, 
           w:1,
           x:0, 
           y:1
@@ -1685,7 +2205,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:2, 
+          h:5, 
           w:1,
           x:0, 
           y:1
@@ -1725,7 +2245,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:3, 
+          h:4, 
           w:1,
           x:0, 
           y:1
@@ -1765,7 +2285,7 @@ const OBJECTS = {
           w:1
         },
         base: {
-          h:3, 
+          h:5, 
           w:1,
           x:0, 
           y:1
@@ -5742,6 +6262,46 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          GULLY_4X7: {
+        name: 'Gully 4x7',
+        slug: 'GULLY_4X7', 
+        type: 'GULLY',
+        bounding: {
+          h:7, 
+          w:4
+        },
+        base: {
+          h:6, 
+          w:3,
+          x:0, 
+          y:0
+        },
+        depth: -64,
+        sprite: {
+          h:104, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:93, 
+          w:33
+        },
+        offset: {
+          x:6, 
+          y:4
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           GULLY_5X2: {
         name: 'Gully 5x2',
         slug: 'GULLY_5X2', 
@@ -5778,6 +6338,57 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          GUMBALL_MACHINE: {
+        name: 'Gumball Machine',
+        slug: 'GUMBALL_MACHINE', 
+        type: 'COIN_OPERATED',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: -2,
+        sprite: {
+          h:48, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:38
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'INSERT COIN', stateTrigger: 'COIN_DISPENSING', validStates: ['COIN_LOCKED']
+          }],
+        default_state: 'COIN_LOCKED',        states: [                {
+              name: 'COIN_LOCKED',
+              transition: 'false',
+              frames: ['GUMBALL_MACHINE-1',]},                {
+              name: 'COIN_DISPENSING',
+              transition: 'COIN_LOCKED',
+              frames: ['GUMBALL_MACHINE-1','GUMBALL_MACHINE-2','GUMBALL_MACHINE-1','GUMBALL_MACHINE-2','GUMBALL_MACHINE-3','GUMBALL_MACHINE-3',]},                {
+              name: 'COIN_RETRACTING',
+              transition: 'COIN_LOCKED',
+              frames: ['GUMBALL_MACHINE-1',]},                           ],
 
           interactions: {
                                   },
@@ -8919,6 +9530,55 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          LIT_SIGN_PIZZA: {
+        name: 'Pizza Lit Sign',
+        slug: 'LIT_SIGN_PIZZA', 
+        type: 'LIT_SIGN',
+        bounding: {
+          h:6, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:9
+        },
+        depth: 0,
+        sprite: {
+          h:88, 
+          w:20,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:0, 
+          w:0
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 2,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [                {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['LIT_SIGN_PIZZA-2',]},                {
+              name: 'ON',
+              transition: 'false',
+              frames: ['LIT_SIGN_PIZZA-1',]},                {
+              name: 'FLICKERING',
+              transition: 'false',
+              frames: ['LIT_SIGN_PIZZA-2','LIT_SIGN_PIZZA-1','LIT_SIGN_PIZZA-1','LIT_SIGN_PIZZA-1','LIT_SIGN_PIZZA-1','LIT_SIGN_PIZZA-2','LIT_SIGN_PIZZA-1','LIT_SIGN_PIZZA-1',]},],
 
           interactions: {
                                   },
