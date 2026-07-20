@@ -40,14 +40,14 @@ export default class InteriorScene extends Phaser.Scene {
 
         this.interior.create();
         this.player.create();
-        this.npcs.create();
-         //// Load the save!
-         this.app.initializeRoomSave();
-         this.manager.hud.pocket.setPocketsFromSave();
-         if (this.slot.TUTORIAL < 30) {
+          //// Load the save before first NPC projection so scheduler state is authoritative.
+          this.app.initializeRoomSave();
+          this.npcs.create();
+          this.manager.hud.pocket.setPocketsFromSave();
+          if (this.slot.TUTORIAL < 30) {
             this.tutorial = new TutorialManager(this);
             this.tutorial.stepTutorial(this.slot.TUTORIAL);
-         }
+          }
     }
 
     update() {
@@ -224,6 +224,10 @@ export default class InteriorScene extends Phaser.Scene {
     }
 
     save () {
+
+        if (this.manager?.npcSchedule && typeof this.manager.npcSchedule.releaseAllFollowers === 'function') {
+            this.manager.npcSchedule.releaseAllFollowers();
+        }
 
 
         var date = this.manager.time.getDateForNotebook();

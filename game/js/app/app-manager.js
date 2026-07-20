@@ -73,16 +73,37 @@ export default class AppManager {
         }
     }
 
+    initializeNpcScheduleFromSlot () {
+        const npcSchedule = this.scene?.manager?.npcSchedule;
+        const slot = this.scene?.slot;
+        if (!npcSchedule || slot == undefined || typeof npcSchedule.fromSaveData !== 'function') {
+            return;
+        }
+
+        const now = this.scene?.manager?.time?.now;
+        const hasSavedNpcs = slot.NPCS != null && typeof slot.NPCS === 'object';
+
+        // Migration path: old saves without NPCS should prime schedule state from current time.
+        npcSchedule.fromSaveData(hasSavedNpcs ? slot.NPCS : null, now);
+
+        // Persist migrated runtime state immediately so subsequent scene transitions
+        // use deterministic NPC data.
+        if (!hasSavedNpcs && typeof npcSchedule.toSaveData === 'function') {
+            slot.NPCS = npcSchedule.toSaveData();
+        }
+    }
+
     initializeSave () {
         if (this.saveManager != null && this.scene.slot != undefined) {
             this.saveManager.initializeSave();
-            this.scene.manager.npcSchedule.fromSaveData(this.scene.slot.NPCS, this.scene.time.now);
+            this.initializeNpcScheduleFromSlot();
         }
     }
 
     initializeRoomSave () {
         if (this.saveManager != null && this.scene.slot != undefined) {
             this.saveManager.initializeRoomSave();
+            this.initializeNpcScheduleFromSlot();
         }
     }
 

@@ -5,12 +5,20 @@ export default class NpcScheduleManager {
         this.scene = scene;
         this.registry = new Map();        // slug -> RuntimeStateRecord
         this.scheduleConfigs = {};        // slug -> schedule config from atlas
-        this.debug = false;                // enable debug logging
+        this.debug = true;                // enable debug logging
 
         this._loadScheduleConfigs();      // pull from npc-schedules.js
         this._initRegistry();            // create runtime records for all scheduled NPCs
         this._bindEvents();
-        this._primeFromCurrentTime();
+        // NOTE: do NOT call _primeFromCurrentTime() here — the portal index is not
+        // loaded yet and address lookups will fall back to stale block-local coords.
+        // Call primeSchedules() explicitly after bootstrapPortalIndexFromDisk().
+    }
+
+    // Call this once the portal index is fully loaded (after bootstrapPortalIndexFromDisk).
+    // Skipped automatically when fromSaveData() will be called immediately after.
+    primeSchedules(now = this._getNow()) {
+        this._primeFromCurrentTime(now);
     }
 
     _bindEvents() {
@@ -28,11 +36,13 @@ export default class NpcScheduleManager {
     // Pick highest-priority matching rule, build leg plan, update record
     _replan(record, now) {
         if (!record || !record.config) {
+            if (this.debug) console.warn(`[NpcSchedule] _replan failed: no record or config`);
             return false;
         }
 
         const schedule = Array.isArray(record.config.schedule) ? record.config.schedule : [];
         if (schedule.length === 0) {
+            if (this.debug) console.warn(`[NpcSchedule] _replan failed: empty schedule`);
             return false;
         }
 
@@ -43,6 +53,7 @@ export default class NpcScheduleManager {
         const rule = matchingRules[0] ?? schedule[0];
         const destination = this._resolveDestination(rule.destination);
         if (!destination) {
+            if (this.debug) console.warn(`[NpcSchedule] _replan failed for ${record.slug}: could not resolve destination for rule ${rule.id}`, rule.destination);
             return false;
         }
 
@@ -90,6 +101,7 @@ export default class NpcScheduleManager {
             }
         }
 
+        if (this.debug) console.log(`[NpcSchedule] _replan succeeded for ${record.slug}: destination=(${destination.x},${destination.y}), scene=${nextScene}, pos=(${record.worldX},${record.worldY})`);
         return true;
     }
 
@@ -114,12 +126,13 @@ export default class NpcScheduleManager {
     }
 
     // Request follow — returns false if transit-locked
-    requestFollow(slug, target = 'PLAYER') {
+    requestFollow(slug, target = 'PLAYER', followDistance = 1) {
         const r = this.registry.get(slug);
         if (!r || r.mode === 'TRANSIT_LOCKED_BUS') return false;
         r.suspendedPlan = r.activePlan;
         r.mode = 'FOLLOWING_PLAYER';
         r.followTarget = target;
+        r.followDistance = followDistance;
         return true;
     }
 
@@ -129,9 +142,18 @@ export default class NpcScheduleManager {
         if (!r) return;
         r.mode = 'SCHEDULED';
         r.followTarget = null;
+        r.followDistance = 1;
         r.suspendedPlan = null;
         r._lastDispatchedPlanVersion = -1;  // reset so next replan triggers movement dispatch
         this._replan(r, this.scene.manager.time.now);  // recompute from current time+pos
+    }
+
+    releaseAllFollowers() {
+        for (const [slug, record] of this.registry) {
+            if (record?.mode === 'FOLLOWING_PLAYER') {
+                this.releaseFollow(slug);
+            }
+        }
     }
 
     // NPC boarded a bus — lock redirects
@@ -182,9 +204,12 @@ export default class NpcScheduleManager {
                 roomId: record.roomId ?? null,
                 facing: record.facing ?? 's',
                 mode: record.mode ?? 'SCHEDULED',
+                followTarget: record.followTarget ?? null,
+                followDistance: record.followDistance ?? 1,
                 activePlanRuleId: record.activePlan?.ruleId ?? null,
                 currentLegIndex: record.currentLegIndex ?? 0
             };
+            if (this.debug) console.log(`[NpcSchedule] toSaveData ${slug}:`, out[slug]);
         }
 
         return out;
@@ -199,19 +224,44 @@ export default class NpcScheduleManager {
         for (const [slug, record] of this.registry) {
             const saved = data[slug];
             if (!saved) {
+                // No saved data — reset position to null so _replan computes the correct location for this time
+                record.worldX = null;
+                record.worldY = null;
+                if (this.debug) console.log(`[NpcSchedule] fromSaveData ${slug}: no saved data, replanning from scratch`);
                 this._replan(record, now);
                 continue;
             }
 
-            if (typeof saved.worldX === 'number') record.worldX = saved.worldX;
-            if (typeof saved.worldY === 'number') record.worldY = saved.worldY;
             if (typeof saved.scene === 'string') record.scene = saved.scene;
             if (typeof saved.roomId === 'string' || typeof saved.roomId === 'number') record.roomId = String(saved.roomId);
             if (typeof saved.facing === 'string') record.facing = saved.facing;
-            if (typeof saved.mode === 'string') record.mode = saved.mode;
             if (typeof saved.currentLegIndex === 'number') record.currentLegIndex = saved.currentLegIndex;
 
-            this._replan(record, now);
+            if (this.debug) console.log(`[NpcSchedule] fromSaveData ${slug}: restored`, { worldX: saved.worldX, worldY: saved.worldY, scene: record.scene, mode: saved.mode });
+
+            // Always replan to update active plan for current time (unless FOLLOWING_PLAYER).
+            // Clear world position first so _replan snaps to the correct schedule destination
+            // (the portal index is now loaded; any coords set during constructor _primeFromCurrentTime
+            // may have used a stale fallback address lookup).
+            // If replan fails, fall back to the saved position so the NPC isn't left coordinate-less.
+            if (saved.mode !== 'FOLLOWING_PLAYER') {
+                record.worldX = null;
+                record.worldY = null;
+                const replanOk = this._replan(record, now);
+                if (!replanOk) {
+                    if (typeof saved.worldX === 'number') record.worldX = saved.worldX;
+                    if (typeof saved.worldY === 'number') record.worldY = saved.worldY;
+                }
+                if (this.debug) console.log(`[NpcSchedule] fromSaveData ${slug}: replan result=${replanOk}, now at (${record.worldX}, ${record.worldY})`);
+                continue;
+            }
+
+            // FOLLOWING_PLAYER: restore mode and suspend the current plan
+            record.mode = 'FOLLOWING_PLAYER';
+            record.followTarget = typeof saved.followTarget === 'string' ? saved.followTarget : 'PLAYER';
+            record.followDistance = typeof saved.followDistance === 'number' ? saved.followDistance : 1;
+            record.suspendedPlan = record.activePlan;
+            if (this.debug) console.log(`[NpcSchedule] fromSaveData ${slug}: restored FOLLOWING_PLAYER mode`);
         }
     }
 
@@ -245,6 +295,7 @@ export default class NpcScheduleManager {
                 config: config,
                 mode: 'SCHEDULED',          // SCHEDULED | FOLLOWING_PLAYER | TRANSIT_LOCKED_BUS | SCRIPTED_OVERRIDE
                 followTarget: null,         // if FOLLOWING_PLAYER, who to follow
+                followDistance: 1,
                 suspendedPlan: null,        // if FOLLOWING_PLAYER, the plan that was suspended
                 activePlan: null,           // the current plan (rule + legs)
                 currentLegIndex: 0,         // index into activePlan.legs
@@ -356,15 +407,17 @@ export default class NpcScheduleManager {
         }
 
         if (destination.type === 'ADDRESS') {
-            // Only use portal index for authoritative world coordinate
+            // Only use portal index for authoritative world coordinate.
+            // Add y+1 to step off the portal wall's collision tile and onto the
+            // walkable tile in front of the door.
             const portalFromIndex = this._queryPortalIndexByAddress(destination.dir, destination.number, destination.street);
             if (portalFromIndex && typeof portalFromIndex.x === 'number' && typeof portalFromIndex.y === 'number') {
-                return portalFromIndex;
+                return { x: portalFromIndex.x, y: portalFromIndex.y + 1 };
             }
-            
-            // No portal index entry found for this address
+
+            // No portal index entry — ADDRESS destinations require portal index authority
             if (this.debug) {
-                console.warn(`[NPC_SCHEDULE] No portal index entry for address: ${destination.dir} ${destination.number} ${destination.street}`);
+                console.warn(`[NPC_SCHEDULE] ADDRESS destination has no portal index entry: ${destination.dir} ${destination.number} ${destination.street}`);
             }
             return null;
         }

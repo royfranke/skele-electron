@@ -83,6 +83,7 @@ export default class NpcRuntimeProjector {
                 return;
             }
 
+            this._applyFollowMode(record, npc);
             this._applyRecordPose(record, npc);
             record.spawnedScene = sceneId;
             record.runtimeNpc = npc;
@@ -94,6 +95,13 @@ export default class NpcRuntimeProjector {
 
         if (record.mode === 'FOLLOWING_PLAYER') {
             // While following, trust runtime movement and never snap to scheduled tile.
+            this._applyFollowMode(record, existing);
+            this._syncRecordFromRuntime(record, existing);
+            return;
+        }
+
+        if (Array.isArray(existing.destinations) && existing.destinations.length > 0) {
+            // Let scheduled travel finish without despawning/recreating the NPC mid-route.
             this._syncRecordFromRuntime(record, existing);
             return;
         }
@@ -109,6 +117,7 @@ export default class NpcRuntimeProjector {
                 return;
             }
 
+            this._applyFollowMode(record, npc);
             this._applyRecordPose(record, npc);
             record.spawnedScene = sceneId;
             record.runtimeNpc = npc;
@@ -124,6 +133,17 @@ export default class NpcRuntimeProjector {
         const npc = this.npcManager.getNpcBySlug(record.slug);
         if (!npc) {
             return;
+        }
+
+        const hasDestination = !!(record.activePlan?.destination &&
+            typeof record.activePlan.destination.x === 'number' &&
+            typeof record.activePlan.destination.y === 'number');
+        const planVersion = typeof record.planVersion === 'number' ? record.planVersion : 0;
+        const dispatchedVersion = typeof record._lastDispatchedPlanVersion === 'number' ? record._lastDispatchedPlanVersion : -1;
+
+        if (hasDestination && planVersion !== dispatchedVersion) {
+            npc.moveToTile(record.activePlan.destination.x, record.activePlan.destination.y);
+            record._lastDispatchedPlanVersion = planVersion;
         }
 
         if (npc.standingTile && typeof npc.standingTile.x === 'number' && typeof npc.standingTile.y === 'number') {
@@ -173,6 +193,10 @@ export default class NpcRuntimeProjector {
             return;
         }
 
+        if (Array.isArray(npc.destinations) && npc.destinations.length > 0) {
+            return;
+        }
+
         const facing = record?.facing ?? record?.activePlan?.arrivalFacing;
         if (typeof facing === 'string') {
             npc.facing = facing;
@@ -194,6 +218,28 @@ export default class NpcRuntimeProjector {
             record.worldX = x;
             record.worldY = y;
         }
+    }
+
+    _applyFollowMode(record, npc) {
+        if (!record || !npc) {
+            return;
+        }
+
+        if (record.mode !== 'FOLLOWING_PLAYER') {
+            npc.following = null;
+            return;
+        }
+
+        const followObject = record.followTarget === 'PLAYER' ? this.scene.player : null;
+        if (!followObject) {
+            npc.following = null;
+            return;
+        }
+
+        npc.following = {
+            follow: followObject,
+            distance: typeof record.followDistance === 'number' ? record.followDistance : 1,
+        };
     }
 
     

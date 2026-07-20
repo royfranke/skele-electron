@@ -56,6 +56,11 @@ export default class GameScene extends Phaser.Scene {
         if (this.exterior && typeof this.exterior.bootstrapPortalIndexFromDisk === 'function') {
             await this.exterior.bootstrapPortalIndexFromDisk();
         }
+        // Prime NPC schedules now that the portal index is loaded, so address
+        // lookups resolve to correct world coordinates rather than block-local fallbacks.
+        if (this.manager?.npcSchedule && typeof this.manager.npcSchedule.primeSchedules === 'function') {
+            this.manager.npcSchedule.primeSchedules();
+        }
         //// Load save position/facing before runtime collider setup so the player
         //// does not briefly appear at constructor defaults.
         this.app.initializeSave();
