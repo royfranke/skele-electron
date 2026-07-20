@@ -1118,6 +1118,17 @@ import Shop from "../object/shop.js";
         this.worldReady = true;
         if (this.debug) console.log(`[Exterior] rendered chunk ${chunk.key} placedTiles=${placed} origin=${chunk.origin || 'unknown'}`);
         this.refreshChunkCollisions();
+
+        // Apply current key light to all entities just spawned with this chunk
+        try {
+            const manager = this.scene?.manager;
+            if (manager && typeof manager.handleKeylight === 'function') {
+                manager.handleKeylight('OBJECTS');
+                manager.handleKeylight('PLANTS');
+                manager.handleKeylight('TREES');
+                manager.handleKeylight('ITEMS');
+            }
+        } catch (e) {}
     }
 
     isWorldReady () {
