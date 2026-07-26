@@ -116,9 +116,35 @@ export default class GameScene extends Phaser.Scene {
     }
 
     async portalTo(portal) {
+        const traceRecordBefore = this.manager?.npcSchedule?.getRecord?.('AUNTIE');
+        if (traceRecordBefore) {
+            this.manager?.npcSchedule?._traceRecord?.('scene:exterior.portalTo:beforeFlush', traceRecordBefore, {
+                ruleId: traceRecordBefore.activePlan?.ruleId ?? null,
+            });
+        }
+        if (this.npcs?.projector && typeof this.npcs.projector.updateAll === 'function') {
+            this.npcs.projector.updateAll();
+        }
+        const traceRecordAfter = this.manager?.npcSchedule?.getRecord?.('AUNTIE');
+        if (traceRecordAfter) {
+            this.manager?.npcSchedule?._traceRecord?.('scene:exterior.portalTo:afterFlush', traceRecordAfter, {
+                ruleId: traceRecordAfter.activePlan?.ruleId ?? null,
+            });
+        }
         if (this.verbose) console.log(portal);
         /// Before portal, save the game
         this.slot = this.app.softSaveGameData();
+        const saved = this.slot?.NPCS?.AUNTIE ?? null;
+        if (saved) {
+            this.manager?.npcSchedule?._traceRecord?.('scene:exterior.portalTo:savedNPC', traceRecordAfter ?? traceRecordBefore, {
+                savedScene: saved.scene ?? null,
+                savedRoomId: saved.roomId ?? null,
+                savedWorldX: saved.worldX ?? null,
+                savedWorldY: saved.worldY ?? null,
+                savedLegIndex: saved.currentLegIndex ?? null,
+                savedRuleId: saved.activePlanRuleId ?? null,
+            });
+        }
         if (this.verbose) console.log(this.slot);
         this.slot.POSITION.X = portal.x;
         this.slot.POSITION.Y = portal.y;

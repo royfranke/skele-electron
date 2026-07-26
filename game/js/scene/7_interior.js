@@ -24,7 +24,7 @@ export default class InteriorScene extends Phaser.Scene {
         
     }
 
-    create() {
+    async create() {
         this.place = 'interior';
         this.app = new AppManager(this,'GAME');
         this.manager = new GameManager(this);
@@ -40,6 +40,9 @@ export default class InteriorScene extends Phaser.Scene {
 
         this.interior.create();
         this.player.create();
+          if (this.manager?.npcSchedule && typeof this.manager.npcSchedule.hydratePortalIndexFromDisk === 'function') {
+            await this.manager.npcSchedule.hydratePortalIndexFromDisk();
+          }
           //// Load the save before first NPC projection so scheduler state is authoritative.
           this.app.initializeRoomSave();
           this.npcs.create();
@@ -59,7 +62,33 @@ export default class InteriorScene extends Phaser.Scene {
     }
 
     async portalTo(portal) {
+        const traceRecordBefore = this.manager?.npcSchedule?.getRecord?.('AUNTIE');
+        if (traceRecordBefore) {
+            this.manager?.npcSchedule?._traceRecord?.('scene:interior.portalTo:beforeFlush', traceRecordBefore, {
+                ruleId: traceRecordBefore.activePlan?.ruleId ?? null,
+            });
+        }
+        if (this.npcs?.projector && typeof this.npcs.projector.updateAll === 'function') {
+            this.npcs.projector.updateAll();
+        }
+        const traceRecordAfter = this.manager?.npcSchedule?.getRecord?.('AUNTIE');
+        if (traceRecordAfter) {
+            this.manager?.npcSchedule?._traceRecord?.('scene:interior.portalTo:afterFlush', traceRecordAfter, {
+                ruleId: traceRecordAfter.activePlan?.ruleId ?? null,
+            });
+        }
         this.slot = this.app.softSaveGameData();
+        const saved = this.slot?.NPCS?.AUNTIE ?? null;
+        if (saved) {
+            this.manager?.npcSchedule?._traceRecord?.('scene:interior.portalTo:savedNPC', traceRecordAfter ?? traceRecordBefore, {
+                savedScene: saved.scene ?? null,
+                savedRoomId: saved.roomId ?? null,
+                savedWorldX: saved.worldX ?? null,
+                savedWorldY: saved.worldY ?? null,
+                savedLegIndex: saved.currentLegIndex ?? null,
+                savedRuleId: saved.activePlanRuleId ?? null,
+            });
+        }
         if (this.verbose) console.log(this.slot);
         const previousReturn = this.slot?.POSITION?.RETURN;
         const resolvedReturn = portal?.return ?? previousReturn ?? null;
