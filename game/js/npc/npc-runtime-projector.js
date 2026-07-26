@@ -233,17 +233,19 @@ export default class NpcRuntimeProjector {
         const dispatchedLegKey = typeof record._lastDispatchedLegKey === 'string' ? record._lastDispatchedLegKey : null;
 
         if (hasDestination && legKey !== dispatchedLegKey) {
-            npc.moveToTile(currentLeg.x, currentLeg.y);
-            record._lastDispatchedLegKey = legKey;
-            if (currentLeg.type === 'PORTAL') {
-                this._trace(record, 'dispatchLeg', {
-                    legType: currentLeg.type,
-                    legScene: currentLeg.scene,
-                    legRoomId: currentLeg.roomId,
-                    legX: currentLeg.x,
-                    legY: currentLeg.y,
-                });
-                this._setPortalDoorState(currentLeg, 'OPENING');
+            const queued = npc.moveToTile(currentLeg.x, currentLeg.y) === true;
+            if (queued) {
+                record._lastDispatchedLegKey = legKey;
+                if (currentLeg.type === 'PORTAL') {
+                    this._trace(record, 'dispatchLeg', {
+                        legType: currentLeg.type,
+                        legScene: currentLeg.scene,
+                        legRoomId: currentLeg.roomId,
+                        legX: currentLeg.x,
+                        legY: currentLeg.y,
+                    });
+                    this._setPortalDoorState(currentLeg, 'OPENING');
+                }
             }
         }
 

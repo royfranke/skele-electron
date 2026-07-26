@@ -386,11 +386,12 @@ export default class Npc {
   moveToTile(_x, _y) {
     const startX = this.standingTile?.x ?? _x;
     const startY = this.standingTile?.y ?? _y;
+    const nav = this.scene?.manager?.nav;
     let route = this.buildSimpleTileRouteFromFindRouteOptions(startX, startY, _x, _y);
 
     // Prefer collision-map routes; use full route fallback when available.
-    if ((!Array.isArray(route) || route.length == 0) && this.scene?.manager?.nav?.getFullRoute) {
-      route = this.scene.manager.nav.getFullRoute(startX, startY, _x, _y, 'simple_tile');
+    if ((!Array.isArray(route) || route.length == 0) && nav?.getFullRoute) {
+      route = nav.getFullRoute(startX, startY, _x, _y, 'simple_tile');
     }
 
     const routeFound = Array.isArray(route) && route.length > 0;
@@ -401,8 +402,15 @@ export default class Npc {
       return true;
     }
 
-    // Fallback to direct move; checkItinerary will step through with collision physics.
-    this.goTo(_x, _y);
+    // If no route was found, only allow a single adjacent step when the tile is walkable.
+    const isAdjacent = Math.abs(startX - _x) + Math.abs(startY - _y) === 1;
+    const canStep = isAdjacent && typeof nav?.worldIsWalkable === 'function' && nav.worldIsWalkable(_x, _y);
+    if (canStep) {
+      this.goTo(_x, _y);
+      return true;
+    }
+
+    // No valid collision-aware path to destination.
     return false;
   }
 

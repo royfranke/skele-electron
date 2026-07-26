@@ -282,6 +282,7 @@ export default class NavigatorManager {
         var solution = [];
         // While the frontier is populated...
         var counter = 0;
+        const maxIterations = type === 'intersection' ? 1000 : 5000;
         while (frontier.length > 0 && !solved) {
             
             counter++;
@@ -290,7 +291,7 @@ export default class NavigatorManager {
             visited.push(frontier[0]);
             
             for (var n = 0; n < next_ints.length;n++) {
-                if (!visited.includes(next_ints[n]) && !frontier.includes(next_ints[n])) {
+                if (!this.compareCoordinates(visited, next_ints[n]) && !this.compareCoordinates(frontier, next_ints[n])) {
                     frontier.push(next_ints[n]);
                     parents.push([next_ints[n],frontier[0]]);
                     if (next_ints[n][0] == end[0] && next_ints[n][1] == end[1]) {
@@ -309,8 +310,8 @@ export default class NavigatorManager {
                 }
             }
             frontier.shift();
-            if (counter > 100) {
-                console.log("Wayfinding counter exceeded 100!");
+            if (counter > maxIterations) {
+                console.log(`Wayfinding counter exceeded ${maxIterations} for ${type}!`);
                 break;
             }
         }
