@@ -127,6 +127,21 @@ export default class InteriorScene extends Phaser.Scene {
         if (this.tutorial != undefined) {
             this.slot.TUTORIAL = this.tutorial.tutorial_step;
         }
+
+        if (this.manager?.npcSchedule && typeof this.manager.npcSchedule.markFollowersForSceneTransition === 'function') {
+            const targetScene = String(this.slot.POSITION.ROOM) === '-1' ? 'exterior' : 'interior';
+            const targetRoomId = targetScene === 'interior' ? this.slot.POSITION.ROOM : null;
+            this.manager.npcSchedule.markFollowersForSceneTransition(
+                targetScene,
+                targetRoomId,
+                this.slot.POSITION.X,
+                this.slot.POSITION.Y,
+            );
+            if (typeof this.manager.npcSchedule.toSaveData === 'function') {
+                this.slot.NPCS = this.manager.npcSchedule.toSaveData();
+            }
+        }
+
         if (portal.room_id == '-1') {
             this.scene.stop('Interior Scene');
             this.scene.start('Game Scene',{slot: this.slot});

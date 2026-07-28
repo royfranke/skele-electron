@@ -159,7 +159,35 @@ export default class NpcRuntimeProjector {
         }
 
         if (!existing) {
-            const npc = this.npcManager.newNpcToWorld(record.worldX, record.worldY, record.slug);
+            let spawnX = record.worldX;
+            let spawnY = record.worldY;
+
+            // When a FOLLOWING_PLAYER NPC enters a new scene its stored worldX/Y
+            // may be stale interior tile coordinates. Snap it to the player's
+            // current tile so it doesn't pathfind across the entire map.
+            if (record.mode === 'FOLLOWING_PLAYER' && record.followTarget === 'PLAYER') {
+                const playerTile = this.scene?.player?.standingTile;
+                if (!playerTile || typeof playerTile.x !== 'number' || typeof playerTile.y !== 'number') {
+                    // Wait for player tile initialization before spawning follower NPC.
+                    return;
+                }
+
+                const transfer = this._getPendingFollowTransferForCurrentScene(record);
+                const anchorX = typeof transfer?.anchorX === 'number' ? transfer.anchorX : playerTile.x;
+                const anchorY = typeof transfer?.anchorY === 'number' ? transfer.anchorY : playerTile.y;
+                const spawnTile = this._selectFollowerSpawnTile(anchorX, anchorY, record.slug);
+
+                spawnX = spawnTile.x;
+                spawnY = spawnTile.y;
+                record.worldX = spawnX;
+                record.worldY = spawnY;
+
+                if (transfer) {
+                    record.pendingFollowTransfer = null;
+                }
+            }
+
+            const npc = this.npcManager.newNpcToWorld(spawnX, spawnY, record.slug);
             if (!npc) {
                 return;
             }
@@ -169,8 +197,8 @@ export default class NpcRuntimeProjector {
             record.spawnedScene = sceneId;
             record.runtimeNpc = npc;
             this._trace(record, 'spawned', {
-                spawnX: record.worldX,
-                spawnY: record.worldY,
+                spawnX,
+                spawnY,
             });
             return;
         }
@@ -421,6 +449,112 @@ export default class NpcRuntimeProjector {
             follow: followObject,
             distance: typeof record.followDistance === 'number' ? record.followDistance : 1,
         };
+        // Ensure greeting is set so world_actions are properly updated in NPC.update()
+        npc.greeting = true;
+    }
+
+    _normalizeRoomId(roomId) {
+        if (roomId == null) {
+            return null;
+        }
+        return String(roomId);
+    }
+
+    _getPendingFollowTransferForCurrentScene(record) {
+        const transfer = record?.pendingFollowTransfer;
+        if (!transfer || typeof transfer !== 'object') {
+            return null;
+        }
+
+        const currentScene = this._sceneId();
+        if ((transfer.toScene === 'interior' ? 'interior' : 'exterior') !== currentScene) {
+            return null;
+        }
+
+        if (currentScene === 'interior') {
+            const transferRoom = this._normalizeRoomId(transfer.toRoomId);
+            const currentRoom = this._normalizeRoomId(this._roomId());
+            if (transferRoom !== currentRoom) {
+                return null;
+            }
+        }
+
+        return transfer;
+    }
+
+    _isWalkableTile(x, y) {
+        const nav = this.scene?.manager?.nav;
+        if (!nav || typeof nav.worldIsWalkable !== 'function') {
+            return true;
+        }
+        return nav.worldIsWalkable(x, y) === true;
+    }
+
+    _isOccupiedTile(x, y, slug) {
+        const playerTile = this.scene?.player?.standingTile;
+        if (playerTile && playerTile.x === x && playerTile.y === y) {
+            return true;
+        }
+
+        const npcs = Array.isArray(this.npcManager?.list) ? this.npcManager.list : [];
+        for (let i = 0; i < npcs.length; i++) {
+            const npc = npcs[i];
+            if (!npc || npc?.info?.slug === slug) {
+                continue;
+            }
+
+            const tile = npc.standingTile;
+            if (tile && tile.x === x && tile.y === y) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    _selectFollowerSpawnTile(anchorX, anchorY, slug) {
+        const anchor = {
+            x: Math.floor(anchorX),
+            y: Math.floor(anchorY),
+        };
+        const offsets = [
+            [0, 0],
+            [0, 1],
+            [1, 0],
+            [0, -1],
+            [-1, 0],
+            [1, 1],
+            [1, -1],
+            [-1, 1],
+            [-1, -1],
+            [0, 2],
+            [2, 0],
+            [0, -2],
+            [-2, 0],
+        ];
+
+        for (let i = 0; i < offsets.length; i++) {
+            const x = anchor.x + offsets[i][0];
+            const y = anchor.y + offsets[i][1];
+            if (!this._isWalkableTile(x, y)) {
+                continue;
+            }
+            if (this._isOccupiedTile(x, y, slug)) {
+                continue;
+            }
+            return { x, y };
+        }
+
+        for (let i = 0; i < offsets.length; i++) {
+            const x = anchor.x + offsets[i][0];
+            const y = anchor.y + offsets[i][1];
+            if (!this._isWalkableTile(x, y)) {
+                continue;
+            }
+            return { x, y };
+        }
+
+        return anchor;
     }
 
     

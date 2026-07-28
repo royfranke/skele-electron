@@ -984,6 +984,42 @@ export default class NpcScheduleManager {
         }
     }
 
+    markFollowersForSceneTransition(targetScene, targetRoomId = null, anchorX = null, anchorY = null) {
+        const normalizedScene = targetScene === 'interior' ? 'interior' : 'exterior';
+        const normalizedRoomId = normalizedScene === 'interior' && targetRoomId != null
+            ? String(targetRoomId)
+            : null;
+        const hasAnchor = typeof anchorX === 'number' && typeof anchorY === 'number';
+
+        for (const [slug, record] of this.registry) {
+            if (!record || record.mode !== 'FOLLOWING_PLAYER' || record.followTarget !== 'PLAYER') {
+                continue;
+            }
+
+            record.pendingFollowTransfer = {
+                toScene: normalizedScene,
+                toRoomId: normalizedRoomId,
+                anchorX: hasAnchor ? anchorX : null,
+                anchorY: hasAnchor ? anchorY : null,
+                at: Date.now(),
+            };
+
+            record.scene = normalizedScene;
+            record.roomId = normalizedRoomId;
+            if (hasAnchor) {
+                record.worldX = anchorX;
+                record.worldY = anchorY;
+            }
+
+            this._traceRecord('scene:markFollowersForTransition', record, {
+                transitionScene: normalizedScene,
+                transitionRoomId: normalizedRoomId,
+                transitionAnchorX: hasAnchor ? anchorX : null,
+                transitionAnchorY: hasAnchor ? anchorY : null,
+            });
+        }
+    }
+
     // NPC boarded a bus — lock redirects
     notifyBusBoarded(slug, busId) {
         const record = this.registry.get(slug);
@@ -1080,6 +1116,7 @@ export default class NpcScheduleManager {
                 mode: record.mode ?? 'SCHEDULED',
                 followTarget: record.followTarget ?? null,
                 followDistance: record.followDistance ?? 1,
+                pendingFollowTransfer: record.pendingFollowTransfer ?? null,
                 activePlanRuleId: record.activePlan?.ruleId ?? null,
                 currentLegIndex: record.currentLegIndex ?? 0
             };
@@ -1112,6 +1149,21 @@ export default class NpcScheduleManager {
             if (typeof saved.currentLegIndex === 'number') record.currentLegIndex = saved.currentLegIndex;
             if (typeof saved.worldX === 'number') record.worldX = saved.worldX;
             if (typeof saved.worldY === 'number') record.worldY = saved.worldY;
+            if (saved.pendingFollowTransfer && typeof saved.pendingFollowTransfer === 'object') {
+                const transferScene = saved.pendingFollowTransfer.toScene === 'interior' ? 'interior' : 'exterior';
+                record.pendingFollowTransfer = {
+                    toScene: transferScene,
+                    toRoomId: transferScene === 'interior' && saved.pendingFollowTransfer.toRoomId != null
+                        ? String(saved.pendingFollowTransfer.toRoomId)
+                        : null,
+                    anchorX: typeof saved.pendingFollowTransfer.anchorX === 'number' ? saved.pendingFollowTransfer.anchorX : null,
+                    anchorY: typeof saved.pendingFollowTransfer.anchorY === 'number' ? saved.pendingFollowTransfer.anchorY : null,
+                    at: typeof saved.pendingFollowTransfer.at === 'number' ? saved.pendingFollowTransfer.at : Date.now(),
+                };
+            }
+            else {
+                record.pendingFollowTransfer = null;
+            }
 
             if (this.debug) console.log(`[NpcSchedule] fromSaveData ${slug}: restored`, { worldX: saved.worldX, worldY: saved.worldY, scene: record.scene, mode: saved.mode });
             this._traceRecord('fromSaveData:restored', record, {
@@ -1219,6 +1271,7 @@ export default class NpcScheduleManager {
                 spawnedScene: null,         // which scene the NPC is currently spawned in (if any)
                 spawnedChunk: null,         // which chunk the NPC is currently spawned in (if any)
                 runtimeNpc: null,
+                pendingFollowTransfer: null,
                 planVersion: 0,             // incremented when plan changes; used to trigger movement one-shot
                 _lastDispatchedLegKey: null,
                 _lastDispatchedPlanVersion: -1,  // tracks which planVersion was already dispatched

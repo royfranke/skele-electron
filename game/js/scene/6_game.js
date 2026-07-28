@@ -165,6 +165,18 @@ export default class GameScene extends Phaser.Scene {
             await this.exterior.savePortalIndexFile();
         }
 
+        if (this.manager?.npcSchedule && typeof this.manager.npcSchedule.markFollowersForSceneTransition === 'function') {
+            this.manager.npcSchedule.markFollowersForSceneTransition(
+                'interior',
+                this.slot.POSITION.ROOM,
+                this.slot.POSITION.X,
+                this.slot.POSITION.Y,
+            );
+            if (typeof this.manager.npcSchedule.toSaveData === 'function') {
+                this.slot.NPCS = this.manager.npcSchedule.toSaveData();
+            }
+        }
+
         console.log(this.slot.POSITION + 'portal to ding ding');
         this.scene.start('Interior Scene', {slot: this.slot});
     }

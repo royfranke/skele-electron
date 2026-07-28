@@ -16,6 +16,8 @@ export default class Npc {
     this.greeting = false;
     this.following = null;
     this.followingTarget = null;
+    this.followRepathCooldownMs = 600;
+    this.lastFollowRepathAt = 0;
     this.info = npc;
 
     this.npcState = new NpcState();
@@ -59,6 +61,21 @@ export default class Npc {
         { action: 'FOLLOW ME', object: this },
         { action: 'FOLLOW ME AT A DISTANCE', object: this }
       ];
+    }
+    // Restore stop-following actions after scene transition when NPC is already following
+    if (this.greeting && this.following != null) {
+      const followDistance = this.following.distance || 1;
+      if (followDistance === 1) {
+        this.world_actions = [
+          { action: 'STOP FOLLOWING ME', object: this },
+          { action: 'FOLLOW ME AT A DISTANCE', object: this }
+        ];
+      } else {
+        this.world_actions = [
+          { action: 'STOP FOLLOWING ME', object: this },
+          { action: 'FOLLOW ME', object: this }
+        ];
+      }
     }
   }
 
@@ -420,19 +437,50 @@ export default class Npc {
     this.setState('IDLE');
   }
 
+  snapToTile(_x, _y) {
+    const worldX = _x * 16;
+    const worldY = _y * 16;
+
+    if (this.sprite?.sprite) {
+      this.sprite.sprite.setPosition(worldX, worldY);
+      if (this.sprite.sprite.body && typeof this.sprite.sprite.body.reset === 'function') {
+        this.sprite.sprite.body.reset(worldX, worldY);
+      }
+      else if (this.sprite.sprite.body && typeof this.sprite.sprite.body.setVelocity === 'function') {
+        this.sprite.sprite.body.setVelocity(0, 0);
+      }
+    }
+
+    this.standingTile = { x: _x, y: _y };
+    this.destinations = [];
+  }
+
   follow(object, distance = 1) { /// Could be player, NPC, or other moving target, must having facing and standingTile.x standingTile.y properties
-    if (!object || !object.standingTile) {
+    if (!object || !object.standingTile || !this.standingTile) {
       this.setState('IDLE');
       return;
     }
 
     var x_distance = this.standingTile.x - object.standingTile.x;
     var y_distance = this.standingTile.y - object.standingTile.y;
+    const manhattanDistance = Math.abs(x_distance) + Math.abs(y_distance);
     const targetKey = `${object.standingTile.x}_${object.standingTile.y}`;
+    const now = Date.now();
+    const cooldownElapsed = (now - this.lastFollowRepathAt) >= this.followRepathCooldownMs;
+
+    // Recovery for stale cross-scene positions: resync once instead of
+    // attempting an expensive path across most of the map.
+    if (this.destinations.length == 0 && manhattanDistance > 96) {
+      this.snapToTile(object.standingTile.x, object.standingTile.y);
+      this.followingTarget = targetKey;
+      this.setState('IDLE');
+      return;
+    }
 
     if ((x_distance > distance || x_distance < -distance) || (y_distance > distance || y_distance < -distance)) {
-      if (this.followingTarget !== targetKey || this.destinations.length == 0) {
+      if (this.followingTarget !== targetKey || (this.destinations.length == 0 && cooldownElapsed)) {
         this.followingTarget = targetKey;
+        this.lastFollowRepathAt = now;
         this.moveToTile(object.standingTile.x, object.standingTile.y);
       }
     }
