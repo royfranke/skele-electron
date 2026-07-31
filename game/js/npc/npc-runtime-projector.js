@@ -264,6 +264,7 @@ export default class NpcRuntimeProjector {
             const queued = npc.moveToTile(currentLeg.x, currentLeg.y) === true;
             if (queued) {
                 record._lastDispatchedLegKey = legKey;
+                record._portalDoorOpened = false;
                 if (currentLeg.type === 'PORTAL') {
                     this._trace(record, 'dispatchLeg', {
                         legType: currentLeg.type,
@@ -272,8 +273,23 @@ export default class NpcRuntimeProjector {
                         legX: currentLeg.x,
                         legY: currentLeg.y,
                     });
-                    this._setPortalDoorState(currentLeg, 'OPENING');
                 }
+            }
+        }
+
+        // Open the portal door only when the NPC is within 2 tiles of it.
+        if (
+            hasDestination &&
+            currentLeg.type === 'PORTAL' &&
+            !record._portalDoorOpened &&
+            npc.standingTile &&
+            typeof npc.standingTile.x === 'number' &&
+            typeof npc.standingTile.y === 'number'
+        ) {
+            const dist = Math.abs(npc.standingTile.x - currentLeg.x) + Math.abs(npc.standingTile.y - currentLeg.y);
+            if (dist <= 2) {
+                record._portalDoorOpened = true;
+                this._setPortalDoorState(currentLeg, 'OPENING');
             }
         }
 
