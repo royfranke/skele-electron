@@ -320,9 +320,14 @@ export default class BlockBlueprint {
         }
     }
 
-    buildRock(_x, _y) {
+    buildRock(_x, _y, water = false) {
         if (this.isPathTile(_x, _y)) return;
-        this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROCK_SMALL');
+        if (water) {
+            this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROCK_RIVER_1');
+        }
+        else {
+            this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'ROCK_SMALL');
+        }
     }
 
     buildStump(_x, _y) {
@@ -720,7 +725,7 @@ export default class BlockBlueprint {
             this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.WATER.FILL_, x, y, section_width, section_height);
 
             if (Phaser.Math.RND.between(0, 2) == 0) {
-                this.buildRock(x + Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1));
+                this.buildRock(x + Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1), true);
             }
 
 
@@ -728,7 +733,7 @@ export default class BlockBlueprint {
             this.buildGiantCanePatch(x + section_width - 2, y-1, 6, section_height+2);
 
             if (Phaser.Math.RND.between(0, 2) == 0) {
-                this.buildRock(x + section_width - Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1));
+                this.buildRock(x + section_width - Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1), true);
             }
 
 

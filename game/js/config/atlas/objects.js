@@ -850,7 +850,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: 64,
         sprite: {
           h:64, 
           w:64,
@@ -890,7 +890,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: 64,
         sprite: {
           h:64, 
           w:64,
@@ -930,7 +930,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: 0,
+        depth: 64,
         sprite: {
           h:64, 
           w:64,
@@ -5705,6 +5705,66 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          FLOOR_LAMP_1: {
+        name: 'Floor Lamp 1',
+        slug: 'FLOOR_LAMP_1', 
+        type: 'LAMP',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:6, 
+          w:8
+        },
+        offset: {
+          x:4, 
+          y:24
+        },
+        varieties: 2,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }],
+        default_state: 'OFF',        states: [            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['FLOOR_LAMP_1-2',]
+              },               {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: ['FLOOR_LAMP_1-2', 'FLOOR_LAMP_1-1', ]
+              },            {
+              name: 'ON',
+              transition: 'false',
+              frames: ['FLOOR_LAMP_1-1',]
+              },               {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: ['FLOOR_LAMP_1-1', 'FLOOR_LAMP_1-2', ]
+              },],
+
+          interactions: {
+                                  },
+    },
           DECOR_FRAME_1: {
         name: 'Framed Picture 1',
         slug: 'DECOR_FRAME_1', 
@@ -6276,7 +6336,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: -64,
+        depth: -112,
         sprite: {
           h:104, 
           w:64,
@@ -6316,7 +6376,7 @@ const OBJECTS = {
           x:0, 
           y:0
         },
-        depth: -28,
+        depth: -32,
         sprite: {
           h:32, 
           w:80,
@@ -10878,6 +10938,49 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          ROCK_RIVER_1: {
+        name: 'River Rock',
+        slug: 'ROCK_RIVER_1', 
+        type: 'RIVER_DECOR',
+        bounding: {
+          h:1, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: -4,
+        sprite: {
+          h:16, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:12
+        },
+        offset: {
+          x:2, 
+          y:5
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'FLOWING',        states: [                {
+              name: 'FLOWING',
+              transition: 'false',
+              frames: ['ROCK_RIVER_1-1','ROCK_RIVER_1-2','ROCK_RIVER_1-3',]},],
+
+          interactions: {
+                                  },
+    },
           ROCK_SMALL: {
         name: 'Rock Small',
         slug: 'ROCK_SMALL', 
@@ -13045,6 +13148,49 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          RIVER_POLE_SUNKEN: {
+        name: 'Sunken Pole',
+        slug: 'RIVER_POLE_SUNKEN', 
+        type: 'RIVER_DECOR',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: -4,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:8, 
+          w:6
+        },
+        offset: {
+          x:6, 
+          y:19
+        },
+        varieties: 3,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'FLOWING',        states: [                {
+              name: 'FLOWING',
+              transition: 'false',
+              frames: ['RIVER_POLE_SUNKEN-1','RIVER_POLE_SUNKEN-2','RIVER_POLE_SUNKEN-3',]},],
 
           interactions: {
                                   },
