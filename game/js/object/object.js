@@ -236,6 +236,13 @@ export default class Object {
                     if (this.info.interactions.hasOwnProperty(key)) {
                         const interaction = this.info.interactions[key];
                         if (interaction.req_world_action && interaction.req_world_action !== '') {
+                            // Check req_state against the current object state
+                            if (interaction.req_state && interaction.req_state !== '') {
+                                const validInteractionStates = interaction.req_state.split(',').map(s => s.trim().toUpperCase());
+                                if (!validInteractionStates.includes(state.name.toUpperCase())) {
+                                    continue;
+                                }
+                            }
                             // Check if requirements can be met
                             const context = { activeObject: self };
                             const checkResult = self.requirementsEngine.checkRequirements(
