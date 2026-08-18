@@ -45,7 +45,7 @@ const NPC_STATES = {
     },
     WALK: {
         name: 'WALK',
-        speed: 65
+        speed: 40
     },
 };
 

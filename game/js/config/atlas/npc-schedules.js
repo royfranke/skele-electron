@@ -64,7 +64,7 @@ const NPC_SCHEDULES = {
       destination: {
         type: 'ADDRESS',     // ADDRESS | TILE | SLUG | INTERIOR
         // For ADDRESS, optional x/y act as offsets from the resolved portal tile.
-        dir: 'W', number: '105', street: 'Belly Button Street'
+        dir: 'W', number: '107', street: 'Belly Button Street'
       },
       // Optional movement area relative to resolved destination.
       // Example: { startX: -1, startY: 0, endX: 1, endY: 2 }
@@ -110,7 +110,29 @@ const NPC_SCHEDULES = {
     }
   ]
   },
-  
+  LOUIS: {
+  slug: 'LOUIS',
+  transitDistanceThreshold: 1000, // tiles; trips longer than this → consider bus
+  schedule: [
+    {
+      id: 'morning_home',
+      timeStart: { hour: 6, minute: 0 },
+      timeEnd:   { hour: 9, minute: 43 },
+      priority: 10,
+      conditions: [],        // always active   
+      destination: {
+        type: 'ADDRESS',     // ADDRESS | TILE | SLUG | INTERIOR
+        // For ADDRESS, optional x/y act as offsets from the resolved portal tile.
+        dir: 'W', number: '105', street: 'Belly Button Street'
+      },
+      // Optional movement area relative to resolved destination.
+      // Example: { startX: -1, startY: 0, endX: 1, endY: 2 }
+      arrivalZone: null,
+      arrivalAction: 'IDLE',
+      arrivalFacing: 's',
+      indoors: false,        // expects to be in exterior
+    }]
+  }
   
 };
 export default NPC_SCHEDULES;

@@ -13,6 +13,8 @@ const OBJECT_TYPES = {
       'BASEMENT_WINDOW'    ],
       BASKET_RACK: [
       'BASKET_RACK'    ],
+      BATH: [
+      'BATHTUB'    ],
       BEADED_CURTAIN: [
       'BEADED_CURTAIN_BODEGA'    ],
       BED: [
@@ -162,7 +164,7 @@ const OBJECT_TYPES = {
       SIMPLE_PLANT: [
       'CREEK_SEDGE','RASPBERRY_CANE_1','RASPBERRY_CANE_2','RASPBERRY_CANE_3'    ],
       SINK: [
-      'KITCHEN_SINK'    ],
+      'BATHROOM_SINK','KITCHEN_SINK'    ],
       SOFA: [
       'SOFA_PLAID_1','SOFA_SHLUBBY_1'    ],
       STAFFED_COUNTER: [
@@ -187,6 +189,8 @@ const OBJECT_TYPES = {
       'TV_SMALL_NORTH','TV_SMALL_SOUTH'    ],
       TOASTER: [
       'TOASTER'    ],
+      TOILET: [
+      'TOILET'    ],
       TRAFFIC_BARRIER: [
       'CONE_FALLEN','CONE_UPRIGHT','TRAFFIC_BARRIER_SMALL'    ],
       TRAFFIC_LIGHT_: [

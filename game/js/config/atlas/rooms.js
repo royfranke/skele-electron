@@ -528,7 +528,7 @@ name: "Auntie’s House",
 listingName: "Graves, Marcy", },
     
             roomData: { 
-                featureList: [{"x":"5","y":"1","slug":"INT_DOOR_SIDE_WHITE","params":{"portal":{"room_id":15,"x":3,"y":9}}},{"x":"4","y":"1","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"5","y":"1","slug":"INT_DOOR_SIDE_WHITE","params":{"portal":{"room_id":15,"x":3,"y":9}}},{"x":"0","y":"0","slug":"BATHTUB","params":{}},{"x":"4","y":"0","slug":"BATHROOM_SINK","params":{}},{"x":"3","y":"0","slug":"TOILET","params":{}},{"x":"4","y":"1","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
                 removalList: [],
                 itemList: []

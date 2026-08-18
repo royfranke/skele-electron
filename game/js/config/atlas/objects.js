@@ -304,6 +304,126 @@ const OBJECTS = {
 
             },                                  },
     },
+          BATHROOM_SINK: {
+        name: 'Bathroom Sink',
+        slug: 'BATHROOM_SINK', 
+        type: 'SINK',
+        bounding: {
+          h:3, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:12
+        },
+        offset: {
+          x:2, 
+          y:28
+        },
+        varieties: 1,
+        solid: 0,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'TURN ON', stateTrigger: 'TURNING_ON', validStates: ['OFF']
+          }, {
+            name: 'TURN OFF', stateTrigger: 'TURNING_OFF', validStates: ['ON']
+          }],
+        default_state: 'OFF',        states: [            {
+              name: 'OFF',
+              transition: 'false',
+              frames: ['BATHROOM_SINK-1',]
+              },               {
+              name: 'TURNING_ON',
+              transition: 'ON',
+              frames: []
+              },            {
+              name: 'ON',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'TURNING_OFF',
+              transition: 'OFF',
+              frames: []
+              },],
+
+          interactions: {
+                                  },
+    },
+          BATHTUB: {
+        name: 'Bathtub',
+        slug: 'BATHTUB', 
+        type: 'BATH',
+        bounding: {
+          h:6, 
+          w:2
+        },
+        base: {
+          h:3, 
+          w:1,
+          x:0, 
+          y:3
+        },
+        depth: -96,
+        sprite: {
+          h:96, 
+          w:25,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:96, 
+          w:18
+        },
+        offset: {
+          x:0, 
+          y:0
+        },
+        varieties: 17,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'FILL TUB', stateTrigger: 'FILLING_TUB', validStates: ['EMPTY_TUB']
+          }, {
+            name: 'DRAIN TUB', stateTrigger: 'DRAINING_TUB', validStates: ['FULL_TUB']
+          }],
+        default_state: 'EMPTY_TUB',        states: [            {
+              name: 'EMPTY_TUB',
+              transition: 'false',
+              frames: ['BATHTUB-1',]
+              },               {
+              name: 'FILLING_TUB',
+              transition: 'FULL_TUB',
+              frames: ['BATHTUB-2', 'BATHTUB-3', 'BATHTUB-4', 'BATHTUB-5', 'BATHTUB-6', 'BATHTUB-7', 'BATHTUB-8', 'BATHTUB-9', 'BATHTUB-10', 'BATHTUB-8', 'BATHTUB-9', 'BATHTUB-10', 'BATHTUB-8', 'BATHTUB-9', 'BATHTUB-10', 'BATHTUB-8', 'BATHTUB-9', 'BATHTUB-10', 'BATHTUB-8', 'BATHTUB-9', 'BATHTUB-10', 'BATHTUB-11', ]
+              },            {
+              name: 'FULL_TUB',
+              transition: 'false',
+              frames: ['BATHTUB-11',]
+              },               {
+              name: 'DRAINING_TUB',
+              transition: 'EMPTY_TUB',
+              frames: ['BATHTUB-11', 'BATHTUB-12', 'BATHTUB-13', 'BATHTUB-14', 'BATHTUB-15', 'BATHTUB-16', 'BATHTUB-17', 'BATHTUB-1', ]
+              },],
+
+          interactions: {
+                                  },
+    },
           BED_1: {
         name: 'Bed 1',
         slug: 'BED_1', 
@@ -13343,6 +13463,46 @@ const OBJECTS = {
                                 ]
 
             },                                  },
+    },
+          TOILET: {
+        name: 'Toilet',
+        slug: 'TOILET', 
+        type: 'TOILET',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:18, 
+          w:12
+        },
+        offset: {
+          x:2, 
+          y:10
+        },
+        varieties: 2,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
     },
           DAILY_NEWS_BOX_: {
         name: 'Town News Box',

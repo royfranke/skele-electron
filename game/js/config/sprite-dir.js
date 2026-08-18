@@ -22,10 +22,33 @@ const SPRITE_DIR = {
         'WALK'
     ],
     KIDS: [
-        'PATRICE'
+        'PATRICE',
+        'LOUIS'
     ],
     KID_ANIMS: {
         IDLE: {
+            LOUIS: {
+                N: {
+                    START: 0,
+                    END: 6
+                },
+                N_SIDE: {
+                    START: 7,
+                    END: 14
+                },
+                SIDE: {
+                    START: 15,
+                    END: 22
+                },
+                S_SIDE: {
+                    START: 23,
+                    END: 30
+                },
+                S: {
+                    START: 31,
+                    END: 38
+                }
+            },
             PATRICE: {
                 N: {
                     START: 0,
@@ -47,9 +70,31 @@ const SPRITE_DIR = {
                     START: 0,
                     END: 45,
                 }
-            }   
+            }
         },
         WALK: {
+            LOUIS: {
+                N: {
+                    START: 0,
+                    END: 7,
+                },
+                N_SIDE: {
+                    START: 8,
+                    END: 15,
+                },
+                SIDE: {
+                    START: 16,
+                    END: 23,
+                },
+                S_SIDE: {
+                    START: 24,
+                    END: 31,
+                },
+                S: {
+                    START: 32,
+                    END: 39,
+                }
+            },
             PATRICE: {
                 N: {
                     START: 0,
@@ -72,7 +117,7 @@ const SPRITE_DIR = {
                     END: 49,
                 }
             }
-        } 
+        }
     },
     ADULT_STATES: [
         'IDLE',
@@ -104,7 +149,7 @@ const SPRITE_DIR = {
                     START: 0,
                     END: 30,
                 }
-            }   
+            }
         },
         WALK: {
             AUNTIE: {
@@ -129,7 +174,7 @@ const SPRITE_DIR = {
                     END: 34,
                 }
             }
-        } 
+        }
     },
     FACES: [
         'N',
@@ -162,10 +207,10 @@ const SPRITE_DIR = {
             my: -1
         },
         e: {
-            x:1,
-            y:0,
-            mx:2,
-            my:0
+            x: 1,
+            y: 0,
+            mx: 2,
+            my: 0
         },
         s: {
             x: 0,
@@ -407,7 +452,7 @@ const SPRITE_DIR = {
                 END: 0,
             },
             N_SIDE: {
-                START:1,
+                START: 1,
                 END: 1,
             },
             SIDE: {
@@ -431,7 +476,7 @@ const SPRITE_DIR = {
                 END: 0,
             },
             N_SIDE: {
-                START:1,
+                START: 1,
                 END: 1,
             },
             SIDE: {
@@ -446,7 +491,7 @@ const SPRITE_DIR = {
                 START: 4,
                 END: 4,
             }
-        }   
+        }
     },
     PULL: {
         ANIM: {
