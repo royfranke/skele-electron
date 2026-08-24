@@ -263,6 +263,7 @@ export default class Object {
             
             this.addChestActions();
         }
+        this.addServiceActions();
     }
 
     setServices (services) {
@@ -351,6 +352,59 @@ export default class Object {
             
             // Refresh HUD display to show inventory changes
             this.scene.manager.hud.refreshDisplay();
+        }
+
+        // Handle service actions
+        if (this.services != null) {
+            const matchingService = this.services.find(service => service.name === action);
+            
+            if (matchingService) {
+                console.log('Executing service:', matchingService.slug);
+                
+                // Check service requirements using the same engine as item actions
+                const context = { activeObject: this };
+                const checkResult = this.requirementsEngine.checkRequirements(
+                    matchingService.requirements.requires,
+                    context
+                );
+
+                console.log(`Service requirements met: ${checkResult.met} of ${checkResult.required}`);
+
+                if (!checkResult.satisfied) {
+                    // Refund on failure
+                    this.requirementsEngine.refund(checkResult.refunds);
+                    
+                    // Show failure messages
+                    if (checkResult.failures.length > 0) {
+                        console.log('Service requirement failures:', checkResult.failures);
+                    }
+                    return;
+                }
+
+                // Give result item if specified
+                if (matchingService.requirements.req_result_item && matchingService.requirements.req_result_item !== '') {
+                    const result = this.scene.manager.itemManager.newItemToPockets(
+                        matchingService.requirements.req_result_item
+                    );
+                    if (!result) {
+                        this.requirementsEngine.refund(checkResult.refunds);
+                        this.scene.manager.hud.hudThinking.tellBrain('My hands are full.');
+                        return;
+                    }
+                }
+
+                // Apply service results (handles data modifications, texture changes, etc.)
+                this.requirementsEngine.applyResults(matchingService.requirements.requires, matchingService.requirements, context);
+
+                // Emit quest event with service slug
+                this.scene.events.emit('REQ_' + matchingService.slug + '_MET');
+                console.log('REQ_' + matchingService.slug + '_MET');
+                
+                // Refresh HUD display to show any inventory changes
+                this.scene.manager.hud.refreshDisplay();
+                
+                return; // Service was handled, exit early
+            }
         }
 
         // Handle state changes from world_actions

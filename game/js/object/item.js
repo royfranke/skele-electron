@@ -265,6 +265,8 @@ export default class Item {
         const actionsSimple = [];
 
         Object.values(interactions).forEach(interaction => {
+            if (!interaction.req_pocket_action || interaction.req_pocket_action === '') return;
+
             const context = { item: this };
             const checkResult = this.requirementsEngine.checkRequirements(
                 interaction.requires,

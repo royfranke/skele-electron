@@ -196,22 +196,21 @@ export default class RequirementsEngine {
     }
 
     checkMoney(requirement, context) {
-        const hasCoins = this.scene.player.coinpurse.availableCoins([requirement.MONEY]);
-        
-        if (!hasCoins) {
+        const hasAmount = this.scene.player.coinpurse.availableAmount(requirement.MONEY);
+
+        if (!hasAmount) {
             const formatted = (requirement.MONEY / 100).toFixed(2);
             this.scene.manager.hud.hudThinking.tellBrain(`I don't have $${formatted}.`);
         }
 
         return {
-            met: hasCoins,
-            reason: !hasCoins ? `Insufficient funds: $${(requirement.MONEY / 100).toFixed(2)}` : null
+            met: hasAmount,
+            reason: !hasAmount ? `Insufficient funds: $${(requirement.MONEY / 100).toFixed(2)}` : null
         };
     }
 
     consumeMoney(requirement, context) {
-        const result = this.scene.player.coinpurse.insertCoins([requirement.MONEY]);
-        return result;
+        return this.scene.player.coinpurse.spendAmount(requirement.MONEY);
     }
 
     checkData(requirement, context) {
@@ -245,6 +244,10 @@ export default class RequirementsEngine {
                 1
             );
             return { type: 'CONSUMED', item: requirement.ITEM, removed };
+        }
+        else if (requirement.type === 'MONEY') {
+            // Money is consumed in applyResults via consumeMoney.
+            return { type: 'CONSUMED', money: requirement.MONEY, success: true };
         }
         else if (requirement.type === 'ITEM_KIND') {
             // For ITEM_KIND, we need to find which specific item in pockets matches
@@ -291,16 +294,30 @@ export default class RequirementsEngine {
     }
 
     handleDuplicated(requirement, interaction, context) {
-        const pocketIndex = context.pocketIndex;
-        if (pocketIndex === undefined) {
+        let pocketIndex = context.pocketIndex;
+
+        // Service/world actions do not provide pocketIndex; resolve from requirement type.
+        if (pocketIndex === undefined && requirement.type === 'ITEM_KIND') {
+            pocketIndex = this.scene.manager.hud.pocket.findItemKindInPockets(requirement.ITEM_KIND);
+        }
+        if (pocketIndex === undefined && requirement.type === 'ITEM') {
+            pocketIndex = this.scene.manager.hud.pocket.findInPockets(requirement.ITEM);
+        }
+        if (pocketIndex === undefined || pocketIndex === false) {
             return { type: 'DUPLICATED', success: false };
         }
 
         const pocket = this.scene.manager.hud.pocket.getPocket(pocketIndex);
-        if (pocket.STATE !== 'EMPTY') {
-            pocket.HOLDS.updateStackCount(1);
+        if (pocket.STATE === 'EMPTY') {
+            return { type: 'DUPLICATED', success: false };
+        }
+
+        const heldItem = pocket[pocket.STATE] || pocket.HOLDS;
+        if (heldItem && typeof heldItem.updateStackCount === 'function') {
+            heldItem.updateStackCount(1);
             return { type: 'DUPLICATED', success: true };
         }
+
         return { type: 'DUPLICATED', success: false };
     }
 

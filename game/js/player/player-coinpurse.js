@@ -99,6 +99,47 @@ export default class PlayerCoinpurse {
         return amount < 100 ? amount+'¢' : '$'+(amount/100).toFixed(2);
     }
 
+    // Rebuild purse from remaining balance to model receiving change from payment
+    spendAmount (amount) {
+        if (!this.availableAmount(amount)) return false;
+
+        const currentTotal = this.updateTotal();
+        let remaining = currentTotal - amount;
+
+        // Clear current denominations
+        Object.keys(this.contents.COIN).forEach(key => {
+            this.contents.COIN[key] = 0;
+        });
+        Object.keys(this.contents.PAPER).forEach(key => {
+            this.contents.PAPER[key] = 0;
+        });
+
+        // Reallocate remaining balance using largest denominations first
+        const paperDenoms = [10000, 5000, 2000, 1000, 500, 200, 100];
+        const coinDenoms = [25, 10, 5, 1];
+
+        for (const denom of paperDenoms) {
+            const key = this.paperRef[denom];
+            const count = Math.floor(remaining / denom);
+            if (count > 0) {
+                this.contents.PAPER[key] = count;
+                remaining -= (count * denom);
+            }
+        }
+
+        for (const denom of coinDenoms) {
+            const key = this.coinRef[denom];
+            const count = Math.floor(remaining / denom);
+            if (count > 0) {
+                this.contents.COIN[key] = count;
+                remaining -= (count * denom);
+            }
+        }
+
+        this.updateTotal();
+        return remaining === 0;
+    }
+
     removeCoins (coin_amount_array) {
         let spent = 0;
         coin_amount_array.forEach(element => {
