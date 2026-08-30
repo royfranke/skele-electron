@@ -47,6 +47,10 @@ export default class TreeManager {
     }
 
     newTreeToWorld (_x,_y,slug,days_old=0, options = {}) {
+        if (!this.isInWorldBounds(_x, _y)) {
+            return false;
+        }
+
         const appearance = options?.appearance ?? options?.treeVisual ?? options?.visual ?? null;
         var tree = this.newTree(slug, days_old, appearance);
         var result = this.putTreeInWorld(tree,_x,_y, options);
@@ -60,6 +64,10 @@ export default class TreeManager {
     }
 
     putTreeInWorld (tree, _x, _y, options = {}) {
+        if (!this.isInWorldBounds(_x, _y)) {
+            return false;
+        }
+
         const added = this.registry.placeTree(tree, _x, _y);
         if (!added) return false;
 
@@ -89,6 +97,14 @@ export default class TreeManager {
         } catch (e) {}
 
         return tree;
+    }
+
+    isInWorldBounds (_x, _y) {
+        const inWorldBounds = this.scene?.exterior?.inWorldBounds;
+        if (typeof inWorldBounds === 'function') {
+            return inWorldBounds(_x, _y);
+        }
+        return true;
     }
 
 
