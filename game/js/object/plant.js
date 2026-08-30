@@ -159,8 +159,8 @@ export default class Plant {
             }
 
             this.flowers.push(sprite);
+            this.hasFlower = true;
         }
-        this.hasFlower = true;
         this.tweenFlower();
     }
 
@@ -263,9 +263,34 @@ export default class Plant {
     }
 
     destroySprite() {
-        this.sprite.destroy();
-        this.sprite_shadow.destroy();
+        if (Array.isArray(this.flowers) && this.flowers.length > 0) {
+            this.flowers.forEach(flower => {
+                try {
+                    flower.destroy();
+                } catch (e) {}
+            });
+        }
+        this.flowers = [];
+        this.hasFlower = false;
+
+        if (this.debugLabel) {
+            try {
+                this.debugLabel.destroy();
+            } catch (e) {}
+            this.debugLabel = undefined;
+        }
+
+        if (this.sprite != null) {
+            this.sprite.destroy();
+        }
+        if (this.shadow != null) {
+            this.shadow.destroy();
+        }
+        if (this.sprite_shadow != null) {
+            this.sprite_shadow.destroy();
+        }
         this.sprite = null;
+        this.shadow = null;
         this.sprite_shadow = null;
     }
 }
