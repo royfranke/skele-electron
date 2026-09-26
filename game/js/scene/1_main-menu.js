@@ -28,13 +28,37 @@ export default class MainMenuScene extends Phaser.Scene {
         this.cursor_hover = { cursor: 'url(assets/images/cursor-hover.png), pointer' };
         this.assembleBackground();
         this.assembleMenu();
-        this.assembleTitle();
+        //this.assembleTitle();
+        this.assembleStaticTitle();
         this.assembleSubtitle();
         this.assembleVersion();
-        this.assembleItemGrid();
+        //this.assembleItemGrid();
+        this.assembleItemBorder();
 
         this.input.setDefaultCursor('url(assets/images/cursor.png), pointer');
         
+    }
+
+    assembleItemBorder() {
+        // Implement the item border assembly here
+        let itemWidth = 18;
+        let itemHeight = 18;
+        let left = this.camera.view.left + 8;
+        let top = this.camera.view.top + 8;
+        let right = this.camera.view.right - 18;
+        let bottom = this.camera.view.bottom - 18;
+
+        for (let x = left; x <= right; x += itemWidth) {
+            for (let y = top; y <= bottom; y += itemHeight) {
+                if (x === left || x > right - itemWidth || y === top || y > bottom - itemHeight) {
+                    // delay the addition of the sprite slightly to create a staggered effect
+                    this.time.delayedCall(Math.random() * 1000, () => {
+                        this.add.sprite(x, y, 'ITEMS', this.getRandomItem(), 0).setOrigin(0,0).setDepth(100);
+                    });
+                }
+            }
+        }
+
     }
 
 
@@ -77,24 +101,65 @@ export default class MainMenuScene extends Phaser.Scene {
     }
 
     assembleVersion() {
-        let version = this.add.bitmapText(this.camera.view.left + this.camera.view.margin.left + 56, this.camera.view.bottom - 24, 'SkeleNotebook', this.version);
+        let version = this.add.bitmapText(this.camera.view.left + this.camera.view.margin.left + 24, this.camera.view.bottom - 48, 'SkeleNotebook', this.version);
         version.setOrigin(0,0);
         version.setFontSize(8);
-        version.setTintFill(0xb29638);
+        version.setTintFill(0x3d56d2);
         version.setDepth(1);
     }
 
     assembleBackground() {
-        let background = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_MID_SAPPHIRE_FAT_BORDER');
+        let background = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BAG_UNFOCUSED');
         background.setDepth(1);
 
         let background_frame = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_SHALLOW_RED_EDGE_FRAME');
 
-        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_MID_ORANGE_FAT_BORDER');
+        let background_frame2 = this.hud.makeBlock(this.camera.view.left + 30, this.camera.view.top + 30, this.camera.view.width - 60, this.camera.view.height - 60, 'BLOCK_SHALLOW_RED_EDGE_FRAME');
+
+        background_frame2.setDepth(10);
+
+        let background_frame3 = this.hud.makeBlock(this.camera.view.left + 30, this.camera.view.top + 30, this.camera.view.width - 60, this.camera.view.height - 60, 'BLOCK_MID_DARK_BLUE_FAT_BORDER');
+        background_frame3.setDepth(1);
+
+        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_MID_MOONSTONE_FAT_BORDER');
         menu_background.setDepth(2);
 
         let menu_frame = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME');
 
+    }
+
+     assembleStaticTitle() {
+        var rainbow = [];
+        let start_top = this.camera.view.top + (this.camera.view.height * .28);
+        let start_left = this.cameras.main.centerX;
+        let color = ['0x4973a5','0x32675a','0x4973a5', '0x3d56d2','0x4973a5', '0x7758ab','0x4973a5', '0x974d9e','0x4973a5', '0xd93232','0x4973a5', '0xf47832','0x4973a5', '0xed931e','0x4973a5', '0xf2b22b', '0x4973a5', '0xf8d239', '0x4973a5', '0xfff59a'];
+        for (var i = 0; i < color.length; i++) {
+            let title = this.add.bitmapText(start_left + (1 * i), start_top - (1 * i), 'SkelePuff', 'SUMMER BREAK');
+            title.setDepth(100 + i);
+            title.setOrigin(0.5);
+            title.setTintFill(color[i]);
+            title.setFontSize(32);
+            if (color[i] === '0x4973a5') {
+                title.setAlpha(0.25); // Dim the separator color
+            }
+            rainbow.push(title);
+        }
+        // Add tween with a staggered start
+        
+
+        this.tweens.add({
+            targets: rainbow,
+            y: "-=12",
+            duration: 4000,
+            ease: 'Sine.easeInOut',
+            yoyo: true,
+            repeat: -1,
+            delay: function (target, key, value, index, total)
+            {
+                return index * 125; // Stagger the start of each tween by 100ms
+            }
+        });
+        
     }
 
     assembleTitle() {
@@ -135,7 +200,7 @@ export default class MainMenuScene extends Phaser.Scene {
         let subtitle = this.add.bitmapText(this.cameras.main.centerX, this.camera.view.top + (this.camera.view.height * .36), 'SkeleScript', 'An Elegy for Aunties');
         subtitle.setOrigin(0.5);
         subtitle.setFontSize(8);
-        subtitle.setTintFill(0xc3b572);
+        subtitle.setTintFill(0x3d56d2);
         subtitle.setDepth(10);
     }
 
@@ -148,9 +213,9 @@ export default class MainMenuScene extends Phaser.Scene {
         menu.setDepth(20);
         let yOffset = 0;
         menuItems.forEach(item => {
-            var text = this.add.bitmapText(0, yOffset, 'SkeleNotebook', item.display);
+            var text = this.add.bitmapText(0, yOffset, 'SkeleTalk', item.display);
             text.setOrigin(0.5);
-            text.setTintFill(0x5a735b);
+            text.setTintFill(0x54467f);
             text.setInteractive(this.cursor_hover);
             text.on('pointerdown', item.action);
             text.on('pointerover', function (pointer) {
@@ -158,7 +223,7 @@ export default class MainMenuScene extends Phaser.Scene {
 
             });
             text.on('pointerout', function (pointer) {
-                text.setTintFill(0x5a735b);
+                text.setTintFill(0x54467f);
 
             });
 

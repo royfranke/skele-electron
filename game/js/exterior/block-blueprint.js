@@ -299,7 +299,7 @@ export default class BlockBlueprint {
                 if (this.isPathTile(x, y)) return;
             }
         }
-        var gully = this.scene.manager.objectManager.newObjectToWorld(_x, _y, gully_name);
+        this.scene.manager.objectManager.newObjectToWorld(_x, _y, gully_name);
     }
 
     buildPond(_x, _y, width = 3, height = 2) {
@@ -711,16 +711,17 @@ export default class BlockBlueprint {
             var section_height = Phaser.Math.RND.between( 1, 4);
             var x = _x + Phaser.Math.RND.between(0, 4);
             var y = _y + h;
-            if (h >= gully_y*6) {
+            if (h >= gully_y) {
+                console.log('Building gully at y:', y);
                 this.buildGully(_x - 9, y, 4, 7);
-                gully_y += 1;
+                gully_y += 6;
             }
             
             if (Phaser.Math.RND.between(0, 2) == 0) {
                 this.buildBranch(x - Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1), Phaser.Math.RND.between(3, 5), Phaser.Math.RND.between(1, 2));
             }
-            this.buildFoxtailPatch(x - 6, y-1, 4, section_height+2);
-            this.buildGiantCanePatch(x - 3, y-1, 6, section_height+2);
+            this.buildFoxtailPatch(x - 6, y-1, 4, section_height);
+            this.buildGiantCanePatch(x - 3, y-1, 6, section_height);
 
             this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.WATER.FILL_, x, y, section_width, section_height);
 
@@ -730,7 +731,7 @@ export default class BlockBlueprint {
 
 
 
-            this.buildGiantCanePatch(x + section_width - 2, y-1, 6, section_height+2);
+            this.buildGiantCanePatch(x + section_width - 2, y-1, 6, section_height);
 
             if (Phaser.Math.RND.between(0, 2) == 0) {
                 this.buildRock(x + section_width - Phaser.Math.RND.between(2, 6), y + Phaser.Math.RND.between(0, section_height - 1), true);

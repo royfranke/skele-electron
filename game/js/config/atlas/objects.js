@@ -564,6 +564,49 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          BACK_SHELF_BODEGA: {
+        name: 'Bodega Back Shelf',
+        slug: 'BACK_SHELF_BODEGA', 
+        type: 'ANIM_DECOR',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:24,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:24
+        },
+        offset: {
+          x:0, 
+          y:32
+        },
+        varieties: 4,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'ON',        states: [                {
+              name: 'ON',
+              transition: 'false',
+              frames: ['BACK_SHELF_BODEGA-1','BACK_SHELF_BODEGA-2','BACK_SHELF_BODEGA-3','BACK_SHELF_BODEGA-4',]},],
+
+          interactions: {
+                                  },
+    },
           BEADED_CURTAIN_BODEGA: {
         name: 'Bodega Beaded Curtain',
         slug: 'BEADED_CURTAIN_BODEGA', 
@@ -3130,18 +3173,18 @@ const OBJECTS = {
         sprite: {
           h:55, 
           w:38,
-          x:0, 
+          x:-8, 
           y:0
         },
         size: {
           h:55, 
-          w:38
+          w:32
         },
         offset: {
-          x:0, 
+          x:8, 
           y:0
         },
-        varieties: 4,
+        varieties: 12,
         solid: 1,
         portal: 0,
         loot: [
@@ -3152,28 +3195,36 @@ const OBJECTS = {
             name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
           }, {
             name: 'LOOK INSIDE', stateTrigger: 'LOOKING_INSIDE', validStates: ['OPEN']
+          }, {
+            name: 'START DRYER', stateTrigger: 'DRYER_ON', validStates: ['CLOSED']
           }],
-        default_state: 'CLOSED',        states: [            {
+        default_state: 'CLOSED',        states: [                {
+              name: 'DRYER_ON',
+              transition: 'false',
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-1','LAUNDRY_COMMERCIAL_DRYER-2','LAUNDRY_COMMERCIAL_DRYER-3','LAUNDRY_COMMERCIAL_DRYER-4','LAUNDRY_COMMERCIAL_DRYER-5','LAUNDRY_COMMERCIAL_DRYER-6','LAUNDRY_COMMERCIAL_DRYER-7','LAUNDRY_COMMERCIAL_DRYER-8',]},                {
+              name: 'DRYER_OFF',
+              transition: 'CLOSED',
+              frames: []},            {
               name: 'CLOSED',
               transition: 'false',
-              frames: ['LAUNDRY_COMMERCIAL_DRYER-1',]
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-9',]
               },               {
               name: 'OPENING',
               transition: 'OPEN',
-              frames: ['LAUNDRY_COMMERCIAL_DRYER-1', 'LAUNDRY_COMMERCIAL_DRYER-2', 'LAUNDRY_COMMERCIAL_DRYER-3', 'LAUNDRY_COMMERCIAL_DRYER-4', ]
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-9', 'LAUNDRY_COMMERCIAL_DRYER-10', 'LAUNDRY_COMMERCIAL_DRYER-11', 'LAUNDRY_COMMERCIAL_DRYER-12', ]
               },            {
               name: 'OPEN',
               transition: 'false',
-              frames: ['LAUNDRY_COMMERCIAL_DRYER-4',]
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-12',]
               },               {
               name: 'CLOSING',
               transition: 'CLOSED',
-              frames: ['LAUNDRY_COMMERCIAL_DRYER-4', 'LAUNDRY_COMMERCIAL_DRYER-3', 'LAUNDRY_COMMERCIAL_DRYER-2', 'LAUNDRY_COMMERCIAL_DRYER-1', ]
+              frames: ['LAUNDRY_COMMERCIAL_DRYER-12', 'LAUNDRY_COMMERCIAL_DRYER-11', 'LAUNDRY_COMMERCIAL_DRYER-10', 'LAUNDRY_COMMERCIAL_DRYER-9', ]
               },                           {
               name: 'LOOKING_INSIDE',
               transition: 'OPEN',
-              frames: ['LAUNDRY_COMMERCIAL_DRYER-3', ]
-              },],            slots: 0,
+              frames: []
+              },                           ],            slots: 0,
             items: [],
 
           interactions: {
@@ -7836,6 +7887,86 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          LIBRARY_BOOK_SHELF_1: {
+        name: 'Library Bookshelf',
+        slug: 'LIBRARY_BOOK_SHELF_1', 
+        type: 'BOOK_SHELF',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:36
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          LIBRARY_BOOK_SHELF_2: {
+        name: 'Library Bookshelf 2',
+        slug: 'LIBRARY_BOOK_SHELF_2', 
+        type: 'BOOK_SHELF',
+        bounding: {
+          h:3, 
+          w:2
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:32,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:12, 
+          w:32
+        },
+        offset: {
+          x:0, 
+          y:36
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           TABLE_WOOD_DECOR: {
         name: 'Lightly Decorative Wood Table',
         slug: 'TABLE_WOOD_DECOR', 
@@ -9778,6 +9909,78 @@ const OBJECTS = {
           y:2
         },
         depth: -16,
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:20, 
+          w:60
+        },
+        offset: {
+          x:0, 
+          y:22
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT','FACING_EAST','FACING_NORTH','FACING_SOUTH','FACING_WEST']
+          }, {
+            name: 'CURL UP ON', stateTrigger: 'CURL_UP', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_WEST',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'SITTING',
+              transition: 'false',
+              frames: []
+              },                           {
+              name: 'CURL_UP',
+              transition: 'SLEEPING',
+              frames: []
+              },],
+
+          interactions: {
+                                  },
+    },
+          SOFA_PLASTIC_COVER: {
+        name: 'Plastic Covered Sofa',
+        slug: 'SOFA_PLASTIC_COVER', 
+        type: 'SOFA',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        depth: 0,
         sprite: {
           h:48, 
           w:64,
@@ -12552,6 +12755,86 @@ const OBJECTS = {
           interactions: {
                                   },
     },
+          STORE_BOOK_COUNTER_LONG: {
+        name: 'Store Book Counter Long',
+        slug: 'STORE_BOOK_COUNTER_LONG', 
+        type: 'STORE_COUNTER',
+        bounding: {
+          h:4, 
+          w:1
+        },
+        base: {
+          h:4, 
+          w:1,
+          x:0, 
+          y:0
+        },
+        depth: 0,
+        sprite: {
+          h:64, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:56, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:8
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          STORE_BOOK_COUNTER_SHORT: {
+        name: 'Store Book Counter Short',
+        slug: 'STORE_BOOK_COUNTER_SHORT', 
+        type: 'STORE_COUNTER',
+        bounding: {
+          h:2, 
+          w:1
+        },
+        base: {
+          h:1, 
+          w:1,
+          x:0, 
+          y:1
+        },
+        depth: 0,
+        sprite: {
+          h:32, 
+          w:16,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:16, 
+          w:16
+        },
+        offset: {
+          x:0, 
+          y:16
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [],
+        default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
           EXT_WINDOW_STORE_4_CLAD_GREEN: {
         name: 'Store Half Windows Green Clad',
         slug: 'EXT_WINDOW_STORE_4_CLAD_GREEN', 
@@ -13268,6 +13551,78 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          SOFA_STRIPED: {
+        name: 'Striped Sofa',
+        slug: 'SOFA_STRIPED', 
+        type: 'SOFA',
+        bounding: {
+          h:3, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:4,
+          x:0, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:48, 
+          w:64,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:20, 
+          w:60
+        },
+        offset: {
+          x:0, 
+          y:22
+        },
+        varieties: 1,
+        solid: 1,
+        portal: 0,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'SIT', stateTrigger: 'SITTING', validStates: ['DEFAULT','FACING_EAST','FACING_NORTH','FACING_SOUTH','FACING_WEST']
+          }, {
+            name: 'CURL UP ON', stateTrigger: 'CURL_UP', validStates: ['DEFAULT']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'DEFAULT',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_EAST',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_NORTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_SOUTH',
+              transition: 'false',
+              frames: []
+              }, {
+              name: 'FACING_WEST',
+              transition: 'false',
+              frames: []
+              },               {
+              name: 'SITTING',
+              transition: 'false',
+              frames: []
+              },                           {
+              name: 'CURL_UP',
+              transition: 'SLEEPING',
+              frames: []
+              },],
 
           interactions: {
                                   },

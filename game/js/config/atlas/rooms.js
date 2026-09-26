@@ -87,7 +87,7 @@ delivers: [
             },
                             front_room: 1,
         roomData: { 
-                featureList: [{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA","params":{}},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN","params":{}},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW","params":{}},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER","params":{}},{"x":"0","y":"8","slug":"BASKET_RACK","params":{}},{"x":"0","y":"10","slug":"CONE_UPRIGHT","params":{}},{"x":"1","y":"8","slug":"CARDBOARD_FLOOR_MAT","params":{}},{"x":"0","y":"3","slug":"STORE_COUNTER_BONEDEGA_1","params":{}},{"x":"3","y":"3","slug":"STORE_COUNTER_BONEDEGA_3","params":{}},{"x":"1","y":"3","slug":"STAFFED_COUNTER_BONEDEGA","params":{}},{"x":"4","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"4","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"8","y":"9","slug":"MILK_CRATE","params":{}},{"x":"11","y":"7","slug":"FAN_OSCILLATING","params":{}},{"x":"1","y":"11","slug":"EXT_DOOR_STORE_BLACK","params":{"portal":{"room_id":-1}}},{"x":"0","y":"7","slug":"SIGN_RED_ARROW_DOWN_SMALL","params":{}},{"x":"1","y":"8","slug":"DUCT_TAPE_FLOOR_LINE","params":{}},{"x":"4","y":"10","slug":"CONE_FALLEN","params":{}},{"x":"1","y":"11","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"5","y":"3","slug":"BEADED_CURTAIN_BODEGA","params":{}},{"x":"8","y":"3","slug":"INT_DOOR_GREEN_SIGN","params":{}},{"x":"0","y":"7","slug":"CARDBOARD_DOWN_ARROW","params":{}},{"x":"10","y":"4","slug":"COMMERCIAL_FREEZER","params":{}},{"x":"0","y":"8","slug":"BASKET_RACK","params":{}},{"x":"0","y":"10","slug":"CONE_UPRIGHT","params":{}},{"x":"1","y":"8","slug":"CARDBOARD_FLOOR_MAT","params":{}},{"x":"0","y":"3","slug":"STORE_COUNTER_BONEDEGA_1","params":{}},{"x":"3","y":"3","slug":"STORE_COUNTER_BONEDEGA_3","params":{}},{"x":"1","y":"3","slug":"STAFFED_COUNTER_BONEDEGA","params":{}},{"x":"4","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"9","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"4","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"6","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"8","y":"9","slug":"MILK_CRATE","params":{}},{"x":"11","y":"7","slug":"FAN_OSCILLATING","params":{}},{"x":"1","y":"11","slug":"EXT_DOOR_STORE_BLACK","params":{"portal":{"room_id":-1}}},{"x":"0","y":"7","slug":"SIGN_RED_ARROW_DOWN_SMALL","params":{}},{"x":"1","y":"8","slug":"DUCT_TAPE_FLOOR_LINE","params":{}},{"x":"4","y":"10","slug":"CONE_FALLEN","params":{}},{"x":"1","y":"0","slug":"BACK_SHELF_BODEGA","params":{}},{"x":"1","y":"11","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
                 removalList: [{"x":"7","y":"0"},{"x":"8","y":"0"},{"x":"9","y":"0"},{"x":"10","y":"0"},{"x":"11","y":"0"},{"x":"7","y":"1"},{"x":"8","y":"1"},{"x":"9","y":"1"},{"x":"10","y":"1"},{"x":"11","y":"1"},{"x":"7","y":"2"},{"x":"8","y":"2"},{"x":"9","y":"2"},{"x":"10","y":"2"},{"x":"11","y":"2"},{"x":"7","y":"3"},{"x":"8","y":"3"},{"x":"9","y":"3"},{"x":"10","y":"3"},{"x":"11","y":"3"},{"x":"0","y":"11"},{"x":"3","y":"11"},{"x":"4","y":"11"},{"x":"5","y":"11"},{"x":"6","y":"11"},{"x":"7","y":"11"},{"x":"8","y":"11"},{"x":"9","y":"11"},{"x":"10","y":"11"},{"x":"11","y":"11"}],
                 itemList: []
@@ -414,7 +414,7 @@ buys: [
             },
                             front_room: 13,
         roomData: { 
-                featureList: [{"x":"1","y":"-1","slug":"COUNTERTOP_CORNER_BROWN"},{"x":"0","y":"-1","slug":"COUNTERTOP_S_BROWN"},{"x":"0","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"1","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"2","y":"1","slug":"UNDERCOUNTER_CABINET_W_DARK_WOOD"},{"x":"0","y":"4","slug":"STORE_WINDOW_COUNTER_4"},{"x":"4","y":"4","slug":"INT_DOOR_GREEN_SIGN"},{"x":"1","y":"4","slug":"ADDING_MACHINE"},{"x":"0","y":"8","slug":"EXT_DOOR_STORE_METAL","params":{"portal":{"room_id":-1}}},{"x":"0","y":"8","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"1","y":"-1","slug":"COUNTERTOP_CORNER_BROWN"},{"x":"0","y":"-1","slug":"COUNTERTOP_S_BROWN"},{"x":"0","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"1","y":"0","slug":"UNDERCOUNTER_CABINET_S_DARK_WOOD"},{"x":"2","y":"1","slug":"UNDERCOUNTER_CABINET_W_DARK_WOOD"},{"x":"0","y":"4","slug":"STORE_WINDOW_COUNTER_4"},{"x":"4","y":"4","slug":"INT_DOOR_GREEN_SIGN"},{"x":"1","y":"4","slug":"ADDING_MACHINE"},{"x":"0","y":"8","slug":"EXT_DOOR_STORE_METAL","params":{"portal":{"room_id":-1}}},{"x":"4","y":"6","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"0","y":"8","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
                 removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"},{"x":"3","y":"1"},{"x":"4","y":"1"},{"x":"5","y":"1"},{"x":"4","y":"2"},{"x":"5","y":"2"},{"x":"4","y":"3"},{"x":"5","y":"3"},{"x":"4","y":"4"},{"x":"5","y":"4"},{"x":"2","y":"8"},{"x":"3","y":"8"},{"x":"4","y":"8"},{"x":"5","y":"8"}],
                 itemList: []
@@ -726,7 +726,7 @@ sells: [
     overallHeight: 14,
     overallWidth: 8,
     floorSlug: "PLANK.BROWN_",
-    wallSlug: "BRICK.RED_WEATHERED_",
+    wallSlug: "CEMENT.GREEN_WORN_",
         listing: { slug: "BOOKSTORE",
 name: "Dead Language Bookstore",
 listingName: "Dead Language Bookstore",
@@ -784,10 +784,10 @@ buys: [
             },
                             front_room: 20,
         roomData: { 
-                featureList: [{"x":"0","y":"1","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"0","y":"4","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"0","y":"7","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"3","y":"11","slug":"BOOK_CART","params":{}},{"x":"3","y":"0","slug":"INT_DOOR_RED_BROWN_SIGN","params":{}},{"x":"2","y":"11","slug":"BASKET_RACK","params":{}},{"x":"5","y":"-1","slug":"PAPER_SIGN_POSTED","params":{}},{"x":"2","y":"10","slug":"SIGN_RED_ARROW_DOWN_SMALL","params":{}},{"x":"0","y":"11","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"11","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"3","y":"11","slug":"BOOK_CART","params":{}},{"x":"3","y":"0","slug":"INT_DOOR_RED_BROWN_SIGN","params":{}},{"x":"2","y":"11","slug":"BASKET_RACK","params":{}},{"x":"5","y":"-1","slug":"PAPER_SIGN_POSTED","params":{}},{"x":"2","y":"10","slug":"SIGN_RED_ARROW_DOWN_SMALL","params":{}},{"x":"0","y":"11","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"4","slug":"LIBRARY_BOOK_SHELF_1","params":{}},{"x":"0","y":"7","slug":"LIBRARY_BOOK_SHELF_2","params":{}},{"x":"0","y":"0","slug":"LIBRARY_BOOK_SHELF_2","params":{}},{"x":"5","y":"7","slug":"STORE_BOOK_COUNTER_SHORT","params":{}},{"x":"4","y":"4","slug":"STORE_BOOK_COUNTER_LONG","params":{}},{"x":"0","y":"11","slug":"FRONTDOOR","params":{}}],
                 recipeList: [{"x":"0","y":"10","slug":"CARPET.GREEN_"},{"x":"1","y":"10","slug":"CARPET.GREEN_"},{"x":"0","y":"11","slug":"CARPET.GREEN_"},{"x":"1","y":"11","slug":"CARPET.GREEN_"}],
                 removalList: [{"x":"3","y":"0"},{"x":"4","y":"0"},{"x":"5","y":"0"}],
-                itemList: []
+                itemList: [{"x":"2","y":"0","slug":"BROOM"}]
          }
 }
   };
