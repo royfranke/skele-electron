@@ -1,5 +1,6 @@
 
 import PRELOAD_SOUND from "../config/atlas/audio.js";
+import { getVolume } from "../settings/settings-store.js";
 /* global Phaser */
 /*
  *  HUD sound effects
@@ -13,8 +14,7 @@ export default class HudSound {
     }
 
     play (sound_slug, repeat=0, repeat_delay=0) {
-        //var volume = this.scene.manager.settings.getSetting('volume_ui');
-        var volume = 1;
+        var volume = getVolume(this.scene, 'FX');
         var self = this;
         PRELOAD_SOUND.forEach(function (sound, index) {
             if (sound.NAME === sound_slug) {

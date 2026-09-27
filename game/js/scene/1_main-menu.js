@@ -16,7 +16,6 @@ export default class MainMenuScene extends Phaser.Scene {
     }
 
     create() {
-        console.log("Main Menu Scene");
         this.version = '1.2.3';
         this.data.settings = this.cache.json.get('SETTINGSCONFIG');
         this.ITEMS = ITEMS;

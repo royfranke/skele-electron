@@ -1,5 +1,4 @@
 import AppState from "./app-state.js";
-import AppMenu from "./app-menu.js";
 import AppInput from "./app-input.js";
 import AppCamera from "./app-camera.js";
 import AppView from "./app-view.js";
@@ -23,7 +22,6 @@ export default class AppManager {
         this.state = this.appState.getStateConfig();
         this.camera = new AppCamera(this.scene, this.state);
         this.appView = new AppView(this.scene, this.getView(),this.state.name);
-        this.initializeMenu();
         this.initializeInput();
         this.initializeSaveManager();
         this.startScene();
@@ -33,21 +31,6 @@ export default class AppManager {
             this.camera.wake();
         }, this);
     }
-
-    preloadGame (data) {
-        this.appView.selectedLoad(this.menu.selected, data);
-
-    }
-
-    initializeMenu () {
-        if (this.state.menu) {
-            this.menu = new AppMenu(this.scene, this.state.name, this.camera.view);
-        }
-        else {
-            this.menu = null;
-        }
-    }
-
 
     initializeInput () {
         if (this.state.input) {
@@ -127,15 +110,18 @@ export default class AppManager {
         if (this.input != null) {
             this.input.update();
         }
-        if (this.menu != null) {
+        if (this.input != null && this.state.name == 'LOAD') {
             for (const [key, value] of Object.entries(this.input.INPUT)) {
-                if (this.input.INPUT[key].TAP) {
-                    this.menu.input(key);
+                if (value.TAP) {
+                    this.appView.handleLoadInput(key);
                 }
             }
-            if (this.state.name == 'LOAD' && this.menu.selected != this.menu.last_selected) {
-                this.menu.setSelected(this.menu.selected);
-                this.appView.selectLoad(this.menu.selected);
+        }
+        if (this.input != null && this.state.name == 'SETTINGS') {
+            for (const [key, value] of Object.entries(this.input.INPUT)) {
+                if (value.TAP) {
+                    this.appView.handleSettingsInput(key);
+                }
             }
         }
     }

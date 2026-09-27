@@ -13,6 +13,7 @@ export default class AppInput {
     this.available_initialized = false;
     var config = this.scene.cache.json.get('SETTINGSCONFIG');
     this.configJSON = config.INPUT;
+    this.bindings = this.configJSON.CUSTOM || this.configJSON.DEFAULT;
 
   }
   
@@ -20,7 +21,7 @@ export default class AppInput {
   initializeAppKeys () {
     const { KeyCodes } = Phaser.Input.Keyboard;
 
-    for (const [key, value] of Object.entries(this.configJSON.CUSTOM)) {
+    for (const [key, value] of Object.entries(this.bindings)) {
       this.config[key] = KeyCodes[value];
     }
 
@@ -43,6 +44,30 @@ export default class AppInput {
         this.INPUT[key] = {TAP: false, HOLD: false};
     }
     this.available_initialized = true;
+  }
+
+  /* Re-reads bindings so a rebind takes effect without leaving the scene. */
+  refreshBindings () {
+    const had_app_keys = this.initialized;
+    const had_avail_keys = this.available_initialized;
+
+    this.scene.input.keyboard.removeAllKeys(true);
+    this.INPUT = {};
+    this.config = {};
+    this.available = {};
+    this.initialized = false;
+    this.available_initialized = false;
+
+    const config = this.scene.cache.json.get('SETTINGSCONFIG');
+    this.configJSON = config.INPUT;
+    this.bindings = this.configJSON.CUSTOM || this.configJSON.DEFAULT;
+
+    if (had_app_keys) {
+      this.initializeAppKeys();
+    }
+    if (had_avail_keys) {
+      this.initializeAvailableKeys();
+    }
   }
 
   update() {

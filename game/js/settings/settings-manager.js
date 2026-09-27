@@ -1,5 +1,7 @@
 import SettingsFactory from "./settings-factory.js";
 import SettingsState from "./settings-state.js";
+import SettingsView from "./settings-view.js";
+import { saveSettings as persistSettings } from "./settings-store.js";
 
 
 /* Settings Manager Class */
@@ -10,31 +12,7 @@ export default class SettingsManager {
         this.scene = scene;
         this.settingsState = new SettingsState();
         this.factory = new SettingsFactory(scene);
-        this.config = {
-            "INPUT": this.factory.getSettingsData("input"),
-            "AUDIO": this.factory.getSettingsData("audio"),
-            "DISPLAY": this.factory.getSettingsData("display"),
-            "CONTENT": this.factory.getSettingsData("content")
-        };
-
-        this.display = {
-            input: {
-                frame: "BLOCK_SHALLOW_GREEN_FRAME",
-                block: "BLOCK_MID_LILAC_BORDER",
-            },
-            audio: {
-                frame: "BLOCK_SHALLOW_DARK_FRAME",
-                block: "BLOCK_MID_LILAC_BORDER",
-            },
-            display: {
-                frame: "BLOCK_SHALLOW_DARK_FRAME",
-                block: "BLOCK_MID_LILAC_BORDER",
-            },
-            content: {
-                frame: "BLOCK_SHALLOW_DARK_FRAME",
-                block: "BLOCK_MID_LILAC_BORDER",
-            }
-        }
+        this.view = null;
     }
 
     getState () {
@@ -59,29 +37,31 @@ export default class SettingsManager {
         return {data: data,type: type};
     }
 
-    saveSettings (type) {
-        let data = this.factory.getSettingsData(type);
-        this.scene.saveSettingsData(data);
+    saveSettings () {
+        return persistSettings(this.scene);
+    }
+
+    getSetting (key, type="input") {
+        return this.factory.getSetting(key, type);
     }
 
     setSetting (key, value, type) {
-        this.factory.setSetting(key, value, type);
+        return this.factory.setSetting(key, value, type);
     }
 
     resetSettings (type) {
-        this.factory.resetSettings(type);
+        return this.factory.resetSettings(type);
     }
 
-    setView (_x, _y, width, height, type="input") {
-        var slot_slice = this.scene.add.nineslice(_x,_y, 'UI', this.display[type].block, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
-        var slot_highlight = this.scene.add.nineslice(_x,_y, 'UI', this.display[type].frame, width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(true);
-        var settings = this.config[type.toUpperCase()].data.CUSTOM;
-        console.log(settings);
-        /// Do for each key value
-        for (let key in settings) {
-            let value = settings[key];
-            let text = this.scene.add.bitmapText(_x + 8, _y + 8, 'SkeleTalk', key + ': ' + value, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
-            _y += 16;
+    setView (_x, _y, width, height, view) {
+        this.view = new SettingsView(this.scene, this, view);
+        this.view.create(_x, _y, width, height);
+        return this.view;
+    }
+
+    input (key) {
+        if (this.view != null) {
+            this.view.input(key);
         }
     }
 

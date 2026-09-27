@@ -1,4 +1,5 @@
 import PreloadManager from '../preload/preload-manager.js';
+import { loadSettings } from '../settings/settings-store.js';
 /**
  * Boot Scene
  */
@@ -16,8 +17,12 @@ export default class BootScene extends Phaser.Scene {
     create() {
         this.preload.initializeAnim();
         console.log("Boot Scene");
-        this.scene.stop("Boot");
-        this.scene.start("Splash");
+
+        // Settings must be merged into the cache before any scene reads them.
+        loadSettings(this).then(() => {
+            this.scene.stop("Boot");
+            this.scene.start("Splash");
+        });
     }
 
     update () {

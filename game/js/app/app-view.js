@@ -1,5 +1,6 @@
 
 import SettingsManager from "../settings/settings-manager.js";
+import HudSound from "../hud/hud-sound.js";
 /*
  * Manages application view
  * SPLASH | MAIN | SETTINGS | NEW | LOAD | GAME | TUTORIAL
@@ -12,6 +13,7 @@ export default class AppView {
         this.view = view;
         this.tip = null;
         this.version = '1.3.0';
+        this.sound = new HudSound(scene);
         this.create(state_name);
     }
 
@@ -63,8 +65,13 @@ export default class AppView {
         var _y = this.view.top + this.view.margin.top;
         var width = this.view.right - _x - this.view.margin.right;
 
-        this.settingsManager.setView(_x,_y, width, height, 'content');
-       //this.settingsManager.saveSettings('input');
+        this.settingsManager.setView(_x,_y, width, height, this.view);
+    }
+
+    handleSettingsInput (key) {
+        if (this.settingsManager != null) {
+            this.settingsManager.input(key);
+        }
     }
 
     addCootieCatcher(_x,_y) {
@@ -118,60 +125,31 @@ export default class AppView {
         var width = this.view.right - left - this.view.margin.right;
 
         this.slots = [];
-        var SAVES = [];
+        this.selected = 0;
+        this.loading = false;
+        this.saves = [];
         for (var i=0;i<3;i++) {
-            if (this.scene.cache.json.get('SLOT_'+i)) {
-                SAVES.push(this.scene.cache.json.get('SLOT_'+i));
-            }
+            this.saves.push(this.scene.cache.json.get('SLOT_'+i) || null);
         }
+
         for (var i=0;i<3;i++) {
             var top = this.view.top + this.view.margin.top + ((height + 4) *i);
             var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
             var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_RED_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
 
-            
             // Mouse/Touch Input
-            slot_slice.setInteractive(); 
-            if (i === 0) {
-                slot_slice.on('pointerover', function (pointer) {
-                    // This function will be called when the menu block is clicked or tapped
-                    self.scene.app.menu.setSelected(1);
-                });
-                slot_slice.on('pointerdown', function (pointer) {
-                    // This function will be called when the menu block is clicked or tapped
-                    self.scene.app.menu.select(1);
-                });
-            }
-            if (i === 1) {
-                slot_slice.on('pointerover', function (pointer) {
-                    // This function will be called when the menu block is clicked or tapped
-                    self.scene.app.menu.setSelected(2);
-                });
-                slot_slice.on('pointerdown', function (pointer) {
-                    // This function will be called when the menu block is clicked or tapped
-                    self.scene.app.menu.select(2);
-                });
-            }
-            if (i === 2) {
-                slot_slice.on('pointerover', function (pointer) {
-                    // This function will be called when the menu block is clicked or tapped
-                    self.scene.app.menu.setSelected(3);
-                });
-                slot_slice.on('pointerdown', function (pointer) {
-                    // This function will be called when the menu block is clicked or tapped
-                    self.scene.app.menu.select(3);
-                });
-            }
-            
-            
+            let slot_number = i + 1;
+            slot_slice.setInteractive();
+            slot_slice.on('pointerover', () => self.selectLoad(slot_number));
+            slot_slice.on('pointerdown', () => self.chooseLoad(slot_number));
 
-            if (SAVES.length > i) {
-                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+SAVES[i].TIME.DAY + ', ' + SAVES[i].SAVE.DATE, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+            if (this.saves[i] != null) {
+                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+this.saves[i].TIME.DAY + ', ' + this.saves[i].SAVE.DATE, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
 
                 var _x = left + this.view.margin.left;
                 var _y = top + this.view.margin.top*2;
                 
-                var slot_headline = this.revealMarquee(SAVES[i].SAVE.HEADLINE,_x,_y);
+                var slot_headline = this.revealMarquee(this.saves[i].SAVE.HEADLINE,_x,_y);
             }
             else {
                 var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day ???', 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
@@ -180,6 +158,45 @@ export default class AppView {
 
             this.slots.push({slice: slot_slice, selector: slot_highlight,slot_byline: slot_byline, slot_headline: slot_headline});
         }
+    }
+
+    /* Keyboard driver for the load screen; slots are numbered 1-3. */
+    handleLoadInput (key) {
+        if (this.loading) {
+            return;
+        }
+
+        switch (key) {
+            case 'UP':
+                this.selectLoad(this.selected <= 1 ? this.slots.length : this.selected - 1);
+                this.sound.play('MENU_INPUT');
+            break;
+            case 'DOWN':
+                this.selectLoad(this.selected >= this.slots.length ? 1 : this.selected + 1);
+                this.sound.play('MENU_INPUT');
+            break;
+            case 'SELECT':
+                this.chooseLoad(this.selected);
+            break;
+            case 'BACK':
+                this.scene.app.endScene('MAIN');
+            break;
+        }
+    }
+
+    chooseLoad (selected) {
+        if (this.loading || selected < 1 || selected > this.slots.length) {
+            return;
+        }
+
+        var data = this.saves[selected - 1];
+        if (data == null) {
+            return;
+        }
+
+        this.loading = true;
+        this.sound.play('MENU_SELECT');
+        this.selectedLoad(selected, data);
     }
 
     getMarqueeFill (length,blank=false) {
@@ -221,6 +238,11 @@ export default class AppView {
 
     selectLoad (selected) {
         /// Highlights save slot on load menu
+        if (selected === this.selected) {
+            return;
+        }
+        this.selected = selected;
+        this.playCootieCatcher();
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
                 this.slots[i].slice.setTexture('UI','BLOCK_MID_LILAC_FAT_BORDER');
@@ -239,7 +261,6 @@ export default class AppView {
         console.log("Selected slot "+selected); 
         var self = this;
         // Uses a tween to drop the slots not selected
-        this.scene.app.menu.disappearMenu();
 
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {

@@ -60,7 +60,7 @@ export default class HudPayment extends HudCommon {
             this.inputSelect();
         });
 
-        var cancel_button = this.makeButton(this.position.pay_button.x - (button.text.displayWidth + 40), this.position.pay_button.y,'CANCEL', 'Z', 'RED');
+        var cancel_button = this.makeBackButton(this.position.pay_button.x - (button.text.displayWidth + 40), this.position.pay_button.y, 'CANCEL');
         cancel_button.click_area.on('pointerdown', () => {
             this.inputBack();
         });

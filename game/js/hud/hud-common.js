@@ -1,4 +1,5 @@
 import HudFactory from "./hud-factory.js";
+import { getSetting } from "../settings/settings-store.js";
 
 /*
  * Handles common HUD functions, connecting to factory
@@ -8,10 +9,10 @@ import HudFactory from "./hud-factory.js";
 
 export default class HudCommon {
     
-        constructor(scene) {
+        constructor(scene, view = scene.app.camera.view) {
             this.scene = scene;
             this.factory = new HudFactory(this.scene);
-            this.view = this.scene.app.camera.view;
+            this.view = view;
             this.initialize();
         }
 
@@ -43,7 +44,7 @@ export default class HudCommon {
         }
 
         makeBackButton(_x, _y, text = 'CLOSE') {
-            return this.makeButton(_x, _y, text, 'Z', 'RED');
+            return this.makeButton(_x, _y, text, getSetting(this.scene, 'INPUT', 'BACK'), 'RED');
         }
 
         makeSlip(_x,_y,text,button,origin=1) {

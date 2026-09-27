@@ -16,10 +16,6 @@ const SETTINGS_STATES = {
         name: 'AUDIO',
         display: 'Sound'
     },
-    DISPLAY: {
-        name: 'DISPLAY',
-        display: 'Display'
-    },
     CONTENT: {
         name: 'CONTENT',
         display: 'Game Content'

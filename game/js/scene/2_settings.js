@@ -1,4 +1,6 @@
 import AppManager from "../app/app-manager.js";
+import HudCommon from "../hud/hud-common.js";
+
 /**
  * Settings
  */
@@ -7,27 +9,31 @@ export default class SystemSettingsScene extends Phaser.Scene {
         super("System Settings");
     }
 
+    init (data) {
+        this.data = data;
+    }
+
     create() {
-        
+        this.data.settings = this.cache.json.get('SETTINGSCONFIG');
         this.app = new AppManager(this,'SETTINGS');
+        this.camera = this.app.camera;
+        this.hud = new HudCommon(this);
+        this.cursor_hover = { cursor: 'url(assets/images/cursor-hover.png), pointer' };
+        this.assembleBackground();
+        this.input.setDefaultCursor('url(assets/images/cursor.png), pointer');
+        
     }
 
     update() {
         this.app.update();
     }
 
-    saveSettingsData(data) {
-        // Replace `data` and `slot` with the actual data and slot you want to save
-        console.log("I'm going to call 'save-settings'");
-        window.api.invoke('save-settings', data)
-            .then(function(res) {
-                console.log(res); // will print "This worked!" to the browser console
-            })
-            .catch(function(err) {
-                console.error(err); // will print "This didn't work!" to the browser console.
-            });
-    }
+        assembleBackground() {
+        let background = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BAG_UNFOCUSED');
+        background.setDepth(1);
 
-    
+        let background_frame = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_SHALLOW_RED_EDGE_FRAME');
+
+    }
 
 }

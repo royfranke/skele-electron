@@ -7,6 +7,80 @@ const fs = require('fs')
 
 const CHUNKS_DIR = path.join(__dirname, 'game', 'assets', 'chunks')
 const PORTAL_INDEX_FILE = 'portal_index.json'
+const SETTINGS_DEFAULTS_FILE = path.join(__dirname, 'game', 'data', 'config_settings.json')
+const SETTINGS_FILE = 'settings.json'
+
+let settingsDefaultsCache = null
+
+function settingsFilePath() {
+  return path.join(app.getPath('userData'), SETTINGS_FILE)
+}
+
+async function readSettingsDefaults() {
+  if (settingsDefaultsCache) {
+    return settingsDefaultsCache
+  }
+
+  const raw = await fs.promises.readFile(SETTINGS_DEFAULTS_FILE, 'utf8')
+  settingsDefaultsCache = JSON.parse(raw)
+  return settingsDefaultsCache
+}
+
+// Overrides arrive from the renderer, so every key/value is checked against the
+// shipped defaults before it is written to disk.
+function sanitizeOverrides(defaults, incoming) {
+  const clean = {}
+
+  if (!incoming || typeof incoming !== 'object') {
+    return clean
+  }
+
+  for (const category of Object.keys(defaults)) {
+    const categoryDefaults = defaults[category] && defaults[category].DEFAULT
+    const submitted = incoming[category]
+
+    if (!categoryDefaults || !submitted || typeof submitted !== 'object') {
+      continue
+    }
+
+    const available = defaults[category] && defaults[category].AVAILABLE
+    const categoryClean = {}
+
+    for (const [key, value] of Object.entries(submitted)) {
+      if (!Object.prototype.hasOwnProperty.call(categoryDefaults, key)) {
+        continue
+      }
+
+      const fallback = categoryDefaults[key]
+      if (typeof value !== typeof fallback) {
+        continue
+      }
+
+      if (typeof fallback === 'number') {
+        if (!Number.isFinite(value)) {
+          continue
+        }
+        // Every numeric setting today is a 0-10 level.
+        categoryClean[key] = Math.min(10, Math.max(0, Math.round(value)))
+        continue
+      }
+
+      if (typeof fallback === 'string') {
+        if (available && !Object.prototype.hasOwnProperty.call(available, value)) {
+          continue
+        }
+      }
+
+      categoryClean[key] = value
+    }
+
+    if (Object.keys(categoryClean).length > 0) {
+      clean[category] = categoryClean
+    }
+  }
+
+  return clean
+}
 
 function resolveSlotChunkDir(slot) {
   if (slot === undefined || slot === null) {
@@ -28,16 +102,6 @@ function saveData(data) {
         return console.log(err);
     }
     console.log("The file was saved!");
-  }); 
-}
-
-function saveSettings(data) {
-  console.log("Trying to save settings... for "+data.type);
-  fs.writeFile("./game/data/config_"+(data.type.toLowerCase())+".json", JSON.stringify(data.data), function(err) {
-    if(err) {
-        return console.log(err);
-    }
-    return console.log(data.type+" settings were saved!");
   }); 
 }
 
@@ -77,8 +141,70 @@ ipcMain.handle('save-data', async (event, data) => {
   saveData(data); 
 });
 
-ipcMain.handle('save-settings', async (event, data) => {
-  saveSettings(data); 
+ipcMain.handle('load-settings', async () => {
+  let defaults
+
+  try {
+    defaults = await readSettingsDefaults()
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'defaults-unreadable',
+      code: error && error.code,
+      message: error && error.message,
+    }
+  }
+
+  const filePath = settingsFilePath()
+
+  try {
+    const raw = await fs.promises.readFile(filePath, 'utf8')
+    return { ok: true, data: sanitizeOverrides(defaults, JSON.parse(raw)), path: filePath }
+  } catch (error) {
+    if (error && error.code === 'ENOENT') {
+      return { ok: true, data: {}, path: filePath }
+    }
+
+    return {
+      ok: false,
+      reason: 'read-failed',
+      code: error && error.code,
+      message: error && error.message,
+      path: filePath,
+    }
+  }
+});
+
+ipcMain.handle('save-settings', async (_event, data) => {
+  let defaults
+
+  try {
+    defaults = await readSettingsDefaults()
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'defaults-unreadable',
+      code: error && error.code,
+      message: error && error.message,
+    }
+  }
+
+  const overrides = sanitizeOverrides(defaults, data && data.overrides)
+  const filePath = settingsFilePath()
+
+  try {
+    await fs.promises.mkdir(path.dirname(filePath), { recursive: true })
+    await fs.promises.writeFile(filePath, JSON.stringify(overrides, null, 2), 'utf8')
+    return { ok: true, data: overrides, path: filePath }
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'write-failed',
+      code: error && error.code,
+      message: error && error.message,
+      path: filePath,
+    }
+  }
 });
 
 ipcMain.handle('load-chunk', async (_event, data) => {

@@ -2,7 +2,7 @@ import STATES from "../config/settings-states.js";
 
 /*
  * Manages settings state 
- * NOT_LOADED | INPUT | AUDIO | DISPLAY | GAME CONTENT
+ * NOT_LOADED | INPUT | AUDIO | CONTENT
  */
 
 export default class SettingsState {

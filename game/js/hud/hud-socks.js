@@ -534,7 +534,7 @@ export default class HudSocks extends HudCourt {
         this.setMisses();
         this.drawSelected(0);
 
-        this.back_button = this.makeButton(this.boardView.x - 8, this.boardView.y,'CANCEL', 'Z', 'RED');
+        this.back_button = this.makeBackButton(this.boardView.x - 8, this.boardView.y, 'CANCEL');
 
 
         this.back_button.click_area.on('pointerdown', () => {
