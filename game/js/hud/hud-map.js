@@ -16,7 +16,7 @@ export default class HudMap extends HudSide {
         }
         this.keytip = 'MAP';
         this.colors = {
-            selected: 'ITEM_FOCUSED',
+            selected: 'BLOCK_MID_BEIGE_FAT_BORDER',
             normal: 'BAG_UNFOCUSED',
             frame:'BLOCK_SHALLOW_YELLOW_FRAME'
         };
