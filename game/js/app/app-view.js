@@ -39,15 +39,15 @@ export default class AppView {
         if (this.tip) {
             this.tip.destroy();
         }
-        var width = (this.view.width/3) - (this.view.margin.left + this.view.margin.right);
+        var width = (this.view.width) - (this.view.margin.left + this.view.margin.right);
         var _x = this.view.left + this.view.margin.left;
-        var _y = this.view.bottom - (this.view.margin.bottom);
+        var _y = this.view.top + (this.view.margin.top/2);
 
         var text_tip = this.scene.add.bitmapText(_x, _y, 'SkeleTalk',tip, 8).setOrigin(0).setScrollFactor(0).setDepth(1001).setMaxWidth(width - 16).setLineSpacing(10).setAlpha(0);
         text_tip.setTintFill(0xFFFFFF);
         var tween = this.scene.add.tween({
             targets: [text_tip],
-            y: '-='+(text_tip.displayHeight + 8),
+            y: '+='+(text_tip.displayHeight + 8),
             alpha: 1,
             duration: 1000,
             ease: 'Sine.easeInOut',
@@ -137,18 +137,41 @@ export default class AppView {
             slot_slice.on('pointerover', () => self.selectLoad(slot_number));
             slot_slice.on('pointerdown', () => self.chooseLoad(slot_number));
 
+            let slot_byline;
+            let slot_headline;
+            let slot_item_grid = [];
             if (this.saves[i] != null) {
-                var slot_byline = this.scene.add.bitmapText(slotLeft + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Day '+this.saves[i].TIME.DAY + ', ' + this.saves[i].SAVE.DATE, 8).setOrigin(0).setScrollFactor(0).setDepth(1000).setMaxWidth(width - this.view.margin.left*2);
+                slot_byline = this.scene.add.bitmapText(slotLeft + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Day '+this.saves[i].TIME.DAY + ', ' + this.saves[i].SAVE.DATE, 8).setOrigin(0).setScrollFactor(0).setDepth(1000).setMaxWidth(width - this.view.margin.left*2);
 
                 var _x = slotLeft + this.view.margin.left;
                 var _y = top + this.view.margin.top*2;
                 
-                var slot_headline = this.revealMarquee(this.saves[i].SAVE.HEADLINE,_x,_y).setMaxWidth(width - this.view.margin.left*2);
+                slot_headline = this.revealMarquee(this.saves[i].SAVE.HEADLINE,_x,_y).setMaxWidth(width - this.view.margin.left*2);
+
+                /// Draw a grid of six blocks with items towards the bottom of the slot
+                slot_item_grid = this.addItemGrid(slotLeft, top, width, height);
+
             }
 
-            this.slots.push({slice: slot_slice, selector: slot_highlight,slot_byline: slot_byline, slot_headline: slot_headline});
+            this.slots.push({slice: slot_slice, selector: slot_highlight,slot_byline: slot_byline, slot_headline: slot_headline, slot_item_grid: slot_item_grid});
         }
     }
+
+    addItemGrid (slotLeft, top, width, height) {
+        var slot_item_grid = [];
+        /// First draw empty blocks
+        let slot_width = 28;
+        let slot_height = 28;
+        /// Add a grid of 3 columns and 2 rows of item blocks
+        for (var row=0; row<2; row++) {
+            for (var col=0; col<4; col++) {
+                var nineslice = this.scene.add.nineslice(slotLeft+12 + (slot_width + 4) * col, (top + height - (slot_height + 8) * 2) + (slot_height + 4) * row, 'UI', 'BLOCK_SHALLOW_RED', slot_width, slot_height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999);
+                slot_item_grid.push(nineslice);
+            }
+        }
+        return slot_item_grid;
+    }
+    
 
     /* Keyboard driver for the load screen; slots are numbered 1-3. */
     handleLoadInput (key) {
@@ -253,33 +276,41 @@ export default class AppView {
         console.log("Selected slot "+selected); 
         var self = this;
         // Uses a tween to drop the slots not selected
-
+        /// Remove the back button by destroying its components
+        if (this.backButton) {
+            this.backButton.block.destroy();
+            this.backButton.text.destroy();
+            this.backButton.button.destroy();
+            this.backButton.button_text.destroy();
+            this.backButton.click_area.destroy();
+            this.backButton = null;
+        }
+        let tip = '"Don\'t forget to look both ways before you cross."';
+        this.drawTip(tip);
+        
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
                 this.slots[i].slice.setTexture('UI','BLOCK_MID_TWILIGHT_BORDER');
                 this.slots[i].selector.setVisible(false);
 
                 const tween = this.scene.add.tween({
-                    targets: [self.slots[i].slice, self.slots[i].selector,self.slots[i].slot_byline, self.slots[i].slot_headline],
+                    targets: [self.slots[i].slice, self.slots[i].selector, self.slots[i].slot_byline, self.slots[i].slot_headline, ...(self.slots[i].slot_item_grid || [])].filter(Boolean),
                     x: '+='+self.slots[i].slice.displayWidth,
                     alpha: 0,
                     duration: 1500,
                     ease: 'Sine.easeIn',
                     repeat: 0
                 });
-                let tip = '"Don\'t forget to look both ways before you cross."';
-                tween.on('complete', () => {
-                  self.drawTip(tip);
-                });
+
             }
             else {
                 if (selected > 0) {
                     this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_YELLOW_FAT_BORDER');
                     this.slots[selected - 1].selector.setVisible(true);
 
-                    this.slots[selected - 1].slot_headline.setText('loading...');
+                    this.slots[selected - 1].slot_headline.setText('waking up....');
                     const tween = this.scene.add.tween({
-                        targets: [self.slots[i].slice, self.slots[i].selector, self.slots[i].slot_byline, self.slots[i].slot_headline],
+                        targets: [self.slots[i].slice, self.slots[i].selector, self.slots[i].slot_byline, self.slots[i].slot_headline, ...(self.slots[i].slot_item_grid || [])].filter(Boolean),
                         x: '+=4',
                         y: '-=1',
                         duration: 750,
