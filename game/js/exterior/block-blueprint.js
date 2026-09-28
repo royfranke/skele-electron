@@ -711,7 +711,7 @@ export default class BlockBlueprint {
             var section_height = Phaser.Math.RND.between( 1, 4);
             var x = _x + Phaser.Math.RND.between(0, 4);
             var y = _y + h;
-            if (h >= gully_y) {
+            if (h >= gully_y && h + 7 <= height) {
                 console.log('Building gully at y:', y);
                 this.buildGully(_x - 9, y, 4, 7);
                 gully_y += 6;
@@ -744,9 +744,9 @@ export default class BlockBlueprint {
 
     buildBridge(_x,_y, road_width = 7) {
         
-        this.scene.manager.objectManager.newObjectToWorld(_x, _y, 'BRIDGE_LEDGE_N_1');
-        this.scene.manager.objectManager.newObjectToWorld(_x+10, _y, 'BRIDGE_LEDGE_N_2');
-        this.scene.manager.objectManager.newObjectToWorld(_x+18, _y, 'BRIDGE_LEDGE_N_3');
+        this.scene.manager.objectManager.newObjectToWorld(_x, _y-1, 'BRIDGE_LEDGE_N_1');
+        this.scene.manager.objectManager.newObjectToWorld(_x+10, _y-1, 'BRIDGE_LEDGE_N_2');
+        this.scene.manager.objectManager.newObjectToWorld(_x+18, _y-1, 'BRIDGE_LEDGE_N_3');
 
         this.buildStairs(_x - 2, _y + road_width + 1, 2, 5);
         this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.PLAZA.FILL_, _x-2, _y + road_width + 6, 3, 6);
