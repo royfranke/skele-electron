@@ -10,7 +10,7 @@ import HudCommon from "../hud/hud-common.js";
 const CATEGORIES = ['CONTENT', 'AUDIO', 'INPUT'];
 const ROW_TYPES = { CONTENT: 'toggle', AUDIO: 'level', INPUT: 'bind' };
 const ROW_HEIGHT = 20;
-const HEADER_HEIGHT = 26;
+const HEADER_HEIGHT = 32;
 const FOOTER_HEIGHT = 20;
 const MAX_LEVEL = 10;
 const PIP_SIZE = 8;
@@ -37,7 +37,7 @@ export default class SettingsView extends HudCommon {
         this.scene.add.nineslice(_x, _y, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
         this.scene.add.nineslice(_x, _y, 'UI', 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(1200);
 
-        this.headerText = this.scene.add.bitmapText(_x + 10, _y + 9, 'SkeleTalk', '', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
+        this.headerText = this.scene.add.bitmapText(_x + 10, _y + 9, 'SkeleMarquee', '', 16).setOrigin(0).setScrollFactor(0).setDepth(1001);
         this.statusText = this.scene.add.bitmapText(_x + 10, _y + height - 14, 'SkeleTalk', '', 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
         this.buildTabs();
@@ -87,7 +87,7 @@ export default class SettingsView extends HudCommon {
         this.selector.setY(this.tabs[index].y);
         this.selectorText.setY(this.tabs[index].y + 4);
 
-        this.headerText.setText(SETTINGS_STATES[this.categoryName()].display);
+        this.headerText.setText(SETTINGS_STATES[this.categoryName()].display.toUpperCase());
         this.buildRows();
         this.setStatus();
 
@@ -131,7 +131,7 @@ export default class SettingsView extends HudCommon {
             const rowType = key === RESET_KEY ? 'reset' : type;
 
             const block = this.scene.add.nineslice(_x, _y, 'UI', 'BLOCK_MID_DARK_BLUE', columnWidth - 8, ROW_HEIGHT - 2, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999);
-            const label = this.scene.add.bitmapText(_x + 6, _y + 5, 'SkeleTalk', rowType === 'reset' ? 'Reset to defaults' : key.toLowerCase(), 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
+            const label = this.scene.add.bitmapText(_x + 6, _y + 5, 'SkeleMarquee', rowType === 'reset' ? 'RESET TO DEFAULTS' : key.toUpperCase(), 8).setOrigin(0).setScrollFactor(0).setDepth(1001);
 
             const row = { key: key, type: rowType, block: block, label: label, x: _x, y: _y, width: columnWidth - 8 };
 
@@ -149,7 +149,7 @@ export default class SettingsView extends HudCommon {
                 }
             }
             else if (rowType !== 'reset') {
-                row.value = this.scene.add.bitmapText(_x + row.width - 8, _y + 5, 'SkeleStreetSigns', '', 8).setOrigin(1, 0).setScrollFactor(0).setDepth(1001);
+                row.value = this.scene.add.bitmapText(_x + row.width - 8, _y + 5, 'SkeleMarquee', '', 8).setOrigin(1, 0).setScrollFactor(0).setDepth(1001);
                 row.value.setTintFill(0x2d4275);
             }
 

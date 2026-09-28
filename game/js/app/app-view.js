@@ -1,6 +1,7 @@
 
 import SettingsManager from "../settings/settings-manager.js";
 import HudSound from "../hud/hud-sound.js";
+import HudCommon from "../hud/hud-common.js";
 /*
  * Manages application view
  * SPLASH | MAIN | SETTINGS | NEW | LOAD | GAME | TUTORIAL
@@ -108,21 +109,14 @@ export default class AppView {
 
     createLoad() {
         var self = this;
-        var tip_message = [
-            '"Don\'t forget about your pile of homework."',
-            '"Keep good company."',
-            '"Keep your cool."'
+        var left = this.view.left + this.view.margin.left;
+        var top = this.view.top + this.view.margin.top + 28;
+        var height = this.view.bottom - top - (this.view.margin.bottom*2);
+        var gap = 4;
+        var width = Math.floor((this.view.right - left - this.view.margin.right - (gap*2))/3);
 
-        ];
-        var tip = this.drawTip(Phaser.Math.RND.pick(tip_message));
-        this.cootiecatcher = {};
-        this.cootiecatcher.anim = this.addCootieCatcher(this.view.left + this.view.margin.left + 64, this.view.bottom - 96);
-        this.cootiecatcher.last = 1;
-
-        var total_height = this.view.bottom - (this.view.top + this.view.margin.top + (this.view.margin.bottom*2));
-        var height = total_height/3;
-        var left  = this.view.left + (this.view.margin.left*2) + 120;
-        var width = this.view.right - left - this.view.margin.right;
+        this.backButton = new HudCommon(this.scene, this.view).makeBackButton(left + 96, this.view.top + this.view.margin.top, 'Back to Menu');
+        this.backButton.click_area.on('pointerdown', () => this.handleLoadInput('BACK'));
 
         this.slots = [];
         this.selected = 0;
@@ -133,9 +127,9 @@ export default class AppView {
         }
 
         for (var i=0;i<3;i++) {
-            var top = this.view.top + this.view.margin.top + ((height + 4) *i);
-            var slot_slice = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
-            var slot_highlight = this.scene.add.nineslice(left, top, 'UI', 'BLOCK_SHALLOW_RED_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
+            var slotLeft = left + ((width + gap) * i);
+            var slot_slice = this.scene.add.nineslice(slotLeft, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
+            var slot_highlight = this.scene.add.nineslice(slotLeft, top, 'UI', 'BLOCK_SHALLOW_SUNRISE_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
 
             // Mouse/Touch Input
             let slot_number = i + 1;
@@ -144,16 +138,12 @@ export default class AppView {
             slot_slice.on('pointerdown', () => self.chooseLoad(slot_number));
 
             if (this.saves[i] != null) {
-                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day '+this.saves[i].TIME.DAY + ', ' + this.saves[i].SAVE.DATE, 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                var slot_byline = this.scene.add.bitmapText(slotLeft + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Day '+this.saves[i].TIME.DAY + ', ' + this.saves[i].SAVE.DATE, 8).setOrigin(0).setScrollFactor(0).setDepth(1000).setMaxWidth(width - this.view.margin.left*2);
 
-                var _x = left + this.view.margin.left;
+                var _x = slotLeft + this.view.margin.left;
                 var _y = top + this.view.margin.top*2;
                 
-                var slot_headline = this.revealMarquee(this.saves[i].SAVE.HEADLINE,_x,_y);
-            }
-            else {
-                var slot_byline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top, 'SkeleTalk', 'Slot '+(i+1)+': Day ???', 8).setOrigin(0).setScrollFactor(0).setDepth(1000);
-                var slot_headline = this.scene.add.bitmapText(left + this.view.margin.left, top + this.view.margin.top*2, 'SkeleMarquee', 'new', 16).setOrigin(0).setScrollFactor(0).setDepth(1000);
+                var slot_headline = this.revealMarquee(this.saves[i].SAVE.HEADLINE,_x,_y).setMaxWidth(width - this.view.margin.left*2);
             }
 
             this.slots.push({slice: slot_slice, selector: slot_highlight,slot_byline: slot_byline, slot_headline: slot_headline});
@@ -167,10 +157,12 @@ export default class AppView {
         }
 
         switch (key) {
+            case 'LEFT':
             case 'UP':
                 this.selectLoad(this.selected <= 1 ? this.slots.length : this.selected - 1);
                 this.sound.play('MENU_INPUT');
             break;
+            case 'RIGHT':
             case 'DOWN':
                 this.selectLoad(this.selected >= this.slots.length ? 1 : this.selected + 1);
                 this.sound.play('MENU_INPUT');
@@ -199,19 +191,20 @@ export default class AppView {
         this.selectedLoad(selected, data);
     }
 
-    getMarqueeFill (length,blank=false) {
+    getMarqueeFill (headline,blank=false) {
         var headline_display = '';
-        for (var i=0;i<length;i++) {
-            if (blank) {var content = '_';}
-            var content = Phaser.Math.RND.pick(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','_','_']);
-            headline_display += content;
+        for (var i=0;i<headline.length;i++) {
+            var character = headline[i];
+            headline_display += /[a-z]/i.test(character)
+                ? (blank ? ' ' : Phaser.Math.RND.pick(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']))
+                : character;
         }
         return headline_display;
     }
 
     revealMarquee (headline,_x,_y) {
-        var headline_text = headline.toLowerCase().replace(/ /g,"_");
-        var headline_display = this.getMarqueeFill(headline_text.length,true);
+        var headline_text = headline.toLowerCase();
+        var headline_display = this.getMarqueeFill(headline_text,true);
         
         var headline_object = this.scene.add.bitmapText(_x,_y, 'SkeleMarquee', headline_display, 16).setOrigin(0).setScrollFactor(0).setDepth(1000);
         
@@ -220,7 +213,7 @@ export default class AppView {
             delay: 125,
             repeat:6,
             callback: ()=>{
-                headline_display = self.getMarqueeFill(headline_text.length);
+                headline_display = self.getMarqueeFill(headline_text);
                 headline_object.setText(headline_display);
             }
         });
@@ -242,10 +235,9 @@ export default class AppView {
             return;
         }
         this.selected = selected;
-        this.playCootieCatcher();
         for (var i=0;i<3;i++) {
             if (i != selected - 1) {
-                this.slots[i].slice.setTexture('UI','BLOCK_MID_LILAC_FAT_BORDER');
+                this.slots[i].slice.setTexture('UI','BLOCK_MID_BLUE_FAT_BORDER');
                 this.slots[i].selector.setVisible(false);
             }
             else {
