@@ -1,4 +1,5 @@
 import HudCommon from './hud-common.js';
+import { getSetting } from '../settings/settings-store.js';
 /*
  * Gets injected into the game scene
  */
@@ -12,37 +13,32 @@ export default class HudFocusHints extends HudCommon {
     initialize () {
        this.focusHints = [
             {
-                char: 'I',
                 focus: 'POCKETS',
+                action: 'INVENTORY',
                 x: (this.view.right - 156),
                 y: this.view.top + 24
             },
             {
-                char: 'N',
                 focus: 'NOTEBOOK',
                 x: (this.view.left + this.view.margin.left) + 40,
                 y: this.view.bottom - (this.view.margin.bottom + 18)
             },
             {
-                char: 'M',
                 focus: 'MAP',
                 x: (this.view.left + this.view.margin.left) + 40,
                 y: this.view.bottom - (this.view.margin.bottom + 58 + 80)
             },
             {
-                char: 'K',
                 focus: 'KEYCHAIN',
                 x: (this.view.left + this.view.margin.left) + 40,
                 y: this.view.bottom - (this.view.margin.bottom + 58 + 40)
             },
             {
-                char: 'P',
                 focus: 'COINPURSE',
                 x: (this.view.left + this.view.margin.left) + 40,
                 y: this.view.bottom - (this.view.margin.bottom + 58)
             },
             {
-                char: 'W',
                 focus: 'WATCH',
                 x: (this.view.left + this.view.margin.left) + 40,
                 y: this.view.top + this.view.margin.top
@@ -59,7 +55,7 @@ export default class HudFocusHints extends HudCommon {
                 block: this.makeFocusBlock(hint.x, hint.y, 18, 18, 'BLOCK_DEEP_SAPPHIRE'),
                 text: this.makeFocusBitmapText(hint.x+5, hint.y+3, 16, 12, 'SkeleButton')
             };
-            keyTip.text.setText(hint.char);
+            keyTip.text.setText(getSetting(this.scene, 'INPUT', hint.action || hint.focus));
             return keyTip;
         }
         else {
