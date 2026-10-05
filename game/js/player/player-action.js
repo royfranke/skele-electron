@@ -20,6 +20,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.actionTile = {x: 0, y: 0};
         this.actionTileLast = {x: 0, y: 0};
         this.actionTileLookUp = SPRITE_DIR.DIR_TILE;
+        this.menuDirty = true;
         this.actionsGroup = this.scene.add.group();
         this.clearActions();
         this.listen();
@@ -29,11 +30,15 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         this.availableActions = [];
         this.actionsMap = new Map;
         this.menu = {x: 0, y: 0};
+        this.menuDirty = true;
         this.scene.manager.hud.hudAction.clearActions();
     }
 
     showActions (showing) {
-        this.showMenu = showing;
+        if (this.showMenu !== showing) {
+            this.showMenu = showing;
+            this.menuDirty = true;
+        }
     }
 
     addMarker () {
@@ -190,10 +195,14 @@ import SPRITE_DIR from "../config/sprite-dir.js";
             x: parseInt(this.scene.player.standingTile.x + mods['x']),
             y: parseInt(this.scene.player.standingTile.y + mods['y'])
         };
-        this.menu = {
+        const menu = {
             x: parseInt(this.actionTile.x + mods['mx'])*16,
             y: parseInt(this.actionTile.y + mods['my'])*16
         };
+        if (menu.x != this.menu.x || menu.y != this.menu.y) {
+            this.menuDirty = true;
+        }
+        this.menu = menu;
         this.updateMarker();
     }
 
@@ -256,19 +265,13 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         if (this.scene.player.playerInput.more && this.availableActions.length > 1 ) {
             var firstItem = this.availableActions.shift(); // Remove the first item
             this.availableActions.push(firstItem); // Add the first item to the end
+            this.menuDirty = true;
         }
     }
 
     listen () {
-        var self = this;
-        this.scene.events.on('ACTION_CLICKED', function(action) {
-            let selectedAction = null;
-            self.availableActions.forEach(function (availableAction) {
-                if (availableAction.action == action) {
-                    selectedAction = availableAction;
-                }
-            });
-            self.queueActionExecution(selectedAction);
+        this.scene.events.on('ACTION_CLICKED', action => {
+            this.queueActionExecution(action);
         });
     }
 
@@ -515,38 +518,24 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     actionMenu () {
-        const safeClearActionsGroup = () => {
-            if (!this.actionsGroup) return;
-            // Phaser may leave a Group instance with torn-down internals during scene transitions.
-            if (this.actionsGroup.children == undefined) return;
-            try {
-                this.actionsGroup.clear(false, true);
-            } catch (e) {}
-        };
-
         if (!this.showMenu) {
-            safeClearActionsGroup();
+            if (this.menuDirty) {
+                this.scene.manager.hud.hudAction.clearActions();
+            }
             this.displayActions = null;
+            this.menuDirty = false;
         }
-        else {  
-            var displayActions = [];
-
-            this.availableActions.forEach(function (action, index) {
-                displayActions.push({
-                    action: action.action,
-                    object: action.object,
-                    ground: action.ground,
-                    fx: action.fx
-                });
-            });
-
+        else {
+            const displayActions = this.availableActions;
             this.displayActions = displayActions;
             if (this.scene?.manager?.hud?.hudAction?.drawActions) {
-                this.scene.manager.hud.hudAction.drawActions(displayActions, this.menu.x, this.menu.y);
-            }
-            if (displayActions.length == 0) {
-                safeClearActionsGroup();
-                this.showMarker(false);
+                if (this.menuDirty) {
+                    this.scene.manager.hud.hudAction.drawActions(displayActions, this.menu.x, this.menu.y);
+                    this.menuDirty = false;
+                }
+                if (displayActions.length == 0) {
+                    this.showMarker(false);
+                }
             }
         }
     }

@@ -288,7 +288,7 @@ export default class InteriorScene extends Phaser.Scene {
         var tomorrow = tomorrow_date.weekday+', '+tomorrow_date.month+' '+tomorrow_date.day;  
 
         this.slot.SAVE.DATE = tomorrow;
-        this.slot.SAVE.HEADLINE = this.manager.quest.getSaveHeadline().toLowerCase().replace(/ /g,"_");
+        this.slot.SAVE.HEADLINE = this.manager.quest.getSaveHeadline().toLowerCase();
 
         this.manager.time.setTimeFromSleep();
         this.app.saveManager.saveGameData();
