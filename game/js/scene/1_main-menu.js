@@ -16,7 +16,7 @@ export default class MainMenuScene extends Phaser.Scene {
     }
 
     create() {
-        this.version = '1.2.3';
+        this.version = '1.2.4';
         this.data.settings = this.cache.json.get('SETTINGSCONFIG');
         this.ITEMS = ITEMS;
 
@@ -120,7 +120,7 @@ export default class MainMenuScene extends Phaser.Scene {
         let background_frame3 = this.hud.makeBlock(this.camera.view.left + 30, this.camera.view.top + 30, this.camera.view.width - 60, this.camera.view.height - 60, 'BLOCK_MID_DARK_BLUE_FAT_BORDER');
         background_frame3.setDepth(1);
 
-        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_MID_MOONSTONE_FAT_BORDER');
+        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_MID_SKY_FAT_BORDER');
         menu_background.setDepth(2);
 
         let menu_frame = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top + (this.camera.view.height * .40), 200, 120, 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME');

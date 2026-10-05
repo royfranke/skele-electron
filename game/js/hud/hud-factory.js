@@ -87,14 +87,14 @@ export default class HudFactory {
 
         button_data.click_area.on('pointerover', () => {
             if (button_data.block != null && button_data.button != null) {
-                 button_data.block.setFrame('BLOCK_MID_CREAM_RIGHT');
+                 button_data.block.setFrame('BLOCK_SHALLOW_CREAM_RIGHT');
                  button_data.button.setFrame('BLOCK_SHALLOW_' + color + '_LEFT');
             }
         });
         button_data.click_area.on('pointerout', () => {
             if (button_data.block != null && button_data.button != null) {
-                button_data.block.setFrame('BLOCK_MID_WHITE_RIGHT');
-                button_data.button.setFrame('BLOCK_MID_' + color + '_LEFT');
+                button_data.block.setFrame('BLOCK_DEEP_WHITE_RIGHT');
+                button_data.button.setFrame('BLOCK_DEEP_' + color + '_LEFT');
             }
         });
 

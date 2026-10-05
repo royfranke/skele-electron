@@ -115,7 +115,7 @@ export default class AppView {
         var gap = 4;
         var width = Math.floor((this.view.right - left - this.view.margin.right - (gap*2))/3);
 
-        this.backButton = new HudCommon(this.scene, this.view).makeBackButton(left + 96, this.view.top + this.view.margin.top, 'Back to Menu');
+        this.backButton = new HudCommon(this.scene, this.view).makeBackButton(left + 88, this.view.top + this.view.margin.top, 'Back to Menu');
         this.backButton.click_area.on('pointerdown', () => this.handleLoadInput('BACK'));
 
         this.slots = [];
@@ -129,7 +129,7 @@ export default class AppView {
         for (var i=0;i<3;i++) {
             var slotLeft = left + ((width + gap) * i);
             var slot_slice = this.scene.add.nineslice(slotLeft, top, 'UI', 'BLOCK_MID_LILAC_BORDER', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(998);
-            var slot_highlight = this.scene.add.nineslice(slotLeft, top, 'UI', 'BLOCK_SHALLOW_SUNRISE_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
+            var slot_highlight = this.scene.add.nineslice(slotLeft, top, 'UI', 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME', width, height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999).setVisible(false);
 
             // Mouse/Touch Input
             let slot_number = i + 1;
@@ -149,7 +149,7 @@ export default class AppView {
                 slot_headline = this.revealMarquee(this.saves[i].SAVE.HEADLINE,_x,_y).setMaxWidth(width - this.view.margin.left*2);
 
                 /// Draw a grid of six blocks with items towards the bottom of the slot
-                slot_item_grid = this.addItemGrid(slotLeft, top, width, height);
+                slot_item_grid = this.addItemGrid(slotLeft, top, width, height, this.saves[i]);
 
             }
 
@@ -157,16 +157,73 @@ export default class AppView {
         }
     }
 
-    addItemGrid (slotLeft, top, width, height) {
+    addItemGrid (slotLeft, top, width, height, save) {
         var slot_item_grid = [];
         /// First draw empty blocks
         let slot_width = 28;
         let slot_height = 28;
+        var missingColor = 0x4973a5;
         /// Add a grid of 3 columns and 2 rows of item blocks
         for (var row=0; row<2; row++) {
             for (var col=0; col<4; col++) {
-                var nineslice = this.scene.add.nineslice(slotLeft+12 + (slot_width + 4) * col, (top + height - (slot_height + 8) * 2) + (slot_height + 4) * row, 'UI', 'BLOCK_SHALLOW_RED', slot_width, slot_height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999);
+                var x = slotLeft+12 + (slot_width + 4) * col;
+                var y = (top + height - (slot_height + 8) * 2) + (slot_height + 4) * row;
+                var nineslice = this.scene.add.nineslice(x, y, 'UI', 'BLOCK_SHALLOW_DARK_BLUE', slot_width, slot_height, 8,8,8,8).setOrigin(0).setScrollFactor(0).setDepth(999);
                 slot_item_grid.push(nineslice);
+
+                if (col == 0 && row == 0) {
+                    var item = this.scene.add.sprite(x + 5, y + 5, 'UI', 'WATCH_DEFAULT', 0).setOrigin(0,0).setDepth(1000);
+                    
+                    slot_item_grid.push(item);
+                }
+                if (col == 1 && row == 0) {
+
+                    var item = this.scene.add.sprite(x + 5, y + 5, 'ITEMS', 'NOTEBOOK_RED', 0).setOrigin(0,0).setDepth(1000);
+                    console.log(save.NOTEBOOK);
+
+                    if (save && save.NOTEBOOK && save.NOTEBOOK.STATUS && save.NOTEBOOK.STATUS.HAS === "TRUE") {
+                        item.setVisible(true);
+                    } else {
+                        item.setTintFill(missingColor);
+                    }
+
+                    slot_item_grid.push(item);
+                }
+                if (col == 2 && row == 0) {
+                    var item = this.scene.add.sprite(x + 5, y + 5, 'UI', 'COINPURSE_CLOSED', 0).setOrigin(0,0).setDepth(1000);
+
+                    if (save && save.COINPURSE && save.COINPURSE.STATUS && save.COINPURSE.STATUS.HAS === "TRUE") {
+                        item.setVisible(true);
+                    } else {
+                        item.setTintFill(missingColor);
+                    }
+
+                    slot_item_grid.push(item);
+                }
+                if (col == 3 && row == 0) {
+                    
+
+                    if (save && save.KEYRING && save.KEYRING.STATUS && save.KEYRING.STATUS.HAS === "TRUE") {
+                        let keyCount = save.KEYS.length || 0;
+                        var item = this.scene.add.sprite(x + 5, y + 5, 'UI', 'KEY_RING_'+keyCount, 0).setOrigin(0,0).setDepth(1000);
+                    } else {
+                        var item = this.scene.add.sprite(x + 5, y + 5, 'UI', 'KEY_RING_2', 0).setOrigin(0,0).setDepth(1000);
+                        item.setTintFill(missingColor);
+                    }
+
+                    slot_item_grid.push(item);
+                }
+                if (col == 0 && row == 1) {
+                    var item = this.scene.add.sprite(x + 5, y + 5, 'ITEMS', 'MAP_BUS', 0).setOrigin(0,0).setDepth(1000);
+
+                    if (save && save.MAPS && save.MAPS.length > 0) {
+                        item.setVisible(true);
+                    } else {
+                        item.setTintFill(missingColor);
+                    }
+
+                    slot_item_grid.push(item);
+                }
             }
         }
         return slot_item_grid;
@@ -265,7 +322,7 @@ export default class AppView {
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_BEIGE_FAT_BORDER');
+                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_SKY_FAT_BORDER');
                     this.slots[selected - 1].selector.setVisible(true);
                 }
             }
@@ -305,7 +362,7 @@ export default class AppView {
             }
             else {
                 if (selected > 0) {
-                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_YELLOW_FAT_BORDER');
+                    this.slots[selected - 1].slice.setTexture('UI','BLOCK_MID_LILAC_FAT_BORDER');
                     this.slots[selected - 1].selector.setVisible(true);
 
                     this.slots[selected - 1].slot_headline.setText('waking up....');
