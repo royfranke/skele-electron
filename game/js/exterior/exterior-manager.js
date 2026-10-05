@@ -2408,7 +2408,6 @@ import Shop from "../object/shop.js";
 
             // A world tile was clicked.
             self.scene.player.clearDestinations();
-            console.log("Clicked tile at:", tileX, tileY);
             if (self.scene.player.state.name == 'IDLE' || self.scene.player.state.name == 'WALKING') {
                 self.scene.player.moveToTile(tileX, tileY);
             }

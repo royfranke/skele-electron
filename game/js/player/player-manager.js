@@ -145,7 +145,7 @@ export default class PlayerManager {
     this.playerSprite.facing = facing.toLowerCase();
   }
 
-  getFacing(facing, up = false, right = false, down = false, left = false) {
+  getFacing(facing = this.playerSprite.facing, up = false, right = false, down = false, left = false) {
     var focus = this.getFocus();
     if (focus.name == 'PLAYER' && this.destinations.length == 0) {
       return this.playerInput.getFacing(facing);
