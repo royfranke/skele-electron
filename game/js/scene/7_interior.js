@@ -342,7 +342,10 @@ export default class InteriorScene extends Phaser.Scene {
                     if (!entity || entity.kind !== 'object') {
                         continue;
                     }
-                    if (entity.slug.startsWith('EXT_DOOR_') && entity.params.state !== 'CLOSED') {
+                    if (!entity.params || typeof entity.params !== 'object' || Array.isArray(entity.params)) {
+                        entity.params = {};
+                    }
+                    if (entity.slug?.startsWith('EXT_DOOR_') && entity.params.state !== 'CLOSED') {
                         entity.params.state = 'CLOSED';
                         processedEntities += 1;
                         chunkChanged = true;

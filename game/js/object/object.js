@@ -176,6 +176,7 @@ export default class Object {
         
         if (this.state != this.last_state || this.state == null) { // State change
             this.playAnimation();
+            this.last_state = this.state;
         }
 
     }
@@ -647,14 +648,13 @@ export default class Object {
 
     setState (state_name, force=true) {
         //console.log("Setting state to "+state_name+" for "+this.info.slug);
+        if (this.state != null && this.state.name == state_name) {
+            return;
+        }
         if (this.last_state == null) {
             force = true;
         }
         this.last_state = this.state;
-        if (this.state != null && this.state.name == state_name) {
-            //console.log("Already set to that state.");
-            return;
-        }
         if (!force) { // TODO: Figure out why this didn't work to cycle the states
             this.info.states.forEach(function (state) {
                 if (state.stateTrigger == state_name) {
@@ -667,7 +667,9 @@ export default class Object {
         else {
             this.state = this.info.states.find(state => state.name === state_name);
             if (this.state == null) {
-                this.state = this.info.states[0];
+                this.state = this.info.states.find(state => state.name === this.info.default_state)
+                    ?? this.info.states[0]
+                    ?? null;
             }
         }
     }

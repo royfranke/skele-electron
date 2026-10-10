@@ -122,17 +122,9 @@
         "FACING": "S"
     },
     "SAVE": {
-        "HEADLINE": "NEW",
+        "HEADLINE": "NEW KID",
         "SLOT": 1,
-        "DATE": "Friday, June 3rd"
-    },
-    "SETTINGS": {
-        "CONTENT": {
-            "MOTHS": "TRUE",
-            "BUTTERFLIES": "TRUE",
-            "SMOKES": "TRUE",
-            "BOOZE": "TRUE"
-        }
+        "DATE": "Friday, June 3"
     },
     "TIME": {
         "ALARM": {

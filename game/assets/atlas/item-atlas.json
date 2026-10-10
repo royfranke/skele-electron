@@ -2127,8 +2127,8 @@
 	}
     
                          
-        ,  { 
-		"filename": "BEER_TRASH",
+      ,  { 
+		"filename": "BANDAID",
 		"frame": {"x":160,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2136,7 +2136,7 @@
     
                          
       ,  { 
-		"filename": "SODA_BLUE_TRASH",
+		"filename": "BEER_TRASH",
 		"frame": {"x":176,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2144,7 +2144,7 @@
     
                          
       ,  { 
-		"filename": "SODA_GREEN_TRASH",
+		"filename": "SODA_BLUE_TRASH",
 		"frame": {"x":192,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2152,7 +2152,7 @@
     
                          
       ,  { 
-		"filename": "NIGHT_LIGHT",
+		"filename": "SODA_GREEN_TRASH",
 		"frame": {"x":208,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2160,7 +2160,7 @@
     
                          
       ,  { 
-		"filename": "CLAY_MARBLES",
+		"filename": "NIGHT_LIGHT",
 		"frame": {"x":224,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2168,7 +2168,7 @@
     
                          
       ,  { 
-		"filename": "CLAY_COIL",
+		"filename": "CLAY_MARBLES",
 		"frame": {"x":240,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2176,7 +2176,7 @@
     
                          
       ,  { 
-		"filename": "CLAY_LUMP",
+		"filename": "CLAY_COIL",
 		"frame": {"x":256,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2184,7 +2184,7 @@
     
                          
       ,  { 
-		"filename": "CLAY_PINCH_POT",
+		"filename": "CLAY_LUMP",
 		"frame": {"x":272,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2192,7 +2192,7 @@
     
                          
       ,  { 
-		"filename": "LEAF_OAK",
+		"filename": "CLAY_PINCH_POT",
 		"frame": {"x":288,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2200,7 +2200,7 @@
     
                          
       ,  { 
-		"filename": "RADIO_PORTABLE",
+		"filename": "LEAF_OAK",
 		"frame": {"x":304,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2208,7 +2208,7 @@
     
                          
       ,  { 
-		"filename": "COMBO_LOCK_BLUE",
+		"filename": "RADIO_PORTABLE",
 		"frame": {"x":320,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2216,7 +2216,7 @@
     
                          
       ,  { 
-		"filename": "COMBO_LOCK_RED",
+		"filename": "COMBO_LOCK_BLUE",
 		"frame": {"x":336,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2224,7 +2224,7 @@
     
                          
       ,  { 
-		"filename": "PADLOCK",
+		"filename": "COMBO_LOCK_RED",
 		"frame": {"x":352,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2232,7 +2232,7 @@
     
                          
       ,  { 
-		"filename": "ADULT_MAGAZINE_1",
+		"filename": "PADLOCK",
 		"frame": {"x":368,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2240,7 +2240,7 @@
     
                          
       ,  { 
-		"filename": "ADULT_MAGAZINE_2",
+		"filename": "ADULT_MAGAZINE_1",
 		"frame": {"x":384,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2248,7 +2248,7 @@
     
                          
       ,  { 
-		"filename": "GARBAGE",
+		"filename": "ADULT_MAGAZINE_2",
 		"frame": {"x":400,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2256,7 +2256,7 @@
     
                          
       ,  { 
-		"filename": "HOT_SAUCE",
+		"filename": "GARBAGE",
 		"frame": {"x":416,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2264,7 +2264,7 @@
     
                          
       ,  { 
-		"filename": "CHOCOLATE_DRINK",
+		"filename": "HOT_SAUCE",
 		"frame": {"x":432,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2272,7 +2272,7 @@
     
                          
       ,  { 
-		"filename": "CHOCOLATE_DRINK_OPEN",
+		"filename": "CHOCOLATE_DRINK",
 		"frame": {"x":448,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2280,7 +2280,7 @@
     
                          
       ,  { 
-		"filename": "ALE",
+		"filename": "CHOCOLATE_DRINK_OPEN",
 		"frame": {"x":464,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2288,7 +2288,7 @@
     
                          
       ,  { 
-		"filename": "ALE_OPEN",
+		"filename": "ALE",
 		"frame": {"x":480,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2296,7 +2296,7 @@
     
                          
       ,  { 
-		"filename": "GLASS_BOTTLE_4",
+		"filename": "ALE_OPEN",
 		"frame": {"x":496,"y":128,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2304,7 +2304,7 @@
     
                          
       ,  { 
-		"filename": "GLASS_BOTTLE_3",
+		"filename": "GLASS_BOTTLE_4",
 		"frame": {"x":0,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2312,7 +2312,7 @@
     
                          
       ,  { 
-		"filename": "GLASS_BOTTLE_2",
+		"filename": "GLASS_BOTTLE_3",
 		"frame": {"x":16,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2320,7 +2320,7 @@
     
                          
       ,  { 
-		"filename": "GLASS_BOTTLE_1",
+		"filename": "GLASS_BOTTLE_2",
 		"frame": {"x":32,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2328,7 +2328,7 @@
     
                          
       ,  { 
-		"filename": "GLASS_BOTTLE_0",
+		"filename": "GLASS_BOTTLE_1",
 		"frame": {"x":48,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2336,7 +2336,7 @@
     
                          
       ,  { 
-		"filename": "GREEN_GLASS_TRIANGLE",
+		"filename": "GLASS_BOTTLE_0",
 		"frame": {"x":64,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2344,7 +2344,7 @@
     
                          
       ,  { 
-		"filename": "GLASS_TRIANGLE",
+		"filename": "GREEN_GLASS_TRIANGLE",
 		"frame": {"x":80,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2352,7 +2352,7 @@
     
                          
       ,  { 
-		"filename": "GLASS_HEART",
+		"filename": "GLASS_TRIANGLE",
 		"frame": {"x":96,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2360,7 +2360,7 @@
     
                          
       ,  { 
-		"filename": "GREEN_GLASS_HEART",
+		"filename": "GLASS_HEART",
 		"frame": {"x":112,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2368,7 +2368,7 @@
     
                          
       ,  { 
-		"filename": "GREEN_GLASS_BOTTLE_3",
+		"filename": "GREEN_GLASS_HEART",
 		"frame": {"x":128,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2376,7 +2376,7 @@
     
                          
       ,  { 
-		"filename": "GREEN_GLASS_BOTTLE_4",
+		"filename": "GREEN_GLASS_BOTTLE_3",
 		"frame": {"x":144,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2384,7 +2384,7 @@
     
                          
       ,  { 
-		"filename": "GREEN_GLASS_BOTTLE_1",
+		"filename": "GREEN_GLASS_BOTTLE_4",
 		"frame": {"x":160,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2392,7 +2392,7 @@
     
                          
       ,  { 
-		"filename": "GREEN_GLASS_BOTTLE_0",
+		"filename": "GREEN_GLASS_BOTTLE_1",
 		"frame": {"x":176,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2400,7 +2400,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_FRESCO_CLOSED",
+		"filename": "GREEN_GLASS_BOTTLE_0",
 		"frame": {"x":192,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2408,7 +2408,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_CANE_SODA_CLOSED",
+		"filename": "SODA_F_FRESCO_CLOSED",
 		"frame": {"x":208,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2416,7 +2416,7 @@
     
                          
       ,  { 
-		"filename": "SALT_SHAKER",
+		"filename": "SODA_F_CANE_SODA_CLOSED",
 		"frame": {"x":224,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2424,7 +2424,7 @@
     
                          
       ,  { 
-		"filename": "MUSTARD",
+		"filename": "SALT_SHAKER",
 		"frame": {"x":240,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2432,7 +2432,7 @@
     
                          
       ,  { 
-		"filename": "SALT_IODIZED",
+		"filename": "MUSTARD",
 		"frame": {"x":256,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2440,7 +2440,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_LEMONADE_CLOSED",
+		"filename": "SALT_IODIZED",
 		"frame": {"x":272,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2448,7 +2448,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_PURPLE_DRINK_CLOSED",
+		"filename": "SODA_F_LEMONADE_CLOSED",
 		"frame": {"x":288,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2456,7 +2456,7 @@
     
                          
       ,  { 
-		"filename": "PEPPER_SHAKER",
+		"filename": "SODA_F_PURPLE_DRINK_CLOSED",
 		"frame": {"x":304,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2464,7 +2464,7 @@
     
                          
       ,  { 
-		"filename": "KETCHUP",
+		"filename": "PEPPER_SHAKER",
 		"frame": {"x":320,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2472,7 +2472,7 @@
     
                          
       ,  { 
-		"filename": "EMPTY_SODA_F_CUP",
+		"filename": "KETCHUP",
 		"frame": {"x":336,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2480,7 +2480,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_FRESCO",
+		"filename": "EMPTY_SODA_F_CUP",
 		"frame": {"x":352,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2488,7 +2488,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_CANE_SODA",
+		"filename": "SODA_F_FRESCO",
 		"frame": {"x":368,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2496,7 +2496,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_DRINK",
+		"filename": "SODA_F_CANE_SODA",
 		"frame": {"x":384,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2504,7 +2504,7 @@
     
                          
       ,  { 
-		"filename": "BOOK_5",
+		"filename": "SODA_F_DRINK",
 		"frame": {"x":400,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2512,7 +2512,7 @@
     
                          
       ,  { 
-		"filename": "BOOK_4",
+		"filename": "BOOK_5",
 		"frame": {"x":416,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2520,7 +2520,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_LEMONADE",
+		"filename": "BOOK_4",
 		"frame": {"x":432,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2528,7 +2528,7 @@
     
                          
       ,  { 
-		"filename": "SODA_F_PURPLE_DRINK",
+		"filename": "SODA_F_LEMONADE",
 		"frame": {"x":448,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2536,7 +2536,7 @@
     
                          
       ,  { 
-		"filename": "BOOK_3",
+		"filename": "SODA_F_PURPLE_DRINK",
 		"frame": {"x":464,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2544,7 +2544,7 @@
     
                          
       ,  { 
-		"filename": "BOOK_7",
+		"filename": "BOOK_3",
 		"frame": {"x":480,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2552,7 +2552,7 @@
     
                          
       ,  { 
-		"filename": "BOOK_6",
+		"filename": "BOOK_7",
 		"frame": {"x":496,"y":144,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2560,7 +2560,7 @@
     
                          
       ,  { 
-		"filename": "SODA_GREEN_51",
+		"filename": "BOOK_6",
 		"frame": {"x":0,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2568,7 +2568,7 @@
     
                          
       ,  { 
-		"filename": "SODA_GREEN_48",
+		"filename": "SODA_GREEN_51",
 		"frame": {"x":16,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2576,7 +2576,7 @@
     
                          
       ,  { 
-		"filename": "SODA_GREEN_49",
+		"filename": "SODA_GREEN_48",
 		"frame": {"x":32,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2584,7 +2584,7 @@
     
                          
       ,  { 
-		"filename": "SODA_GREEN_50",
+		"filename": "SODA_GREEN_49",
 		"frame": {"x":48,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2592,7 +2592,7 @@
     
                          
       ,  { 
-		"filename": "SODA_RED_43",
+		"filename": "SODA_GREEN_50",
 		"frame": {"x":64,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2600,7 +2600,7 @@
     
                          
       ,  { 
-		"filename": "SODA_RED_45",
+		"filename": "SODA_RED_43",
 		"frame": {"x":80,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2608,7 +2608,7 @@
     
                          
       ,  { 
-		"filename": "SODA_RED_46",
+		"filename": "SODA_RED_45",
 		"frame": {"x":96,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2616,7 +2616,7 @@
     
                          
       ,  { 
-		"filename": "SODA_RED_44",
+		"filename": "SODA_RED_46",
 		"frame": {"x":112,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2624,7 +2624,7 @@
     
                          
       ,  { 
-		"filename": "SODA_BLUE_52",
+		"filename": "SODA_RED_44",
 		"frame": {"x":128,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2632,7 +2632,7 @@
     
                          
       ,  { 
-		"filename": "SODA_BLUE_53",
+		"filename": "SODA_BLUE_52",
 		"frame": {"x":144,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2640,7 +2640,7 @@
     
                          
       ,  { 
-		"filename": "SODA_BLUE_54",
+		"filename": "SODA_BLUE_53",
 		"frame": {"x":160,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2648,7 +2648,7 @@
     
                          
       ,  { 
-		"filename": "SODA_BLUE_55",
+		"filename": "SODA_BLUE_54",
 		"frame": {"x":176,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2656,7 +2656,7 @@
     
                          
       ,  { 
-		"filename": "BEER_56",
+		"filename": "SODA_BLUE_55",
 		"frame": {"x":192,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2664,7 +2664,7 @@
     
                          
       ,  { 
-		"filename": "BEER_57",
+		"filename": "BEER_56",
 		"frame": {"x":208,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2672,7 +2672,7 @@
     
                          
       ,  { 
-		"filename": "BEER_58",
+		"filename": "BEER_57",
 		"frame": {"x":224,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2680,7 +2680,7 @@
     
                          
       ,  { 
-		"filename": "BEER_59",
+		"filename": "BEER_58",
 		"frame": {"x":240,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2688,7 +2688,7 @@
     
                          
       ,  { 
-		"filename": "INSTANT_NOODLES_SEAL_RED",
+		"filename": "BEER_59",
 		"frame": {"x":256,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2696,7 +2696,7 @@
     
                          
       ,  { 
-		"filename": "INSTANT_NOODLES_SEAL_GREEN",
+		"filename": "INSTANT_NOODLES_SEAL_RED",
 		"frame": {"x":272,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2704,7 +2704,7 @@
     
                          
       ,  { 
-		"filename": "INSTANT_NOODLES_SEAL_BLUE",
+		"filename": "INSTANT_NOODLES_SEAL_GREEN",
 		"frame": {"x":288,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2712,7 +2712,7 @@
     
                          
       ,  { 
-		"filename": "INSTANT_NOODLES_SEAL_ORANGE",
+		"filename": "INSTANT_NOODLES_SEAL_BLUE",
 		"frame": {"x":304,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2720,7 +2720,7 @@
     
                          
       ,  { 
-		"filename": "PUDDING_CHOCOLATE_SEAL",
+		"filename": "INSTANT_NOODLES_SEAL_ORANGE",
 		"frame": {"x":320,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2728,7 +2728,7 @@
     
                          
       ,  { 
-		"filename": "PUDDING_VANILLA_SEAL",
+		"filename": "PUDDING_CHOCOLATE_SEAL",
 		"frame": {"x":336,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2736,7 +2736,7 @@
     
                          
       ,  { 
-		"filename": "GELATIN_RED_SEAL",
+		"filename": "PUDDING_VANILLA_SEAL",
 		"frame": {"x":352,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2744,7 +2744,7 @@
     
                          
       ,  { 
-		"filename": "VIDEO_RENTAL",
+		"filename": "GELATIN_RED_SEAL",
 		"frame": {"x":368,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2752,7 +2752,7 @@
     
                          
       ,  { 
-		"filename": "KITE_MIX",
+		"filename": "VIDEO_RENTAL",
 		"frame": {"x":384,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2760,7 +2760,7 @@
     
                          
       ,  { 
-		"filename": "KITE_RED_YELLOW",
+		"filename": "KITE_MIX",
 		"frame": {"x":400,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2768,7 +2768,7 @@
     
                          
       ,  { 
-		"filename": "KITE_BLUE",
+		"filename": "KITE_RED_YELLOW",
 		"frame": {"x":416,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2776,7 +2776,7 @@
     
                          
       ,  { 
-		"filename": "NOTEPAD_NOTES",
+		"filename": "KITE_BLUE",
 		"frame": {"x":432,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2784,7 +2784,7 @@
     
                          
       ,  { 
-		"filename": "PENCIL",
+		"filename": "NOTEPAD_NOTES",
 		"frame": {"x":448,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2792,7 +2792,7 @@
     
                          
       ,  { 
-		"filename": "TAPE",
+		"filename": "PENCIL",
 		"frame": {"x":464,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2800,7 +2800,7 @@
     
                          
       ,  { 
-		"filename": "MASON_LINE",
+		"filename": "TAPE",
 		"frame": {"x":480,"y":160,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2808,8 +2808,16 @@
     
                          
       ,  { 
-		"filename": "NOTEPAD",
+		"filename": "MASON_LINE",
 		"frame": {"x":496,"y":160,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "NOTEPAD",
+		"frame": {"x":0,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
@@ -2817,14 +2825,6 @@
                          
         ,  { 
 		"filename": "PACKAGE",
-		"frame": {"x":0,"y":176,"w":16,"h":16},
-		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
-		"sourceSize": {"w":16,"h":16}
-	}
-    
-                         
-      ,  { 
-		"filename": "NOTE_PAPER",
 		"frame": {"x":16,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2832,7 +2832,7 @@
     
                          
       ,  { 
-		"filename": "NOTE",
+		"filename": "NOTE_PAPER",
 		"frame": {"x":32,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2840,7 +2840,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG",
+		"filename": "NOTE",
 		"frame": {"x":48,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2848,7 +2848,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG_MUSTARD",
+		"filename": "HOT_DOG",
 		"frame": {"x":64,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2856,7 +2856,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG_KETCHUP",
+		"filename": "HOT_DOG_MUSTARD",
 		"frame": {"x":80,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2864,7 +2864,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG_KETCHUP_MUSTARD",
+		"filename": "HOT_DOG_KETCHUP",
 		"frame": {"x":96,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2872,7 +2872,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG_HALF",
+		"filename": "HOT_DOG_KETCHUP_MUSTARD",
 		"frame": {"x":112,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2880,7 +2880,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG_HALF_MUSTARD",
+		"filename": "HOT_DOG_HALF",
 		"frame": {"x":128,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2888,7 +2888,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG_HALF_KETCHUP",
+		"filename": "HOT_DOG_HALF_MUSTARD",
 		"frame": {"x":144,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2896,7 +2896,7 @@
     
                          
       ,  { 
-		"filename": "HOT_DOG_HALF_KETCHUP_MUSTARD",
+		"filename": "HOT_DOG_HALF_KETCHUP",
 		"frame": {"x":160,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2904,7 +2904,7 @@
     
                          
       ,  { 
-		"filename": "EMPTY_PUDDING_CUP",
+		"filename": "HOT_DOG_HALF_KETCHUP_MUSTARD",
 		"frame": {"x":176,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2912,7 +2912,7 @@
     
                          
       ,  { 
-		"filename": "EMPTY_PUDDING_CUP_61",
+		"filename": "EMPTY_PUDDING_CUP",
 		"frame": {"x":192,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2920,7 +2920,7 @@
     
                          
       ,  { 
-		"filename": "EMPTY_NOODLE_CUP",
+		"filename": "EMPTY_PUDDING_CUP_61",
 		"frame": {"x":208,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2928,7 +2928,7 @@
     
                          
       ,  { 
-		"filename": "EMPTY_NOODLE_CUP_60",
+		"filename": "EMPTY_NOODLE_CUP",
 		"frame": {"x":224,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2936,7 +2936,7 @@
     
                          
       ,  { 
-		"filename": "YELLOW_PAGES",
+		"filename": "EMPTY_NOODLE_CUP_60",
 		"frame": {"x":240,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2944,7 +2944,7 @@
     
                          
       ,  { 
-		"filename": "WHITE_PAGES",
+		"filename": "YELLOW_PAGES",
 		"frame": {"x":256,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2952,7 +2952,7 @@
     
                          
       ,  { 
-		"filename": "WILLOW_SWITCH",
+		"filename": "WHITE_PAGES",
 		"frame": {"x":272,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2960,7 +2960,7 @@
     
                          
       ,  { 
-		"filename": "WILLOW_SWITCH_64",
+		"filename": "WILLOW_SWITCH",
 		"frame": {"x":288,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2968,7 +2968,7 @@
     
                          
       ,  { 
-		"filename": "ADDRESS_BOOK",
+		"filename": "WILLOW_SWITCH_64",
 		"frame": {"x":304,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2976,7 +2976,7 @@
     
                          
       ,  { 
-		"filename": "WISHBONE",
+		"filename": "ADDRESS_BOOK",
 		"frame": {"x":320,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2984,7 +2984,7 @@
     
                          
       ,  { 
-		"filename": "WILLOW_SWITCH_62",
+		"filename": "WISHBONE",
 		"frame": {"x":336,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -2992,7 +2992,7 @@
     
                          
       ,  { 
-		"filename": "WILLOW_SWITCH_65",
+		"filename": "WILLOW_SWITCH_62",
 		"frame": {"x":352,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3000,7 +3000,7 @@
     
                          
       ,  { 
-		"filename": "WISHBONE_UNLUCKY",
+		"filename": "WILLOW_SWITCH_65",
 		"frame": {"x":368,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3008,7 +3008,7 @@
     
                          
       ,  { 
-		"filename": "WISHBONE_LUCKY",
+		"filename": "WISHBONE_UNLUCKY",
 		"frame": {"x":384,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3016,7 +3016,7 @@
     
                          
       ,  { 
-		"filename": "WILLOW_SWITCH_63",
+		"filename": "WISHBONE_LUCKY",
 		"frame": {"x":400,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3024,7 +3024,7 @@
     
                          
       ,  { 
-		"filename": "WILLOW_SWITCH_66",
+		"filename": "WILLOW_SWITCH_63",
 		"frame": {"x":416,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3032,7 +3032,7 @@
     
                          
       ,  { 
-		"filename": "STRING",
+		"filename": "WILLOW_SWITCH_66",
 		"frame": {"x":432,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3040,7 +3040,7 @@
     
                          
       ,  { 
-		"filename": "TOILET_PAPER",
+		"filename": "STRING",
 		"frame": {"x":448,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3048,7 +3048,7 @@
     
                          
       ,  { 
-		"filename": "TOILET_PAPER_67",
+		"filename": "TOILET_PAPER",
 		"frame": {"x":464,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3056,7 +3056,7 @@
     
                          
       ,  { 
-		"filename": "SOFT_SERVE_VANILLA",
+		"filename": "TOILET_PAPER_67",
 		"frame": {"x":480,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3064,7 +3064,7 @@
     
                          
       ,  { 
-		"filename": "SOFT_SERVE_CHOCOLATE",
+		"filename": "SOFT_SERVE_VANILLA",
 		"frame": {"x":496,"y":176,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3072,7 +3072,7 @@
     
                          
       ,  { 
-		"filename": "SOFT_SERVE_TWIST",
+		"filename": "SOFT_SERVE_CHOCOLATE",
 		"frame": {"x":0,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3080,7 +3080,7 @@
     
                          
       ,  { 
-		"filename": "FANNY_PACK",
+		"filename": "SOFT_SERVE_TWIST",
 		"frame": {"x":16,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3088,7 +3088,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TOWEL_ROLL",
+		"filename": "FANNY_PACK",
 		"frame": {"x":32,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3096,7 +3096,7 @@
     
                          
       ,  { 
-		"filename": "PAPER_TOWEL_ROLL_69",
+		"filename": "PAPER_TOWEL_ROLL",
 		"frame": {"x":48,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3104,7 +3104,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_GREEN",
+		"filename": "PAPER_TOWEL_ROLL_69",
 		"frame": {"x":64,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3112,7 +3112,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_GREEN_USED",
+		"filename": "PRAYER_CANDLE_GREEN",
 		"frame": {"x":80,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3120,7 +3120,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_GREEN_EMPTY",
+		"filename": "PRAYER_CANDLE_GREEN_USED",
 		"frame": {"x":96,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3128,7 +3128,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_WHITE",
+		"filename": "PRAYER_CANDLE_GREEN_EMPTY",
 		"frame": {"x":112,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3136,7 +3136,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_WHITE_USED",
+		"filename": "PRAYER_CANDLE_WHITE",
 		"frame": {"x":128,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3144,7 +3144,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_WHITE_EMPTY",
+		"filename": "PRAYER_CANDLE_WHITE_USED",
 		"frame": {"x":144,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3152,7 +3152,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_YELLOW",
+		"filename": "PRAYER_CANDLE_WHITE_EMPTY",
 		"frame": {"x":160,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3160,7 +3160,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_YELLOW_USED",
+		"filename": "PRAYER_CANDLE_YELLOW",
 		"frame": {"x":176,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3168,7 +3168,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_YELLOW_EMPTY",
+		"filename": "PRAYER_CANDLE_YELLOW_USED",
 		"frame": {"x":192,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3176,7 +3176,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_ORANGE",
+		"filename": "PRAYER_CANDLE_YELLOW_EMPTY",
 		"frame": {"x":208,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3184,7 +3184,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_ORANGE_USED",
+		"filename": "PRAYER_CANDLE_ORANGE",
 		"frame": {"x":224,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3192,7 +3192,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_ORANGE_EMPTY",
+		"filename": "PRAYER_CANDLE_ORANGE_USED",
 		"frame": {"x":240,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3200,7 +3200,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_RED",
+		"filename": "PRAYER_CANDLE_ORANGE_EMPTY",
 		"frame": {"x":256,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3208,7 +3208,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_RED_USED",
+		"filename": "PRAYER_CANDLE_RED",
 		"frame": {"x":272,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3216,7 +3216,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_RED_EMPTY",
+		"filename": "PRAYER_CANDLE_RED_USED",
 		"frame": {"x":288,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3224,7 +3224,7 @@
     
                          
       ,  { 
-		"filename": "PRAYER_CANDLE_EMPTY",
+		"filename": "PRAYER_CANDLE_RED_EMPTY",
 		"frame": {"x":304,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3232,7 +3232,7 @@
     
                          
       ,  { 
-		"filename": "BINDLE",
+		"filename": "PRAYER_CANDLE_EMPTY",
 		"frame": {"x":320,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3240,7 +3240,7 @@
     
                          
       ,  { 
-		"filename": "BANDANA_RED",
+		"filename": "BINDLE",
 		"frame": {"x":336,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3248,7 +3248,7 @@
     
                          
       ,  { 
-		"filename": "BINDLE_PLASTIC",
+		"filename": "BANDANA_RED",
 		"frame": {"x":352,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3256,7 +3256,7 @@
     
                          
       ,  { 
-		"filename": "PIGGY_BANK",
+		"filename": "BINDLE_PLASTIC",
 		"frame": {"x":368,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3264,7 +3264,7 @@
     
                          
       ,  { 
-		"filename": "CAT_FOOD_CAN",
+		"filename": "PIGGY_BANK",
 		"frame": {"x":384,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3272,7 +3272,7 @@
     
                          
       ,  { 
-		"filename": "CAT_FOOD_OPEN_CAN",
+		"filename": "CAT_FOOD_CAN",
 		"frame": {"x":400,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3280,7 +3280,7 @@
     
                          
       ,  { 
-		"filename": "CAT_FOOD_EMPTY_CAN",
+		"filename": "CAT_FOOD_OPEN_CAN",
 		"frame": {"x":416,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3288,7 +3288,7 @@
     
                          
       ,  { 
-		"filename": "PACKAGE_SMALL",
+		"filename": "CAT_FOOD_EMPTY_CAN",
 		"frame": {"x":432,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3296,7 +3296,7 @@
     
                          
       ,  { 
-		"filename": "CANNED_TOMATO",
+		"filename": "PACKAGE_SMALL",
 		"frame": {"x":448,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3304,7 +3304,7 @@
     
                          
       ,  { 
-		"filename": "CANNED_TOMATO_OPEN",
+		"filename": "CANNED_TOMATO",
 		"frame": {"x":464,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3312,7 +3312,7 @@
     
                          
       ,  { 
-		"filename": "PACKAGE_FRAGILE",
+		"filename": "CANNED_TOMATO_OPEN",
 		"frame": {"x":480,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3320,7 +3320,7 @@
     
                          
       ,  { 
-		"filename": "BOX_SEALED",
+		"filename": "PACKAGE_FRAGILE",
 		"frame": {"x":496,"y":192,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3328,7 +3328,7 @@
     
                          
       ,  { 
-		"filename": "BOX_OPEN",
+		"filename": "BOX_SEALED",
 		"frame": {"x":0,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3336,7 +3336,7 @@
     
                          
       ,  { 
-		"filename": "CANNED_LIMA_BEANS",
+		"filename": "BOX_OPEN",
 		"frame": {"x":16,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3344,7 +3344,7 @@
     
                          
       ,  { 
-		"filename": "CANNED_LIMA_BEANS_OPEN",
+		"filename": "CANNED_LIMA_BEANS",
 		"frame": {"x":32,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3352,7 +3352,7 @@
     
                          
       ,  { 
-		"filename": "EMPTY_CAN",
+		"filename": "CANNED_LIMA_BEANS_OPEN",
 		"frame": {"x":48,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3360,7 +3360,7 @@
     
                          
       ,  { 
-		"filename": "PRETZELS",
+		"filename": "EMPTY_CAN",
 		"frame": {"x":64,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3368,7 +3368,7 @@
     
                          
       ,  { 
-		"filename": "PRETZELS_OPEN",
+		"filename": "PRETZELS",
 		"frame": {"x":80,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3376,7 +3376,7 @@
     
                          
       ,  { 
-		"filename": "PRETZELS_EMPTY",
+		"filename": "PRETZELS_OPEN",
 		"frame": {"x":96,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3384,7 +3384,7 @@
     
                          
       ,  { 
-		"filename": "PRETZELS_DECAY",
+		"filename": "PRETZELS_EMPTY",
 		"frame": {"x":112,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3392,7 +3392,7 @@
     
                          
       ,  { 
-		"filename": "CHIPS",
+		"filename": "PRETZELS_DECAY",
 		"frame": {"x":128,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3400,7 +3400,7 @@
     
                          
       ,  { 
-		"filename": "CHIPS_OPEN",
+		"filename": "CHIPS",
 		"frame": {"x":144,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3408,7 +3408,7 @@
     
                          
       ,  { 
-		"filename": "CHIPS_EMPTY",
+		"filename": "CHIPS_OPEN",
 		"frame": {"x":160,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3416,7 +3416,7 @@
     
                          
       ,  { 
-		"filename": "CHIPS_DECAY",
+		"filename": "CHIPS_EMPTY",
 		"frame": {"x":176,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3424,7 +3424,7 @@
     
                          
       ,  { 
-		"filename": "PICKLES",
+		"filename": "CHIPS_DECAY",
 		"frame": {"x":192,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3432,7 +3432,7 @@
     
                          
       ,  { 
-		"filename": "PICKLES_OPEN",
+		"filename": "PICKLES",
 		"frame": {"x":208,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3440,7 +3440,7 @@
     
                          
       ,  { 
-		"filename": "PICKLE_JUICE",
+		"filename": "PICKLES_OPEN",
 		"frame": {"x":224,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3448,7 +3448,7 @@
     
                          
       ,  { 
-		"filename": "PICKLES_EMPTY",
+		"filename": "PICKLE_JUICE",
 		"frame": {"x":240,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3456,7 +3456,7 @@
     
                          
       ,  { 
-		"filename": "FISH_FOOD",
+		"filename": "PICKLES_EMPTY",
 		"frame": {"x":256,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3464,7 +3464,7 @@
     
                          
       ,  { 
-		"filename": "FISH_IN_BAG",
+		"filename": "FISH_FOOD",
 		"frame": {"x":272,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3472,7 +3472,7 @@
     
                          
       ,  { 
-		"filename": "FISH_NET",
+		"filename": "FISH_IN_BAG",
 		"frame": {"x":288,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3480,7 +3480,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY",
+		"filename": "FISH_NET",
 		"frame": {"x":304,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3488,7 +3488,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_77",
+		"filename": "RASPBERRY",
 		"frame": {"x":320,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3496,7 +3496,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_76",
+		"filename": "RASPBERRY_77",
 		"frame": {"x":336,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3504,7 +3504,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_75",
+		"filename": "RASPBERRY_76",
 		"frame": {"x":352,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3512,7 +3512,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_74",
+		"filename": "RASPBERRY_75",
 		"frame": {"x":368,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3520,7 +3520,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_73",
+		"filename": "RASPBERRY_74",
 		"frame": {"x":384,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3528,7 +3528,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_71",
+		"filename": "RASPBERRY_73",
 		"frame": {"x":400,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3536,7 +3536,7 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_72",
+		"filename": "RASPBERRY_71",
 		"frame": {"x":416,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
@@ -3544,13 +3544,109 @@
     
                          
       ,  { 
-		"filename": "RASPBERRY_70",
+		"filename": "RASPBERRY_72",
 		"frame": {"x":432,"y":208,"w":16,"h":16},
 		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 		"sourceSize": {"w":16,"h":16}
 	}
     
                          
-                                                                              	
+      ,  { 
+		"filename": "RASPBERRY_70",
+		"frame": {"x":448,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "CAT_LITTER",
+		"frame": {"x":464,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "INHALER",
+		"frame": {"x":480,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "AIR_FRESHENER",
+		"frame": {"x":496,"y":208,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "SUNFLOWER_SEEDS",
+		"frame": {"x":0,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "MAP_TOWN",
+		"frame": {"x":16,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "MAP_BUS",
+		"frame": {"x":32,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "HAMMER",
+		"frame": {"x":48,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PLUM",
+		"frame": {"x":64,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PLUM_81",
+		"frame": {"x":80,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PLUM_80",
+		"frame": {"x":96,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+      ,  { 
+		"filename": "PLUM_79",
+		"frame": {"x":112,"y":224,"w":16,"h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+    
+                         
+                                                                                    	
 ]
 }
