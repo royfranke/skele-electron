@@ -47,6 +47,36 @@ schedule: {
     sunday: {
         closed: "TRUE",    }
 },
+services: [
+        {
+        slug: "REDEEM_CAN",
+        name: "Redeem Can",
+        requirements: 
+        {
+            req_group_name: 'Redeem Can',
+req_pocket_action: '',
+req_world_action: '',
+req_state: '',
+req_result_item: '',
+req_result_data_key: '',
+req_result_data_set: '',
+req_result_data_modify: '',
+req_result_texture: '',
+req_result_fx: '',
+req_result_ground: '',
+requires: [
+  {
+    slot_type: 'IN_HAND_OR_BAG',
+    type: 'ITEM_KIND',
+    result: 'SOLD',
+    ITEM_KIND: 'EMPTY_CAN'
+    }
+]
+          },
+        
+    }    
+        
+    ],
 sells: [
             "SODA_RED", 
                 "SODA_BLUE", 

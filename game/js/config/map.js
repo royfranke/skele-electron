@@ -3486,7 +3486,9 @@ sells: [
                 "COMBO_LOCK_RED", 
                 "MASON_LINE", 
                 "BACKPACK_CANVAS", 
-                "LAUNDRY_LIQUID"
+                "LAUNDRY_LIQUID", 
+                "HAMMER", 
+                "TAPE"
         ],
                 front_room: 18,                                
             },

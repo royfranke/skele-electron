@@ -274,13 +274,10 @@ export default class Object {
     }
 
     addServiceActions() {
-        console.log('Adding service actions');
         if (this.services == null) {
-            console.log('No services to add');
              return; }
         var player_action = this.scene.player.action;
         var self = this;
-        console.log(this.services);
         this.services.forEach(function (service) {
             console.log(service);
             player_action.addAction({ action: service.name, object: self, ground: '', fx: '' });

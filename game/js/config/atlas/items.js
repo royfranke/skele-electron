@@ -2769,10 +2769,10 @@ items: []    },
         slug: 'SODA_RED_TRASH', 
         use:  'HOLDS',
         icon: 'SODA_RED_TRASH',
-        type: 'TRASH',
+        type: 'EMPTY_CAN',
         default_status: '',
         description: 'Redeem this can for 5 cents at your local Can Redemption Center.',
-        cost: 0,
+        cost: 5,
         tags: [{category:'Spawn Points', tag: 'spawn on sidewalk'}, {category:'Spawn Points', tag: 'spawn on ledges'}, {category:'Spawn Points', tag: 'spawn in recycling zone'}],
         deplete_from: 0,
         contains: [],
@@ -2780,11 +2780,11 @@ items: []    },
         stack: 0,
         stacks: [        ],
         interactions: {
-        group_17: {
-                req_group: 17,
-                req_group_name: 'Throw Away Trash',
-                req_pocket_action: 'THROW AWAY',
-                req_world_action: 'THROW AWAY',
+        group_47: {
+                req_group: 47,
+                req_group_name: 'Redeem Can',
+                req_pocket_action: '',
+                req_world_action: '',
                 req_state: '',
                 req_result_item: '',
                 req_result_data_key: '',
@@ -2795,16 +2795,10 @@ items: []    },
                 req_result_ground: '',
                 requires: [
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_BAG',
                     type: 'ITEM_KIND',
-                    result: 'CONSUMED',
-                    ITEM_KIND: 'TRASH',
-                    },
-                  {
-                    slot_type: 'ON_ACTIVE',
-                    type: 'OBJ_TYPE',
-                    result: 'FILLED',
-                    OBJ_TYPE: 'TRASH_CAN'
+                    result: 'SOLD',
+                    ITEM_KIND: 'EMPTY_CAN'
                     }
                                 ]
 
@@ -2861,10 +2855,10 @@ items: []    },
         slug: 'BEER_TRASH', 
         use:  'HOLDS',
         icon: 'BEER_TRASH',
-        type: 'TRASH',
+        type: 'EMPTY_CAN',
         default_status: '',
         description: 'Redeem this can for 5 cents at your local Can Redemption Center.',
-        cost: 0,
+        cost: 5,
         tags: [{category:'Spawn Points', tag: 'spawn on ledges'}, {category:'Spawn Points', tag: 'spawn in woods garbage patch'}, {category:'Spawn Points', tag: 'spawn in recycling zone'}],
         deplete_from: 0,
         contains: [],
@@ -2872,11 +2866,11 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        group_17: {
-                req_group: 17,
-                req_group_name: 'Throw Away Trash',
-                req_pocket_action: 'THROW AWAY',
-                req_world_action: 'THROW AWAY',
+        group_47: {
+                req_group: 47,
+                req_group_name: 'Redeem Can',
+                req_pocket_action: '',
+                req_world_action: '',
                 req_state: '',
                 req_result_item: '',
                 req_result_data_key: '',
@@ -2887,16 +2881,10 @@ items: []    },
                 req_result_ground: '',
                 requires: [
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_BAG',
                     type: 'ITEM_KIND',
-                    result: 'CONSUMED',
-                    ITEM_KIND: 'TRASH',
-                    },
-                  {
-                    slot_type: 'ON_ACTIVE',
-                    type: 'OBJ_TYPE',
-                    result: 'FILLED',
-                    OBJ_TYPE: 'TRASH_CAN'
+                    result: 'SOLD',
+                    ITEM_KIND: 'EMPTY_CAN'
                     }
                                 ]
 
@@ -2907,10 +2895,10 @@ items: []    },
         slug: 'SODA_GREEN_TRASH', 
         use:  'HOLDS',
         icon: 'SODA_GREEN_TRASH',
-        type: 'TRASH',
+        type: 'EMPTY_CAN',
         default_status: '',
         description: 'Redeem this can for 5 cents at your local Can Redemption Center.',
-        cost: 0,
+        cost: 5,
         tags: [{category:'Spawn Points', tag: 'spawn on ledges'}, {category:'Spawn Points', tag: 'spawn in woods garbage patch'}, {category:'Spawn Points', tag: 'spawn in recycling zone'}],
         deplete_from: 0,
         contains: [],
@@ -2918,11 +2906,11 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        group_17: {
-                req_group: 17,
-                req_group_name: 'Throw Away Trash',
-                req_pocket_action: 'THROW AWAY',
-                req_world_action: 'THROW AWAY',
+        group_47: {
+                req_group: 47,
+                req_group_name: 'Redeem Can',
+                req_pocket_action: '',
+                req_world_action: '',
                 req_state: '',
                 req_result_item: '',
                 req_result_data_key: '',
@@ -2933,16 +2921,10 @@ items: []    },
                 req_result_ground: '',
                 requires: [
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_BAG',
                     type: 'ITEM_KIND',
-                    result: 'CONSUMED',
-                    ITEM_KIND: 'TRASH',
-                    },
-                  {
-                    slot_type: 'ON_ACTIVE',
-                    type: 'OBJ_TYPE',
-                    result: 'FILLED',
-                    OBJ_TYPE: 'TRASH_CAN'
+                    result: 'SOLD',
+                    ITEM_KIND: 'EMPTY_CAN'
                     }
                                 ]
 
@@ -3137,10 +3119,10 @@ items: []    },
         slug: 'SODA_BLUE_TRASH', 
         use:  'HOLDS',
         icon: 'SODA_BLUE_TRASH',
-        type: 'TRASH',
+        type: 'EMPTY_CAN',
         default_status: '',
         description: 'Redeem this can for 5 cents at your local Can Redemption Center.',
-        cost: 0,
+        cost: 5,
         tags: [{category:'Spawn Points', tag: 'spawn on ledges'}, {category:'Spawn Points', tag: 'spawn in woods garbage patch'}, {category:'Spawn Points', tag: 'spawn in recycling zone'}],
         deplete_from: 0,
         contains: [],
@@ -3148,11 +3130,11 @@ items: []    },
         stack: 1,
         stacks: [        ],
         interactions: {
-        group_17: {
-                req_group: 17,
-                req_group_name: 'Throw Away Trash',
-                req_pocket_action: 'THROW AWAY',
-                req_world_action: 'THROW AWAY',
+        group_47: {
+                req_group: 47,
+                req_group_name: 'Redeem Can',
+                req_pocket_action: '',
+                req_world_action: '',
                 req_state: '',
                 req_result_item: '',
                 req_result_data_key: '',
@@ -3163,16 +3145,10 @@ items: []    },
                 req_result_ground: '',
                 requires: [
                   {
-                    slot_type: 'IN_HAND',
+                    slot_type: 'IN_HAND_OR_BAG',
                     type: 'ITEM_KIND',
-                    result: 'CONSUMED',
-                    ITEM_KIND: 'TRASH',
-                    },
-                  {
-                    slot_type: 'ON_ACTIVE',
-                    type: 'OBJ_TYPE',
-                    result: 'FILLED',
-                    OBJ_TYPE: 'TRASH_CAN'
+                    result: 'SOLD',
+                    ITEM_KIND: 'EMPTY_CAN'
                     }
                                 ]
 

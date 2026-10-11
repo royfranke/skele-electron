@@ -233,8 +233,56 @@ export default class RequirementsEngine {
             'DUPLICATED': this.handleDuplicated,
             'MAILED': this.handleMailed,
             'FILLED': this.handleFilled,
-            'DEPLETED': this.handleDepleted
+            'DEPLETED': this.handleDepleted,
+            'SOLD': this.handleSold
         };
+    }
+
+    handleSold(requirement, interaction, context) {
+        const pockets = this.scene.manager.hud.pocket;
+        let pocketIndex;
+
+        if (requirement.type === 'ITEM') {
+            pocketIndex = pockets.findInPockets(requirement.ITEM);
+        } else if (requirement.type === 'ITEM_KIND') {
+            pocketIndex = pockets.findItemKindInPockets(requirement.ITEM_KIND);
+        } else {
+            return { type: 'SOLD', success: false };
+        }
+
+        if (pocketIndex === false) {
+            return { type: 'SOLD', success: false };
+        }
+
+        const pocket = pockets.getPocket(pocketIndex);
+        const item = pocket[pocket.STATE];
+        const cost = item.info.cost;
+        if (!Number.isSafeInteger(cost) || cost < 0) {
+            return { type: 'SOLD', success: false };
+        }
+
+        const itemSlug = item.info.slug;
+        const removed = pockets.removeItemFromPockets(itemSlug, 1);
+        if (!removed) {
+            return { type: 'SOLD', item: itemSlug, removed, success: false };
+        }
+
+        const coinpurse = this.scene.player.coinpurse;
+        let remaining = cost;
+        for (const denomination of [10000, 5000, 2000, 1000, 500, 200, 100]) {
+            while (remaining >= denomination) {
+                coinpurse.addDollar(denomination);
+                remaining -= denomination;
+            }
+        }
+        for (const denomination of [25, 10, 5, 1]) {
+            while (remaining >= denomination) {
+                coinpurse.addCoin(denomination);
+                remaining -= denomination;
+            }
+        }
+
+        return { type: 'SOLD', item: itemSlug, removed, money: cost, success: true };
     }
 
     handleConsumed(requirement, interaction, context) {
