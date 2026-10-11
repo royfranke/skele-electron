@@ -77,10 +77,10 @@ export default class SaveScene extends Phaser.Scene {
 
         let background_frame = this.hud.makeBlock(this.camera.view.left, this.camera.view.top, this.camera.view.width, this.camera.view.height, 'BLOCK_SHALLOW_RED_EDGE_FRAME');
 
-        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top +this.camera.view.margin.top, 300, this.camera.view.height - (this.camera.view.margin.top + this.camera.view.margin.bottom), 'BLOCK_MID_SKY_FAT_BORDER');
+        let menu_background = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top +this.camera.view.margin.top, 300, this.camera.view.height - (this.camera.view.margin.top + this.camera.view.margin.bottom*2), 'BLOCK_MID_SKY_FAT_BORDER');
         menu_background.setDepth(2);
 
-        let menu_background_frame = this.hud.makeBlock(this.cameras.main.centerX - 100, this.camera.view.top +this.camera.view.margin.top, 300, this.camera.view.height - (this.camera.view.margin.top + this.camera.view.margin.bottom), 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME');
+        let menu_background_frame = this.hud.makeBlock(menu_background.x, menu_background.y, 300, menu_background.height, 'BLOCK_SHALLOW_YELLOW_EDGE_FRAME');
         menu_background_frame.setDepth(3);
 
         

@@ -1275,7 +1275,7 @@ import Shop from "../object/shop.js";
         plants.forEach(entity => {
             const wx = chunk.tileOriginX + entity.localX;
             const wy = chunk.tileOriginY + entity.localY;
-            try { plantManager.registry.removePlants(wx, wy); } catch (e) {}
+            try { plantManager.registry.removePlants(wx, wy, { syncChunk: false }); } catch (e) {}
         });
     }
 
@@ -1343,11 +1343,6 @@ import Shop from "../object/shop.js";
             try {
                 if (entity.variety && created.setVariety) created.setVariety(entity.variety);
                 if (entity.params && created.setParams) created.setParams(entity.params);
-                if (Array.isArray(entity.params?.announcements)) {
-                    entity.params.announcements.forEach(a => {
-                        if (created.setAnnouncement) created.setAnnouncement(a.announcement, a.kind);
-                    });
-                }
                 if (entity.params?.portal && created.setPortal) {
                     created.setPortal(entity.params.portal);
                 }

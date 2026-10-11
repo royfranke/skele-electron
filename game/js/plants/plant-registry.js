@@ -76,7 +76,7 @@ export default class PlantRegistry {
         return true;
     }
 
-    removePlants(_x, _y) {
+    removePlants(_x, _y, options = {}) {
         if (!this.placeEmpty(_x, _y)) {
             var plants = this.registry[_x + "_" + _y];
             plants.forEach(plant => {
@@ -87,6 +87,9 @@ export default class PlantRegistry {
             if (this.registry.hasOwnProperty(_x + "_" + _y)) {
                 // Remove the key-value pair
                 delete this.registry[_x + "_" + _y];
+            }
+            if (options?.syncChunk === false) {
+                return true;
             }
             // Also remove plant metadata from chunk storage when possible
             try {

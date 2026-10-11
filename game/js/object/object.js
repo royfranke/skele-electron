@@ -567,6 +567,14 @@ export default class Object {
         if (params.signal_role != undefined) {
             this.signalRole = params.signal_role;
         }
+
+        if (Array.isArray(params.announcements)) {
+            params.announcements.forEach(announcement => {
+                if (announcement != null && announcement.announcement != undefined) {
+                    this.setAnnouncement(announcement.announcement, announcement.kind);
+                }
+            });
+        }
     }
 
     setLight (keylight) {

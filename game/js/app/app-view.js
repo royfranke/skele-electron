@@ -41,13 +41,13 @@ export default class AppView {
         }
         var width = (this.view.width) - (this.view.margin.left + this.view.margin.right);
         var _x = this.view.left + this.view.margin.left;
-        var _y = this.view.top + (this.view.margin.top / 2);
+        var _y = this.view.bottom - (this.view.margin.top);
 
         var text_tip = this.scene.add.bitmapText(_x, _y, 'SkeleTalk', tip, 8).setOrigin(0).setScrollFactor(0).setDepth(1001).setMaxWidth(width - 16).setLineSpacing(10).setAlpha(0);
         text_tip.setTintFill(0xFFFFFF);
         var tween = this.scene.add.tween({
             targets: [text_tip],
-            y: '+=' + (text_tip.displayHeight + 8),
+            y: '-=' + (text_tip.displayHeight),
             alpha: 1,
             duration: 1000,
             ease: 'Sine.easeInOut',

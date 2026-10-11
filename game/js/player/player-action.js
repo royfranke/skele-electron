@@ -60,8 +60,14 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     updateMarker() {
+        this.locale = this.scene[this.scene.place];
+        const groundLayer = this.locale?.groundLayer;
+        if (!groundLayer) {
+            this.actionMarker?.setVisible(false);
+            return;
+        }
         this.checkMarker();
-        this.snappedWorldPoint = this.locale.groundLayer.tileToWorldXY(this.actionTile.x, this.actionTile.y);
+        this.snappedWorldPoint = groundLayer.tileToWorldXY(this.actionTile.x, this.actionTile.y);
 
         this.actionMarker.setPosition(this.snappedWorldPoint.x - 8, this.snappedWorldPoint.y - 8);
         

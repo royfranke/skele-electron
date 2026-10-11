@@ -53,6 +53,14 @@ export default class Announcer {
                     let sign = self.add.nineslice(_x,_y, 'UI', 'BLOCK_MID_YELLOW_BORDER', announce.displayWidth + 12, 20, 8,8,8,8).setOrigin(.5).setDepth(_y + 15);
                     announced.push(sign);
                 }
+                else if (announcement.kind == 'HANDWRITTEN') {
+                    let announce = self.add.bitmapText(_x, _y + 1, 'SkeleScript', announcement.announcement, 8).setOrigin(.5).setDepth(_y + 64);
+
+                    announced.push(announce);
+
+                    let sign = self.add.nineslice(_x,_y, 'UI', 'NOTE_NINESLICE', announce.displayWidth + 16, 32, 8,8,8,8).setOrigin(.5).setDepth(_y + 63);
+                    announced.push(sign);
+                }
                 else if (announcement.kind == 'CALENDAR') {
                     let announce = this.scene.add.sprite(_x + 32,_y - 48, 'UI','CALENDAR_'+announcement.announcement).setOrigin(0).setDepth(10000);
 

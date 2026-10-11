@@ -123,7 +123,7 @@ const NPC_SCHEDULES = {
       destination: {
         type: 'ADDRESS',     // ADDRESS | TILE | SLUG | INTERIOR
         // For ADDRESS, optional x/y act as offsets from the resolved portal tile.
-        dir: 'W', number: '105', street: 'Belly Button Street'
+        dir: 'W', number: '103', street: 'Belly Button Street'
       },
       // Optional movement area relative to resolved destination.
       // Example: { startX: -1, startY: 0, endX: 1, endY: 2 }
