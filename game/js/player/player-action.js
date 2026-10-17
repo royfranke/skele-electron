@@ -282,7 +282,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
     queueActionExecution(selectedAction = null) {
-        if (selectedAction == null) {
+        if (selectedAction == null || this.scene.player?.groundSitting) {
             return;
         }
 
@@ -295,7 +295,7 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         const adjacentTiles = this.getAdjacentTiles(targetTile);
         const onAdjacentTile = adjacentTiles.some(tile => this.isPlayerOnTile(tile));
         
-        if (onAdjacentTile && this.isPlayerFacingTargetTile(targetTile)) {
+        if (!this.isGroundSitAction(selectedAction) && onAdjacentTile && this.isPlayerFacingTargetTile(targetTile)) {
             this.executeActionSelection(selectedAction);
             return;
         }
@@ -332,6 +332,10 @@ import SPRITE_DIR from "../config/sprite-dir.js";
         }
 
         if (this.isPlayerOnTile(approachTile) && this.scene.player.destinations.length == 0) {
+            if (this.isGroundSitAction(selectedAction) &&
+                !['IDLE', 'WALK', 'RUN'].includes(this.scene.player.getState().name)) {
+                return;
+            }
             const actionToExecute = selectedAction;
             this.pendingAction = null;
             this.executeActionSelection(actionToExecute);
@@ -474,9 +478,26 @@ import SPRITE_DIR from "../config/sprite-dir.js";
     }
 
 
+    isGroundSitAction(action) {
+        return action?.action?.toUpperCase() === 'SIT' && !action.object;
+    }
+
     doAction (selectedAction = null) {
         let action = (selectedAction == null) ? this.availableActions[0] : selectedAction;
+        if (action == null) {
+            return;
+        }
         let targetTile = action.tile || this.actionTile;
+        if (this.isGroundSitAction(action)) {
+            const locale = this.scene[this.scene.place];
+            const ground = (locale === this.scene.exterior)
+                ? locale.getGroundAt(targetTile.x, targetTile.y)
+                : locale.ground.getGround(targetTile.x, targetTile.y);
+            if (ground?.TYPE === 'STAIRS' && this.isPlayerOnTile(targetTile)) {
+                this.scene.player.sitOnGround(targetTile);
+            }
+            return;
+        }
         if (this.scene.player.state.name == 'IDLE') {
             this.scene.player.setState(action.action.toUpperCase());
             if (action.fx != undefined && action.fx != '') {

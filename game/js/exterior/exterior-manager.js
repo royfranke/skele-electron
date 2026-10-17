@@ -1353,6 +1353,9 @@ import Shop from "../object/shop.js";
                 }
                 if (entity.flipX && created.sprite && typeof created.sprite.setFlipX === 'function') {
                     created.sprite.setFlipX(true);
+                    if (created.info?.slug?.startsWith('PORCH_STAIR_RAIL_LEFT')) {
+                        objectManager.registry.refreshSolidFootprint(created);
+                    }
                     if (created.sprite.body && created.info && created.info.offset && created.info.sprite) {
                         const bodyOffsetX = created.info.offset.x + (created.info.sprite.w/2);
                         const newBodyOffsetX = created.info.sprite.w - bodyOffsetX;
@@ -2310,6 +2313,10 @@ import Shop from "../object/shop.js";
     }
 
     getObjectFootprintBounds (object, anchorX, anchorY) {
+        const registry = this.scene?.manager?.objectManager?.registry;
+        if (registry?.getSolidFootprintBounds) {
+            return registry.getSolidFootprintBounds(object, anchorX, anchorY);
+        }
         const base = object?.info?.base ?? {};
         const width = Math.max(1, Math.ceil(Number(base.w) || 1));
         const height = Math.max(1, Math.ceil(Number(base.h) || 1));

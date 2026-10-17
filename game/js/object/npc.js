@@ -1,3 +1,4 @@
+import MAP_CONFIG from "../config/map.js";
 import NpcState from "../npc/npc-state.js";
 import NpcSprite from "../npc/npc-sprite.js";
 
@@ -143,52 +144,43 @@ export default class Npc {
       return [start];
     }
 
+    const keyOf = (coord) => coord[0] + ',' + coord[1];
+    const seen = new Set([keyOf(start)]);
+    const parents = new Map();
     var frontier = [start];
-    var visited = [];
-    var parents = [];
+    var head = 0;
     var solved = false;
     var solution = [];
     var counter = 0;
 
-    while (frontier.length > 0 && solved == false) {
+    while (head < frontier.length && solved == false) {
       counter++;
 
-      var nextTiles = nav.findRouteOptions(frontier, visited, 'simple_tile');
-      var current = frontier[0];
-      visited.push(current);
+      var current = frontier[head++];
+      var nextTiles = nav.findRouteOptions([current], [], 'simple_tile');
 
       for (var n = 0; n < nextTiles.length; n++) {
         var nextTile = nextTiles[n];
-        if (!nav.compareCoordinates(visited, nextTile) && !nav.compareCoordinates(frontier, nextTile)) {
-          frontier.push(nextTile);
-          parents.push([nextTile, current]);
+        var key = keyOf(nextTile);
+        if (seen.has(key)) {
+          continue;
+        }
+        seen.add(key);
+        parents.set(key, current);
+        frontier.push(nextTile);
 
-          if (nextTile[0] == end[0] && nextTile[1] == end[1]) {
-            solved = true;
-            var place = current;
-            solution = [nextTile, current];
-
-            while (place[0] != start[0] || place[1] != start[1]) {
-              var foundParent = false;
-              for (var d = 0; d < parents.length; d++) {
-                if (parents[d][0][0] == place[0] && parents[d][0][1] == place[1]) {
-                  place = parents[d][1];
-                  solution.push(place);
-                  foundParent = true;
-                  break;
-                }
-              }
-
-              if (!foundParent) {
-                break;
-              }
-            }
-            break;
+        if (nextTile[0] == end[0] && nextTile[1] == end[1]) {
+          solved = true;
+          solution = [nextTile];
+          var place = current;
+          while (place) {
+            solution.push(place);
+            place = parents.get(keyOf(place));
           }
+          break;
         }
       }
 
-      frontier.shift();
       if (counter > 1000) {
         break;
       }
@@ -404,6 +396,14 @@ export default class Npc {
     const startX = this.standingTile?.x ?? _x;
     const startY = this.standingTile?.y ?? _y;
     const nav = this.scene?.manager?.nav;
+
+    // Unwalkable destinations can never be reached; skip the full-map BFS floods.
+    if (MAP_CONFIG.useStrictSimpleTileWalkability === true &&
+        typeof nav?.worldIsWalkable === 'function' &&
+        !nav.worldIsWalkable(_x, _y)) {
+      return false;
+    }
+
     let route = this.buildSimpleTileRouteFromFindRouteOptions(startX, startY, _x, _y);
 
     // Prefer collision-map routes; use full route fallback when available.

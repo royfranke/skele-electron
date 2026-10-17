@@ -271,45 +271,52 @@ export default class NavigatorManager {
         }
         var start = [a_x,a_y];
         var end = [b_x,b_y];
-    
-        var visited = [];
-        var parents = [];
-        var obey_laws = true;
+
+        // An unwalkable destination can never be reached; bail before flooding the map.
+        if ((type === 'tile' || (type === 'simple_tile' && MAP_CONFIG.useStrictSimpleTileWalkability === true)) &&
+            !this.worldIsWalkable(b_x, b_y)) {
+            this.recordRouteFailure(type, a_x, a_y, b_x, b_y, 'unwalkable-destination');
+            return type === 'simple_tile' ? [] : undefined;
+        }
+
+        const keyOf = (coord) => coord[0] + ',' + coord[1];
+        const seen = new Set([keyOf(start)]);
+        const parents = new Map();
         var solved = false;
 
-        // Build a frontier from the next open intersections
         var frontier = [start];
+        var head = 0;
         var solution = [];
-        // While the frontier is populated...
         var counter = 0;
         const maxIterations = type === 'intersection' ? 1000 : 5000;
-        while (frontier.length > 0 && !solved) {
-            
+        while (head < frontier.length && !solved) {
+
             counter++;
-            
-            var next_ints = this.findRouteOptions(frontier,visited,type);
-            visited.push(frontier[0]);
-            
-            for (var n = 0; n < next_ints.length;n++) {
-                if (!this.compareCoordinates(visited, next_ints[n]) && !this.compareCoordinates(frontier, next_ints[n])) {
-                    frontier.push(next_ints[n]);
-                    parents.push([next_ints[n],frontier[0]]);
-                    if (next_ints[n][0] == end[0] && next_ints[n][1] == end[1]) {
-                        solved = true;
-                        var place = frontier[0];
-                        solution = [next_ints[n],frontier[0]];
-                        while (place != start) {
-                            for (var d = 0; d < parents.length; d++) {
-                                if (parents[d][0] == place) {
-                                    place = parents[d][1];
-                                    solution.push(place);
-                                }
-                            }
-                        }
+
+            const current = frontier[head++];
+            // Membership is tracked via `seen`, so option finders only need the current node.
+            var next_ints = this.findRouteOptions([current], [], type);
+
+            for (var n = 0; n < next_ints.length; n++) {
+                const next = next_ints[n];
+                const key = keyOf(next);
+                if (seen.has(key)) {
+                    continue;
+                }
+                seen.add(key);
+                parents.set(key, current);
+                frontier.push(next);
+                if (next[0] == end[0] && next[1] == end[1]) {
+                    solved = true;
+                    solution = [next];
+                    var place = current;
+                    while (place) {
+                        solution.push(place);
+                        place = parents.get(keyOf(place));
                     }
+                    break;
                 }
             }
-            frontier.shift();
             if (counter > maxIterations) {
                 console.log(`Wayfinding counter exceeded ${maxIterations} for ${type}!`);
                 break;

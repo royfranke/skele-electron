@@ -120,6 +120,11 @@ export default class PlayerSprite {
       return;
     }
 
+    if (this.scene.player.groundSitting) {
+      this.sprite.body.setVelocity(0);
+      return;
+    }
+
     if (this.scene.player.destinations.length == 0) {
       let input = this.scene.player.playerInput;
       let speed = this.scene.player.speed;

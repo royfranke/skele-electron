@@ -260,9 +260,17 @@ export default class NpcRuntimeProjector {
             : null;
         const dispatchedLegKey = typeof record._lastDispatchedLegKey === 'string' ? record._lastDispatchedLegKey : null;
 
-        if (hasDestination && legKey !== dispatchedLegKey) {
+        const now = Date.now();
+        const retryBlocked = record._failedLegKey === legKey && now < (record._failedLegRetryAt ?? 0);
+        if (hasDestination && legKey !== dispatchedLegKey && !retryBlocked) {
             const queued = npc.moveToTile(currentLeg.x, currentLeg.y) === true;
+            if (!queued) {
+                // Back off so an unreachable leg isn't re-pathed every frame.
+                record._failedLegKey = legKey;
+                record._failedLegRetryAt = now + 2000;
+            }
             if (queued) {
+                record._failedLegKey = null;
                 record._lastDispatchedLegKey = legKey;
                 record._portalDoorOpened = false;
                 if (currentLeg.type === 'PORTAL') {

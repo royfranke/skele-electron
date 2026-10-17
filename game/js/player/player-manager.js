@@ -34,6 +34,8 @@ export default class PlayerManager {
     this.player_focus = false;
     this.audio = false;
     this.destinations = [];
+    this.groundSitting = false;
+    this.groundSitSelectReady = false;
   }
 
 
@@ -55,6 +57,11 @@ export default class PlayerManager {
   }
 
   setState(state_string = 'IDLE') {
+    if (this.groundSitting && state_string != 'SITTING') {
+      this.groundSitting = false;
+      this.groundSitSelectReady = false;
+      this.playerSprite.footShadow?.setVisible(true);
+    }
     if (this.state.name == state_string) {
       return;
     }
@@ -176,6 +183,45 @@ export default class PlayerManager {
     this.setState('IDLE');
   }
 
+  sitOnGround(tile) {
+    if (!['IDLE', 'WALK', 'RUN'].includes(this.getState().name) || this.hopping || this.tripping) {
+      return;
+    }
+
+    this.clearDestinations();
+    this.action.pendingAction = null;
+    this.resetInputs();
+    this.playerInput.select = false;
+    this.playerInput.more = false;
+    this.speed = 0;
+    const tileSize = this.locale.map?.tileWidth || 16;
+    const sprite = this.playerSprite.sprite;
+    sprite.body.setVelocity(0);
+    sprite.setPosition((tile.x + 0.5) * tileSize, (tile.y + 0.5) * tileSize - 8);
+    this.updateActiveTile();
+    this.setFacing('s');
+    this.state = this.setState('SITTING');
+    this.groundSitting = true;
+    this.groundSitSelectReady = false;
+    this.playerSprite.footShadow?.setVisible(false);
+    this.action.clearActions();
+    this.action.updateActionAvailability();
+  }
+
+  standUp() {
+    if (!this.groundSitting) {
+      return;
+    }
+    this.resetInputs();
+    this.playerInput.select = false;
+    this.playerInput.more = false;
+    this.speed = 0;
+    this.playerSprite.sprite.body.setVelocity(0);
+    this.state = this.setState('IDLE');
+    this.updateActiveTile();
+    this.action.refreshActions();
+  }
+
 
   moveToward(_x, _y) {
     var x_distance = this.standingTile.x - _x;
@@ -235,6 +281,20 @@ export default class PlayerManager {
     this.player_focus = true;
     this.last_state = this.getLastState();
     this.state = this.getState();
+
+    if (this.groundSitting) {
+      const select = this.app.input.INPUT.SELECT;
+      this.speed = 0;
+      this.playerSprite.sprite.body.setVelocity(0);
+      this.resetInputs();
+      if (!select?.HOLD && !select?.TAP) {
+        this.groundSitSelectReady = true;
+      }
+      else if (this.groundSitSelectReady && select?.TAP) {
+        this.standUp();
+      }
+      return;
+    }
 
     if (this.state.input) {
       this.updateActiveTile();
@@ -349,6 +409,7 @@ export default class PlayerManager {
     // Fixed speed states
     const stateSpeed = {
       'IDLE': 0,
+      'SITTING': 0,
       'DIG': 0,
       'TRIP': 0,
       'SLEEP': 0,
@@ -375,6 +436,14 @@ export default class PlayerManager {
   }
 
   checkHopTriggers() {
+    if (this.groundSitting) {
+      return;
+    }
+    const selectedAction = this.action?.pendingAction?.selectedAction;
+    if (this.underfoot?.TYPE === 'STAIRS' && this.action?.isGroundSitAction(selectedAction) &&
+        this.action.isPlayerOnTile(selectedAction.tile || this.action.actionTile)) {
+      return;
+    }
     const hopTriggers = ['CURB', 'STAIRS'];
     if (this.underfoot && hopTriggers.includes(this.underfoot.TYPE) && this.state.name != 'HOP') {
       this.hop();

@@ -10258,7 +10258,7 @@ const OBJECTS = {
         base: {
           h:1, 
           w:1,
-          x:2, 
+          x:1, 
           y:3
         },
         depth: 0,
@@ -10338,7 +10338,7 @@ const OBJECTS = {
         base: {
           h:1, 
           w:1,
-          x:2, 
+          x:1, 
           y:3
         },
         depth: 0,
@@ -10378,7 +10378,7 @@ const OBJECTS = {
         base: {
           h:1, 
           w:1,
-          x:2, 
+          x:1, 
           y:3
         },
         depth: 0,
@@ -10418,7 +10418,7 @@ const OBJECTS = {
         base: {
           h:1, 
           w:1,
-          x:2, 
+          x:1, 
           y:3
         },
         depth: 0,
@@ -10458,7 +10458,7 @@ const OBJECTS = {
         base: {
           h:1, 
           w:1,
-          x:2, 
+          x:1, 
           y:3
         },
         depth: 0,

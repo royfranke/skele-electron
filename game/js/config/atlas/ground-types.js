@@ -340,6 +340,11 @@ const GROUND_TYPE = {
     ANIMALPREF: 7,
     FRIENDS: ['CEMENT','PLAZA'],
     ACTIONS: [
+         { ITEM: "",
+       ACTION: "sit",
+       FX: "",
+       GROUND: ""
+      } 
         ]
   },
   ROOF: {
@@ -415,8 +420,8 @@ const GROUND_TYPE = {
     BITMAP: true,
     EDGE: "FEATHER",
     COLLIDES: false,
-    USEMASK: true,
-    ZINDEX: 7,
+    USEMASK: false,
+    ZINDEX: 0,
     ADULTPREF: 50,
     CHILDPREF: 7,
     ANIMALPREF: 4,

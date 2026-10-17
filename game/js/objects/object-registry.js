@@ -234,7 +234,13 @@ export default class ObjectRegistry {
         const base = object?.info?.base ?? {};
         const width = Math.max(1, Math.ceil(Number(base.w) || 1));
         const height = Math.max(1, Math.ceil(Number(base.h) || 1));
-        const startX = Math.floor(Number(anchorX));
+        const mirroredPorch = object?.sprite?.flipX === true &&
+            object?.info?.slug?.startsWith('PORCH_STAIR_RAIL_LEFT');
+        const tileSize = this.scene?.exterior?.map?.tileWidth || 16;
+        const offsetX = mirroredPorch
+            ? (Number(object.info.sprite.w) / tileSize) - (2 * Number(base.x || 0)) - width
+            : 0;
+        const startX = Math.floor(Number(anchorX) + offsetX);
         const startY = Math.floor(Number(anchorY));
 
         return {
@@ -243,6 +249,20 @@ export default class ObjectRegistry {
             endX: startX + width - 1,
             endY: startY + height - 1,
         };
+    }
+
+    refreshSolidFootprint (object) {
+        const previousKeys = this.solidFootprintTilesByObject.get(object) ?? [];
+        this.unindexSolidFootprint(object);
+        this.indexSolidFootprint(object, object.tile_x, object.tile_y);
+        const currentKeys = this.solidFootprintTilesByObject.get(object) ?? [];
+        const exterior = this.scene?.exterior;
+        if (this.scene?.locale === 'exterior' && exterior?.refreshChunkCollisionAtTile) {
+            for (const key of new Set([...previousKeys, ...currentKeys])) {
+                const [tileX, tileY] = key.split('_').map(Number);
+                exterior.refreshChunkCollisionAtTile(tileX, tileY);
+            }
+        }
     }
 
     indexSolidFootprint (object, anchorX, anchorY) {

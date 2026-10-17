@@ -1378,10 +1378,22 @@ export default class NpcScheduleManager {
             // walkable tile in front of the door.
             const portalFromIndex = this._queryPortalIndexByAddress(destination.dir, destination.number, destination.street);
             if (portalFromIndex && typeof portalFromIndex.x === 'number' && typeof portalFromIndex.y === 'number') {
-                return {
+                const resolved = {
                     x: portalFromIndex.x + Math.floor(destination.x ?? 0),
                     y: portalFromIndex.y + 1 + Math.floor(destination.y ?? 0)
                 };
+
+                // Not every door faces south; if the default approach tile is blocked, use a walkable neighbor of the portal.
+                const nav = this.scene?.manager?.nav;
+                if (typeof nav?.worldIsWalkable === 'function' && !nav.worldIsWalkable(resolved.x, resolved.y)) {
+                    const fallback = [[0, -1], [-1, 0], [1, 0]]
+                        .map(([dx, dy]) => ({ x: portalFromIndex.x + dx, y: portalFromIndex.y + dy }))
+                        .find((tile) => nav.worldIsWalkable(tile.x, tile.y));
+                    if (fallback) {
+                        return fallback;
+                    }
+                }
+                return resolved;
             }
 
             // No portal index entry — ADDRESS destinations require portal index authority

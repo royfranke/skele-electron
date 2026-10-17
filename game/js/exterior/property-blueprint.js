@@ -684,10 +684,11 @@ export default class PropertyBlueprint {
         this.scene[this.scene.locale].wallLayer.removeTileAt(_x + stairs.x, _y + stoop.height);
         this.scene[this.scene.locale].wallLayer.removeTileAt(_x + 1 + stairs.x, _y + stoop.height);
 
-        this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x, _y + stoop.height, porch_rail);
+        this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x - 1, _y + stoop.height, porch_rail);
 
-        let porch_right = this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x + 2, _y + stoop.height, porch_rail);
+        let porch_right = this.scene.manager.objectManager.newObjectToWorld(_x + stairs.x + 1, _y + stoop.height, porch_rail);
         porch_right.sprite.setFlipX(true);
+        this.scene.manager.objectManager.registry.refreshSolidFootprint(porch_right);
         porch_right.sprite.setOffset(76, 44);
         if (porch_right.sprite.body) {
             const bodyOffsetX = porch_right.info.offset.x + (porch_right.info.sprite.w/2);
