@@ -116,6 +116,21 @@ export default class Tree {
             ];
         }
 
+        if (this.info.slug == 'PLUM') {
+            if (Phaser.Math.RND.between(0, 1) == 0) {
+                return [
+                    this.createBranchSpec(-7, -(this.sprite.displayHeight - 6), false, true),
+                    this.createBranchSpec(-7, -(this.sprite.displayHeight - 7), true, false),
+                    this.createBranchSpec(-8, -(this.sprite.displayHeight + 5), false, false),
+                ];
+            }
+
+            return [
+                this.createBranchSpec(-7, -(this.sprite.displayHeight - 6), false, true),
+                this.createBranchSpec(-7, -(this.sprite.displayHeight - 2), true, false),
+            ];
+        }
+
         return [];
     }
 

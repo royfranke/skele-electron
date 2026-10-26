@@ -369,7 +369,7 @@ sells: [
             },
                             front_room: 12,
         roomData: { 
-                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"2","y":"2","slug":"WALL_CALENDAR"},{"x":"4","y":"3","slug":"ADDING_MACHINE"},{"x":"3","y":"3","slug":"COUNTER_BELL","params":{"announcements":[{"announcement":"Ring Bell for\nService","kind":"HANDWRITTEN"}]}},{"x":"2","y":"1","slug":"NO_SMOKING_PAPER"},{"x":"3","y":"2","slug":"PAPER_SIGN_ARROW"},{"x":"0","y":"6","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"6","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"3","y":"3","slug":"STORE_WINDOW_COUNTER_3"},{"x":"0","y":"3","slug":"INT_DOOR_RED_BROWN_SIGN"},{"x":"2","y":"2","slug":"WALL_CALENDAR"},{"x":"4","y":"3","slug":"ADDING_MACHINE"},{"x":"3","y":"3","slug":"COUNTER_BELL","params":{"announcements":[{"announcement":"Ring Bell for Service","kind":"DEFAULT"}]}},{"x":"2","y":"1","slug":"NO_SMOKING_PAPER"},{"x":"3","y":"2","slug":"PAPER_SIGN_ARROW"},{"x":"0","y":"6","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"6","slug":"FRONTDOOR","params":{}}],
                 recipeList: [{"x":"3","y":"0","slug":"PLANK.BROWN_"},{"x":"4","y":"0","slug":"PLANK.BROWN_"},{"x":"5","y":"0","slug":"PLANK.BROWN_"},{"x":"3","y":"1","slug":"PLANK.BROWN_"},{"x":"4","y":"1","slug":"PLANK.BROWN_"},{"x":"5","y":"1","slug":"PLANK.BROWN_"},{"x":"3","y":"2","slug":"PLANK.BROWN_"},{"x":"4","y":"2","slug":"PLANK.BROWN_"},{"x":"5","y":"2","slug":"PLANK.BROWN_"},{"x":"3","y":"3","slug":"PLANK.BROWN_"},{"x":"4","y":"3","slug":"PLANK.BROWN_"},{"x":"5","y":"3","slug":"PLANK.BROWN_"}],
                 removalList: [{"x":"0","y":"0"},{"x":"1","y":"0"},{"x":"2","y":"0"},{"x":"0","y":"1"},{"x":"1","y":"1"},{"x":"2","y":"1"},{"x":"0","y":"2"},{"x":"1","y":"2"},{"x":"2","y":"2"},{"x":"0","y":"3"},{"x":"1","y":"3"},{"x":"2","y":"3"},{"x":"2","y":"6"},{"x":"3","y":"6"},{"x":"4","y":"6"},{"x":"5","y":"6"}],
                 itemList: []
@@ -514,7 +514,7 @@ sells: [
             },
                             front_room: 14,
         roomData: { 
-                featureList: [{"x":"4","y":"2","slug":"DINER_CHAIR_MAROON"},{"x":"0","y":"3","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"0","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"0","y":"3","slug":"FRONTDOOR","params":{}}],
+                featureList: [{"x":"4","y":"2","slug":"DINER_CHAIR_MAROON"},{"x":"0","y":"3","slug":"EXT_DOOR_STORE_STOOP_1","params":{"portal":{"room_id":-1}}},{"x":"0","y":"0","slug":"SHOP_SHELVES_MOTTLED","params":{}},{"x":"3","y":"-1","slug":"CURTAIN_PSYCHIC","params":{}},{"x":"0","y":"3","slug":"FRONTDOOR","params":{}}],
                 recipeList: [],
                 removalList: [{"x":"2","y":"3"},{"x":"3","y":"3"},{"x":"4","y":"3"},{"x":"5","y":"3"}],
                 itemList: []

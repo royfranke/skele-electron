@@ -10298,7 +10298,7 @@ const OBJECTS = {
         base: {
           h:1, 
           w:1,
-          x:5, 
+          x:4, 
           y:3
         },
         depth: 0,
@@ -10759,6 +10759,66 @@ const OBJECTS = {
                   ],
         actions: [],
         default_state: 'DEFAULT',        states: [],
+
+          interactions: {
+                                  },
+    },
+          CURTAIN_PSYCHIC: {
+        name: 'Psychic Curtain',
+        slug: 'CURTAIN_PSYCHIC', 
+        type: 'INT_DOOR_',
+        bounding: {
+          h:4, 
+          w:4
+        },
+        base: {
+          h:1, 
+          w:2,
+          x:1, 
+          y:2
+        },
+        depth: 0,
+        sprite: {
+          h:53, 
+          w:59,
+          x:0, 
+          y:0
+        },
+        size: {
+          h:48, 
+          w:32
+        },
+        offset: {
+          x:16, 
+          y:0
+        },
+        varieties: 5,
+        solid: 0,
+        portal: 1,
+        loot: [
+                  ],
+        actions: [ {
+            name: 'OPEN', stateTrigger: 'OPENING', validStates: ['CLOSED']
+          }, {
+            name: 'CLOSE', stateTrigger: 'CLOSING', validStates: ['OPEN']
+          }],
+        default_state: 'DEFAULT',        states: [            {
+              name: 'CLOSED',
+              transition: 'false',
+              frames: ['CURTAIN_PSYCHIC-5',]
+              },               {
+              name: 'OPENING',
+              transition: 'OPEN',
+              frames: ['CURTAIN_PSYCHIC-5', 'CURTAIN_PSYCHIC-4', 'CURTAIN_PSYCHIC-3', 'CURTAIN_PSYCHIC-2', 'CURTAIN_PSYCHIC-1', ]
+              },            {
+              name: 'OPEN',
+              transition: 'false',
+              frames: ['CURTAIN_PSYCHIC-1',]
+              },               {
+              name: 'CLOSING',
+              transition: 'CLOSED',
+              frames: ['CURTAIN_PSYCHIC-1', 'CURTAIN_PSYCHIC-2', 'CURTAIN_PSYCHIC-3', 'CURTAIN_PSYCHIC-4', 'CURTAIN_PSYCHIC-5', ]
+              },],
 
           interactions: {
                                   },

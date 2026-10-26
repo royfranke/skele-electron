@@ -1317,6 +1317,24 @@ const ITEMS = {
             },        },
 slots: '6',
 items: []    },
+      EGG_CARTON: {
+        name: 'Carton of Eggs',
+        slug: 'EGG_CARTON', 
+        use:  'HOLDS',
+        icon: 'EGG_CARTON',
+        type: 'PRODUCT',
+        default_status: '',
+        description: '',
+        cost: 200,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       CASSEROLE_BROWNIE: {
         name: 'Casserole Brownie',
         slug: 'CASSEROLE_BROWNIE', 
@@ -2396,6 +2414,52 @@ items: []    },
         interactions: {
         },
     },
+      PLUM_CRUSHED: {
+        name: 'Crushed Plum',
+        slug: 'PLUM_CRUSHED', 
+        use:  'HOLDS',
+        icon: 'PLUM_CRUSHED',
+        type: 'TRASH',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        group_17: {
+                req_group: 17,
+                req_group_name: 'Throw Away Trash',
+                req_pocket_action: 'THROW AWAY',
+                req_world_action: 'THROW AWAY',
+                req_state: '',
+                req_result_item: '',
+                req_result_data_key: '',
+                req_result_data_set: '',
+                req_result_data_modify: '',
+                req_result_texture: '',
+                req_result_fx: '',
+                req_result_ground: '',
+                requires: [
+                  {
+                    slot_type: 'IN_HAND',
+                    type: 'ITEM_KIND',
+                    result: 'CONSUMED',
+                    ITEM_KIND: 'TRASH',
+                    },
+                  {
+                    slot_type: 'ON_ACTIVE',
+                    type: 'OBJ_TYPE',
+                    result: 'FILLED',
+                    OBJ_TYPE: 'TRASH_CAN'
+                    }
+                                ]
+
+            },        },
+    },
       CHIPS_DECAY: {
         name: 'Decaying Bag of Chips',
         slug: 'CHIPS_DECAY', 
@@ -2623,6 +2687,29 @@ items: []    },
         containedBy: [],
         stack: 1,
         stacks: [        ],
+        interactions: {
+        },
+    },
+      EGG: {
+        name: 'Egg',
+        slug: 'EGG', 
+        use:  'HOLDS',
+        icon: 'EGG',
+        type: 'MATERIAL',
+        default_status: '',
+        description: '',
+        cost: 50,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 2,
+        stacks: [ {
+            icon: 'EGG_85',
+            type: 'asset',
+            lessThan: 3,
+            greaterThan: 1
+          }        ],
         interactions: {
         },
     },
@@ -6548,6 +6635,24 @@ items: []    },
         interactions: {
         },
     },
+      PLUM_EATEN: {
+        name: 'Partially Eaten Plum',
+        slug: 'PLUM_EATEN', 
+        use:  'HOLDS',
+        icon: 'PLUM_EATEN',
+        type: 'FOOD',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 1,
+        stacks: [        ],
+        interactions: {
+        },
+    },
       PENCIL: {
         name: 'Pencil',
         slug: 'PENCIL', 
@@ -8605,6 +8710,39 @@ items: []    },
                                 ]
 
             },        },
+    },
+      STONE: {
+        name: 'Stone',
+        slug: 'STONE', 
+        use:  'HOLDS',
+        icon: 'STONE',
+        type: 'MATERIAL',
+        default_status: '',
+        description: '',
+        cost: 0,
+        tags: [],
+        deplete_from: 0,
+        contains: [],
+        containedBy: [],
+        stack: 3,
+        stacks: [ {
+            icon: 'STONE_82',
+            type: 'asset',
+            lessThan: 4,
+            greaterThan: 2
+          }, {
+            icon: 'STONE_83',
+            type: 'asset',
+            lessThan: 3,
+            greaterThan: 1
+          }, {
+            icon: 'STONE_84',
+            type: 'asset',
+            lessThan: 0,
+            greaterThan: 0
+          }        ],
+        interactions: {
+        },
     },
       JELLY_STRAWBERRY: {
         name: 'Strawberry* Jelly',

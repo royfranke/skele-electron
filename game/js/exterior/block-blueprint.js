@@ -129,12 +129,12 @@ export default class BlockBlueprint {
             else {
                 this.scene.manager.objectManager.newObjectToWorld(this.block.right - 7, this.block.bottom - 1, 'HYDRANT_CITY_');
 
-                this.scene.manager.treeManager.newTreeToWorld(this.block.left + 8.25, this.block.bottom - .25, 'SUGAR_MAPLE');
+                this.scene.manager.treeManager.newTreeToWorld(this.block.left + 8.25, this.block.bottom - .25, (Phaser.Math.RND.between(0, 1) == 0 ? 'PLUM' : 'SUGAR_MAPLE'));
                 this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 8, this.block.bottom - 1, 2, 1);
 
                 this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.DIRT.FILL_, this.block.left + 27, this.block.bottom - 1, 2, 1);
 
-                this.scene.manager.treeManager.newTreeToWorld(this.block.left + 36.25, this.block.bottom - .25, 'ASH');
+                this.scene.manager.treeManager.newTreeToWorld(this.block.left + 36.25, this.block.bottom - .25, (Phaser.Math.RND.between(0, 1) == 0 ? 'PLUM' : 'SUGAR_MAPLE'));
                 this.scene[this.scene.locale].groundLayer.weightedRandomize(TILES.MULCH.FILL_, this.block.left + 36, this.block.bottom - 1, 2, 1);
             }
 
@@ -560,7 +560,7 @@ export default class BlockBlueprint {
                         break;
                     case 11:
                         if (this.isPathTile(x, y)) continue;
-                        this.scene.manager.treeManager.newTreeToWorld(x, y + .5, 'SUGAR_MAPLE');
+                        this.scene.manager.treeManager.newTreeToWorld(x, y + .5, Phaser.Math.RND.between(0, 1) == 0 ? 'SUGAR_MAPLE' : 'PLUM');
                         groundLayer.weightedRandomize(TILES.LEAVES.FILL_, x, y, 2, 1);
                         break;
                     case 19:
